@@ -1,0 +1,70 @@
+{
+  "passfail"      : false
+, "maxerr"        : 1000
+
+// , "moz" : true
+// , "esnext": true
+// , "node": true
+
+, "strict"        : false
+
+// relaxing options
+// , "boss"          : true
+, "sub"           : true // suppress warnings about using [] notation
+, "laxcomma"      : true // comma first
+, "laxbreak"      : true // unsafe line breakings
+, "loopfunc"      : true // defining functions inside loops
+, "eqnull"        : true // allow a == null
+, "onecase"       : true
+, "lastsemic"     : true // suppress warnings for semicolon omitted for the last statement in a one-line block
+
+, "-W018"         : true // confusing use of !
+
+// enforcing options
+, "forin"         : true
+, "curly"         : false
+// , "curly"         : true // i prefer this option to be on, but too much code doesn't use it
+, "eqeqeq"        : false
+, "expr"          : true
+, "immed"         : true
+// , "latedef"       : false
+, "latedef"       : true
+, "-W026": true // allow inner function declarations to not be at top of outer functions
+, "newcap"        : true
+// , "nonew"         : true -- crashes with expr:true on jshint >= 1.0.0, see https://github.com/jshint/jshint/issues/912
+, "undef"         : true
+, "unused"        : true
+, "trailing"      : true
+// , "es3": true
+, "noarg": true
+, "noempty": true
+
+// style options
+// , "quotmark": true
+, "maxlen"        : 100
+, "maxparams": 5
+, "maxdepth": 5
+, "maxcomplexity": 12
+, "maxstatements": 30
+
+// environment
+, "debug"         : false
+, "devel"         : false
+
+, "browser"       : true
+// , "jquery"        : true // noConflict
+//, "prototypejs"   : true
+, "nonstandard"   : false
+, "predef"        :
+    [ "YUI"
+    , "YAHOO"
+    , "$j"
+    , "jQuery"
+    , "ActiveXObject"
+    , "fweb"
+    , "NotPrototype"
+    , "alert"
+    , "imports"
+    , "define"
+    ]
+}

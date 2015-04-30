@@ -1,0 +1,101 @@
+    n = start
+    for elem in sequence:
+        n = start
+def enumerate_(sequence, start=0):
+    n = start
+    for elem in sequence:
+        yield n, elem
+        n += 1
+        
+    
+type(enumerate_)
+import plistlib
+plistlib.__file__
+help(plistlib.readPlist)
+import path
+import os.path
+os.path.abspath('.')
+plistlib.readPlist('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript
+plistlib.readPlist('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript/JavaScript.tmLanguage')
+import plistlib
+plistlib.readPlist ('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript/JavaScript.tmLanguage')
+plistlib.readPlistFromString(file('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript/JavaScript.tmLanguage').read())
+import plistlib
+plistlib.__file__
+import dbus
+improt dbus
+import dbus
+import argparse
+argparse.ArgumentParser()
+ap = argparse.ArgumentParser()
+ap._get_args
+{}
+({})
+({1})
+({1}).add(2)
+s = ({1})
+s.add(2)
+s
+(a = 1)
+a = 1
+1900 * 0.67
+0.67 * 2050
+0.67 * 2375
+0.67 * 2775
+0.67 * 4000
+import usb
+import usb
+import usb.core
+import usb.core
+import
+import usb.core
+device = usb.core.find(idVendor=0x046d, idProduct=0xc24d)
+device
+device.address
+device.read
+device.get_active_configuration()
+import usb
+usb
+help(usb)
+import usb.core
+devices = list(usb.core.find(find_all=True, idVendor=0x1c4f, idProduct=0x0016))
+devices
+devices[1]
+kbd = devices[1]
+kbd.address
+kbd.product
+kbd.idProduct
+kbd.iProduct
+kbd.serial_number
+kbd.read()
+kbd.iManufacturer
+kbd.iProduct
+ls
+pad = devices[0]
+pad.get_active_configuration()
+m = Mech5Keyboard()
+m.dumpinfo()
+m.devices[0].bEndpointAddress
+a = m.devices[0]
+a.address
+a.bus
+a = Mech5Keyboard()
+a.kbd
+a.pad
+a = Mech5Keyboard()
+a.dumpinfo()
+a = Mech5Keyboard()
+a.dumpinfo()
+a.dumpinfo()
+a = Mech5Keyboard()
+a.dumpinfo()
+a = Mech5Keyboard()
+a.dumpinfo()
+a = Mech5Keyboard()
+a.detach_keyboard_special_keys()
+0b10000000
+0xF0
+0xA0
+0x90
+0x80
+>>>>>>> shrubbery-ni

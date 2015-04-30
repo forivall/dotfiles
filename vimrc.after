@@ -1,0 +1,27 @@
+" this is meant to be used with the "janus" vim distribution
+" https://github.com/carlhuda/janus
+
+set guifont=Monospace\ 11
+
+" my custom settings
+set ignorecase
+set smartcase
+
+" A tab produces a 2-space indentation
+set softtabstop=4
+set shiftwidth=4
+"set expandtab
+"set noexpandtab
+set tabstop=4
+
+"set t_Co=256
+
+:colorscheme Tomorrow
+
+" style "no-resize-handle"
+" {
+"     GtkWindow::resize-grip-height = 0
+"     GtkWindow::resize-grip-width = 0
+" }
+" 
+" class "GtkWidget" style "no-resize-handle"

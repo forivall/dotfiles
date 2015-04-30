@@ -1,0 +1,132 @@
+[user]
+	name = Jordan Klassen
+	email = jordan@klassen.me.uk
+[core]
+	autocrlf = input
+	filemode = false
+	# pager = less -F
+  pager = most
+	excludesfile = /home/jklassen/.gitignore
+[diff]
+        renames = false
+#       renames = copies # makes genco choke
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	st = status -b -s
+	stat = status -b -s
+	# --pretty=format:"%H%x20%an%x09%ad%x09%s"
+	ahead = log --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph HEAD ^origin/HEAD
+	ahead-root = !git --no-pager log --oneline HEAD ^origin/HEAD
+	ahead2 = log --name-status --abbrev-commit --pretty=oneline --graph --decorate HEAD ^origin/HEAD
+	diffc = diff --cached
+	last = show --oneline --name-status --decorate
+	l = log --pretty=oneline --abbrev-commit --decorate --graph
+	la = log --pretty=oneline --abbrev-commit --decorate --graph --all
+	l2 = log --pretty="tformat:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph --no-notes
+	l3 = log --pretty="tformat:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
+	lg = log --name-status --pretty=oneline --abbrev-commit --decorate --graph
+	lga = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --all
+	lg2 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph --no-notes
+	lg3 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
+	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
+	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
+	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graphlast = show --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph
+	teaml = log --author=".*\\\\(aslesarev\\\\|bbarbour\\\\|bolaney\\\\|ghuynh\\\\|jtary\\\\|eli\\\\|jthompson\\\\|jklassen\\\\)@fortinet\\.com.*" --pretty=oneline --abbrev-commit --decorate --graph
+	teamlg = log --author=".*\\\\(aslesarev\\\\|bbarbour\\\\|bolaney\\\\|ghuynh\\\\|jtary\\\\|eli\\\\|jthompson\\\\|jklassen\\\\)@fortinet\\.com.*" --name-status --pretty=oneline --abbrev-commit --decorate --graph
+	teamlog = log --author=".*\\\\(aslesarev\\\\|bbarbour\\\\|bolaney\\\\|ghuynh\\\\|jtary\\\\|eli\\\\|jthompson\\\\|jklassen\\\\)@fortinet\\.com.*"
+	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
+	ignore-for-now = update-index --assume-unchanged
+	root = rev-parse --show-toplevel
+	# useful to force make to rebuild changed files; just `| xargs touch`
+	show-files-only = show --pretty="format:" --name-only
+
+	# legit
+	# branches = !legit branches
+	# brs = !legit branches
+	# graft = !legit graft \"$@\"
+	# harvest = !legit harvest \"$@\"
+	# publish = !legit publish \"$@\"
+	# sprout = !legit sprout \"$@\"
+	# switch = !legit switch \"$@\"
+	# sync = !legit sync \"$@\"
+	# unpublish = !legit unpublish \"$@\"
+
+	exec = "!exec "
+	# see bashrc
+	# custom commands, before adding scripts to bin
+	age = !/home/jklassen/code/git-age/git-age
+	diffuse = !/home/jklassen/scripts/git-diffuse
+	genco = !/home/jklassen/scripts/git-genco
+	genpatch = !/home/jklassen/scripts/git-genpatch
+	gerrit-submit = !/home/jklassen/scripts/git-gerrit-submit
+	grep-gedit-open = "!exec echo"
+	prepare-eco = !/home/jklassen/scripts/git-prepare-eco
+	review-merge = !/home/jklassen/scripts/git-review-merge
+	store-untracked-files = !/home/jklassen/scripts/git-archive-untracked-files
+    blameall = !/home/jklassen/scripts/git-blameall
+    branch-archive = !/home/jklassen/scripts/git-branch-archive
+
+    # aliases for custom commands
+    sm = subl-modified
+    sp = subl-projects
+
+[color]
+	# diff = always
+	grep = always
+	interactive = always
+	status = always
+	ui = auto
+	branch = auto
+	diff = auto
+# [color "branch"]
+# 	current = yellow reverse
+# 	local = yellow
+# 	remote = green
+# [color "diff"]
+# 	meta = red bold
+# 	frag = cyan bold
+# 	old = red
+# 	new = green
+[color "status"]
+	# added = green
+	# changed = green
+	untracked = magenta
+
+[grep]
+	lineNumber = true
+[pager]
+	ahead = less
+	last = false
+	ll = true
+	ls-files = true
+	stash = less
+[giggle]
+	file-view-vpane-position = 807
+	history-view-vpane-position = 216
+	main-window-geometry = 1265x1022+653+27
+	main-window-maximized = false
+	main-window-view = HistoryView
+	show-graph = true
+[merge]
+	tool = diffuse_custom
+	#tool = meld
+	conflictstyle = diff3
+[rerere]
+	enabled = 1
+[mergetool "diffuse_custom"]
+	cmd = /usr/bin/diffuse \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+	#"
+[github]
+	user = forivall
+# [push]
+# 	default = simple
+[push]
+	default = simple
+[url "git://anongit.kde.org/"]
+   insteadOf = kde:
+[url "ssh://git@git.kde.org/"]
+   pushInsteadOf = kde:
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
