@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # This file defines a couple of git aliases and bash completions for a number
 # of git scripts
 
@@ -45,27 +45,32 @@ function ___git_indent_helper() {
     "$@" 2>/dev/null | (whitespace="↳ "; while read l; do echo "$whitespace$l"; whitespace="  "; done)
 }
 
+GIT_SSH_AGENT_CHECK=(ssh-add -l)
+GIT_SSH_AGENT_ADD=(ssh-add)
+
+# ssh-add works fine if envoy is started in ssh-agent mode
+# GIT_SSH_AGENT_CHECK=(envoy -l)
+# GIT_SSH_AGENT_ADD=(envoy -a)
+
 ___git_ran_once=n
 function git() { # also put these in git-aliases for autocomplete
-    local a;
-    if [[ $___git_ran_once = n ]] ; then
-        ___git_ran_once=y
-        echo Running ssh-add
-        if ! ssh-add -l ; then
-          echo Running ssh-add
-          ssh-add
-        fi
+  local a;
+  if [[ $___git_ran_once = n && "$1" =~ "clone|fetch|fetch-pack|pull|push|send-pack" ]] ; then
+    ___git_ran_once=y
+    if ! $GIT_SSH_AGENT_CHECK >/dev/null; then
+      $GIT_SSH_AGENT_ADD
     fi
-    case "$1" in
-        age) shift; ~/code/git-repos/git-age/git-age $@;;
-        diff) shift; if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then /usr/bin/env git --no-pager diff $@ ; else /usr/bin/env git diff $@ ; fi;;
-        grep-gedit-open) shift; git-grep-gedit-open $@;;
-        blameall) shift; ~/code/git-blameall.py $@;;
-        stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
-        checkout|cherry-pick|commit|fetch|merge|pull|push) /usr/bin/env git "$@" && ___git_indent_helper git st --no-files; echo  ;;
-        # diffuse) shift; ~/scripts/git-diffuse "$@";;
-        *) /usr/bin/env git "$@";;
-    esac
+  fi
+  case "$1" in
+    age) shift; ~/code/git-repos/git-age/git-age $@;;
+    diff) shift; if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then /usr/bin/env git --no-pager diff $@ ; else /usr/bin/env git diff $@ ; fi;;
+    grep-gedit-open) shift; git-grep-gedit-open $@;;
+    blameall) shift; ~/code/git-blameall.py $@;;
+    stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
+    checkout|cherry-pick|commit|fetch|merge|pull|push) /usr/bin/env git "$@" && ___git_indent_helper git st --no-files; echo  ;;
+    # diffuse) shift; ~/scripts/git-diffuse "$@";;
+    *) /usr/bin/env git "$@";;
+  esac
 }
 
 _git-stashed() {
