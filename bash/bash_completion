@@ -1,0 +1,12 @@
+#!/bin/bash
+BASH_COMPLETION_LOCAL_DIR=~/.bash_completion.d
+if [[ -d $BASH_COMPLETION_LOCAL_DIR && -r $BASH_COMPLETION_LOCAL_DIR && \
+    -x $BASH_COMPLETION_LOCAL_DIR ]]; then
+    for i in $(LC_ALL=C command ls "$BASH_COMPLETION_LOCAL_DIR"); do
+        i=$BASH_COMPLETION_LOCAL_DIR/$i
+        if [[ ${i##*/} != @($_backup_glob|Makefile*) && -f $i && -r $i ]] ; then
+            . "$i"
+        fi
+    done
+fi
+unset i
