@@ -6567,3 +6567,64 @@ add benq strobe settings'
 : 1430353698:0;subl .
 : 1430353863:0;git st
 : 1430353865:0;git add -p
+: 1430354209:0;git st
+: 1430354211:0;git diff
+: 1430354248:0;git la
+: 1430354253:0;git stash drop
+: 1430354255:0;git la
+: 1430354258:0;git st
+: 1430354259:0;git diff
+: 1430357615:0;sudo systemctl reboot
+: 1430371582:0;~/.config/autostart-scripts/set-mouse-accel.sh
+: 1430371585:0;git st
+: 1430373371:0;cd code/git/dotfiles
+: 1430373372:0;git st
+: 1430373373:0;git fetch
+: 1430373522:0;atom code/git/dotfiles
+: 1430373548:0;envoy -ps
+: 1430373554:0;envoy --help
+: 1430373558:0;envoy -a
+: 1430373598:0;envoy -l
+: 1430373614:0;git st
+: 1430373618:0;ps -AF|grep envoy
+: 1430373632:0;git fetch
+: 1430373645:0;git st
+: 1430373647:0;git push
+: 1430373657:0;ssh-add
+: 1430373768:0;envoy -d
+: 1430373772:0;envoy
+: 1430373775:0;envoy -l
+: 1430373776:0;envoy -k
+: 1430373778:0;envoy -l
+: 1430373835:0;...
+: 1430373836:0;ls
+: 1430373862:0;git log -Senvoy -p -- zsh_history_interactive|grep envoy
+: 1430373945:0;systemctl show envoy@ssh-agent.service
+: 1430373962:0;envoyd --help
+: 1430373991:0;git st
+: 1430373994:0;gman git
+: 1430374036:0;git help -a
+: 1430374077:0;envoy -k
+: 1430374092:0;git bundle
+: 1430374337:0;git fetch
+: 1430374391:0;git st
+: 1430374393:0;git fetch
+: 1430374417:0;git push
+: 1430374420:0;git fetch
+: 1430374438:0;envoy -k
+: 1430374441:0;git fetch
+: 1430374535:0;git st
+: 1430374542:0;git add -p
+: 1430374576:0;envoy -k
+: 1430374620:0;git fetch
+: 1430374671:0;a=(ls -l)
+: 1430374674:0;$a
+: 1430374677:0;"$a"
+: 1430374680:0;$a
+: 1430374720:0;git fetch
+: 1430374727:0;git st
+: 1430374732:0;git add -p
+: 1430374743:0;git st
+: 1430374757:0;git commit -m 'improve git auto ssh-add'
+: 1430374759:0;git st
+: 1430374771:0;git add -p
