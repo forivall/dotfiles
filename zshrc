@@ -67,7 +67,7 @@ antigen bundle "$SH_ROOT/plugins" unsorted
 # antigen bundle "$SH_ROOT/plugins" simple-history-search
 antigen apply
 # bashcompletions need to happen after apply
-antigen bundle "$HOME/.opam/opam-init"
+if [[ -d "$HOME/.opam" ]] then antigen bundle "$HOME/.opam/opam-init" ; fi
 
 # todo: create a plugin for envoy
-eval $(envoy -ps)
+if whence envoy >/dev/null ; then eval $(envoy -ps) ; fi

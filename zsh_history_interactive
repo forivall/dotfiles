@@ -6562,3 +6562,8 @@ add benq strobe settings'
 : 1430352487:0;git add zsh_history_interactive
 : 1430352487:0;git st
 : 1430352564:0;git add zsh_history_interactive
+: 1430353679:0;subl .
+: 1430353694:0;atom .
+: 1430353698:0;subl .
+: 1430353863:0;git st
+: 1430353865:0;git add -p
