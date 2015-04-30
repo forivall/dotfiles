@@ -69,4 +69,5 @@ antigen apply
 # bashcompletions need to happen after apply
 antigen bundle "$HOME/.opam/opam-init"
 
+# todo: create a plugin for envoy
 eval $(envoy -ps)
