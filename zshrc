@@ -38,6 +38,13 @@ BARE_GLOB_QUAL=true
 COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 
+IS_WINDOWS=false
+if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
+  IS_WINDOWS=true
+  PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
+  CYGWIN="$CYGWIN codepage:oem"
+fi
+
 # slow
 ___progress
 export ZSH="$(-antigen-get-clone-dir https://github.com/forivall/oh-my-zsh.git)"
@@ -75,6 +82,8 @@ antigen bundle "$SH_ROOT/plugins" npm; ___progress
 antigen bundle "$SH_ROOT/plugins" subl; ___progress
 antigen bundle "$SH_ROOT/plugins" trash; ___progress
 antigen bundle "$SH_ROOT/plugins" unsorted; ___progress
+$IS_WINDOWS && antigen bundle "$SH_ROOT/plugins" cygwin-sudo; ___progress
+
 # antigen bundle "$SH_ROOT/plugins" simple-history-search
 antigen apply; ___progress
 # bashcompletions need to happen after apply
@@ -83,8 +92,6 @@ if [[ -d "$HOME/.opam" ]] then antigen bundle "$HOME/.opam/opam-init" ; fi
 # todo: create a plugin for envoy
 if whence envoy >/dev/null ; then eval $(envoy -ps) ; fi
 
-if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
-  PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
-fi
 
 echo -en '\r'
+# ___time_end

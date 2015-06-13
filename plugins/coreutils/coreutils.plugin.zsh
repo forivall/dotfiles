@@ -45,5 +45,42 @@ alias diff_=/usr/bin/diff
 # cleanup() { find -name __tmp; }
 # cleanup-run() { find -name __tmp -exec /usr/bin/rm -r ';' ; }
 
+if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
+  # alias lnd="/cygdrive/c/Program Files/MSysGit/bin/ln"
+  __coreutils_pathopts() {
+    local argname=$1
+    local optstmp
+    local optval
+    local optconverted
+    optstmp=()
+    shift
+    for i in {1..$#}; do
+        optval=${(P)i}
+        optconverted=$optval
+        if [[ "$optval[1]" != "-" ]] ; then
+            optconverted="$(cygpath -w "$optval"|sed 's/\\/\\\\/g')"
+        fi
+        eval ${argname}+=${(q)optconverted}
+    done
+  }
+  if [[ -e "/cygdrive/c/Program Files/MSysGit/bin/ln" ]]; then
+      lnd() {
+          local opts
+          opts=()
+          __coreutils_pathopts opts "$@"
+          echo "$opts"
+          "/cygdrive/c/Program Files/MSysGit/bin/ln" $opts
+      }
+      lndsu() {
+          local opts
+          opts=()
+          __coreutils_pathopts opts "$@"
+          echo "$opts"
+          sudo "/cygdrive/c/Program Files/MSysGit/bin/ln" $opts
+      }
+  fi
+fi
+
+
 # whatever...
 forever() { while eval "$@" || (echo "Exited Abnormally! Restarting in 1 second."; sleep 1); do : ; done; }
