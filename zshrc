@@ -71,6 +71,7 @@ antigen bundle mafredri/zsh-async; ___progress
 antigen bundle sindresorhus/pure; ___progress
 antigen bundle zsh-users/zsh-completions src; ___progress
 # antigen bundle "$SH_ROOT/plugins/"
+$IS_WINDOWS && antigen bundle "$SH_ROOT/plugins" cygwin-functions; ___progress
 antigen bundle "$SH_ROOT/plugins" simple-history-search; ___progress
 antigen bundle "$SH_ROOT/plugins" colors; ___progress
 antigen bundle "$SH_ROOT/plugins" coreutils; ___progress

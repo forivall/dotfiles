@@ -47,38 +47,33 @@ alias diff_=/usr/bin/diff
 
 if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   # alias lnd="/cygdrive/c/Program Files/MSysGit/bin/ln"
-  __coreutils_pathopts() {
-    local argname=$1
-    local optstmp
-    local optval
-    local optconverted
-    optstmp=()
-    shift
-    for i in {1..$#}; do
-        optval=${(P)i}
-        optconverted=$optval
-        if [[ "$optval[1]" != "-" ]] ; then
-            optconverted="$(cygpath -w "$optval"|sed 's/\\/\\\\/g')"
-        fi
-        eval ${argname}+=${(q)optconverted}
-    done
-  }
+  autoload -U cygpath-w-convert-args
   if [[ -e "/cygdrive/c/Program Files/MSysGit/bin/ln" ]]; then
       lnd() {
           local opts
           opts=()
-          __coreutils_pathopts opts "$@"
+          cygpath-w-convert-args opts "$@"
           echo "$opts"
           "/cygdrive/c/Program Files/MSysGit/bin/ln" $opts
       }
       lndsu() {
           local opts
           opts=()
-          __coreutils_pathopts opts "$@"
+          cygpath-w-convert-args opts "/cygdrive/c/Program Files/MSysGit/bin/ln" "$@"
           echo "$opts"
-          sudo "/cygdrive/c/Program Files/MSysGit/bin/ln" $opts
+          $(whence sudo) $opts
       }
   fi
+  mklink() {
+    local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
+    echo mklink "$opts"
+    cmd '/D' '/C' mklink $opts
+  }
+  mklinksu() {
+    local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
+    echo mklink "$opts"
+    $(whence sudo) cmd '/D' '/C' mklink $opts '&' 'set' '/p' 'enter="Press enter to exit"'
+  }
 fi
 
 

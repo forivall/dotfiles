@@ -1,0 +1,31 @@
+# Convert arguments from cygwin paths to windows paths
+#
+# First argument: *name* (not contents) of output array variable.
+# ... arguments: arguments to Convert
+
+argname=$1
+local optval
+local optconverted
+shift
+local winargs=false
+if [[ "$1" == "--winargs" ]]; then
+  winargs=true
+  shift
+fi
+
+for i in {1..$#}; do
+    optval=${(P)i}
+    optconverted=$optval
+    if [[ "$optval[1]" == "-" ]] ; then
+      if $winargs ; then
+        if [[ "$optval" == '--help' ]] ; then
+          optconverted='/?'
+        else
+          optconverted[1]='/'
+        fi
+      fi
+    else
+        optconverted="$(cygpath -w "$(realpath "$optval")"|sed 's/\\/\\\\/g')"
+    fi
+    eval ${argname}+=${(q)optconverted}
+done
