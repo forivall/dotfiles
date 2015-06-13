@@ -1,15 +1,3 @@
-    n = start
-    for elem in sequence:
-        n = start
-def enumerate_(sequence, start=0):
-    n = start
-    for elem in sequence:
-        yield n, elem
-        n += 1
-        
-    
-type(enumerate_)
-import plistlib
 plistlib.__file__
 help(plistlib.readPlist)
 import path
@@ -99,3 +87,14 @@ a.detach_keyboard_special_keys()
 0x90
 0x80
 >>>>>>> shrubbery-ni
+from gi.repository import Gtk
+Gtk.IconTheme.get_default()
+icon_theme = Gtk.IconTheme.get_default()
+icon_theme.list_icons()
+icon_theme.list_icons()
+from maitch import *
+ctx = Context(PACKAGE = "roxterm", SRC_DIR = "${TOP_DIR}/src",
+        MCFLAGS = "${CPPFLAGS} -I. -I${SRC_DIR} -D_GNU_SOURCE -DHAVE_CONFIG_H")
+ctx.getenv('ENABLE_GIT')
+ctx.env
+ctx.getenv
