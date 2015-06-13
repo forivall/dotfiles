@@ -2426,3 +2426,351 @@
 : 1434186170:0;git commit
 : 1434186206:0;git st
 : 1434186209:0;git add -p
+: 1434186216:0;git st
+: 1434186219:0;git commit
+: 1434186225:0;git st
+: 1434186228:0;git diff
+: 1434186235:0;git checkout plugins/
+: 1434186250:0;git add bash/
+: 1434186251:0;git st
+: 1434186252:0;git diffc
+: 1434186273:0;atom bash/bash_completion.d/bash_completion.d
+: 1434186301:0;cd bash/bash_completion.d
+: 1434186302:0;ls
+: 1434186303:0;ls -al
+: 1434186310:0;rm bash_completion.d
+: 1434186311:0;git st
+: 1434186326:0;git rm --cached bash_completion.d
+: 1434186327:0;git st
+: 1434186329:0;ls
+: 1434186332:0;..
+: 1434186333:0;git st
+: 1434186344:0;git push
+: 1434186536:0;ls
+: 1434186538:0;cd antigen
+: 1434186546:0;pip install -r requirements.txt
+: 1434186551:0;make
+: 1434186567:0;ls
+: 1434214233:0;cd code/git/dotfiles
+: 1434214237:0;atom .
+: 1434214287:0;cd antigen
+: 1434214287:0;ls
+: 1434214289:0;git st
+: 1434214292:0;git checkout master
+: 1434214293:0;git st
+: 1434214795:0;rm asdf
+: 1434214800:0;cd
+: 1434214813:0;cd $APPDATA/Sublime\ Text\ 3
+: 1434214814:0;ls
+: 1434214823:0;cd Installed\ Packages
+: 1434214823:0;ls
+: 1434214840:0;cd ../Local
+: 1434214840:0;ls
+: 1434214844:0;cd ../Packages
+: 1434214844:0;ls
+: 1434214849:0;cd Terminal
+: 1434214850:0;ls
+: 1434214851:0;git st
+: 1434214861:0;atom Terminal.py
+: 1434215056:0;cd antigen
+: 1434215060:0;git checkout -
+: 1434216035:0;pact install rxvt
+: 1434216084:0;ls /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/
+: 1434216121:0;mkdir /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216124:0;sudo mkdir /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216138:0;ls -l /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs
+: 1434216143:0;ls -l /c/ProgramData/Microsoft/Windows/Start\ Menu/
+: 1434216193:0;type -a sudo
+: 1434216246:0;..
+: 1434216298:0;mkdir /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216303:0;cygpath -w /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216305:0;cygpath -w /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin|clip
+: 1434216362:0;ls -l /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs
+: 1434216367:0;ls -l /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216372:0;ls -al /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216376:0;ls -l /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216383:0;pact install rxvt
+: 1434216388:0;pact remove rxvt
+: 1434216392:0;pact install rxvt
+: 1434216414:0;ls -l /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Cygwin
+: 1434216451:0;pact remove rxvt
+: 1434216499:0;pact install rxvt
+: 1434216600:0;atom .Xdefaults
+: 1434216939:0;ls
+: 1434217078:0;mkdir /usr/bin/X11
+: 1434217088:0;rmdir /usr/bin/X11
+: 1434217102:0;mkdir -p /usr/lib/X11/app-defaults
+: 1434217107:0;pact remove rxvt
+: 1434217143:0;pact install rxvt
+: 1434217165:0;mkdir -p /etc/X11/app-defaults
+: 1434217177:0;pact remove rxvt
+: 1434217188:0;pact install rxvt
+: 1434217271:0;pact install rxvt-unicode
+: 1434217299:0;pact --help
+: 1434217308:0;pact show
+: 1434217314:0;pact show rxvt-unicode
+: 1434217317:0;pact
+: 1434217328:0;pact ls
+: 1434217349:0;rxvt-unicode
+: 1434217379:0;rxvtu
+: 1434217385:0;xterm
+: 1434217441:0;rxvt-unicode-Xs
+: 1434217445:0;pact install rxvt-unicode-Xs
+: 1434217453:0;pact find rxvt
+: 1434217471:0;pact install rxvt-unicode-common
+: 1434217534:0;set
+: 1434217539:0;set|grep cyg
+: 1434217545:0;set|grep -i cyg
+: 1434217555:0;echo $CYGWIN
+: 1434217831:0;pact find terminator
+: 1434217843:0;pact remove rxvt rxvt-unicode-common rxvt-unicode
+: 1434217848:0;pact help
+: 1434218067:0;cd $USERPROFILE
+: 1434218068:0;ls
+: 1434218080:0;type -a ln
+: 1434218163:0;ls
+: 1434218164:0;cd $USERPROFILE
+: 1434218165:0;ls
+: 1434218191:0;lnd /e/Apps
+: 1434218200:0;ls
+: 1434218268:0;lnd /e/Apps
+: 1434218275:0;lnd -s /e/Apps
+: 1434218279:0;lnd --help
+: 1434218312:0;cd $USERPROFILE
+: 1434218315:0;lnd -s /e/Apps
+: 1434218329:0;lnd --help
+: 1434218340:0;lnd -s /e/Apps Apps
+: 1434218350:0;lnd --symbolic /e/Apps Apps
+: 1434218402:0;cd $USERPROFILE
+: 1434218405:0;lnd --symbolic /e/Apps Apps
+: 1434218427:0;sudo lnd --symbolic /e/Apps Apps
+: 1434218560:0;atom /usr/share/zsh/5.0.7/functions/regexp-replace
+: 1434218893:0;cd $USERPROFILE
+: 1434218896:0;lnd --symbolic /e/Apps Apps
+: 1434218930:0;cd $USERPROFILE
+: 1434218931:0;lnd --symbolic /e/Apps Apps
+: 1434218935:0;ls apps
+: 1434218939:0;ls Apps
+: 1434218965:0;mv apps/* /e/Apps
+: 1434218977:0;rmdir Apps
+: 1434218980:0;lnd --symbolic /e/Apps Apps
+: 1434218984:0;ls apps
+: 1434218990:0;ls /e/apps
+: 1434219000:0;ls
+: 1434219005:0;rm apps
+: 1434219007:0;ls
+: 1434219014:0;lndsu --symbolic /e/Apps Apps
+: 1434219018:0;ls
+: 1434219021:0;ls apps
+: 1434219082:0;echo $COMSPEC
+: 1434219178:0;runas
+: 1434219181:0;runas --help
+: 1434219185:0;runas /?
+: 1434219444:0;type -af sudo
+: 1434219475:0;sudo
+: 1434219482:0;pact remove sudo
+: 1434219516:0;cd
+: 1434219546:0;ls
+: 1434219547:0;..
+: 1434219554:0;mkdir cygwin-sudo
+: 1434219575:0;git submodule add --help
+: 1434219600:0;git submodule add git@github.com:nu774/sudo-for-cygwin.git ./sudo-for-cygwin
+: 1434219607:0;ls
+: 1434219616:0;git st
+: 1434219629:0;git rm -f ./sudo-for-cygwin
+: 1434219631:0;ls
+: 1434219635:0;cd cygwin-sudo
+: 1434219639:0;git submodule add git@github.com:nu774/sudo-for-cygwin.git ./sudo-for-cygwin
+: 1434219642:0;gi tst
+: 1434219643:0;git st
+: 1434219644:0;ls
+: 1434219661:0;atom cygwin-sudo.plugin.zsh
+: 1434219759:0;ls
+: 1434219762:0;type -af sudo
+: 1434219839:0;true
+: 1434219840:0;false
+: 1434219896:0;type -af sudo
+: 1434219904:0;echo $IS_WINDOWS
+: 1434219911:0;$IS_WINDOWS && echo y
+: 1434219930:0;echo $PATH
+: 1434219952:0;type -af sudo
+: 1434219958:0;echo $PATH
+: 1434220003:0;$IS_WINDOWS && echo y
+: 1434220035:0;echo $PATH
+: 1434220039:0;type -af sudo
+: 1434220087:0;cd $USERPROFILE
+: 1434220095:0;lndsu --symbolic /e/Apps Apps
+: 1434220100:0;rm Apps
+: 1434220102:0;lndsu --symbolic /e/Apps Apps
+: 1434220146:0;ls
+: 1434220149:0;ls apps
+: 1434220155:0;sudo echo
+: 1434220205:0;pip
+: 1434220211:0;pip2
+: 1434220219:0;pip2 list
+: 1434220256:0;type -a python
+: 1434220261:0;python --version
+: 1434220272:0;pip2 list
+: 1434220861:0;whence python
+: 1434220875:0;cygpath $(whence python)
+: 1434220879:0;cygpath -w $(whence python)
+: 1434221109:0;__zsh_cygwinsudo_plugin_installinstructions
+: 1434221214:0;sudo echo
+: 1434221395:0;ls
+: 1434221401:0;sudo touch test
+: 1434222026:0;cl
+: 1434222030:0;start
+: 1434222042:0;type -a cmd
+: 1434222044:0;start cmd
+: 1434222048:0;type -a start
+: 1434222081:0;cygpath -w . |clip
+: 1434222100:0;cygpath -w .
+: 1434222104:0;cygpath -w $PWD
+: 1434222108:0;cygpath -w $PWD|clip
+: 1434222109:0;E:\Jordan\Code\git\dotfiles\plugins\cygwin-sudo
+: 1434222145:0;git submodule add git@github.com:jpassing/elevate.git ./elevate
+: 1434222173:0;ls
+: 1434222176:0;cd elevate
+: 1434222185:0;du -a .
+: 1434222203:0;head ./Elevate.sdf
+: 1434222208:0;open .
+: 1434222534:0;git st
+: 1434222536:0;git diff
+: 1434222576:0;ls
+: 1434222590:0;bin/x64/Debug/Elevate.exe touch 1
+: 1434222593:0;ls
+: 1434222595:0;ls -l
+: 1434222611:0;git st
+: 1434222684:0;git diff
+: 1434222843:0;ls
+: 1434222853:0;bin/x64/Debug/Elevate.exe touch 2
+: 1434222857:0;ls
+: 1434222889:0;git st
+: 1434222956:0;git ts
+: 1434222957:0;git st
+: 1434222995:0;hub browse github/ignore
+: 1434223006:0;hub browse github/gitignore
+: 1434223063:0;curl -L https://github.com/github/gitignore/raw/8559c8a381a26e596fc3cf76eeb99df2a62eebf8/VisualStudio.gitignore > .gitignore
+: 1434223065:0;ls
+: 1434223067:0;git st
+: 1434223073:0;git add .gitignore
+: 1434223076:0;rm 1
+: 1434223078:0;rm 2
+: 1434223078:0;git st
+: 1434223081:0;git add -p
+: 1434223109:0;git st
+: 1434223120:0;git diff
+: 1434223151:0;git rm Elevate.sdf
+: 1434223157:0;git rm -f Elevate.sdf
+: 1434223174:0;git st
+: 1434223177:0;git add -p
+: 1434223186:0;git rm -f Elevate/Elevate.aps
+: 1434223187:0;git st
+: 1434223208:0;ls
+: 1434223221:0;./bin/x64/Debug/Elevate touch 1
+: 1434223224:0;ls
+: 1434223226:0;rm 1
+: 1434223227:0;ls
+: 1434223228:0;git st
+: 1434223260:0;git checkout -b 'fix-build'
+: 1434223263:0;git st
+: 1434223264:0;git add -p
+: 1434223268:0;git commit
+: 1434223282:0;git st
+: 1434223286:0;hub fork
+: 1434223296:0;git push -u forivall fix-build
+: 1434223302:0;git st
+: 1434223303:0;..
+: 1434223304:0;git st
+: 1434223318:0;git rm -f elevate
+: 1434223355:0;git rm -rf elevate
+: 1434223359:0;ls
+: 1434223368:0;git rm -rf elevate
+: 1434223371:0;git st
+: 1434223387:0;git rm -r sudo-for-cygwin
+: 1434223391:0;git rm -fr sudo-for-cygwin
+: 1434223587:0;git submodule add git@github.com:forivall/elevate.git ./elevate
+: 1434223623:0;subl subl ../../.git/config
+: 1434223635:0;atom ../../.git/config
+: 1434223666:0;git submodule add git@github.com:forivall/elevate.git ./elevate
+: 1434223823:0;git st
+: 1434223827:0;cd
+: 1434223828:0;git st
+: 1434223829:0;gitidff
+: 1434223832:0;git diff
+: 1434223856:0;cd plugins/cygwin-sudo
+: 1434223857:0;git st
+: 1434223866:0;git ignore '/.installed'
+: 1434223867:0;ls
+: 1434223868:0;git st
+: 1434223876:0;subl .gitignore
+: 1434223884:0;subl ../../.gitignore
+: 1434223900:0;rm .installed
+: 1434223906:0;git ignore ./.installed
+: 1434223916:0;git ignore .installed
+: 1434223934:0;touch .installed
+: 1434223934:0;git st
+: 1434223947:0;git diff
+: 1434223987:0;ls
+: 1434223990:0;cfd elevate
+: 1434223991:0;cd elevate
+: 1434224000:0;open ./Elevate.sln
+: 1434224024:0;git checkout fix-build
+: 1434224025:0;git st
+: 1434224034:0;git reset --hard HEAD
+: 1434224037:0;git checkout fix-build
+: 1434224038:0;git st
+: 1434224042:0;open ./Elevate.sln
+: 1434224059:0;type -af open
+: 1434224068:0;echo $__DESKTOP_OPEN
+: 1434224077:0;type -a cygstart
+: 1434224158:0;ls
+: 1434224169:0;ls bin/x64/Release
+: 1434224249:0;ls
+: 1434224251:0;tree bin
+: 1434224283:0;echo "$__zsh_cygwinsudo_plugin_location/bin/$__zsh_cygwinsudo_arch/Release/Elevate"
+: 1434224322:0;test -x "$__zsh_cygwinsudo_plugin_location/bin/$__zsh_cygwinsudo_arch/Release/Elevate"
+: 1434224325:0;test -x "$__zsh_cygwinsudo_plugin_location/bin/$__zsh_cygwinsudo_arch/Release/Elevate.exe"
+: 1434224341:0;/cygdrive/e/Jordan/Code/git/dotfiles/plugins/cygwin-sudo/bin/x64/Release/Elevate
+: 1434224373:0;test -x "$__zsh_cygwinsudo_plugin_location/elevate/bin/$__zsh_cygwinsudo_arch/Release/Elevate"
+: 1434224393:0;type -a sudo
+: 1434224419:0;cygsudo
+: 1434224456:0;sudo touch 1
+: 1434224459:0;type -a sudo
+: 1434224461:0;ls
+: 1434224463:0;rm 1
+: 1434224480:0;type -a sudo
+: 1434224485:0;sudo touch 1
+: 1434224487:0;ls
+: 1434224504:0;type -a start
+: 1434224563:0;start touch
+: 1434224682:0;type -af open
+: 1434224690:0;cygstart
+: 1434224770:0;ls
+: 1434224774:0;ls 
+: 1434224807:0;git st
+: 1434224811:0;git diff
+: 1434224820:0;..
+: 1434224821:0;git st
+: 1434224823:0;git diff
+: 1434224826:0;git add -p
+: 1434224855:0;git st
+: 1434224857:0;cd elevate
+: 1434224858:0;git st
+: 1434224866:0;git checkout Elevate/Elevate.vcxproj.user
+: 1434224867:0;git st
+: 1434224868:0;..
+: 1434224869:0;git st
+: 1434224875:0;...
+: 1434224878:0;git st
+: 1434224882:0;git checkout .gitignore
+: 1434224883:0;gitst
+: 1434224885:0;git add -p
+: 1434224913:0;git st
+: 1434224922:0;git add plugins/cygwin-sudo/
+: 1434224923:0;git st
+: 1434224933:0;git commit
+: 1434224942:0;git st
+: 1434224948:0;git checkout plugins/
+: 1434224949:0;git st
+: 1434224952:0;git add -p
