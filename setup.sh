@@ -21,3 +21,14 @@ ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 
 ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion
 ln -fs "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
+
+if [[ -n "$BABUN_HOME" ]]; then
+    BINPATH="$(cygpath "$HOMEPATH")/.local/bin"
+    mkdir -p "$BINPATH"
+    if [[ ! -e "$BINPATH/recycle.exe" ]] ; then
+        curl -OL http://www.maddogsw.com/cmdutils/cmdutils.zip
+        unzip cmdutils.zip -d cmdutils
+        cp cmdutils/Recycle.exe "$BINPATH/recycle.exe"
+    fi
+fi
+

@@ -15,7 +15,17 @@ alias git-new-workdir="/usr/share/git/workdir/git-new-workdir"
 alias gitview="/usr/share/git/gitview/gitview"
 
 alias g=git
-alias ge="git each"
+alias gg="git grep"
+# alias ge="git each"
+ge() {
+    local first; first="$1"
+    if whence "$first" >/dev/null 2>/dev/null ; then
+        shift
+    else
+        first=git
+    fi
+    for d in */.git(#q:s/\\/.git//)(/); do echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
+}
 alias gr="git r"
 alias grg="git r git"
 alias gst="git st"

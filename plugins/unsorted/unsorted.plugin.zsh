@@ -1,3 +1,24 @@
+
+alias res="echo -en \"\ec\e[3J\""
+
+type xclip > /dev/null && alias clip="xclip -selection c"
+
+# shellcheck disable=SC2059
+condalias() {
+    if [[ -e "$2" ]]; then
+        alias "$(printf "$1" "$2")"
+    fi
+}
+
+condalias markdown_py="%s -x def_list -x abbr" "/usr/bin/markdown_py"
+
+alias scat="source-highlight -fesc -o STDOUT -i"
+function scat2() { source-highlight -fesc "$@" -o STDOUT; }
+
+unfunction condalias
+
+### open
+
 function _prompt () {
     if [ -n "${ZSH_VERSION+x}" ] ; then
         read "?'$1' doesn't exist. Make a new file? [Y/n] " response

@@ -1,8 +1,13 @@
 #!/usr/bin/env zsh
-
+___progress_symbols='|/-\'
+___progress_i=0
+___progress() { echo -en '\r'; echo -n "${___progress_symbols[(( (__progress_i = ((__progress_i + 1) % 4)) + 1))]} "}
+___progress
 ___time_start () { ___source_time="$(date +%s%N)"; }
-___time_end () { ___now_time="$(date +%s%N)"; echo $(( (___now_time - ___source_time) / 1000000))ms "$@"; }
+___print_time_diff () { local start_time="$1"; shift; local end_time="$(date +%s%N)"; echo $(( (end_time - start_time) / 1000000))ms; }
+___time_end () { echo $(___print_time_diff $___source_time) "$@"; }
 ___timed () { ___time_start; "$@"; ___time_end "$@" }
+___time_start
 
 # SH_ROOT="$XDG_CONFIG/ermahger-sh"
 SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
@@ -31,43 +36,55 @@ EXTENDED_GLOB=true
 setopt bareglobqual
 BARE_GLOB_QUAL=true
 COMPLETION_WAITING_DOTS=true
+DISABLE_AUTO_TITLE=false
 
 # slow
+___progress
 export ZSH="$(-antigen-get-clone-dir https://github.com/forivall/oh-my-zsh.git)"
-antigen bundle forivall/oh-my-zsh
-
+antigen bundle forivall/oh-my-zsh; ___progress
 # antigen bundle git
 # antigen bundle git-extras
 # antigen bundle node
 # antigen bundle pip
 # antigen bundle python
 # antigen bundle web-search
-antigen bundle command-not-found
+antigen bundle command-not-found; ___progress
 # antigen bundle virtualenv
 
 # slow
-antigen bundle npm
+antigen bundle npm; ___progress
 # slow
-antigen bundle nvm
-antigen bundle colorize
-antigen bundle cp
+antigen bundle nvm; ___progress
+antigen bundle colorize; ___progress
+antigen bundle cp; ___progress
+antigen bundle meteor; ___progress
+antigen bundle git-extras; ___progress
 # antigen bundle encode64
-antigen bundle sindresorhus/pure
-antigen bundle zsh-users/zsh-completions src
+antigen bundle mafredri/zsh-async; ___progress
+antigen bundle sindresorhus/pure; ___progress
+antigen bundle zsh-users/zsh-completions src; ___progress
 # antigen bundle "$SH_ROOT/plugins/"
-antigen bundle "$SH_ROOT/plugins" simple-history-search
-antigen bundle "$SH_ROOT/plugins" colors
-antigen bundle "$SH_ROOT/plugins" coreutils
+antigen bundle "$SH_ROOT/plugins" simple-history-search; ___progress
+antigen bundle "$SH_ROOT/plugins" colors; ___progress
+antigen bundle "$SH_ROOT/plugins" coreutils; ___progress
 # slow
-antigen bundle "$SH_ROOT/plugins" git
-antigen bundle "$SH_ROOT/plugins" magic-cd
-antigen bundle "$SH_ROOT/plugins" npm
-antigen bundle "$SH_ROOT/plugins" subl
-antigen bundle "$SH_ROOT/plugins" unsorted
+antigen bundle "$SH_ROOT/plugins" git; ___progress
+antigen bundle "$SH_ROOT/plugins" github; ___progress
+antigen bundle "$SH_ROOT/plugins" magic-cd; ___progress
+antigen bundle "$SH_ROOT/plugins" npm; ___progress
+antigen bundle "$SH_ROOT/plugins" subl; ___progress
+antigen bundle "$SH_ROOT/plugins" trash; ___progress
+antigen bundle "$SH_ROOT/plugins" unsorted; ___progress
 # antigen bundle "$SH_ROOT/plugins" simple-history-search
-antigen apply
+antigen apply; ___progress
 # bashcompletions need to happen after apply
 if [[ -d "$HOME/.opam" ]] then antigen bundle "$HOME/.opam/opam-init" ; fi
 
 # todo: create a plugin for envoy
 if whence envoy >/dev/null ; then eval $(envoy -ps) ; fi
+
+if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
+  PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
+fi
+
+echo -en '\r'

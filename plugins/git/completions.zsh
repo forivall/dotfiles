@@ -37,7 +37,7 @@ local comp="$(zstyle -L ':completion:*:*:git:*')"
 if (( ${#comp} < 1 )) ; then comp="zstyle ':completion:*:*:git:*'"; fi
 # echo ${#comp}
 # echo $comp
-local autocomps="$(for i in ${${(k)commands[(I)git-*]}#git-} ; do echo -n "'"$(echo $i|sed s/\'/"'\\\\''"/)"' " ; done)"
+local autocomps="$(for i in ${${(k)commands[(I)git-*]}#git-} ; do echo -n "'"${i//\'/"'\\\\''"/}"' " ; done)"
 # autocomps=$(echo $autocomps|tr '()' ' ')
 comp="$comp $autocomps \
     branch-archive:'archive a branch via tag archive/<branch-name><date junk to keep unique>' \

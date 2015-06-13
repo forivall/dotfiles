@@ -3,10 +3,10 @@
 	email = jordan@klassen.me.uk
 [core]
 	autocrlf = input
-	filemode = false
 	# pager = less -F
   pager = most
 	excludesfile = /home/jklassen/.gitignore
+	trustctime = false
 [diff]
         renames = false
 #       renames = copies # makes genco choke
@@ -33,9 +33,6 @@
 	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graphlast = show --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph
-	teaml = log --author=".*\\\\(aslesarev\\\\|bbarbour\\\\|bolaney\\\\|ghuynh\\\\|jtary\\\\|eli\\\\|jthompson\\\\|jklassen\\\\)@fortinet\\.com.*" --pretty=oneline --abbrev-commit --decorate --graph
-	teamlg = log --author=".*\\\\(aslesarev\\\\|bbarbour\\\\|bolaney\\\\|ghuynh\\\\|jtary\\\\|eli\\\\|jthompson\\\\|jklassen\\\\)@fortinet\\.com.*" --name-status --pretty=oneline --abbrev-commit --decorate --graph
-	teamlog = log --author=".*\\\\(aslesarev\\\\|bbarbour\\\\|bolaney\\\\|ghuynh\\\\|jtary\\\\|eli\\\\|jthompson\\\\|jklassen\\\\)@fortinet\\.com.*"
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged
 	root = rev-parse --show-toplevel

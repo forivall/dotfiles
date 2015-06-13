@@ -1,4 +1,9 @@
 
+
+alias ds='pushd'
+alias dp='popd'
+alias cd..="cd .."
+
 # simple method to handle multiple cd customizations
 function _next_cd() { _next_cd_false=1 ; }
 function _next_cd_reset() { _next_cd_false=0 ; }
