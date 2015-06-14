@@ -12,6 +12,11 @@ if [[ "$1" == "--winargs" ]]; then
   winargs=true
   shift
 fi
+local rel=false
+if [[ "$1" == "--rel" ]]; then
+  rel=true
+  shift
+fi
 
 for i in {1..$#}; do
     optval=${(P)i}
@@ -25,7 +30,9 @@ for i in {1..$#}; do
         fi
       fi
     else
+      if ! $rel || [[ "$optval[1]" == '/' || "$optval[1]" == '.' ]]; then
         optconverted="$(cygpath -w "$(realpath "$optval")"|sed 's/\\/\\\\/g')"
+      fi
     fi
     eval ${argname}+=${(q)optconverted}
 done

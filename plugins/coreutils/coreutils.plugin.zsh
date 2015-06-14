@@ -53,26 +53,32 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
           local opts
           opts=()
           cygpath-w-convert-args opts "$@"
-          echo "$opts"
-          "/cygdrive/c/Program Files/MSysGit/bin/ln" $opts
+          echo "$opts[@]"
+          "/cygdrive/c/Program Files/MSysGit/bin/ln" "$opts[@]"
       }
       lndsu() {
           local opts
           opts=()
           cygpath-w-convert-args opts "/cygdrive/c/Program Files/MSysGit/bin/ln" "$@"
-          echo "$opts"
-          $(whence sudo) $opts
+          echo "$opts[@]"
+          $(whence sudo) "$opts[@]"
       }
   fi
   mklink() {
     local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
     echo mklink "$opts"
-    cmd '/D' '/C' mklink $opts
+    env cmd '/D' '/C' mklink "$opts[@]"
   }
   mklinksu() {
     local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
-    echo mklink "$opts"
-    $(whence sudo) cmd '/D' '/C' mklink $opts '&' 'set' '/p' 'enter="Press enter to exit"'
+    echo mklink "$opts[@]"
+    $(whence sudo) env cmd '/D' '/C' mklink "$opts[@"] '&' 'set' '/p' 'enter="Press enter to exit"'
+  }
+  cmd() {
+    local opts; opts=(); cygpath-w-convert-args opts --winargs --rel "$@"
+    echo cmd "$opts"
+    echo ${(F)opts}
+    env cmd "$opts[@]"
   }
 fi
 

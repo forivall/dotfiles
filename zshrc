@@ -24,6 +24,13 @@ setopt appendhistory
 setopt histfcntllock
 setopt nohistsavebycopy
 
+IS_WINDOWS=false
+if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
+  IS_WINDOWS=true
+  PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
+  CYGWIN="$CYGWIN codepage:oem"
+  _ANTIGEN_CACHE_DIR="$SH_ROOT/.cygwin_antigen_cache"
+fi
 source "$SH_ROOT/antigen/antigen.zsh"
 antigenp() { antigen "$@"; ___progress ; }
 
@@ -36,12 +43,6 @@ BARE_GLOB_QUAL=true
 COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 
-IS_WINDOWS=false
-if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
-  IS_WINDOWS=true
-  PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
-  CYGWIN="$CYGWIN codepage:oem"
-fi
 
 export _ANTIGEN_CACHE_ENABLED=true
 if whence -- -zcache-start >/dev/null; then HAS_CACHE=true; else HAS_CACHE=false fi
