@@ -3,11 +3,9 @@ ___progress_symbols='|/-\'
 ___progress_i=0
 ___progress() { echo -en '\r'; echo -n "${___progress_symbols[(( (__progress_i = ((__progress_i + 1) % 4)) + 1))]} "}
 ___progress
-___time_start () { ___source_time="$(date +%s%N)"; }
+
+
 ___print_time_diff () { local start_time="$1"; shift; local end_time="$(date +%s%N)"; echo $(( (end_time - start_time) / 1000000))ms; }
-___time_end () { echo $(___print_time_diff $___source_time) "$@"; }
-___timed () { ___time_start; "$@"; ___time_end "$@" }
-___time_start
 
 # SH_ROOT="$XDG_CONFIG/ermahger-sh"
 SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
@@ -27,7 +25,7 @@ setopt histfcntllock
 setopt nohistsavebycopy
 
 source "$SH_ROOT/antigen/antigen.zsh"
-# antigen use oh-my-zsh
+antigenp() { antigen "$@"; ___progress ; }
 
 # omz settings
 HYPHEN_INSENSITIVE=true
@@ -45,54 +43,66 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   CYGWIN="$CYGWIN codepage:oem"
 fi
 
-# slow
+export _ANTIGEN_CACHE_ENABLED=true
+if whence -- -zcache-start >/dev/null; then HAS_CACHE=true; else HAS_CACHE=false fi
+# HAS_CACHE=false
 ___progress
+
+# set -x
+$HAS_CACHE && -zcache-start bundles
+
 export ZSH="$(-antigen-get-clone-dir https://github.com/forivall/oh-my-zsh.git)"
-antigen bundle forivall/oh-my-zsh; ___progress
-# antigen bundle git
-# antigen bundle git-extras
-# antigen bundle node
-# antigen bundle pip
-# antigen bundle python
-# antigen bundle web-search
-antigen bundle command-not-found; ___progress
-# antigen bundle virtualenv
 
 # slow
-antigen bundle npm; ___progress
-# slow
-antigen bundle nvm; ___progress
-antigen bundle colorize; ___progress
-antigen bundle cp; ___progress
-antigen bundle meteor; ___progress
-antigen bundle git-extras; ___progress
-# antigen bundle encode64
-antigen bundle mafredri/zsh-async; ___progress
-antigen bundle sindresorhus/pure; ___progress
-antigen bundle zsh-users/zsh-completions src; ___progress
-# antigen bundle "$SH_ROOT/plugins/"
-$IS_WINDOWS && antigen bundle "$SH_ROOT/plugins" cygwin-functions; ___progress
-antigen bundle "$SH_ROOT/plugins" simple-history-search; ___progress
-antigen bundle "$SH_ROOT/plugins" colors; ___progress
-antigen bundle "$SH_ROOT/plugins" coreutils; ___progress
-# slow
-antigen bundle "$SH_ROOT/plugins" git; ___progress
-antigen bundle "$SH_ROOT/plugins" github; ___progress
-antigen bundle "$SH_ROOT/plugins" magic-cd; ___progress
-antigen bundle "$SH_ROOT/plugins" npm; ___progress
-antigen bundle "$SH_ROOT/plugins" subl; ___progress
-antigen bundle "$SH_ROOT/plugins" trash; ___progress
-antigen bundle "$SH_ROOT/plugins" unsorted; ___progress
-$IS_WINDOWS && antigen bundle "$SH_ROOT/plugins" cygwin-sudo; ___progress
+antigenp bundle forivall/oh-my-zsh
+# antigenp bundle git
+# antigenp bundle git-extras
+# antigenp bundle node
+# antigenp bundle pip
+# antigenp bundle python
+# antigenp bundle web-search
+antigenp bundle command-not-found
+# antigenp bundle virtualenv
 
-# antigen bundle "$SH_ROOT/plugins" simple-history-search
-antigen apply; ___progress
+# slow
+antigenp bundle npm
+# slow
+antigenp bundle nvm
+antigenp bundle colorize
+antigenp bundle cp
+antigenp bundle meteor
+antigenp bundle git-extras
+# antigenp bundle encode64
+antigenp bundle mafredri/zsh-async
+antigenp bundle sindresorhus/pure
+antigenp bundle zsh-users/zsh-completions src
+# antigenp bundle "$SH_ROOT/plugins/"
+$IS_WINDOWS && antigenp bundle "$SH_ROOT/plugins" cygwin-functions
+antigenp bundle "$SH_ROOT/plugins" simple-history-search
+antigenp bundle "$SH_ROOT/plugins" colors
+antigenp bundle "$SH_ROOT/plugins" coreutils
+antigenp bundle "$SH_ROOT/plugins" git
+antigenp bundle "$SH_ROOT/plugins" github
+antigenp bundle "$SH_ROOT/plugins" magic-cd
+antigenp bundle "$SH_ROOT/plugins" npm
+antigenp bundle "$SH_ROOT/plugins" subl
+antigenp bundle "$SH_ROOT/plugins" trash
+antigenp bundle "$SH_ROOT/plugins" unsorted
+$IS_WINDOWS && antigenp bundle "$SH_ROOT/plugins" cygwin-sudo
+
+$HAS_CACHE && -zcache-done
+# set +x
+# antigenp bundle "$SH_ROOT/plugins" simple-history-search
+antigenp apply
 # bashcompletions need to happen after apply
-if [[ -d "$HOME/.opam" ]] then antigen bundle "$HOME/.opam/opam-init" ; fi
+if [[ -d "$HOME/.opam" ]] then antigenp bundle "$HOME/.opam/opam-init" ; fi
+
 
 # todo: create a plugin for envoy
 if whence envoy >/dev/null ; then eval $(envoy -ps) ; fi
 
-
+unfunction antigenp
 echo -en '\r'
 # ___time_end
+[[ "$PERF_TEST" == y ]] && exit
+true

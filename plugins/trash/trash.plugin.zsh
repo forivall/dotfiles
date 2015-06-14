@@ -3,13 +3,14 @@ if [ -z "${KDE_SESSION_UID+x}" ] ; then
   alias rmsu="sudo gvfs-trash"
 else
   if whence kioclient5 2>/dev/null >/dev/null ; then
-    rm() { kioclient5 move "$@" "trash:/" ; }
-    rmsu() { sudo kioclient5 move "$@" "trash:/" ; }
+    trash() { kioclient5 move "$@" "trash:/" ; }
+    trashsu() { sudo kioclient5 move "$@" "trash:/" ; }
   else
-    rm() { kioclient move "$@" "trash:/" ; }
-    rmsu() { sudo kioclient move "$@" "trash:/" ; }
+    trash() { kioclient move "$@" "trash:/" ; }
+    trashsu() { sudo kioclient move "$@" "trash:/" ; }
   fi
-
+  alias rm=trash
+  alias rmsu=trashsu
 fi
 
 alias rmd=/bin/rm

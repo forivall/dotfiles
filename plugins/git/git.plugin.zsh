@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 # This file defines a couple of git aliases and bash completions for a number
 # of git scripts
-
+__zsh_forivall_git_plugin_location=$0:A
+__zsh_forivall_git_plugin_location=${__zsh_forivall_git_plugin_location%/*}
 
 alias gl='git l'
 alias gla='git la'
@@ -162,5 +163,5 @@ function git-on-this-day {
     done
 }
 
-source "$(dirname "$0")/completions.zsh"
-source "$(dirname "$0")/gitify.zsh"
+source "$__zsh_forivall_git_plugin_location/completions.zsh"
+source "$__zsh_forivall_git_plugin_location/gitify.zsh"
