@@ -61,20 +61,20 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
   zgen load jocelynmallon/zshmarks
-  $IS_WINDOWS && zgen load "$SH_ROOT" plugins/cygwin-functions
-  zgen load "$SH_ROOT" plugins/simple-history-search
-  zgen load "$SH_ROOT" plugins/colors
-  zgen load "$SH_ROOT" plugins/coreutils
-  zgen load "$SH_ROOT" plugins/git
-  zgen load "$SH_ROOT" plugins/github
-  zgen load "$SH_ROOT" plugins/magic-cd
-  zgen load "$SH_ROOT" plugins/npm
-  zgen load "$SH_ROOT" plugins/subl
-  zgen load "$SH_ROOT" plugins/trash
-  zgen load "$SH_ROOT" plugins/unsorted
-  $IS_WINDOWS && zgen load "$SH_ROOT" plugins/cygwin-sudo
+  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
+  zgen load "$SH_ROOT/plugins/simple-history-search"
+  zgen load "$SH_ROOT/plugins/colors"
+  zgen load "$SH_ROOT/plugins/coreutils"
+  zgen load "$SH_ROOT/plugins/git"
+  zgen load "$SH_ROOT/plugins/github"
+  zgen load "$SH_ROOT/plugins/magic-cd"
+  zgen load "$SH_ROOT/plugins/npm"
+  zgen load "$SH_ROOT/plugins/subl"
+  zgen load "$SH_ROOT/plugins/trash"
+  zgen load "$SH_ROOT/plugins/unsorted"
+  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
 
-  zgen load "$SH_ROOT" plugins/simple-history-search
+  zgen load "$SH_ROOT/plugins/simple-history-search"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
