@@ -4,6 +4,9 @@ alias ds='pushd'
 alias dp='popd'
 alias cd..="cd .."
 
+local colored="$(tput setaf 7 2>/dev/null)"
+local resetcolor="$(tput sgr0 2>/dev/null)"
+
 # simple method to handle multiple cd customizations
 function _next_cd() { _next_cd_false=1 ; }
 function _next_cd_reset() { _next_cd_false=0 ; }
@@ -71,9 +74,7 @@ function _real_cd() {
     local REAL_PWD
     REAL_PWD=$(pwd -P)
     if [[ "$REAL_PWD" != $(pwd) ]]; then
-        tput setaf 7
-        echo -n "$REAL_PWD" >&2
-        tput sgr0
+        echo -n "${colored}${REAL_PWD}${resetcolor}" >&2
         echo >&2
         # echo " ('cd -P .' to go there)" >&2
     fi
@@ -95,6 +96,8 @@ function cd() {
     _cd_to_file "$@"
     if _next_cd_test ; then return ; fi
     # echo a 1>&2
+
+    # TODO: cd to zshmarks
 
     _real_cd "$@"
 }

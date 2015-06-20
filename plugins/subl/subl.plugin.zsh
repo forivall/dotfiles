@@ -16,7 +16,7 @@ if [[ -e "/cygdrive/c/Program Files/Sublime Text 3/sublime_text.exe" ]]; then
             fi
         done
         # echo "$opts"
-        "/cygdrive/c/Program Files/Sublime Text 3/sublime_text.exe" "$opts"
+        "/cygdrive/c/Program Files/Sublime Text 3/sublime_text.exe" "${opts[@]}"
     }
 fi
 
@@ -32,7 +32,7 @@ if [[ -e "/cygdrive/c/Users/forivall/AppData/Local/atom/bin/atom.cmd" ]]; then
                 opts[$i]="$(cygpath -w "$optval"|sed 's/\\/\\\\/g')"
             fi
         done
-        "atom.cmd" "$opts"
+        "atom.cmd" "${opts[@]}"
     }
     alias apm=apm.cmd
 fi
@@ -49,6 +49,6 @@ if [[ -e "/cygdrive/c/Program Files/Gimp/bin/gimp-2.8.exe" ]]; then
                 opts[$i]="$(cygpath -w "$optval"|sed 's/\\/\\\\/g')"
             fi
         done
-        ("/cygdrive/c/Program Files/Gimp/bin/gimp-2.8.exe" "$opts" 2> /dev/null &)
+        ("/cygdrive/c/Program Files/Gimp/bin/gimp-2.8.exe" "${opts[@]}" 2> /dev/null &)
     }
 fi

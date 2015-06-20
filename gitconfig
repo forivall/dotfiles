@@ -54,16 +54,16 @@
 	# see bashrc
 	# custom commands, before adding scripts to bin
 	age = !/home/jklassen/code/git-age/git-age
-	diffuse = !/home/jklassen/scripts/git-diffuse
-	genco = !/home/jklassen/scripts/git-genco
-	genpatch = !/home/jklassen/scripts/git-genpatch
-	gerrit-submit = !/home/jklassen/scripts/git-gerrit-submit
+	diffuse = !/code/git/forivall_dotfiles_scripts/scripts/git-diffuse
+	genco = !/code/git/forivall_dotfiles_scripts/scripts/git-genco
+	genpatch = !/code/git/forivall_dotfiles_scripts/scripts/git-genpatch
+	gerrit-submit = !/code/git/forivall_dotfiles_scripts/scripts/git-gerrit-submit
 	grep-gedit-open = "!exec echo"
-	prepare-eco = !/home/jklassen/scripts/git-prepare-eco
-	review-merge = !/home/jklassen/scripts/git-review-merge
-	store-untracked-files = !/home/jklassen/scripts/git-archive-untracked-files
-    blameall = !/home/jklassen/scripts/git-blameall
-    branch-archive = !/home/jklassen/scripts/git-branch-archive
+	prepare-eco = !/code/git/forivall_dotfiles_scripts/scripts/git-prepare-eco
+	review-merge = !/code/git/forivall_dotfiles_scripts/scripts/git-review-merge
+	store-untracked-files = !/code/git/forivall_dotfiles_scripts/scripts/git-archive-untracked-files
+    blameall = !/code/git/forivall_dotfiles_scripts/scripts/git-blameall
+    branch-archive = !/code/git/forivall_dotfiles_scripts/scripts/git-branch-archive
 
     # aliases for custom commands
     sm = subl-modified
@@ -115,6 +115,12 @@
 [mergetool "diffuse_custom"]
 	cmd = /usr/bin/diffuse \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 	#"
+[mergetool "diffuse_windows"]
+    cmd = \"C:\\Program Files (x86)\\Diffuse\\diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+    #"
+[mergetool "diffuse_cygwindows"]
+    cmd = \"/cygdrive/c/Program Files (x86)/Diffuse/diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+    #"
 [github]
 	user = forivall
 # [push]
