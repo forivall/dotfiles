@@ -1,5 +1,6 @@
 
-if ! whence subl 2>/dev/null >/dev/null && whence subl3 2>/dev/null >/dev/null; then
+if whence subl3 2>/dev/null >/dev/null; then
+    alias subl2="$(whence subl)"
     alias subl=subl3
 fi
 
