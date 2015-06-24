@@ -1,0 +1,25 @@
+# functional filter
+
+setopt localoptions localtraps
+local outv="$1"; shift
+eval "${outv}=()"
+local filterfn="$1"; shift
+whence "$filterfn"
+if ! whence "$filterfn" >/dev/null 2>/dev/null; then
+	local lambda="$filterfn"
+	# hack to make a local function
+	filterfn=TRAPUSR1
+	TRAPUSR1() { eval "$lambda"; }
+fi
+local inv; inv=("$@")
+if [[ "$#" == 1 && "${(Pt)1}" == array* ]]; then
+	inv=("${(P)1[@]}")
+fi
+
+local val_
+for val_ in "${inv[@]}"; do
+	if "$filterfn" "$val_"; then
+		eval "${outv}+=${val_}"
+	fi
+done
+

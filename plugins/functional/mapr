@@ -1,0 +1,9 @@
+setopt localoptions localtraps
+local ar_n=$1; shift
+local fn="$1"; shift
+if whence fn >/dev/null 2>/dev/null; then
+	local lambda="$fn"
+	TRAPUSR1() { eval "$fn"; }
+fi
+
+
