@@ -36,10 +36,13 @@ if [[ -n "$ProgramW6432" ]]; then __zsh_cygwinsudo_arch=x64; else __zsh_cygwinsu
 if [[ -x "$__zsh_cygwinsudo_plugin_location/elevate/bin/$__zsh_cygwinsudo_arch/Release/Elevate" ]]; then
   alias cygsudo=/usr/bin/sudo
   alias sudo=elevate
-  elevate() {
-    "$__zsh_cygwinsudo_plugin_location/elevate/bin/$__zsh_cygwinsudo_arch/Release/Elevate" "$@"
-  }
 else
   echo "Please build elevate in release mode for your platform."
   cygstart "$__zsh_cygwinsudo_plugin_location/elevate/Elevate.sln"
 fi
+
+elevate() {
+  "$__zsh_cygwinsudo_plugin_location/elevate/bin/$__zsh_cygwinsudo_arch/Release/Elevate" "$@"
+}
+# compdef _elevate elevate
+# compinit -d "${ZGEN_DIR}/zcompdump"

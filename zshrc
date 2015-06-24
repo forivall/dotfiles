@@ -17,8 +17,13 @@ HISTFILE=~/.zsh_history
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
-$IS_WINDOWS && PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
+$IS_WINDOWS && [[ -n "$VBOX_INSTALL_PATH" ]] && PATH="$PATH:$(cygpath $VBOX_INSTALL_PATH)"
 $IS_WINDOWS && CYGWIN="$CYGWIN codepage:oem"
+
+if $IS_WINDOWS; then
+  if [[ -e "/c/Qt/Tools/QtCreator" ]]; then PATH="$PATH:/c/Qt/Tools/QtCreator/bin"; fi
+  if [[ -e "/c/Qt/5.4/msvc2013_64" ]]; then PATH="$PATH:/c/Qt/5.4/msvc2013_64/bin"; fi
+fi
 
 # omz settings
 HYPHEN_INSENSITIVE=true
@@ -29,7 +34,8 @@ BARE_GLOB_QUAL=true
 COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 
-ZGEN_OH_MY_ZSH_REPO=forivall
+PURE_HIGHLIGHT_REPO=1
+
 source "$SH_ROOT/zgen/zgen.zsh"
 
 if ! zgen saved; then
@@ -51,30 +57,32 @@ if ! zgen saved; then
   # zgen oh-my-zsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async
   ! $IS_WINDOWS && zgen load sindresorhus/pure
-  $IS_WINDOWS && zgen load forivall/pure '' no-async
+  $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
-  $IS_WINDOWS && zgen load "$SH_ROOT" plugins/cygwin-functions
-  zgen load "$SH_ROOT" plugins/simple-history-search
-  zgen load "$SH_ROOT" plugins/colors
-  zgen load "$SH_ROOT" plugins/coreutils
-  zgen load "$SH_ROOT" plugins/git
-  zgen load "$SH_ROOT" plugins/github
-  zgen load "$SH_ROOT" plugins/magic-cd
-  zgen load "$SH_ROOT" plugins/npm
-  zgen load "$SH_ROOT" plugins/subl
-  zgen load "$SH_ROOT" plugins/trash
-  zgen load "$SH_ROOT" plugins/unsorted
-  $IS_WINDOWS && zgen load "$SH_ROOT" plugins/cygwin-sudo
+  zgen load jocelynmallon/zshmarks
+  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
+  zgen load "$SH_ROOT/plugins/simple-history-search"
+  zgen load "$SH_ROOT/plugins/colors"
+  zgen load "$SH_ROOT/plugins/coreutils"
+  zgen load "$SH_ROOT/plugins/git"
+  zgen load "$SH_ROOT/plugins/github"
+  zgen load "$SH_ROOT/plugins/magic-cd"
+  zgen load "$SH_ROOT/plugins/npm"
+  zgen load "$SH_ROOT/plugins/subl"
+  zgen load "$SH_ROOT/plugins/trash"
+  zgen load "$SH_ROOT/plugins/unsorted"
+  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
 
-  zgen load "$SH_ROOT" plugins/simple-history-search
+  zgen load "$SH_ROOT/plugins/simple-history-search"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   zgen save
 fi
 
+autoload -U cygcd
+
 # todo: create a plugin for envoy
 $HAS_ENVOY && eval $(envoy -ps)
 
-[[ "$PERF_TEST" == y ]] && exit
-true
+if [[ "$PERF_TEST" == y ]] ; then exit; else true; fi

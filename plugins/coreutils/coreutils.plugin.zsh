@@ -66,20 +66,36 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   fi
   mklink() {
     local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
-    echo mklink "$opts"
+    # for i in {1..${#opts}}; do opts[$i]=${opts[$i]// /\\\\ }; done
+    local echoopts; echoopts=()
+    for i in {1..$#}; do
+      echoopts[$i]="${opts[$i]}"
+      if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
+        echoopts[$i]=\""${opts[$i]}"\"
+      fi
+    done
+    echo mklink "$echoopts"
     env cmd '/D' '/C' mklink "$opts[@]"
   }
   mklinksu() {
     local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
-    echo mklink "$opts[@]"
-    $(whence sudo) env cmd '/D' '/C' mklink "$opts[@"] '&' 'set' '/p' 'enter="Press enter to exit"'
+    # for i in {1..${#opts}}; do opts[$i]=${opts[$i]// /\\\\ }; done
+    local echoopts; echoopts=()
+    for i in {1..$#}; do
+      echoopts[$i]="${opts[$i]}"
+      if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
+        echoopts[$i]=\""${opts[$i]}"\"
+      fi
+    done
+    echo mklink "$echoopts[@]"
+    $(whence sudo) env cmd '/D' '/C' mklink "$echoopts[@]" '&' 'set' '/p' 'enter="Press enter to exit"'
   }
-  cmd() {
-    local opts; opts=(); cygpath-w-convert-args opts --winargs --rel "$@"
-    echo cmd "$opts"
-    echo ${(F)opts}
-    env cmd "$opts[@]"
-  }
+  # cmd() {
+  #   local opts; opts=(); cygpath-w-convert-args opts --winargs --rel "$@"
+  #   # echo cmd "$opts"
+  #   # echo ${(F)opts}
+  #   env cmd "$opts[@]"
+  # }
 fi
 
 

@@ -1,25 +1,25 @@
 
 if [[ -n "$TERM" ]] ; then
-    TERM_=$TERM
-    if [[ $TERM_ == "dumb" ]] ; then
-        red=''
-        green=''
-        yellow=''
-        blue=''
-        purple=''
-        teal=''
-        grey=''
-        reset=''
-    else
-        red=$(tput -T $TERM_ setaf 1)
-        green=$(tput -T $TERM_ setaf 2)
-        yellow=$(tput -T $TERM_ setaf 3)
-        blue=$(tput -T $TERM_ setaf 4)
-        purple=$(tput -T $TERM_ setaf 5)
-        teal=$(tput -T $TERM_ setaf 6)
-        grey=$(tput -T $TERM_ setaf 7)
-        reset=$(tput -T $TERM_ sgr0)
-    fi
+  TERM_=$TERM
+  if [[ $TERM_ == "dumb" ]] ; then
+    red=''
+    green=''
+    yellow=''
+    blue=''
+    purple=''
+    teal=''
+    grey=''
+    reset=''
+  else
+    red=$(tput -T $TERM_ setaf 1)
+    green=$(tput -T $TERM_ setaf 2)
+    yellow=$(tput -T $TERM_ setaf 3)
+    blue=$(tput -T $TERM_ setaf 4)
+    purple=$(tput -T $TERM_ setaf 5)
+    teal=$(tput -T $TERM_ setaf 6)
+    grey=$(tput -T $TERM_ setaf 7)
+    reset=$(tput -T $TERM_ sgr0)
+  fi
 else
     red='\e[0;31m'
     green='\e[0;32m'
