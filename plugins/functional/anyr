@@ -1,11 +1,9 @@
-# functional filter
-# function can be defined as a string, or be a defined function.
-# usage: filterr <outvar> <function> list of things to filter
-# usage: filterr <outvar> <function> input_array_variable
+# functional anyr
+
+# usage: anyr <function> list of thigns to test
+# usage: anyr <function> input_array_variable
 
 setopt localoptions localtraps
-local outv="$1"; shift
-eval "${outv}=()"
 local filterfn="$1"; shift
 whence "$filterfn"
 if ! whence "$filterfn" >/dev/null 2>/dev/null; then
@@ -22,6 +20,7 @@ fi
 local val_
 for val_ in "${inv[@]}"; do
 	if "$filterfn" "$val_"; then
-		eval "${outv}+=${val_}"
+		return true
 	fi
 done
+return false
