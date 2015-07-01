@@ -17,12 +17,18 @@ function npm() {
     shift; npm-$command "$@"; return
   fi
   local -a npm_cmd; npm_cmd=( "$(whence -p npm)" )
+  if ${IS_WINDOWS:-false} && [[ -t 1 ]]; then npm_cmd+=( --color=always ); fi
   if [[ "$1" == "-g" ]] ; then npm_cmd+=( -g ); shift; fi
   case "$1" in
+    # t) ;&
+    # tst) ;&
+    # test) ;&
+    # start) ;&
+    # stop) ;&
     ru[nm]) shift; ${npm_cmd[@]} run --no-spin "$@";;
     # diffuse) shift; ~/scripts/git-diffuse "$@";;
     go) shift; cd $(${npm_cmd[@]} explore "$@" pwd);;
-    *) /usr/bin/env npm "$@";;
+    *) ${npm_cmd[@]} "$@";;
   esac
 }
 
