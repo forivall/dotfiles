@@ -37,12 +37,49 @@ if [[ -x "$__zsh_cygwinsudo_plugin_location/elevate/bin/$__zsh_cygwinsudo_arch/R
   alias cygsudo=/usr/bin/sudo
   alias sudo=elevate
 else
+  # TODO: create a release on github, download it instead of building
   echo "Please build elevate in release mode for your platform."
   cygstart "$__zsh_cygwinsudo_plugin_location/elevate/Elevate.sln"
 fi
 
 elevate() {
+  echo "elevate" "$@"
   "$__zsh_cygwinsudo_plugin_location/elevate/bin/$__zsh_cygwinsudo_arch/Release/Elevate" "$@"
 }
+
+sudow() {
+  local opts; opts=()
+
+  local use_cmd; if [[ "$1" == "-c" ]] then use_cmd=true; shift; else use_cmd=false; fi
+  raw_command="$1"
+  if whence "$raw_command" >/dev/null 2>/dev/null ; then
+    command="$(whence -p "$raw_command")"
+    shift
+    echo "$command"
+    echo "$@"
+    cygpath-w-convert-args opts "$command" "$@"
+    echo "$opts[@]"
+    elevate "$opts[@]"
+  else
+    if [[ "$#" == 0 ]] ; then
+      elevate "$(cygpath -w "$(whence -p cmd)")"
+      return
+    fi
+    command="$raw_command"
+    shift
+    cygpath-w-convert-args opts --winargs "$@"
+    # for i in {1..${#opts}}; do opts[$i]=${opts[$i]// /\\\\ }; done
+    local echoopts; echoopts=()
+    for i in {1..$#}; do
+      echoopts[$i]="${opts[$i]}"
+      if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
+        echoopts[$i]=\""${opts[$i]}"\"
+      fi
+    done
+    echo "$command" "$echoopts[@]"
+    elevate env cmd '/D' '/C' "$command" "$echoopts[@]" '&' 'set' '/p' 'enter="Press enter to exit"'
+  fi
+}
+
 # compdef _elevate elevate
 # compinit -d "${ZGEN_DIR}/zcompdump"

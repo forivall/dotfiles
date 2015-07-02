@@ -62,6 +62,7 @@ if ! zgen saved; then
   zgen load jocelynmallon/zshmarks
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
+  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
   zgen load "$SH_ROOT/plugins/simple-history-search"
   zgen load "$SH_ROOT/plugins/colors"
   zgen load "$SH_ROOT/plugins/coreutils"
@@ -72,7 +73,6 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/subl"
   zgen load "$SH_ROOT/plugins/trash"
   zgen load "$SH_ROOT/plugins/unsorted"
-  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
 
   zgen load "$SH_ROOT/plugins/simple-history-search"
 
