@@ -6414,3 +6414,20 @@ fi; done
 : 1434773575:0;git st
 : 1434773579:0;git checkout plugins
 : 1434773582:0;git add zsh_history_interactive
+: 1435167848:0;subl zshrc
+: 1435167894:0;git st
+: 1435167898:0;git merge origin/master -X theirs
+: 1435167903:0;git la
+: 1435167921:0;most zsh_history_interactive
+: 1435167935:0;git push
+: 1435167941:0;git add plugins/functional/
+: 1435167942:0;gitst
+: 1435167943:0;git st
+: 1435167949:0;git commit
+: 1435167959:0;git push
+: 1436293987:0;cd code/repos/git/dotfiles
+: 1436293988:0;git st
+: 1436293990:0;git fetch
+: 1436293993:0;git st
+: 1436293995:0;git pull
+: 1436294067:0;git add zsh_history_interactive; git commit -m 'update history'; git merge -X theirs origin/master
