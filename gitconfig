@@ -7,6 +7,8 @@
   pager = most
 	excludesfile = /home/jklassen/.gitignore
 	trustctime = false
+	editor = vim
+	# trustctime = false
 [diff]
         renames = false
 #       renames = copies # makes genco choke
@@ -68,6 +70,10 @@
     # aliases for custom commands
     sm = subl-modified
     sp = subl-projects
+    cp = cherry-pick
+    cl = clone
+    unstage = reset HEAD --
+    dc = diff --cached
 
 [color]
 	# diff = always
@@ -133,3 +139,10 @@
    pushInsteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
+[credential]
+	helper = cache --timeout=3600
+[mergetool]
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false

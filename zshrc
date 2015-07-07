@@ -48,7 +48,7 @@ if ! zgen saved; then
   # zgen oh-my-zsh plugins/web-search
   zgen oh-my-zsh plugins/command-not-found
   # zgen oh-my-zsh plugins/virtualenv
-  zgen oh-my-zsh plugins/npm
+  # zgen oh-my-zsh plugins/npm
   zgen oh-my-zsh plugins/nvm
   zgen oh-my-zsh plugins/colorize
   zgen oh-my-zsh plugins/cp
@@ -60,7 +60,9 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
   zgen load jocelynmallon/zshmarks
+  zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
+  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
   zgen load "$SH_ROOT/plugins/simple-history-search"
   zgen load "$SH_ROOT/plugins/colors"
   zgen load "$SH_ROOT/plugins/coreutils"
@@ -71,7 +73,6 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/subl"
   zgen load "$SH_ROOT/plugins/trash"
   zgen load "$SH_ROOT/plugins/unsorted"
-  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
 
   zgen load "$SH_ROOT/plugins/simple-history-search"
 
@@ -79,7 +80,7 @@ if ! zgen saved; then
 
   zgen save
 fi
-
+unsetopt nomatch
 autoload -U cygcd
 
 # todo: create a plugin for envoy

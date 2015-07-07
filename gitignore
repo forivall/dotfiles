@@ -1,2 +1,4 @@
 *~
 ._sublime-project_count
+.tags
+npm-debug.log

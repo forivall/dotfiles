@@ -1,14 +1,45 @@
+__zsh_npm_plugin_location=$0:A
+__zsh_npm_plugin_location=${__zsh_npm_plugin_location%/*}
+
+if ${IS_WINDOWS:-false} ; then
+  if [[ ! -e "${__zsh_npm_plugin_location}/_npm" ]] ; then
+    cp "${__zsh_npm_plugin_location}/npm.completion.zsh" "${__zsh_npm_plugin_location}/_npm"
+  fi
+  # if [[ -e /usr/share/zsh/5.0.7/functions/_npm ]] ; then
+  #   mkdir -p /usr/share/zsh/5.0.7/functions-disabled
+  #   mv /usr/share/zsh/5.0.7/functions/_npm /usr/share/zsh/5.0.7/functions-disabled
+  # fi
+  local __completion_file_location="$(dirname "$(whence -p npm)")/node_modules/npm/lib/completion.js"
+  if [[ ! -e "${__completion_file_location}~" ]]; then
+    fix_npm_completion() {
+      local __completion_file_location="$(dirname "$(whence -p npm)")/node_modules/npm/lib/completion.js"
+      < "${__completion_file_location}" sed 's/if (process.platform === "win32") {/if (false \&\& process.platform === "win32") { \/\/ disabled for cygwin/g' > ${__zsh_npm_plugin_location}/npm_completion.js
+      sudow -c move "${__completion_file_location}" "${__completion_file_location}~"
+      sudow -c move "${__zsh_npm_plugin_location}/npm_completion.js" "${__completion_file_location}"
+      unfunction fix_npm_completion
+    }
+    echo "call fix_npm_completion to fix npm completion on cygwin"
+  fi
+fi
+
 function npm() {
-  for cmd in ${=$(compgen -c -X '!npm-*'|sort|uniq)} ; do
-    if [[ "$1" == "${cmd#npm-}" ]] ; then shift; "$cmd" "$@" ; return ; fi
-  done
-  local -a npm_cmd; npm_cmd=( /usr/bin/env npm )
+  command=$1
+  if [[ ${(k)functions[npm-$command]} == npm-$command ]] ; then
+    shift; npm-$command "$@"; return
+  fi
+  local -a npm_cmd; npm_cmd=( "$(whence -p npm)" )
+  if ${IS_WINDOWS:-false} && [[ -t 1 ]]; then npm_cmd+=( --color=always ); fi
   if [[ "$1" == "-g" ]] ; then npm_cmd+=( -g ); shift; fi
   case "$1" in
+    # t) ;&
+    # tst) ;&
+    # test) ;&
+    # start) ;&
+    # stop) ;&
     ru[nm]) shift; ${npm_cmd[@]} run --no-spin "$@";;
     # diffuse) shift; ~/scripts/git-diffuse "$@";;
     go) shift; cd $(${npm_cmd[@]} explore "$@" pwd);;
-    *) /usr/bin/env npm "$@";;
+    *) ${npm_cmd[@]} "$@";;
   esac
 }
 
