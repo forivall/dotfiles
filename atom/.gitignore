@@ -1,0 +1,6 @@
+compile-cache
+.apm
+.node-gyp
+packages
+storage
+nohup.out

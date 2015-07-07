@@ -1,0 +1,96 @@
+"*":
+  "exception-reporting":
+    userId: "d669d80a-cb48-445f-92bf-5ae1bb0d0696"
+  welcome:
+    showOnStartup: false
+  core:
+    disabledPackages: [
+      "adwaita-ui"
+      "atomatigit"
+      "command-toolbar"
+      "ctags-status"
+      "recent-files"
+      "tomorrow"
+      "atom-ctags"
+      "git-projects"
+      "welcome"
+      "minimap-highlight-selected"
+      "minimap-selection"
+      "minimap"
+      "autocomplete-plus-python-jedi"
+      "atom-color-highlight"
+      "atom-terminal"
+      "linter-jshint"
+      "sublime-tabs"
+      "linter-clang"
+    ]
+    themes: [
+      "adwaita-pro-ui"
+      "tomorrow-ya"
+    ]
+  editor:
+    invisibles:
+      cr: " "
+      eol: " "
+      space: " "
+    fontFamily: "Bitstream Vera Sans Mono"
+    fontSize: 14
+    scrollPastEnd: true
+    showIndentGuide: true
+    showInvisibles: true
+  linter:
+    lintOnChange: false
+    ignoredLinterErrors: [
+      "scss-lint"
+    ]
+    subtleLinterErrors: [
+      "shellcheck"
+    ]
+  tabs:
+    showIcons: true
+    usePreviewTabs: true
+  "tree-view": {}
+  "adwaita-pro-ui":
+    fontFamily: "DejaVu Sans"
+    fontSize: 13.4
+    iconTheme: "Octicons"
+  "autocomplete-plus":
+    includeCompletionsFromAllBuffers: true
+    confirmCompletion: "tab"
+  "git-projects": {}
+  minimap:
+    scrollAnimation: true
+    scrollAnimationDuration: 100
+    displayPluginsControls: false
+  "recent-files-fuzzy-finder": {}
+  "atom-terminal":
+    app: "roxterm"
+    args: "--tab"
+  "custom-invisibles":
+    crActive: false
+    eolActive: false
+    spaceActive: false
+  "linter-clang":
+    clangIncludePaths: "/mnt/Peng/Jordan/Code/kernelsrc/linux/include"
+  "ide-flow":
+    flowPath: "/home/forivall/.opam/system/bin/flow"
+  "highlight-selected":
+    lightTheme: true
+    onlyHighlightWholeWords: true
+  "you-complete-me":
+    ycmdPath: "/mnt/Peng/Jordan/Code/git/ycmd"
+    pythonExecutable: "/usr/bin/python2"
+  "linter-jshint": {}
+  "linter-eslint":
+    disableWhenNoEslintrcFileInPath: true
+  "file-icons":
+    coloured: false
+    onChanges: true
+  "save-session":
+    dataSaveFolder: "/home/forivall/.atom/packages/save-session/projects"
+    skipSavePrompt: false
+  "run-in-terminal":
+    save_before_launch: false
+    terminal: "roxterm --tab"
+  "linter-stylint":
+    stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
