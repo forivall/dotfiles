@@ -64,6 +64,7 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
   zgen load "$SH_ROOT/plugins/simple-history-search"
+  zgen load "$SH_ROOT/plugins/dimensions-in-title"
   zgen load "$SH_ROOT/plugins/colors"
   zgen load "$SH_ROOT/plugins/coreutils"
   zgen load "$SH_ROOT/plugins/git"
