@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# mainly useful when git-rerere has already resolved the conflict, but hasn't
+# marked it as resolve (for good reason. You should review to make sure that
+# the re-resolution was correctly applied)
+
+exec git add $(for f in $(git status --porcelain|grep UU) ; do (if [[ "$f" != *UU* ]] ; then echo $f; fi); done)

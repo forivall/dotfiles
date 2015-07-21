@@ -4,3 +4,9 @@
 [submodule "zgen"]
 	path = zgen
 	url = git@github.com:forivall/zgen.git
+[submodule "plugins/external-tools/fabiokr-dotfiles"]
+	path = plugins/external-tools/fabiokr-dotfiles
+	url = git@github.com:fabiokr/dotfiles.git
+[submodule "plugins/external-tools/leshylabs-blogcode"]
+	path = plugins/external-tools/leshylabs-blogcode
+	url = git@github.com:leshylabs/blogcode.git

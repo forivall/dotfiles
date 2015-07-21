@@ -1,0 +1,43 @@
+#!/bin/zsh
+# git-archive-untracked-files
+
+: ${UNTRACKED_FILES_STORAGE:=~/.git-old-untracked-files}
+
+mkdir -p "$UNTRACKED_FILES_STORAGE"
+
+gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
+b=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+
+encode_url () {
+  # Remove characters from a url that don't work well in a filename.
+  # Inspired by -anti-get-clone-dir() method from antigen.
+  autoload -U regexp-replace
+  regexp-replace 1 '/' '-SLASH-'
+  regexp-replace 1 ':' '-COLON-'
+  regexp-replace 1 '\|' '-PIPE-'
+  echo $1
+}
+
+url="$(git config --get remote.origin.url)" || url="$(git config --get "remote.$(git remote|head -n1).url")" || url="$(basename $gitroot)"
+
+d="$UNTRACKED_FILES_STORAGE/$(encode_url "$url")/$b"
+mkdir -p "$d"
+
+OIFS=$IFS
+IFS="
+"
+for line in $(git status --porcelain) ; do
+  if [[ "$line" == \?\?\ * ]] ; then
+    f=${line#?? }
+    echo $f
+    if [[ "$f" != ".gitignore" && -f "$f" ]] &&
+        [[ ! -h "$f" ]]; then
+
+      cmd="mv"
+      mkdir -p "$(dirname "$d/$f")"
+      echo "$cmd \"$f\" \"$d/$f\""
+      "$cmd" "$f" "$d/$f"
+    fi
+  fi
+done
+IFS=$OIFS

@@ -1,0 +1,70 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]; then
+    builtin cd $(git rev-parse --show-toplevel 2>/dev/null)
+elif [[ "$1" = /* ]] ; then
+    builtin cd $(git rev-parse --show-toplevel 2>/dev/null)"$1"
+else
+    builtin cd "$1"
+fi
+
+
+# _git_cd() {
+#   if [[ "$1" != "" ]]; then
+#     cd "$@"
+#   else
+#     local OUTPUT
+#     OUTPUT="$(git rev-parse --show-toplevel 2>/dev/null)"
+#     if [[ -e "$OUTPUT" ]]; then
+#       if [[ "$OUTPUT" != "$(pwd)" ]]; then
+#         cd "$OUTPUT"
+#       else
+#         cd
+#       fi
+#     else
+#       cd
+#     fi
+#   fi
+# }
+
+# alias cd=_git_cd
+
+#!/bin/bash
+
+# _git_chdir_load () {
+#     gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
+#     gitrel=${PWD#$gitroot}
+#     wd=$(basename $gitroot)
+#     wd_root=$(dirname $gitroot)
+#     wd_prefix=${wd%.*}
+# }
+
+# lwd () {
+#     _git_chdir_load
+#     for d in $(ls --color=never $wd_root) ; do
+#         if [[ -d "$wd_root/$d" && "$d" == $wd_prefix* ]] ; then
+#             echo ${d#$wd_prefix.}
+#         fi
+#     done
+# }
+
+# cwd () {
+#     _git_chdir_load
+#     cd "$wd_root/$wd_prefix.$1/$gitrel"
+# }
+
+# f () { cwd $@ ; }
+
+# # completion command
+# function ___git_chdir_comp {
+#     local curw
+#     COMPREPLY=()
+#     curw=${COMP_WORDS[COMP_CWORD]}
+#     COMPREPLY=($(compgen -W '`lwd`' -- $curw))
+#     return 0
+# }
+
+# # bind completion command
+# shopt -s progcomp
+# complete -F ___git_chdir_comp cwd
+# complete -F ___git_chdir_comp f

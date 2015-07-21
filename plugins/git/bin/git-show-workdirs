@@ -1,0 +1,32 @@
+#! /bin/bash
+if [[ "$1" == "--porcelain" ]] ; then
+    porcelain=1
+    search="$2"
+else
+    search="$1"
+fi
+function output() {
+    OIFS="${IFS}"
+    IFS=$'\n'
+    for dir in $(find . -maxdepth 1 -type d -name "$search*"|sort -d)
+    do
+        if !(git --git-dir=$dir/.git rev-parse --git-dir >/dev/null 2> /dev/null)
+            then
+            continue
+        fi
+        if [[ -z "$porcelain" ]] ; then
+            printf "%-24s " "${dir:2}"
+            for line in $(git --work-tree=$dir --git-dir=$dir/.git status -b -s)
+            do
+                echo $line
+                break
+            done
+        else
+            echo "${dir:2}"
+        fi
+    done
+    IFS="${OIFS}"
+}
+printf '\033[?7l'
+output
+printf '\033[?7h'

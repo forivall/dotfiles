@@ -1,0 +1,28 @@
+#!/bin/bash
+GERRIT_SERVER= # SET THIS VARIABLE
+# gerrit () { ssh -p 29418 $GERRIT_SERVER gerrit "$@"; }
+gerrit () {
+    echo ssh -p 29418 $GERRIT_SERVER gerrit "$@"
+    ssh -p 29418 $GERRIT_SERVER gerrit "$@";
+}
+urlopen () {
+    python2 -m webbrowser -t "$1" > /dev/null
+}
+
+changeid="$(git log --grep 'Change-Id:' --format=%B -n 1 $@ | grep Change-Id: | sed 's/Change-Id: //')"
+query_results="$(gerrit query "$changeid")"
+echo "$query_results" | grep "rowCount: 0" >/dev/null && echo "change $changeid not found" >&2 && exit 1
+urls="$(echo "$query_results" | grep 'url:' | awk '{ print $2 }')"
+if echo "$query_results" | grep "rowCount: 1" ; then
+    url=$urls
+    urlopen $url
+else
+    for url_ in $urls; do
+        url=$url_
+        urlopen $url
+        break
+        # echo $url "(y/n)"
+        # read yn
+        # if [[ $yn == y ]] ; then break ; fi
+    done
+fi

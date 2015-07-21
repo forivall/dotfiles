@@ -1,0 +1,43 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+
+args="$@"
+function get_revisions {
+for r in $args
+do
+  if [[ "$r" == "--" ]]
+    then break
+  fi
+  if [[ "$r" == -* ]]
+    then continue
+  fi
+  echo "$r"
+done
+}
+
+function subl_ { "$HOME/bin/subl" "$@" ; }
+
+changed_files="$(git diff --name-only $@)"
+
+#git diff --name-only $@
+#echo $(get_revisions)
+relpath="$(python -c "import os.path; print os.path.relpath(\"$(git rev-parse --show-toplevel)\", \"$PWD\")")"
+
+relchanged_files="$(echo "$changed_files"| xargs -d '
+' -n1 printf "%s/%s\n" $relpath)"
+revisions=$(get_revisions)
+mkdir -p /tmp/git-subl-modified
+subl_ -n
+echo "$relchanged_files" | while read f ; do
+    tmpf="/tmp/git-subl-modified/$RANDOM"
+    if git show $revisions:$f > $tmpf 2> /dev/null ; then
+        out=$(cmp $f $tmpf 2>/dev/null)
+    else
+        out='0'
+    fi
+    subl_ $f:${out#*line }
+done
+#cd $(git rev-parse --show-toplevel)
+# --quiet
+#echo $changed_files | xargs -n50 -P0 diffuse -s$(get_revisions)
+#cd - > /dev/null

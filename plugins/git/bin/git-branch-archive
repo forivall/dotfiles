@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ "$1" == "-l" ]] ; then
+    git tag -l archive*
+    exit
+fi
+
+for b in "$@" ; do
+    tagname="archive/$b"
+    if git show-ref --tags --quiet --verify -- "refs/tags/$tagname" ; then
+        time=$(date +%Y%m%d)
+        tagname="archive/${b}_$time"
+        if git show-ref --tags --quiet --verify -- "refs/tags/$tagname" ; then
+            time=$(date +%Y%m%d_%H%M)
+            tagname="archive/${b}_$time"
+        fi
+    fi
+    if git tag "$tagname" "$b" ; then
+        echo Created tag "$tagname"
+        if git show-ref --tags --verify -- "refs/tags/$tagname" ; then
+            git branch -D "$b"
+        fi
+    fi
+done

@@ -1,0 +1,76 @@
+#!/bin/zsh
+#!/bin/bash
+
+# ;& syntax uses bash >= 4.0; zsh probably more up to date
+autoload -U colors  && colors
+
+color_print() {
+    ONE=$1
+    shift
+    print -Pf "$fg[blue]%-7s $reset_color %s\n" "$ONE" "$*"
+}
+
+
+NUM=10
+by_commit=false
+by_creation=false
+
+while :; do
+case "$1" in
+    -n) NUM=$2; shift; shift; continue;
+    ;;
+    --commit) ;&
+    -c) by_commit=true; shift; continue;
+    ;;
+    --creation) ;&
+    -r) by_creation=true; shift; continue;
+    ;;
+    *)
+    break
+    ;;
+esac
+break;
+done
+
+if $by_commit; then
+    #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
+    git for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)' refs/heads/ |
+    head -n $NUM |
+    while read line; do eval color_print $line; done
+    exit
+fi
+
+if $by_creation; then
+    git branch | awk -F ' +' '! /\(no branch\)/ {print $2}'|
+        xargs -n1 git reflog show --date=short |
+        grep -i created |
+        sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3 \2 \5/' |
+        sort -rg | head -n $NUM |
+        awk '{printf "%s %s",$1, $2 } ; $3 != "HEAD" { print " ←",$3 }; $3 == "HEAD" { print "" }' |
+        while read line; do eval color_print $line; done
+    exit
+fi
+
+# default is by access
+# --checkout
+# -k
+
+# print the branch name of the most recent unique 10 checkouts
+_i=0
+(for i in {1..999} ; do
+    branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
+    if (( $? != 0 )) ; then break ; fi
+    # printf '%-7s ' @{-$i}
+    echo @{-$i} ${branchname#refs/heads/}
+done) | awk '!x[$2]++' | while read branchname ; do
+    # if (( $_i == 0 )) ; then echo -n - ; else echo -n $_i ; fi ; echo -n ' '
+    # echo "$branchname"
+    eval color_print $branchname
+    _i=$(( $_i + 1 ))
+    if (( $_i >= $NUM )) ; then break; fi
+done
+
+# TODO: convert to python, use python-urwid. (menu, up/down to select)
+#       or node, see what yeoman uses.
+
+

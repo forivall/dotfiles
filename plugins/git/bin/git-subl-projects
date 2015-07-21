@@ -1,0 +1,26 @@
+#!/bin/bash
+
+projects="$(git --no-pager ls-files -o -i -x '*.sublime-project')"
+if (( $(echo "$projects" | wc -l) > 1 )) ; then
+
+    n=1
+    for p in $projects ; do
+        echo "$n : $p"
+        n=$(( $n + 1 ))
+    done
+
+    echo -n "Which project do you want to open (a=all)? "
+    read choice
+
+    n=1
+    for p in $projects ; do
+        if [[ $choice == 'a' || $choice == $n ]] ; then
+            ~/bin/subl --project $p
+        fi
+        n=$(( $n + 1 ))
+    done
+else
+    for p in $projects ; do
+        ~/bin/subl --project $p
+    done
+fi

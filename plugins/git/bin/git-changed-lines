@@ -1,0 +1,48 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+
+# outputs _just_ the changed lines. I don't remember my rationale for this script though.
+
+changed_files=$(git diff --name-only $@)
+diffstat_out="$(git diff --stat)"
+
+cd $(git rev-parse --show-toplevel)
+# --quiet
+for f in $changed_files ; do
+    echo -ne "\033[0;35m"
+    echo $(echo "$diffstat_out" | grep $f)
+    echo -ne "\033[0m"
+
+    echo -n "  lines: "
+    #git --no-pager blame -p $f #| awk '/Not Committed Yet/{getline; getline; print}'
+    prev_line=-2
+    range_start=-2
+    for n in $(git --no-pager blame --line-porcelain $f |
+    awk '/author Not Committed Yet/{if (a && a !~ /author Not Committed Yet/) print a} {a=$0}' |
+    awk '{print $3}') ; do
+        if (( prev_line > -1 )) ; then
+            if (( "$n" > (prev_line + 1) )) ; then
+                if (( (prev_line - range_start) > 1 )) ; then
+                    echo -n "$range_start-$prev_line,"
+                else
+                    echo -n "$range_start,$prev_line,"
+                fi
+                range_start=$n
+            # else
+
+            fi
+        else
+            range_start=$n
+        fi
+        prev_line=$n
+    done
+    if (( "$range_start" != "$prev_line" )) ; then
+        echo "$range_start-$prev_line"
+    else
+        echo "$range_start"
+    fi
+done
+
+echo "$diffstat_out"|tail -n1
+
+cd - > /dev/null

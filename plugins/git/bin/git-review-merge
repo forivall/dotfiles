@@ -1,0 +1,15 @@
+#!/bin/bash
+b=$(git branch | grep \*)
+b=${b:2}
+c=$([[ -n $1 ]] && echo $1 || echo ${b:4})
+echo $b $c
+
+# this line is incorrect
+#n=$(git log --oneline $c ^origin/HEAD|wc -l)
+
+# d=$(git merge-base origin/master $c)
+d=$(git merge-base origin/5-x $c)
+#echo "git diff $c~$n $c"
+git diff $d $c>/tmp/git-check-merge-1
+git diff HEAD^ HEAD>/tmp/git-check-merge-2
+diffuse /tmp/git-check-merge-1 /tmp/git-check-merge-2

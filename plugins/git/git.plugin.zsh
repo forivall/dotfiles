@@ -3,6 +3,7 @@
 # of git scripts
 __zsh_forivall_git_plugin_location=$0:A
 __zsh_forivall_git_plugin_location=${__zsh_forivall_git_plugin_location%/*}
+PATH="$PATH:${__zsh_forivall_git_plugin_location}/bin"
 
 alias gl='git l'
 alias gla='git la'

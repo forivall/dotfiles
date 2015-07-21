@@ -1,0 +1,27 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+
+args="$@"
+function get_revisions {
+for r in $args
+do
+  if [[ "$r" == "--" ]]
+    then break
+  fi
+  if [[ "$r" == -* ]]
+    then continue
+  fi
+  echo " -r $r"
+done
+}
+
+changed_files="$(git diff --name-only $@)"
+
+#echo $(get_revisions)
+cd $(git rev-parse --show-toplevel)
+
+echo diffuse -s$(get_revisions) "<$(echo "$changed_files"|wc -l) files>"
+echo "$changed_files" | xargs -d '
+' -n50 -P0 diffuse -s$(get_revisions)
+
+cd - > /dev/null
