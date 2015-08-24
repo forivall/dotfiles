@@ -2,10 +2,10 @@
 	name = Jordan Klassen
 	email = jordan@klassen.me.uk
 [core]
-	autocrlf = input
+	#autocrlf = input
 	# pager = less -F
   pager = most
-	excludesfile = /home/jklassen/.gitignore
+	excludesfile = /home/forivall/.gitignore
 	trustctime = false
 	editor = vim
 	# trustctime = false
