@@ -3,7 +3,6 @@
 # a nice, short useful git status alternative.
 
 cd "$GIT_PREFIX"
-PURPLE=$(tput setaf 5)
 # requires the following in config
 # [color "status"]
 #     untracked = magenta
@@ -27,7 +26,7 @@ default_paths () {
 
 # BUF="$(
 
-git -c 'color.status=always' status -b -s -uno "$@"
+git -c 'color.status=always' status -b -s -uno "$@" &&
 git -c 'color.status=always' -c 'color.status.untracked=magenta' -c 'column.status=always,dense' -c 'advice.statusHints=false'\
     status  "$@" $(default_paths) |
     sed -e "1,/Untracked files/d" -e "/^no changes/,/$/d" -e "/^$/,/$/d" -e "s/\t/   /"

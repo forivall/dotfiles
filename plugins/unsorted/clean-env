@@ -1,0 +1,15 @@
+#
+
+local all_vars="$(typeset -gx)"
+
+local declv
+
+for decl in "${(f)all_vars}"; do
+  decln="${decl%%=*}"
+  declvs="${decl#*=}"
+  # eval "declv=$declvs"
+  if [[ "$declvs" == "''" ]]; then
+    # echo "unset $decln"
+    unset $decln
+  fi
+done

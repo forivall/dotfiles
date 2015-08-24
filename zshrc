@@ -106,6 +106,8 @@ fi
 unsetopt nomatch
 autoload -U cygcd
 
+clean-env
+
 # todo: create a plugin for envoy
 $HAS_ENVOY && eval $(envoy -ps)
 

@@ -1,3 +1,4 @@
+autoload -U clean-env
 
 alias res="echo -en \"\ec\e[3J\""
 
