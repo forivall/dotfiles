@@ -1,5 +1,14 @@
 #!/usr/bin/env zsh
 
+# echo $NODE_PATH
+# source() {
+#   echo $NODE_PATH
+#   echo source "$@"
+#   grep NODE_PATH "$1"
+#   builtin source "$@"
+# }
+# alias .=source
+
 SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
 
 setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=return; 2=$code; fi; if ("$@") 2>&1 >/dev/null ; then eval "$arg=true"; else eval "$arg=false"; fi; }
@@ -36,8 +45,17 @@ DISABLE_AUTO_TITLE=false
 
 PURE_HIGHLIGHT_REPO=1
 
+# https://wiki.archlinux.org/index.php/Zsh#Help_command
+autoload -U run-help
+autoload run-help-git
+autoload run-help-svn
+autoload run-help-svk
+unalias run-help
+alias help=run-help
+
 source "$SH_ROOT/zgen/zgen.zsh"
 
+export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 if ! zgen saved; then
   zgen oh-my-zsh
   # zgen oh-my-zsh plugins/git
@@ -56,7 +74,9 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/git-extras
   # zgen oh-my-zsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async
-  ! $IS_WINDOWS && zgen load sindresorhus/pure
+  # ! $IS_WINDOWS && zgen load "$SH_ROOT/../../repos/git/zsh-pure"
+  # ! $IS_WINDOWS && zgen load sindresorhus/pure
+  ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
   zgen load jocelynmallon/zshmarks
@@ -64,8 +84,10 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
   zgen load "$SH_ROOT/plugins/simple-history-search"
+  zgen load "$SH_ROOT/plugins/external-tools"
   zgen load "$SH_ROOT/plugins/dimensions-in-title"
   zgen load "$SH_ROOT/plugins/colors"
+  zgen load "$SH_ROOT/plugins/rubygems"
   zgen load "$SH_ROOT/plugins/coreutils"
   zgen load "$SH_ROOT/plugins/git"
   zgen load "$SH_ROOT/plugins/github"
@@ -88,3 +110,10 @@ autoload -U cygcd
 $HAS_ENVOY && eval $(envoy -ps)
 
 if [[ "$PERF_TEST" == y ]] ; then exit; else true; fi
+
+# unfunction source
+# unalias .
+if $IS_WINDOWS ; then
+  export NVM_DIR="/c/Users/forivall/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fi

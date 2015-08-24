@@ -121,3 +121,5 @@ cheat() {
         /usr/local/bin/cheat "$@"
     fi
 }
+
+alias klogout="qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1"

@@ -59,6 +59,21 @@ function _git_cd() {
   fi
 }
 
+function _package_cd() {
+  if [[ "$1" != "" ]]; then
+    _next_cd "$@"
+  else
+    local d
+    d="$(dirname "$PWD")"
+    while [[ "$d" != "/" ]]; do
+      if [[ -f "$d/package.json" ]]; then
+        _real_cd "$d"
+        break
+      fi
+    done
+  fi
+}
+
 function _cd_to_file() {
     if [[ -f "$1" ]]; then
         builtin cd $(dirname "$1")
@@ -92,6 +107,10 @@ function cd() {
     _git_cd "$@"
     if _next_cd_test ; then return ; fi ; _next_cd_reset
     # echo b 1>&2
+
+    # todo: place before git cd and fix infinite loop
+    # _package_cd "$@"
+    # if _next_cd_test ; then return ; fi ; _next_cd_reset
 
     _cd_to_file "$@"
     if _next_cd_test ; then return ; fi

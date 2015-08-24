@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
 
+# TODO: use gnu stow
+# http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
+
 git submodule update --init
 ln -fs "$(realpath zshrc)" ~/.zshrc
 ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
@@ -31,4 +34,3 @@ if [[ -n "$BABUN_HOME" ]]; then
         cp cmdutils/Recycle.exe "$BINPATH/recycle.exe"
     fi
 fi
-

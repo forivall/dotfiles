@@ -2,26 +2,33 @@
 # git-archive-untracked-files
 
 : ${UNTRACKED_FILES_STORAGE:=~/.git-old-untracked-files}
+echo "$UNTRACKED_FILES_STORAGE"
 
 mkdir -p "$UNTRACKED_FILES_STORAGE"
 
 gitroot=$(git rev-parse --show-toplevel 2>/dev/null)
-b=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD 2>/dev/null)
+b=$(git rev-parse --short HEAD 2>/dev/null)
 
 encode_url () {
   # Remove characters from a url that don't work well in a filename.
   # Inspired by -anti-get-clone-dir() method from antigen.
+  local u
+  u="$1"
   autoload -U regexp-replace
-  regexp-replace 1 '/' '-SLASH-'
-  regexp-replace 1 ':' '-COLON-'
-  regexp-replace 1 '\|' '-PIPE-'
-  echo $1
+  regexp-replace u '@' '-AT-'
+  regexp-replace u '/' '-SLASH-'
+  regexp-replace u ':' '-COLON-'
+  regexp-replace u '\|' '-PIPE-'
+  echo $u
 }
 
 url="$(git config --get remote.origin.url)" || url="$(git config --get "remote.$(git remote|head -n1).url")" || url="$(basename $gitroot)"
 
-d="$UNTRACKED_FILES_STORAGE/$(encode_url "$url")/$b"
-mkdir -p "$d"
+d="$UNTRACKED_FILES_STORAGE/$(encode_url "$url")/$b/$(date +%Y-%m-%d)"
+mkparentdir () {
+  mkdir -p "$d"
+  mkparentdir() { :; }
+}
 
 OIFS=$IFS
 IFS="
@@ -30,8 +37,10 @@ for line in $(git status --porcelain) ; do
   if [[ "$line" == \?\?\ * ]] ; then
     f=${line#?? }
     echo $f
-    if [[ "$f" != ".gitignore" && -f "$f" ]] &&
+    if [[ "$f" != ".gitignore" && -e "$f" ]] &&
         [[ ! -h "$f" ]]; then
+
+      mkparentdir
 
       cmd="mv"
       mkdir -p "$(dirname "$d/$f")"
