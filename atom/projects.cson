@@ -1,0 +1,26 @@
+"azio-levetron-mech5-linux-driver":
+  title: "azio-levetron-mech5-linux-driver"
+  paths: [
+    "/mnt/Peng/Jordan/Code/git/azio-levetron-mech5-linux-driver"
+    "/mnt/Peng/Jordan/Code/kernelsrc/linux"
+    "/mnt/Peng/Jordan/Code/git/logitech-g710-linux-driver"
+  ]
+"adwaita-pro-ui":
+  title: "adwaita-pro-ui"
+  paths: [
+    "/mnt/Peng/Jordan/Code/git/adwaita-pro-ui"
+  ]
+tacoscript:
+  title: "tacoscript"
+  paths: [
+    "/mnt/Peng/Jordan/Code/tacoscript-hacking/babel"
+    "/mnt/Peng/Jordan/Code/tacoscript-hacking/detect-indent"
+    "/mnt/Peng/Jordan/Code/tacoscript-hacking/tacoscript"
+  ]
+"tree-view-doubleclick":
+  title: "tree-view-doubleclick"
+  paths: [
+    "/mnt/Peng/Jordan/Code/git/atom-tabs"
+    "/mnt/Peng/Jordan/Code/git/atom-tree-view"
+    "/mnt/Peng/Jordan/Code/git/atom-tree-view-clear-preview-doubleclick"
+  ]
