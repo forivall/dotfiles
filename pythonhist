@@ -1,54 +1,3 @@
-plistlib.__file__
-help(plistlib.readPlist)
-import path
-import os.path
-os.path.abspath('.')
-plistlib.readPlist('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript
-plistlib.readPlist('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript/JavaScript.tmLanguage')
-import plistlib
-plistlib.readPlist ('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript/JavaScript.tmLanguage')
-plistlib.readPlistFromString(file('/home/jklassen/.config/sublime-text-2/Packages/Better Javascript/JavaScript.tmLanguage').read())
-import plistlib
-plistlib.__file__
-import dbus
-improt dbus
-import dbus
-import argparse
-argparse.ArgumentParser()
-ap = argparse.ArgumentParser()
-ap._get_args
-{}
-({})
-({1})
-({1}).add(2)
-s = ({1})
-s.add(2)
-s
-(a = 1)
-a = 1
-1900 * 0.67
-0.67 * 2050
-0.67 * 2375
-0.67 * 2775
-0.67 * 4000
-import usb
-import usb
-import usb.core
-import usb.core
-import
-import usb.core
-device = usb.core.find(idVendor=0x046d, idProduct=0xc24d)
-device
-device.address
-device.read
-device.get_active_configuration()
-import usb
-usb
-help(usb)
-import usb.core
-devices = list(usb.core.find(find_all=True, idVendor=0x1c4f, idProduct=0x0016))
-devices
-devices[1]
 kbd = devices[1]
 kbd.address
 kbd.product
@@ -98,3 +47,54 @@ ctx = Context(PACKAGE = "roxterm", SRC_DIR = "${TOP_DIR}/src",
 ctx.getenv('ENABLE_GIT')
 ctx.env
 ctx.getenv
+import PyQt4.QtCore as Qt4Core
+import PyQt4.QtGui as Qt4Gui
+p = Qt4Gui.QPalette()
+p.Active
+p = Qt4Gui.QPalette.Window
+p
+Qt4Gui.QApplication.palette
+Qt4Gui.QApplication.palette()
+p = _
+p.Active
+p.Current
+p.Link
+p.base
+p.base()
+base = p.base()
+base.color
+base.color()
+base
+c = base.color()
+c.Rgb()
+c.Rgb
+c.convertTo
+c.convertTo.__doc__
+c.blackF
+c.blackF()
+c.Hsl
+c.convertTo
+c.value()
+c.valueF()
+base
+p.Link
+p.link().color().value()
+p.link().color().valueF()
+c = p.link().color()
+c.colorNames()
+c.colorNames().toList()
+c.colorNames().value()
+cl = c.colorNames()
+str(cl)
+cl.last
+cl.first()
+cl.last()
+c.darker
+c.dark
+c.name()
+c.darker)_
+c.darker()
+c.lighter()
+c.lighter().name()
+c.darker().name()
+c.name()
