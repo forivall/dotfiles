@@ -1,0 +1,1 @@
+cd ~/.atom/packages/you-complete-me/ycmd; python2 ./build.py --clang-completer --omnisharp-completer --gocode-completer

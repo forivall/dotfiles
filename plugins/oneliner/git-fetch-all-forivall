@@ -1,0 +1,1 @@
+github-repositories -f f forivall|cut -d' ' -f2|xargs -n1 git clone
