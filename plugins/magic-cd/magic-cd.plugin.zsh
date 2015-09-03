@@ -48,26 +48,31 @@ function _multidot_cd() {
 }
 fi
 
-function _git_cd() {
+function _project_cd() {
   if [[ "$1" != "" ]]; then
     _next_cd "$@"
   else
-    local OUTPUT
-    OUTPUT="$(git rev-parse --show-toplevel 2>/dev/null)"
-    [[ "$OUTPUT" == "$PWD" ]] && OUTPUT="$(cd ..; git rev-parse --show-toplevel 2>/dev/null)"
-    if [[ -e "$OUTPUT" ]]; then _real_cd "$OUTPUT" ; else _next_cd ; fi
+    local PROJECT_ROOT
+    local PACKAGE_ROOT
+    PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+    [[ "$PROJECT_ROOT" == "$PWD" ]] && PROJECT_ROOT="$(cd ..; git rev-parse --show-toplevel 2>/dev/null)"
+    _get_package_root
+
+    if [[ -z "$PROJECT_ROOT" || (( ${PACKAGE_ROOT} > ${PROJECT_ROOT} )) ]]; then PROJECT_ROOT="$PACKAGE_ROOT" ; fi
+    if [[ -e "$PROJECT_ROOT" ]]; then _real_cd "$PROJECT_ROOT" ; else _next_cd ; fi
   fi
 }
 
-function _package_cd() {
+function _get_package_root() {
   if [[ "$1" != "" ]]; then
     _next_cd "$@"
   else
     local d
-    d="$(dirname "$PWD")"
+    d="$PWD"
     while [[ "$d" != "/" ]]; do
+      d="${d:h}"
       if [[ -f "$d/package.json" ]]; then
-        _real_cd "$d"
+        PACKAGE_ROOT="$d"
         break
       fi
     done
@@ -104,13 +109,9 @@ function cd() {
     if _next_cd_test ; then return ; fi ; _next_cd_reset
     # echo c 1>&2
 
-    _git_cd "$@"
+    _project_cd "$@"
     if _next_cd_test ; then return ; fi ; _next_cd_reset
     # echo b 1>&2
-
-    # todo: place before git cd and fix infinite loop
-    # _package_cd "$@"
-    # if _next_cd_test ; then return ; fi ; _next_cd_reset
 
     _cd_to_file "$@"
     if _next_cd_test ; then return ; fi

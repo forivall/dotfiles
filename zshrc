@@ -35,6 +35,7 @@ if $IS_WINDOWS; then
 fi
 
 # omz settings
+DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 setopt extended_glob
 EXTENDED_GLOB=true
@@ -53,9 +54,18 @@ autoload run-help-svk
 unalias run-help
 alias help=run-help
 
+# PURE_PROMPT_SYMBOL="$(printf '\u2765')"
+# PURE_PROMPT_SYMBOL="$(printf '\u2771')"
+# PURE_PROMPT_SYMBOL="›"
+PURE_PROMPT_SYMBOL="»"
+PURE_PROMPT_SYMBOL="%B»%b"
+# PURE_PROMPT_SYMBOL="%B>%b"
+# PURE_PROMPT_SYMBOL="→"
+# PURE_PROMPT_SYMBOL="$"
+export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
+
 source "$SH_ROOT/zgen/zgen.zsh"
 
-export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 if ! zgen saved; then
   zgen oh-my-zsh
   # zgen oh-my-zsh plugins/git
@@ -83,21 +93,22 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
-  zgen load "$SH_ROOT/plugins/simple-history-search"
+  zgen load "$SH_ROOT/plugins/oneliner"
   zgen load "$SH_ROOT/plugins/external-tools"
   zgen load "$SH_ROOT/plugins/dimensions-in-title"
   zgen load "$SH_ROOT/plugins/colors"
   zgen load "$SH_ROOT/plugins/rubygems"
   zgen load "$SH_ROOT/plugins/coreutils"
   zgen load "$SH_ROOT/plugins/git"
+  zgen load "$SH_ROOT/plugins/git-ftp"
   zgen load "$SH_ROOT/plugins/github"
   zgen load "$SH_ROOT/plugins/magic-cd"
   zgen load "$SH_ROOT/plugins/npm"
   zgen load "$SH_ROOT/plugins/subl"
   zgen load "$SH_ROOT/plugins/trash"
   zgen load "$SH_ROOT/plugins/unsorted"
-
   zgen load "$SH_ROOT/plugins/simple-history-search"
+  zgen load "$SH_ROOT/plugins/zgen-autoupdate"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 

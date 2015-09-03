@@ -1,0 +1,1 @@
+ddccontrol -r 0x10 -w 0 dev:/dev/i2c-11; sleep 1; ddccontrol -r 0x12 -w 50 dev:/dev/i2c-11

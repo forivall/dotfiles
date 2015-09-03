@@ -27,7 +27,8 @@ function npm() {
   if [[ ${(k)functions[npm-$command]} == npm-$command ]] ; then
     shift; npm-$command "$@"; return
   fi
-  local -a npm_cmd; npm_cmd=( "$(whence -p npm)" )
+  local npm_bin="$(whence -p npm)";
+  local -a npm_cmd; npm_cmd=( "$npm_bin" "--node-gyp=$("$npm_bin" -g root)/pangyp/bin/node-gyp.js" )
   if ${IS_WINDOWS:-false} && [[ -t 1 ]]; then npm_cmd+=( --color=always ); fi
   if [[ "$1" == "-g" ]] ; then npm_cmd+=( -g ); shift; fi
   case "$1" in

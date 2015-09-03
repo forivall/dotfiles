@@ -37,6 +37,7 @@ oneliner-create() {
 
   echo "$code" > "$__zsh_oneliner_plugin_location/$name"
 
+  unfunction "$fname"
   autoload -U "$name"
 
   echo "Successfully created oneliner \"$name\""
@@ -57,3 +58,14 @@ oneliner-init() {
 if [[ -z "$NO_ONELINER_AUTOINIT" ]]; then
   oneliner init
 fi
+
+oneliner-list() {
+  local s
+  local name
+  for s in "$__zsh_oneliner_plugin_location/"* ; do
+    name="${s##*/}"
+    if [[ "$name" != "oneliner.plugin.zsh" ]]; then
+      echo "$name"
+    fi
+  done
+}
