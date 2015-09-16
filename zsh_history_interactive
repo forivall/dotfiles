@@ -10279,3 +10279,14 @@ iframe(src='
 : 1441317079:0;git st
 : 1441317087:0;git diff
 : 1441317102:0;git add zsh_history_interactive && git commit -m 'update history'
+: 1435796090:0;gi tst
+: 1435796096:0;git add zsh_history_interactive
+: 1442371451:0;git st
+: 1442371453:0;git show
+: 1442371456:0;git la
+: 1442371470:0;git stashed pull --rebase
+: 1442371478:0;git st
+: 1442371486:0;git push
+: 1442371491:0;vim zsh_history_interactive
+: 1442371548:0;git st
+: 1442371553:0;git add zsh_history_interactive
