@@ -26,3 +26,5 @@
 
 # 'atom-text-editor':
 #   'ctrl-k right':'pane:split-right'
+'atom-workspace':
+  'alt-shift-r': 'run-in-terminal:start-terminal-here'

@@ -23,6 +23,7 @@
       "linter-jshint"
       "sublime-tabs"
       "linter-clang"
+      "tree-view-open-files"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -34,7 +35,6 @@
       eol: " "
       space: " "
     fontFamily: "Bitstream Vera Sans Mono"
-    fontSize: 14
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
