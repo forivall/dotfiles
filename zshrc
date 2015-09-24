@@ -9,6 +9,8 @@
 # }
 # alias .=source
 
+[[ "$HOST" == "shrubbery-ni" ]] && export VAGRANT_HOME=/mnt/Peng/vagrant-home-linux
+
 SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
 
 setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=return; 2=$code; fi; if ("$@") 2>&1 >/dev/null ; then eval "$arg=true"; else eval "$arg=false"; fi; }

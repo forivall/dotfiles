@@ -28,7 +28,8 @@ function npm() {
     shift; npm-$command "$@"; return
   fi
   local npm_bin="$(whence -p npm)";
-  local -a npm_cmd; npm_cmd=( "$npm_bin" "--node-gyp=$("$npm_bin" -g root)/pangyp/bin/node-gyp.js" )
+  local -a npm_cmd; npm_cmd=( "$npm_bin" )
+  # npm_cmd+=( "--node-gyp=$("$npm_bin" -g root)/pangyp/bin/node-gyp.js" )
   if ${IS_WINDOWS:-false} && [[ -t 1 ]]; then npm_cmd+=( --color=always ); fi
   if [[ "$1" == "-g" ]] ; then npm_cmd+=( -g ); shift; fi
   case "$1" in

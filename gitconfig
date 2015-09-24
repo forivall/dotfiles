@@ -113,13 +113,20 @@
 	main-window-view = HistoryView
 	show-graph = true
 [merge]
-	tool = diffuse_custom
-	#tool = meld
+    #tool = diffuse_windows
+    #tool = diffuse_custom
+	tool = meld
 	conflictstyle = diff3
 [rerere]
 	enabled = 1
 [mergetool "diffuse_custom"]
 	cmd = /usr/bin/diffuse \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+	#"
+[mergetool "diffuse_base"]
+	cmd = /usr/bin/diffuse \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	#"
+[mergetool "meld_merged"]
+	cmd = /usr/bin/meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 	#"
 [mergetool "diffuse_windows"]
     cmd = \"C:\\Program Files (x86)\\Diffuse\\diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
