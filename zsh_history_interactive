@@ -10232,3 +10232,123 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443745714:0;git diff
 : 1443745717:0;git add -p
 : 1443745722:0;git add zsh_history_interactive
+: 1443746010:0;ls -l ~/.atom
+: 1443746013:0;ls -ld ~/.atom
+: 1443746015:0;ls
+: 1443746019:0;ls atom
+: 1443746026:0;cat setup.sh
+: 1443746057:0;cd atom
+: 1443746058:0;ls
+: 1443746069:0;git rm nohup.out
+: 1443746073:0;ls
+: 1443746078:0;git st
+: 1443746083:0;git ls-files .
+: 1443746118:0;git ls-files
+: 1443746120:0;git ls-files /
+: 1443746123:0;git ls-files .
+: 1443746172:0;for f in git ls-files .; cat ~/.atom/$f > $f; done
+: 1443746179:0;for f in git ls-files .; do cat ~/.atom/$f > $f; done
+: 1443746186:0;git ls-files .
+: 1443746195:0;for f in $(git ls-files .); do cat ~/.atom/$f > $f; done
+: 1443746200:0;git st
+: 1443746206:0;git diff
+: 1443746216:0;atom -n .
+: 1443746225:0;gi tst
+: 1443746228:0;git add -p
+: 1443746241:0;gi st
+: 1443746242:0;git st
+: 1443746251:0;git add -p
+: 1443746296:0;git st
+: 1443746299:0;git checkout .gitignore
+: 1443746300:0;git st
+: 1443746301:0;git add -p
+: 1443746426:0;git st
+: 1443746428:0;git checkout .
+: 1443746429:0;git st
+: 1443746431:0;git rest
+: 1443746433:0;git reset
+: 1443746435:0;git checkout .
+: 1443746436:0;git st
+: 1443746439:0;git pull
+: 1443746441:0;git st
+: 1443746448:0;for f in $(git ls-files .); do cat ~/.atom/$f > $f; done
+: 1443746451:0;git add -p
+: 1443746470:0;git st
+: 1443746472:0;git diff .gitignore
+: 1443746480:0;git checkout .gitignore
+: 1443746481:0;git st
+: 1443746482:0;git add -p
+: 1443746677:0;git st
+: 1443746683:0;git checkout .
+: 1443746684:0;git st
+: 1443746688:0;rm git ls-files
+: 1443746688:0;git st
+: 1443746782:0;history_search my-packages.txt
+: 1443746794:0;cd
+: 1443746798:0;history_search my-packages.txt
+: 1443746810:0;type -af history_search
+: 1443746888:0;(cd $__zsh_unsorted_plugin_location; git root)
+: 1443746909:0;git rev-parse --git-dir
+: 1443746933:0;git help root
+: 1443746945:0;type -af git-root
+: 1443746950:0;cat /usr/bin/git-root
+: 1443746955:0;git rev-parse --show-toplevel
+: 1443746995:0;git rev-parse --show-prefix
+: 1443747002:0;ls
+: 1443747011:0;ls bash
+: 1443747071:0;history -a
+: 1443747125:0;history_search my-packages.txt
+: 1443747129:0;history_search my-packages
+: 1443747133:0;history_search grep
+: 1443747162:0;npm ls
+: 1443747164:0;apm ls
+: 1443747170:0;apm ls --flat
+: 1443747174:0;apm ls --help
+: 1443747184:0;apm list --packages --bare
+: 1443747200:0;apm list --packages --bare > atom/my-packages.txt
+: 1443747202:0;gi tst
+: 1443747206:0;git add -p atom/my-packages.txt
+: 1443747216:0;res
+: 1443747222:0;apm list --packages --bare |sort> atom/my-packages.txt
+: 1443747223:0;git st
+: 1443747228:0;git add -p atom
+: 1443747257:0;apm list --bare |sort> atom/my-packages.txt
+: 1443747258:0;git st
+: 1443747260:0;git add -p atom
+: 1443747273:0;git st
+: 1443747279:0;apm help lsit
+: 1443747281:0;apm help list
+: 1443747294:0;apm list --installed --bare |sort> atom/my-packages.txt
+: 1443747296:0;git st
+: 1443747298:0;git add -p atom
+: 1443747413:0;git st
+: 1443747415:0;git diff
+: 1443747419:0;git diff atom
+: 1443747426:0;git checkout atom
+: 1443747426:0;git st
+: 1443747468:0;ls atom
+: 1443747474:0;git ls-files atom
+: 1443747545:0;git st
+: 1443747556:0;chmod +x setup-atom.sh plugins/oneliner/restart-plasmashell
+: 1443747557:0;git st
+: 1443747566:0;git add setup-atom.sh plugins/oneliner/restart-plasmashell
+: 1443747566:0;git st
+: 1443747577:0;git add plugins/unsorted/unsorted.plugin.zsh
+: 1443747578:0;git st
+: 1443747580:0;cd atom
+: 1443747585:0;for f in $(git ls-files .); do cat ~/.atom/$f > $f; done
+: 1443747589:0;git st
+: 1443747593:0;git checkout my-packages.txt
+: 1443747594:0;git st
+: 1443747595:0;git diff
+: 1443747618:0;got checkout .
+: 1443747621:0;git checkout .
+: 1443747633:0;ls
+: 1443747634:0;..
+: 1443747636:0;./setup-atom.sh
+: 1443747643:0;ls ~/.atom
+: 1443747651:0;git st
+: 1443747652:0;git commit
+: 1443747657:0;git st
+: 1443747659:0;git push
+: 1443747677:0;git add zsh_history_interactive
