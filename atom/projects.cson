@@ -23,6 +23,16 @@ tacoscript:
     "/mnt/Peng/Jordan/Code/hacking-tacoscript/babel/packages/babylon"
     "/mnt/Peng/Jordan/Code/hacking-tacoscript/babel/packages/babel-core"
     "/mnt/Peng/Jordan/Code/hacking-tacoscript/babel"
+    "/home/jord/code/tacoscript-hacking/babel/packages/babylon"
+    "/home/jord/code/repos/git/dotfiles"
+    "/home/jord/code/tacoscript-hacking/tacoscript/packages/horchata"
+    "/home/jord/.nvm/versions/io.js/v3.3.1/lib/node_modules/mocha"
+    "/home/jord/code/tacoscript-hacking/tacoscript/packages/tacoscript/node_modules/mocha-fixtures-generic"
+    "/home/jord/code/tacoscript-hacking/tacoscript/packages/tacoscript"
+    "/home/jord/code/tacoscript-hacking/tacoscript"
+    "/home/jord/code/tacoscript-hacking/tacoscript-ast-playground"
+    "/home/jord/code/tacoscript-hacking/tacoscript/packages/tacoscript-cli"
+    "/home/jord/code/tacoscript-hacking"
   ]
 "tree-view-doubleclick":
   title: "tree-view-doubleclick"
