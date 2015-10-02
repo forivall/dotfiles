@@ -108,11 +108,12 @@
   "linter-jshint": {}
   "linter-eslint":
     disableWhenNoEslintrcFileInPath: true
+    globalNodePath: "/home/jord/.nvm/versions/io.js/v3.3.1"
   "file-icons":
     coloured: false
     onChanges: true
   "save-session":
-    dataSaveFolder: "/home/forivall/.atom/packages/save-session/projects"
+    dataSaveFolder: "/home/jord/.atom/packages/save-session/projects"
     skipSavePrompt: false
     extraDelay: 2000
   "run-in-terminal":
