@@ -8951,15 +8951,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443337121:0;kbuildsycoca5 && kquitapp plasma && kstart plasma
 : 1443337131:0;kbuildsycoca5 && kquitapp plasma-desktop && kstart plasma-desktop
 : 1443337232:0;kbuildsycoca5 && kquitapp plasmadesktop && kstart plasmadesktop
-: 1443337248:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
-: 1443339500:0;dell-monitor-night
-: 1443339927:0;yaourt -Syua
-: 1443387435:0;dell-monitor-day
-: 1443468908:0;yaourt -Syu
-: 1443468916:0;yaourt -Sc
-: 1443468936:0;yaourt -Syu
-: 1443468943:0;df -h
-: 1443468949:0;yaourt -Syua
 : 1443469037:0;cd code/hacking-tacoscript
 : 1443469043:0;cd tacoscript
 : 1443469142:0;git checkout origin/tmp-3 -- .
@@ -10466,3 +10457,167 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443812788:0;dotfiles
 : 1443812789:0;git st
 : 1443812795:0;git add zsh_history_interactive
+: 1443812796:0;git st
+: 1443812810:0;git commit -m 'history'
+: 1443812811:0;git s
+: 1443812812:0;gitst 
+: 1443812813:0;git st
+: 1443812815:0;git push
+: 1443812818:0;git add -p
+: 1443812833:0;git st
+: 1443812840:0;sedml
+: 1443812843:0;git st
+: 1443812846:0;git reset plugins
+: 1443812847:0;gitst
+: 1443812864:0;pacman -Qdttq
+: 1443812877:0;yaourt -Qi hawknl
+: 1443812888:0;yaourt -R hawknl
+: 1443812967:0;res
+: 1443812968:0;cd /home/forivall/.atom/packages/you-complete-me
+: 1443812969:0;ls
+: 1443812970:0;git st
+: 1443812984:0;df -h
+: 1443812997:0;du .
+: 1443813001:0;git st
+: 1443813004:0;ls
+: 1443813007:0;cd ycmd
+: 1443813008:0;git st
+: 1443813010:0;git la
+: 1443813012:0;git fetch
+: 1443813013:0;git la
+: 1443813020:0;du .
+: 1443813022:0;du -h .
+: 1443813039:0;git clean -nX
+: 1443813046:0;git st
+: 1443813096:0;cd /var/cache
+: 1443813096:0;ls
+: 1443813099:0;cd manjaro-tools
+: 1443813099:0;ls
+: 1443813114:0;run-help cd
+: 1443813119:0;history_search manjaro
+: 1443813130:0;yaourt -Ql manjaro-tools-pkg
+: 1443813145:0;vim /usr/share/manjaro-tools/makepkg-x86_64.conf
+: 1443813173:0;vim /usr/bin/buildtree
+: 1443813195:0;type -af import
+: 1443813203:0;import --help
+: 1443813213:0;bash
+: 1443813635:0;type-af import
+: 1443813232:0;cat /etc/manjaro-tools/manjaro-tools.conf
+: 1443813240:0;vim /etc/manjaro-tools/manjaro-tools.conf
+: 1443813252:0;cd
+: 1443813255:0;cd /mnt/Peng
+: 1443813255:0;ls
+: 1443813260:0;ls ManjaroSystem
+: 1443813263:0;ls -ld ManjaroSystem
+: 1443813266:0;cd ManjaroSystem
+: 1443813266:0;ls
+: 1443813276:0;mkdir manjaro-tools
+: 1443813340:0;mkdir cache
+: 1443813348:0;mkdir var
+: 1443813353:0;mv manjaro-tools cache
+: 1443813357:0;mv cache var
+: 1443813368:0;mkdir -p var/lib/manjaro-tools
+: 1443813371:0;tree .
+: 1443813407:0;mkdir -p etc/manjaro-tools/sets
+: 1443813415:0;ls /etc/manjaro-tools/sets/
+: 1443813418:0;tree /etc/manjaro-tools/sets/
+: 1443813469:0;cp /etc/manjaro-tools/manjaro-tools.conf .
+: 1443813521:0;sudo vim /etc/manjaro-tools/manjaro-tools.conf
+: 1443813577:0;ls
+: 1443813586:0;la
+: 1443813597:0;mv pkgtree /mnt/Peng/ManjaroSystem/var/cache/manjaro-tools
+: 1443813614:0;vim /etc/manjaro-tools/manjaro-tools.conf
+: 1443813638:0;cp /etc/manjaro-tools/manjaro-tools.conf .
+: 1443813642:0;vim manjaro-tools.conf
+: 1443813649:0;sudo mv pkgtree /mnt/Peng/ManjaroSystem/var/cache/manjaro-tools
+: 1443813653:0;ls
+: 1443813693:0;cd /mnt/Peng/ManjaroSystem/var/cache/manjaro-tools/
+: 1443813694:0;ls
+: 1443813696:0;tree
+: 1443813700:0;git st
+: 1443813702:0;ls
+: 1443813708:0;mv pkgtree pkgtree_
+: 1443813709:0;ls
+: 1443813712:0;sudo mv pkgtree /mnt/Peng/ManjaroSystem/var/cache/manjaro-tools
+: 1443813728:0;open .
+: 1443813778:0;sudo chown -R forivall:users pkgtree
+: 1443813864:0;df -h
+: 1443813917:0;journalctl --vacuum-time=2d
+: 1443813921:0;sudo journalctl --vacuum-time=2d
+: 1443813933:0;history_search logrotate
+: 1443813938:0;history_search rotate
+: 1443813987:0;systemctl status logrotate.timer
+: 1443814120:0;yaourt -Ss clean
+: 1443814141:0;yaourt -S pkgcacheclean
+: 1443814149:0;rehash
+: 1443814152:0;pkgcacheclean
+: 1443814156:0;sudo pkgcacheclean
+: 1443814163:0;pkgcacheclean -h
+: 1443814167:0;pkgcacheclean --help
+: 1443814501:0;yaourt -R browser-vacuum
+: 1443814509:0;yaourt -R browser-vaccum
+: 1443814522:0;yaourt -S browser-vacuum
+: 1443814550:0;df -h
+: 1443814557:0;rehash
+: 1443814559:0;cd
+: 1443814561:0;df -h
+: 1443814564:0;browser-vacuum
+: 1443814637:0;yaourt -S tmpreaper
+: 1443814653:0;rehash
+: 1443814654:0;tmpreaper
+: 1443814762:0;res
+: 1443814764:0;df -h
+: 1443814809:0;yaourt -R visual-studio-code
+: 1443814887:0;yaourt -Ss locale
+: 1443814949:0;cd .cache
+: 1443814950:0;ls
+: 1443815034:0;ps -AF|grep trackerd
+: 1443815039:0;ps -AF|grep tracker
+: 1443815064:0;tracker-preferences
+: 1443815179:0;df -h
+: 1443815203:0;yaourt -Ql manjaro-tools-pkg
+: 1443815206:0;buildtree
+: 1443815213:0;buildtree --help
+: 1443815216:0;buildtree -s -a
+: 1443815297:0;df -h
+: 1443815455:0;yaourt -Ss lfs
+: 1443815469:0;yaourt -S git-lfs
+: 1443815763:0;apm install indent-guide-improved
+: 1443815789:0;apm install tab-control
+: 1443815806:0;apm rm indentation-indicator
+: 1443815811:0;dotfiles
+: 1443815816:0;cd atom
+: 1443815825:0;apm ls --help
+: 1443815840:0;apm ls --installed --bare |sort > my-packages.txt
+: 1443815842:0;git st
+: 1443815845:0;git add -p my-packages.txt
+: 1443815852:0;apm rm atom-hard-wrap
+: 1443815859:0;apm ls --installed --bare |sort > my-packages.txt
+: 1443815862:0;git add -p
+: 1443815874:0;apm rm hecs-dark-ui
+: 1443815879:0;apm ls --installed --bare |sort > my-packages.txt
+: 1443815880:0;git add -p
+: 1443815908:0;apm rm quantum-ui razor-atom-syntax-theme recent-files selection-outlines
+: 1443815917:0;apm ls --installed --bare |sort > my-packages.txt
+: 1443815921:0;git add -p
+: 1443815935:0;git st
+: 1443815941:0;git reset -p my-packages.txt
+: 1443815948:0;git st
+: 1443815949:0;git diff
+: 1443815954:0;git commit
+: 1443815958:0;git st
+: 1443815960:0;git push
+: 1443816353:0;git st
+: 1443816355:0;git add -p
+: 1443816369:0;git st
+: 1443816372:0;git commit
+: 1443816379:0;git st
+: 1443816383:0;git push
+: 1443816638:0;git st
+: 1443816641:0;..
+: 1443816642:0;git st
+: 1443816643:0;git diff
+: 1443816646:0;git stashed pull
+: 1443816702:0;git st
+: 1443816706:0;git reset
+: 1443816709:0;git add zsh_history_interactive
