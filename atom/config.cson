@@ -208,10 +208,10 @@
 ".js.source":
   "multi-wrap-guide":
     columns: [
-      79
+      80
     ]
   editor:
-    preferredLineLength: 79
+    preferredLineLength: 80
 ".coffee.source":
   "multi-wrap-guide":
     columns: [
