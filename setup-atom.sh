@@ -9,6 +9,6 @@ ln -fs "$(realpath atom/command-toolbar.json)" ~/.atom/command-toolbar.json
 ln -fs "$(realpath atom/config.cson)" ~/.atom/config.cson
 ln -fs "$(realpath atom/init.coffee)" ~/.atom/init.coffee
 ln -fs "$(realpath atom/keymap.cson)" ~/.atom/keymap.cson
-ln -fs "$(realpath atom/projects.cson)" ~/.atom/projects.cson
+#ln -fs "$(realpath atom/projects.cson)" ~/.atom/projects.cson
 ln -fs "$(realpath atom/snippets.cson)" ~/.atom/snippets.cson
 ln -fs "$(realpath atom/styles.less)" ~/.atom/styles.less
