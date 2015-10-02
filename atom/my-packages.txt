@@ -15,7 +15,6 @@ editorconfig@1.2.0
 expose@0.6.0
 file-icons@1.6.9
 file-types@0.5.1
-hecs-dark-ui@0.1.4
 hide-files@0.1.7
 highlight-selected@0.10.1
 html2jade-plus@1.0.0
