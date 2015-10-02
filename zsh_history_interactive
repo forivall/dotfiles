@@ -135,6 +135,7 @@
 : 1435011990:0;yaourt -R ttf-noto-font
 : 1435011990:0;yaourt -S ttf-sil-fonts
 : 1435011990:0;yaourt -S ttf-santana
+: 1435011990:0;google-chrome-beta
 : 1435011990:0;google-chrome-beta --force-device-scale-factor=2
 : 1435011990:0;yaourt -Ss mint
 : 1435011990:0;yaourt -Ss mint-stick
@@ -402,7 +403,6 @@
 : 1435011990:0;yaourt -Ql umongo|grep bin
 : 1435011990:0;umongo.sh
 : 1435011990:0;ps -AF|grep mongo
-: 1435011990:0;robomongo
 : 1435011990:0;tail -f /tmp/robomongo.log
 : 1435011990:0;meteor add meteorhacks:npm
 : 1435011990:0;atom packages.json
@@ -520,7 +520,6 @@
 : 1435011990:0;rmdir dbus
 : 1435011990:0;atom examples/service/server2.js
 : 1435011990:0;cd ../git/atom-tree-view
-: 1435011990:0;cd ../atom
 : 1435011990:0;gg 'Add Project Folder'
 : 1435011990:0;gg 'add-project-folder'
 : 1435011990:0;atom src/workspace-element.coffee
@@ -596,7 +595,6 @@
 : 1435011990:0;yaourt -Ss kdeinit
 : 1435011990:0;yaourt -Qo /usr/bin/kdeinit5
 : 1435011990:0;yaourt -Ss kinit
-: 1435011990:0;totem
 : 1435011990:0;gedit
 : 1435011990:0;ktraderclient5 --version
 : 1435011990:0;yaourt -Ss kservice
@@ -752,7 +750,6 @@
 : 1435011990:0;ktraderclient --help
 : 1435011990:0;kmimetypefinder linuxmint-17.1-mate-32bit.iso
 : 1435011990:0;kmimetypefinder5 linuxmint-17.1-mate-32bit.iso
-: 1435011990:0;kmimetypefinder --help
 : 1435011990:0;kmimetypefinder -c linuxmint-17.1-mate-32bit.iso
 : 1435011990:0;kmimetypefinder -f linuxmint-17.1-mate-32bit.iso
 : 1435011990:0;rsync -r --progress ./Videos "/mnt/Peng/Jordan/320gb linux"
@@ -2227,7 +2224,6 @@
 : 1435011990:0;git add mumblesrc/compiler.pri mumblesrc/winpaths_*
 : 1435011990:0;git add main.rpo
 : 1435011990:0;git add --help
-: 1435011990:0;git add -N src
 : 1435011990:0;git reset src/dinputkeydebug.pro.user
 : 1435011990:0;git add main.pro
 : 1435011990:0;cygpath $PWD|clip
@@ -2747,7 +2743,6 @@ fi; done
 : 1435011990:0;sudo dkms build -m hid-azio-lv-mech5 -v r12.9a8289c
 : 1435011990:0;~/code/git/logitech-g710-linux-driver/misc/rebind.sh
 : 1435011990:0;ktraderclient --servicetype Application --mimetype x-scheme-handler/http
-: 1435011990:0;ktraderclient5 --servicetype Application --mimetype x-scheme-handler/http
 : 1435011990:0;ls /mnt/Peng/Jordan/Code/git/ycmd
 : 1435011990:0;cd /mnt/Peng/Jordan/Code/git/ycmd
 : 1435011990:0;cd ~/.zgen
@@ -2954,7 +2949,6 @@ fi; done
 : 1435169998:0;git checkout patch-1
 : 1435170025:0;git checkout -b master -t origin/master
 : 1435170126:0;cd atom-html2jade-plus
-: 1435170268:0;git stashed checkout master
 : 1435170283:0;git reset && git checkout
 : 1435170421:0;apm release major
 : 1435170445:0;apm help publish
@@ -3252,8 +3246,6 @@ fi; done
 : 1435563994:0;uuidgen -r
 : 1435564588:0;git config core.filemode false
 : 1435564641:0;gi tcheckout .
-: 1435601045:0;python
-: 1435603634:0;cd ../..
 : 1435604856:0;cd ../atom-build
 : 1435604925:0;atom lib/build.js
 : 1435606258:0;ls playground
@@ -3929,16 +3921,12 @@ EOF
 : 1436307085:0;cat init.coffee
 : 1436307088:0;cat keymap.cson
 : 1436307107:0;echo nohup.out >> .gitignore
-: 1436307152:0;git add -p .
-: 1436307186:0;apm list --help
 : 1436307192:0;apm list --installed --bare
 : 1436307206:0;apm list --installed --bare > my-packages.txt
 : 1436307222:0;apm list --json --bare
 : 1436307226:0;apm list --json --bare|jq
 : 1436307230:0;apm list --json --bare|jq .
 : 1436307241:0;git add my-packages.txt
-: 1436307256:0;git reset .
-: 1436661494:0;dmesg|tail
 : 1436661520:0;lsmod|grep mouse
 : 1436661527:0;modprobe -r mousedev
 : 1436661530:0;sudo modprobe -r mousedev
@@ -3986,11 +3974,11 @@ EOF
 : 1436865246:0;git add index.gif
 : 1436937332:0;hub clone forivall/tacoscript-core
 : 1436937504:0;cd tacoscript-core
+: 1436937511:0;npm i 
 : 1436937763:0;git submodule init
 : 1436938489:0;npm link ../..
 : 1436938497:0;ls node_modules/babel-core
 : 1436938557:0;npm link packages/babel-cli
-: 1436938644:0;git submodule update --init
 : 1436938661:0;cd packagrs/babel-cli
 : 1436938667:0;cd packages/babel-cli
 : 1436938678:0;ls node_modules/babel-core/
@@ -4005,7 +3993,6 @@ EOF
 : 1437004177:0;git show 2eda333
 : 1437004251:0;curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh
 : 1437013045:0;git show patch-project-paths
-: 1437070926:0;yaourt -Ss flashplugin
 : 1437070959:0;yaourt -S community/flashplugin
 : 1437071171:0;rm ~/.zgen/sindresorhus/pure-master
 : 1437071185:0;asdf
@@ -4025,6 +4012,7 @@ EOF
 : 1437099641:0;git checkout -b drag-and-drop-root
 : 1437099647:0;git merge abm0/master
 : 1437099743:0;git reset --hard origin/master
+: 1437099747:0;gi tla
 : 1437099755:0;git l abm0/master
 : 1437099776:0;git diff origin/master abm0/master
 : 1437100497:0;hub clone atom/tabs atom-tabs
@@ -4057,7 +4045,6 @@ EOF
 : 1437107316:0;(sleep 1 && echo $$ &)
 : 1437107323:0;(sleep 1 && echo $$)&
 : 1437107330:0;((sleep 1 && echo $$)&)
-: 1437107417:0;at
 : 1437107650:0;date -d +%s
 : 1437107674:0;date +%s
 : 1437108035:0;echo $$
@@ -4070,7 +4057,6 @@ EOF
 : 1437162768:0;apm rm build-tools-cpp
 : 1437162771:0;apm install build-tools
 : 1437163600:0;plasmashell&
-: 1437163636:0;yaourt -Ql plasma-desktop
 : 1437163641:0;yaourt -Ql plasma-desktop|grep bin
 : 1437163655:0;yaourt -Qi plasma-desktop
 : 1437163678:0;yaourt -Ql plasma-workspace
@@ -4248,7 +4234,6 @@ EOF
 : 1437212136:0;git clone git@github.com:JavascriptIsMagic/tree-view-git-projects.git
 : 1437212141:0;cd tree-view-git-projects
 : 1437212151:0;mv tree-view-git-projects atom-tree-view-git-projects
-: 1437212155:0;cd atom-tree-view
 : 1437212161:0;cd atom-tree-view-git-projects
 : 1437212986:0;git checkout -b use-realpath
 : 1437212999:0;git commit -m 'use realpaths'
@@ -4272,7 +4257,6 @@ EOF
 : 1437243232:0;npm install cake-gulp coffee-script
 : 1437243248:0;cake
 : 1437243746:0;git add cakefile Cakefile
-: 1437243768:0;git commit -m 'tmp'
 : 1437243818:0;git add lib/tree-view-git-projects.js
 : 1437246408:0;git commit -m '
 : 1437249288:0;git commit 
@@ -4360,11 +4344,6 @@ EOF
 : 1437344710:0;git checkout ..
 : 1437344779:0;git push forivall HEAD:refs/heads/underline-repo-name-merge-1
 : 1437344799:0;git rebase origin/master
-: 1437344802:0;git st
-: 1437344806:0;git mergetool
-: 1437344844:0;git st
-: 1437344848:0;git rebase --continue
-: 1437344851:0;git mergetool
 : 1437344871:0;git rebase --abort
 : 1437344899:0;git diff origin/master > tmp.patch
 : 1437344913:0;rm pure.zsh.orig
@@ -4398,16 +4377,6 @@ EOF
 : 1437346090:0;-zgen-path-contains ~/.zgen/forivall/pure-underline-repo-name sh
 : 1437346093:0;-zgen-path-contains ~/.zgen/forivall/pure-underline-repo-name .md
 : 1437346226:0;git reset --hard HEAD
-: 1437346227:0;git st
-: 1437346229:0;git la
-: 1437346235:0;git stash drop
-: 1437346237:0;git st
-: 1437346240:0;zgen reset
-: 1437346246:0;hub browse
-: 1437346808:0;..
-: 1437347338:0;ls
-: 1437347347:0;cd repos/git/zsh-pure
-: 1437347349:0;res
 : 1437347425:0;open ~/GIF\ Screencasts
 : 1437347737:0;cd ~
 : 1437347744:0;mkcd git-repository
@@ -4481,9 +4450,6 @@ EOF
 : 1438328092:0;sudo systemctl enable lightdm
 : 1438328106:0;yaourt -Ss lightdm-qt
 : 1438328112:0;yaourt -S lightdm-qt5
-: 1438328126:0;yaourt -S liblightdm-qt5
-: 1438328168:0;tail -f /var/log/syslog.log
-: 1438328172:0;sudo tail -f /var/log/syslog.log
 : 1438328178:0;journalctl
 : 1438328192:0;journalctl|grep sddm
 : 1438328203:0;journalctl --help
@@ -4578,15 +4544,11 @@ EOF
 : 1439002994:0;sudo rm /var/lib/pacman/db.lck
 : 1439002998:0;sudo pacman -Su
 : 1439003677:0;ssh -i ./dsa/id_dsa -p 2222 sherbr5@biz82.inmotionhosting.com
-: 1439003685:0;cd code/smc
-: 1439003686:0;ls
 : 1439003689:0;ssh-add id_rsa
-: 1439003711:0;ssh -i ./id_rsa -p 2222 sherbr5@biz82.inmotionhosting.com
-: 1439005162:0;npm i -g git-commander
-: 1439005534:0;cd
 : 1439005542:0;yaourt -Ss amphetype
 : 1439005576:0;cd code/aur/aur-packages/aur
 : 1439005603:0;mkdir amphetype-lalop-git
+: 1439005605:0;cd amphetype-lalop-git
 : 1439005612:0;makepkg-template
 : 1439005618:0;makepkg-template --help
 : 1439005646:0;gman makepkg-template
@@ -4704,16 +4666,7 @@ EOF
 : 1439254657:0;yaourt -Ss evernote
 : 1439254675:0;yaourt -S nixnote-beta
 : 1439254749:0;nixnote2
-: 1439260305:0;git st
-: 1439260315:0;git add .
-: 1439260316:0;git st
-: 1439260318:0;git add -p
-: 1439260328:0;y
-: 1439260329:0;git st
-: 1439260330:0;git commit
-: 1439260338:0;git push
 : 1439261231:0;cd code/repos
-: 1439261231:0;ls
 : 1439261236:0;ls -al
 : 1439261245:0;ls gitgit-repos
 : 1439261251:0;cat gitgit-repos
@@ -4736,7 +4689,15 @@ EOF
 : 1439262359:0;wine --help
 : 1439262364:0;wine regedit
 : 1439262424:0;wineboot
+: 1439262430:0;ls
+: 1439262437:0;env WINEPREFIX="/home/forivall/.wine" wine ./Evernote_5.8.13.8152.exe
+: 1439262475:0;wineserver -k
+: 1439262477:0;env WINEPREFIX="/home/forivall/.wine" wine ./Evernote_5.8.13.8152.exe
+: 1439262677:0;sudo systemctl stop sddm
+: 1439262681:0;startx
+: 1439262759:0;~/.config/autostart-scripts/set-mouse-accel.sh
 : 1439262853:0;cd Downloads
+: 1439262871:0;env WINEPREFIX="/home/forivall/.wine" wine ./Evernote_5.8.13.8152.exe
 : 1439262886:0;env WINEPREFIX="/home/forivall/.wine" wine regedit
 : 1439263200:0;open ~/.wine
 : 1439263257:0;env WINEPREFIX="/home/forivall/.wine" wine ./Evernote_5.8.13.8152.exe
@@ -4833,63 +4794,21 @@ EOF
 : 1439490940:0;git submodule update
 : 1439490974:0;git remote add forivall git@github.com:forivall/babel.git
 : 1439491015:0;git stashed checkout generator-print-refactor
-: 1439491020:0;git st
-: 1439491025:0;git show stash
-: 1439491029:0;git la
-: 1439491037:0;git merge origin/master
-: 1439491040:0;git st
-: 1439491043:0;git push
-: 1439491048:0;make test
-: 1439491072:0;make bootstrap
-: 1439491158:0;make test
-: 1439491221:0;git st
-: 1439494292:0;cd ../tacoscript
-: 1439494293:0;git st
-: 1439494295:0;git fetch
-: 1439494299:0;git diff
 : 1439494302:0;gi t6st
-: 1439494303:0;git st
-: 1439494307:0;git diff
-: 1439494310:0;git stash save
-: 1439494313:0;git store-untracked-files
-: 1439494315:0;git st
-: 1439494319:0;git fetch
 : 1439494326:0;git checkout tmp
-: 1439494328:0;git st
-: 1439494329:0;git la
-: 1439494348:0;cd ..
-: 1439494355:0;cd tacoscript-ast-playground
-: 1439494356:0;git st
-: 1439494359:0;git diff
-: 1439494461:0;git fetch
-: 1439494466:0;git st
-: 1439494469:0;git diff
-: 1439494473:0;git checkout app.js
-: 1439494476:0;git stashed pull
-: 1439494482:0;git st
-: 1439494485:0;git diff
-: 1439494488:0;git mergetool
-: 1439494540:0;git st
-: 1439494542:0;git stash drop
-: 1439494545:0;git diff
-: 1439494547:0;git diffc
-: 1439494569:0;git reset
-: 1439494570:0;git st
-: 1439494571:0;git diff
 : 1439494574:0;git checkout src/app.js
+: 1439494575:0;git st
+: 1439494593:0;git store-untracked-files
+: 1439494604:0;git diff
+: 1439494636:0;git st
+: 1439494648:0;ls
+: 1439494656:0;cat package.json
 : 1439494671:0;make build
+: 1439494675:0;npm run build
+: 1439494708:0;cd ../tacoscript
+: 1439494709:0;git st
+: 1439494723:0;cd packages/tacoscript
 : 1439494732:0;babel src --out-dir lib
-: 1439494738:0;git st
-: 1439494747:0;cd ../tacoscript-ast-playground
-: 1439494749:0;npm run build
-: 1439494764:0;npm start
-: 1439494768:0;git diff
-: 1439494769:0;git st
-: 1439494771:0;git diff
-: 1439494790:0;git la
-: 1439494833:0;babel -w src --out-dir lib
-: 1439495084:0;ls
-: 1439495086:0;..
 : 1439495091:0;mv generators0/* generators
 : 1439495095:0;rmdir generators0
 : 1439495344:0;ls node_modules/.bin
@@ -4903,9 +4822,6 @@ EOF
 : 1439501458:0;npm i -g speed-test
 : 1439501627:0;speed-test
 : 1439501769:0;grep flat-volumes /etc/pulse/* ~/.pulse/*
-: 1439501868:0;type -af grep
-: 1439502492:0;cat /etc/pulse/daemon.conf
-: 1439502591:0;pacmd
 : 1439502616:0;pacmd dump
 : 1439502618:0;pacmd dump|grep flat
 : 1439502663:0;pacmd
@@ -4951,15 +4867,6 @@ EOF
 : 1439521335:0;mkcd node-browserify-parse-bug
 : 1439521412:0;browserify --help
 : 1439521421:0;browserify
-: 1439521429:0;browserify -e index.js
-: 1439521441:0;cat package.json
-: 1439521451:0;vim package.json
-: 1439521516:0;browserify -e index.js
-: 1439521524:0;npm i --save brfs
-: 1439521532:0;browserify -e index.js
-: 1439521565:0;vim package.json
-: 1439521571:0;vim index.js
-: 1439521584:0;browserify -e index.js
 : 1439521592:0;npm i --save everything.js
 : 1439521610:0;vim index.js
 : 1439521815:0;okteta node_modules/everything.js/es5.js
@@ -5021,14 +4928,6 @@ EOF
 : 1439523744:0;git remote add git@gist.github.com:395645f2f6d4213882a4.git
 : 1439523750:0;git remote add origin git@gist.github.com:395645f2f6d4213882a4.git
 : 1439523766:0;git reset origin/master
-: 1439523767:0;git st
-: 1439523771:0;git la
-: 1439523777:0;git st
-: 1439523796:0;git push -u origin master
-: 1439523799:0;git st
-: 1439523801:0;git la
-: 1439523808:0;git log
-: 1439523811:0;git l3
 : 1439523819:0;git log --stat
 : 1439524160:0;gem uninstall gist
 : 1439524171:0;sudo pip install python-gist
@@ -5074,34 +4973,10 @@ EOF
 : 1439539602:0;git checkout -b 'utf16'
 : 1439539623:0;git push -u forivall utf16
 : 1439539641:0;git checkout -b 'unicode-separators'
-: 1439539642:0;gi tst
 : 1439539645:0;gitla
-: 1439539646:0;git la
 : 1439539654:0;git reset --hard ece214f
 : 1439540332:0;cd ../brfs
 : 1439540427:0;vim test/files/separators.txt
-: 1439540437:0;git st
-: 1439540439:0;$(npm bin)/tap test/separators.js
-: 1439540448:0;git st
-: 1439540450:0;git diff
-: 1439540454:0;git la
-: 1439540460:0;git commit --amend
-: 1439540462:0;git st
-: 1439540466:0;git add -p
-: 1439540469:0;git commit --amend
-: 1439540472:0;git show
-: 1439540485:0;git st
-: 1439540489:0;git reset HEAD^
-: 1439540490:0;git st
-: 1439540494:0;git add -p
-: 1439540508:0;git st
-: 1439540515:0;git la
-: 1439540522:0;git commit
-: 1439540525:0;git st
-: 1439540526:0;git diff
-: 1439540528:0;git stash save
-: 1439540532:0;$(npm bin)/tape test/unicode_separators.js
-: 1439540538:0;git st
 : 1439540546:0;git push -u forivall unicode-separators
 : 1439540843:0;$(npm bin)/tape test/unicode_separators.js
 : 1439540903:0;cd brfs
@@ -5117,23 +4992,10 @@ EOF
 : 1439542250:0;rm node_modules && npm i
 : 1439542286:0;browserify -e index.js
 : 1439542326:0;cd ../../tacoscript-hacking/
-: 1439542327:0;ls
-: 1439542331:0;cd tacoscript-ast-playground
-: 1439542331:0;git st
-: 1439542333:0;git diff
-: 1439542344:0;git diff src/app.js
-: 1439542354:0;vim src/app.js
-: 1439542373:0;git st
-: 1439542375:0;git diff src
-: 1439542388:0;npm start
 : 1439542414:0;rm node_modules/brfs && npm i brfs
 : 1439542482:0;vim src/app.js
 : 1439542994:0;git add -p package.json src/app.js
 : 1439543051:0;npm i --save-dev brfs
-: 1439543080:0;git st
-: 1439543084:0;git diff package.json
-: 1439543092:0;git add -p package.json
-: 1439543095:0;git st
 : 1439543103:0;git diffc src
 : 1439543115:0;git commit -m 'use tacoscript js parse helper'
 : 1439543127:0;git commit -m 'build\
@@ -5152,10 +5014,7 @@ EOF
 : 1439599227:0;cd atom-wrap-selection
 : 1439599231:0;apm i .
 : 1439599234:0;apm install .
-: 1439599236:0;npm i
 : 1439599240:0;apm rebuild
-: 1439599241:0;ls
-: 1439599246:0;atom .
 : 1439599318:0;apm rm wrap-selection
 : 1439600321:0;find . -name atom-hard-wrap
 : 1439600325:0;find . -name atom-
@@ -5178,28 +5037,16 @@ EOF
 : 1439605332:0;yaourt -S libnetctlgui
 : 1439605480:0;yaourt -U /tmp/yaourt-tmp-forivall/libnetctlgui-1.4.8-1-x86_64.pkg.tar.xz
 : 1439605501:0;yaourt -S netctl-gui netctlgui-helper
-: 1439605607:0;yaourt -Sua
-: 1439605735:0;cd
 : 1439605743:0;mkdir aurbuild
-: 1439605744:0;cd aurbuild
 : 1439605747:0;yaourt -G libnetctlgui
 : 1439605754:0;cd libnetctlgui
-: 1439605759:0;makepkg -si
-: 1439605924:0;yaourt -Sua
-: 1439605935:0;..
 : 1439605938:0;yaourt -G shellcheck
 : 1439605943:0;cd shellcheck
-: 1439605947:0;makepkg -s
-: 1439606029:0;cd ..
 : 1439606038:0;yaourt -Qs haskell json
 : 1439606050:0;yaourt -G haskell-json
 : 1439606060:0;cd haskell-json
-: 1439606063:0;makepkg -s
-: 1439606076:0;cd ..
 : 1439606081:0;yaourt -G haskell-regex-tdfa
 : 1439606089:0;cd haskell-regex-tdfa
-: 1439606091:0;makepkg -s
-: 1439606098:0;ls
 : 1439606103:0;yaourt -U haskell-json-0.9.1-1-x86_64.pkg.tar.xz
 : 1439606114:0;cd ../shellcheck
 : 1439606271:0;yaourt -U haskell-regex-tdfa-1.2.0-1-x86_64.pkg.tar.xz
@@ -5213,9 +5060,6 @@ EOF
 : 1439866804:0;sudo rm /usr/lib/libudev.so.0
 : 1439866813:0;yaourt -U /tmp/yaourt-tmp-forivall/libudev.so.0-0.1.1-2-x86_64.pkg.tar.xz
 : 1439866823:0;yaourt -S lighttable
-: 1439867588:0;htop
-: 1440215660:0;apm help
-: 1440215662:0;apm update
 : 1440215792:0;mkcd code/hacking-projection-photos
 : 1440215824:0;cd ../hacking-projection
 : 1440215891:0;mkcd projection-photos
@@ -5224,7 +5068,6 @@ EOF
 : 1440219908:0;cd code/hacking-projection/sound-machine-electron-guide
 : 1440219913:0;nvm list
 : 1440219916:0;nvm list-remote
-: 1440219929:0;node --version
 : 1440219937:0;nvm install v0.12.7
 : 1440220053:0;cat ~/.bashrc
 : 1440220058:0;cat ~/.zshrc
@@ -5240,7 +5083,6 @@ EOF
 : 1440278561:0;sudo systemctl stop sddm
 : 1440278698:0;subl /etc/X11/xorg.conf.d/30-nvidia.conf
 : 1440278850:0;cat ~/.config/autostart-scripts/randr-nvidia-hack.sh
-: 1440279158:0;startx
 : 1440279200:0;subl
 : 1440279381:0;nvidia-settings --assign CurrentMetaMode="DVI-I-1: 1920x1080_120 +0+0, DP-0: nvidia-auto-select +1920+0, DVI-D-0: nvidia-auto-select +1920+180"
 : 1440279429:0;nvidia-settings --assigne CurrentMetaMode="DVI-I-1: 1920x1080_120 +0+0, DP-0: nvidia-auto-select +1920+0, DVI-D-0: nvidia-auto-select +3840+180"
@@ -5261,10 +5103,6 @@ EOF
 : 1440280254:0;nvidia-settings --help
 : 1440280265:0;nvidia-settings -q all
 : 1440280284:0;xrandr --lkist
-: 1440280286:0;xrandr
-: 1440280301:0;nvidia-settings --assign CurrentMetaMode="DVI-I-1: 1920x1080_120 +0+0, DP-1: nvidia-auto-select +1920+0, DVI-D-0: 1440x900 +3840+180"
-: 1440280353:0;startx
-: 1440280430:0;nvidia-settings --assign CurrentMetaMode="DVI-I-1: 1920x1080_120 +0+0, DP-1: nvidia-auto-select +1920+0, DVI-D-0: 1440x900 +3840+180"
 : 1440280576:0;startx
 : 1440280782:0;logout
 : 1440281013:0;ls /usr/share/ddccontrol-db/monitor/DEL*
@@ -5322,19 +5160,11 @@ EOF
 : 1440309223:0;ls /usr/share/applications/
 : 1440309235:0;grep 'Monitor' /usr/share/applications/*
 : 1440309296:0;grep 'Monitor Settings' /usr/share/applications/*
-: 1440309323:0;gddccontrol
-: 1440309446:0;git st
-: 1440309472:0;apm update
-: 1440309534:0;git la
-: 1440309547:0;git show
 : 1440309591:0;cd ../projection-photo
 : 1440309664:0;npm versino
 : 1440309672:0;yaourt -Qs npm
 : 1440309676:0;nvm
 : 1440309679:0;nvm ls-remote
-: 1440309688:0;nvm install iojs-v3.1.0
-: 1440309700:0;ls
-: 1440309708:0;vim ~/.zshrc
 : 1440309734:0;nvm install iojs-v3.1.0
 : 1440309747:0;npm alias
 : 1440309761:0;nvm alias default iojs
@@ -5344,10 +5174,6 @@ EOF
 : 1440309822:0;ls ~/.nvm/versions/node/v0.12.1/lib
 : 1440309825:0;ls ~/.nvm/versions/node/v0.12.1/lib/node_modules
 : 1440309944:0;npm show npm
-: 1440310101:0;npm i -g npm
-: 1440310108:0;npm --version
-: 1440310116:0;npm i -g npm@3
-: 1440310125:0;npm --version
 : 1440310128:0;npm --help
 : 1440310314:0;yo
 : 1440310487:0;rm tmp
@@ -5367,8 +5193,6 @@ EOF
 : 1440312817:0;git add src/creator/
 : 1440313297:0;npm i -g jspm
 : 1440313333:0;npm i --save-dev jspm
-: 1440313346:0;jspm init
-: 1440313407:0;git st
 : 1440313409:0;git diff package.json
 : 1440313637:0;atom gulpfile.js
 : 1440314015:0;npm i --save-dev gulp gulp-babel
@@ -5396,7 +5220,6 @@ EOF
 : 1440318590:0;dropbox-cli stop
 : 1440318594:0;yaorut -S
 : 1440318597:0;yaourt -S
-: 1440318600:0;yaourt -Su
 : 1440318609:0;dropbox-cli start
 : 1440318642:0;mkdir Dropbox_jordanjklassen_gmail
 : 1440318762:0;jobs
@@ -5421,9 +5244,6 @@ EOF
 : 1440320732:0;npm i --save git://git@github.com:hevets/kenburns.git#aspectRatio
 : 1440320751:0;npm i --save git+https://github.com/hevets/kenburns.git#aspectRatio
 : 1440320794:0;git remote add forivall git@github.com:forivall/kenburns.git
-: 1440320797:0;git fetch forivall
-: 1440320822:0;git checkout -b aspect-ratio forivall/aspectRatio
-: 1440320828:0;git checkout --detach
 : 1440320833:0;git branch -d aspect-ratio
 : 1440320838:0;git checkout -b aspect-ratio forivall/aspectRatio
 : 1440320845:0;npm init
@@ -5455,19 +5275,6 @@ EOF
 : 1440340626:0;subl 2015\ Sherbrooke\ Safari\ DVBS/projection-photo-slideshow.json
 : 1440340648:0;cd 2015\ Sherbrooke\ Safari\ DVBS
 : 1440342344:0;cat projection-photo-slideshow.json
-: 1440343443:0;git st
-: 1440343448:0;git diff
-: 1440343451:0;git add -p
-: 1440343459:0;git st
-: 1440343460:0;git commit
-: 1440343475:0;git st
-: 1440343476:0;git push
-: 1440343764:0;ls
-: 1440343769:0;cat package.json
-: 1440343770:0;git st
-: 1440343777:0;npm build
-: 1440343782:0;ls
-: 1440343792:0;npm run build
 : 1440343910:0;tree lib
 : 1440343983:0;npm rm --save jspm
 : 1440344228:0;npm prune --production
@@ -5495,11 +5302,6 @@ EOF
 : 1440345237:0;du -sh dist/*
 : 1440345397:0;git tag -a -m "Initial release" v0.0.1
 : 1440345400:0;git push --tags
-: 1440345405:0;hub browse
-: 1440345529:0;ls
-: 1440345539:0;rm dist
-: 1440345555:0;ls
-: 1440345557:0;ls dist
 : 1440345564:0;rm dist
 : 1440345587:0;electron-packager . ProjectionPhoto --out=dist --ignore='^/dist$' --platform=all --arch=all --prune --version=0.30.4 --overwrite
 : 1440345612:0;./dist/ProjectionPhoto-linux-x64/ProjectionPhoto
@@ -5508,12 +5310,6 @@ EOF
 : 1440346195:0;gimp
 : 1440346260:0;subl projection-photo-slideshow.json
 : 1440346314:0;cd dist
-: 1440346315:0;ls
-: 1440346316:0;open .
-: 1440346858:0;df -h
-: 1440369982:0;npm i -g wat
-: 1440392413:0;wat
-: 1440392489:0;yaourt -Syu
 : 1440393558:0;nvidia-settings -q dpys
 : 1440393580:0;sudo modprobe -r i2c-dev
 : 1440393588:0;sudo modprobe i2c-dev
@@ -5569,15 +5365,7 @@ EOF
 : 1440448301:0;rm ~/.atom/packages/adwaita-pro-ui
 : 1440448333:0;mv adwaita-pro-ui ../repos/git/atom-adwaita-pro-ui
 : 1440448340:0;cd ../repos/git/atom-adwaita-pro-ui
-: 1440448340:0;git st
-: 1440448348:0;gi tst
-: 1440448352:0;git diff
 : 1440448360:0;git stashed pull --rebase
-: 1440448365:0;git st
-: 1440448367:0;git show
-: 1440448374:0;git push
-: 1440448384:0;apm link .
-: 1440448394:0;hub browse
 : 1440448440:0;cd ../../gtksrc/gtk-3.16.2/
 : 1440448519:0;find . -name '*.less'
 : 1440448531:0;find . -name '*.sass'
@@ -5597,13 +5385,6 @@ EOF
 : 1440449238:0;curl -L 'http://ftp.gnome.org/pub/gnome/sources/gtk+/3.17/gtk+-3.17.7.tar.xz' | tar -xJf- .
 : 1440449276:0;curl -L 'http://ftp.gnome.org/pub/gnome/sources/gtk+/3.17/gtk+-3.17.7.tar.xz' | tar -xJf-
 : 1440449399:0;cd gtk+
-: 1440449401:0;git pull
-: 1440449403:0;..
-: 1440449404:0;ls
-: 1440449413:0;cd gtk+-3.17.7
-: 1440449413:0;ls
-: 1440449566:0;git pull
-: 1440449592:0;git tag
 : 1440449650:0;cd gtk+-3.17.7
 : 1440449652:0;find . -name '*.scss'
 : 1440449837:0;/mnt/Peng/Jordan/Code/repos/git/atom-adwaita-pro-ui
@@ -6474,7 +6255,6 @@ done
 : 1440624441:0;ls niftykb-teamspeak-mirror
 : 1440624446:0;rm niftykb-teamspeak-mirror
 : 1440624451:0;rm niftykb-teamspeak-mirror.bfg-report
-: 1440624453:0;ls sandbox
 : 1440624464:0;mv sandbox ../../hacking-niftykb
 : 1440624470:0;echo *(#q+ngit)
 : 1440626405:0;find / -type l
@@ -6709,7 +6489,6 @@ done
 : 1440788335:0;cat /etc/sane.d/canon.conf
 : 1440788349:0;cat /etc/sane.d/dll.d
 : 1440788356:0;cat /etc/sane.d/dll.conf
-: 1440788458:0;echo $PATH
 : 1440788465:0;zsh -c "echo $PATH"
 : 1440788734:0;npm ls
 : 1440788774:0;npm explore npm
@@ -6961,9 +6740,20 @@ done
 : 1441055335:0;ls js
 : 1441055665:0;html2jade -h
 : 1441055735:0;html2jade gallery.html -o src
+: 1441055737:0;git st
+: 1441055739:0;git diff
+: 1441056149:0;git add src
+: 1441056149:0;git st
 : 1441056155:0;git add .
+: 1441056156:0;git st
 : 1441056161:0;git reset css
+: 1441056162:0;git st
+: 1441056172:0;git checkout -b tmp
 : 1441056175:0;git commit -m tmp
+: 1441056176:0;git st
+: 1441056180:0;git checkout -
+: 1441056181:0;git st
+: 1441056190:0;html2jade *.html -o src
 : 1441056193:0;mkdir src
 : 1441056209:0;git add css
 : 1441056221:0;git checkout *.html
@@ -6986,7 +6776,17 @@ done
 : 1441058543:0;mv templates/main.jade src/templates/
 : 1441058550:0;jade --help
 : 1441058575:0;jade -w 'src/*.jade' -o .
+: 1441058582:0;jade -w src/*.jade -o .
+: 1441060203:0;git st
+: 1441060205:0;git add -p
 : 1441060271:0;q
+: 1441060273:0;git add -p
+: 1441060366:0;git st
+: 1441060367:0;git add -p
+: 1441060371:0;git st
+: 1441060373:0;git reset
+: 1441060374:0;git add -p
+: 1441060386:0;git st
 : 1441060391:0;git add src/templates/main.jade
 : 1441066620:0;gg 'shadow'
 : 1441066624:0;gg 'shadow-title'
@@ -7085,6 +6885,8 @@ iframe(src='
 : 1441087335:0;cd /e/slowsystem/ProgFilesx86_Steam_steamapps/common/Team\ Fortress\ 2/tf/download
 : 1441087338:0;cd maps
 : 1441087341:0;curl -OL http://fakkelbrigade.eu/maps/cp_sunshine_rc8.bsp
+: 1441087834:0;cd /e/slowsystem/ProgFilesx86_Steam_steamapps/common/Team\ Fortress\ 2/tf/cfg/; tf2-cool-faces sayface.cfg
+: 1441130548:0;apm update
 : 1441130552:0;yaourt -Syua
 : 1441154657:0;yaourt -Ss mionix
 : 1441161910:0;chmod 755 .
@@ -7190,7 +6992,10 @@ iframe(src='
 : 1441305223:0;xinput list | sed -En 's/.*Laview Technology Mionix Avior 7000.*id=([0-9]+) .*pointer/\1/p'|xargs -n1 -i_ xinput --set-prop _ 'Device Accel Constant Deceleration' 2.1
 : 1441314387:0;ps -AF|grep nuvo
 : 1441314437:0;yaourt -SYu
+: 1441314438:0;yaourt -Syu
+: 1441314449:0;yaourt -Sua
 : 1441314473:0;yaourt -Ss nuvola
+: 1441314484:0;yaourt -S nuvolaplayer-git
 : 1441314516:0;yaourt -S diorite-git
 : 1441314597:0;yaourt -U /tmp/yaourt-tmp-forivall/nuvolaplayer-git-2015.08.31.b1fe746-1-x86_64.pkg.tar.xz
 : 1441314615:0;yaourt -Ss rdio
@@ -7203,6 +7008,7 @@ iframe(src='
 : 1441314778:0;yaourt -S atom-editor-bin
 : 1441315017:0;yaourt -Ss flash
 : 1441315027:0;yaourt -R flashplugin
+: 1441315070:0;yaourt -Qs flash
 : 1441315085:0;yaourt -Ss pepper
 : 1441315089:0;yaourt -Qs pepper
 : 1441315096:0;yaourt -Qs wrapper
@@ -7362,7 +7168,11 @@ iframe(src='
 : 1441393679:0;git checkout -b 'fix-transparent-drag-bg'
 : 1441393717:0;git push -u origin fix-transparent-drag-bg
 : 1441393725:0;git push -u forivall fix-transparent-drag-bg
+: 1441393730:0;hub browse
+: 1441393967:0;git st
 : 1441393981:0;git checkout drag-and-drop-root
+: 1441393983:0;gitst
+: 1441393983:0;git st
 : 1441393994:0;git merge fix-transparent-drag-bg
 : 1441395962:0;mv dir5/dir3 .
 : 1441395973:0;mv dir*/dir* .
@@ -7423,73 +7233,39 @@ iframe(src='
 : 1441604209:0;mv *.png sites/all/themes/cand2015/assets/asset--nav-branding-bg/images/
 : 1441604268:0;mkdir -p sites/all/themes/cand2015/assets/asset--candidate-nav-tmndp-branding/images/
 : 1441604287:0;mv sites/all/themes/cand2015/assets/asset--nav-branding-bg/images/^TopBar.png sites/all/themes/cand2015/assets/asset--candidate-nav-tmndp-branding/images/
-: 1441604333:0;ls
-: 1441604348:0;pwd|clip
 : 1441604353:0;mkdir chrome-saved
-: 1441604381:0;ls
-: 1441604383:0;cd chrome-saved
-: 1441604396:0;..
-: 1441604396:0;ls
 : 1441604404:0;mkdir firefox-saved
 : 1441604413:0;mv front_page* sites firefox-saved
-: 1441604414:0;ls
-: 1441604417:0;cd chrome-saved
-: 1441604417:0;ls
-: 1441604421:0;cd chrome-saved
-: 1441604423:0;python -m http.server
-: 1441604455:0;ls
-: 1441604462:0;atom -n .
 : 1441604467:0;atom -n ..
-: 1441658143:0;ls
-: 1441658155:0;ksuperkey
-: 1441658175:0;killall ksuperkey
 : 1441658176:0;ksuperkey
 : 1441658187:0;yaourt -Ss ksuperkey
-: 1441658545:0;ps -FC ksuperkey
-: 1441658631:0;killall ksuperkey
-: 1441658632:0;ps -FC ksuperkey
 : 1441658654:0;ksuperkey -e 'Control_L=A'
-: 1441658666:0;killall ksuperkey
 : 1441658672:0;ksuperkey -e 'Super_L=A'
-: 1441658700:0;sudo dkms autoinstall -k $(uname -r)
-: 1441658716:0;sudo modprobe hid-lg-g710-plus
-: 1441658737:0;dkms --help
-: 1441658753:0;dkms status
 : 1441658772:0;sudo dkms remove 
 : 1441658793:0;sudo dkms remove hid-azio-lv-mech5/r12.9a8289c --all
 : 1441658837:0;dkms status
 : 1441658853:0;sudo dkms remove hid-lg-g710-plus/r19.ecd2099 --all
 : 1441658877:0;lsmod
 : 1441658879:0;lsmod|grep hid
-: 1441658890:0;yaourt -Syu
 : 1441658952:0;mhwd-gpu --help
 : 1441658955:0;mhwd-gpu --status
 : 1441658974:0;sudo dkms autoinstall -k $(uname -r)
 : 1441658979:0;sudo dkms status
-: 1441658983:0;uname -r
 : 1441658988:0;sudo dkms autoinstall
 : 1441659001:0;sudo dkms help
 : 1441659005:0;dkms --help
-: 1441659032:0;sudo dkms install hid-lg-g710-plus/r19.ecd2099
 : 1441659061:0;sudo dkms install hid-azio-lv-mech5/r12.9a8289c
 : 1441659078:0;sudo modprobe hid-lg-g710-plus
 : 1441659087:0;sudo modprobe hid-azio-lv-mech5
 : 1441659099:0;sudo ~/code/repos/git@forivall/azio-levetron-mech5-linux-driver/misc/rebind.sh
-: 1441659113:0;sudo ~/code/repos/git/logitech-g710-linux-driver/misc/rebind.sh
-: 1441659124:0;ps -FC ksuperkey
 : 1441659142:0;killall ksuperkey
 : 1441659162:0;xev
 : 1441659479:0;ps -FC ksuperkey
 : 1441659704:0;nuvolaplayer3 --help
 : 1441659716:0;nuvolaplayer3ctl -h
 : 1441659728:0;nuvolaplayer3
-: 1441659769:0;bg
-: 1441659771:0;disown %nuvolaplayer3
 : 1441659815:0;nuvolaplayer3 -a rdio
-: 1441659822:0;bg
 : 1441659823:0;disown %nuvolaplayer3
-: 1441659874:0;apm update
-: 1441660416:0;python -m http.server
 : 1441660662:0;pip install git+git://github.com/NamPNQ/SimpleJinjaServer
 : 1441660667:0;sudo pip install git+git://github.com/NamPNQ/SimpleJinjaServer
 : 1441660693:0;python -m SimpleJinjaServer
@@ -7497,48 +7273,16 @@ iframe(src='
 : 1441660721:0;sudo pip2 install git+git://github.com/NamPNQ/SimpleJinjaServer
 : 1441660728:0;python2 -m SimpleJinjaServer
 : 1441660736:0;python2 -m SimpleJinjaServer -p 8000
-: 1441660742:0;python2 -m SimpleJinjaServer 8000
 : 1441660913:0;apm search jinja
 : 1441660929:0;apm install atom-jinja2
-: 1441660982:0;ls
 : 1441660986:0;ln -s ../post_content.html
 : 1441661316:0;ln -s ../front-page-custom-inject.js
 : 1441662680:0;ln -s ../front-page-custom.css
-: 1441666752:0;..
-: 1441666752:0;git st
-: 1441666757:0;git init
-: 1441666758:0;git st
 : 1441666785:0;git add front-page-custom*
 : 1441666788:0;git add post_content.html
-: 1441666788:0;git st
-: 1441666792:0;git commit
-: 1441666799:0;git st
-: 1441667122:0;git add -p
 : 1441667124:0;giut st
-: 1441667125:0;git st
-: 1441667126:0;git commit
-: 1441667134:0;git st
 : 1441670286:0;python2 -m SimpleJinjaServer 8000
-: 1441670308:0;git st
-: 1441670309:0;git diff
-: 1441670311:0;git stash save
-: 1441670313:0;git st
 : 1441670315:0;git shwo
-: 1441670316:0;git show
-: 1441670385:0;git stash pop
-: 1441671313:0;git st
-: 1441671315:0;git add -p
-: 1441671322:0;git st
-: 1441671323:0;git commit
-: 1441671332:0;git st
-: 1441671825:0;git add -p
-: 1441671829:0;git st
-: 1441671831:0;git commit
-: 1441671837:0;git st
-: 1441672036:0;git add -p
-: 1441672039:0;git st
-: 1441672040:0;git commit
-: 1441672043:0;git st
 : 1441672228:0;systemctl --user start btsync.service
 : 1441672239:0;yaourt -Ql btsync
 : 1441672251:0;cat ~/.config/btsync/btsync.conf
@@ -7549,628 +7293,231 @@ iframe(src='
 : 1441672529:0;yaourt -S syncthing syncthing-gtk
 : 1441672638:0;sudo systemctl --user enable syncthing
 : 1441672644:0;systemctl --user enable syncthing
-: 1441672651:0;rehash
 : 1441672659:0;systemctl --user start syncthing.service
-: 1441672665:0;syncthing-gtk
 : 1441672676:0;ls -l Sync
-: 1441672678:0;cd
 : 1441672681:0;ls -ld Sync
 : 1441672728:0;it st
-: 1441672729:0;git st
 : 1441672776:0;git remote -add
 : 1441672785:0;git remote --add origin git@github.com:forivall-old-repos/ndp-masonry-2015.git
 : 1441672788:0;git remote add origin git@github.com:forivall-old-repos/ndp-masonry-2015.git
-: 1441672789:0;git st
 : 1441672812:0;git push -u origin master:gh-pages
-: 1441672817:0;git st
 : 1441672830:0;git add chrome-saved
-: 1441672830:0;git st
-: 1441672833:0;git commit
-: 1441672844:0;gitst
-: 1441672845:0;git st
-: 1441672848:0;ls
-: 1441672858:0;cd chrome-saved
 : 1441672866:0;git mv index.html index.jinja.html
-: 1441672871:0;ls
-: 1441672912:0;git st
 : 1441672918:0;git add index.html 
-: 1441672919:0;git st
-: 1441672920:0;git commit
-: 1441672927:0;git st
-: 1441672929:0;git push
 : 1441672936:0;git push origin HEAD:origin/gh-pages
-: 1441672939:0;git st
 : 1441672951:0;git push origin HEAD:gh-pages
-: 1441672955:0;git push -u origin HEAD:gh-pages
-: 1441673118:0;ls
 : 1441673120:0;ls front-page-custom
 : 1441673125:0;ls -l .
-: 1441673155:0;git st
 : 1441673159:0;touch .nojekyll
-: 1441673160:0;git st
 : 1441673162:0;git add .nojekyll
-: 1441673163:0;git st
-: 1441673166:0;git commit
-: 1441673176:0;git st
 : 1441673178:0;git push -u origin HEAD:gh-pages
-: 1441673183:0;git st
-: 1441673210:0;ls
-: 1441673211:0;..
-: 1441673212:0;ls
-: 1441673212:0;git st
-: 1441673491:0;yaourt -Ss qr
 : 1441673499:0;yaourt -S qtqr
 : 1441673573:0;qtqr
 : 1441673624:0;yaourt -Ss qt
 : 1441673626:0;yaourt -Ss qr
-: 1441687360:0;git st
 : 1441687371:0;git add .nojekyll ../.nojekyll
-: 1441687371:0;git st
-: 1441687580:0;pwd|clip
-: 1441687635:0;git st
-: 1441687636:0;git diff
-: 1441687659:0;gi tst
-: 1441687660:0;git st
-: 1441687707:0;git add -p
-: 1441687713:0;git st
-: 1441687714:0;..
-: 1441687715:0;git st
-: 1441687725:0;git add custom.js
-: 1441687726:0;git st
 : 1441687729:0;rm chrome-saved/custom.js
-: 1441687729:0;git st
-: 1441687937:0;cd chrome-saved
-: 1441687946:0;python -m http.server
 : 1441688007:0;cd sites/default/files/multisite/648138/IMCE
 : 1441688025:0;ln -s ../../../../../../../custom.js custom.js.txt
-: 1441688049:0;cd
-: 1441688050:0;git st
 : 1441688057:0;git add chrome-saved/sits
 : 1441688059:0;git add chrome-saved/sites/
-: 1441688060:0;git st
-: 1441688061:0;git add -p
-: 1441688086:0;gti st
-: 1441688086:0;git st
 : 1441688104:0;ls -ld custom.js
-: 1441688120:0;git add -p
-: 1441688122:0;git st
 : 1441688140:0;git rm --cached front-page-custom-inject.js
-: 1441688141:0;git st
-: 1441688146:0;git add -p
-: 1441688157:0;git st
 : 1441688164:0;git checkout chrome-saved/front-page-custom.css
-: 1441688164:0;git st
 : 1441688168:0;git checkout chrome-saved/post_content.html
-: 1441688169:0;git st
 : 1441688180:0;git ignore '/firefox-saved'
-: 1441688181:0;git st
-: 1441688185:0;git add .gitignore
-: 1441688186:0;git st
-: 1441688200:0;git store-untracked-files
-: 1441688200:0;git st
 : 1441688207:0;ls -ld chrome-saved/front-page-custom.
 : 1441688209:0;ls -ld chrome-saved/front-page-custom.js
 : 1441688222:0;git rm chrome-saved/front-page-custom.js
 : 1441688225:0;rm chrome-saved/front-page-custom.js
-: 1441688226:0;git st
-: 1441688230:0;git commit
-: 1441688234:0;git st
-: 1441688236:0;git push
-: 1441688241:0;git checkout --detach
 : 1441688248:0;git branch -m master gh-pages
 : 1441688251:0;git checkout gh-pages
-: 1441688251:0;gi tst
-: 1441688252:0;git push
-: 1441688345:0;ls
-: 1441688347:0;cd chrome-saved
 : 1441688353:0;curl -OL http://everywhere0.ndp.ca/everywhere.js\?BBB
-: 1441688354:0;ls
 : 1441688359:0;mv everywhere.js\?BBB everywhere.js
-: 1441688360:0;ls
 : 1441688391:0;curl -L http://amandeepnijjar.ndp.ca/sites/default/files/js/js_39YKOs1XoxoN4xMfHspOK3oTfsKBy-KoT_cCqFwPDKY.js -o candidate-front-page.js
-: 1441688396:0;git st
 : 1441688399:0;git add candidate-front-page.js
-: 1441688400:0;gi tst
-: 1441688757:0;..
-: 1441688766:0;echo '{}' > package.json
 : 1441688770:0;npm i proxrox
 : 1441688786:0;npm i -g proxrox
-: 1441688840:0;proxrox
 : 1441688848:0;proxrox install
 : 1441688908:0;yaourt -Ss nginx
 : 1441688912:0;yaourt -S nginx
 : 1441688918:0;proxrox
-: 1441688922:0;proxrox start
 : 1441688941:0;cat /tmp/proxrox/51d3fd79-08a0-4bb0-bc9a-896822778a91
 : 1441688946:0;ls /tmp/proxrox/51d3fd79-08a0-4bb0-bc9a-896822778a91
-: 1441688956:0;proxrox stop
-: 1441688967:0;pwd|clip
 : 1441688982:0;atom .proxrox.yml
-: 1441689051:0;rehash
 : 1441689062:0;proxrox start .proxrox.yml
-: 1441689069:0;proxrox stop
-: 1441689085:0;proxrox start .proxrox.yaml
 : 1441689117:0;tail -f /tmp/proxrox/09105085-ac06-4f5e-9885-df761b4fbb27/logs/*
 : 1441689128:0;cat /tmp/proxrox/09105085-ac06-4f5e-9885-df761b4fbb27/nginx.conf
-: 1441689175:0;proxrox stop
-: 1441689176:0;ls
 : 1441689190:0;proxrox start
-: 1441689195:0;proxrox stop
 : 1441689208:0;proxrox start .proxrox.yaml
 : 1441689340:0;tail -f /tmp/proxrox/efaf5dca-69fc-478f-8ffa-4e02c9a80e79/logs
-: 1441689350:0;dmesg -w
-: 1441689356:0;proxrox stop
 : 1441689364:0;proxrox -v start .proxrox.yaml
-: 1441689470:0;ls
 : 1441689475:0;cat .proxrox.yaml
 : 1441689687:0;npm i express-http-proxy --save
 : 1441689763:0;npm i --save express
 : 1441689774:0;atom test-server.js
-: 1441689941:0;babel-node test-server.js
-: 1441689960:0;node
-: 1441690024:0;babel-node test-server.js
 : 1441690048:0;proxrox stop
-: 1441690051:0;babel-node test-server.js
 : 1441690089:0;lsof
 : 1441690095:0;lsof|grep 8000
 : 1441690111:0;lsof 8000
 : 1441690123:0;netstat|grep 8000
 : 1441690128:0;netstat
-: 1441690148:0;babel-node test-server.js 8001
-: 1441690179:0;node
 : 1441690188:0;babel-node test-server.js 8001
 : 1441690242:0;babel-node test-server.js
-: 1441692952:0;git st
-: 1441692954:0;git add -p
-: 1441692977:0;git st
 : 1441692980:0;git diff custom.js
 : 1441692983:0;git checkout custom.js
-: 1441692983:0;git st
-: 1441692990:0;git add -p
-: 1441692995:0;git checkout chrome-saved/
-: 1441692995:0;git st
 : 1441693001:0;git add package.json test-server.js
 : 1441693010:0;git ignore '/node_modules'
-: 1441693011:0;git sxt
-: 1441693012:0;git st
-: 1441693111:0;git add -p
-: 1441693114:0;git st
-: 1441693115:0;git commit
-: 1441693149:0;git st
-: 1441693155:0;git push
-: 1441693158:0;git st
 : 1441693635:0;git add .proxrox.yaml
-: 1441693636:0;git st
-: 1441693641:0;git checkout chrome-saved/
-: 1441693642:0;git st
-: 1441693659:0;git commit
-: 1441693665:0;git st
-: 1441693666:0;git push
-: 1441694541:0;git st
-: 1441694544:0;git diff
-: 1441694587:0;git add -p
-: 1441694591:0;git st
-: 1441694594:0;git checkout .
-: 1441694594:0;git st
-: 1441695070:0;git add -p
-: 1441695079:0;git st
-: 1441695080:0;git commit
-: 1441695179:0;git st
-: 1441695189:0;git add -p
-: 1441695195:0;git st
-: 1441695201:0;git reset
-: 1441695220:0;git checkout -p HEAD^ -- custom.js
-: 1441695227:0;git st
-: 1441695229:0;git diff
 : 1441695240:0;git reset -p custom.js
-: 1441695242:0;git st
-: 1441695249:0;git stash save
 : 1441695254:0;git checkout -p HEAD^ -- custom.js
-: 1441695257:0;gi tst
-: 1441695261:0;git reset
-: 1441695261:0;git st
-: 1441695263:0;git add -p
-: 1441695269:0;git st
 : 1441695272:0;git add custom.js
-: 1441695274:0;git commit --amend
-: 1441695278:0;git st
-: 1441695299:0;git stash pop
-: 1441695301:0;git st
-: 1441695397:0;git add -p
-: 1441695399:0;git st
-: 1441695400:0;git commit
-: 1441695408:0;git st
-: 1441695408:0;git push
-: 1441696947:0;kdeconnect-send http://amandeepnijjar.ndp.ca/our-riding
-: 1441698945:0;ls
-: 1441698946:0;..
-: 1441698946:0;ls
 : 1441698961:0;inkscape 59040.pdf
-: 1441699029:0;ls
-: 1441699070:0;open .
-: 1441699143:0;yaorut -Ss svg
-: 1441699149:0;yaourt -Ss svg
 : 1441699157:0;yaourt -S svgcleaner
-: 1441699193:0;rehash
 : 1441699195:0;svgcleaner-
 : 1441699197:0;svgcleaner-gui
 : 1441699271:0;open vancouver-south-riding-map_cleaned.svg
-: 1441699367:0;open .
 : 1441699525:0;syncthing-gtk
 : 1441699795:0;kdeconnect-send http://amandeepnijjar.ndp.ca/sites/default/files/multisite/648138/IMCE/vancouver-south-riding-map.svg
 : 1441701540:0;kdeconnect-send http://amandeepnijjar.ndp.ca/our-riding
 : 1441705630:0;ps -AF|grep goog
-: 1441705642:0;ps -FC chrome
-: 1441705648:0;killall chrome
-: 1441705651:0;ps -FC chrome
-: 1441705743:0;killall chrome
 : 1441705744:0;ps -FC chrome
-: 1441745369:0;cd
-: 1441745373:0;cd 
-: 1441745378:0;cd ../tacoscript-ast-playground
-: 1441745379:0;git st
-: 1441745380:0;git diff
-: 1441745389:0;npm start
-: 1441745583:0;gi tst
-: 1441745585:0;git fetch
-: 1441745587:0;git fetch upstream
-: 1441745590:0;git st
-: 1441745591:0;git la
-: 1441745625:0;git l3 --all
-: 1441746514:0;git st
-: 1441746516:0;git add -p
-: 1441746517:0;git st
-: 1441746519:0;git add -p src
-: 1441746523:0;git st
-: 1441746524:0;git commit
-: 1441746548:0;git st
-: 1441746549:0;git push
-: 1441746576:0;git st
-: 1441746582:0;git add -p
-: 1441746587:0;git st
-: 1441746589:0;git commit
-: 1441746596:0;git st
-: 1441746597:0;git push
-: 1441746707:0;apm update
-: 1441746719:0;yaourt -Syu
 : 1441746819:0;apm home project-manager
-: 1441761553:0;..
-: 1441761554:0;ls
-: 1441761557:0;..
-: 1441761558:0;ls
 : 1441761564:0;cd ndp/masonry-front-page-inject
-: 1441761565:0;ls
-: 1441761565:0;git st
-: 1441761567:0;git diff
 : 1441761582:0;git checkout -b 'custom-everywhere'
-: 1441761583:0;git st
 : 1441761586:0;git add chrome-saved/
-: 1441761586:0;git st
-: 1441761588:0;git commit
-: 1441761604:0;git st
-: 1441761610:0;git checkout -
-: 1441761610:0;git st
-: 1441761614:0;gi tst
-: 1441761617:0;open .
-: 1441761639:0;git st
 : 1441761643:0;cd chrome-saved
-: 1441761644:0;ls
-: 1441761644:0;git st
 : 1441761650:0;mv Amandeep\ Nijjar\ for\ Vancouver\ South\ Â«\ Canada\'s\ NDP.html index.html
-: 1441761651:0;git st
-: 1441761653:0;git add -p
-: 1441761664:0;atom -n .
-: 1441761693:0;git st
-: 1441761695:0;git add -p
-: 1441761703:0;git st
-: 1441761707:0;git commit
-: 1441761722:0;git show
-: 1441761764:0;ls
-: 1441761794:0;..
-: 1441761794:0;ls
-: 1441761797:0;npm start
-: 1441762088:0;git st
-: 1441762093:0;git log
 : 1441762103:0;git show 66edb0c555323077782af25d2784bedeeda1a99d
 : 1441762115:0;git log chrome-saved/
 : 1441762120:0;git show 525cb7d7b3bd198a744d0e5531c94afd14ca8597
-: 1441762157:0;git st
-: 1441762160:0;git add -p
-: 1441762163:0;git st
-: 1441762165:0;git commit
-: 1441762171:0;git st
-: 1441762175:0;ls
 : 1441762265:0;git mv custom.js init.js
-: 1441762266:0;git st
-: 1441762277:0;ls
 : 1441762281:0;mkdir client
 : 1441762406:0;git mv init.js client/
-: 1441762406:0;git st
 : 1441762419:0;npm i -g browserify
-: 1441762458:0;npm run client-build
 : 1441762539:0;npm i --save twitter-text
-: 1441762566:0;npm run client-build
-: 1441762596:0;nesh -b
 : 1441762851:0;killall tsclient
 : 1441762860:0;ps -AF|grep ts
-: 1441762864:0;ps -AF|grep ts3
 : 1441762873:0;killall ts3client_linux_amd64
 : 1441762876:0;ps -AF|grep ts3
 : 1441762882:0;sudo systemctl reboot
 : 1441789131:0;cd /e/slowsystem/ProgFilesx86_Steam_steamapps/common/Team\ Fortress\ 2/tf/cfg/; tf2-cool-faces sayface.cfg
-: 1441827862:0;~/.config/autostart-scripts/set-mouse-accel.sh
-: 1441828199:0;apm update
-: 1441828201:0;yaourt -Syu
 : 1441828215:0;fg
-: 1441828219:0;yaourt -Sua
 : 1441828246:0;yaourt -S shellcheck python2-pyparted memtest86-efi
 : 1441828325:0;yaourt -U /tmp/yaourt-tmp-forivall/python2-pyparted-3.10.7-1-x86_64.pkg.tar.xz
 : 1441828331:0;yaourt -S shellcheck
-: 1441828333:0;yaourt -Syu
-: 1441830368:0;cd code/repos/git
 : 1441830371:0;git clone git@github.com:daylerees/colour-schemes.git
 : 1441830485:0;cd base16-builder
-: 1441830485:0;ls
-: 1441830486:0;git st
-: 1441830488:0;git la
-: 1441830497:0;git fetch
-: 1441830499:0;git fetch upstream
-: 1441830501:0;git la
-: 1441830507:0;ls
-: 1441830510:0;ls schemes
-: 1441830523:0;git la
-: 1441830528:0;git l3 --all
-: 1441830541:0;git fetch upstream
-: 1441830546:0;hub browse
-: 1441830555:0;git l3 --all
-: 1441830655:0;ls
 : 1441830659:0;cat README.md
 : 1441830669:0;./base16 
-: 1441830746:0;git st
 : 1441830758:0;git remote add up-to-date git@github.com:xHN35RQ/base16-builder.git
 : 1441830761:0;git fetch up-to-date
 : 1441830770:0;git merge up-to-date/master
-: 1441830774:0;git st
-: 1441830777:0;./base16
-: 1441831038:0;ls
 : 1441831041:0;kate .
 : 1441831052:0;kate --help
-: 1441831065:0;atom -n .
 : 1441831124:0;atom -n ../colour-schemes
-: 1441831194:0;..
 : 1441831196:0;git clone git@github.com:sickill/coloration.git
 : 1441831208:0;cd coloration
-: 1441831208:0;ls
 : 1441831215:0;gem install coloration
-: 1441831223:0;ls
 : 1441831236:0;cd ../base16-builder/output
-: 1441831237:0;ls
 : 1441831244:0;cd textmate
-: 1441831244:0;ls
-: 1441831255:0;rehash
 : 1441831266:0;tm2katepart base16-tomorrowday.light.tmTheme
-: 1441831267:0;ls
 : 1441831313:0;mkdir ../kate
 : 1441831324:0;mv base16-tomorrowday.light.txt ../kate
 : 1441831325:0;cd ../kate
-: 1441831325:0;ls
 : 1441831415:0;gedit ~/.config/katepartrc
 : 1441831431:0;gedit ~/.config/katerc
 : 1441831523:0;gedit ~/.config/
 : 1441834200:0;yaourt -Ss gimp-plugin-registry
 : 1441834204:0;yaourt -Ss gimp-plugin
 : 1441834226:0;yaourt -S gimp-plugin-fblur gimp-plugin-lqr
-: 1441838347:0;npm start
 : 1441838359:0;npm i --save-dev watchify
 : 1441838379:0;npm i -g watchify
-: 1441838411:0;npm start
-: 1441838505:0;git st
-: 1441838507:0;gi tla
 : 1441838511:0;git shwo 4e7b3fd
 : 1441838514:0;git show 4e7b3fd
-: 1441839750:0;npm start
 : 1441839844:0;watchify -v
 : 1441839852:0;browserify -v
 : 1441839856:0;browserify --verbose
 : 1441839889:0;watchify --verbose client/main.js -o custom.js
 : 1441839898:0;watchify client/main.js -o custom.js --verbose
-: 1441839915:0;npm start
-: 1441840747:0;git st
-: 1441840751:0;git diff
-: 1441840782:0;ls
-: 1441840785:0;npm start
-: 1441840816:0;ls
 : 1441840828:0;ls client
-: 1441840835:0;cd chrome-saved/sites/default/files/multisite/648138/IMCE
-: 1441840835:0;ls
 : 1441840848:0;ln -s ../../../../../../../xJs.js xJs.js.txt
-: 1441840860:0;cd
-: 1441840862:0;ls
 : 1441840895:0;ls chrome-saved/sites/default/files/multisite/648138/IMCE/xJs.js.txt
 : 1441840897:0;cat chrome-saved/sites/default/files/multisite/648138/IMCE/xJs.js.txt
-: 1441840908:0;npm start
-: 1441840921:0;git st
-: 1441840923:0;git add -p
-: 1441840932:0;y
-: 1441840933:0;git st
 : 1441840950:0;git add client/main.js
-: 1441840950:0;gi tst
-: 1441840952:0;git commit
-: 1441840967:0;git st
-: 1441841029:0;npm start
-: 1441841717:0;git st
-: 1441841722:0;git add -p
-: 1441841730:0;git st
-: 1441841752:0;git commit
-: 1441841764:0;git st
-: 1441841765:0;git push
-: 1441842289:0;ssh -i ./id_rsa -p 2222 sherbr5@biz82.inmotionhosting.com
-: 1441842294:0;..
 : 1441842298:0;cd smc
-: 1441842298:0;ls
-: 1441842301:0;ssh -i ./id_rsa -p 2222 sherbr5@biz82.inmotionhosting.com
 : 1441842424:0;ssh-add ./id_rsa
 : 1441842427:0;ssh -i ./id_rsa -p 2222 sherbr5@biz82.inmotionhosting.com
-: 1441843474:0;zgen update
 : 1441843495:0;cd /mnt/Peng/Jordan/Code/repos/git@forivall/dotfiles/plugins/git-ftp/
-: 1441843498:0;ls
-: 1441843500:0;cat git-ftp.plugin.zsh
-: 1441843502:0;git st
 : 1441843503:0;git diff .
-: 1441843508:0;git checkout .
-: 1441843508:0;git st
-: 1441843516:0;ls
 : 1441843520:0;rm git-ftp.plugin.zsh
 : 1441843524:0;git checkout git-ftp.plugin.zsh
-: 1441843529:0;ls
 : 1441843530:0;ls bin
 : 1441843537:0;cat git-ftp.plugin.zsh
-: 1441843582:0;gi tst
-: 1441843583:0;git st
-: 1441843588:0;atom -n .
 : 1441843599:0;git st .
-: 1441843601:0;git diff
-: 1441843606:0;gitst
-: 1441843607:0;gi tst
-: 1441843607:0;git st
 : 1441843613:0;git add git-ftp.plugin.zsh
-: 1441843614:0;git st
-: 1441843615:0;git commit
-: 1441843619:0;git st
-: 1441843637:0;install-or-update-git-ftp
 : 1441843650:0;yaourt -S pandoc
 : 1441843658:0;yaourt -Ss pandoc
 : 1441843673:0;yaourt -S pandoc-bin
 : 1441843742:0;install-or-update-git-ftp
 : 1441843750:0;man git-ftp
-: 1441843783:0;git st
 : 1441843863:0;kate ../../base16
 : 1441843921:0;kate ../../output/konsole/base16-tomorrowday.colorscheme
 : 1441844000:0;atom ../../../../../repos/git/atom-tomorrow-ya
 : 1441845189:0;open ../../output/konsole/base16-tomorrowday.html
 : 1441845231:0;open ../../output/*/*tomorrowday*.html
-: 1441845323:0;cd
-: 1441845325:0;./base16
 : 1441847182:0;atom -n ./base16
-: 1441848812:0;atom
 : 1441848822:0;atom --help
-: 1441848828:0;atom -w
 : 1441848869:0;atom -w --safe
 : 1441848990:0;atom -w
 : 1441849081:0;subl3
 : 1441849090:0;subl3 .
-: 1441861265:0;cd
 : 1441861269:0;cd code/ndp
-: 1441861269:0;ls
-: 1441861272:0;atom -n .
-: 1441861327:0;ls
-: 1441861330:0;cd masonry-front-page-inject
-: 1441861339:0;npm run client-build
-: 1441862722:0;..
 : 1441862724:0;git clone https://github.com/nojimage/twitter-text-php.git
 : 1441862734:0;git clone https://github.com/edburnett/twitter-text-python.git
 : 1441862741:0;npm i -g sloc
-: 1441862748:0;rehash
-: 1441862755:0;sloc twitter-text-php/lib
 : 1441862770:0;sloc twitter-text-python/ttp/^test.py
 : 1441862777:0;sloc twitter-text-python/ttp/^tests.py
 : 1441862784:0;sloc twitter-text-python/ttp/(^tests.py)
-: 1441862795:0;sloc twitter-text-python/ttp
-: 1441862804:0;sloc twitter-text-php/lib
 : 1441862806:0;sloc twitter-text-python/ttp
 : 1441862836:0;sloc twitter-text-python/ttp/tests.py
 : 1441862890:0;sloc twitter-text-python/ttp/{__init__.py,ttp.py,utils.py}
 : 1441862898:0;sloc twitter-text-python/ttp/__init__.py twitter-text-python/ttp/ttp.py twitter-text-python/ttp/utils.py 
 : 1441862901:0;sloc --help
-: 1441862923:0;sloc twitter-text-python/ttp -e 'test.*'
 : 1441862941:0;sloc twitter-text-php/lib
 : 1441862955:0;sloc twitter-text-php/lib/Twitter
-: 1441862959:0;sloc twitter-text-python/ttp -e 'test.*'
 : 1441862969:0;sloc twitter-text-php/
 : 1441862978:0;sloc twitter-text-php/tests
 : 1441862982:0;sloc twitter-text-python/ttp -e 'test.*'
-: 1441863629:0;nesh -b
-: 1441864204:0;ls
 : 1441864207:0;npm i --save nimble
-: 1441864428:0;nesh -b
 : 1441864690:0;npm i --save url-unshort
 : 1441864856:0;npm rm --save url-unshorten
 : 1441864869:0;npm i unshorten
 : 1441864877:0;npm ls unshorten
 : 1441864880:0;npm i --save unshorten
-: 1441865650:0;nesh -b
 : 1441866175:0;npm i najax
-: 1441866184:0;nesh -b
-: 1441866969:0;git st
-: 1441866972:0;git diff
-: 1441867138:0;ls
-: 1441867139:0;npm start
 : 1441867228:0;cd chrome-saved/sites/default/files/multisite/648138/IMCE
-: 1441867228:0;ls
-: 1441867232:0;ls -ld xjs.js.txt
 : 1441867253:0;ln -sf ../../../../../../../xjs.js xjs.js.txt
 : 1441867256:0;ls -ld xjs.js.txt
-: 1441867898:0;git st
-: 1441867901:0;cd
-: 1441867901:0;git st
 : 1441867916:0;git add chrome-saved/sites/default/files/multisite/648138/IMCE/xjs.js.txt
-: 1441867917:0;git st
-: 1441867920:0;git add -p
-: 1441867931:0;git st
-: 1441868009:0;gi tst
-: 1441868011:0;git commit
-: 1441868016:0;git s
 : 1441868109:0;npm i --save-dev uglifyify
-: 1441868209:0;npm run client-build-release
-: 1441868282:0;npm run release-qa
-: 1441868419:0;ls
-: 1441868429:0;du --apparent-size xjs.js
 : 1441868695:0;npm run client-build
 : 1441868699:0;du --apparent-size xjs.js
-: 1441868874:0;git st
-: 1441868876:0;git diff
-: 1441868905:0;git st
-: 1441868907:0;git diff
-: 1441868948:0;git st
-: 1441868972:0;npm run client-build-release
-: 1441869014:0;git st
-: 1441869020:0;git add -p
-: 1441869021:0;git st
-: 1441869023:0;git commit
-: 1441869028:0;git st
-: 1441869030:0;git push
-: 1441869829:0;npm start
-: 1441869884:0;git s
-: 1441869888:0;npm run client-build-release
-: 1441869894:0;npm run release-qa
-: 1441869922:0;gi tst
-: 1441871365:0;npm i -g wat
 : 1441871385:0;wat js array splice
 : 1441871405:0;wat length
 : 1441871443:0;wat guide
-: 1441871445:0;wat tour
 : 1441871457:0;rm -r /tmp/.wat
 : 1441871461:0;rmd -r /tmp/.wat
-: 1441871469:0;wat tour
 : 1441871482:0;ls /tmp/.wat
 : 1441871487:0;ls -l /tmp/.wat
 : 1441871516:0;npm -g rm wat
-: 1441871519:0;npm i -g wat
-: 1441871558:0;wat tour
 : 1441871565:0;exit
-: 1441871572:0;wat tour
-: 1441871600:0;npm rm -g wat
-: 1441871606:0;wat
-: 1441871608:0;npm i -g wat
-: 1441871625:0;wat tour
 : 1441871657:0;npm --version
 : 1441871659:0;wat --version
 : 1441871663:0;npm --all --version
 : 1441871668:0;node --version
 : 1441871673:0;node -v --version
 : 1441871675:0;npm -v --version
-: 1441871684:0;npm version
-: 1441871695:0;~
 : 1441871695:0;Â» wat
 : 1441871695:0;zsh: command not found: wat
 : 1441871695:0;~
@@ -8181,99 +7528,38 @@ iframe(src='
 : 1441871698:0;~ 12s
 : 1441871698:0;Â» wat tour
 : 1441871704:0;npm rm -g wat
-: 1441871709:0;cd
 : 1441871717:0;wat
 : 1441871718:0;npm i -g wat
 : 1441871737:0;wat tour
 : 1441871750:0;npm version
 : 1441871766:0;echo $ZSH_VERSION
-: 1441871807:0;uname -v
-: 1441871812:0;uname -a
 : 1441871824:0;uname
-: 1441871825:0;uname -r
-: 1441873270:0;gi tst
-: 1441873271:0;git st
-: 1441873460:0;df -h
-: 1441911193:0;ls
-: 1441911194:0;..
 : 1441911197:0;./base16 --help
 : 1441911209:0;./base16 -s tomorrow-day -t kate
-: 1441911220:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441911389:0;res
-: 1441911389:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441911658:0;mkdir output
-: 1441911659:0;git st
 : 1441911662:0;git checkout output/.gitkeep
-: 1441911663:0;git st
-: 1441911666:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441911723:0;pwd|clip
-: 1441911948:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441911958:0;pwd|clip
-: 1441912495:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441913658:0;git st
-: 1441913662:0;git add -p
-: 1441913686:0;git st
 : 1441913699:0;git add Tomorrow\ Day.kateschema templates/kate/-dark.kateschema.erb templates/kate/-light.kateschema.erb 
-: 1441913700:0;git st
-: 1441913703:0;git commit
-: 1441913710:0;git st
 : 1441914162:0;cd ../../kdesrc
-: 1441914162:0;ls
 : 1441914167:0;cd kate
-: 1441914167:0;git st
-: 1441914169:0;git fetch
-: 1441914171:0;git st
-: 1441914172:0;git pull
-: 1441914175:0;open .
-: 1441914538:0;cd "/mnt/Peng/Jordan/Code/repos/git/base16-builder/templates/kate"; echo -e -n '\0033\0143'
-: 1441914539:0;..
-: 1441914540:0;ls
-: 1441914544:0;..
-: 1441914544:0;ls
-: 1441914547:0;./base16 -s schemes/tomorrow-day.yml -t kate
 : 1441915325:0;irb
-: 1441915394:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441915597:0;open .
-: 1441915949:0;./base16 -s schemes/tomorrow-day.yml -t kate
 : 1441915955:0;cd "/mnt/Peng/Jordan/Code/repos/git/base16-builder/templates/kate"; echo -e -n '\0033\0143'
-: 1441915956:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441916801:0;ls
 : 1441916809:0;ls .config/katerc
 : 1441916813:0;cat .config/katerc
 : 1441916838:0;cat .config/katepartrc
 : 1441916848:0;rm .config/katepartrc
 : 1441916855:0;cat .config/katesyntaxhighlightingrc
-: 1441916865:0;rm .config/katesyntaxhighlightingrc
 : 1441916873:0;cat .config/katevirc
 : 1441916891:0;rm .config/katesyntaxhighlightingrc
 : 1441916945:0;strace kate
-: 1441917101:0;find .config -name '*kate*'
-: 1441917103:0;cd
 : 1441917105:0;find .config -name '*kate*'
 : 1441917118:0;rm .config/session/kate*
 : 1441917129:0;find .local -name '*kate*'
 : 1441917172:0;find /tmp -name '*kate*'
-: 1441917921:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441918783:0;./base16 -s schemes/tomorrow-day.yml -t preview
-: 1441918906:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441918966:0;./base16 -s schemes/tomorrow-day.yml -t preview
-: 1441918976:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1441921380:0;apm update
-: 1441921388:0;git st
-: 1441921390:0;git add -p
-: 1441921411:0;y
-: 1441921414:0;git st
-: 1441921416:0;git commit
-: 1441921432:0;git st
-: 1441921433:0;git push
 : 1441921540:0;apm install webbox-color
 : 1441921602:0;apm install pigments
 : 1441921917:0;atom --safe
 : 1441922039:0;apm help
 : 1441922063:0;subl ~/.atom/config.cson
-: 1441922073:0;apm list
 : 1441922078:0;apm list --json
-: 1441922083:0;apm list --help
 : 1441922086:0;apm list -b
 : 1441922091:0;apm list
 : 1441922094:0;apm list --help
@@ -8285,80 +7571,40 @@ iframe(src='
 : 1441925417:0;cd code
 : 1441925422:0;ls -ld ndp
 : 1441925428:0;chmod a-w ndp
-: 1441925428:0;ls
 : 1441925431:0;cd ndp
-: 1441925431:0;ls
-: 1441925436:0;cd masonry-front-page-inject
 : 1441925444:0;npm i truncate-url
-: 1441925458:0;nesh -b
-: 1441927010:0;yaourt -Syu
-: 1441927022:0;yaourt -Sua
 : 1441927837:0;cat ~/.config/chrome-beta-flags.conf
 : 1441927849:0;yaourt -Ql google-chrome-beta
-: 1441927860:0;vim ~/.config/chrome-beta-flags.conf
 : 1441927868:0;yaourt -Ql google-chrome-beta|grep conf
 : 1441927870:0;yaourt -Ql google-chrome-beta|grep flag
-: 1441927959:0;vim ~/.config/chrome-beta-flags.conf
 : 1441927981:0;ps -af|grep chrome
 : 1441927984:0;ps -AF|grep chrome
-: 1441927997:0;killall chrome
-: 1441928019:0;google-chrome-beta
-: 1441928025:0;killall chrome
 : 1441928026:0;google-chrome-beta
 : 1441928352:0;bg
 : 1441928353:0;disown %google-chrome-beta
-: 1441947813:0;dell-monitor-night
-: 1441947972:0;dell-monitor-evening
-: 1441948606:0;cd code/repos/git@forivall/dotfiles
-: 1441948621:0;..
 : 1441948626:0;atom atom-adwaita-pro-ui
 : 1441949383:0;atom ../git/atom-tomorrow-ya
 : 1441952221:0;./base16 -s schemes/tomorrow-day.yml -t example
-: 1441952292:0;./base16 -s schemes/tomorrow-day.yml -t preview
-: 1441953407:0;move-firefox-sharing-indicator-to-second-monitor
 : 1441953461:0;./colors16
 : 1441953465:0;./colors256
-: 1441953660:0;coffee
-: 1441955131:0;./base16 -s schemes/tomorrow-day.yml -t preview
-: 1442000675:0;dell-monitor-day
-: 1442003313:0;ls
 : 1442003337:0;cd code/repos/git/base16-builder
-: 1442003389:0;atom .
-: 1442004116:0;./base16 -s schemes/lch.yml -t preview
 : 1442004132:0;firefox output/preview/base16-lch.html
-: 1442005212:0;./base16 -s schemes/lch.yml -t preview
-: 1442006174:0;gi tst
-: 1442006185:0;./base16 -s schemes/lch.yml -t preview
 : 1442006191:0;git diff base16
 : 1442006265:0;./base16 -s schemes/lch.yml -t preview
 : 1442007805:0;kdeconnect-send http://www.churchschickenbc.ca/index.php/coupon-zone
-: 1442011728:0;apm update
-: 1442011731:0;yaourt -Syu
-: 1442011877:0;cd
-: 1442011891:0;./base16 -s schemes/tomorrow-day.yml -t preview
-: 1442014296:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442015224:0;..
-: 1442015226:0;cd -
-: 1442015230:0;..
 : 1442015232:0;git clone git@github.com:FeynCalc/feyncalc.git
 : 1442015260:0;kate feyncalc
-: 1442015416:0;./base16 -s schemes/tomorrow-day.yml -t kate
 : 1442015883:0;git clone git@github.com:pavan-or/IndustrialMathProgramming.git
 : 1442016018:0;git clone git@github.com:clientside/amplesdk.git
-: 1442016985:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442021609:0;node
 : 1442021753:0;coffee
 : 1442022284:0;cd ../../../sandbox
 : 1442022304:0;coffee -i cw.coffee
 : 1442022312:0;coffee --help
 : 1442022316:0;nesh --help
 : 1442022330:0;nesh -c -e cw.coffee
-: 1442022392:0;./base16 -s schemes/tomorrow-day.yml -t kate
 : 1442024861:0;./base16 -s schemes/tomorrow-day.yml -t preview
-: 1442026747:0;./base16 -s schemes/tomorrow-day.yml -t kate
 : 1442026915:0;dotfiles
 : 1442026920:0;atom zshrc
-: 1442028805:0;./base16 -s schemes/tomorrow-day.yml -t kate
 : 1442029746:0;systemctl list-units
 : 1442029750:0;systemctl list-unit-files
 : 1442029754:0;systemctl list-unit-files|grep qua
@@ -8370,325 +7616,105 @@ iframe(src='
 : 1442030042:0;yaourt -Ss irc
 : 1442030085:0;yaourt -S smuxi smuxi-server
 : 1442030113:0;smuxi
-: 1442030115:0;rehash
 : 1442030121:0;smuxi-frontend-gnome
 : 1442030396:0;cd ../../kdesrc/kate
-: 1442030397:0;ls
-: 1442030400:0;atom -n .
-: 1442030464:0;git st
-: 1442030475:0;git submodule init --recusive
-: 1442030479:0;git submodule update --init --recusive
 : 1442030503:0;git submodule list
 : 1442030507:0;git submodule --help
-: 1442030519:0;ls
 : 1442030527:0;git log --grep katepart
-: 1442030558:0;ls
 : 1442030566:0;git log -- part
 : 1442030579:0;git log --name-status -- part
 : 1442030603:0;git checkout bf6269cc925747cd7beb789b4e9f3ba908cb1f27^
-: 1442030622:0;ls
 : 1442030624:0;cd part
 : 1442030683:0;...
 : 1442030687:0;git clone git://anongit.kde.org/kparts.git
 : 1442030695:0;cd kparts
-: 1442030696:0;ls
-: 1442030698:0;ls src
-: 1442030744:0;git show bf6269cc925747cd7beb789b4e9f3ba908cb1f27
-: 1442030764:0;git checkout master
-: 1442030765:0;git st
-: 1442030766:0;git pull
-: 1442030768:0;gi tst
-: 1442030769:0;..
 : 1442030776:0;pwd
 : 1442030781:0;cd $PWD/..
 : 1442030796:0;cd ${PWD:h}
-: 1442030799:0;git st
-: 1442030802:0;ls
 : 1442030807:0;git show bf6269cc925747cd7beb789b4e9f3ba908cb1f27
 : 1442030820:0;git log -- ktexteditor
-: 1442030845:0;..
 : 1442030847:0;git clone git://anongit.kde.org/ktexteditor.git
 : 1442030923:0;atom ktexteditor
-: 1442031208:0;apm rm language-autohotkey
-: 1442033361:0;cd
-: 1442033365:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442043860:0;cd
-: 1442043863:0;yaourt -Syu
-: 1442043869:0;apm update
-: 1442043874:0;yaourt -Syu
 : 1442043912:0;yaourt -Sy
 : 1442043929:0;sudo echo
-: 1442043942:0;yaourt -Syu
-: 1442043955:0;apm update
-: 1442043958:0;cd
-: 1442043967:0;git st
-: 1442045081:0;dell-monitor-night
-: 1442045169:0;dell-monitor-evening
-: 1442045183:0;dell-monitor-night
-: 1442045225:0;type -f dell-monitor-night
 : 1442045233:0;type -fdell-monitor-night
 : 1442045235:0;type -f dell-monitor-night
 : 1442045261:0;vim ~/code/repos/git@forivall/dotfiles/plugins/oneliner/dell-monitor-night
-: 1442045276:0;dell-monitor-night
-: 1442048013:0;cd
-: 1442048015:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442054548:0;git st
 : 1442054556:0;git add templates/kate/preview.html.erb
 : 1442054561:0;git add templates/kate/README.md
-: 1442054561:0;git st
-: 1442054567:0;git add -p
 : 1442054604:0;gut st
-: 1442054605:0;git st
-: 1442054611:0;git add templates/kate/-light.kateschema.erb
-: 1442054612:0;git st
-: 1442054615:0;git add -p
-: 1442054623:0;git st
-: 1442054626:0;git commit
-: 1442054645:0;git st
-: 1442054646:0;git push
-: 1442054655:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442054675:0;./base16 -t kate
-: 1442127438:0;dell-monitor-evening
 : 1442128242:0;yaourt -Ss open-sans
 : 1442128245:0;yaourt -Ss open
 : 1442128248:0;yaourt -Ss ttf-open
 : 1442128257:0;yaourt -S ttf-opensans
-: 1442130182:0;dell-monitor-night
-: 1442196648:0;dell-monitor-twilight
-: 1442266089:0;apm update
-: 1442266091:0;yaourt -Syu
-: 1442266501:0;cd
-: 1442266511:0;yaourt -Syu
-: 1442266516:0;./base16
-: 1442266523:0;rm output/*
 : 1442266530:0;./base16 -t kate
 : 1442266535:0;rm output/*
-: 1442266540:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442270744:0;cd code/sandbox
 : 1442270752:0;git clone git://git.sisudoc.org/git/doc/sisu-markup-samples.git
-: 1442271220:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442271322:0;git st
-: 1442271323:0;git diff
-: 1442271349:0;git st
 : 1442271360:0;cp -dark.kateschema.erb -light.kateschema.erb
-: 1442271361:0;git st
 : 1442271370:0;cp --help
 : 1442271382:0;cp \\-dark.kateschema.erb \\-light.kateschema.erb
 : 1442271387:0;cp \-dark.kateschema.erb \-light.kateschema.erb
 : 1442271427:0;cp -T \-dark.kateschema.erb \-light.kateschema.erb
 : 1442271465:0;cp -- \-dark.kateschema.erb \-light.kateschema.erb
-: 1442271469:0;git st
-: 1442271479:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442272630:0;atom .
 : 1442273299:0;./base16 -s schemes/tomorrow-day.yml -t kate
-: 1442273460:0;git st
 : 1442273468:0;git add templates/kate/-light.kateschema.erb
-: 1442273468:0;gti st
-: 1442273473:0;git add -p
 : 1442273503:0;git add -p templates/preview/html.erb
-: 1442273508:0;git st
-: 1442273511:0;git commit
-: 1442273520:0;git st
 : 1442273527:0;cd templates/kate
-: 1442273528:0;git st
 : 1442273539:0;cp -- -light.kateschema.erb -dark.kateschema.erb
-: 1442273539:0;git st
 : 1442273593:0;git add -- -dark.kateschema.erb
-: 1442273594:0;git st
-: 1442273595:0;git commit
-: 1442273607:0;git st
-: 1442273629:0;ls
-: 1442273635:0;cd
-: 1442273637:0;ls
-: 1442273650:0;./base16 -s schemes/eighties.yml -t kate
 : 1442273690:0;open output/kate/base16-eighties.preview.html
-: 1442274320:0;./base16 -s schemes/eighties.yml -t kate
 : 1442274948:0;./base16 -s schemes/greenscreen.yml -t kate
-: 1442275056:0;git st
-: 1442275060:0;git add -p
-: 1442275098:0;git st
-: 1442275099:0;git commit
-: 1442275106:0;git st
-: 1442275174:0;git push
-: 1442275177:0;git la
-: 1442275186:0;git fetch origin
-: 1442275188:0;git st
-: 1442275193:0;git fetch upstream
-: 1442275204:0;git checkout upstream-master
-: 1442275205:0;git st
-: 1442275209:0;git stash save
-: 1442275210:0;git st
-: 1442275217:0;git checkout upstream-master
-: 1442275218:0;git st
-: 1442275222:0;git show
-: 1442275234:0;git checkout -
-: 1442275235:0;gi tst
 : 1442275249:0;git branch -m upstream-master roxterm
 : 1442275252:0;git show roxterm
-: 1442275300:0;git st
 : 1442275320:0;git push origin roxterm:roxterm
-: 1442275417:0;git remote -v
 : 1442275459:0;git checkout roxterm
-: 1442275460:0;git st
 : 1442275476:0;git checkout -b roxterm-xHN35RQ
 : 1442275484:0;git rebase up-to-date/master
-: 1442275485:0;git st
 : 1442275493:0;git push -u origin
 : 1442275500:0;git push -u origin roxterm-xHN35RQ
-: 1442275562:0;git st
-: 1442275603:0;git checkout upstream-master
-: 1442275605:0;git st
-: 1442275608:0;git la
-: 1442275627:0;gi tst
-: 1442275632:0;git checkout --detach
 : 1442275642:0;git push origin :upstream-master
 : 1442275652:0;git branch -d upstream-master
 : 1442275656:0;git checkout upstream-master
 : 1442275663:0;git checkout upstream-master upstream/master
 : 1442275681:0;git checkout -b upstream-master upstream/master
-: 1442275682:0;gi tst
-: 1442275685:0;git la
-: 1442275750:0;git store-untracked-files
-: 1442275752:0;git st
-: 1442275762:0;gi tst
-: 1442275763:0;git st
-: 1442275764:0;git la
 : 1442275779:0;git show b6204e1
-: 1442275784:0;git last b6204e1
-: 1442275791:0;git st
 : 1442275798:0;git checkout b6204e1 -- base16
-: 1442275799:0;git st
-: 1442275801:0;git diffc
-: 1442275928:0;git reset
-: 1442275930:0;git add -p
-: 1442275949:0;git st
-: 1442275950:0;git commit
-: 1442275973:0;git st
-: 1442275974:0;git commit
-: 1442275987:0;git reset HEAD^
-: 1442275988:0;git st
 : 1442275994:0;git checkout -b fix-mix-function
-: 1442275995:0;gi tst
-: 1442275999:0;git commit
-: 1442276001:0;git add -p
-: 1442276003:0;git st
-: 1442276004:0;git commit
-: 1442276040:0;git st
 : 1442276048:0;git push origin fix-mix-function
-: 1442276221:0;gi tst
-: 1442276222:0;git st
-: 1442276223:0;git la
 : 1442276346:0;git branch -m master kate-wip-area
-: 1442276348:0;git la
 : 1442276382:0;git push origin kate-wip-area:kate-wip-area
 : 1442276389:0;git push origin :master
-: 1442276392:0;gi tla
-: 1442276428:0;git st
-: 1442276461:0;git la
-: 1442276524:0;gi tst
-: 1442276525:0;git la
 : 1442276566:0;git checkout -b kate up-to-date/master
-: 1442276566:0;git st
-: 1442276568:0;git la
-: 1442276578:0;gi tst
-: 1442276579:0;git la
 : 1442276596:0;git last b6204e1
-: 1442276603:0;git la
 : 1442276693:0;git checkout kate-wip-area -- base16
-: 1442276696:0;git diffc
-: 1442276698:0;git la
 : 1442276713:0;git diff up-to-date/master kate-wip-area
-: 1442276720:0;git diff --name-status up-to-date/master kate-wip-area
-: 1442276772:0;git st
-: 1442276780:0;git diffc
-: 1442277008:0;git st
-: 1442277009:0;git reset
-: 1442277010:0;git st
-: 1442277011:0;git add -p
-: 1442277034:0;git st
-: 1442277041:0;git reset
-: 1442277041:0;git st
-: 1442277043:0;git add -p
-: 1442277076:0;git st
-: 1442277079:0;git commit
-: 1442277083:0;git st
-: 1442277091:0;git diff
-: 1442277098:0;git checkout .
-: 1442277099:0;git st
-: 1442277100:0;git la
-: 1442277104:0;git diff --name-status up-to-date/master kate-wip-area
-: 1442277113:0;git st
-: 1442277114:0;git store-untracked-files
-: 1442277115:0;git st
 : 1442277156:0;git checkout kate-wip-area -- templates/kate
-: 1442277157:0;gi tst
-: 1442277166:0;git st
-: 1442277178:0;git diff
-: 1442277356:0;git st
 : 1442277361:0;./base16 -s schemes/eighties.yml -t kate
-: 1442279128:0;git st
-: 1442279130:0;git add -p
-: 1442279133:0;y
-: 1442279135:0;git st
-: 1442279262:0;git la
-: 1442279285:0;git st
-: 1442279290:0;git commit
-: 1442279297:0;git st
 : 1442279310:0;git git st
-: 1442279312:0;git st
 : 1442279317:0;git pull --rebase
-: 1442279320:0;git st
 : 1442279332:0;git push -u origin kate
-: 1442279336:0;git st
 : 1442279431:0;git diff --name-status up-to-date/master kate-wip-area
-: 1442279453:0;git st
 : 1442279471:0;git checkout -b diffuse up-to-date/master
-: 1442279472:0;git st
 : 1442279495:0;git checkout kate-wip-area -- templates/diffuse
-: 1442279496:0;git st
-: 1442279498:0;git diffc
-: 1442279515:0;git st
-: 1442279516:0;git commit
-: 1442279533:0;git st
-: 1442279534:0;git push
 : 1442279544:0;git push origin diffuse
-: 1442279587:0;git st
-: 1442279588:0;git la
 : 1442279596:0;git push -u origin diffuse
-: 1442279598:0;gi tst
-: 1442279599:0;git la
 : 1442279615:0;git log templates/diffuse
 : 1442279628:0;git log -a templates/diffuse
 : 1442279635:0;git log kate-wip-area templates/diffuse
 : 1442279711:0;cat schemes/tomorrow.yml
 : 1442279757:0;atom ../../../sandbox/color.scss
-: 1442279796:0;git st
 : 1442279805:0;git checkout -b tomorrow-day up-to-date/master
-: 1442279806:0;git st
 : 1442279809:0;ls schemes
 : 1442279838:0;gg c82829
 : 1442279853:0;git l -p schemes/yesterday
 : 1442279861:0;git l -p schemes/yesterday.yml
 : 1442279936:0;cat schemes/yesterday.yml|clip
-: 1442279980:0;./base16
-: 1442280038:0;git st
-: 1442280045:0;git la
-: 1442280056:0;git checkout -b master
 : 1442280061:0;git branch -d tomorrow-day
-: 1442280061:0;gi tst
-: 1442280063:0;git la
 : 1442280121:0;git merge diffuse kate fix-mix-function roxterm-xHN35RQ
-: 1442280127:0;git st
-: 1442280129:0;git la
 : 1442280139:0;git diff HEAD up-to-date/master
 : 1442280152:0;git diff --stat up-to-date/master
-: 1442280189:0;git st
 : 1442280193:0;git push -u origin master
-: 1442280216:0;git st
-: 1442280289:0;git la
-: 1442280313:0;./base16
 : 1442280369:0;open output/kate/base16-yesterday.preview.html
-: 1442280520:0;git la
 : 1442280535:0;git show kate-wip-area -- schemes/tomorrow-day.yml
 : 1442280538:0;git show kate-wip-area -- schemes/tomorrow.yml
 : 1442280547:0;git show kate-wip-area
@@ -8697,169 +7723,69 @@ iframe(src='
 : 1442280578:0;git show kate-wip-area -- :/
 : 1442280588:0;git show kate-wip-area:/schemes/tomorrow-day.yml
 : 1442280592:0;git show kate-wip-area:schemes/tomorrow-day.yml
-: 1442280769:0;./base16
-: 1442280914:0;git st
 : 1442280919:0;git add schemes/yesterday-forivall.yml
-: 1442280920:0;git st
-: 1442280921:0;git commit
-: 1442280929:0;git st
-: 1442280931:0;git push
-: 1442280978:0;git st
-: 1442280981:0;ls
 : 1442281033:0;tar cvfz output 2015-09-14.tar.gz
 : 1442281043:0;tar cvfz 2015-09-14.tar.gz output
-: 1442281045:0;ls
-: 1442281052:0;open 2015-09-14.tar.gz
-: 1442281091:0;zip --help
 : 1442281104:0;zip 2015-09-14.zip output
-: 1442281106:0;ls
-: 1442281111:0;open 2015-09-14.zip
 : 1442281121:0;zip -r 2015-09-14.zip output
 : 1442281127:0;open 2015-09-14.zip
-: 1442281149:0;open 2015-09-14.tar.gz
-: 1442281226:0;open .
-: 1442281263:0;ls
 : 1442281267:0;rm 2015-09-14.zip
 : 1442281271:0;zip --help
-: 1442281325:0;zip -r -x .gitkeep -9 2015-09-14.zip output
 : 1442281398:0;mv 2015-09-14.tar.gz 2015-09-14.tar.gz_
-: 1442281404:0;tar --help
 : 1442281450:0;tar cvfz --exclude '*.gitkeep' 2015-09-14.tar.gz output
-: 1442281469:0;ls
 : 1442281486:0;tar cvfz --exclude='*.gitkeep' 2015-09-14.tar.gz output
 : 1442281517:0;tar cvfz --exclude=*.gitkeep 2015-09-14.tar.gz output
 : 1442281533:0;tar -cvfz --exclude=*.gitkeep 2015-09-14.tar.gz output
 : 1442281541:0;rm -- --exclude
 : 1442281543:0;rm -- --exclude=\*.gitkeep
-: 1442281546:0;ls
 : 1442281550:0;cat z
-: 1442281555:0;ls
-: 1442281556:0;res
 : 1442281558:0;head z
 : 1442281592:0;tar --exclude '.gitkeep' cvfz 2015-09-14.tar.gz output
 : 1442281598:0;tar --usage
 : 1442281613:0;tar --help
-: 1442281638:0;tar --exclude '.gitkeep' -cvzf 2015-09-14.tar.gz output
-: 1442281646:0;open 2015-09-14.tar.gz
-: 1442281681:0;ls
 : 1442281684:0;rm output
-: 1442281695:0;./base16
 : 1442281701:0;mkdir output
-: 1442281705:0;git st
 : 1442281707:0;git checkout output/
-: 1442281707:0;git st
 : 1442281711:0;rm z
 : 1442281721:0;rm 2015-09-14.zip 2015-09-14.tar.gz_ 2015-09-14.tar.gz
 : 1442281723:0;./base16
 : 1442281749:0;tar --exclude '.gitkeep' -cvzf 2015-09-14.tar.gz output
 : 1442281758:0;zip -r -x .gitkeep -9 2015-09-14.zip output
-: 1442281765:0;ls
 : 1442281771:0;open 2015-09-14.tar.gz
 : 1442281806:0;oepn .
-: 1442281807:0;open .
 : 1442348720:0;yaorut -Syu
-: 1442348722:0;yaourt -Syu
 : 1442348728:0;yaorut -Sc
-: 1442348731:0;yaourt -Sc
-: 1442348746:0;apm update
-: 1442348751:0;yaourt -Sua
 : 1442348899:0;cd code/ndp/
-: 1442348900:0;ls
 : 1442348908:0;atom
-: 1442348917:0;atom .
-: 1442348945:0;ls
 : 1442348946:0;cd masonry-front-page-inject
-: 1442348948:0;gi tst
-: 1442348949:0;git st
-: 1442348952:0;git diff
-: 1442349210:0;git st
-: 1442349212:0;npm start
-: 1442349217:0;git st
 : 1442349223:0;git diff chrome-saved/sites
 : 1442349228:0;git checkout chrome-saved/sites
-: 1442349229:0;git st
-: 1442349230:0;npm start
-: 1442349424:0;ls
 : 1442349435:0;ls -l chrome-saved/sites/default/files/multisite/648138/IMCE/xjs.js.txt
 : 1442350080:0;npm i --save brfs
 : 1442350100:0;npm i --save browserify-css
-: 1442350148:0;npm start
-: 1442350428:0;git st
 : 1442350436:0;git add client/custom.css client/fix-twitter-links.js
-: 1442350436:0;git st
-: 1442350443:0;git add -p
-: 1442350447:0;git st
-: 1442350452:0;git add -p
-: 1442350466:0;y
-: 1442350467:0;git st
-: 1442350477:0;git diff
 : 1442350484:0;git checkout chrome-saved/
-: 1442350485:0;git st
-: 1442350489:0;git commit
-: 1442350500:0;git st
-: 1442350502:0;git push
 : 1442350523:0;npm run client-build-release
 : 1442350529:0;npm run release-qa
-: 1442350730:0;git st
-: 1442444961:0;yaourt -Syu
-: 1442444968:0;apm update
 : 1442445054:0;cd .nvm
-: 1442445059:0;git fetch
-: 1442445061:0;git la
-: 1442445072:0;git l3
 : 1442445078:0;git l3 -a
 : 1442445085:0;git l3 --all
-: 1442448433:0;yaourt -Syu
 : 1442448441:0;yaorut -Sua
-: 1442448446:0;yaourt -Sua
-: 1442448460:0;redo --help
 : 1442448472:0;gman redo
 : 1442448481:0;yaourt -Qi redo
 : 1442448484:0;yaourt -Qi redo-git
 : 1442449179:0;yaourt -Ss ttf-input
 : 1442449185:0;yaourt -S ttf-input
-: 1442449335:0;git st
-: 1442449340:0;cd code/hacking-tacoscript
-: 1442449340:0;git st
 : 1442449811:0;yaourt -Ss fontmatrix
 : 1442449818:0;yaourt -S fontmatrix-git
 : 1442450245:0;fontmatrix
-: 1442450941:0;apm update
-: 1442451647:0;git st
-: 1442451654:0;cd
-: 1442451654:0;git st
 : 1442451758:0;yaourt -S nuvolaplayer-git
-: 1442451794:0;babel -w src -d lib --copy-files
-: 1442451797:0;ls
-: 1442451801:0;cd packages/tacoscript
-: 1442451803:0;babel -w src -d lib --copy-files
-: 1442451807:0;cd -
-: 1442451813:0;git st
-: 1442452631:0;cd test
-: 1442452646:0;ln -s ../../../mocha.opts
-: 1442452647:0;..
 : 1442452652:0;cd horchata
-: 1442452656:0;cd test
-: 1442452659:0;ln -s ../../../mocha.opts
-: 1442452661:0;cd
 : 1442452665:0;cd ../tacoscript-cli
 : 1442452670:0;cd test
 : 1442452672:0;ln -s ../../../mocha.opts
-: 1442452674:0;cd
-: 1442452677:0;cd ../tacoscript
-: 1442452677:0;git st
-: 1442452680:0;..
-: 1442452680:0;git st
 : 1442452684:0;git add **/mocha.opts
-: 1442452685:0;git st
-: 1442452690:0;git commit
-: 1442452709:0;cd tacoscript
-: 1442452716:0;mocha test/generation.js
 : 1442452720:0;npm i -g mocha
-: 1442452732:0;mocha test/generation.js
-: 1442452736:0;rehash
-: 1442452743:0;res
-: 1442452745:0;mocha test/generation.js
 : 1442452852:0;yaourt -Qs -git
 : 1442452857:0;yaourt -Qs -- -git
 : 1442452894:0;yaourt -S kcm-user-namanger-git
@@ -8873,46 +7799,21 @@ iframe(src='
 : 1442452994:0;yaourt -Ss robomongo
 : 1442453012:0;yaourt -R robomongo-git && yaourt -S robomongo
 : 1442453018:0;yaourt -R robomongo-git && yaourt -S robomongo-bin
-: 1442453038:0;cd aurbuild
 : 1442453044:0;yaourt -G redshift-gtk-git
-: 1442453049:0;ls
 : 1442453053:0;cd redshift-gtk-git
-: 1442453059:0;makepkg -si
-: 1442453086:0;yaourt -Sua
 : 1442453106:0;evhz
 : 1442453110:0;sudo evhz
 : 1442453137:0;yaourt -S kde-thumbnailer-apk
-: 1442453228:0;git st
-: 1442453231:0;git push
-: 1442453239:0;ls
-: 1442453266:0;..
-: 1442453266:0;ls
 : 1442453269:0;git rm generation/
-: 1442453270:0;git st
 : 1442453274:0;git rm -r generation/
-: 1442453275:0;gi tst
-: 1442513115:0;nvrandr-set-triple
 : 1442513149:0;~/.config/autostart-scripts/set-mouse-accel.sh
-: 1442513260:0;nvrandr-set-triple
 : 1442513293:0;gddccontrol
 : 1442513377:0;gnome-tweak-tool
 : 1442516682:0;vim lol.href
-: 1442520975:0;cd
-: 1442521022:0;babel -w src -d lib --copy-files
-: 1442521139:0;apm update
-: 1442521992:0;mocha test/generation.js
-: 1442522012:0;yaourt -Syu
-: 1442522020:0;yaourt -Sua
-: 1442522251:0;cd aurbuild
 : 1442522257:0;yaourt -G redo-git
 : 1442522261:0;cd redo-git
-: 1442522265:0;makepkg -si
-: 1442522271:0;ls
 : 1442522273:0;ls redo
-: 1442522282:0;atom -n .
 : 1442522339:0;PYTHON=python2 env python
-: 1442522418:0;cd src/redo
-: 1442522419:0;ls
 : 1442522434:0;grep . '#!/usr/bin/env python'
 : 1442522445:0;grep -R '#!/usr/bin/env python' .
 : 1442522573:0;echo ./*(.x)
@@ -8924,19 +7825,14 @@ iframe(src='
 : 1442522854:0;man find
 : 1442522972:0;find . '!' .git -executable -type f
 : 1442523019:0;find . -not .git -executable -type f
-: 1442523037:0;find . -not -wholename '*.git*' -executable -type f
 : 1442523042:0;sed
 : 1442523043:0;gman sed
-: 1442523083:0;gman ack
 : 1442523089:0;ack --help
 : 1442523093:0;yaorut -Ss ack
 : 1442523098:0;yaourt -Ss ack
 : 1442523108:0;gack
-: 1442523140:0;yaourt -Ql ack
 : 1442523143:0;yaourt -S ack
 : 1442523149:0;yaourt -Ql ack
-: 1442523156:0;rehash
-: 1442523157:0;res
 : 1442523163:0;gman ack
 : 1442523175:0;find . -not -wholename '*.git*' -executable -type f
 : 1442523242:0;rgrep
@@ -8944,659 +7840,192 @@ iframe(src='
 : 1442523307:0;find . -path .git -prune -o -executable -type f 
 : 1442523326:0;gman find
 : 1442523403:0;find . -path .git -prune -o \( -executable -type f \)
-: 1442523417:0;find . -path .git -prune
 : 1442523425:0;find .
 : 1442523431:0;find . -path .git -prune
 : 1442523547:0;find . -path .git -prune -o
-: 1442523552:0;find . -path .git -prune -o -true
-: 1442523558:0;res
 : 1442523559:0;find . -path .git -prune -o -true
 : 1442523569:0;find . -path ./.git -prune -o -true
-: 1442523579:0;find . -name .git -prune -o -true
-: 1442523584:0;res
-: 1442523585:0;find . -name .git -prune -o -true
-: 1442523597:0;find . -name .git -prune -o -executable -type f 
-: 1442523598:0;res
-: 1442523599:0;find . -name .git -prune -o -executable -type f 
 : 1442523610:0;find . -name .git -prune -o -true
 : 1442523620:0;find . -name .git -prune -o -executable -type f 
-: 1442523659:0;find . -name .git -prune -o -executable -type f -print
 : 1442523699:0;awk
 : 1442523809:0;find . -name .git -prune -o -executable -type f -print
 : 1442523816:0;find . -name .git -prune -o -executable -type f -print|xargs cat
 : 1442523821:0;find . -name .git -prune -o -executable -type f -print|xargs head -n1
 : 1442523900:0;find . -name .git -prune -o -executable -type f -print | xargs gawk -i inplace '{ gsub(/^#!/usr/bin/env python$/, "#!/usr/bin/env python2") }; { print }'
 : 1442523931:0;find . -name .git -prune -o -executable -type f -print | xargs gawk -i inplace '{ gsub(/^#!\/usr\/bin\/env python$/, "#!/usr/bin/env python2") }; { print }'
-: 1442523933:0;git st
-: 1442523934:0;git diff
-: 1442523989:0;git st
 : 1442524010:0;pacman -Qo /usr/bin/gawk
-: 1442524030:0;git st
-: 1442524031:0;..
-: 1442524031:0;git st
-: 1442524033:0;..
-: 1442524034:0;git st
-: 1442524035:0;ls
 : 1442524121:0;git clone https://aur.archlinux.org/redo-git.git
 : 1442524128:0;mv redo-git/.git .
-: 1442524129:0;git st
-: 1442524134:0;git diff
-: 1442524150:0;makepkg -si
-: 1442524482:0;git st
 : 1442524485:0;cd redo
-: 1442524485:0;git st
-: 1442524489:0;cd ..
-: 1442524491:0;cd src/redo
-: 1442524491:0;git st
-: 1442524496:0;git la
-: 1442524506:0;hub browse
-: 1442524549:0;git remote -v
 : 1442524555:0;cd ../../redo
-: 1442524557:0;git remote -v
-: 1442524560:0;cd -
-: 1442524711:0;git diff
-: 1442524716:0;git diff install.do
 : 1442524734:0;git diff install.do > ../../patch
-: 1442524842:0;git st
-: 1442524844:0;..
-: 1442524845:0;git st
-: 1442524846:0;..
-: 1442524846:0;git st
 : 1442524848:0;git add patch
-: 1442524849:0;git st
-: 1442524870:0;ls src
 : 1442524881:0;ls redo-git
 : 1442524888:0;ls -ld redo-git
 : 1442524892:0;rm redo-git
-: 1442524893:0;git st
 : 1442524901:0;rm pkg src
-: 1442524904:0;makepkg -si
-: 1442524929:0;ls
 : 1442524932:0;cd src/redo
-: 1442524933:0;git st
 : 1442524939:0;git diff install.do
-: 1442524953:0;..
-: 1442524956:0;makepkg -si
 : 1442524968:0;redo
 : 1442524970:0;redo --help
-: 1442524973:0;git st
-: 1442524978:0;git add PKGBUILD
-: 1442524979:0;git st
-: 1442524981:0;git diffc
-: 1442525049:0;git diffc|clip
 : 1442525113:0;git am
-: 1442525146:0;git st
-: 1442525188:0;git diffc|clip
-: 1442525191:0;git st
 : 1442525197:0;git am --abort
-: 1442525198:0;git st
-: 1442525206:0;git diffc
 : 1442525218:0;git diffc|clip
-: 1442525441:0;git st
-: 1442525445:0;mocha test/generation.js
-: 1442525449:0;res
-: 1442525450:0;mocha test/generation.js
-: 1442528956:0;cd
 : 1442528980:0;cd ../../repos/git/atom-selected-requires
-: 1442528985:0;npm i && apm rebuild
-: 1442529385:0;ls node_modules
 : 1442529397:0;cd ../atom-require-opener
-: 1442529398:0;git st
-: 1442529401:0;git la
-: 1442529405:0;git pull
-: 1442529409:0;npm i && apm rebuild
-: 1442529427:0;ls node_modules
 : 1442529432:0;rm node_modules/atom-selected-requires
-: 1442529439:0;npm i && apm rebuild
-: 1442529594:0;nesh -b
-: 1442531265:0;cd
-: 1442531271:0;cd ../babel
-: 1442531272:0;git st
-: 1442531307:0;git fetch
-: 1442531308:0;git la
-: 1442531313:0;git checkout development
-: 1442531315:0;git la
 : 1442531320:0;git checkout origin/development
-: 1442531323:0;git st
-: 1442531328:0;git store-untracked-files
-: 1442531330:0;git st
-: 1442531342:0;atom .
-: 1442531397:0;ls src
 : 1442531401:0;rm src
-: 1442531771:0;cd ../tacoscript
-: 1442531772:0;eslint
 : 1442531780:0;node_modules/.bin/eslint
 : 1442531791:0;node_modules/.bin/eslint packages/*/src
-: 1442531936:0;mocha test/generation.js
-: 1442531953:0;ls node_modules
 : 1442531959:0;ls ../../node_modules
-: 1442531983:0;babel -w src -d lib --copy-files
-: 1442531990:0;mocha test/generation.js
 : 1442532040:0;npm i --save-dev babel-runtime
-: 1442532057:0;mocha test/generation.js
 : 1442532630:0;npm i --save-dev try-resolve
-: 1442532640:0;mocha test/generation.js
-: 1442532645:0;res
-: 1442532646:0;mocha test/generation.js
-: 1442532654:0;git st
-: 1442532754:0;git add -p
-: 1442532755:0;cd
-: 1442532755:0;git st
 : 1442532761:0;git add src/trans
 : 1442532763:0;git add src/translation/
-: 1442532764:0;git st
 : 1442532765:0;git add -po
-: 1442532766:0;git add -p
-: 1442532798:0;git st
 : 1442532805:0;git rm src/transformation/
-: 1442532806:0;git st
 : 1442532808:0;git rm -r src/transformation/
-: 1442532809:0;git st
-: 1442532813:0;git add -p
-: 1442532822:0;git st
-: 1442532826:0;git commit
-: 1442532849:0;git st
-: 1442532851:0;git push
-: 1442532856:0;git st
-: 1442532860:0;git checkout master
-: 1442532861:0;gi tla
-: 1442532864:0;git la
-: 1442532872:0;ls
-: 1442532877:0;git la
 : 1442532892:0;git rebase -i tmp
-: 1442532895:0;git la
 : 1442532911:0;git merge -i tmp
-: 1442532945:0;git la
-: 1442532952:0;git st
 : 1442532956:0;git rebase -i
-: 1442533100:0;git st
-: 1442533104:0;git commit --amend
-: 1442533134:0;git st
-: 1442533147:0;git show
-: 1442533157:0;git commit --amend
 : 1442533181:0;git branch -m tmp sandbox-basic-generator
-: 1442533184:0;gi tst
 : 1442533188:0;git checkout sandbox-basic-generator
-: 1442533188:0;git st
-: 1442533189:0;git la
-: 1442533202:0;git push origin :tmp
 : 1442533211:0;git push -u origin sandbox-basic-generator
-: 1442533215:0;git st
-: 1442533216:0;git la
-: 1442533220:0;git checkout master
-: 1442533221:0;git st
-: 1442533222:0;git show
-: 1442533223:0;git la
-: 1442533239:0;git fetch upstream
-: 1442533243:0;git la
-: 1442533259:0;gi tst
-: 1442533260:0;git st
 : 1442533273:0;re
-: 1442533274:0;cd
-: 1442533274:0;git st
-: 1442533275:0;git la
-: 1442533595:0;gitst
-: 1442533596:0;git st
-: 1442533597:0;gi tla
-: 1442533599:0;git add -p
-: 1442533605:0;y
-: 1442533606:0;git st
-: 1442533607:0;git commit
-: 1442533611:0;git st
-: 1442533614:0;git push
-: 1442533672:0;git la
-: 1442533707:0;git st
 : 1442533718:0;git branch
 : 1442534501:0;git branch -a
 : 1442534514:0;git log origin/old
-: 1442604829:0;yaourt -Syu
 : 1442605357:0;xkill
-: 1442606869:0;apm update
-: 1442696221:0;yaourt -Syu
-: 1442696228:0;yaourt -Sua
-: 1442696291:0;apm update
 : 1442713654:0;dell-monitor-twilight
-: 1442716695:0;cd code/repos/git/atom-tree-view
-: 1442716696:0;git st
-: 1442716698:0;git la
-: 1442716701:0;git fetch origin
 : 1442716703:0;git fetch upstream
-: 1442716704:0;git la
 : 1442716735:0;apm install atom-project-view
 : 1442716739:0;apm install project-view
 : 1442716767:0;move-firefox-sharing-indicator-to-second-monitor
 : 1442716778:0;type -f move-firefox-sharing-indicator-to-second-monitor
-: 1442716809:0;oneliner create move-firefox-sharing-indicator-to-3rd-monitor
-: 1442716865:0;move-firefox-sharing-indicator-to-3rd-monitor
 : 1442716891:0;xrandr
 : 1442716922:0;oneliner create move-firefox-sharing-indicator-to-3rd-monitor
-: 1442716933:0;move-firefox-sharing-indicator-to-3rd-monitor
 : 1442717037:0;ls -ld ~/.atom/packages/project-view
 : 1442717041:0;ls -l ~/.atom/packages/project-view
 : 1442717067:0;cat ~/.atom/packages/project-view/package.json
 : 1442717073:0;cat ~/.atom/packages/project-view/package.json|jq .repository
 : 1442717077:0;cat ~/.atom/packages/project-view/package.json|jq .repository.url
-: 1442717123:0;..
 : 1442717128:0;git clone git@github.com:subesokun/atom-project-view.git
 : 1442717156:0;cd atom-project-view
-: 1442717160:0;npm i && apm rebuild
-: 1442717167:0;atom .
-: 1442717246:0;rm ~/.atom/packages/tree-view
-: 1442717261:0;..
 : 1442717267:0;cd atom-tree-view
 : 1442717269:0;apm link .
 : 1442717285:0;rm ~/.atom/packages/tree-view
-: 1442717379:0;git st
 : 1442717388:0;cd ../atom-tree-view
-: 1442717389:0;git st
-: 1442717395:0;git la
-: 1442717414:0;ls node_modules
 : 1442717419:0;rm node_modules && npm i && apm link
 : 1442717475:0;rm node_modules
-: 1442717481:0;git st
-: 1442717482:0;git la
 : 1442717500:0;git merge v0.188.0
-: 1442717505:0;git st
-: 1442717506:0;git la
-: 1442717515:0;npm i && apm rebuild
 : 1442717555:0;touch ~/null
 : 1442717559:0;chmod +x ~/null
 : 1442717581:0;npm i -g pangyp
 : 1442717593:0;npm i -g node-gyp
 : 1442717628:0;atom ~/.zshrc
-: 1442718484:0;type -af npm
-: 1442718506:0;npm i && apm rebuild
 : 1442718521:0;type -af node-gyp
 : 1442718559:0;npm i -g npm
 : 1442718564:0;npm i -g npm@3
 : 1442718584:0;npm i && apm rebuild
 : 1442718659:0;npm --node-gyp=true i && apm rebuild
 : 1442718671:0;apm link
-: 1442718699:0;atom .
-: 1442718811:0;cd ../atom-tabs
-: 1442718813:0;git pull
-: 1442718814:0;git la
-: 1442718894:0;ls
-: 1442718900:0;atom .
 : 1442719004:0;git log -SprocessId
 : 1442719009:0;git show ab97f58e97aa4593e6383b39eca404375fe76f0d
-: 1442720076:0;apm update
 : 1442720089:0;apm show project-manager
 : 1442720134:0;ls ~/.atom/packages/project-manager
 : 1442720138:0;ls -ld ~/.atom/packages/project-manager
-: 1442720291:0;git st
-: 1442720295:0;git add -p
-: 1442720299:0;git st
-: 1442720301:0;git commit
-: 1442720378:0;git st
-: 1442720380:0;git push
-: 1442720386:0;hub browse
-: 1442720708:0;git st
-: 1442720711:0;git fetch
-: 1442720712:0;git la
-: 1442720729:0;git remote -v
 : 1442720739:0;git branch -v
 : 1442720751:0;git checkout --detach
-: 1442720854:0;git branch -d master
-: 1442720858:0;git la
 : 1442720891:0;git remote add old git@github.com:forivall-old-repos/tacoscript-babel-shared-history.git
 : 1442720893:0;git fetch old
-: 1442720897:0;gi tst
-: 1442720898:0;git la
-: 1442720902:0;git branch -d master
-: 1442720906:0;git branch -D master
-: 1442720906:0;git la
 : 1442720911:0;git branch -d sandbox-basic-generator
-: 1442720917:0;git la
 : 1442720923:0;git remote -d old
 : 1442720928:0;git remote remove old
-: 1442720929:0;git la
 : 1442720942:0;git remote remove upstream
-: 1442720943:0;git st
-: 1442720944:0;git la
 : 1442720973:0;git update-ref --help
-: 1442721011:0;git remote -v
-: 1442721013:0;git la
 : 1442721019:0;git update-ref -d refs/remotes/origin/sandbox-basic-generator
-: 1442721020:0;git la
-: 1442721025:0;git show stash
 : 1442721035:0;git stash remove
 : 1442721039:0;git stash drop
-: 1442721041:0;git la
 : 1442721047:0;git checkout origin/master
-: 1442721049:0;git la
-: 1442721067:0;git checkout master
-: 1442721067:0;git st
-: 1442721068:0;git la
-: 1442721904:0;cd packages/tacoscript
-: 1442721921:0;make watch
-: 1442722644:0;mocha test/generation.js
-: 1442722791:0;res
-: 1442722793:0;mocha test/generation.js
-: 1442723260:0;res
-: 1442723260:0;mocha test/generation.js
 : 1442723287:0;babel -w src -d lib --copy-files
-: 1442723292:0;mocha test/generation.js
-: 1442723298:0;res
-: 1442723299:0;mocha test/generation.js
-: 1442723309:0;gi tla
-: 1442723312:0;git st
-: 1442723313:0;git diff
-: 1442723362:0;res
-: 1442723368:0;mocha test/generation.js
-: 1442723576:0;git st
-: 1442723577:0;git add -p
-: 1442723580:0;y
-: 1442723581:0;git st
 : 1442723585:0;git add src/parse-js/
-: 1442723586:0;git st
-: 1442723587:0;git commit
-: 1442723593:0;git st
-: 1442723802:0;cd
-: 1442723804:0;cd ..
-: 1442723804:0;ls
 : 1442723811:0;git clone git@github.com:sebmck/mocha-fixtures.git
 : 1442723815:0;atom mocha-fixtures
-: 1442726414:0;nesh -b
 : 1442726547:0;cd mocha-fixtures
 : 1442726548:0;npm i 
-: 1442730726:0;nvrandr-set-triple
 : 1442731701:0;yaourt -Ss obs
 : 1442731716:0;yaourt -S obs-studio
-: 1442731984:0;rehash
-: 1442731986:0;obs
 : 1442732231:0;yaourt -Qs wallpaper
 : 1442732241:0;yaourt -Ql plasma-workspace-wallpapers
 : 1442732261:0;yaourt -Ql kde-wallpapers
 : 1442734197:0;cd ../mocha
-: 1442734200:0;cd
 : 1442734203:0;cd ../mocha-fixtures
-: 1442734204:0;git st
-: 1442734205:0;git diff
 : 1442734211:0;git diff --stat
-: 1442734239:0;git st
-: 1442734240:0;git commit
-: 1442734242:0;git add -p
-: 1442734247:0;y
-: 1442734248:0;git st
-: 1442734255:0;git commit
-: 1442734261:0;git st
-: 1442734290:0;cd ../babel
-: 1442734290:0;ls
 : 1442734357:0;cd packages/babel-core
-: 1442734358:0;ls
 : 1442734360:0;tree test
-: 1442734367:0;..
-: 1442734381:0;npm i
-: 1442734469:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core
-: 1442734626:0;git st
-: 1442734630:0;git add packages/babel-core/test-fixtures.json
-: 1442734630:0;git st
-: 1442734634:0;git diffc
-: 1442734639:0;atom packages/babel-core/test-fixtures.json
-: 1442734670:0;git add packages/babel-core/test-fixtures.json
-: 1442734671:0;git st
-: 1442734679:0;git add -p
-: 1442734683:0;git st
-: 1442734685:0;git commit --amend
-: 1442734687:0;git st
 : 1442734701:0;git checkout -b 'generic'
-: 1442734702:0;git st
 : 1442734705:0;hub fork
-: 1442734736:0;hub browse
-: 1442734756:0;git remote -v
 : 1442734791:0;ping -t google.com
-: 1442734794:0;ping google.com
-: 1442734844:0;obs
-: 1442734871:0;htop
 : 1442734879:0;obs
-: 1442735601:0;git diffc
-: 1442735604:0;git st
-: 1442735687:0;git la
 : 1442735695:0;git remote add forivall git@github.com:forivall/mocha-fixtures.git
 : 1442735699:0;git fetch forivall
 : 1442735706:0;git push -u forivall generic
 : 1442735721:0;git branch -d generic
-: 1442735726:0;git branch -d master
 : 1442735731:0;git branch -D master
-: 1442735733:0;git checkout master
-: 1442735734:0;git st
 : 1442735741:0;git checkout -b master
-: 1442735745:0;git checkout -
-: 1442735750:0;git branch -d master
-: 1442735767:0;git checkout -b master origin/master
-: 1442735768:0;git st
-: 1442735769:0;git la
-: 1442735791:0;cd
-: 1442735794:0;cd -
-: 1442735796:0;cd ../babel
-: 1442735808:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core
 : 1442735824:0;atom packages/babel-core/test-fixtures.json
-: 1442735865:0;git st
-: 1442735866:0;git diff
-: 1442735926:0;git st
-: 1442735929:0;git checkout -
 : 1442736040:0;git diff master
-: 1442736082:0;uglifyjs --help
-: 1442736107:0;gi tst
-: 1442736114:0;git diff
-: 1442736123:0;git add -p
-: 1442736125:0;git st
-: 1442736127:0;git commit
-: 1442736134:0;git commit --amend
-: 1442736137:0;git s
-: 1442736148:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core
 : 1442736198:0;(cd packages/babel-core; uglify -b test-fixtures.json -o test-fixtures.json)
 : 1442736203:0;(cd packages/babel-core; uglifyjs -b test-fixtures.json -o test-fixtures.json)
 : 1442736213:0;uglifyjs --help
 : 1442736230:0;(cd packages/babel-core; uglifyjs test-fixtures.json -b -o test-fixtures.json)
 : 1442736283:0;npm  i -g jsonbeautify
 : 1442736377:0;npm i -g js-beautify
-: 1442736397:0;rehash
 : 1442736400:0;js-beautify --help
-: 1442736429:0;js-beautify --replace packages/babel-core/test-fixtures.json
-: 1442736432:0;git st
-: 1442736437:0;git add packages/babel-core/test-fixtures.json
-: 1442736448:0;git checkout master
-: 1442736450:0;git st
-: 1442736453:0;git add -p
-: 1442736456:0;git st
-: 1442736458:0;git commit --amend
-: 1442736461:0;git push --force
-: 1442736465:0;git st
-: 1442736474:0;git checkout -
 : 1442736490:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core
-: 1442736494:0;git st
-: 1442736496:0;git diff
 : 1442736503:0;js-beautify --replace packages/babel-core/test-fixtures.json
-: 1442736505:0;git diff
-: 1442736531:0;git checkout -
-: 1442736600:0;git st
-: 1442736603:0;git diff
-: 1442736618:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core && js-beautify --replace packages/babel-core/test-fixtures.json
-: 1442736623:0;gi tst
-: 1442736626:0;git diff
-: 1442736631:0;git commit --amend
-: 1442736646:0;gi tst
-: 1442736648:0;git add -p
-: 1442736651:0;git st
-: 1442736655:0;git commit --amend
-: 1442736657:0;git st
-: 1442736659:0;git push --force
-: 1442736661:0;git st
-: 1442736665:0;git checkout -
-: 1442736668:0;gi tst
 : 1442736672:0;git add packages/babel-core/test-fixtures.json
-: 1442736673:0;git st
-: 1442736680:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core && js-beautify --replace packages/babel-core/test-fixtures.json
-: 1442736687:0;git diff
-: 1442736690:0;gi tst
-: 1442736692:0;git st
-: 1442736695:0;git checkout -
-: 1442736698:0;git st
-: 1442736700:0;gi tst
 : 1442736704:0;node ../mocha-fixtures/bin/mocha-fixture-dump.js packages/babel-core && js-beautify --replace packages/babel-core/test-fixtures.json
-: 1442736713:0;gi tst
-: 1442736714:0;git st
-: 1442736747:0;git reset
-: 1442736749:0;gi tst
 : 1442736774:0;git show --spec
-: 1442736781:0;git last
 : 1442736787:0;git help last
 : 1442736805:0;git show --help
-: 1442736823:0;git st
 : 1442736825:0;git show --stat
 : 1442736860:0;git checkout -b generic-fork
-: 1442736861:0;git st
-: 1442736988:0;apm update
-: 1442737230:0;ping google.com
-: 1442737484:0;git log
 : 1442737488:0;git log -p
-: 1442737582:0;git st
-: 1442737585:0;git la
-: 1442737587:0;git diff
-: 1442737589:0;git add -p
-: 1442737591:0;y
-: 1442737592:0;git st
-: 1442737597:0;git commit
-: 1442737601:0;git st
 : 1442737612:0;git push -u forivall generic-fork
-: 1442737615:0;git st
-: 1442737637:0;npm publish
-: 1442738133:0;git st
-: 1442738134:0;git add -p
-: 1442738140:0;git st
-: 1442738142:0;git commit
-: 1442738146:0;git st
-: 1442738148:0;git push
 : 1442738160:0;git checkout generic
 : 1442738168:0;git cherry-pick generic-fork
-: 1442738170:0;git st
-: 1442738170:0;git la
-: 1442738173:0;git push
-: 1442738179:0;git checkout -
-: 1442738274:0;ping google.com
-: 1442738556:0;gi tst
-: 1442738557:0;git st
 : 1442738563:0;ls packages/tacoscript
-: 1442738903:0;git st
-: 1442738905:0;git add -p
-: 1442738908:0;git st
-: 1442738910:0;git commit
-: 1442738926:0;git st
-: 1442738930:0;git push
 : 1442738945:0;npm version patch
-: 1442738946:0;git st
-: 1442738948:0;git show
-: 1442738952:0;git push
 : 1442738957:0;npm publish
-: 1442738967:0;git st
 : 1442739241:0;npm i mocha-fixtures-generic
 : 1442739256:0;npm i mocha-fixtures-generic --save
-: 1442739267:0;mocha test/generation.js
-: 1442739286:0;cd packages/tacoscript
-: 1442739287:0;mocha test/generation.js
-: 1442739323:0;res
-: 1442739324:0;mocha test/generation.js
-: 1442739354:0;git st
-: 1442739357:0;git add -p
-: 1442739361:0;git st
-: 1442739490:0;git add -p
-: 1442739533:0;mocha test/generation.js
-: 1442739559:0;git st
-: 1442739562:0;git show
-: 1442739568:0;git commit
-: 1442739572:0;git st
 : 1442739576:0;git checkout -b tmp
 : 1442739600:0;git commit -m 'wip fixture code cleanup'
-: 1442739601:0;gitst
-: 1442739602:0;git st
 : 1442739609:0;git push -u origin tmp
-: 1442739612:0;git st
-: 1442739614:0;git checkout -
-: 1442739615:0;git st
-: 1442739619:0;git push
-: 1442739622:0;git st
-: 1442816348:0;nvrandr-set-triple
-: 1442816726:0;dell-monitor-night
-: 1442819496:0;gi tst
 : 1442819501:0;meld
 : 1442819510:0;meld --help
 : 1442819609:0;cd code/repos/git@forivall/dotfiles
-: 1442819610:0;git st
-: 1442819613:0;..
-: 1442819613:0;ls
 : 1442819666:0;cd ../git/atom-sublime-tabs
-: 1442819667:0;git st
-: 1442819668:0;gi tla
-: 1442819672:0;git fetch origin
-: 1442819674:0;git la
 : 1442819681:0;git merge origin/master
-: 1442819686:0;git la
-: 1442819692:0;..
-: 1442819692:0;ls
 : 1442819750:0;cd atom-run-in-terminal
-: 1442819751:0;gi tst
-: 1442819751:0;git st
-: 1442819755:0;git la
-: 1442819761:0;cd -
-: 1442819762:0;ls
 : 1442819774:0;cd atom-default-language
-: 1442819775:0;git st
-: 1442819777:0;cd -
-: 1442819777:0;ls
 : 1442819810:0;cd g-key
-: 1442819810:0;git st
-: 1442819813:0;git la
-: 1442819817:0;git fetch
-: 1442819819:0;git diff
-: 1442819821:0;cd -
-: 1442819822:0;ls
 : 1442819830:0;cd kde-gamemode-plasmoid
-: 1442819831:0;ls
-: 1442819832:0;git st
-: 1442819834:0;cd -
-: 1442819862:0;cd ..
-: 1442819863:0;ls
-: 1442819864:0;..
-: 1442819866:0;cd sandbox
 : 1442819965:0;mkdir git-merge-conflict-example
 : 1442819968:0;cd git-merge-conflict-example
 : 1442819971:0;git init
 : 1442819976:0;touch README.md
-: 1442819984:0;vim README.md
-: 1442820015:0;git st
 : 1442820018:0;git add README.md
-: 1442820018:0;git st
-: 1442820022:0;git commit
-: 1442820025:0;gi tst
 : 1442820035:0;git checkout -b A
-: 1442820040:0;vim README.md
-: 1442820059:0;git st
-: 1442820066:0;git add -p
-: 1442820067:0;git st
-: 1442820069:0;git commit
 : 1442820081:0;git checkout amster
-: 1442820084:0;git checkout master
-: 1442820085:0;git la
 : 1442820087:0;vim README.md
-: 1442820101:0;git st
-: 1442820104:0;git add -p
-: 1442820105:0;git st
 : 1442820112:0;git checkout -b B
-: 1442820114:0;git st
-: 1442820115:0;git commit
-: 1442820118:0;git st
 : 1442820120:0;git checkout a
 : 1442820124:0;git checkout A
 : 1442820126:0;git merge B
-: 1442820128:0;git st
-: 1442820130:0;git mergetool
-: 1442820142:0;vim ~/.gitconfig
-: 1442820169:0;git mergetool
-: 1442820306:0;vim ~/.gitconfig
 : 1442820358:0;git mergetool
-: 1442820455:0;vim ~/.gitconfig
 : 1442820538:0;yaourt -Ql git|grep meld
 : 1442820545:0;cat /usr/lib/git-core/mergetools/meld
 : 1442820580:0;diffuse --help
@@ -9604,77 +8033,26 @@ iframe(src='
 : 1442820741:0;vim ~/.gitconfig
 : 1442820893:0;git mergetool --tool=meld_merged
 : 1442820984:0;cd ~/Pictures/code
-: 1442820986:0;open .
-: 1442864739:0;dell-monitor-day
-: 1442865409:0;..
 : 1442865421:0;cd repos/git/zsh-pure
-: 1442865456:0;gi tst
-: 1442865457:0;git st
-: 1442865459:0;git show
-: 1442865464:0;git push
-: 1442865467:0;git la
-: 1442865474:0;git fetch origin
-: 1442865476:0;git la
 : 1442865485:0;git merge 1.2.0
-: 1442865486:0;git st
-: 1442865487:0;git la
-: 1442865590:0;hub browse
-: 1442867236:0;cd
-: 1442867236:0;git st
 : 1442867252:0;npm i -g github-releases
 : 1442869933:0;apm i browser-plus
 : 1442869939:0;apm install browser-plus
 : 1442869974:0;apm install preview-plus
-: 1442870962:0;jade diagram.jade
 : 1442870968:0;open diagram.
 : 1442870971:0;open diagram.html
 : 1442870998:0;jade diagram.jade
-: 1442871954:0;git st
-: 1442871957:0;git la
-: 1442871959:0;git fetch
-: 1442871961:0;git la
-: 1442871976:0;git fetch origin
-: 1442871978:0;git la
-: 1442871993:0;gi tla
 : 1442871999:0;git branch -d master
-: 1442872001:0;git checkout master
-: 1442872002:0;git st
 : 1442872008:0;git checkout -b master origin/master
-: 1442872011:0;git la
-: 1442872013:0;git st
-: 1442872014:0;git diff
 : 1442872027:0;git checkout -b 'docs-add-diagram'
 : 1442872031:0;git add diagram.md
-: 1442872031:0;git st
 : 1442872036:0;git push -u forivall docs-add-diagram
-: 1442872040:0;git st
-: 1442872043:0;git commit
-: 1442872051:0;git st
-: 1442872054:0;git push
-: 1442872143:0;ls
 : 1442872152:0;cp diagram.md diagram.html
-: 1442872154:0;open .
-: 1442872427:0;git st
 : 1442872443:0;cp ~/Downloads/diagram.svg .
-: 1442872445:0;git st
 : 1442872450:0;git rm --cached diagram.md
-: 1442872450:0;git st
-: 1442872454:0;git add diagram.svg
-: 1442872454:0;git st
-: 1442872457:0;git commit --amend
-: 1442872460:0;git st
-: 1442872463:0;git push --force
-: 1442872666:0;git st
 : 1442872669:0;git add diagram.
 : 1442872671:0;git add diagram.svg
-: 1442872671:0;gits t
 : 1442872695:0;firefox diagram.svg
-: 1442872764:0;git st
-: 1442872766:0;git add -p
-: 1442872769:0;git st
-: 1442872818:0;gi tst
-: 1442872819:0;git st
-: 1442872820:0;git add -p
 : 1442872822:0;git st
 : 1442872824:0;git commit --amend
 : 1442872826:0;git st
@@ -11976,3 +10354,1523 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443744705:0;git commit -m 'updates'
 : 1443744706:0;git st
 : 1443744712:0;git stashed pull --rebase
+
+: 1443057771:0;gi tst
+: 1443057774:0;git diff
+: 1443057779:0;git commit
+: 1443057783:0;git st
+: 1443057785:0;git push
+: 1443057788:0;git diff
+: 1443057820:0;atom .
+: 1443057935:0;npm i node-sass
+: 1443057964:0;npm i
+: 1443057966:0;ls
+: 1443057969:0;ls node_modules
+: 1443057983:0;./start.sh
+: 1443058004:0;npm i naught
+: 1443058043:0;./start.sh
+: 1443058049:0;npm bin
+: 1443058101:0;./start.sh
+: 1443058121:0;cat stderr.log
+: 1443058125:0;cat log.log
+: 1443058144:0;node ./server.js
+: 1443058193:0;npm start
+: 1443058281:0;cp config/secrets.coffee.example config/secrets.coffee
+: 1443058401:0;npm start
+: 1443058427:0;systemctl start mongodb.service
+: 1443058447:0;npm start
+: 1443058469:0;cat /etc/mongodb.conf
+: 1443058478:0;mongodb --help
+: 1443058482:0;mongod --help
+: 1443058493:0;tail -f /var/log/mongodb/mongod.log
+: 1443058510:0;tail -n 100 -f /var/log/mongodb/mongod.log
+: 1443058521:0;npm start
+: 1443058567:0;systemctl enable mongodb.service
+: 1443058680:0;git st
+: 1443058681:0;git diff
+: 1443059244:0;df -h
+: 1443059249:0;yaourt -Sc
+: 1443059255:0;df -h
+: 1443059440:0;yaourt -Ss dirstat
+: 1443059495:0;res
+: 1443059500:0;cd code/hacking-sizzlingstats/sizzlingstats.com
+: 1443059504:0;npm start
+: 1443070342:0;git st
+: 1443070343:0;ls
+: 1443070344:0;git diff
+: 1443070433:0;curl ipconfig.me
+: 1443070451:0;curl checkip.dyndns.org
+: 1443070462:0;curl -s checkip.dyndns.org
+: 1443070608:0;echo "api_key: sXSoeIgI4UsRi1gLoqSFSEHMuYz17PuT" > ~/.ultrahook
+: 1443070614:0;gem install ultrahook
+: 1443070670:0;ultrahook sizzlingstats 8001
+: 1443070983:0;npm start
+: 1443071025:0;atom .
+: 1443071041:0;npm test
+: 1443071051:0;npm i grunt
+: 1443071062:0;npm i grunt-cli
+: 1443071110:0;npm test
+: 1443071240:0;npm start
+: 1443071254:0;ultrahook sizzlingstats 8001
+: 1443071553:0;robomongo
+: 1443071764:0;npm start
+: 1443071906:0;yaourt -Ss ngrok
+: 1443071912:0;yaourt -S ngrok
+: 1443071948:0;yaourt -S ngrok-bin
+: 1443072020:0;yaourt -Ql ngrok-bin
+: 1443072031:0;authtoken AwdAfhfEaVCK7gtnyNQ5_4fUGKNmMiNNehLkSzAj14
+: 1443072033:0;ngrok authtoken AwdAfhfEaVCK7gtnyNQ5_4fUGKNmMiNNehLkSzAj14
+: 1443072035:0;rehash
+: 1443072044:0;hgrok --help
+: 1443072049:0;ngrok --help
+: 1443072151:0;ngrok --helpngrok http -subdomain=forivall 8001
+: 1443072159:0;ngrok http -subdomain=forivall 8001
+: 1443072171:0;ngrok http 8001
+: 1443072178:0;sudo ngrok http 8001
+: 1443072185:0;ngrok http 8001
+: 1443072275:0;ultrahook sizzlingstats 8001
+: 1443073131:0;cd ..
+: 1443073141:0;git clone git@github.com:SizzlingStats/sizzlingplugins.git
+: 1443073285:0;npm start
+: 1443074854:0;npm i -g human-to-cron
+: 1443074864:0;cd ../../sandbox
+: 1443074867:0;npm i human-to-cron
+: 1443074871:0;nesh -b
+: 1443077728:0;git st
+: 1443077730:0;git add -p
+: 1443077801:0;git st
+: 1443077803:0;git commit
+: 1443077816:0;git st
+: 1443077824:0;git checkout -b 'overkill-damage'
+: 1443077825:0;git st
+: 1443077843:0;git checkout -b 'misc-comments-improvements'
+: 1443077844:0;git st
+: 1443077845:0;git add -p
+: 1443077886:0;git st
+: 1443077889:0;git commit
+: 1443077904:0;gi tst
+: 1443077905:0;git st
+: 1443077908:0;git checkout -
+: 1443077911:0;git st
+: 1443077917:0;git stashed checkout -
+: 1443077919:0;git st
+: 1443077926:0;git show
+: 1443077928:0;git add -p
+: 1443077948:0;git st
+: 1443077957:0;git add -p test
+: 1443077968:0;git st
+: 1443077971:0;git commit
+: 1443078008:0;git st
+: 1443078021:0;git checkout -b updated-tests
+: 1443078027:0;git add -p test
+: 1443078029:0;gi tst
+: 1443078030:0;git commit
+: 1443078036:0;git st
+: 1443078039:0;git checkout -
+: 1443078039:0;git st
+: 1443078049:0;git checkout -b 'debug-logs'
+: 1443078050:0;git add -p
+: 1443078056:0;git st
+: 1443078059:0;git commit
+: 1443078063:0;git st
+: 1443078064:0;git checkout -
+: 1443078065:0;git st
+: 1443078070:0;git diff
+: 1443078084:0;git checkout master
+: 1443078085:0;git st
+: 1443078087:0;git diff
+: 1443078093:0;git stashed checkout master
+: 1443078095:0;git st
+: 1443078106:0;git la
+: 1443078116:0;git stashed reset --hard origin/master
+: 1443078118:0;git st
+: 1443078121:0;git add -p
+: 1443078134:0;git checkout -b 'naught-dependency'
+: 1443078135:0;git st
+: 1443078137:0;git add -p
+: 1443078139:0;git st
+: 1443078141:0;git commit
+: 1443078227:0;git st
+: 1443078231:0;git la
+: 1443078248:0;git checkout overkill-damage
+: 1443078249:0;git st
+: 1443078254:0;git la
+: 1443078639:0;npm start
+: 1443080028:0;dell-monitor-night
+: 1443081937:0;gi tst
+: 1443081938:0;git st
+: 1443081940:0;git add -p
+: 1443081958:0;gi tst
+: 1443081959:0;git st
+: 1443081960:0;git commit
+: 1443081971:0;git st
+: 1443081976:0;git add -p
+: 1443081981:0;git st
+: 1443081987:0;git add views/partials/faq.jade
+: 1443081987:0;git st
+: 1443081989:0;git commit
+: 1443081993:0;git st
+: 1443082046:0;git remote add forivallgit@github.com:forivall/sizzlingstats.com.git
+: 1443082050:0;git remote add forivall git@github.com:forivall/sizzlingstats.com.git
+: 1443082051:0;gi tst
+: 1443082056:0;git push -u forivall overkill-damage
+: 1443082058:0;git st
+: 1443082059:0;gi tla
+: 1443082419:0;got st
+: 1443082421:0;git st
+: 1443082450:0;git push -u forivall naught-dependency:refs/heads/naught-dependency
+: 1443082464:0;git push -u forivall debug-logs:refs/heads/debug-logs
+: 1443082476:0;git push -u forivall updated-tests:refs/heads/updated-tests
+: 1443082500:0;git push -u forivall misc-comments-improvements:refs/heads/misc-comments-improvements
+: 1443112210:0;dell-monitor-day
+: 1443115265:0;cd
+: 1443115269:0;cd ../tacoscript-ast-playground
+: 1443115274:0;cd
+: 1443115279:0;make watch
+: 1443115284:0;npm start
+: 1443117059:0;nesh -b
+: 1443117264:0;git st
+: 1443119299:0;npm i --save create-hash
+: 1443119584:0;nesh -b
+: 1443120097:0;make watch
+: 1443120143:0;npm start
+: 1443122402:0;nesh -b
+: 1443122694:0;make watch
+: 1443122700:0;npm start
+: 1443123337:0;git s
+: 1443123338:0;git st
+: 1443123341:0;git la
+: 1443123349:0;cd
+: 1443123349:0;git st
+: 1443123352:0;git diff
+: 1443123357:0;git la
+: 1443123371:0;git show 1a2055e
+: 1443123376:0;git la
+: 1443123382:0;git show b0a6053
+: 1443123397:0;git st
+: 1443123398:0;git la
+: 1443123425:0;git checkout -b token-attachment-parser-plugin 1a2055e
+: 1443123426:0;git st
+: 1443123430:0;git stashed checkout -b token-attachment-parser-plugin 1a2055e
+: 1443123433:0;git st
+: 1443123436:0;git la
+: 1443123445:0;git checkout -p b0a6053
+: 1443123485:0;gi tst
+: 1443123486:0;git st
+: 1443123488:0;git commit
+: 1443123502:0;git st
+: 1443123506:0;git la
+: 1443123514:0;git show 88a4894
+: 1443123522:0;git st
+: 1443123528:0;git la
+: 1443123551:0;git st
+: 1443123554:0;git add -N src
+: 1443123555:0;git st
+: 1443123558:0;git add -p
+: 1443123628:0;git st
+: 1443123847:0;git commit
+: 1443123853:0;git st
+: 1443123883:0;git commit --amend
+: 1443123889:0;git st
+: 1443123906:0;git push -u origin token-attachment-parser-plugin
+: 1443123908:0;git st
+: 1443123909:0;git la
+: 1443123928:0;cd
+: 1443123931:0;yaourt -Syu
+: 1443127813:0;git st
+: 1443127844:0;git add -p
+: 1443127868:0;git st
+: 1443127870:0;git add -p
+: 1443127959:0;git st
+: 1443127990:0;git commit
+: 1443127994:0;git st
+: 1443128011:0;git rm src/parse-js/attach-tokens.js
+: 1443128011:0;git st
+: 1443128014:0;git commit
+: 1443128023:0;git st
+: 1443128027:0;git push
+: 1443128034:0;git la
+: 1443128056:0;git push tmp:tmp-1
+: 1443128065:0;git push origin tmp:refs/heads/tmp-1
+: 1443128069:0;git push :tmp
+: 1443128073:0;git push origin :tmp
+: 1443128075:0;git la
+: 1443128081:0;git branch -d tmp
+: 1443128085:0;git branch -D tmp
+: 1443128086:0;git la
+: 1443128097:0;git checkout -b tmp-2
+: 1443128097:0;git st
+: 1443128099:0;git add -p
+: 1443128106:0;gitst
+: 1443128108:0;git checkout -
+: 1443128109:0;git st
+: 1443128111:0;git add -p
+: 1443128117:0;git st
+: 1443128125:0;git commit --amend
+: 1443128130:0;git push --force
+: 1443128133:0;gi tst
+: 1443128135:0;git add -p
+: 1443128137:0;git st
+: 1443128139:0;git checkout -
+: 1443128140:0;git st
+: 1443128144:0;git la
+: 1443128152:0;git branch -d tmp-2
+: 1443128154:0;git branch -D tmp-2
+: 1443128158:0;git checkout -b tmp-2
+: 1443128160:0;git st
+: 1443128162:0;git add -p
+: 1443128167:0;git st
+: 1443128172:0;git push -u origin tmp-2
+: 1443128174:0;git st
+: 1443128178:0;git commit
+: 1443128183:0;git st
+: 1443128184:0;git push
+: 1443128187:0;git la
+: 1443128199:0;git checkout master
+: 1443128201:0;git la
+: 1443128217:0;git merge token-attachment-parser-plugin
+: 1443128222:0;git st
+: 1443128226:0;git push
+: 1443128229:0;git la
+: 1443128239:0;git push origin :token-attachment-parser-plugin
+: 1443128242:0;git la
+: 1443128253:0;git checkout tmp-2
+: 1443128257:0;git rebase master
+: 1443128258:0;git la
+: 1443128261:0;git push --force
+: 1443128264:0;git la
+: 1443128278:0;make watch
+: 1443128280:0;npm start
+: 1443128406:0;mocha test/generation.js
+: 1443128423:0;git st
+: 1443128428:0;git checkout master
+: 1443128428:0;git st
+: 1443128429:0;git la
+: 1443128433:0;git commit
+: 1443128435:0;git add -p
+: 1443128445:0;git commit
+: 1443128455:0;git st
+: 1443128457:0;git push
+: 1443128459:0;git la
+: 1443128471:0;git checkout tmp-2
+: 1443128480:0;git rebase master
+: 1443128483:0;git push --force
+: 1443128485:0;git la
+: 1443128492:0;git st
+: 1443128493:0;git la
+: 1443128497:0;mocha test/generation.js
+: 1443128669:0;git st
+: 1443128670:0;git show
+: 1443129239:0;git st
+: 1443129244:0;git diff
+: 1443129248:0;git la
+: 1443129251:0;git checkout master
+: 1443129253:0;git add -p
+: 1443129257:0;git st
+: 1443129258:0;git commit
+: 1443129264:0;git st
+: 1443129267:0;git push
+: 1443129271:0;git checkout tmp-2
+: 1443129272:0;git st
+: 1443129273:0;git la
+: 1443129277:0;git rebase master
+: 1443129280:0;git push --force
+: 1443129284:0;git st
+: 1443129328:0;git checkout master
+: 1443129329:0;git st
+: 1443129346:0;mocha test/generation.js
+: 1443129385:0;make watch
+: 1443129388:0;mocha test/generation.js
+: 1443129575:0;git st
+: 1443129576:0;git add -p
+: 1443129589:0;git st
+: 1443129590:0;git commit
+: 1443129597:0;git st
+: 1443129602:0;git diff
+: 1443129711:0;mocha test/generation.js
+: 1443129783:0;git st
+: 1443129784:0;git add -p
+: 1443129789:0;git reset
+: 1443129791:0;git add -p
+: 1443129794:0;git st
+: 1443129796:0;git commit --amend
+: 1443129797:0;git st
+: 1443129806:0;git commit -a
+: 1443129815:0;git st
+: 1443129820:0;git checkout tmp-2
+: 1443129821:0;git la
+: 1443129827:0;git rebase 0f6e5b6
+: 1443129829:0;git st
+: 1443129832:0;git la
+: 1443129850:0;git checkout -
+: 1443129851:0;git st
+: 1443129852:0;git la
+: 1443129878:0;git st
+: 1443129888:0;git checkout tmp-2
+: 1443129889:0;git st
+: 1443129893:0;git checkout -
+: 1443129897:0;git checkout tmp-2 -- .
+: 1443129898:0;git st
+: 1443129899:0;git diff
+: 1443129901:0;git diffc
+: 1443129918:0;git st
+: 1443129920:0;git la
+: 1443129933:0;git checkout -b tmp_
+: 1443129943:0;git st
+: 1443129947:0;git commit -m 'tmp'
+: 1443129951:0;git checkout tmp-2
+: 1443129953:0;git reset tmp_
+: 1443129954:0;git st
+: 1443129955:0;git la
+: 1443129959:0;git st
+: 1443129965:0;git push --force
+: 1443129968:0;git branch -d tmp_
+: 1443129970:0;git la
+: 1443129974:0;git checkout master
+: 1443129975:0;git st
+: 1443129980:0;git push
+: 1443129982:0;git la
+: 1443130764:0;yaourt -Sua
+: 1443130878:0;killall google-chrome-beta
+: 1443130886:0;killall chrome
+: 1443131452:0;open cups-pdf/prepress_-c__setpdfwrite_-f__s.pdf
+: 1443131467:0;open cups-pdf/_Untitled_Document__pdf.pdf
+: 1443168710:0;dell-monitor-night
+: 1443168723:0;yaourt -Sua
+: 1443168882:0;yaourt -Syua
+: 1443168914:0;apm update
+: 1443206270:0;dell-monitor-day
+: 1443217493:0;git st
+: 1443217618:0;gman at
+: 1443217622:0;at
+: 1443217625:0;yaourt -Ss at
+: 1443217681:0;yaourt -S at
+: 1443217687:0;at
+: 1443217688:0;gman at
+: 1443217731:0;atom ~/code/repos/git@forivall/dotfiles/plugins/coreutils/coreutils.plugin.zsh
+: 1443217747:0;git st
+: 1443217750:0;git add -p
+: 1443217753:0;git st
+: 1443217761:0;git commit -m 'add sleep_until'
+: 1443217762:0;git st
+: 1443217804:0;gi tst
+: 1443217976:0;git st
+: 1443218005:0;git add -p
+: 1443218029:0;git st
+: 1443218030:0;git add -p
+: 1443218032:0;y
+: 1443218033:0;git st
+: 1443218164:0;sleep_until 17:30
+: 1443218182:0;sleep_until 17:30 && git commit -m "Change terminology" && git push
+: 1443219317:0;git commit -m "Change terminology" && git push
+: 1443237989:0;apm update
+: 1443245914:0;dell-monitor-night
+: 1443327242:0;dell-monitor-day
+: 1443327251:0;dell-monitor-evening
+: 1443327753:0;yaourt -Ss emoji
+: 1443327770:0;yaourt -S ibus-uniemoji-git
+: 1443327781:0;ibus
+: 1443327785:0;ibus enigine
+: 1443327789:0;ibus engine
+: 1443327806:0;ibus list-engine
+: 1443327810:0;ibus restart
+: 1443327862:0;yaourt -Ss ibus
+: 1443327886:0;yaourt -S ibus-qt
+: 1443327896:0;ibus-daemon
+: 1443327900:0;ibus-setup
+: 1443329474:0;ibus-daemon
+: 1443330205:0;google-chrome-beta --force-device-scale-factor=2
+: 1443330241:0;ibus-daemon
+: 1443330514:0;google-chrome-beta --force-device-scale-factor=3
+: 1443330526:0;vim ~/.config/chrome-beta-flags.conf
+: 1443330538:0;mv ~/.config/chrome-beta-flags.conf .
+: 1443330540:0;google-chrome-beta --force-device-scale-factor=3
+: 1443330593:0;google-chrome-beta --force-device-scale-factor=2
+: 1443330844:0;mv chrome-beta-flags.conf ~/.config/
+: 1443330959:0;yaourt -Qii ttf-noto-emoji-monochrome
+: 1443333291:0;dell-monitor-night
+: 1443337106:0;yaourt -Ql plasma-desktop
+: 1443337121:0;kbuildsycoca5 && kquitapp plasma && kstart plasma
+: 1443337131:0;kbuildsycoca5 && kquitapp plasma-desktop && kstart plasma-desktop
+: 1443337232:0;kbuildsycoca5 && kquitapp plasmadesktop && kstart plasmadesktop
+: 1443337248:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
+: 1443339500:0;dell-monitor-night
+: 1443339927:0;yaourt -Syua
+: 1443387435:0;dell-monitor-day
+: 1443468908:0;yaourt -Syu
+: 1443468916:0;yaourt -Sc
+: 1443468936:0;yaourt -Syu
+: 1443468943:0;df -h
+: 1443468949:0;yaourt -Syua
+: 1443469037:0;cd code/hacking-tacoscript
+: 1443469038:0;git st
+: 1443469043:0;cd tacoscript
+: 1443469045:0;git st
+: 1443469048:0;git fetch
+: 1443469061:0;git st
+: 1443469064:0;git la
+: 1443469070:0;git pull
+: 1443469100:0;git st
+: 1443469103:0;git la
+: 1443469108:0;gi tst
+: 1443469112:0;git la
+: 1443469142:0;git checkout origin/tmp-3 -- .
+: 1443469144:0;git st
+: 1443469146:0;git diffc
+: 1443469148:0;git reset
+: 1443469148:0;git st
+: 1443469150:0;git la
+: 1443469152:0;git diff
+: 1443469204:0;apm update
+: 1443470888:0;yaourt -Syua
+: 1443470911:0;npm i -g greenkeeper
+: 1443470936:0;yaourt -Ss otto
+: 1443470971:0;cd
+: 1443470974:0;cd Downloads
+: 1443470995:0;unzip otto_0.1.0_linux_amd64.zip
+: 1443470998:0;ls otto
+: 1443471023:0;echo $LOCAL
+: 1443471027:0;echo $PATH
+: 1443471030:0;echo $path
+: 1443471033:0;echo $(N)path
+: 1443471038:0;echo ${(N)path}
+: 1443471040:0;echo ${(n)path}
+: 1443471047:0;echo ${(l)path}
+: 1443471547:0;echo ${(f)path}
+: 1443471561:0;echo ${(F)path}
+: 1443471602:0;ls
+: 1443471604:0;./otto
+: 1443471615:0;./otto status
+: 1443471620:0;./otto version
+: 1443471628:0;cd
+: 1443471646:0;cd code/repos/git@forivall/
+: 1443471647:0;ls
+: 1443471649:0;cd aur-packages
+: 1443471650:0;ls
+: 1443471657:0;ls aur4
+: 1443471667:0;git submodule status
+: 1443471712:0;git submodule summary
+: 1443471718:0;git submodule status -v
+: 1443471734:0;git submodule foreach git remote -v
+: 1443471743:0;ls
+: 1443471745:0;cd aur
+: 1443471746:0;ls
+: 1443471747:0;cd hid-
+: 1443471751:0;cd hid-azio-lv-mech5-dkms-git
+: 1443471752:0;git st
+: 1443471753:0;git remote -v
+: 1443471755:0;..
+: 1443471774:0;cd aur4/hid-azio-lv-mech5-dkms-git
+: 1443471775:0;git st
+: 1443471776:0;git remote -v
+: 1443471779:0;git st
+: 1443471780:0;sl
+: 1443471781:0;ls
+: 1443471783:0;..
+: 1443471784:0;ls
+: 1443471787:0;ls teamspeak3-addon-installer
+: 1443471791:0;git st
+: 1443471794:0;..
+: 1443471794:0;ls
+: 1443471797:0;ls old
+: 1443471799:0;git fetch
+: 1443471800:0;git la
+: 1443471810:0;git submodule update --init --recusive
+: 1443471827:0;git submodule init --recusive
+: 1443471833:0;git submodule status
+: 1443471839:0;git submodule sync
+: 1443471842:0;git submodule init
+: 1443471851:0;git submodule update --init --recusive
+: 1443471855:0;git submodule update --recusive
+: 1443471864:0;git submodule update --init
+: 1443471879:0;git submodule foreach git remote -v
+: 1443471917:0;git submodule add ssh://aur@aur4.archlinux.org/otto-bin.git aur4/otto-bin
+: 1443471926:0;cd aur4/otto-bin
+: 1443471927:0;git st
+: 1443471947:0;makepkg-template
+: 1443472008:0;makepkg-template /usr/share/pacman/PKGBUILD.proto
+: 1443472013:0;cp /usr/share/pacman/PKGBUILD.proto PKGBUILD
+: 1443472016:0;atom -n .
+: 1443472286:0;yaourt -Ss otto
+: 1443472620:0;curl -OL https://dl.bintray.com/mitchellh/otto/otto_0.1.0_SHA256SUMS.sig
+: 1443472650:0;gpg
+: 1443472668:0;gpgconf
+: 1443472745:0;signtool
+: 1443472755:0;open otto_0.1.0_SHA256SUMS.sig
+: 1443472770:0;kgpg
+: 1443472776:0;kgpgconf
+: 1443472814:0;open .
+: 1443472838:0;kate
+: 1443472901:0;ls
+: 1443472909:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
+: 1443472991:0;ls
+: 1443472996:0;gpg --output doc --decrypt
+: 1443473001:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
+: 1443473088:0;wget http://www.apache.org/dist/openoffice/KEYS
+: 1443473091:0;cat KEYS
+: 1443473112:0;kate keys
+: 1443473115:0;kate KEYS
+: 1443473137:0;mv KEYS KEY
+: 1443473140:0;gpg --import KEY
+: 1443473148:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
+: 1443473155:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
+: 1443473226:0;gpg --recv-keys 348FFC4C
+: 1443473237:0;gpg --sign-key 348FFC4C
+: 1443473258:0;gpg --init
+: 1443473267:0;gpgconf
+: 1443473272:0;gpg --sign-key 348FFC4C
+: 1443473286:0;gpg --default-key
+: 1443473310:0;gpg --gen-key
+: 1443473376:0;seahorse-daemon
+: 1443473379:0;seahorse
+: 1443473393:0;killall seahorse-daemon
+: 1443473481:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
+: 1443473491:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
+: 1443473520:0;kgpg
+: 1443473523:0;kgpg --help
+: 1443473529:0;kgpg -s otto_0.1.0_SHA256SUMS.sig
+: 1443473561:0;ls
+: 1443473576:0;kgpg -s
+: 1443473579:0;kgpg -s otto_0.1.0_SHA256SUMS.sig
+: 1443473604:0;subl otto_0.1.0_SHA256SUMS.sig
+: 1443473648:0;gpg -d otto_0.1.0_SHA256SUMS.sig
+: 1443473691:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
+: 1443473722:0;curl -OL https://dl.bintray.com/mitchellh/otto/otto_0.1.0_linux_386.zip
+: 1443473731:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
+: 1443473786:0;sha256sum -c otto_0.1.0_linux_386.zip
+: 1443473820:0;sha256sum otto_0.1.0_linux_386.zip
+: 1443473850:0;gpg --verify otto_0.1.0_SHA256SUMS.sig otto_0.1.0_SHA256SUMS
+: 1443473914:0;gpg -d otto_0.1.0_SHA256SUMS.sig
+: 1443473921:0;gpg -d < otto_0.1.0_SHA256SUMS.sig
+: 1443474012:0;curl -OL https://dl.bintray.com/mitchellh/otto/otto_0.1.0_SHA256SUMS?direct
+: 1443474013:0;ls
+: 1443474026:0;mv otto_0.1.0_SHA256SUMS\?direct otto_0.1.0_SHA256SUMS
+: 1443474027:0;ls
+: 1443474031:0;cat otto_0.1.0_SHA256SUMS
+: 1443474125:0;gpg --verify otto_0.1.0_SHA256SUMS.sig otto_0.1.0_SHA256SUMS
+: 1443474139:0;gpg --verify otto_0.1.0_SHA256SUMS
+: 1443474144:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
+: 1443474160:0;cat otto_0.1.0_SHA256SUMS
+: 1443474286:0;cat otto_0.1.0_SHA256SUMS|
+: 1443474288:0;cat otto_0.1.0_SHA256SUMS|clip
+: 1443474437:0;yaourt -Ql atom-bin
+: 1443474441:0;yaourt -Ql atom-editor-bin
+: 1443474461:0;ls -ld /usr/bin/atom
+: 1443474473:0;install --help
+: 1443474585:0;ls
+: 1443474587:0;makepkg
+: 1443474626:0;ls
+: 1443474628:0;ls src
+: 1443474648:0;makepkg
+: 1443474655:0;git st
+: 1443474664:0;git add PKGBUILD
+: 1443474665:0;git st
+: 1443474666:0;git commit
+: 1443474670:0;git st
+: 1443474674:0;git push
+: 1443474731:0;ls ../*/.gitignore
+: 1443474756:0;git ignore '/pkg' '/src' '*.zip'
+: 1443474757:0;git st
+: 1443474762:0;git add .gitignore
+: 1443474764:0;git commit --amend
+: 1443474766:0;git st
+: 1443474778:0;git push
+: 1443474929:0;mksrcinfo
+: 1443474930:0;gi tst
+: 1443474934:0;git add .SRCINFO
+: 1443474936:0;cat .SRCINFO
+: 1443474944:0;git st
+: 1443474947:0;git commit --amend
+: 1443474955:0;git st
+: 1443474956:0;git push
+: 1443474985:0;yaourt -Ss otto
+: 1443474990:0;yaourt -S otto-bin
+: 1443475008:0;ott
+: 1443475009:0;otto
+: 1443475157:0;git st
+: 1443475161:0;..
+: 1443475174:0;gi tst
+: 1443475175:0;git st
+: 1443475184:0;git add aur4/otto-bin/
+: 1443475184:0;git st
+: 1443475190:0;git reset
+: 1443475197:0;cd aur4/otto-bin/
+: 1443475198:0;git st
+: 1443475201:0;..
+: 1443475204:0;git submodule add ssh://aur@aur4.archlinux.org/otto-bin.git aur4/otto-bin
+: 1443475206:0;git st
+: 1443475212:0;mkdir aur
+: 1443475217:0;mkdir aur/otto-bin
+: 1443475255:0;cp aur4/otto-bin/{PKGBUILD,.SRCINFO} aur/otto-bin
+: 1443475256:0;ls
+: 1443475258:0;ls aur
+: 1443475261:0;ls aur/otto-bin
+: 1443475264:0;la aur/otto-bin
+: 1443475265:0;git st
+: 1443475269:0;git add aur/otto-bin/
+: 1443475278:0;cp aur4/otto-bin/.gitignore aur/otto-bin
+: 1443475280:0;git st
+: 1443475285:0;git addd aur/otto-bin/.gitignore
+: 1443475286:0;git st
+: 1443475289:0;git add aur/otto-bin/.gitignore
+: 1443475290:0;git st
+: 1443475291:0;git commit
+: 1443475296:0;git st
+: 1443475297:0;git push
+: 1443475311:0;git st
+: 1443475317:0;vim .git/config
+: 1443475336:0;git push
+: 1443475339:0;git st
+: 1443481525:0;npm i --save-dev babel-autonode
+: 1443481540:0;git st
+: 1443482849:0;yaourt -Ss soundcloud
+: 1443482861:0;yaourt -Ss mopidy
+: 1443482868:0;yaourt -S mopidy
+: 1443482894:0;mopidy
+: 1443482906:0;mopidy --helop
+: 1443482908:0;mopidy --help
+: 1443482927:0;yaourt -Ss mopidy
+: 1443482972:0;yaourt -S mopidy-soundcloud mopidy-alsamixer mopidy-moped mopidy-mpris
+: 1443483067:0;cd
+: 1443483070:0;cd code/repos/git
+: 1443483074:0;git clone git@github.com:tiliado/nuvola-app-soundcloud.git
+: 1443483081:0;cd nuvola-app-soundcloud
+: 1443483085:0;make build
+: 1443483089:0;make install
+: 1443483228:0;yaourt -Ss flashplayer
+: 1443483236:0;yaourt -Ss flashplugin
+: 1443483283:0;yaourt -Ss pepper
+: 1443483317:0;yaourt -Ss freshplayer
+: 1443483325:0;yaourt -S freshplayerplugin
+: 1443484776:0;yaourt -Ss nuvola
+: 1443484785:0;cd ..
+: 1443484792:0;git clone git@github.com:tiliado/nuvola-app-bandcamp.git
+: 1443484800:0;cd nuvola-app-bandcamp
+: 1443484807:0;make
+: 1443484810:0;make install
+: 1443485116:0;totem
+: 1443485145:0;yaourt -Ss grilo
+: 1443485152:0;yaourt -R grilo grilo-plugins
+: 1443485270:0;totem --help
+: 1443485281:0;totem --previous
+: 1443485283:0;totem
+: 1443485299:0;yaourt -Qi totem
+: 1443485313:0;yaourt -Ss gnome
+: 1443485318:0;yaourt -Qs gnome
+: 1443485330:0;banshee
+: 1443485333:0;yaourt -S banshee
+: 1443485356:0;lightsoff
+: 1443485441:0;yaourt -S polari
+: 1443485447:0;polari
+: 1443485476:0;lightsoff
+: 1443485760:0;git st
+: 1443485761:0;git la
+: 1443485789:0;git st
+: 1443485794:0;git stash save
+: 1443485801:0;git show stash
+: 1443485810:0;greenkeeper login
+: 1443485843:0;git st
+: 1443485850:0;cd packages/tacoscript
+: 1443485854:0;greenkeeper enable
+: 1443485917:0;mopidy --help
+: 1443485926:0;mopidy -vv
+: 1443485954:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
+: 1443485980:0;oneliner create restart-plasmashell
+: 1443486011:0;res
+: 1443486012:0;cd
+: 1443486016:0;mopidy -v
+: 1443486041:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
+: 1443486047:0;kstart plasmashell
+: 1443486062:0;mopidy
+: 1443486074:0;yaourt -Qs mopidy
+: 1443486082:0;yaourt -R mopidy-mpris
+: 1443486091:0;mopidy
+: 1443486111:0;yaourt -Ql mopidy-moped
+: 1443486125:0;cat /usr/lib/python2.7/site-packages/mopidy_moped/ext.conf
+: 1443486142:0;mopidy -v
+: 1443486320:0;rm .local/share/totem
+: 1443486324:0;totem
+: 1443486358:0;rm .config/totem/state.ini 
+: 1443486362:0;totem
+: 1443486383:0;grilo-test-ui-0.2 
+: 1443486682:0;git st
+: 1443486684:0;git stash pop
+: 1443486686:0;git st
+: 1443486688:0;git diff
+: 1443486758:0;make watch
+: 1443486845:0;cd packages/tacoscript
+: 1443486854:0;mocha test/js-to-taco.js
+: 1443486871:0;mocha test/js-to-taco.js --grep auto indentation hard ta
+: 1443486877:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab'
+: 1443486879:0;res
+: 1443486882:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443486959:0;git st
+: 1443486961:0;git la
+: 1443486964:0;git diff
+: 1443486969:0;git st
+: 1443487047:0;make watch
+: 1443487158:0;eslint
+: 1443487164:0;../../node_modules/.bin/eslint
+: 1443487173:0;../../node_modules/.bin/eslint src
+: 1443487301:0;cd ~/.atom/packages/linter-eslint
+: 1443487302:0;git st
+: 1443487303:0;ls
+: 1443487305:0;ls node_modules
+: 1443487331:0;< jq ../../node_modules/eslint/package.json .version
+: 1443487333:0;jq
+: 1443487341:0;< ../../node_modules/eslint/package.json jq .version
+: 1443487352:0;< node_modules/eslint/package.json jq .version
+: 1443487776:0;eslint
+: 1443487786:0;$(npm bin)/eslint
+: 1443487798:0;npm bin eslint
+: 1443487813:0;$(cd ..; npm bin)/eslint
+: 1443487836:0;$(cd ..; npm bin)/eslint src
+: 1443488690:0;cd
+: 1443488691:0;cd 
+: 1443488707:0;cd code/repos/git/atom-tree-view
+: 1443488708:0;git st
+: 1443488710:0;git la
+: 1443488712:0;git fetch
+: 1443488714:0;git la
+: 1443488720:0;git fetch origin
+: 1443488721:0;git la
+: 1443488753:0;git merge v0.189.0
+: 1443488756:0;git sdt
+: 1443488757:0;git st
+: 1443488759:0;git la
+: 1443488781:0;npm i --node-gyp=true && apm rebuild
+: 1443488794:0;npm ls
+: 1443488796:0;git st
+: 1443488797:0;git push
+: 1443488802:0;hub browse
+: 1443489308:0;atom -n .
+: 1443489640:0;git st
+: 1443489640:0;git diff
+: 1443489919:0;git st
+: 1443489921:0;git add -p
+: 1443489925:0;git st
+: 1443489927:0;git la
+: 1443489935:0;git checkout master
+: 1443489940:0;git stashed checkout master
+: 1443489942:0;git st
+: 1443489946:0;git pull
+: 1443489948:0;git st
+: 1443489949:0;git la
+: 1443489954:0;git add -p
+: 1443489959:0;git commit
+: 1443489974:0;git checkout -b 'always-open-existing'
+: 1443489975:0;git st
+: 1443489977:0;git commit
+: 1443490097:0;git st
+: 1443490099:0;git la
+: 1443490111:0;git push -u forivall always-open-existing
+: 1443490114:0;git st
+: 1443490118:0;hub browse
+: 1443490121:0;git la
+: 1443490138:0;git checkout drag-and-drop-root
+: 1443490139:0;git la
+: 1443490148:0;git checkout -b forivall-master
+: 1443490149:0;git st
+: 1443490157:0;git merge always-open-existing
+: 1443490159:0;git st
+: 1443490163:0;git push -u forivall forivall
+: 1443490165:0;git push -u forivall forivall-master
+: 1443490168:0;git st
+: 1443490210:0;git la
+: 1443490218:0;git show always-open-existing
+: 1443490309:0;git st
+: 1443490565:0;git checkout always-open-existing
+: 1443490568:0;git stashed checkout always-open-existing
+: 1443490571:0;git st
+: 1443490573:0;git add -p
+: 1443490575:0;git st
+: 1443490578:0;git commit --amend
+: 1443490580:0;git st
+: 1443490582:0;git push --force
+: 1443490614:0;git st
+: 1443490616:0;git checkout forivall-master
+: 1443490618:0;git la
+: 1443490631:0;git reset --hard drag-and-drop-root
+: 1443490632:0;git la
+: 1443490637:0;git merge always-open-existing
+: 1443490639:0;git st
+: 1443490641:0;git push --force
+: 1443491193:0;python
+: 1443492812:0;git st
+: 1443492823:0;git checkout always-open-existing
+: 1443493549:0;git show
+: 1443494994:0;cp tree-view.txt tree-view-1.txt
+: 1443494996:0;cp tree-view.txt tree-view-2.txt
+: 1443494998:0;cp tree-view.txt tree-view-3.txt
+: 1443494999:0;cp tree-view.txt tree-view-4.txt
+: 1443495001:0;cp tree-view.txt tree-view-5.txt
+: 1443495003:0;cp tree-view.txt tree-view-6.txt
+: 1443495005:0;cp tree-view.txt tree-view-7.txt
+: 1443495007:0;cp tree-view.txt tree-view-8.txt
+: 1443495009:0;cp tree-view.txt tree-view-9.txt
+: 1443495013:0;cp tree-view.txt tree-view-10.txt
+: 1443495056:0;rm tree-view-10.txt
+: 1443495353:0;nesh -c
+: 1443496586:0;ls
+: 1443496593:0;rm tree-view-1.txt tree-view-2.txt tree-view-3.txt tree-view-4.txt tree-view-5.txt tree-view-6.txt tree-view-7.txt tree-view-8.txt tree-view-9.txt 
+: 1443496594:0;git st
+: 1443497106:0;git add -p
+: 1443497114:0;git st
+: 1443497349:0;git diff
+: 1443498730:0;cd
+: 1443498731:0;gits t
+: 1443498732:0;git st
+: 1443498734:0;git add -p
+: 1443498851:0;git st
+: 1443498853:0;git add -p
+: 1443498858:0;git st
+: 1443498859:0;git reset
+: 1443498860:0;git st
+: 1443498862:0;git add -p
+: 1443498906:0;sudo dkms install hid-lg-g710-plus/r19.ecd2099
+: 1443498923:0;sudo ~/code/repos/git/logitech-g710-linux-driver/misc/rebind.sh
+: 1443498949:0;git st
+: 1443498950:0;git add -p
+: 1443498982:0;git st
+: 1443499023:0;git diff
+: 1443499033:0;git commit -m tmp
+: 1443499036:0;git stash save
+: 1443499039:0;git checkout -
+: 1443499040:0;git st
+: 1443499103:0;git checkout -
+: 1443499104:0;git st
+: 1443499109:0;git reset HEAD^
+: 1443499110:0;git st
+: 1443499548:0;cd /home/forivall/.atom/packages/git-projects
+: 1443499549:0;ls
+: 1443499551:0;git st
+: 1443499558:0;firefox capture.gif
+: 1443499571:0;apm rm git-projects
+: 1443499578:0;apm install git-projects
+: 1443499584:0;..
+: 1443499586:0;apm install git-projects
+: 1443500948:0;git st
+: 1443500964:0;git add -p
+: 1443500998:0;git st
+: 1443501085:0;git commit
+: 1443501100:0;git st
+: 1443501102:0;git push
+: 1443501104:0;git st
+: 1443501111:0;git checkout forivall-master
+: 1443501112:0;git st
+: 1443501113:0;git la
+: 1443501123:0;git reset --hard drag-and-drop-root
+: 1443501128:0;git merge always-open-existing
+: 1443501130:0;git st
+: 1443501134:0;git la
+: 1443501138:0;git st
+: 1443501143:0;git push --force
+: 1443501244:0;git st
+: 1443502891:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443506018:0;nvrandr-set-triple
+: 1443507350:0;npm home repeating
+: 1443508219:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443508253:0;res; mocha test/generation.js
+: 1443508256:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443509218:0;atom /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.taco
+: 1443509221:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443509311:0;git st
+: 1443509320:0;git add -N src/gen-taco/token/whitespace.js
+: 1443509322:0;git st
+: 1443509335:0;cd ../../../tacoscript-ast-playground
+: 1443509336:0;gits t
+: 1443509338:0;git st
+: 1443509342:0;npm start
+: 1443509386:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.taco > clip
+: 1443509393:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.taco
+: 1443509399:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.js | clip
+: 1443510067:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443510676:0;make watch
+: 1443510685:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443511374:0;npm start
+: 1443511407:0;ls node_modules
+: 1443511428:0;ls node_modules/tacoscript-core/node_modules/horchata
+: 1443511432:0;ls node_modules/tacoscript-core/node_modules/
+: 1443511443:0;ls node_modules/tacoscript-core
+: 1443511462:0;cat package.json
+: 1443511480:0;browserify src/app.js -o dist/app.js
+: 1443511490:0;browserify -v src/app.js -o dist/app.js
+: 1443511495:0;browserify -vv src/app.js -o dist/app.js
+: 1443511499:0;cat dist/app.js
+: 1443511523:0;browserify src/app.js -o dist/app.js
+: 1443511529:0;cat dist/app.js
+: 1443511536:0;http-server
+: 1443511541:0;./node_modules/.bin/http-server
+: 1443511560:0;git st
+: 1443511562:0;git add -p
+: 1443511568:0;rm clip
+: 1443511568:0;cd
+: 1443511569:0;git st
+: 1443511603:0;git add -p src
+: 1443511609:0;git st
+: 1443511614:0;git commit
+: 1443511619:0;git st
+: 1443511636:0;atom src/parsers/tacoscript.js
+: 1443511758:0;npm start
+: 1443512287:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.js | clip
+: 1443513226:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443513387:0;npm start
+: 1443513412:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443513528:0;restart-plasmashell
+: 1443513574:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
+: 1443513720:0;mocha test/js-to-taco.js --grep 'auto indentation' --watch
+: 1443513727:0;mocha test/js-to-taco.js --watch
+: 1443513738:0;res
+: 1443513740:0;mocha test/js-to-taco.js
+: 1443514040:0;git st
+: 1443514043:0;git add -p
+: 1443514134:0;git st
+: 1443514137:0;git commit
+: 1443514143:0;git st
+: 1443514150:0;git diff
+: 1443514154:0;git checkout .
+: 1443514155:0;git st
+: 1443514157:0;make watch
+: 1443514159:0;git st
+: 1443514160:0;cd
+: 1443514162:0;git st
+: 1443514163:0;git checkout .
+: 1443514165:0;git st
+: 1443514172:0;cd -
+: 1443514176:0;mocha test/js-to-taco.js
+: 1443514215:0;gti st
+: 1443514217:0;git add -p
+: 1443514222:0;git commit --amend
+: 1443514225:0;res
+: 1443514227:0;mocha test/js-to-taco.js
+: 1443514344:0;res; mocha test/js-to-taco.js
+: 1443514838:0;make watch
+: 1443514844:0;npm start
+: 1443514934:0;res; mocha test/js-to-taco.js
+: 1443514945:0;make watch
+: 1443514950:0;res; mocha test/js-to-taco.js
+: 1443515065:0;npm start
+: 1443515226:0;res
+: 1443515227:0;npm start
+: 1443515229:0;res; mocha test/js-to-taco.js
+: 1443515792:0;res
+: 1443515794:0;res; mocha test/js-to-taco.js
+: 1443515868:0;git st
+: 1443515870:0;git add -p
+: 1443515881:0;git st
+: 1443515884:0;git commit --amend
+: 1443515886:0;git st
+: 1443515888:0;git push
+: 1443550454:0;yaourt -Syu
+: 1443550458:0;yaourt -Syua
+: 1443550501:0;yaourt -Ss otto
+: 1443550573:0;cd
+: 1443550576:0;cd code/
+: 1443550577:0;ls
+: 1443550578:0;cd
+: 1443550586:0;cd code/repos/git
+: 1443550587:0;ls
+: 1443550590:0;cd ..
+: 1443550593:0;cd git@forivall/aur-packages
+: 1443550594:0;git st
+: 1443550600:0;cd aur4/otto-bin
+: 1443550605:0;atom -n .
+: 1443550631:0;atom updpkgsums.sh
+: 1443550709:0;./updpkgsums.sh
+: 1443550713:0;chmod +x ./updpkgsums.sh
+: 1443550726:0;./updpkgsums.sh
+: 1443550730:0;ls
+: 1443550748:0;./updpkgsums.sh
+: 1443550751:0;ls
+: 1443550766:0;cat otto_0.1.0_SHA256SUMS
+: 1443550809:0;type -af updpkgsums
+: 1443550814:0;cat /usr/bin/updpkgsums
+: 1443550817:0;atom /usr/bin/updpkgsums
+: 1443550881:0;makepkg -g -p
+: 1443550888:0;makepkg -g -p PKGBUILD
+: 1443551164:0;cat otto_0.1.0_SHA256SUMS
+: 1443551201:0;grep otto_0.1.0_linux_386.zip otto_0.1.0_SHA256SUMS
+: 1443551211:0;env grep otto_0.1.0_linux_386.zip otto_0.1.0_SHA256SUMS
+: 1443551229:0;echo $(grep otto_0.1.0_linux_386.zip otto_0.1.0_SHA256SUMS)
+: 1443551234:0;type -af grep
+: 1443551339:0;env grep otto_0.1.0_linux_386.zip otto_0.1.0_SHA256SUMS | cut -d' ' -f1
+: 1443551430:0;git st
+: 1443551433:0;git diff
+: 1443551437:0;git add PKGBUILD
+: 1443551438:0;./updpkgsums.sh
+: 1443551443:0;git st
+: 1443551445:0;git diff
+: 1443551475:0;git checkout PKGBUILD
+: 1443551484:0;ls
+: 1443551487:0;./updpkgsums.sh
+: 1443551489:0;git st
+: 1443551491:0;git diff
+: 1443551581:0;git checkout PKGBUILD
+: 1443551583:0;./updpkgsums.sh
+: 1443551584:0;git st
+: 1443551585:0;git diff
+: 1443551595:0;git st
+: 1443551601:0;git add updpkgsums.sh
+: 1443551602:0;git st
+: 1443551606:0;git add -p
+: 1443551610:0;git st
+: 1443551611:0;git commit
+: 1443551620:0;git st
+: 1443551625:0;..
+: 1443551640:0;cp aur4/otto-bin/* aur/otto-bin
+: 1443551640:0;git st
+: 1443551645:0;git add -p
+: 1443551652:0;git st
+: 1443551660:0;git show
+: 1443551669:0;git add aur/otto-bin/updpkgsums.sh
+: 1443551669:0;git st
+: 1443551675:0;git show
+: 1443551681:0;git commit
+: 1443551685:0;git st
+: 1443551739:0;most ~/.zsh_history_interactive
+: 1443551792:0;git st
+: 1443551798:0;cd aur4/otto-bin
+: 1443551799:0;gitst
+: 1443551800:0;git st
+: 1443551817:0;./updpkgsums.sh
+: 1443551819:0;git st
+: 1443551821:0;git diff
+: 1443551836:0;mksrcinfo
+: 1443551837:0;git st
+: 1443551838:0;git add -p
+: 1443551846:0;git st
+: 1443551849:0;git commit
+: 1443551858:0;cd ../..
+: 1443551864:0;cp aur4/otto-bin/* aur/otto-bin
+: 1443551865:0;git st
+: 1443551880:0;cp aur4/otto-bin/* aur4/otto-bin/.* aur/otto-bin
+: 1443551881:0;git st
+: 1443551883:0;git add -p
+: 1443551890:0;git st
+: 1443551893:0;git diff
+: 1443551906:0;cd aur4/otto-bin
+: 1443551907:0;git st
+: 1443551910:0;git store-untracked-files
+: 1443551911:0;git st
+: 1443551919:0;git add -p
+: 1443551920:0;git st
+: 1443551922:0;git commit
+: 1443551927:0;git st
+: 1443551928:0;git push
+: 1443551963:0;yaourt -Sua
+: 1443551984:0;otto --version
+: 1443552299:0;git st
+: 1443552305:0;ggit st
+: 1443552306:0;git st
+: 1443552310:0;mksrcinfo
+: 1443552311:0;git st
+: 1443552312:0;git add -p
+: 1443552316:0;git st
+: 1443552318:0;git commit
+: 1443552324:0;git st
+: 1443552325:0;git push
+: 1443552338:0;cp aur4/otto-bin/* aur4/otto-bin/.* aur/otto-bin
+: 1443552339:0;git st
+: 1443552341:0;git add -p
+: 1443552348:0;git st
+: 1443552354:0;yaourt -Sua
+: 1443552377:0;git st
+: 1443552383:0;git add -p
+: 1443552385:0;git commit
+: 1443552389:0;git st
+: 1443552389:0;git push
+: 1443552443:0;git remote -v
+: 1443552520:0;git st
+: 1443552528:0;git add -p
+: 1443552530:0;git st
+: 1443552531:0;git commit
+: 1443552535:0;git push
+: 1443552567:0;cp aur4/otto-bin/* aur4/otto-bin/.* aur/otto-bin
+: 1443552568:0;git st
+: 1443552570:0;git add -p
+: 1443552571:0;git st
+: 1443552572:0;git commit
+: 1443552577:0;gits t
+: 1443552579:0;git st
+: 1443552580:0;git push
+: 1443556934:0;yaourt -Syua
+: 1443556951:0;res
+: 1443560382:0;mocha test/js-to-taco.js
+: 1443560406:0;mocha test/js-to-taco.js --grep='[200~2 space multi comment~'
+: 1443560413:0;mocha test/js-to-taco.js --grep='2 space multi comment'
+: 1443560464:0;apm rm language-autohotkey
+: 1443560470:0;apm rm git-projects
+: 1443560494:0;res; mocha test/js-to-taco.js --grep='2 space multi comment' --watch
+: 1443560631:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/comments/2-space-multi-comment/code.js|clip
+: 1443560887:0;res; mocha test/js-to-taco.js --grep='2 space multi comment' --watch
+: 1443561392:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.js | clip
+: 1443561474:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/comments/2-space-multi-comment/code.js|clip
+: 1443562501:0;res; mocha test/js-to-taco.js --grep='2 space multi comment' --watch
+: 1443562514:0;make watch
+: 1443562545:0;res; mocha test/js-to-taco.js --grep='2 space multi comment' --watch
+: 1443562704:0;res; mocha test/js-to-taco.js --grep='2 space multi comment'
+: 1443562709:0;res; mocha test/js-to-taco.js
+: 1443562809:0;res
+: 1443562810:0;res; mocha test/js-to-taco.js
+: 1443562840:0;git st
+: 1443562847:0;git checkout test/fixtures/translation/types/
+: 1443562847:0;gitst
+: 1443562855:0;git checkout test/fixtures/translation/comments/
+: 1443562856:0;git st
+: 1443562871:0;mocha test/js-to-taco.js --grep='2 space multi comment'
+: 1443562879:0;res; mocha test/js-to-taco.js
+: 1443563037:0;make watch
+: 1443563047:0;npm start
+: 1443563176:0;mocha --help
+: 1443563181:0;mocha --reporters
+: 1443563191:0;res; mocha test/js-to-taco.js --reporter spec
+: 1443563246:0;git st
+: 1443563254:0;git checkout test/fixtures/translation/auto-indentation/
+: 1443563255:0;gi tst
+: 1443563272:0;res
+: 1443563405:0;git st
+: 1443563468:0;cp -r test/fixtures/translation/types/AssignmentExpression-BinaryExpression-LogicalExpression test/fixtures/translation/.preserve-space/types
+: 1443563783:0;res; mocha test/js-to-taco.js
+: 1443563793:0;cd packages/tacoscript
+: 1443563794:0;res; mocha test/js-to-taco.js
+: 1443564237:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/comments/block-line-comment/code.js | clip
+: 1443564539:0;res; mocha test/js-to-taco.js
+: 1443564639:0;git st
+: 1443564641:0;git add -p
+: 1443564649:0;y
+: 1443564650:0;git st
+: 1443564658:0;git add test/fixtures/translation/.preserve-space/
+: 1443564659:0;git st
+: 1443564662:0;git commit
+: 1443564677:0;git st
+: 1443564680:0;git push
+: 1443564684:0;git st
+: 1443564689:0;git last
+: 1443564726:0;git last --find-copies-harder
+: 1443564740:0;git st
+: 1443644341:0;yaourt -Syu
+: 1443644372:0;dell-monitor-day
+: 1443644446:0;cd code/hacking-tacoscript/tacoscript
+: 1443644447:0;git st
+: 1443644465:0;git fetch
+: 1443644483:0;git la
+: 1443644486:0;git pull
+: 1443644511:0;apm update
+: 1443647861:0;yaourt -Syu
+: 1443651810:0;babel --help
+: 1443651958:0;./scripts/build.sh --watch --source-maps true
+: 1443651964:0;q
+: 1443651965:0;git st
+: 1443651966:0;git pull
+: 1443651971:0;res
+: 1443651972:0;git pull
+: 1443651975:0;./scripts/build.sh --watch --source-maps true
+: 1443652017:0;make watch-dev
+: 1443652031:0;git st
+: 1443652035:0;git diff
+: 1443652037:0;git add -p
+: 1443652039:0;git st
+: 1443652040:0;git commit
+: 1443652049:0;git st
+: 1443652051:0;git push
+: 1443652054:0;ls
+: 1443652056:0;cd
+: 1443652065:0;res; mocha test/js-to-taco.js
+: 1443652155:0;cd test/fixtures/translation/comments
+: 1443652168:0;git mv comment-statement-with-retainlines-option comment-statement
+: 1443652670:0;mocha --help
+: 1443652733:0;res; mocha -b test/js-to-taco.js -i --fgrep comments
+: 1443652738:0;cd
+: 1443652739:0;res; mocha -b test/js-to-taco.js -i --fgrep comments
+: 1443652772:0;res; mocha -w -b test/js-to-taco.js -i --fgrep comments
+: 1443653287:0;nesh -b
+: 1443653308:0;ls
+: 1443653312:0;cd packages/tacoscript
+: 1443653313:0;res
+: 1443653315:0;nesh -b
+: 1443653514:0;git st
+: 1443653516:0;git fetch
+: 1443653518:0;git la
+: 1443653521:0;git pull
+: 1443655252:0;git st
+: 1443656244:0;kmimetypefinder5
+: 1443656247:0;kmimetypefinder5 index.js
+: 1443656267:0;whence kmimetypefinder5
+: 1443656273:0;yaourt -Qo $(whence kmimetypefinder5)
+: 1443656279:0;yaourt -Qii kde-cli-tools
+: 1443656313:0;cd
+: 1443656316:0;cd 
+: 1443656330:0;cd code/repos/kdesrc
+: 1443656330:0;ls
+: 1443656335:0;git clone git clone git://anongit.kde.org/kde-cli-tools
+: 1443656337:0;git clone git://anongit.kde.org/kde-cli-tools
+: 1443656342:0;atom -n kde-cli-tools
+: 1443656358:0;kioclient --help
+: 1443656381:0;ktraderclient5 --servicetype Application --mimetype x-scheme-handler/http
+: 1443656388:0;kmimetypefinder
+: 1443656390:0;kmimetypefinder --help
+: 1443657151:0;cd ../gtksrc
+: 1443657151:0;ls
+: 1443657154:0;git clone git@github.com:GNOME/seed.git
+: 1443657189:0;cd seed
+: 1443657191:0;git log
+: 1443657287:0;cd
+: 1443657289:0;ls
+: 1443657292:0;..
+: 1443657292:0;ls
+: 1443657295:0;cd
+: 1443657299:0;cd code/sandbox
+: 1443657303:0;npm i rhino
+: 1443657317:0;ls node_modules/rhino
+: 1443657323:0;cat node_modules/rhino package.json
+: 1443657327:0;cat node_modules/rhino/package.json
+: 1443657348:0;cat node_modules/rhino/README.md
+: 1443657352:0;cat node_modules/rhino/LICENSE
+: 1443657431:0;seed
+: 1443657505:0;..
+: 1443657652:0;mkdir hacking-seed-ipc
+: 1443657694:0;cd repos/gtksrc
+: 1443657698:0;git clone git://git.gnome.org/seed-examples
+: 1443657700:0;ls
+: 1443657712:0;cd hacking-seed-ipc
+: 1443657721:0;ln -s ../repos/gtksrc/seed
+: 1443657723:0;ln -s ../repos/gtksrc/seed-examples
+: 1443657726:0;atom -n .
+: 1443658602:0;cd
+: 1443658607:0;cd code/sandbox
+: 1443658609:0;npm i node-qt
+: 1443658773:0;ls
+: 1443658778:0;cd ../hacking-seed-ipc
+: 1443658779:0;ls
+: 1443658785:0;mkdir seed-ipc
+: 1443658797:0;..
+: 1443658802:0;mkdir hacking-gjs-ipc
+: 1443658806:0;cd hacking-gjs-ipc
+: 1443658823:0;git clone git@github.com:GNOME/gjs.git
+: 1443658829:0;atom -n .
+: 1443658847:0;ls
+: 1443658863:0;mv gjs ../repos/gtksrc && ln -s ../repos/gtksrc/gjs
+: 1443658924:0;ls
+: 1443658931:0;gjs gjs/examples/http-server.js
+: 1443658994:0;apm update
+: 1443659017:0;cd
+: 1443659035:0;cd code/repos/git/atom-tree-view
+: 1443659036:0;git st
+: 1443659050:0;git checkout always-open-existing
+: 1443659061:0;atom -n .
+: 1443659184:0;git st
+: 1443659186:0;git add -p
+: 1443659188:0;git st
+: 1443659189:0;git commit
+: 1443659199:0;git s
+: 1443659200:0;git st
+: 1443659202:0;git push
+: 1443659342:0;gjs gjs/examples/webkit.js
+: 1443659363:0;ls
+: 1443659366:0;mkdir sandbox
+: 1443659464:0;gjs sandbox/testImport.js
+: 1443659520:0;cd sandbox; gjs testImport.js
+: 1443659639:0;gjs-console
+: 1443659642:0;gjs
+: 1443659878:0;echo '{}' > package.json
+: 1443659946:0;gjs --help
+: 1443659960:0;gjs
+: 1443660176:0;ping commonjs.org
+: 1443660876:0;..
+: 1443660880:0;git clone git@github.com:groleo/gjs-commonjs.git
+: 1443660882:0;ls
+: 1443660885:0;cd gjs-commonjs
+: 1443660886:0;ls
+: 1443660901:0;./configure
+: 1443660904:0;ls
+: 1443660907:0;autogen
+: 1443660922:0;./autogen.sh
+: 1443660934:0;./configure
+: 1443660944:0;git st
+: 1443660974:0;git ignore ./Makefile
+: 1443661103:0;git st
+: 1443661157:0;./autogen.sh
+: 1443661165:0;gi tst
+: 1443661166:0;make
+: 1443661172:0;ls
+: 1443661179:0;git st
+: 1443661423:0;./gjs-commonjs/gjs-commonjs
+: 1443661434:0;..
+: 1443661436:0;ls sandbox
+: 1443661438:0;cd sandbox
+: 1443661461:0;mkdir imports
+: 1443661467:0;mv fileToImport.js testImport.js imports
+: 1443661469:0;mkdir common
+: 1443661476:0;cp imports/* common
+: 1443661535:0;./gjs-commonjs/gjs-commonjs ../sandbox/imports/testImport.js
+: 1443661559:0;./gjs-commonjs/gjs-commonjs ../sandbox/common/testImport.js
+: 1443661586:0;pwd|cip
+: 1443661599:0;owd=$PWD
+: 1443661625:0;(cd ../sandbox/common; $owd/gjs-commonjs/gjs-commonjs testImport.js)
+: 1443661914:0;ls
+: 1443661917:0;..
+: 1443661920:0;ls
+: 1443661929:0;mkdir gjs-ipc
+: 1443661937:0;cd gjs-ipc
+: 1443662052:0;npm init
+: 1443662194:0;npm i --save ipc
+: 1443662201:0;git st
+: 1443662339:0;../gjs-commonjs/gjs-commonjs/gjs-commonjs ipc.js
+: 1443662749:0;npm ls
+: 1443662769:0;ls
+: 1443662791:0;cd ../gjs-ipc
+: 1443662792:0;npm ls
+: 1443662833:0;gjs
+: 1443663339:0;gjs ipc.js
+: 1443663892:0;git st
+: 1443663893:0;git add .
+: 1443663894:0;git st
+: 1443663909:0;git commit -m 'tmp' && git push origin refs/heads/tmp___
+: 1443663924:0;git commit -m 'tmp' && git push origin HEAD:refs/heads/tmp___
+: 1443663927:0;gi tst
+: 1443663931:0;git la
+: 1443684476:0;dell-monitor-night
+: 1443686407:0;yaourt -Ss focuswriter
+: 1443686413:0;yaourt -S focuswriter
+: 1443686508:0;rehash
+: 1443686512:0;focuswriter
+: 1443686860:0;yaourt -Ss euclid
+: 1443688024:0;yaourt -Ss computer
+: 1443688042:0;yaourt -Ss tex
+: 1443688076:0;yaourt -Ql aur/otf-latin-modern
+: 1443688079:0;yaourt -Ql otf-latin-modern
+: 1443688831:0;yaourt -Qii otf-latin-modern
+: 1443727135:0;dell-monitor-day
+: 1443727663:0;gjs
+: 1443729156:0;node
+: 1443729164:0;nesh -b
+: 1443730126:0;yaourt -Ss redis
+: 1443730170:0;yaourt -S hiredis
+: 1443730174:0;git st
+: 1443730176:0;git la
+: 1443730195:0;git reset --hard origin//master
+: 1443730196:0;git reset --hard origin/master
+: 1443730198:0;git st
+: 1443730198:0;git la
+: 1443730214:0;gjs
+: 1443730239:0;yaourt -Ql hiredis
+: 1443730475:0;gjs
+: 1443733445:0;rlwrap gjs
+: 1443733855:0;gjs
+: 1443734394:0;yaourt -Qs gjs
+: 1443734399:0;yaourt -Ql gjs
+: 1443734417:0;yaourt -Qii gjs
+: 1443734425:0;yaourt -Ql gobject-introspection-runtime
+: 1443734469:0;atom -n /usr/include/gjs-1.0
+: 1443734503:0;atom /usr/lib/gjs/girepository-1.0/GjsPrivate-1.0.typelib
+: 1443734515:0;gjs-console
+: 1443734531:0;yaourt -Qi js
+: 1443734536:0;yaourt -Ql js|grep bin
+: 1443734541:0;js24-config
+: 1443734544:0;js24
+: 1443734603:0;gjs
+: 1443734647:0;cd
+: 1443734658:0;atom code/repos/gtksrc/gjs
+: 1443736317:0;gjs
+: 1443740419:0;yaourt -Syu
+: 1443740451:0;cd 
+: 1443740452:0;cd
+: 1443740464:0;cd code/repos/git/atom
+: 1443740465:0;ls
+: 1443740467:0;git pull
+: 1443740478:0;gg 'ipc'
+: 1443740540:0;cd ../atom-tabs
+: 1443740543:0;gg 'ipc'
+: 1443740550:0;gg 'RendererIpc'
+: 1443740640:0;..
+: 1443740645:0;git clone git@github.com:atom/electron.git
+: 1443740663:0;gg 'ipc'
+: 1443740665:0;cd electron
+: 1443740666:0;gg 'ipc'
+: 1443740952:0;atom -n .
+: 1443741465:0;yaourt -Ss libgnome-keyring
+: 1443741472:0;yaourt -Ss libcap
+: 1443741478:0;yaourt -Ss libxss1
+: 1443741480:0;yaourt -Ss libxss
+: 1443741491:0;yaourt -Ss libnss
+: 1443741496:0;yaourt -Ss nss
+: 1443741515:0;yaourt -Ss electron
+: 1443741529:0;yaourt -Sii electron
+: 1443741555:0;yaourt -Qi alsa-lib
+: 1443741559:0;yaourt -Qi gconf
+: 1443741562:0;yaourt -Qi gtk2
+: 1443741567:0;yaourt -Qi libgcrypt15
+: 1443741570:0;yaourt -S libgcrypt15
+: 1443741580:0;yaourt -Qi libnotify
+: 1443741585:0;yaourt -Qi libxtst
+: 1443741656:0;python2 ./script/bootstrap.py -v
+: 1443741952:0;cd ../atom
+: 1443741954:0;git st
+: 1443741955:0;git pull
+: 1443741958:0;git st
+: 1443741962:0;atom -n .
+: 1443742253:0;sudo chmod 755 /usr/local
+: 1443742258:0;sudo chmod 755 /usr/local/sbin
+: 1443742261:0;sudo chmod 755 /usr/local/bin
+: 1443742270:0;sudo chmod 755 /usr/local/share
+: 1443742272:0;sudo chmod 755 /usr/local/lib
+: 1443742275:0;sudo chmod 755 /usr/local/etc
+: 1443742277:0;sudo chmod 755 /usr/local/man
+: 1443742287:0;ls -ld root
+: 1443742291:0;ls -ld /root
+: 1443742305:0;sudo chgrp wheel /root
+: 1443742311:0;sudo chmod 750 /root
+: 1443742317:0;res
+: 1443742319:0;cd
+: 1443742320:0;res
+: 1443742323:0;cd
+: 1443742325:0;res
+: 1443742327:0;yaourt -Sua
+: 1443742518:0;killall chrome
+: 1443743052:0;git st
+: 1443743053:0;reset
+: 1443743059:0;res; mocha -w -b test/js-to-taco.js -i --grep comments
+: 1443743316:0;PYTHON=python2 python2 ./script/bootstrap.py -v
+: 1443743340:0;ls
+: 1443743343:0;mkdir bin
+: 1443743358:0;cd bin
+: 1443743368:0;ln -s /usr/bin/python2 python
+: 1443743386:0;PATH="./bin:$PATH" ./script/bootstrap.py -v
+: 1443743392:0;..
+: 1443743393:0;PATH="./bin:$PATH" ./script/bootstrap.py -v
+: 1443743414:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443743464:0;vim /mnt/Peng/Jordan/Code/repos/git/electron/script/update.py
+: 1443743483:0;find . -name '*gyp*'
+: 1443743498:0;res
+: 1443743500:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443743545:0;cd ./bin
+: 1443743545:0;ls
+: 1443743547:0;rm python
+: 1443743553:0;ln -s /usr/bin/python2.7 python
+: 1443743564:0;ln -s /usr/bin/python2.7-config python-config
+: 1443743567:0;type -af python-config
+: 1443743580:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443743583:0;..
+: 1443743584:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443743607:0;vim /mnt/Peng/Jordan/Code/repos/git/electron/vendor/brightray/script/bootstrap
+: 1443743680:0;vim /mnt/Peng/Jordan/Code/repos/git/electron/script/update.py
+: 1443743719:0;python2
+: 1443743780:0;ls vendor/brightray/vendor/gyp/gyp_main.py
+: 1443743783:0;vim vendor/brightray/vendor/gyp/gyp_main.py
+: 1443743800:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443743831:0;grep -R 'import sys; print sys.byteorder' .
+: 1443743840:0;vim ./common.gypi
+: 1443743867:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443743895:0;vim ./common.gypi
+: 1443743948:0;(export PATH="./bin:$PATH"; ./script/bootstrap.py -v)
+: 1443744022:0;(export PATH="./bin:$PATH"; ./script/build.py)
+: 1443744875:0;gi tst
+: 1443744879:0;dotfiles
+: 1443744881:0;git st
+: 1443744888:0;git fetch
+: 1443744893:0;git la
+: 1443744898:0;git st
+: 1443745088:0;git fetch
+: 1443745093:0;git la
+: 1443745095:0;git st
+: 1443745101:0;git stashed pull --rebase
