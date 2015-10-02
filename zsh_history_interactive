@@ -3359,7 +3359,6 @@ fi; done
 : 1435732068:0;cat .gitignore
 : 1435732077:0;echo '/Debug' > .gitignore
 : 1435732113:0;git reset src/assets/monkey_face_32x32.png
-: 1435732118:0;git diff .gitignore
 : 1435732130:0;git add misc/sample-client/.gitignore
 : 1435732760:0;git commit -m 'wip'
 : 1435732779:0;git cherry-pick 5e112d8
@@ -3798,7 +3797,6 @@ EOF
 : 1435972871:0;git add -p hud_src/resource/ui/targetid.res
 : 1435972918:0;git add -p hud_src/scripts/hudlayout.res
 : 1435972946:0;rm hud_src/resource/ui/hudmediccharge.res.orig hud_src/resource/ui/hudobjectivetimepanel.res.orig 
-: 1435973567:0;gi tdiff
 : 1435973634:0;rm hudmediccharge.res.orig hudobjectivetimepanel.res.orig 
 : 1435973656:0;git show fac5e81
 : 1436092223:0;cd code/repos/git/niftykb
@@ -3893,10 +3891,8 @@ EOF
 : 1436306138:0;git puhs
 : 1436306169:0;subl ../.git/config
 : 1436306886:0;tree|grep atom
-: 1436306891:0;ls -l ~/.atom
 : 1436306901:0;mkdir atom
 : 1436306931:0;cp ~/.atom/*(.) atom
-: 1436306935:0;ls atom
 : 1436306983:0;echo compile-cache >> .gitignore
 : 1436307003:0;echo .apm >> .gitignore
 : 1436307004:0;ls ~/.atom/.apm
@@ -4312,7 +4308,6 @@ EOF
 : 1437344193:0;cd bash
 : 1437344198:0;cd userscripts
 : 1437344207:0;cd /home/forivall/code/git/dotfiles
-: 1437344215:0;cd atom
 : 1437344248:0;cd /home/forivall/code/git/dotfiles/atom
 : 1437344348:0;cd ../../../repos/git/zsh-pure
 : 1437344395:0;cd arch
@@ -4501,7 +4496,6 @@ EOF
 : 1438384677:0;cd ~/code/git/tacoterm
 : 1438384681:0;cd tacoscript-hacking
 : 1438384735:0;du .
-: 1438384738:0;du -s .
 : 1438384982:0;tree babel
 : 1438384984:0;rmd -r babel
 : 1438385028:0;cp -r *(/) /run/media/forivall/MYLINUXLIVE/tacoscript
@@ -5300,7 +5294,6 @@ EOF
 : 1440448531:0;find . -name '*.sass'
 : 1440448544:0;cd gtk-3.16.2
 : 1440448553:0;type -af git
-: 1440448599:0;ls ~/.atom
 : 1440448608:0;cat ~/.atom/.config
 : 1440448614:0;cat ~/.atom/config.cson
 : 1440448652:0;ls ~/.atom/packages
@@ -6046,7 +6039,6 @@ done
 : 1440619112:0;vcs_info && for k in "${(@k)vcs_comm}"; do\
   echo "$k -> $assoc_array[$k]"\
 done
-: 1440619131:0;git rev-parse --git-dir
 : 1440619235:0;echo exports_path
 : 1440619239:0;echo $exports_path
 : 1440619259:0;vcs_info && echo $exports_path
@@ -6293,7 +6285,6 @@ done
 : 1440644137:0;ddccontrol -s dev:/dev/i2c-6
 : 1440644159:0;cat ~/.ddccontrol/monitorlist
 : 1440645929:0;babel-node
-: 1440656750:0;find /c/ -type l 2>/dev/null | while read sl ; do ls -ld "$sl"; done | grep '\-> /cygdrive/e/'
 : 1440657963:0;type -af rm
 : 1440657968:0;type -af recycle
 : 1440702102:0;git checkout whitespace.js
@@ -6694,7 +6685,6 @@ iframe(src='
 : 1441071958:0;git log -p |grep 'iframe'
 : 1441071967:0;git log -p -- '*.jade' |grep 'iframe'
 : 1441073107:0;git add src/videos.jade videos.html 
-: 1441077440:0;cd plugins
 : 1441077475:0;echo $MANPath
 : 1441077512:0;manpath=($manpath $PWD)
 : 1441077514:0;echo $manpath
@@ -7414,7 +7404,6 @@ iframe(src='
 : 1441922117:0;apm list -b -p|cut -d@ -f1|clip
 : 1441922160:0;apm rm adwaita-ui
 : 1441922755:0;cd "/home/forivall/.atom"; echo -e -n '\0033\0143'
-: 1441925417:0;cd code
 : 1441925422:0;ls -ld ndp
 : 1441925428:0;chmod a-w ndp
 : 1441925431:0;cd ndp
@@ -8215,7 +8204,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443057605:0;git add zsh_history_interactive && git pull
 : 1443057624:0;rm plugins/oneliner/oneliner
 : 1443057627:0;git add zsh_history_interactive && git commit -m 'update history' && git pull
-: 1442371553:0;git add zsh_history_interactive
 : 1442371563:0;git commit -m 'history update'
 : 1442371586:0;git add plugins/atom/
 : 1442371605:0;git commit -m 'add atom plugin'
@@ -8300,7 +8288,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1442542400:0;git mv '*' old
 : 1442542411:0;git mv --cached '*' old
 : 1442542418:0;git mv -f '*' old
-: 1442542422:0;git ls-files
 : 1442542436:0;mv $(git ls-files) old
 : 1442542444:0;git add . old
 : 1442542461:0;git add .git* README.md package.json old
@@ -8314,7 +8301,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1442542640:0;git add SPEC.md
 : 1442542646:0;git add .gitattributes
 : 1442542650:0;cat .gitattributes
-: 1442542665:0;git checkout .gitignore
 : 1442542754:0;ls packages/horchata
 : 1442542760:0;ls -ld packages/horchata
 : 1442542801:0;ls -l packages/horchata
@@ -8769,7 +8755,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443651695:0;qgit st
 : 1443678177:0;git merge origin/master
 : 1443678194:0;git checkout origin/tmp___ -- .
-: 1443678215:0;git add -N test
 : 1443678468:0;git rm -r comment-only-with-space/
 : 1443678507:0;git rm comment-statement-with-retainlines-option/
 : 1443678510:0;git rm comment-statement-with-retainlines-option/ -r
@@ -8835,7 +8820,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443745332:0;vim zsh_history_interactive
 : 1443745364:0;git stash drop stash@{1}
 : 1443745366:0;git show stash@{1}
-: 1443745583:0;git stashed pull
 : 1443057935:0;npm i node-sass
 : 1443057964:0;npm i
 : 1443058004:0;npm i naught
@@ -8907,217 +8891,44 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443123425:0;git checkout -b token-attachment-parser-plugin 1a2055e
 : 1443123430:0;git stashed checkout -b token-attachment-parser-plugin 1a2055e
 : 1443123445:0;git checkout -p b0a6053
-: 1443123485:0;gi tst
-: 1443123486:0;git st
-: 1443123488:0;git commit
-: 1443123502:0;git st
-: 1443123506:0;git la
 : 1443123514:0;git show 88a4894
-: 1443123522:0;git st
-: 1443123528:0;git la
-: 1443123551:0;git st
 : 1443123554:0;git add -N src
-: 1443123555:0;git st
-: 1443123558:0;git add -p
-: 1443123628:0;git st
-: 1443123847:0;git commit
-: 1443123853:0;git st
-: 1443123883:0;git commit --amend
-: 1443123889:0;git st
 : 1443123906:0;git push -u origin token-attachment-parser-plugin
-: 1443123908:0;git st
-: 1443123909:0;git la
-: 1443123928:0;cd
-: 1443123931:0;yaourt -Syu
-: 1443127813:0;git st
-: 1443127844:0;git add -p
-: 1443127868:0;git st
-: 1443127870:0;git add -p
-: 1443127959:0;git st
-: 1443127990:0;git commit
-: 1443127994:0;git st
 : 1443128011:0;git rm src/parse-js/attach-tokens.js
-: 1443128011:0;git st
-: 1443128014:0;git commit
-: 1443128023:0;git st
-: 1443128027:0;git push
-: 1443128034:0;git la
 : 1443128056:0;git push tmp:tmp-1
 : 1443128065:0;git push origin tmp:refs/heads/tmp-1
 : 1443128069:0;git push :tmp
 : 1443128073:0;git push origin :tmp
-: 1443128075:0;git la
 : 1443128081:0;git branch -d tmp
 : 1443128085:0;git branch -D tmp
-: 1443128086:0;git la
-: 1443128097:0;git checkout -b tmp-2
-: 1443128097:0;git st
-: 1443128099:0;git add -p
-: 1443128106:0;gitst
-: 1443128108:0;git checkout -
-: 1443128109:0;git st
-: 1443128111:0;git add -p
-: 1443128117:0;git st
-: 1443128125:0;git commit --amend
-: 1443128130:0;git push --force
-: 1443128133:0;gi tst
-: 1443128135:0;git add -p
-: 1443128137:0;git st
-: 1443128139:0;git checkout -
-: 1443128140:0;git st
-: 1443128144:0;git la
 : 1443128152:0;git branch -d tmp-2
 : 1443128154:0;git branch -D tmp-2
 : 1443128158:0;git checkout -b tmp-2
-: 1443128160:0;git st
-: 1443128162:0;git add -p
-: 1443128167:0;git st
 : 1443128172:0;git push -u origin tmp-2
-: 1443128174:0;git st
-: 1443128178:0;git commit
-: 1443128183:0;git st
-: 1443128184:0;git push
-: 1443128187:0;git la
-: 1443128199:0;git checkout master
-: 1443128201:0;git la
 : 1443128217:0;git merge token-attachment-parser-plugin
-: 1443128222:0;git st
-: 1443128226:0;git push
-: 1443128229:0;git la
 : 1443128239:0;git push origin :token-attachment-parser-plugin
-: 1443128242:0;git la
-: 1443128253:0;git checkout tmp-2
-: 1443128257:0;git rebase master
-: 1443128258:0;git la
-: 1443128261:0;git push --force
-: 1443128264:0;git la
-: 1443128278:0;make watch
-: 1443128280:0;npm start
-: 1443128406:0;mocha test/generation.js
-: 1443128423:0;git st
-: 1443128428:0;git checkout master
-: 1443128428:0;git st
-: 1443128429:0;git la
-: 1443128433:0;git commit
-: 1443128435:0;git add -p
-: 1443128445:0;git commit
-: 1443128455:0;git st
-: 1443128457:0;git push
-: 1443128459:0;git la
-: 1443128471:0;git checkout tmp-2
-: 1443128480:0;git rebase master
-: 1443128483:0;git push --force
-: 1443128485:0;git la
-: 1443128492:0;git st
-: 1443128493:0;git la
-: 1443128497:0;mocha test/generation.js
-: 1443128669:0;git st
-: 1443128670:0;git show
-: 1443129239:0;git st
-: 1443129244:0;git diff
-: 1443129248:0;git la
-: 1443129251:0;git checkout master
-: 1443129253:0;git add -p
-: 1443129257:0;git st
-: 1443129258:0;git commit
-: 1443129264:0;git st
-: 1443129267:0;git push
-: 1443129271:0;git checkout tmp-2
-: 1443129272:0;git st
-: 1443129273:0;git la
 : 1443129277:0;git rebase master
-: 1443129280:0;git push --force
-: 1443129284:0;git st
-: 1443129328:0;git checkout master
-: 1443129329:0;git st
-: 1443129346:0;mocha test/generation.js
-: 1443129385:0;make watch
-: 1443129388:0;mocha test/generation.js
-: 1443129575:0;git st
-: 1443129576:0;git add -p
-: 1443129589:0;git st
-: 1443129590:0;git commit
-: 1443129597:0;git st
-: 1443129602:0;git diff
 : 1443129711:0;mocha test/generation.js
-: 1443129783:0;git st
-: 1443129784:0;git add -p
-: 1443129789:0;git reset
-: 1443129791:0;git add -p
-: 1443129794:0;git st
-: 1443129796:0;git commit --amend
-: 1443129797:0;git st
 : 1443129806:0;git commit -a
-: 1443129815:0;git st
-: 1443129820:0;git checkout tmp-2
-: 1443129821:0;git la
 : 1443129827:0;git rebase 0f6e5b6
-: 1443129829:0;git st
-: 1443129832:0;git la
-: 1443129850:0;git checkout -
-: 1443129851:0;git st
-: 1443129852:0;git la
-: 1443129878:0;git st
-: 1443129888:0;git checkout tmp-2
-: 1443129889:0;git st
-: 1443129893:0;git checkout -
 : 1443129897:0;git checkout tmp-2 -- .
-: 1443129898:0;git st
-: 1443129899:0;git diff
-: 1443129901:0;git diffc
-: 1443129918:0;git st
-: 1443129920:0;git la
 : 1443129933:0;git checkout -b tmp_
-: 1443129943:0;git st
 : 1443129947:0;git commit -m 'tmp'
 : 1443129951:0;git checkout tmp-2
 : 1443129953:0;git reset tmp_
-: 1443129954:0;git st
-: 1443129955:0;git la
-: 1443129959:0;git st
-: 1443129965:0;git push --force
 : 1443129968:0;git branch -d tmp_
-: 1443129970:0;git la
-: 1443129974:0;git checkout master
-: 1443129975:0;git st
-: 1443129980:0;git push
-: 1443129982:0;git la
-: 1443130764:0;yaourt -Sua
 : 1443130878:0;killall google-chrome-beta
-: 1443130886:0;killall chrome
 : 1443131452:0;open cups-pdf/prepress_-c__setpdfwrite_-f__s.pdf
 : 1443131467:0;open cups-pdf/_Untitled_Document__pdf.pdf
-: 1443168710:0;dell-monitor-night
-: 1443168723:0;yaourt -Sua
-: 1443168882:0;yaourt -Syua
-: 1443168914:0;apm update
-: 1443206270:0;dell-monitor-day
-: 1443217493:0;git st
-: 1443217618:0;gman at
-: 1443217622:0;at
 : 1443217625:0;yaourt -Ss at
 : 1443217681:0;yaourt -S at
 : 1443217687:0;at
 : 1443217688:0;gman at
 : 1443217731:0;atom ~/code/repos/git@forivall/dotfiles/plugins/coreutils/coreutils.plugin.zsh
-: 1443217747:0;git st
-: 1443217750:0;git add -p
-: 1443217753:0;git st
 : 1443217761:0;git commit -m 'add sleep_until'
-: 1443217762:0;git st
-: 1443217804:0;gi tst
-: 1443217976:0;git st
-: 1443218005:0;git add -p
-: 1443218029:0;git st
-: 1443218030:0;git add -p
-: 1443218032:0;y
-: 1443218033:0;git st
 : 1443218164:0;sleep_until 17:30
 : 1443218182:0;sleep_until 17:30 && git commit -m "Change terminology" && git push
 : 1443219317:0;git commit -m "Change terminology" && git push
-: 1443237989:0;apm update
-: 1443245914:0;dell-monitor-night
-: 1443327242:0;dell-monitor-day
 : 1443327251:0;dell-monitor-evening
 : 1443327753:0;yaourt -Ss emoji
 : 1443327770:0;yaourt -S ibus-uniemoji-git
@@ -9128,56 +8939,23 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443327810:0;ibus restart
 : 1443327862:0;yaourt -Ss ibus
 : 1443327886:0;yaourt -S ibus-qt
-: 1443327896:0;ibus-daemon
 : 1443327900:0;ibus-setup
-: 1443329474:0;ibus-daemon
-: 1443330205:0;google-chrome-beta --force-device-scale-factor=2
 : 1443330241:0;ibus-daemon
-: 1443330514:0;google-chrome-beta --force-device-scale-factor=3
 : 1443330526:0;vim ~/.config/chrome-beta-flags.conf
 : 1443330538:0;mv ~/.config/chrome-beta-flags.conf .
 : 1443330540:0;google-chrome-beta --force-device-scale-factor=3
 : 1443330593:0;google-chrome-beta --force-device-scale-factor=2
 : 1443330844:0;mv chrome-beta-flags.conf ~/.config/
 : 1443330959:0;yaourt -Qii ttf-noto-emoji-monochrome
-: 1443333291:0;dell-monitor-night
 : 1443337106:0;yaourt -Ql plasma-desktop
 : 1443337121:0;kbuildsycoca5 && kquitapp plasma && kstart plasma
 : 1443337131:0;kbuildsycoca5 && kquitapp plasma-desktop && kstart plasma-desktop
 : 1443337232:0;kbuildsycoca5 && kquitapp plasmadesktop && kstart plasmadesktop
-: 1443337248:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
-: 1443339500:0;dell-monitor-night
-: 1443339927:0;yaourt -Syua
-: 1443387435:0;dell-monitor-day
-: 1443468908:0;yaourt -Syu
-: 1443468916:0;yaourt -Sc
-: 1443468936:0;yaourt -Syu
-: 1443468943:0;df -h
-: 1443468949:0;yaourt -Syua
 : 1443469037:0;cd code/hacking-tacoscript
-: 1443469038:0;git st
 : 1443469043:0;cd tacoscript
-: 1443469045:0;git st
-: 1443469048:0;git fetch
-: 1443469061:0;git st
-: 1443469064:0;git la
-: 1443469070:0;git pull
-: 1443469100:0;git st
-: 1443469103:0;git la
-: 1443469108:0;gi tst
-: 1443469112:0;git la
 : 1443469142:0;git checkout origin/tmp-3 -- .
-: 1443469144:0;git st
 : 1443469146:0;git diffc
-: 1443469148:0;git reset
-: 1443469148:0;git st
-: 1443469150:0;git la
-: 1443469152:0;git diff
-: 1443469204:0;apm update
-: 1443470888:0;yaourt -Syua
 : 1443470911:0;npm i -g greenkeeper
-: 1443470936:0;yaourt -Ss otto
-: 1443470971:0;cd
 : 1443470974:0;cd Downloads
 : 1443470995:0;unzip otto_0.1.0_linux_amd64.zip
 : 1443470998:0;ls otto
@@ -9190,17 +8968,12 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443471047:0;echo ${(l)path}
 : 1443471547:0;echo ${(f)path}
 : 1443471561:0;echo ${(F)path}
-: 1443471602:0;ls
 : 1443471604:0;./otto
 : 1443471615:0;./otto status
 : 1443471620:0;./otto version
-: 1443471628:0;cd
 : 1443471646:0;cd code/repos/git@forivall/
-: 1443471647:0;ls
 : 1443471649:0;cd aur-packages
-: 1443471650:0;ls
 : 1443471657:0;ls aur4
-: 1443471667:0;git submodule status
 : 1443471712:0;git submodule summary
 : 1443471718:0;git submodule status -v
 : 1443471734:0;git submodule foreach git remote -v
@@ -10352,3 +10125,135 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443747657:0;git st
 : 1443747659:0;git push
 : 1443747677:0;git add zsh_history_interactive
+: 1443747677:0;git st
+: 1443747684:0;git commit -m history && git push
+: 1443748495:0;vim tools/js2c.py
+: 1443748506:0;find . -name js2c.py
+: 1443748540:0;vim ./vendor/node/deps/v8/tools/js2c.py
+: 1443748557:0;vim ./vendor/node/tools/js2c.py
+: 1443748565:0;(export PYTHON=/usr/bin/python2; export PATH="./bin:$PATH"; ./script/build.py)
+: 1443748573:0;find . -name js2c.py
+: 1443748584:0;head ./vendor/node/tools/js2c.py
+: 1443748592:0;head ./vendor/node/deps/v8/tools/js2c.py
+: 1443748645:0;(export PYTHON=/usr/bin/python2; export PATH="$PWD/bin:$PATH"; ./script/build.py)
+: 1443748774:0;git st
+: 1443748783:0;git diff
+: 1443765310:0;git st
+: 1443765312:0;git pull
+: 1443765316:0;git diff
+: 1443765330:0;git st
+: 1443765338:0;git stash save
+: 1443765342:0;git st
+: 1443765350:0;make watch-dev
+: 1443765378:0;reset
+: 1443765393:0;mocha --help
+: 1443765425:0;mocha --bail --watch test/js-to-taco.js --invert --grep comment
+: 1443765439:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443765609:0;res
+: 1443765610:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443765635:0;res
+: 1443765636:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443765695:0;res
+: 1443765695:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443765848:0;res
+: 1443765849:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443765859:0;res
+: 1443765859:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443766744:0;res
+: 1443766745:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443767551:0;res
+: 1443767552:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443768111:0;git st
+: 1443768116:0;git pull
+: 1443768126:0;git stashed pull
+: 1443768131:0;git st
+: 1443768137:0;git diff
+: 1443768173:0;gi tst
+: 1443768174:0;git st
+: 1443768178:0;git add -N test
+: 1443768179:0;git st
+: 1443768180:0;git add -p
+: 1443768210:0;y
+: 1443768211:0;git st
+: 1443768212:0;git commit6
+: 1443768214:0;git commit
+: 1443768218:0;git st
+: 1443768219:0;git push
+: 1443768283:0;git st
+: 1443768317:0;du --summary .
+: 1443768329:0;du -s .
+: 1443768355:0;du -sh .
+: 1443768525:0;yaourt -Sc
+: 1443768563:0;du /var/cache/pacman/pkg/atom-editor-bin-1.0.18-1-x86_64.pkg.tar.xz /var/cache/pacman/pkg/atom-editor-bin-1.0.19-1-x86_64.pkg.tar.xz 
+: 1443768566:0;du -h /var/cache/pacman/pkg/atom-editor-bin-1.0.18-1-x86_64.pkg.tar.xz /var/cache/pacman/pkg/atom-editor-bin-1.0.19-1-x86_64.pkg.tar.xz 
+: 1443776131:0;git st
+: 1443776171:0;find /c/ -type l 2>/dev/null | while read sl ; do ls -ld "$sl"; done | grep '\-> /cygdrive/e/'
+: 1443776226:0;res
+: 1443776227:0;find /c/ -type l 2>/dev/null | while read sl ; do ls -ld "$sl"; done | grep '\-> /cygdrive/e/'
+: 1443810984:0;yaourt -Syu
+: 1443810990:0;apm update
+: 1443811037:0;dotfiles
+: 1443811052:0;source ./plugins/atom/atom.plugin.zsh
+: 1443811068:0;apm-install-all atom/my-packages.txt
+: 1443811081:0;yaourt -Sua
+: 1443811095:0;yaourt -Qii solar-python
+: 1443811100:0;yaourt -Sc
+: 1443811106:0;df -h
+: 1443811171:0;history_search yaorut
+: 1443811177:0;history_search yaourt
+: 1443811199:0;history_search pacman
+: 1443811338:0;dotfiles
+: 1443811339:0;ls
+: 1443811341:0;cd code
+: 1443811344:0;cd plugins
+: 1443811345:0;ls
+: 1443811348:0;ls coreutils
+: 1443811351:0;cd coreutils
+: 1443811352:0;ls
+: 1443811354:0;vim coreutils.plugin.zsh
+: 1443811373:0;scat ../oneliner/oneliner.plugin.zsh
+: 1443811379:0;yaourt -S source-highlight
+: 1443811385:0;scat ../oneliner/oneliner.plugin.zsh
+: 1443811399:0;..
+: 1443811404:0;scat oneliner/oneliner.plugin.zsh
+: 1443811408:0;source-highlight
+: 1443811418:0;source-highlight oneliner/oneliner.plugin.zsh
+: 1443811435:0;cat oneliner/oneliner.plugin.zsh
+: 1443811472:0;cat oneliner/npm-ls-flat
+: 1443811492:0;cd coreutils
+: 1443811493:0;vim coreutils.plugin.zsh
+: 1443811523:0;vim sedml
+: 1443811547:0;chmod +x sedml
+: 1443811550:0;sedml
+: 1443811562:0;type -af sedml
+: 1443811567:0;sedml
+: 1443811577:0;vim sedml
+: 1443811910:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'
+: 1443812085:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -p -e 's/Name *: *(.*)\nInstalled Size *: *(.*)$/\2 \1/'
+: 1443812101:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -p -e 's/Name *: *(.*)$/\2 \1/'
+: 1443812120:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -p -e 's/Name *: *(.*)\nInstalled Size *: *(.*)/\2 \1/'
+: 1443812127:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -p -e 's/Name *: *(.*)\nI/\2 \1/'
+: 1443812143:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -p -e 's/Name *: *(.*)\\nInstalled Size *: *(.*)/\2 \1/'
+: 1443812316:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's/Name *: *(.*)\nInstalled Size *: *(.*)/\2 \1/'
+: 1443812360:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\nInstalled Size *: *(.*)|\2 \1|g'
+: 1443812372:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\2 \1|g'
+: 1443812388:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\nI|\2 \1|g'
+: 1443812391:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\2 \1|g'
+: 1443812399:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n.*Installed Size|\2 \1|g'
+: 1443812405:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\2 \1|g'
+: 1443812438:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'
+: 1443812560:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed s/([^ ]+) Installed Size *: *([^ ]*) ([KM]i)?B$/\2\3 \1/
+: 1443812571:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E s/([^ ]+) Installed Size *: *([^ ]*) ([KM]i)?B$/\2\3 \1/
+: 1443812581:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) ([KM]i)?B$/\2\3 \1/'
+: 1443812594:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) (?:([KM])i)?B$/\2\3 \1/'
+: 1443812603:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) (([KM])i)?B$/\2\4 \1/'
+: 1443812616:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) (([KM])i)?B$/\2\4 \1/'|sort -h
+: 1443812639:0;pacman -Qenq
+: 1443812687:0;ignoregrp="base base-devel"
+: 1443812693:0;comm -23 <(pacman -Qqt | sort) <(echo $ignorepkg | tr ' ' '\n' | cat <(pacman -Sqg $ignoregrp) - | sort -u)
+: 1443812720:0;pacman -Qi $(comm -23 <(pacman -Qqt | sort) <(echo $ignorepkg | tr ' ' '\n' | cat <(pacman -Sqg $ignoregrp) - | sort -u))|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) (([KM])i)?B$/\2\4 \1/'|sort -h
+: 1443812768:0;pacman -Qi $(pacman -Qeq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) (([KM])i)?B$/\2\4 \1/'|sort -h
+: 1443812776:0;pacman -Qi $(pacman -Qemq)|grep -E 'Name|Installed Size'|perl -i -p -e 's|Name *: *(.*)\n|\1 |g'|sed -E 's/([^ ]+) Installed Size *: *([^ ]*) (([KM])i)?B$/\2\4 \1/'|sort -h
+: 1443812788:0;dotfiles
+: 1443812789:0;git st
+: 1443812795:0;git add zsh_history_interactive
