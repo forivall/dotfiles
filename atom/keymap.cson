@@ -26,5 +26,13 @@
 
 # 'atom-text-editor':
 #   'ctrl-k right':'pane:split-right'
+#
 'atom-workspace':
   'alt-shift-r': 'run-in-terminal:start-terminal-here'
+# 'atom-text-editor.source.js':
+# 'atom-text-editor[data-grammer~=js]':
+'atom-text-editor':
+  'alt-shift-g': 'require-opener:open-selections-on-npm'
+  'alt-shift-n': 'require-opener:open-selections-on-github'
+  'alt-shift-o': 'require-opener:open-selections-in-atom'
+  'alt-shift-d': 'require-opener:open-selections-readmes'

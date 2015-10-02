@@ -16,11 +16,13 @@
       "build-tools"
       "color-picker"
       "command-toolbar"
-      "copy-improved"
       "ctags-status"
       "dbus"
       "fixmyjs"
       "git-projects"
+      "hide-files"
+      "ide-flow"
+      "language-babel"
       "linter-clang"
       "linter-coffeelint"
       "linter-coffeescript"
@@ -39,12 +41,21 @@
       "node-debugger"
       "recent-files-fuzzy-finder"
       "recent-files"
+      "recent-files-fuzzy-finder"
+      "save-session"
+      "save-session"
+      "selection-outlines"
       "sublime-tabs"
       "switch-header-source"
       "tomorrow"
       "tree-view-open-files"
+      "webbox-color"
       "welcome"
+      "wrap"
+      "wrap-guide"
       "you-complete-me"
+      "preview-plus"
+      "tab-length"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -58,10 +69,13 @@
       cr: " "
       eol: " "
       space: " "
-    fontFamily: "Bitstream Vera Sans Mono"
+    fontFamily: "Fantasque Sans Mono"
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
+    lineHeight: 1.2
+    backUpBeforeSaving: true
+    fontSize: 15
   linter:
     lintOnChange: false
     ignoredLinterErrors: [
@@ -71,10 +85,13 @@
       "shellcheck"
     ]
     lintOnFly: false
+    showErrorTabLine: true
+    underlineIssues: false
   tabs:
     showIcons: true
     usePreviewTabs: true
-  "tree-view": {}
+  "tree-view":
+    alwaysOpenExisting: true
   "adwaita-pro-ui":
     fontFamily: "DejaVu Sans"
     fontSize: 13.4
@@ -87,6 +104,10 @@
     scrollAnimation: true
     scrollAnimationDuration: 100
     displayPluginsControls: false
+    charWidth: 0.7
+    textOpacity: 0.5
+    interline: 0.4
+    charHeight: 1.5
   "recent-files-fuzzy-finder": {}
   "atom-terminal":
     app: "roxterm"
@@ -95,30 +116,172 @@
     crActive: false
     eolActive: false
     spaceActive: false
-  "linter-clang":
-    clangIncludePaths: "/mnt/Peng/Jordan/Code/kernelsrc/linux/include"
+  "linter-clang": {}
   "ide-flow":
     flowPath: "/home/forivall/.opam/system/bin/flow"
   "highlight-selected":
     lightTheme: true
     onlyHighlightWholeWords: true
   "you-complete-me":
-    ycmdPath: "/mnt/Peng/Jordan/Code/git/ycmd"
     pythonExecutable: "/usr/bin/python2"
-  "linter-jshint": {}
-  "linter-eslint":
-    disableWhenNoEslintrcFileInPath: true
-    globalNodePath: "/home/jord/.nvm/versions/io.js/v3.3.1"
+  "linter-jshint":
+    disableWhenNoJshintrcFileInPath: true
+  "linter-eslint": {}
   "file-icons":
     coloured: false
     onChanges: true
   "save-session":
-    dataSaveFolder: "/home/jord/.atom/packages/save-session/projects"
+    dataSaveFolder: "/home/forivall/.atom/packages/save-session/projects"
     skipSavePrompt: false
-    extraDelay: 2000
   "run-in-terminal":
     save_before_launch: false
-    terminal: "roxterm --tab"
+    terminal: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= roxterm --tab"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
-  "node-debugger": {}
+  "tree-view-git-projects":
+    alphabetizeRoots: false
+  "one-light-ui":
+    fontSize: 13
+  "atom-material-ui":
+    compactTreeView: true
+    depth: true
+    disableAnimations: true
+    fontSize: "Big"
+    accentColor: "Blue"
+    panelContrast: true
+    showTabIcons: true
+  "atom-capyba-ui":
+    layoutMode: "Compact"
+  "slim-dark-ui":
+    layoutMode: "Compact"
+  "file-types":
+    el: "source.perl"
+  wrap: {}
+  "language-babel": {}
+  "linter-scss-lint":
+    executablePath: "/usr/bin/scss-lint"
+  pigments:
+    ignoredNames: [
+      "*"
+    ]
+    sortPaletteColors: "by color"
+  "atom-beautify":
+    _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
+  "preview-plus": {}
+  "status-bar": {}
+  "indentation-indicator":
+    indicatorPosition: "right"
+    spaceAfterColon: true
+".css.scss.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".null-grammar.plain.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+    rows: []
+  editor:
+    preferredLineLength: 80
+".basic.html.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".erb.html.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".html.ruby.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".js.source":
+  "multi-wrap-guide":
+    columns: [
+      79
+    ]
+  editor:
+    preferredLineLength: 79
+".coffee.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".jade.source":
+  "multi-wrap-guide":
+    columns: [
+      79
+    ]
+  editor:
+    preferredLineLength: 79
+".m4.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".gfm.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".cpp.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".json.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".text.xml":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".c.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".makefile2.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".shell.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80

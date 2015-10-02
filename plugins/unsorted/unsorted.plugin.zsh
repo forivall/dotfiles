@@ -1,3 +1,6 @@
+__zsh_unsorted_plugin_location=$0:A
+__zsh_unsorted_plugin_location=${__zsh_oneliner_plugin_location%/*}
+
 autoload -U clean-env
 
 alias res="echo -en \"\ec\e[3J\""
@@ -87,23 +90,12 @@ diff --old-line-format='%l
 }
 
 function history_search {
-    ( (cd $HOME/code/git-repos/forivall_dotfiles_scripts;
-        git log --reverse -p -S"$1" dotfiles/.bash_history) |
-    grep '^-' |
-    sed 's/^-//';
-    (cd $HOME/code/git-repos/forivall_dotfiles_scripts;
-        git log --reverse -p -S"$1" dotfiles/.bash_history_interactive) |
-    grep '^-' |
-    sed 's/^-//';
-    (cd $HOME/code/git-repos/forivall_dotfiles_scripts;
-        git log --reverse -p -S"$1" dotfiles/.zsh_history) |
-    grep '^-' |
-    sed 's/^-//';
-    (cd $HOME/code/git-repos/forivall_dotfiles_scripts;
-        git log --reverse -p -S"$1" dotfiles/.zsh_history_interactive) |
-    grep '^-' |
-    sed 's/^-//';
-    history -a; cat $HOME/.bash_history_interactive) | grep --color=always "$1" | uniq
+    local root;
+    root="$(cd $__zsh_unsorted_plugin_location; git rev-parse --show-toplevel)"
+    ( 
+    (cd $root; git log --reverse -p -S"$1" zsh_history_interactive) |
+        grep '^-' | sed 's/^-//';
+    history -a;) | grep --color=always "$1" | uniq
 }
 
 __cheat_has_opt () {

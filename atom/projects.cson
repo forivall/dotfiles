@@ -13,14 +13,37 @@
 tacoscript:
   title: "tacoscript"
   paths: [
-    "/mnt/Peng/Jordan/Code/tacoscript-hacking/babel"
-    "/mnt/Peng/Jordan/Code/tacoscript-hacking/detect-indent"
-    "/mnt/Peng/Jordan/Code/tacoscript-hacking/tacoscript"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript-ast-playground"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript-cli"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/horchata"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/detect-indent"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/node_modules/babylon"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/babel/packages/babylon"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/babel/packages/babel-core"
+    "/mnt/Peng/Jordan/Code/hacking-tacoscript/babel"
   ]
 "tree-view-doubleclick":
   title: "tree-view-doubleclick"
   paths: [
-    "/mnt/Peng/Jordan/Code/git/atom-tabs"
-    "/mnt/Peng/Jordan/Code/git/atom-tree-view"
-    "/mnt/Peng/Jordan/Code/git/atom-tree-view-clear-preview-doubleclick"
+    "/mnt/Peng/Jordan/Code/repos/git/atom-tree-view"
+    "/mnt/Peng/Jordan/Pictures"
+  ]
+"atom-tree-view":
+  title: "atom-tree-view"
+  paths: [
+    "/mnt/Peng/Jordan/Code/repos/git/atom-project-view"
+    "/mnt/Peng/Jordan/Code/repos/git@forivall/dotfiles"
+    "/mnt/Peng/Jordan/Code/repos/git/atom-tree-view"
+  ]
+"sane-backends":
+  title: "sane-backends"
+  paths: [
+    "/mnt/Peng/Jordan/Code/repos/git/sane-backends"
+  ]
+"sizzlingstats.com":
+  title: "sizzlingstats.com"
+  paths: [
+    "/mnt/Peng/Jordan/Code/hacking-sizzlingstats/sizzlingstats.com"
   ]
