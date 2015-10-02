@@ -8951,6 +8951,15 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443337121:0;kbuildsycoca5 && kquitapp plasma && kstart plasma
 : 1443337131:0;kbuildsycoca5 && kquitapp plasma-desktop && kstart plasma-desktop
 : 1443337232:0;kbuildsycoca5 && kquitapp plasmadesktop && kstart plasmadesktop
+: 1443337248:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
+: 1443339500:0;dell-monitor-night
+: 1443339927:0;yaourt -Syua
+: 1443387435:0;dell-monitor-day
+: 1443468908:0;yaourt -Syu
+: 1443468916:0;yaourt -Sc
+: 1443468936:0;yaourt -Syu
+: 1443468943:0;df -h
+: 1443468949:0;yaourt -Syua
 : 1443469037:0;cd code/hacking-tacoscript
 : 1443469043:0;cd tacoscript
 : 1443469142:0;git checkout origin/tmp-3 -- .
@@ -10125,6 +10134,206 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443747657:0;git st
 : 1443747659:0;git push
 : 1443747677:0;git add zsh_history_interactive
+: 1443747725:0;git st
+: 1443747748:0;ls ~/.atom
+: 1443747761:0;cd atom
+: 1443747789:0;git st
+: 1443747800:0;gi tst
+: 1443747801:0;git st
+: 1443747806:0;for f in $(git ls-files .); do cat ~/.atom/$f > $f; done
+: 1443747807:0;git st
+: 1443747815:0;git diff .
+: 1443747824:0;git checkout .gitignore
+: 1443747825:0;git st
+: 1443747827:0;git diff .
+: 1443747831:0;git add -p
+: 1443747948:0;git st
+: 1443747951:0;git checkout .
+: 1443747952:0;git st
+: 1443747967:0;git commit -m 'update projects\
+'
+: 1443747968:0;git st
+: 1443747974:0;ls
+: 1443747980:0;cat projects.cson
+: 1443747984:0;ls
+: 1443747988:0;git rm projects.cson
+: 1443747989:0;git st
+: 1443747996:0;vim ../setup-atom.sh
+: 1443748005:0;git st
+: 1443748024:0;git add ../setup-atom.sh
+: 1443748025:0;git st
+: 1443748046:0;git commit -m 'remove projects from sync'
+: 1443748046:0;git st
+: 1443748071:0;git checkout HEAD^ ./projects.cson
+: 1443748072:0;git st
+: 1443748075:0;git reset
+: 1443748080:0;ls
+: 1443748085:0;rm ~/.atom/projects.cson
+: 1443748098:0;mv projects.cson ~/.atom/projects.cson
+: 1443748226:0;git st
+: 1443748231:0;git pull
+: 1443748234:0;git st
+: 1443748245:0;cd
+: 1443748246:0;ls
+: 1443748251:0;cd
+: 1443748253:0;dotfiles
+: 1443748254:0;git st
+: 1443748259:0;git dif
+: 1443748260:0;fgit st
+: 1443748262:0;git st
+: 1443748295:0;apm-install-all
+: 1443748302:0;source plugins/atom/atom.plugin.zsh
+: 1443748309:0;ls
+: 1443748313:0;cd atom
+: 1443748314:0;ls
+: 1443748322:0;apm-install-all my-packages.txt
+: 1443748391:0;comm -13 --nocheck-order \\
+    <(apm list --bare --installed | sort | cut -f1 -d@) \\
+    <(< "my-packages.txt" cut -f1 -d@)
+: 1443748419:0;..
+: 1443748422:0;source plugins/atom/atom.plugin.zsh
+: 1443748424:0;cd -
+: 1443748427:0;apm-install-all my-packages.txt
+: 1443748431:0;comm -13 --nocheck-order \git st\
+    <(apm list --bare --installed | sort | cut -f1 -d@) \\
+    <(< "my-packages.txt" cut -f1 -d@)
+: 1443748432:0;git st
+: 1443748435:0;..
+: 1443748435:0;git st
+: 1443748438:0;git add -p
+: 1443748444:0;git st
+: 1443748454:0;git commit
+: 1443748461:0;git st
+: 1443748463:0;git push
+: 1443748909:0;dotfiles
+: 1443748914:0;cd atom
+: 1443748917:0;..
+: 1443748919:0;source plugins/atom/atom.plugin.zsh
+: 1443748922:0;cd atom
+: 1443748925:0;apm-install-all my-packages.txt
+: 1443748950:0;vim my-packages.txt
+: 1443748958:0;apm-install-all my-packages.txt
+: 1443749002:0;git st
+: 1443749005:0;git add -p .
+: 1443749007:0;git st
+: 1443749011:0;git commit
+: 1443749023:0;git st
+: 1443749024:0;git push
+: 1443749040:0;vim my-packages.txt
+: 1443749057:0;apm rm hecs-dark-ui
+: 1443749066:0;git st
+: 1443749069:0;git add -p .
+: 1443749073:0;git commit
+: 1443749080:0;git push
+: 1443749123:0;apm rm pigments
+: 1443749163:0;vim my-packages.txt
+: 1443749175:0;apm-install-all my-packages.txt
+: 1443749212:0;vim my-packages.txt
+: 1443749221:0;apm-install-all my-packages.txt
+: 1443749254:0;git st
+: 1443749260:0;git add -p my-packages.txt
+: 1443749263:0;git st
+: 1443749264:0;git commit
+: 1443749277:0;gi tst
+: 1443749410:0;git st
+: 1443749413:0;git add -p
+: 1443749415:0;git st
+: 1443749418:0;git add -p config.cson
+: 1443749430:0;git st
+: 1443749436:0;ls
+: 1443749443:0;ls -l ~/.atom/config.cson
+: 1443749490:0;git st
+: 1443749493:0;git add -p config.cson
+: 1443749496:0;git st
+: 1443749499:0;git reset
+: 1443749501:0;confgit st
+: 1443749503:0;git reset config.cson
+: 1443749506:0;git add -p config.cson
+: 1443749514:0;git st
+: 1443749525:0;git add -p config.cson
+: 1443749532:0;git reset config.cson
+: 1443749533:0;git st
+: 1443749535:0;git add -p config.cson
+: 1443749538:0;gi tst
+: 1443749539:0;git commit
+: 1443749545:0;git st
+: 1443749546:0;gitpush
+: 1443749548:0;git push
+: 1443759142:0;res
+: 1443759144:0;git st
+: 1443759183:0;git diff
+: 1443759748:0;git st
+: 1443759772:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443759776:0;cd
+: 1443759779:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443759787:0;cd
+: 1443759790:0;make watch
+: 1443759794:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443759798:0;res
+: 1443759803:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443761077:0;git st
+: 1443761084:0;git add test/parsing-fixtures/token-attachment/parentheses/bitwise-or-not-override-double/
+: 1443761085:0;git st
+: 1443761087:0;git add -p
+: 1443761096:0;git st
+: 1443761098:0;git commit
+: 1443761104:0;git st
+: 1443761106:0;git push
+: 1443762178:0;mocha test/parse-js-token-attachment.js
+: 1443762469:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443762481:0;git st
+: 1443762486:0;git add -N test
+: 1443762486:0;git st
+: 1443762488:0;git add -p
+: 1443762497:0;git st
+: 1443762499:0;git commit
+: 1443762506:0;git st
+: 1443762528:0;git add test
+: 1443762528:0;git st
+: 1443762531:0;git commit
+: 1443762540:0;git st
+: 1443762545:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443762736:0;git st
+: 1443762740:0;git add -N test
+: 1443762740:0;git st
+: 1443762742:0;git add -p
+: 1443762746:0;git st
+: 1443762748:0;git commit
+: 1443762756:0;git st
+: 1443762794:0;git mv test/fixtures/translation/edgecase/{,.}new-precedence-parens
+: 1443762796:0;git st
+: 1443762798:0;git commit
+: 1443762809:0;git st
+: 1443762813:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443763927:0;cd
+: 1443763935:0;vim one-plus-two
+: 1443764417:0;git st
+: 1443764419:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443764427:0;make watch
+: 1443764429:0;git st
+: 1443764431:0;git add -p
+: 1443764433:0;git st
+: 1443764436:0;git add -N test
+: 1443764437:0;git st
+: 1443764438:0;git add -P
+: 1443764441:0;git add -p
+: 1443764459:0;y
+: 1443764460:0;gitst
+: 1443764461:0;git st
+: 1443764464:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
+: 1443764470:0;git st
+: 1443764471:0;git commit
+: 1443764480:0;git st
+: 1443764483:0;git push
+: 1443816456:0;git st
+: 1443816458:0;git fetch
+: 1443816468:0;dotfiles
+: 1443816469:0;git st
+: 1443816470:0;git add -p
+: 1443816482:0;git st
+: 1443816499:0;git commit -m 'tweak column ruler'
+: 1443816504:0;git stashed pull --rebase
+
 : 1443747677:0;git st
 : 1443747684:0;git commit -m history && git push
 : 1443748495:0;vim tools/js2c.py
