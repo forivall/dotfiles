@@ -65,3 +65,13 @@ atom-workspace.theme-quantum-ui {
 @blue:            #4271ae; // 0D
 @purple:          #8959a8; // 0E
 @dark-red:        #a3685a; // 0F
+
+.indent-guide-improved {
+  background-color: mix(@gray, @light-gray, 50);
+  &.indent-guide-stack {
+    background-color: @dark-gray;
+    &.indent-guide-active {
+      background-color: mix(@dark-gray, @very-dark-gray, 50);
+    }
+  }
+}

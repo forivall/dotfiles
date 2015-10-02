@@ -69,7 +69,6 @@
       space: " "
     fontFamily: "Fantasque Sans Mono"
     scrollPastEnd: true
-    showIndentGuide: true
     showInvisibles: true
     lineHeight: 1.2
     backUpBeforeSaving: true
