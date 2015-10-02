@@ -54,12 +54,10 @@ pigments@0.15.0
 preview-plus@1.2.6
 project-manager@2.6.1
 project-view@0.1.2
-recent-files@0.3.0
 recent-files-fuzzy-finder@0.2.0
 require-opener@2.0.3
 run-in-terminal@0.4.2
 save-session@0.15.7
-selection-outlines@0.2.0
 sort-lines@0.11.0
 string-looper@0.1.2
 Stylus@1.2.1
