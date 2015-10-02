@@ -70,7 +70,6 @@
     # aliases for custom commands
     sm = subl-modified
     sp = subl-projects
-    cp = cherry-pick
     cl = clone
     unstage = reset HEAD --
     dc = diff --cached

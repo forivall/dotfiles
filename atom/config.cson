@@ -24,10 +24,34 @@
       "sublime-tabs"
       "linter-clang"
       "tree-view-open-files"
+      "fixmyjs"
+      "linter-flow"
+      "node-debugger"
+      "atom-json-escape"
+      "atom-ungit"
+      "build-tools"
+      "color-picker"
+      "copy-improved"
+      "dbus"
+      "linter-flake8"
+      "linter-pep8"
+      "linter-pyflakes"
+      "linter-pylint"
+      "linter-rust"
+      "linter-coffeescript"
+      "linter-coffeelint"
+      "linter-scss-lint"
+      "linter-stylint"
+      "recent-files-fuzzy-finder"
+      "switch-header-source"
+      "you-complete-me"
     ]
     themes: [
       "adwaita-pro-ui"
       "tomorrow-ya"
+    ]
+    packagesWithKeymapsDisabled: [
+      "sort-lines"
     ]
   editor:
     invisibles:
@@ -46,6 +70,7 @@
     subtleLinterErrors: [
       "shellcheck"
     ]
+    lintOnFly: false
   tabs:
     showIcons: true
     usePreviewTabs: true
@@ -89,8 +114,10 @@
   "save-session":
     dataSaveFolder: "/home/forivall/.atom/packages/save-session/projects"
     skipSavePrompt: false
+    extraDelay: 2000
   "run-in-terminal":
     save_before_launch: false
     terminal: "roxterm --tab"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "node-debugger": {}
