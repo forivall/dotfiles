@@ -19,7 +19,7 @@ hide-files@0.1.7
 highlight-selected@0.10.1
 html2jade-plus@1.0.0
 ide-flow@0.8.0
-indentation-indicator@0.6.0
+indent-guide-improved@1.4.3
 language-autotools@2.0.0
 language-babel@0.15.4
 language-cmake@0.1.4
@@ -36,14 +36,14 @@ linter-clang@3.2.3
 linter-coffeelint@1.1.0
 linter-coffeescript@1.0.0
 linter-eslint@3.0.2
-linter-flake8@1.6.1
+linter-flake8@1.7.0
 linter-flow@3.1.3
-linter-jshint@1.2.0
+linter-jshint@1.2.1
 linter-pep8@1.0.1
 linter-pyflakes@0.0.5
-linter-pylint@1.0.1
+linter-pylint@1.0.2
 linter-rust@0.2.9
-linter-scss-lint@2.2.0
+linter-scss-lint@2.2.1
 linter-shellcheck@1.0.2
 linter-stylint@2.0.1
 minimap@4.13.4
@@ -64,6 +64,7 @@ Stylus@1.2.1
 switch-header-source@0.20.0
 symbol-gen@1.0.0
 symbols-tree-view@0.10.0
+tab-control@0.6.8
 tab-length@0.1.0
 tomorrow-ya@1.0.2
 tree-view-git-projects@0.5.0
