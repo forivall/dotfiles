@@ -1419,7 +1419,6 @@
 : 1435011990:0;mv .zcache.bundles-payload.min1 zcache.bundles-payload.min1
 : 1435011990:0;type -af abspath
 : 1435011990:0;type -af dirname
-: 1435011990:0;cd .cache
 : 1435011990:0;-antigen-dump-file-list
 : 1435011990:0;cat .zcache.bundles-meta
 : 1435011990:0;-antigen-dump-file-list npm
@@ -2894,7 +2893,6 @@ fi; done
 : 1435049622:0;git checkout usr/bin/varsall_x64.cmd
 : 1435049779:0;env|direct
 : 1435049783:0;env|grep -i direct
-: 1435050990:0;git dif
 : 1435052772:0;msbuild /?
 : 1435052817:0;git checkout /dinput-more-device-types
 : 1435052828:0;git stashed checkout dinput-more-device-types
@@ -4350,7 +4348,6 @@ EOF
 : 1437347425:0;open ~/GIF\ Screencasts
 : 1437347737:0;cd ~
 : 1437347744:0;mkcd git-repository
-: 14373478:0;
 : 1438318793:0;head .zsh_history
 : 1438318795:0;head .zsh_history_interactive
 : 1438318819:0;xrandr --list
@@ -4495,7 +4492,6 @@ EOF
 : 1438383410:0;xkcdpass
 : 1438384677:0;cd ~/code/git/tacoterm
 : 1438384681:0;cd tacoscript-hacking
-: 1438384735:0;du .
 : 1438384982:0;tree babel
 : 1438384984:0;rmd -r babel
 : 1438385028:0;cp -r *(/) /run/media/forivall/MYLINUXLIVE/tacoscript
@@ -4921,7 +4917,6 @@ EOF
 : 1439540903:0;cd brfs
 : 1439540909:0;npm i ../quote-stream
 : 1439540923:0;$(npm bin)/tap test/separators.js
-: 1439540933:0;git add test
 : 1439540981:0;git checkout -b 'line-separators-test'
 : 1439540995:0;git push -u forivall line-separators-test
 : 1439541919:0;cd code/gists/brfs-separator-bug
@@ -5172,7 +5167,6 @@ EOF
 : 1440320794:0;git remote add forivall git@github.com:forivall/kenburns.git
 : 1440320833:0;git branch -d aspect-ratio
 : 1440320838:0;git checkout -b aspect-ratio forivall/aspectRatio
-: 1440321241:0;gitpush
 : 1440321256:0;git push -u forivall aspect-ratio
 : 1440321270:0;git push forivall :aspectRatio
 : 1440321356:0;npm show jquery
@@ -8079,7 +8073,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443044102:0;git clean -n
 : 1443044107:0;git clean -ni
 : 1443044113:0;git clean -h
-: 1443044123:0;git clean -nX
 : 1443044135:0;git clean -fX
 : 1443044160:0;make uninstall && export BACKENDS="as6e" && autoconf && ./configure --enable-debug && make && make install
 : 1443044168:0;export BACKENDS="as6e" && autoconf && ./configure --enable-debug && make && make install
@@ -8097,8 +8090,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443044787:0;mkdir treebuild
 : 1443044789:0;cd treebuild
 : 1443044792:0;buildtree -s
-: 1443045082:0;journalctl --vacuum-time=2d
-: 1443045087:0;sudo journalctl --vacuum-time=2d
 : 1443045151:0;rmdir treebuild
 : 1443045184:0;mkdir /mnt/Peng/ManjaroSystem
 : 1443045274:0;mkdir -p /mnt/Peng/Jordan/ManjaroLocal/share/baloo
@@ -8145,18 +8136,15 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443046604:0;yaorut -R libgrypt15
 : 1443046607:0;yaourt -R libgrypt15
 : 1443046611:0;yaourt -R libgcrypt15
-: 1443046631:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'
 : 1443046661:0;pacman -Qi $(pacman -Qenq)|grep -E 'Name|Installed Size'|clip
 : 1443046772:0;sort -h ~/Desktop/installed_packages
 : 1443046912:0;yaourt -R gnome-getting-started-docs
 : 1443046932:0;yaourt -R openlierox
-: 1443047069:0;yaourt -Ql manjaro-tools-pkg
 : 1443047095:0;buildtree -a
 : 1443047112:0;df
 : 1443047143:0;while sleep 2; res; df; done
 : 1443047147:0;while sleep 2; do res; df; done
 : 1443047229:0;pacman -Qemq
-: 1443047257:0;yaourt -Qi hawknl
 : 1443047737:0;buildtree -q
 : 1443047754:0;ls /var/cache/manjaro-tools/pkgtree
 : 1443047768:0;ls /var/cache/manjaro-tools/pkgtree/packages-archlinux/packages
@@ -8253,7 +8241,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1442373905:0;/home/jord/.nvm/versions/io.js/v3.3.0/bin/npm --node-gyp=$HOME/null i
 : 1442373931:0;apm link .
 : 1442373957:0;cd ~/.atom/packages/you-complete-me
-: 1442373959:0;cd ycmd
 : 1442373963:0;git submodule update --init --recursive
 : 1442540772:0;type -af oneliner
 : 1442540782:0;type -af oneliner-init
@@ -8328,7 +8315,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1442546045:0;git rm --cached babel-external-helpers.js
 : 1442546052:0;git rm --cached babel-plugin.js
 : 1442546058:0;git mv babel.js taco.js
-: 1442546100:0;tree
 : 1442546111:0;cd src
 : 1442546121:0;git mv babel taco
 : 1442546145:0;git rm babel-external-helpers.js --cached
@@ -8670,8 +8656,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443163126:0;cd ../../../babel/packages/
 : 1443163130:0;git checkout babylon/
 : 1443163143:0;git add test src
-: 1443163190:0;git diff .
-: 1443163192:0;git add -p .
 : 1443163527:0;rm lib
 : 1443163529:0;babel src -d lib --copy-files
 : 1443163733:0;cd ../../../
@@ -8776,7 +8760,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443679922:0;mv bitwise-or bitwise-xor
 : 1443679930:0;mv migrated_0002 bitwise-or
 : 1443680163:0;mocha --watch --bail test/js-to-taco.js --fgrep comments --invert 
-: 1443680176:0;mocha --watch --bail test/js-to-taco.js --grep comments --invert 
 : 1443680211:0;atom 
 : 1443680236:0;cd babel
 : 1443681229:0;git add test/parsing-fixtures/
@@ -8790,7 +8773,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443683995:0;cd packages/tacoscript/test
 : 1443684058:0;git add -N parsing-fixtures/token-attachment/parentheses/bitwise-or-not-base/expected.json parsing-fixtures/token-attachment/parentheses/bitwise-or-not-override/expected.json parsing-fixtures/token-attachment/parentheses/bitwise-or-not-redundant/expected.json 
 : 1443724480:0;mocha --watch --bail test/parse-js-token-attachment.js
-: 1443724675:0;mocha test/parse-js-token-attachment.js
 : 1443724863:0;cd ../babel
 : 1443724866:0;gg 'parenthesizedExpression'
 : 1443724904:0;gg 'parenthesized' -- src
@@ -8810,7 +8792,6 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443744684:0;git add atom/build-tools-cpp.projects
 : 1443744705:0;git commit -m 'updates'
 : 1443745052:0;got commit -m 'history'
-: 1443745058:0;git commit -m 'history'
 : 1443745073:0;rm plugins/npm/npm.plugin.zsh.orig zsh_history_interactive.orig 
 : 1443745244:0;git stash drop
 : 1443745274:0;git stash list
@@ -8976,31 +8957,13 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443471657:0;ls aur4
 : 1443471712:0;git submodule summary
 : 1443471718:0;git submodule status -v
-: 1443471734:0;git submodule foreach git remote -v
-: 1443471743:0;ls
 : 1443471745:0;cd aur
-: 1443471746:0;ls
 : 1443471747:0;cd hid-
 : 1443471751:0;cd hid-azio-lv-mech5-dkms-git
-: 1443471752:0;git st
-: 1443471753:0;git remote -v
-: 1443471755:0;..
 : 1443471774:0;cd aur4/hid-azio-lv-mech5-dkms-git
-: 1443471775:0;git st
-: 1443471776:0;git remote -v
-: 1443471779:0;git st
 : 1443471780:0;sl
-: 1443471781:0;ls
-: 1443471783:0;..
-: 1443471784:0;ls
 : 1443471787:0;ls teamspeak3-addon-installer
-: 1443471791:0;git st
-: 1443471794:0;..
-: 1443471794:0;ls
 : 1443471797:0;ls old
-: 1443471799:0;git fetch
-: 1443471800:0;git la
-: 1443471810:0;git submodule update --init --recusive
 : 1443471827:0;git submodule init --recusive
 : 1443471833:0;git submodule status
 : 1443471839:0;git submodule sync
@@ -9009,38 +8972,23 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443471855:0;git submodule update --recusive
 : 1443471864:0;git submodule update --init
 : 1443471879:0;git submodule foreach git remote -v
-: 1443471917:0;git submodule add ssh://aur@aur4.archlinux.org/otto-bin.git aur4/otto-bin
-: 1443471926:0;cd aur4/otto-bin
-: 1443471927:0;git st
 : 1443471947:0;makepkg-template
 : 1443472008:0;makepkg-template /usr/share/pacman/PKGBUILD.proto
 : 1443472013:0;cp /usr/share/pacman/PKGBUILD.proto PKGBUILD
-: 1443472016:0;atom -n .
-: 1443472286:0;yaourt -Ss otto
 : 1443472620:0;curl -OL https://dl.bintray.com/mitchellh/otto/otto_0.1.0_SHA256SUMS.sig
 : 1443472650:0;gpg
-: 1443472668:0;gpgconf
 : 1443472745:0;signtool
 : 1443472755:0;open otto_0.1.0_SHA256SUMS.sig
-: 1443472770:0;kgpg
 : 1443472776:0;kgpgconf
-: 1443472814:0;open .
 : 1443472838:0;kate
-: 1443472901:0;ls
-: 1443472909:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
-: 1443472991:0;ls
 : 1443472996:0;gpg --output doc --decrypt
-: 1443473001:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
 : 1443473088:0;wget http://www.apache.org/dist/openoffice/KEYS
 : 1443473091:0;cat KEYS
 : 1443473112:0;kate keys
 : 1443473115:0;kate KEYS
 : 1443473137:0;mv KEYS KEY
 : 1443473140:0;gpg --import KEY
-: 1443473148:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
-: 1443473155:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
 : 1443473226:0;gpg --recv-keys 348FFC4C
-: 1443473237:0;gpg --sign-key 348FFC4C
 : 1443473258:0;gpg --init
 : 1443473267:0;gpgconf
 : 1443473272:0;gpg --sign-key 348FFC4C
@@ -9049,164 +8997,90 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443473376:0;seahorse-daemon
 : 1443473379:0;seahorse
 : 1443473393:0;killall seahorse-daemon
-: 1443473481:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
 : 1443473491:0;gpg --output doc --decrypt otto_0.1.0_SHA256SUMS.sig
 : 1443473520:0;kgpg
 : 1443473523:0;kgpg --help
-: 1443473529:0;kgpg -s otto_0.1.0_SHA256SUMS.sig
-: 1443473561:0;ls
 : 1443473576:0;kgpg -s
 : 1443473579:0;kgpg -s otto_0.1.0_SHA256SUMS.sig
 : 1443473604:0;subl otto_0.1.0_SHA256SUMS.sig
-: 1443473648:0;gpg -d otto_0.1.0_SHA256SUMS.sig
-: 1443473691:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
 : 1443473722:0;curl -OL https://dl.bintray.com/mitchellh/otto/otto_0.1.0_linux_386.zip
-: 1443473731:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
 : 1443473786:0;sha256sum -c otto_0.1.0_linux_386.zip
 : 1443473820:0;sha256sum otto_0.1.0_linux_386.zip
-: 1443473850:0;gpg --verify otto_0.1.0_SHA256SUMS.sig otto_0.1.0_SHA256SUMS
 : 1443473914:0;gpg -d otto_0.1.0_SHA256SUMS.sig
 : 1443473921:0;gpg -d < otto_0.1.0_SHA256SUMS.sig
 : 1443474012:0;curl -OL https://dl.bintray.com/mitchellh/otto/otto_0.1.0_SHA256SUMS?direct
-: 1443474013:0;ls
 : 1443474026:0;mv otto_0.1.0_SHA256SUMS\?direct otto_0.1.0_SHA256SUMS
-: 1443474027:0;ls
-: 1443474031:0;cat otto_0.1.0_SHA256SUMS
 : 1443474125:0;gpg --verify otto_0.1.0_SHA256SUMS.sig otto_0.1.0_SHA256SUMS
 : 1443474139:0;gpg --verify otto_0.1.0_SHA256SUMS
 : 1443474144:0;gpg --verify otto_0.1.0_SHA256SUMS.sig
-: 1443474160:0;cat otto_0.1.0_SHA256SUMS
 : 1443474286:0;cat otto_0.1.0_SHA256SUMS|
 : 1443474288:0;cat otto_0.1.0_SHA256SUMS|clip
 : 1443474437:0;yaourt -Ql atom-bin
 : 1443474441:0;yaourt -Ql atom-editor-bin
 : 1443474461:0;ls -ld /usr/bin/atom
 : 1443474473:0;install --help
-: 1443474585:0;ls
-: 1443474587:0;makepkg
-: 1443474626:0;ls
 : 1443474628:0;ls src
 : 1443474648:0;makepkg
-: 1443474655:0;git st
-: 1443474664:0;git add PKGBUILD
-: 1443474665:0;git st
-: 1443474666:0;git commit
-: 1443474670:0;git st
-: 1443474674:0;git push
 : 1443474731:0;ls ../*/.gitignore
 : 1443474756:0;git ignore '/pkg' '/src' '*.zip'
-: 1443474757:0;git st
 : 1443474762:0;git add .gitignore
-: 1443474764:0;git commit --amend
-: 1443474766:0;git st
-: 1443474778:0;git push
-: 1443474929:0;mksrcinfo
-: 1443474930:0;gi tst
 : 1443474934:0;git add .SRCINFO
 : 1443474936:0;cat .SRCINFO
-: 1443474944:0;git st
-: 1443474947:0;git commit --amend
-: 1443474955:0;git st
-: 1443474956:0;git push
-: 1443474985:0;yaourt -Ss otto
 : 1443474990:0;yaourt -S otto-bin
 : 1443475008:0;ott
 : 1443475009:0;otto
-: 1443475157:0;git st
-: 1443475161:0;..
-: 1443475174:0;gi tst
-: 1443475175:0;git st
 : 1443475184:0;git add aur4/otto-bin/
-: 1443475184:0;git st
-: 1443475190:0;git reset
 : 1443475197:0;cd aur4/otto-bin/
-: 1443475198:0;git st
-: 1443475201:0;..
 : 1443475204:0;git submodule add ssh://aur@aur4.archlinux.org/otto-bin.git aur4/otto-bin
-: 1443475206:0;git st
 : 1443475212:0;mkdir aur
 : 1443475217:0;mkdir aur/otto-bin
 : 1443475255:0;cp aur4/otto-bin/{PKGBUILD,.SRCINFO} aur/otto-bin
-: 1443475256:0;ls
 : 1443475258:0;ls aur
 : 1443475261:0;ls aur/otto-bin
 : 1443475264:0;la aur/otto-bin
-: 1443475265:0;git st
 : 1443475269:0;git add aur/otto-bin/
 : 1443475278:0;cp aur4/otto-bin/.gitignore aur/otto-bin
-: 1443475280:0;git st
 : 1443475285:0;git addd aur/otto-bin/.gitignore
-: 1443475286:0;git st
 : 1443475289:0;git add aur/otto-bin/.gitignore
-: 1443475290:0;git st
-: 1443475291:0;git commit
-: 1443475296:0;git st
-: 1443475297:0;git push
-: 1443475311:0;git st
 : 1443475317:0;vim .git/config
-: 1443475336:0;git push
-: 1443475339:0;git st
 : 1443481525:0;npm i --save-dev babel-autonode
-: 1443481540:0;git st
 : 1443482849:0;yaourt -Ss soundcloud
-: 1443482861:0;yaourt -Ss mopidy
 : 1443482868:0;yaourt -S mopidy
-: 1443482894:0;mopidy
 : 1443482906:0;mopidy --helop
-: 1443482908:0;mopidy --help
 : 1443482927:0;yaourt -Ss mopidy
 : 1443482972:0;yaourt -S mopidy-soundcloud mopidy-alsamixer mopidy-moped mopidy-mpris
-: 1443483067:0;cd
-: 1443483070:0;cd code/repos/git
 : 1443483074:0;git clone git@github.com:tiliado/nuvola-app-soundcloud.git
 : 1443483081:0;cd nuvola-app-soundcloud
 : 1443483085:0;make build
-: 1443483089:0;make install
 : 1443483228:0;yaourt -Ss flashplayer
 : 1443483236:0;yaourt -Ss flashplugin
 : 1443483283:0;yaourt -Ss pepper
 : 1443483317:0;yaourt -Ss freshplayer
 : 1443483325:0;yaourt -S freshplayerplugin
 : 1443484776:0;yaourt -Ss nuvola
-: 1443484785:0;cd ..
 : 1443484792:0;git clone git@github.com:tiliado/nuvola-app-bandcamp.git
 : 1443484800:0;cd nuvola-app-bandcamp
-: 1443484807:0;make
 : 1443484810:0;make install
-: 1443485116:0;totem
 : 1443485145:0;yaourt -Ss grilo
 : 1443485152:0;yaourt -R grilo grilo-plugins
 : 1443485270:0;totem --help
 : 1443485281:0;totem --previous
-: 1443485283:0;totem
 : 1443485299:0;yaourt -Qi totem
 : 1443485313:0;yaourt -Ss gnome
 : 1443485318:0;yaourt -Qs gnome
 : 1443485330:0;banshee
 : 1443485333:0;yaourt -S banshee
-: 1443485356:0;lightsoff
 : 1443485441:0;yaourt -S polari
 : 1443485447:0;polari
 : 1443485476:0;lightsoff
-: 1443485760:0;git st
-: 1443485761:0;git la
-: 1443485789:0;git st
-: 1443485794:0;git stash save
 : 1443485801:0;git show stash
 : 1443485810:0;greenkeeper login
-: 1443485843:0;git st
-: 1443485850:0;cd packages/tacoscript
 : 1443485854:0;greenkeeper enable
 : 1443485917:0;mopidy --help
 : 1443485926:0;mopidy -vv
-: 1443485954:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
 : 1443485980:0;oneliner create restart-plasmashell
-: 1443486011:0;res
-: 1443486012:0;cd
-: 1443486016:0;mopidy -v
 : 1443486041:0;kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell
 : 1443486047:0;kstart plasmashell
-: 1443486062:0;mopidy
 : 1443486074:0;yaourt -Qs mopidy
 : 1443486082:0;yaourt -R mopidy-mpris
 : 1443486091:0;mopidy
@@ -9214,33 +9088,15 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443486125:0;cat /usr/lib/python2.7/site-packages/mopidy_moped/ext.conf
 : 1443486142:0;mopidy -v
 : 1443486320:0;rm .local/share/totem
-: 1443486324:0;totem
 : 1443486358:0;rm .config/totem/state.ini 
 : 1443486362:0;totem
 : 1443486383:0;grilo-test-ui-0.2 
-: 1443486682:0;git st
 : 1443486684:0;git stash pop
-: 1443486686:0;git st
-: 1443486688:0;git diff
-: 1443486758:0;make watch
-: 1443486845:0;cd packages/tacoscript
-: 1443486854:0;mocha test/js-to-taco.js
 : 1443486871:0;mocha test/js-to-taco.js --grep auto indentation hard ta
 : 1443486877:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab'
-: 1443486879:0;res
-: 1443486882:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
-: 1443486959:0;git st
-: 1443486961:0;git la
-: 1443486964:0;git diff
-: 1443486969:0;git st
-: 1443487047:0;make watch
-: 1443487158:0;eslint
 : 1443487164:0;../../node_modules/.bin/eslint
 : 1443487173:0;../../node_modules/.bin/eslint src
 : 1443487301:0;cd ~/.atom/packages/linter-eslint
-: 1443487302:0;git st
-: 1443487303:0;ls
-: 1443487305:0;ls node_modules
 : 1443487331:0;< jq ../../node_modules/eslint/package.json .version
 : 1443487333:0;jq
 : 1443487341:0;< ../../node_modules/eslint/package.json jq .version
@@ -9250,80 +9106,22 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443487798:0;npm bin eslint
 : 1443487813:0;$(cd ..; npm bin)/eslint
 : 1443487836:0;$(cd ..; npm bin)/eslint src
-: 1443488690:0;cd
-: 1443488691:0;cd 
-: 1443488707:0;cd code/repos/git/atom-tree-view
-: 1443488708:0;git st
-: 1443488710:0;git la
-: 1443488712:0;git fetch
-: 1443488714:0;git la
 : 1443488720:0;git fetch origin
-: 1443488721:0;git la
 : 1443488753:0;git merge v0.189.0
 : 1443488756:0;git sdt
-: 1443488757:0;git st
-: 1443488759:0;git la
 : 1443488781:0;npm i --node-gyp=true && apm rebuild
-: 1443488794:0;npm ls
-: 1443488796:0;git st
-: 1443488797:0;git push
-: 1443488802:0;hub browse
-: 1443489308:0;atom -n .
-: 1443489640:0;git st
-: 1443489640:0;git diff
-: 1443489919:0;git st
-: 1443489921:0;git add -p
-: 1443489925:0;git st
-: 1443489927:0;git la
 : 1443489935:0;git checkout master
 : 1443489940:0;git stashed checkout master
-: 1443489942:0;git st
-: 1443489946:0;git pull
-: 1443489948:0;git st
-: 1443489949:0;git la
-: 1443489954:0;git add -p
-: 1443489959:0;git commit
 : 1443489974:0;git checkout -b 'always-open-existing'
-: 1443489975:0;git st
-: 1443489977:0;git commit
-: 1443490097:0;git st
-: 1443490099:0;git la
 : 1443490111:0;git push -u forivall always-open-existing
-: 1443490114:0;git st
 : 1443490118:0;hub browse
-: 1443490121:0;git la
 : 1443490138:0;git checkout drag-and-drop-root
-: 1443490139:0;git la
 : 1443490148:0;git checkout -b forivall-master
-: 1443490149:0;git st
-: 1443490157:0;git merge always-open-existing
-: 1443490159:0;git st
 : 1443490163:0;git push -u forivall forivall
 : 1443490165:0;git push -u forivall forivall-master
-: 1443490168:0;git st
-: 1443490210:0;git la
 : 1443490218:0;git show always-open-existing
-: 1443490309:0;git st
-: 1443490565:0;git checkout always-open-existing
 : 1443490568:0;git stashed checkout always-open-existing
-: 1443490571:0;git st
-: 1443490573:0;git add -p
-: 1443490575:0;git st
-: 1443490578:0;git commit --amend
-: 1443490580:0;git st
-: 1443490582:0;git push --force
-: 1443490614:0;git st
-: 1443490616:0;git checkout forivall-master
-: 1443490618:0;git la
-: 1443490631:0;git reset --hard drag-and-drop-root
-: 1443490632:0;git la
-: 1443490637:0;git merge always-open-existing
-: 1443490639:0;git st
-: 1443490641:0;git push --force
 : 1443491193:0;python
-: 1443492812:0;git st
-: 1443492823:0;git checkout always-open-existing
-: 1443493549:0;git show
 : 1443494994:0;cp tree-view.txt tree-view-1.txt
 : 1443494996:0;cp tree-view.txt tree-view-2.txt
 : 1443494998:0;cp tree-view.txt tree-view-3.txt
@@ -9336,178 +9134,54 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443495013:0;cp tree-view.txt tree-view-10.txt
 : 1443495056:0;rm tree-view-10.txt
 : 1443495353:0;nesh -c
-: 1443496586:0;ls
 : 1443496593:0;rm tree-view-1.txt tree-view-2.txt tree-view-3.txt tree-view-4.txt tree-view-5.txt tree-view-6.txt tree-view-7.txt tree-view-8.txt tree-view-9.txt 
-: 1443496594:0;git st
-: 1443497106:0;git add -p
-: 1443497114:0;git st
-: 1443497349:0;git diff
-: 1443498730:0;cd
-: 1443498731:0;gits t
-: 1443498732:0;git st
-: 1443498734:0;git add -p
-: 1443498851:0;git st
-: 1443498853:0;git add -p
-: 1443498858:0;git st
-: 1443498859:0;git reset
-: 1443498860:0;git st
-: 1443498862:0;git add -p
 : 1443498906:0;sudo dkms install hid-lg-g710-plus/r19.ecd2099
 : 1443498923:0;sudo ~/code/repos/git/logitech-g710-linux-driver/misc/rebind.sh
-: 1443498949:0;git st
-: 1443498950:0;git add -p
-: 1443498982:0;git st
-: 1443499023:0;git diff
 : 1443499033:0;git commit -m tmp
-: 1443499036:0;git stash save
-: 1443499039:0;git checkout -
-: 1443499040:0;git st
 : 1443499103:0;git checkout -
-: 1443499104:0;git st
 : 1443499109:0;git reset HEAD^
-: 1443499110:0;git st
 : 1443499548:0;cd /home/forivall/.atom/packages/git-projects
-: 1443499549:0;ls
-: 1443499551:0;git st
 : 1443499558:0;firefox capture.gif
-: 1443499571:0;apm rm git-projects
-: 1443499578:0;apm install git-projects
-: 1443499584:0;..
 : 1443499586:0;apm install git-projects
-: 1443500948:0;git st
-: 1443500964:0;git add -p
-: 1443500998:0;git st
-: 1443501085:0;git commit
-: 1443501100:0;git st
-: 1443501102:0;git push
-: 1443501104:0;git st
 : 1443501111:0;git checkout forivall-master
-: 1443501112:0;git st
-: 1443501113:0;git la
 : 1443501123:0;git reset --hard drag-and-drop-root
 : 1443501128:0;git merge always-open-existing
-: 1443501130:0;git st
-: 1443501134:0;git la
-: 1443501138:0;git st
 : 1443501143:0;git push --force
-: 1443501244:0;git st
-: 1443502891:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
 : 1443506018:0;nvrandr-set-triple
 : 1443507350:0;npm home repeating
-: 1443508219:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
 : 1443508253:0;res; mocha test/generation.js
-: 1443508256:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
 : 1443509218:0;atom /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.taco
-: 1443509221:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
-: 1443509311:0;git st
 : 1443509320:0;git add -N src/gen-taco/token/whitespace.js
-: 1443509322:0;git st
 : 1443509335:0;cd ../../../tacoscript-ast-playground
-: 1443509336:0;gits t
-: 1443509338:0;git st
-: 1443509342:0;npm start
 : 1443509386:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.taco > clip
 : 1443509393:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.taco
-: 1443509399:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.js | clip
-: 1443510067:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
-: 1443510676:0;make watch
-: 1443510685:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
-: 1443511374:0;npm start
 : 1443511407:0;ls node_modules
 : 1443511428:0;ls node_modules/tacoscript-core/node_modules/horchata
 : 1443511432:0;ls node_modules/tacoscript-core/node_modules/
 : 1443511443:0;ls node_modules/tacoscript-core
 : 1443511462:0;cat package.json
-: 1443511480:0;browserify src/app.js -o dist/app.js
 : 1443511490:0;browserify -v src/app.js -o dist/app.js
 : 1443511495:0;browserify -vv src/app.js -o dist/app.js
-: 1443511499:0;cat dist/app.js
 : 1443511523:0;browserify src/app.js -o dist/app.js
 : 1443511529:0;cat dist/app.js
 : 1443511536:0;http-server
 : 1443511541:0;./node_modules/.bin/http-server
-: 1443511560:0;git st
-: 1443511562:0;git add -p
 : 1443511568:0;rm clip
-: 1443511568:0;cd
-: 1443511569:0;git st
 : 1443511603:0;git add -p src
-: 1443511609:0;git st
-: 1443511614:0;git commit
-: 1443511619:0;git st
 : 1443511636:0;atom src/parsers/tacoscript.js
-: 1443511758:0;npm start
-: 1443512287:0;cat /mnt/Peng/Jordan/Code/hacking-tacoscript/tacoscript/packages/tacoscript/test/fixtures/translation/auto-indentation/hard-tab/code.js | clip
-: 1443513226:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
-: 1443513387:0;npm start
-: 1443513412:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
 : 1443513528:0;restart-plasmashell
 : 1443513574:0;mocha test/js-to-taco.js --grep 'auto indentation hard tab' --watch
 : 1443513720:0;mocha test/js-to-taco.js --grep 'auto indentation' --watch
 : 1443513727:0;mocha test/js-to-taco.js --watch
-: 1443513738:0;res
-: 1443513740:0;mocha test/js-to-taco.js
-: 1443514040:0;git st
-: 1443514043:0;git add -p
-: 1443514134:0;git st
-: 1443514137:0;git commit
-: 1443514143:0;git st
-: 1443514150:0;git diff
-: 1443514154:0;git checkout .
-: 1443514155:0;git st
-: 1443514157:0;make watch
-: 1443514159:0;git st
-: 1443514160:0;cd
-: 1443514162:0;git st
-: 1443514163:0;git checkout .
-: 1443514165:0;git st
-: 1443514172:0;cd -
-: 1443514176:0;mocha test/js-to-taco.js
 : 1443514215:0;gti st
-: 1443514217:0;git add -p
-: 1443514222:0;git commit --amend
-: 1443514225:0;res
-: 1443514227:0;mocha test/js-to-taco.js
-: 1443514344:0;res; mocha test/js-to-taco.js
-: 1443514838:0;make watch
-: 1443514844:0;npm start
-: 1443514934:0;res; mocha test/js-to-taco.js
-: 1443514945:0;make watch
-: 1443514950:0;res; mocha test/js-to-taco.js
-: 1443515065:0;npm start
-: 1443515226:0;res
-: 1443515227:0;npm start
-: 1443515229:0;res; mocha test/js-to-taco.js
-: 1443515792:0;res
-: 1443515794:0;res; mocha test/js-to-taco.js
-: 1443515868:0;git st
-: 1443515870:0;git add -p
-: 1443515881:0;git st
 : 1443515884:0;git commit --amend
-: 1443515886:0;git st
-: 1443515888:0;git push
-: 1443550454:0;yaourt -Syu
-: 1443550458:0;yaourt -Syua
 : 1443550501:0;yaourt -Ss otto
-: 1443550573:0;cd
 : 1443550576:0;cd code/
-: 1443550577:0;ls
-: 1443550578:0;cd
 : 1443550586:0;cd code/repos/git
-: 1443550587:0;ls
 : 1443550590:0;cd ..
 : 1443550593:0;cd git@forivall/aur-packages
-: 1443550594:0;git st
-: 1443550600:0;cd aur4/otto-bin
-: 1443550605:0;atom -n .
 : 1443550631:0;atom updpkgsums.sh
-: 1443550709:0;./updpkgsums.sh
 : 1443550713:0;chmod +x ./updpkgsums.sh
-: 1443550726:0;./updpkgsums.sh
-: 1443550730:0;ls
-: 1443550748:0;./updpkgsums.sh
-: 1443550751:0;ls
-: 1443550766:0;cat otto_0.1.0_SHA256SUMS
 : 1443550809:0;type -af updpkgsums
 : 1443550814:0;cat /usr/bin/updpkgsums
 : 1443550817:0;atom /usr/bin/updpkgsums
@@ -9519,86 +9193,20 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443551229:0;echo $(grep otto_0.1.0_linux_386.zip otto_0.1.0_SHA256SUMS)
 : 1443551234:0;type -af grep
 : 1443551339:0;env grep otto_0.1.0_linux_386.zip otto_0.1.0_SHA256SUMS | cut -d' ' -f1
-: 1443551430:0;git st
-: 1443551433:0;git diff
 : 1443551437:0;git add PKGBUILD
-: 1443551438:0;./updpkgsums.sh
-: 1443551443:0;git st
-: 1443551445:0;git diff
-: 1443551475:0;git checkout PKGBUILD
-: 1443551484:0;ls
-: 1443551487:0;./updpkgsums.sh
-: 1443551489:0;git st
-: 1443551491:0;git diff
 : 1443551581:0;git checkout PKGBUILD
-: 1443551583:0;./updpkgsums.sh
-: 1443551584:0;git st
-: 1443551585:0;git diff
-: 1443551595:0;git st
 : 1443551601:0;git add updpkgsums.sh
-: 1443551602:0;git st
-: 1443551606:0;git add -p
-: 1443551610:0;git st
-: 1443551611:0;git commit
-: 1443551620:0;git st
-: 1443551625:0;..
-: 1443551640:0;cp aur4/otto-bin/* aur/otto-bin
-: 1443551640:0;git st
-: 1443551645:0;git add -p
-: 1443551652:0;git st
-: 1443551660:0;git show
 : 1443551669:0;git add aur/otto-bin/updpkgsums.sh
-: 1443551669:0;git st
 : 1443551675:0;git show
-: 1443551681:0;git commit
-: 1443551685:0;git st
 : 1443551739:0;most ~/.zsh_history_interactive
-: 1443551792:0;git st
-: 1443551798:0;cd aur4/otto-bin
-: 1443551799:0;gitst
-: 1443551800:0;git st
 : 1443551817:0;./updpkgsums.sh
-: 1443551819:0;git st
-: 1443551821:0;git diff
-: 1443551836:0;mksrcinfo
-: 1443551837:0;git st
-: 1443551838:0;git add -p
-: 1443551846:0;git st
-: 1443551849:0;git commit
 : 1443551858:0;cd ../..
 : 1443551864:0;cp aur4/otto-bin/* aur/otto-bin
-: 1443551865:0;git st
-: 1443551880:0;cp aur4/otto-bin/* aur4/otto-bin/.* aur/otto-bin
-: 1443551881:0;git st
-: 1443551883:0;git add -p
-: 1443551890:0;git st
-: 1443551893:0;git diff
 : 1443551906:0;cd aur4/otto-bin
-: 1443551907:0;git st
 : 1443551910:0;git store-untracked-files
-: 1443551911:0;git st
-: 1443551919:0;git add -p
-: 1443551920:0;git st
-: 1443551922:0;git commit
-: 1443551927:0;git st
-: 1443551928:0;git push
-: 1443551963:0;yaourt -Sua
 : 1443551984:0;otto --version
-: 1443552299:0;git st
 : 1443552305:0;ggit st
-: 1443552306:0;git st
 : 1443552310:0;mksrcinfo
-: 1443552311:0;git st
-: 1443552312:0;git add -p
-: 1443552316:0;git st
-: 1443552318:0;git commit
-: 1443552324:0;git st
-: 1443552325:0;git push
-: 1443552338:0;cp aur4/otto-bin/* aur4/otto-bin/.* aur/otto-bin
-: 1443552339:0;git st
-: 1443552341:0;git add -p
-: 1443552348:0;git st
-: 1443552354:0;yaourt -Sua
 : 1443552377:0;git st
 : 1443552383:0;git add -p
 : 1443552385:0;git commit
@@ -10324,7 +9932,7 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443816482:0;git st
 : 1443816499:0;git commit -m 'tweak column ruler'
 : 1443816504:0;git stashed pull --rebase
-
+: 1443816783:0;
 : 1443747677:0;git st
 : 1443747684:0;git commit -m history && git push
 : 1443748495:0;vim tools/js2c.py
@@ -10621,3 +10229,33 @@ coolscan coolscan2 coolscan3 dc25 dc210 dc240" && ./configure && make && make in
 : 1443816702:0;git st
 : 1443816706:0;git reset
 : 1443816709:0;git add zsh_history_interactive
+: 1443816760:0;git st
+: 1443816761:0;git diff
+: 1443816786:0;make watch
+: 1443816802:0;git st
+: 1443816819:0;cd packages/tacoscript/src
+: 1443816820:0;git st
+: 1443816822:0;..
+: 1443816824:0;git st
+: 1443816826:0;git pull
+: 1443816830:0;make watch
+: 1443816838:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443816865:0;res
+: 1443816866:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443853089:0;res
+: 1443853092:0;mocha test/js-to-taco.js --invert --grep comment
+: 1443853412:0;vim ~/.atom/packages/adwaita-pro-ui/lib/config.coffee
+: 1443853431:0;vim ~/.atom/packages/adwaita-pro-ui/lib/adwaita-pro-ui.coffee
+: 1443853659:0;git st
+: 1443853822:0;gnome-tweak-tool
+: 1443853889:0;res
+: 1443853928:0;mocha test/js-to-taco.js --grep types
+: 1443853942:0;res
+: 1443853956:0;mocha --bail --watch test/js-to-taco.js --grep types
+: 1443854370:0;git st
+: 1443854372:0;git add -p
+: 1443854379:0;gitst
+: 1443854380:0;git st
+: 1443854390:0;dotfiles
+: 1443854390:0;git st
+: 1443854393:0;git add zsh_history_interactive

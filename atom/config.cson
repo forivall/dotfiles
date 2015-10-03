@@ -90,9 +90,9 @@
   "tree-view":
     alwaysOpenExisting: true
   "adwaita-pro-ui":
-    fontFamily: "DejaVu Sans"
-    fontSize: 13.4
+    fontSize: 13
     iconTheme: "Octicons"
+    fontFamily: "Droid Sans"
   "autocomplete-plus":
     includeCompletionsFromAllBuffers: true
     confirmCompletion: "tab"
