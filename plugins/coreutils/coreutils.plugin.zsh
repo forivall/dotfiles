@@ -24,6 +24,9 @@ function grep() {
     fi
 }
 
+# sed
+autoload -U sedml
+
 # du
 function jsdu() { du -Sah --apparent-size "$@" | grep "\\.js" | sort -h ; }
 function jsduK() { du -SaBK --apparent-size "$@" | grep "\\.js" | sort -n ; }
