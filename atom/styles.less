@@ -20,7 +20,11 @@ atom-text-editor {
 
 atom-workspace {
   -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.1pt;
+  // -webkit-font-smoothing: subpixel-antialiased;
+  // -webkit-font-smoothing: optimizeLegibility;
+  // text-rendering: optimizeLegibility;
+  // text-rendering: geometricPrecision;
+  // -webkit-text-stroke-width: 0.1pt;
 }
 atom-text-editor {
   &::shadow {
@@ -83,6 +87,58 @@ atom-workspace.theme-quantum-ui {
     background-color: @dark-gray;
     &.indent-guide-active {
       background-color: mix(@dark-gray, @very-dark-gray, 50);
+    }
+  }
+}
+
+// TODO: move into adwaita-pro-ui
+
+@tab-top-margin: 1px;
+@tab-height: 34px;
+@tab-total-height: @tab-top-margin + @tab-height;
+@tab-bg-gradient-spacing: @tab-total-height - 1px;
+.tab-bar {
+  flex-wrap: wrap;
+  height: auto;
+  margin-top: -@tab-top-margin;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: repeating-linear-gradient(to bottom, #d6d6d6, #d6d6d6 @tab-bg-gradient-spacing, #a1a1a1 @tab-bg-gradient-spacing, #a1a1a1 @tab-bg-gradient-spacing + 1px);
+  margin-bottom: -1px;
+  .tab {
+    margin-top: @tab-top-margin;
+    &.tab {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+    height: @tab-height;
+    .title {
+      // transform: scale(1.08) translateY(1px);
+      font-size: 1.04em; letter-spacing: -0.34px;
+    }
+    &:hover, &.active {
+      border-bottom-width: 3px;
+    }
+    &:hover {
+      // border-bottom-color: rgba(193,196,193,0.9);
+      border-bottom-color: rgba(93,94,93,0.4);
+      border-left-color: #C0C0C0;
+      border-right-color: #C0C0C0;
+      background-color: #DADADA;
+      box-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+    &.active {
+      margin-top: 0;
+      padding-top: @tab-top-margin;
+      height: @tab-total-height;
+      box-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.10);
+      &:hover {
+        background-color: #E6E6E6;
+        box-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.04);
+      }
+      .title {
+        padding-right: 0;
+      }
     }
   }
 }

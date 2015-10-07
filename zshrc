@@ -56,6 +56,8 @@ autoload run-help-svk
 unalias run-help
 alias help=run-help
 
+zstyle ':completion:*' rehash true
+
 # PURE_PROMPT_SYMBOL="$(printf '\u2765')"
 # PURE_PROMPT_SYMBOL="$(printf '\u2771')"
 # PURE_PROMPT_SYMBOL="›"
@@ -84,6 +86,8 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/meteor
   zgen oh-my-zsh plugins/git-extras
+  # zgen oh-my-zsh plugins/jump
+  zgen load "$SH_ROOT/plugins/jump"
   # zgen oh-my-zsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async
   # ! $IS_WINDOWS && zgen load "$SH_ROOT/../../repos/git/zsh-pure"
@@ -91,7 +95,7 @@ if ! zgen saved; then
   ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
-  zgen load jocelynmallon/zshmarks
+  # zgen load jocelynmallon/zshimarks
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"

@@ -76,8 +76,8 @@
     showInvisibles: true
     lineHeight: 1.2
     backUpBeforeSaving: true
-    fontSize: 15
     showIndentGuide: true
+    fontSize: 15
   linter:
     lintOnChange: false
     ignoredLinterErrors: [
@@ -94,6 +94,7 @@
     usePreviewTabs: true
   "tree-view":
     alwaysOpenExisting: true
+    refreshVcsStatusOnProjectOpen: 5
   "adwaita-pro-ui":
     fontSize: 13
     fontFamily: "Droid Sans"
