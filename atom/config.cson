@@ -180,6 +180,10 @@
   "js-autoimport": {}
   "es-identifier-highlight":
     lightTheme: true
+  "cursor-history":
+    flashOnLand: true
+    flashColor: "success"
+    flashType: "word"
 ".css.scss.source":
   "multi-wrap-guide":
     columns: [

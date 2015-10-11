@@ -31,6 +31,10 @@
   'alt-shift-r': 'run-in-terminal:start-terminal-here'
 # 'atom-text-editor.source.js':
 # 'atom-text-editor[data-grammer~=js]':
+  'alt-.': 'cursor-history:next'
+  'alt-,': 'cursor-history:prev'
+  'alt-;': 'cursor-history:next'
+  'alt-l': 'cursor-history:prev'
 'atom-text-editor':
   'alt-shift-g': 'require-opener:open-selections-on-npm'
   'alt-shift-n': 'require-opener:open-selections-on-github'
