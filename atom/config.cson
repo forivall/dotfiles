@@ -77,7 +77,6 @@
     lineHeight: 1.2
     backUpBeforeSaving: true
     showIndentGuide: true
-    fontSize: 15
   linter:
     lintOnChange: false
     ignoredLinterErrors: [

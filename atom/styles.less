@@ -103,11 +103,14 @@ atom-workspace.theme-quantum-ui {
   margin-top: -@tab-top-margin;
   padding-left: 5px;
   padding-right: 5px;
+
   background: repeating-linear-gradient(to bottom, #d6d6d6, #d6d6d6 @tab-bg-gradient-spacing, #a1a1a1 @tab-bg-gradient-spacing, #a1a1a1 @tab-bg-gradient-spacing + 1px);
   margin-bottom: -1px;
   .tab {
     margin-top: @tab-top-margin;
+    padding-right: 30px;
     &.tab {
+      /* lightweight !important */
       margin-left: 4px;
       margin-right: 4px;
     }
@@ -115,6 +118,60 @@ atom-workspace.theme-quantum-ui {
     .title {
       // transform: scale(1.08) translateY(1px);
       font-size: 1.04em; letter-spacing: -0.34px;
+      &::before {
+        font-weight: normal;
+      }
+    }
+    .close-icon {
+      top: 0px;
+      color: #ABADAD;
+      &::before {
+        padding-top: 2px;
+        width: 19px;
+        height: 19px;
+        border-radius:3px;
+      }
+      &:active {
+        &::before {
+          padding-top: 2px;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0));
+          border: 1px solid #A5A5A5;
+        }
+      }
+      &:hover {
+        &::before {
+          border: 1px solid #A5A5A5;
+        }
+        color: #5B5C54;
+      }
+    }
+    &.modified {
+      &:hover {
+        .close-icon {
+          &:hover {
+            color: #5B5C54;
+          }
+          &::before {
+            padding-top: 3px;
+            box-shadow: inset 0 0 2px 2px rgba(67, 130, 195, 0.25);
+          }
+          &:hover::before {
+            padding-top: 2px;
+          }
+
+          &:active::before {
+            background: linear-gradient(to bottom, rgba(67, 130, 195, 0.3), rgba(67, 130, 195, 0.15) 30%, rgba(67, 130, 195, 0.05));
+            box-shadow: none;
+          }
+          color: #ABADAD;
+        }
+      }
+      &:not(:hover) {
+        .close-icon {
+          top: 12.5px;
+          right: 15px;
+        }
+      }
     }
     &:hover, &.active {
       border-bottom-width: 3px;

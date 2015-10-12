@@ -40,3 +40,10 @@
   'alt-shift-n': 'require-opener:open-selections-on-github'
   'alt-shift-o': 'require-opener:open-selections-in-atom'
   'alt-shift-d': 'require-opener:open-selections-readmes'
+  # 'ctrl-alt-d': 'tern:definition'
+  # 'ctrl-alt-c': 'tern:rename'
+  # default: 'ctrl-shift-r': 'tern:references'
+  # possible ideal: 'ctrl-alt-r': 'tern:references'
+  'ctrl-shift-e': 'tern:references'
+
+  'ctrl-shift-r': 'symbols-view:toggle-project-symbols'
