@@ -41,6 +41,7 @@ language-json5@1.1.0
 language-lua@0.9.4
 language-qml@1.0.0
 language-rust@0.4.5
+language-typescript-grammars-only@1.3.0
 linter@1.8.1
 linter-clang@3.2.3
 linter-coffeelint@1.1.2
@@ -78,6 +79,7 @@ Stylus@1.2.1
 switch-header-source@0.20.0
 symbol-gen@1.0.0
 symbols-tree-view@0.10.0
+synesthesia@0.1.1-1
 tab-control@0.6.8
 tab-length@0.1.0
 tablr@0.4.0

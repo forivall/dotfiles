@@ -5,6 +5,7 @@
     showOnStartup: false
   core:
     disabledPackages: [
+      "synesthesia"
       "adwaita-ui"
       "atom-color-highlight"
       "atom-ctags"
@@ -67,6 +68,17 @@
     packagesWithKeymapsDisabled: [
       "sort-lines"
     ]
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      ".imdone"
+      "tags"
+      "npm-debug.log"
+    ]
   editor:
     invisibles:
       cr: " "
@@ -95,6 +107,7 @@
   "tree-view":
     alwaysOpenExisting: true
     refreshVcsStatusOnProjectOpen: 5
+    hideIgnoredNames: true
   "adwaita-pro-ui":
     fontSize: 13
     iconTheme: "Octicons"
