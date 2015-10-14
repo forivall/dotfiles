@@ -25,7 +25,6 @@
       "ide-flow"
       "language-babel"
       "linter-clang"
-      "linter-coffeelint"
       "linter-coffeescript"
       "linter-flake8"
       "linter-flow"
@@ -48,7 +47,6 @@
       "switch-header-source"
       "tab-length"
       "tomorrow"
-      "tree-view-open-files"
       "webbox-color"
       "welcome"
       "wrap-guide"
@@ -58,6 +56,9 @@
       "hyperclick"
       "atom-jinja2"
       "nuclide-type-hint"
+      "linter-coffeelint"
+      "tree-view-open-files"
+      "smart-tab-name"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -96,8 +97,8 @@
     refreshVcsStatusOnProjectOpen: 5
   "adwaita-pro-ui":
     fontSize: 13
-    fontFamily: "Droid Sans"
     iconTheme: "Octicons"
+    fontFamily: "Droid Sans"
   "autocomplete-plus":
     includeCompletionsFromAllBuffers: true
     confirmCompletion: "tab"
@@ -183,6 +184,16 @@
     flashOnLand: true
     flashColor: "success"
     flashType: "word"
+  "base16-syntax":
+    scheme: "Eighties"
+  "theme-switcher":
+    uiThemeOne: "adwaita-pro-ui"
+    uiThemeTwo: "adwaita-pro-ui"
+    syntaxThemeOne: "tomorrow-ya"
+    syntaxThemeTwo: "today"
+  "github-notifications":
+    notificationAuthToken: " a77986444ecd25d526561a4606b0be8318c6cca7"
+  term3: {}
 ".css.scss.source":
   "multi-wrap-guide":
     columns: [
