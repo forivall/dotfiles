@@ -133,6 +133,8 @@
 [mergetool "diffuse_cygwindows"]
     cmd = \"/cygdrive/c/Program Files (x86)/Diffuse/diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
     #"
+[mergetool "meld_windows"]
+    cmd = \"C:\\Program Files (x86)\\Meld\\meld\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 [github]
 	user = forivall
 # [push]
