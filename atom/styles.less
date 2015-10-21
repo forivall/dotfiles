@@ -32,7 +32,10 @@ atom-text-editor {
   }
   -webkit-text-stroke-width: initial;
 }
-
+.tree-view-resizer {
+  display: flex;
+  flex-direction: column;
+}
 // To style other content in the text editor's shadow DOM, use the ::shadow
 // expression
 atom-text-editor::shadow .cursor {
@@ -100,7 +103,24 @@ atom-workspace.theme-quantum-ui {
   }
 }
 .term3 .terminal {
-    background-color: #222;
+  background-color: #222;
+}
+tree-view-breadcrumb {
+  padding-top: 1px;
+  padding-bottom: 2px;
+  overflow-x: hidden;
+  .btn {
+    font-size: 10px;
+    height: auto;
+    line-height: inherit;
+  }
+}
+tree-view-breadcrumb::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+tree-view-breadcrumb::-webkit-scrollbar-thumb {
+  border: none;
 }
 // html, body { font-size: 13.5px; }
 

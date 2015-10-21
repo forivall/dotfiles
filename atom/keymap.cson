@@ -47,3 +47,5 @@
   'ctrl-shift-e': 'tern:references'
 
   'ctrl-shift-r': 'symbols-view:toggle-project-symbols'
+  'ctrl-k ctrl-j': 'fold-functions:fold'
+  'ctrl-k ctrl-h': 'fold-functions:unfold'

@@ -60,6 +60,7 @@
       "linter-coffeelint"
       "tree-view-open-files"
       "smart-tab-name"
+      "linter-xo"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -207,6 +208,38 @@
   "github-notifications":
     notificationAuthToken: " a77986444ecd25d526561a4606b0be8318c6cca7"
   term3: {}
+  "minimap-codeglance": {}
+  "tree-view-breadcrumb":
+    keepAttached: true
+    pathStyle: true
+    displayProjectRoot: true
+    displayProjectRootName: true
+    keepBreadcrumbVisible: true
+  "fold-functions": {}
+  "fuzzy-finder":
+    preserveLastSearch: true
+    searchAllPanes: true
+".html.ruby.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".erb.html.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".basic.html.text":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
 ".css.scss.source":
   "multi-wrap-guide":
     columns: [
@@ -222,27 +255,6 @@
     rows: []
   editor:
     preferredLineLength: 80
-".basic.html.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".erb.html.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".html.ruby.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
 ".js.source":
   "multi-wrap-guide":
     columns: [
@@ -250,56 +262,7 @@
     ]
   editor:
     preferredLineLength: 80
-".coffee.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".jade.source":
-  "multi-wrap-guide":
-    columns: [
-      79
-    ]
-  editor:
-    preferredLineLength: 79
-".m4.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".gfm.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".cpp.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".json.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".text.xml":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".c.source":
+".shell.source":
   "multi-wrap-guide":
     columns: [
       80
@@ -313,7 +276,56 @@
     ]
   editor:
     preferredLineLength: 80
-".shell.source":
+".c.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".text.xml":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".json.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".cpp.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".gfm.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".m4.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80
+".jade.source":
+  "multi-wrap-guide":
+    columns: [
+      79
+    ]
+  editor:
+    preferredLineLength: 79
+".coffee.source":
   "multi-wrap-guide":
     columns: [
       80

@@ -11,3 +11,9 @@
 #     console.log "Saved! #{editor.getPath()}"
 atom.workspace.observePanes (pane) ->
   console.log(pane)
+
+fixTreeView = ->
+  document.querySelector(".tree-view-resizer").style.display = null
+  setTimeout(fixTreeView, 600000)
+
+setTimeout(fixTreeView, 600)
