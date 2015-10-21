@@ -80,6 +80,7 @@
       "tags"
       "npm-debug.log"
     ]
+    autoHideMenuBar: true
   editor:
     invisibles:
       cr: " "
