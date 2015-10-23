@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-cd "$(dirname "$0")"
+
+set -e
+
+cd "$(dirname "$0")" || exit
 
 # TODO: use gnu stow
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
