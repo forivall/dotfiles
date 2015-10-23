@@ -4,6 +4,10 @@ cd "$(dirname "$0")"
 # TODO: use gnu stow
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
+if ! whence realpath >/dev/null ; then
+  realpath() { readlink -f "$@"}
+fi
+
 git submodule update --init
 ln -fs "$(realpath zshrc)" ~/.zshrc
 ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
