@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if ! type realpath >/dev/null ; then
+  realpath() { readlink -f "$@"; }
+fi
+
 # echo $NODE_PATH
 # source() {
 #   echo $NODE_PATH
@@ -53,7 +57,7 @@ autoload -U run-help
 autoload run-help-git
 autoload run-help-svn
 autoload run-help-svk
-unalias run-help
+unalias run-help 2> /dev/null || true
 alias help=run-help
 
 zstyle ':completion:*' rehash true
