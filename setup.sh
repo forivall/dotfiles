@@ -7,7 +7,7 @@ cd "$(dirname "$0")" || exit
 # TODO: use gnu stow
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
-if ! whence realpath >/dev/null ; then
+if ! type realpath >/dev/null ; then
   realpath() { readlink -f "$@"; }
 fi
 
