@@ -40,6 +40,7 @@
   'alt-shift-n': 'require-opener:open-selections-on-github'
   'alt-shift-o': 'require-opener:open-selections-in-atom'
   'alt-shift-d': 'require-opener:open-selections-readmes'
+  'alt-ctrl-d': 'find-and-replace:toggle-whole-word-option'
   # 'ctrl-alt-d': 'tern:definition'
   # 'ctrl-alt-c': 'tern:rename'
   # default: 'ctrl-shift-r': 'tern:references'
