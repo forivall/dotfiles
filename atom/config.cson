@@ -8,14 +8,13 @@
       "adwaita-ui"
       "atom-color-highlight"
       "atom-ctags"
-      "atom-jinja2"
       "atom-json-escape"
       "atom-terminal"
       "atom-ungit"
       "atomatigit"
       "autocomplete-plus-python-jedi"
-      "browser-plus"
       "build-tools"
+      "browser-plus"
       "color-picker"
       "command-toolbar"
       "ctags-status"
@@ -23,12 +22,9 @@
       "fixmyjs"
       "git-projects"
       "hide-files"
-      "hyperclick"
       "ide-flow"
-      "indent-guide-improved"
       "language-babel"
       "linter-clang"
-      "linter-coffeelint"
       "linter-coffeescript"
       "linter-flake8"
       "linter-flow"
@@ -39,28 +35,31 @@
       "linter-rust"
       "linter-scss-lint"
       "linter-stylint"
-      "linter-xo"
       "node-debugger"
-      "nuclide-type-hint"
-      "pigments"
       "preview-plus"
+      "pigments"
       "recent-files-fuzzy-finder"
       "recent-files"
       "save-session"
       "selection-outlines"
-      "smart-tab-name"
       "sublime-tabs"
-      "switch-header-source"
       "symbol-gen"
-      "synesthesia"
+      "switch-header-source"
       "tab-length"
       "tomorrow"
-      "tree-view-open-files"
       "webbox-color"
       "welcome"
       "wrap-guide"
       "wrap"
       "you-complete-me"
+      "indent-guide-improved"
+      "hyperclick"
+      "atom-jinja2"
+      "nuclide-type-hint"
+      "linter-coffeelint"
+      "tree-view-open-files"
+      "smart-tab-name"
+      "linter-xo"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -81,6 +80,7 @@
       "npm-debug.log"
     ]
     autoHideMenuBar: true
+    destroyEmptyPanes: false
   editor:
     invisibles:
       cr: " "
@@ -92,6 +92,7 @@
     lineHeight: 1.2
     backUpBeforeSaving: true
     showIndentGuide: true
+    fontSize: 13
   linter:
     lintOnChange: false
     ignoredLinterErrors: [
@@ -167,7 +168,6 @@
     fontSize: "Big"
     accentColor: "Blue"
     panelContrast: true
-    showTabIcons: true
   "atom-capyba-ui":
     layoutMode: "Compact"
   "slim-dark-ui":
