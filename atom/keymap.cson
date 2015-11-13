@@ -28,7 +28,6 @@
 #   'ctrl-k right':'pane:split-right'
 #
 'atom-workspace':
-  'alt-shift-r': 'run-in-terminal:start-terminal-here'
 # 'atom-text-editor.source.js':
 # 'atom-text-editor[data-grammer~=js]':
   'alt-.': 'cursor-history:next'
@@ -36,6 +35,7 @@
   'alt-;': 'cursor-history:next'
   'alt-l': 'cursor-history:prev'
 'atom-text-editor':
+  'alt-shift-r': 'run-in-terminal:editor-start-terminal-here'
   'alt-shift-g': 'require-opener:open-selections-on-npm'
   'alt-shift-n': 'require-opener:open-selections-on-github'
   'alt-shift-o': 'require-opener:open-selections-in-atom'
