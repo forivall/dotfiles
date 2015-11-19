@@ -13,7 +13,8 @@ atom.workspace.observePanes (pane) ->
   console.log(pane)
 
 fixTreeView = ->
-  try document.querySelector(".tree-view-resizer").style.display = null
+  treeViewResizer = document.querySelector(".tree-view-resizer")
+  if treeViewResizer? then treeViewResizer.style.display = null
   setTimeout(fixTreeView, 600000)
 
 setTimeout(fixTreeView, 600)
