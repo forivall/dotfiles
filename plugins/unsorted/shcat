@@ -1,0 +1,11 @@
+#!/usr/bin/zsh
+
+nl='
+'
+
+for file in "$@" ; do
+  tput bold; tput setab 226; tput setaf 16;  echo -n " $file "; tput sgr0; echo
+  source-highlight -fesc -o STDOUT -i $file 2>/dev/null || cat "$file"
+  if [[ "$(tail -c1 $file)" != "" ]] ; then tput setaf 16; tput setab 15; echo -n "%"; tput sgr0; echo; fi
+  echo
+done

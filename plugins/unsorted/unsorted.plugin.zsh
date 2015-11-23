@@ -2,8 +2,10 @@ __zsh_unsorted_plugin_location=$0:A
 __zsh_unsorted_plugin_location=${__zsh_oneliner_plugin_location%/*}
 
 autoload -U clean-env
+autoload -U shcat
 
-alias res="echo -en \"\ec\e[3J\""
+#alias res="echo -en \"\ec\e[3J\""
+alias res="echo -n '$(tput reset)'"
 
 type xclip > /dev/null && alias clip="xclip -selection c"
 
@@ -92,7 +94,7 @@ diff --old-line-format='%l
 function history_search {
     local root;
     root="$(cd $__zsh_unsorted_plugin_location; git rev-parse --show-toplevel)"
-    ( 
+    (
     (cd $root; git log --reverse -p -S"$1" zsh_history_interactive) |
         grep '^-' | sed 's/^-//';
     history -a;) | grep --color=always "$1" | uniq
