@@ -81,7 +81,7 @@ if ! zgen saved; then
   # zgen oh-my-zsh plugins/node
   # zgen oh-my-zsh plugins/pip
   # zgen oh-my-zsh plugins/python
-  # zgen oh-my-zsh plugins/web-search
+  zgen oh-my-zsh plugins/web-search
   zgen oh-my-zsh plugins/command-not-found
   # zgen oh-my-zsh plugins/virtualenv
   # zgen oh-my-zsh plugins/npm

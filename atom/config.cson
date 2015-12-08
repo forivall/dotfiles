@@ -61,6 +61,7 @@
       "smart-tab-name"
       "linter-xo"
       "tree-view-git-projects"
+      "background-tips"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -68,6 +69,8 @@
     ]
     packagesWithKeymapsDisabled: [
       "sort-lines"
+      "emmet"
+      "imdone-atom"
     ]
     ignoredNames: [
       ".git"

@@ -1,0 +1,1 @@
+kdeconnect-cli -d $(kdeconnect-cli -a --id-only|head -n1) --ping-msg $1

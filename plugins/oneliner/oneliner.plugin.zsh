@@ -56,7 +56,7 @@ oneliner-init() {
 }
 
 if [[ -z "$NO_ONELINER_AUTOINIT" ]]; then
-  oneliner init
+  oneliner-init
 fi
 
 oneliner-list() {

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Requirements:
+#   apt-get install imagemagick mplayer gtk-recordmydesktop gifsicle
+
+set -e
+
+rm -rf /tmp/mp4_to_gif
+mkdir -p /tmp/mp4_to_gif/png
+
+fname="$1"
+shift
+first_frame="$1"
+last_frame="$2"
+
+# Export into images
+echo mplayer -ao null "$@" "$fname" -vo png:outdir=/tmp/mp4_to_gif/png
+mplayer -ao null "$@" "$fname" -vo png:outdir=/tmp/mp4_to_gif/png
+
+# Convert images to animated gif
+echo "Converting images folder to gif..."
+
+# convert -limit memory 64 -limit map 128 /tmp/mp4_to_gif/png/* /tmp/mp4_to_gif.gif
+mkdir /tmp/mp4_to_gif/gif
+last=$(ls /tmp/mp4_to_gif/png/|tail -n1)
+last=${last%.png}
+for png in /tmp/mp4_to_gif/png/*.png ; do
+    n=${png%.png}; n=${n##*/}
+    if [[ -n "$first_frame" ]] && (( 10#$n < 10#$first_frame )) ; then continue; fi
+    if [[ -n "$last_frame" ]] && (( 10#$n > 10#$last_frame )) ; then continue; fi
+    echo -en "\r$(( ( 10#$n * 100 ) / 10#$last ))%"
+
+    convert $png ${png//png/gif}
+done
+echo
+# Final filename
+original_filename="$fname"
+filename=${original_filename//mp4/gif}
+echo "$filename"
+
+# Optimize gif
+echo "Creating and optimizing animated gif..."
+# convert /tmp/mp4_to_gif.gif -fuzz 10% -layers Optimize "$filename"
+gifsicle -O3 --delay=10 --loop --colors 256 /tmp/mp4_to_gif/gif/*.gif > "$filename"
+
+# Cleans up tmp folders
+rm -rf /tmp/mp4_to_gif
+
+echo "Done! $filename"
