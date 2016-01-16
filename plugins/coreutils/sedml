@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ "$#" -lt 2 ]
 then
-exit;
+return;
 fi
 
 # change the input file if no 3rd argument
@@ -11,7 +11,7 @@ then
 else
         outputfile="$3"
 fi
-sed -n '
+sed -En '
 # if the first line copy the pattern to the hold buffer
 1h
 # if not the first line then append the pattern to the hold buffer

@@ -45,12 +45,16 @@
   'alt-t alt-t': 'imdone-atom:tasks'
 
 'atom-text-editor':
+  # emacs keybindings overwritten by packages
+  "alt-ctrl-b": "editor:move-to-previous-subword-boundary",
+  'alt-ctrl-d': 'find-and-replace:toggle-whole-word-option'
+'atom-text-editor:not([mini])':
   'alt-shift-r': 'run-in-terminal:editor-start-terminal-here'
   'alt-shift-g': 'require-opener:open-selections-on-npm'
   'alt-shift-n': 'require-opener:open-selections-on-github'
   'alt-shift-o': 'require-opener:open-selections-in-atom'
   'alt-shift-d': 'require-opener:open-selections-readmes'
-  'alt-ctrl-d': 'find-and-replace:toggle-whole-word-option'
+  'alt-shift-d': 'require-opener:open-selections-readmes'
   # 'ctrl-alt-d': 'tern:definition'
   # 'ctrl-alt-c': 'tern:rename'
   # default: 'ctrl-shift-r': 'tern:references'
@@ -61,8 +65,6 @@
   'ctrl-k ctrl-j': 'fold-functions:fold'
   'ctrl-k ctrl-h': 'fold-functions:unfold'
 
-  # emacs keybindings overwritten by packages
-  "alt-ctrl-b": "editor:move-to-previous-subword-boundary",
 
   # emmet
   'ctrl-e ctrl-e': 'emmet:expand-abbreviation'
@@ -82,11 +84,11 @@
   'ctrl-alt-enter': 'emmet:interactive-expand-abbreviation'
 
   'ctrl-shift-/': 'emmet:toggle-comment'
-  'enter': 'emmet:insert-formatted-line-break-only'
 
 # language-specific Tab triggers
 # you can add more triggers by changing `grammar` attribute values
 'atom-text-editor[data-grammar="text html basic"]:not([mini]), atom-text-editor[data-grammar~="erb"]:not([mini]), atom-text-editor[data-grammar~="jade"]:not([mini]), atom-text-editor[data-grammar~="css"]:not([mini]), atom-text-editor[data-grammar~="stylus"]:not([mini]), atom-text-editor[data-grammar~="sass"]:not([mini])':
+  'enter': 'emmet:insert-formatted-line-break-only'
   'alt-shift-k': 'emmet:select-next-item'
   'alt-shift-j': 'emmet:select-previous-item'
   'ctrl-shift-j': 'emmet:merge-lines'

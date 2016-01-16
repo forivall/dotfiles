@@ -8,13 +8,14 @@
       "adwaita-ui"
       "atom-color-highlight"
       "atom-ctags"
+      "atom-jinja2"
       "atom-json-escape"
       "atom-terminal"
       "atom-ungit"
       "atomatigit"
       "autocomplete-plus-python-jedi"
-      "build-tools"
       "browser-plus"
+      "build-tools"
       "color-picker"
       "command-toolbar"
       "ctags-status"
@@ -172,6 +173,7 @@
     fontSize: "Big"
     accentColor: "Blue"
     panelContrast: true
+    showTabIcons: true
   "atom-capyba-ui":
     layoutMode: "Compact"
   "slim-dark-ui":
@@ -224,116 +226,3 @@
   "fuzzy-finder":
     preserveLastSearch: true
     searchAllPanes: true
-".html.ruby.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".erb.html.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".basic.html.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".css.scss.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".null-grammar.plain.text":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-    rows: []
-  editor:
-    preferredLineLength: 80
-".js.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".shell.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".makefile2.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".c.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".text.xml":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".json.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".cpp.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".gfm.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".m4.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
-".jade.source":
-  "multi-wrap-guide":
-    columns: [
-      79
-    ]
-  editor:
-    preferredLineLength: 79
-".coffee.source":
-  "multi-wrap-guide":
-    columns: [
-      80
-    ]
-  editor:
-    preferredLineLength: 80
