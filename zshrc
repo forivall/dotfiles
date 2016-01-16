@@ -99,6 +99,7 @@ if ! zgen saved; then
   ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
+  zgen load deliciousinsights/git-stree
   # zgen load jocelynmallon/zshimarks
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
@@ -128,6 +129,8 @@ unsetopt nomatch
 autoload -U cygcd
 
 clean-env
+
+path=($path ~/.zgen/deliciousinsights/git-stree-master)
 
 # todo: create a plugin for envoy
 $HAS_ENVOY && eval $(envoy -ps)
