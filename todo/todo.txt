@@ -2,6 +2,6 @@ Add Email address and resume to personal website
 blondie's call me is ripped off by that band that i don't like that is totally not like radiohead
 fix parsing of sequenceExpressions with newlines in them
 add format and test for parenthises-less call expressions
-count newlines in comments and templates and strings
 update atom-editor-bin .desktop file to point to /usr/bin/atom instead of directly to the executable
 add more preserveLines tests
+clean up tacoscript-generator and move to taco-truck

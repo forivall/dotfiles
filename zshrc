@@ -23,6 +23,10 @@ setbool IS_INTERACTIVE  tty -s
 setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
 setbool HAS_ENVOY  whence envoy
 
+# todo: create a plugin for envoy
+# load envoy before loading plugins so that autoupdate plugin can use ssh
+$HAS_ENVOY && eval $(envoy -ps)
+
 # core shell settings
 export EDITOR=vim
 export VISUAL=vim
@@ -131,9 +135,6 @@ autoload -U cygcd
 clean-env
 
 path=($path ~/.zgen/deliciousinsights/git-stree-master)
-
-# todo: create a plugin for envoy
-$HAS_ENVOY && eval $(envoy -ps)
 
 if [[ "$PERF_TEST" == y ]] ; then exit; else true; fi
 

@@ -1,0 +1,2 @@
+x 2016-01-23 count newlines in comments and templates and strings
+x 2016-01-23 replace remaining usage of newline with "startBlock"
