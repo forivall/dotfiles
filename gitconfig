@@ -40,6 +40,7 @@
 	root = rev-parse --show-toplevel
 	# useful to force make to rebuild changed files; just `| xargs touch`
 	show-files-only = show --pretty="format:" --name-only
+	serve = daemon --export-all --base-path=. --verbose
 
 	# legit
 	# branches = !legit branches
