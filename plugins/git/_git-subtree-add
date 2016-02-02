@@ -1,0 +1,23 @@
+#compdef git-subtree-add
+#description Merge subtrees together and split repository into subtrees
+
+
+(( $+functions[__git_any_repositories_or_references] )) ||
+__git_any_repositories_or_references () {
+  _alternative \
+    'repositories::__git_any_repositories' \
+    'references::__git_references'
+}
+
+_git-subtree-add () {
+
+  _arguments -S \
+    '(-q --quiet)'{-q,--quiet}'[suppress progress output]' \
+    '(-m --message)'{-m,--message}'[use the given message as the commit message for the merge commit]' \
+    '*'{-P,--prefix=}'[the path to the subtree in the repository to manipulate]:directory:_directories' \
+    '--squash[import only a single commit from the subproject]' \
+    ': :__git_any_repositories_or_references' \
+    ':: :__git_ref_specs' && ret=0
+
+  return ret
+}
