@@ -63,6 +63,7 @@
       "node-debugger"
       "preview-plus"
       "pigments"
+      "preview-plus"
       "recent-files-fuzzy-finder"
       "recent-files"
       "save-session"
@@ -70,23 +71,20 @@
       "sublime-tabs"
       "symbol-gen"
       "switch-header-source"
+      "symbol-gen"
+      "synesthesia"
       "tab-length"
+      "tablr"
+      "term3"
       "tomorrow"
+      "tree-view-breadcrumb"
+      "tree-view-git-projects"
+      "tree-view-open-files"
       "webbox-color"
       "welcome"
       "wrap-guide"
       "wrap"
       "you-complete-me"
-      "indent-guide-improved"
-      "hyperclick"
-      "atom-jinja2"
-      "nuclide-type-hint"
-      "linter-coffeelint"
-      "tree-view-open-files"
-      "smart-tab-name"
-      "linter-xo"
-      "tree-view-git-projects"
-      "background-tips"
     ]
     ignoredNames: [
       ".git"
@@ -214,6 +212,7 @@
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
     refreshVcsStatusOnProjectOpen: 5
   "tree-view-breadcrumb":
     displayProjectRoot: true

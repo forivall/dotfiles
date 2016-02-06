@@ -4,14 +4,14 @@
 [core]
 	#autocrlf = input
 	# pager = less -F
-  pager = most
+	pager = most
 	excludesfile = /home/forivall/.gitignore
 	trustctime = false
 	editor = vim
 	# trustctime = false
 [diff]
-        renames = false
-#       renames = copies # makes genco choke
+	renames = false
+	# renames = copies # makes genco choke
 [alias]
 	br = branch
 	ci = commit
@@ -143,11 +143,17 @@
 [push]
 	default = simple
 [url "git://anongit.kde.org/"]
-   insteadOf = kde:
+	insteadOf = kde:
 [url "ssh://git@git.kde.org/"]
-   pushInsteadOf = kde:
+	pushInsteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
+[url "git://github.com/"]
+	insteadOf = hub:
+[url "ssh://git@github.com:"]
+    pushInsteadOf = hub:
+# [url "git@github.com:"]
+#     pushInsteadOf = hub:
 [credential]
 	helper = cache --timeout=3600
 [mergetool]
