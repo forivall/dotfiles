@@ -1,5 +1,5 @@
 
-adwaita-pro-ui@2.1.2
+adwaita-pro-ui@2.1.3
 atom-beautify@0.28.21
 atom-blue-chat@1.23.0
 atom-mocha@0.0.4
@@ -24,7 +24,9 @@ file-types@0.5.1
 fold-functions@0.4.3
 fold-search-results@1.0.3
 github-notifications@0.1.2
+git-wip@0.2.2
 gtk-dark-theme@0.1.4
+hard-wrap@1.0.1
 hard-wrap@1.0.1
 highlight-selected@0.11.2
 html2jade-plus@1.0.0
@@ -54,15 +56,20 @@ linter-shellcheck@1.1.0
 linter-stylint@2.1.0
 linter-xo@0.12.0
 minimap@4.19.0
+minimap-autohide@0.10.1
+minimap-git-diff@4.1.8
 minimap-highlight-selected@4.3.1
 minimap-selection@4.3.1
 multi-wrap-guide@0.23.5
 number-slider@1.0.1
+open-git-modified-files@0.2.1
 pane-by-type@1.0.1
 pigments@0.23.1
+project-find-navigation@0.0.9
 project-manager@2.7.6
 project-view@0.5.0
 promote-folder-to-project@2.0.1
+recent-files-fuzzy-finder@0.2.4
 remember-file-positions@0.2.1
 require-opener@2.0.3
 run-in-terminal@0.6.0
