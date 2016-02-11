@@ -44,6 +44,8 @@
   'alt-l': 'cursor-history:prev'
   'alt-t alt-t': 'imdone-atom:tasks'
 
+  'f9': 'tree-view:toggle'
+
 'atom-text-editor':
   # emacs keybindings overwritten by packages
   "alt-ctrl-b": "editor:move-to-previous-subword-boundary",
