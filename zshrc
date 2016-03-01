@@ -21,11 +21,14 @@ setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=retur
 
 setbool IS_INTERACTIVE  tty -s
 setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
-setbool HAS_ENVOY  whence envoy
+
+# https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+#setbool HAS_ENVOY  whence envoy
 
 # todo: create a plugin for envoy
 # load envoy before loading plugins so that autoupdate plugin can use ssh
-$HAS_ENVOY && eval $(envoy -ps)
+#$HAS_ENVOY && eval $(envoy -ps)
 
 # core shell settings
 export EDITOR=vim

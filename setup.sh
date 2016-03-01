@@ -41,3 +41,9 @@ if [[ -n "$BABUN_HOME" ]]; then
         cp cmdutils/Recycle.exe "$BINPATH/recycle.exe"
     fi
 fi
+
+mkdir -p ~/.config/systemd/user
+cp ./systemd/ssh-agent.service ~/.config/systemd/user
+
+systemctl --user enable ssh-agent.service
+systemctl --user start ssh-agent.service

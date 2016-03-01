@@ -89,46 +89,6 @@ _git-stashed() {
     _git "$@"
 }
 
-if [[ -n "$BASH_VERSION" ]] ; then
-
-#hacky tweak to get my favorite plumbing commands into git bash completion
-source /usr/share/bash-completion/completions/git
-__git_compute_porcelain_commands
-__git_porcelain_commands="$__git_porcelain_commands
-ls-files
-rev-list
-rev-parse
-show-ref
-show-index"
-
-
-# git completion functions for my aliases & scripts
-_git_branch_archive ()
-{ # based on _git_branch
-    __gitcomp_nl "$(__git_heads)"
-}
-
-_git_gerrit_query () { __gitcomp_nl "$(__git_heads)" "" "$cur" "" ; }
-
-_git_genco () { __git_complete_revlist_file ; }
-_git_genpatch () { __git_complete_revlist_file ; }
-
-_git_diffuse ()
-{ # based on _git_diff
-    __git_has_doubledash && return
-    __git_complete_revlist_file
-}
-_git_subl_modified () { _git_diffuse ; }
-
-__git_extras_workflow_open () { __gitcomp "$(__git_heads | grep "^$1/" | sed "s/^$1\\///g")"; }
-_git_open_bug () { __git_extras_workflow_open "bug"; }
-
-if [[ -s /usr/share/git/completion/git-completion.bash ]] ; then
-    source /usr/share/git/completion/git-completion.bash
-fi
-
-fi
-
 ## aliases
 
 ggjs() { gg "$@" -- '*.js' ; }
@@ -164,5 +124,5 @@ function git-on-this-day {
     done
 }
 
-source "$__zsh_forivall_git_plugin_location/completions.zsh"
+# source "$__zsh_forivall_git_plugin_location/completions.zsh"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
