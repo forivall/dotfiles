@@ -180,7 +180,6 @@
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
-    hideVcsIgnoredFiles: true
     refreshVcsStatusOnProjectOpen: 5
   "tree-view-breadcrumb":
     displayProjectRoot: true

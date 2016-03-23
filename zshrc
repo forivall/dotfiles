@@ -21,14 +21,18 @@ setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=retur
 
 setbool IS_INTERACTIVE  tty -s
 setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
+setbool IS_OSX  $([[ "$(uname)" == "Darwin" ]])
+setbool IS_LINUXY  $(! $IS_WINDOWS && ! $IS_OSX)  # could also be BSD
 
-# https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-#setbool HAS_ENVOY  whence envoy
+if $IS_LINUXY ; then
+  # https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  #setbool HAS_ENVOY  whence envoy
 
-# todo: create a plugin for envoy
-# load envoy before loading plugins so that autoupdate plugin can use ssh
-#$HAS_ENVOY && eval $(envoy -ps)
+  # todo: create a plugin for envoy
+  # load envoy before loading plugins so that autoupdate plugin can use ssh
+  #$HAS_ENVOY && eval $(envoy -ps)
+fi
 
 # core shell settings
 export EDITOR=vim
@@ -79,6 +83,11 @@ PURE_PROMPT_SYMBOL="%B»%b"
 # PURE_PROMPT_SYMBOL="$"
 export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
+
+if $IS_OSX ; then
+  path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
+fi
+
 source "$SH_ROOT/zgen/zgen.zsh"
 
 if ! zgen saved; then
@@ -127,6 +136,7 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/unsorted"
   zgen load "$SH_ROOT/plugins/simple-history-search"
   zgen load "$SH_ROOT/plugins/zgen-autoupdate"
+  [[ "$HOST" == *Ledcor* ]] && zgen load "$SH_ROOT/plugins/ledcor"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
