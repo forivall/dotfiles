@@ -1,6 +1,6 @@
 "*":
   "adwaita-pro-ui":
-    fontFamily: "Droid Sans"
+    fontFamily: "Oxygen-Sans"
     fontSize: 13
     iconTheme: "Octicons"
   "atom-beautify":
@@ -20,6 +20,8 @@
     args: "--tab"
   "atom-ternjs":
     lint: false
+  "autocomplete-flow":
+    pathToFlowExecutable: "/usr/local/bin/flow"
   "autocomplete-plus":
     confirmCompletion: "tab"
     includeCompletionsFromAllBuffers: true
@@ -53,6 +55,9 @@
       "tree-view-git-projects"
       "welcome"
       "you-complete-me"
+      "wrap-guide"
+      "run-in-terminal"
+      "git-wip"
     ]
     ignoredNames: [
       ".git"
@@ -71,7 +76,7 @@
       "imdone-atom"
     ]
     themes: [
-      "adwaita-pro-ui"
+      "unity-dark-ui"
       "today"
     ]
   "cursor-history":
@@ -84,12 +89,13 @@
     spaceActive: false
   editor:
     backUpBeforeSaving: true
-    fontFamily: "Fantasque Sans Mono"
+    fontFamily: "Monaco"
+    fontSize: 12
     invisibles:
       cr: " "
       eol: " "
       space: " "
-    lineHeight: 1.2
+    lineHeight: 1.4
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
