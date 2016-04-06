@@ -31,7 +31,6 @@
     autoHideMenuBar: true
     destroyEmptyPanes: false
     disabledPackages: [
-      "atom-beautify"
       "background-tips"
       "block-comment"
       "custom-invisibles"
@@ -69,6 +68,8 @@
       ".imdone"
       "tags"
       "npm-debug.log"
+      "$RECYCLE.BIN"
+      "*.localized"
     ]
     packagesWithKeymapsDisabled: [
       "sort-lines"
@@ -164,6 +165,8 @@
     ]
     sortPaletteColors: "by color"
   "preview-plus": {}
+  "project-manager": {}
+  "project-view": {}
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
     save_before_launch: false
@@ -181,8 +184,8 @@
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
     syntaxThemeTwo: "today"
-    uiThemeOne: "adwaita-pro-ui"
-    uiThemeTwo: "adwaita-pro-ui"
+    uiThemeOne: "unity-ui"
+    uiThemeTwo: "unity-dark-ui"
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true

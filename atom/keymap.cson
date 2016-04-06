@@ -69,6 +69,10 @@
   'ctrl-k ctrl-j': 'fold-functions:fold'
   'ctrl-k ctrl-h': 'fold-functions:unfold'
 
+  'cmd-k cmd-j': 'fold-functions:fold'
+  'cmd-k cmd-h': 'fold-functions:unfold'
+  'cmd-k cmd-/': 'fold-comments:toggle'
+
   # darwin only
   'ctrl-left': 'editor:move-to-previous-subword-boundary'
   'ctrl-right': 'editor:move-to-next-subword-boundary'

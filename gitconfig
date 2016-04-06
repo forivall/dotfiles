@@ -5,7 +5,7 @@
 	#autocrlf = input
 	# pager = less -F
 	pager = most
-	excludesfile = /home/forivall/.gitignore
+	excludesfile = /Users/jordanklassen/.gitignore_global
 	trustctime = false
 	editor = vim
 	# trustctime = false
@@ -120,13 +120,13 @@
 [rerere]
 	enabled = 1
 [mergetool "diffuse_custom"]
-	cmd = /usr/bin/diffuse \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+	cmd = /usr/bin/env diffuse \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 	#"
 [mergetool "diffuse_base"]
-	cmd = /usr/bin/diffuse \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	cmd = /usr/bin/env diffuse \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 	#"
 [mergetool "meld_merged"]
-	cmd = /usr/bin/meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+	cmd = /usr/bin/env meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 	#"
 [mergetool "diffuse_windows"]
     cmd = \"C:\\Program Files (x86)\\Diffuse\\diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
@@ -161,3 +161,13 @@
 	keepbackups = false
 	prompt = false
 	trustexitcode = false
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
