@@ -4,7 +4,8 @@
     fontSize: 13
     iconTheme: "Octicons"
   "atom-beautify":
-    _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
+    general:
+      _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
   "atom-capyba-ui":
     layoutMode: "Compact"
   "atom-material-ui":
