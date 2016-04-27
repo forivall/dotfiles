@@ -38,6 +38,10 @@ function mkcd() { mkdir -p "$@" ; cd "$@" ; }
 function --a() { ( ( "$@" > /dev/null 2>&1 ) & ) ; }
 if type yelp >/dev/null ; then
   function gman() { --a yelp "man:$1" ; }
+elif [[ -d /Applications/Preview.app ]] ; then
+  gman() {
+    man -t "$@" | open -f -a /Applications/Preview.app/
+  }
 fi
 
 # diff

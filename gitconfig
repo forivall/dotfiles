@@ -155,7 +155,7 @@
 # [url "git@github.com:"]
 #     pushInsteadOf = hub:
 [credential]
-	helper = cache --timeout=3600
+	helper = manager
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false

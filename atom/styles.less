@@ -187,3 +187,23 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
   }
 }
 */
+
+@icon-border-radius: 2px;
+@icon-border-color: rgba(0, 0, 0, 0.07);
+
+.unity-ui-show-icons {
+  &.file-icons-tab-pane-icon atom-pane .tab-bar .tab .title[data-path],
+  .icon-file-text,
+  .icon-file-media,
+  .icon-book,
+  .icon-file-binary {
+    // &:before {
+    //   text-shadow:
+    //     @icon-border-color 1px 1px @icon-border-radius, @icon-border-color 1px -1px @icon-border-radius, @icon-border-color -1px -1px @icon-border-radius, @icon-border-color -1px 1px @icon-border-radius,
+    //     @icon-border-color 1.4142px 0px @icon-border-radius, @icon-border-color 0px -1.4142px @icon-border-radius, @icon-border-color -1.4142px 0px @icon-border-radius, @icon-border-color 0px 1.4142px @icon-border-radius;
+    // }
+    &[data-name$=".js"]:before {
+      content: "\f129";
+    }
+  }
+}

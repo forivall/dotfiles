@@ -50,7 +50,6 @@
       "preview-plus"
       "recent-files-fuzzy-finder"
       "tablr"
-      "term3"
       "tree-view-breadcrumb"
       "tree-view-git-projects"
       "welcome"
@@ -76,10 +75,11 @@
       "sort-lines"
       "emmet"
       "imdone-atom"
+      "es-identifier-highlight"
     ]
     themes: [
-      "unity-dark-ui"
-      "today"
+      "unity-ui"
+      "base16-syntax"
     ]
   "cursor-history":
     flashColor: "success"
@@ -91,23 +91,21 @@
     spaceActive: false
   editor:
     backUpBeforeSaving: true
-    fontFamily: "Monaco"
-    fontSize: 12
+    fontFamily: "Fantasque Sans Mono"
+    fontSize: 13
     invisibles:
       cr: " "
       eol: " "
       space: " "
-    lineHeight: 1.4
+    lineHeight: 1.3
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
   "es-identifier-highlight":
-    lightTheme: true
+    lightTheme: false
   "exception-reporting":
     userId: "d669d80a-cb48-445f-92bf-5ae1bb0d0696"
-  "file-icons":
-    coloured: false
-    onChanges: true
+  "file-icons": {}
   "file-types":
     el: "source.perl"
   "fold-functions": {}
@@ -181,12 +179,23 @@
   tabs:
     showIcons: true
     usePreviewTabs: true
-  term3: {}
+  term3:
+    colors:
+      brightWhite:
+        red: 214
+        green: 214
+        blue: 214
+        alpha: 1
+      foreground:
+        red: 219
+        green: 218
+        blue: 220
+        alpha: 1
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
-    syntaxThemeTwo: "today"
+    syntaxThemeTwo: "base16-syntax"
     uiThemeOne: "unity-ui"
-    uiThemeTwo: "unity-dark-ui"
+    uiThemeTwo: "unity-ui"
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true

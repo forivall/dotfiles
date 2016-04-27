@@ -7,6 +7,10 @@ autoload -U shcat
 #alias res="echo -en \"\ec\e[3J\""
 alias res="echo -n '$(tput reset)'"
 
+if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]] ; then
+    alias res="echo -n '$(tput reset)' && osascript -e 'tell application \"System Events\" to keystroke \"k\" using {option down, command down}'"
+fi
+
 type xclip > /dev/null && alias clip="xclip -selection c"
 
 # shellcheck disable=SC2059

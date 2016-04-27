@@ -10,3 +10,6 @@
 [submodule "plugins/external-tools/leshylabs-blogcode"]
 	path = plugins/external-tools/leshylabs-blogcode
 	url = git@github.com:leshylabs/blogcode.git
+[submodule "plugins/git/git-standup"]
+	path = plugins/git/git-standup
+	url = git@github.com:kamranahmedse/git-standup.git

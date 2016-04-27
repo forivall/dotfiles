@@ -10,6 +10,23 @@ source ~/.nvm/nvm.sh
 
 () {
   # TODO: make sure to go to the nearest folder with package.json
+
+  # validate the package.json
+  < package.json jq . > /dev/null || exit
+
+  # ensure that the appropriate config files are available
+  local configFilesRaw configFiles missingConfigFile
+  configFilesRaw="$(< package.json jq -r '.configFiles[]')"
+  configFiles=("${(f)configFilesRaw}")
+  missingConfigFile=false
+  for f in $configFiles ; do
+    if [[ ! -f $f ]] ; then
+      echo "missing $f"
+      missingConfigFile=true
+    fi
+  done
+  if $missingConfigFile ; then return 1; fi
+
   # TODO: support a .mcsignore file
   # TODO: support automatically uploading
 
@@ -18,9 +35,9 @@ source ~/.nvm/nvm.sh
 
   [[ -d node_modules ]] && mv node_modules .dev_node_modules
   nvm use v0.10.25 || return 1
-  npm i --production || return 1
+  npm i --production --node-gyp=true || return 1
   if [[ -e npm-shrinkwrap.json ]]; then env rm npm-shrinkwrap.json || return 1; fi
-  npm shrinkwrap || return 1
+  (( $(< package.json jq '.dependencies|length') == 0 )) || npm shrinkwrap || return 1
 
   [[ -e "$filename" ]] && trash "$filename"
 
