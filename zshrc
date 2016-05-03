@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if [[ -e /etc/profile.d/vte.sh ]] ; then
+    source /etc/profile.d/vte.sh
+fi
+
 if ! type realpath >/dev/null ; then
   realpath() { readlink -f "$@"; }
 fi
