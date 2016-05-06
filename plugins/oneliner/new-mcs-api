@@ -1,0 +1,9 @@
+git clone ~/Code/mcs-repos/template $1 && cd $1 &&
+() {
+  local NAME;
+  NAME="${PWD##*/}";
+  NAME="${NAME#mcs-}";
+  sed -i -e 's/$NAME/'"$NAME"'/g' -e 's/$DESCRIPTION/'"$1"'/g' ./**/*(.) ;
+  git mv index.js "$NAME".js
+  git remote rm origin
+} $2
