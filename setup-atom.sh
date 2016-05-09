@@ -16,7 +16,11 @@ ln -fs "$(realpath atom/build-tools-cpp.projects)" ~/.atom/build-tools-cpp.proje
 ln -fs "$(realpath atom/command-toolbar.json)" ~/.atom/command-toolbar.json
 ln -fs "$(realpath atom/config.cson)" ~/.atom/config.cson
 ln -fs "$(realpath atom/init.coffee)" ~/.atom/init.coffee
-ln -fs "$(realpath atom/keymap.cson)" ~/.atom/keymap.cson
+if [[ "$(uname)" == "Darwin" ]] ; then
+  ln -fs "$(realpath atom/keymap.darwin.cson)" ~/.atom/keymap.cson
+else
+  ln -fs "$(realpath atom/keymap.cson)" ~/.atom/keymap.cson
+fi
 #ln -fs "$(realpath atom/projects.cson)" ~/.atom/projects.cson
 ln -fs "$(realpath atom/snippets.cson)" ~/.atom/snippets.cson
 ln -fs "$(realpath atom/styles.less)" ~/.atom/styles.less

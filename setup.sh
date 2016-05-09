@@ -47,6 +47,15 @@ if [[ -n "$BABUN_HOME" ]]; then
 fi
 
 if type systemctl >/dev/null 2>/dev/null ; then
+  if ! type ssh-agent ; then
+    if type yum >/dev/null 2>/dev/null ; then
+      sudo yum install openssh-askpass
+    else
+      echo please install ssh-agent
+      exit 1
+    fi
+  fi
+
   mkdir -p ~/.config/systemd/user
   cp ./systemd/ssh-agent.service ~/.config/systemd/user
 

@@ -165,7 +165,8 @@
     sortPaletteColors: "by color"
   "preview-plus": {}
   "project-manager": {}
-  "project-view": {}
+  "project-view":
+    displayPath: false
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
     save_before_launch: false
@@ -208,6 +209,12 @@
     pathStyle: true
   "tree-view-git-projects":
     alphabetizeRoots: false
+  "unity-dark-ui":
+    colorStatusIndicatorsInTreeView: true
+    showIcons: true
+  "unity-ui":
+    colorStatusIndicatorsInTreeView: true
+    showIcons: true
   welcome:
     showOnStartup: false
   wrap: {}
