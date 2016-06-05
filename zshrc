@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if [[ -e /etc/profile.d/vte.sh ]] ; then
+  source /etc/profile.d/vte.sh
+fi
+
 if ! type realpath >/dev/null ; then
   realpath() { readlink -f "$@"; }
 fi
@@ -147,3 +151,7 @@ if $IS_WINDOWS ; then
   export NVM_DIR="/c/Users/forivall/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 fi
+
+# added by travis gem
+[ -f /home/forivall/.travis/travis.sh ] && source /home/forivall/.travis/travis.sh
+
