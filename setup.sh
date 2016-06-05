@@ -8,7 +8,11 @@ cd "$(dirname "$0")" || exit
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
 if ! type realpath >/dev/null ; then
-  realpath() { readlink -f "$@"; }
+  if ! type grealpath >/dev/null ; then
+    realpath() { grealpath "$@"; }
+  else
+    realpath() { readlink -f "$@"; }
+  fi
 fi
 
 git submodule update --init
@@ -42,8 +46,10 @@ if [[ -n "$BABUN_HOME" ]]; then
     fi
 fi
 
-mkdir -p ~/.config/systemd/user
-cp ./systemd/ssh-agent.service ~/.config/systemd/user
+if type systemctl >/dev/null 2>/dev/null ; then
+  mkdir -p ~/.config/systemd/user
+  cp ./systemd/ssh-agent.service ~/.config/systemd/user
 
-systemctl --user enable ssh-agent.service
-systemctl --user start ssh-agent.service
+  systemctl --user enable ssh-agent.service
+  systemctl --user start ssh-agent.service
+fi

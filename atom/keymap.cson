@@ -46,12 +46,14 @@
 
   'f9': 'tree-view:toggle'
 
+
 'atom-text-editor':
   # emacs keybindings overwritten by packages
   "alt-ctrl-b": "editor:move-to-previous-subword-boundary",
   'alt-ctrl-d': 'find-and-replace:toggle-whole-word-option'
 'atom-text-editor:not([mini])':
   'alt-shift-r': 'run-in-terminal:editor-start-terminal-here'
+  'cmd-shift-r': 'atom-mac-terminal:open'
   'alt-shift-g': 'require-opener:open-selections-on-npm'
   'alt-shift-n': 'require-opener:open-selections-on-github'
   'alt-shift-o': 'require-opener:open-selections-in-atom'
@@ -67,6 +69,9 @@
   'ctrl-k ctrl-j': 'fold-functions:fold'
   'ctrl-k ctrl-h': 'fold-functions:unfold'
 
+  # darwin only
+  'ctrl-left': 'editor:move-to-previous-subword-boundary'
+  'ctrl-right': 'editor:move-to-next-subword-boundary'
 
   # emmet
   'ctrl-e ctrl-e': 'emmet:expand-abbreviation'

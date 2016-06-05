@@ -1,4 +1,13 @@
-if [ -z "${KDE_SESSION_UID+x}" ] ; then
+
+if $IS_WINDOWS; then
+  alias rm="recycle -f"
+elif $IS_OSX; then
+  if ! type trash >/dev/null 2>/dev/null ; then
+    brew install trash
+  fi
+  alias rm=trash
+  alias rmsu="sudo trash"
+elif [ -z "${KDE_SESSION_UID+x}" ] ; then
   alias rm=gvfs-trash
   alias rmsu="sudo gvfs-trash"
 else
@@ -15,7 +24,3 @@ fi
 
 alias rmd=/bin/rm
 alias rmdsu="sudo /usr/bin/rm"
-
-if [[ -n "$CYGWIN_VERSION" ]]; then
-    alias rm="recycle -f"
-fi

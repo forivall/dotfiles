@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
 
+if ! type realpath >/dev/null ; then
+  if ! type grealpath >/dev/null ; then
+    realpath() { grealpath "$@"; }
+  else
+    realpath() { readlink -f "$@"; }
+  fi
+fi
+
 # TODO: use gnu stow
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
