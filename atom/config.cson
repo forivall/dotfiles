@@ -1,4 +1,8 @@
 "*":
+  "activate-power-mode":
+    autoToggle: false
+    screenShake:
+      enabled: false
   "adwaita-pro-ui":
     fontFamily: "Droid Sans"
     fontSize: 13
@@ -8,6 +12,8 @@
       _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
   "atom-capyba-ui":
     layoutMode: "Compact"
+  "atom-mac-terminal":
+    terminal: "iTerm2"
   "atom-material-ui":
     accentColor: "Blue"
     compactTreeView: true
@@ -34,26 +40,20 @@
       "background-tips"
       "block-comment"
       "custom-invisibles"
-      "dbus"
-      "file-types"
       "hard-wrap"
-      "language-autotools"
-      "language-babel"
       "linter-flake8"
-      "linter-flow"
       "linter-jshint"
       "linter-scss-lint"
       "linter-stylint"
       "pane-by-type"
       "pigments"
       "preview-plus"
-      "recent-files-fuzzy-finder"
-      "tablr"
-      "term3"
       "tree-view-breadcrumb"
-      "tree-view-git-projects"
       "welcome"
-      "you-complete-me"
+      "wrap-guide"
+      "run-in-terminal"
+      "git-wip"
+      "autocomplete-flow"
     ]
     ignoredNames: [
       ".git"
@@ -142,6 +142,10 @@
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "markdown-table-formatter": {}
+  mdattachment:
+    commonDirName: "."
+    oneDirFolAllBuffers: true
   minimap:
     charHeight: 1.5
     charWidth: 0.7
@@ -159,6 +163,7 @@
     ]
     sortPaletteColors: "by color"
   "preview-plus": {}
+  "project-manager": {}
   "project-view": {}
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
@@ -193,6 +198,7 @@
     alphabetizeRoots: false
   welcome:
     showOnStartup: false
+  whitespace: {}
   wrap: {}
   "you-complete-me":
     pythonExecutable: "/usr/bin/python2"

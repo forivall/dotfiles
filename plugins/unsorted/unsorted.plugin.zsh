@@ -4,6 +4,10 @@ __zsh_unsorted_plugin_location=${__zsh_oneliner_plugin_location%/*}
 autoload -U clean-env
 autoload -U shcat
 
+alias ccat="ccat -G String=darkgreen -G Comment=faint -G Keyword=purple -G Punctuation=teal -G Type=darkred -G Literal=darkred -G Plaintext=reset -G Tag=red"
+
+alias http="http --pretty=colors"
+
 #alias res="echo -en \"\ec\e[3J\""
 alias res="echo -n '$(tput reset)'"
 

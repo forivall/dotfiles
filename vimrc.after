@@ -16,7 +16,7 @@ set tabstop=4
 
 "set t_Co=256
 
-:colorscheme Tomorrow
+:colorscheme Tomorrow-Night
 
 " style "no-resize-handle"
 " {

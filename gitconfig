@@ -74,6 +74,7 @@
     cl = clone
     unstage = reset HEAD --
     dc = diff --cached
+    amend = commit --amend --no-edit
 
 [color]
 	# diff = always
