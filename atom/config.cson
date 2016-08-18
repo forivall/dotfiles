@@ -1,4 +1,8 @@
 "*":
+  "activate-power-mode":
+    autoToggle: false
+    screenShake:
+      enabled: false
   "adwaita-pro-ui":
     fontFamily: "Oxygen-Sans"
     fontSize: 13
@@ -8,6 +12,8 @@
       _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
   "atom-capyba-ui":
     layoutMode: "Compact"
+  "atom-mac-terminal":
+    terminal: "iTerm2"
   "atom-material-ui":
     accentColor: "Blue"
     compactTreeView: true
@@ -38,30 +44,18 @@
       "background-tips"
       "block-comment"
       "custom-invisibles"
-      "dbus"
-      "file-types"
       "hard-wrap"
-      "language-autotools"
-      "language-babel"
       "linter-flake8"
-      "linter-flow"
       "linter-jshint"
       "linter-scss-lint"
       "linter-stylint"
-      "pigments"
       "preview-plus"
-      "recent-files-fuzzy-finder"
-      "tablr"
       "tree-view-breadcrumb"
-      "tree-view-git-projects"
       "welcome"
-      "you-complete-me"
       "wrap-guide"
       "run-in-terminal"
       "git-wip"
-      "antialiased"
-      "tab-control"
-      "autocomplete-paths"
+      "autocomplete-flow"
     ]
     ignoredNames: [
       ".git"
@@ -83,7 +77,7 @@
       "es-identifier-highlight"
     ]
     themes: [
-      "unity-ui"
+      "native-ui"
       "base16-syntax"
     ]
   "cursor-history":
@@ -152,6 +146,10 @@
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "markdown-table-formatter": {}
+  mdattachment:
+    commonDirName: "."
+    oneDirFolAllBuffers: true
   minimap:
     charHeight: 1.5
     charWidth: 0.7
@@ -170,8 +168,7 @@
     sortPaletteColors: "by color"
   "preview-plus": {}
   "project-manager": {}
-  "project-view":
-    displayPath: false
+  "project-view": {}
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
     save_before_launch: false
@@ -200,8 +197,8 @@
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
     syntaxThemeTwo: "base16-syntax"
-    uiThemeOne: "unity-ui"
-    uiThemeTwo: "unity-ui"
+    uiThemeOne: "native-ui"
+    uiThemeTwo: "native-ui"
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
@@ -222,6 +219,7 @@
     showIcons: true
   welcome:
     showOnStartup: false
+  whitespace: {}
   wrap: {}
   "you-complete-me":
     pythonExecutable: "/usr/bin/python2"

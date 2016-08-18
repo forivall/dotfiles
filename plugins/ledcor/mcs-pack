@@ -31,7 +31,6 @@ source ~/.nvm/nvm.sh
   if $missingConfigFile ; then return 1; fi
 
   # TODO: support a .mcsignore file
-  # TODO: support automatically uploading
 
   local filename
   filename="$MCSAPIDIR/$(jq -r .name package.json)-$(jq -r .version package.json | sed 's/\./_/g').zip"
@@ -52,14 +51,20 @@ source ~/.nvm/nvm.sh
   (cd ..
     typeset -a files
     files=( $dir/**/*(.) )
+    if [[ -e $dir/.env ]] ; then
+      files=( $dir/.env $dir/.env.example $files )
+    elif [[ -e $dir/.env.example ]] ; then
+      echo ".env file missing!"
+      return 1
+    fi
     echo ${(F)files} | zip "$filename" -@ || return 1
   ) || return 1
 
   echo "Wrote file to $filename"
 
   if [[ $1 == '-u' ]] ; then
-    apiid="$(jq .oracleMobileApiId package.json -r -e)"
-    (( $? == 0 )) && (nvm use 6 && node "$scriptdir/upload-impl.nightmare.js" "$apiid" "$filename") || "not uploading, oracleMobileApiId not in package.json"
+    apiid="$(jq .mcsDeploy.dev.id package.json -r -e)"
+    (( $? == 0 )) && (nvm use 6 && node "$scriptdir/upload-impl.nightmare.js" "$apiid" "$filename") || "not uploading, mcsDeploy.dev.id not in package.json"
   fi
 
   if [[ -d node_modules ]] ; then env rm -r node_modules || return 1; fi

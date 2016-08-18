@@ -1,16 +1,3 @@
-c.dark
-c.name()
-c.darker)_
-c.darker()
-c.lighter()
-c.lighter().name()
-c.darker().name()
-c.name()
-import geopandas
-geopandas.geocode
-import geopy
-import geopandas
-geopandas.geocode
 import geopandas.geocode
 geopandas.geocode
 geopandas.geocode.geocode
@@ -98,3 +85,16 @@ geopandas.GeoDataFrame.append
 geopandas.gpd
 geopandas.GeoDataFrame()
 gdf = geopandas.GeoDataFrame()
+import numpy as np
+np.fromstring('-1')
+np.fromstring(' -1')
+np.fromstring(b' -1')
+np.fromstring(b' -1 ')
+np.fromstring('', dtype=float)
+np.fromstring('asdf', dtype=float)
+np.fromstring('asdf;lkj', dtype=float)
+np.fromstring('(+1, -1_', dtype=float)
+np.fromstring('(+1, -1)', dtype=float)
+np.fromstring('[+1, -1]', dtype=float)
+np.fromstring('(+1, -1)', dtype=float)
+eval('(+1, -1)')

@@ -200,12 +200,27 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
     }
   }
 }
-.theme-unity-ui {
+.theme-unity-ui, .theme-unity-dark-ui, .theme-native-ui {
   .multirow-tabs.tab-bar {
     display: flex;
     .tab {
       flex-basis: 175px;
       max-width: none;
+    }
+  }
+}
+
+.theme-native-ui {
+  .list-group, .list-tree {
+    .selected:before {
+      margin-top: 3px;
+      height: 20px;
+    }
+    li:not(.list-nested-item), li.list-nested-item > .list-item {
+      // line-height: 16px;
+      margin-top: -4px;
+      // padding-top: 2px;
+      // margin-bottom: -2px;
     }
   }
 }

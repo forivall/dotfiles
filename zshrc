@@ -152,6 +152,8 @@ clean-env
 
 path=($path ~/.zgen/deliciousinsights/git-stree-master)
 
+export GOPATH="$HOME/.gocode"
+
 if [[ "$PERF_TEST" == y ]] ; then exit; else true; fi
 
 # unfunction source
@@ -162,3 +164,5 @@ if $IS_WINDOWS ; then
 fi
 
 [[ -e "$SH_ROOT/api_keys.sh" ]] && source "$SH_ROOT/api_keys.sh"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

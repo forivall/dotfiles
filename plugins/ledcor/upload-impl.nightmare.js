@@ -5,6 +5,8 @@ var zip = process.argv[3];
 var Nightmare = require('nightmare');
 require('nightmare-upload')(Nightmare);
 var Cookie = require('cookie');
+
+// TODO: store in os keychain instead
 var config = require('./config.json');
 
 var nightmare = Nightmare();
