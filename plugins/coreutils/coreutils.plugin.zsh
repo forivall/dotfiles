@@ -40,6 +40,26 @@ if type yelp >/dev/null ; then
   function gman() { --a yelp "man:$1" ; }
 fi
 
+# touch
+function touche {
+  typeset -a files args
+  files=()
+  args=("$@")
+  rest=0
+  for r in $args ; do
+    if (( rest )); then files+=("$r")
+    elif [[ "$r" == "--" ]] ; then
+      rest=1
+    elif [[ "$r" != -* ]]; then
+      files+=("$r")
+    fi
+  done
+  for f in $files ; do if [[ "$f" == */* ]] ; then
+    mkdir -p "${f%/*}"
+  fi; done
+  touch "$@"
+}
+
 # diff
 function diff { colordiff -u "$@" | most ; }
 alias diff_=/usr/bin/diff

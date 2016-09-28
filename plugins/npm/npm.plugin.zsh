@@ -3,6 +3,8 @@ __zsh_npm_plugin_location=${__zsh_npm_plugin_location%/*}
 
 alias nr="npm run"
 
+path+=($__zsh_npm_plugin_location)
+
 if ${IS_WINDOWS:-false} ; then
   if [[ ! -e "${__zsh_npm_plugin_location}/_npm" ]] ; then
     cp "${__zsh_npm_plugin_location}/npm.completion.zsh" "${__zsh_npm_plugin_location}/_npm"
