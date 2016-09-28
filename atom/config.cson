@@ -88,6 +88,10 @@
     crActive: false
     eolActive: false
     spaceActive: false
+  docblockr:
+    indentation_spaces: 2
+    indentation_spaces_same_para: 0
+    simple_mode: true
   editor:
     backUpBeforeSaving: true
     fontFamily: "Fantasque Sans Mono"
@@ -179,6 +183,8 @@
   "slim-dark-ui":
     layoutMode: "Compact"
   "status-bar": {}
+  "svg-preview":
+    openPreviewAutomatically: true
   tabs:
     showIcons: true
     usePreviewTabs: true
