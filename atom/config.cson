@@ -176,7 +176,7 @@
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
     save_before_launch: false
-    terminal: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= roxterm --tab"
+    terminal: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= mate-terminal --tab"
   "save-session":
     dataSaveFolder: "/home/forivall/.atom/packages/save-session/projects"
     skipSavePrompt: false

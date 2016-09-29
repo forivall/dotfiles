@@ -1,15 +1,20 @@
 [submodule "plugins/cygwin-sudo/elevate"]
 	path = plugins/cygwin-sudo/elevate
-	url = git@github.com:forivall/elevate.git
+	url = https://github.com/forivall/elevate.git
+	pushurl = git@github.com:forivall/elevate.git
 [submodule "zgen"]
 	path = zgen
-	url = git@github.com:forivall/zgen.git
+	url = https://github.com/forivall/zgen.git
+	pushurl = git@github.com:forivall/zgen.git
 [submodule "plugins/external-tools/fabiokr-dotfiles"]
 	path = plugins/external-tools/fabiokr-dotfiles
-	url = git@github.com:forivall/fabiokr-dotfiles.git
+	url = https://github.com/forivall/fabiokr-dotfiles.git
+	pushurl = git@github.com:forivall/fabiokr-dotfiles.git
 [submodule "plugins/external-tools/leshylabs-blogcode"]
 	path = plugins/external-tools/leshylabs-blogcode
-	url = git@github.com:leshylabs/blogcode.git
+	url = https://github.com/leshylabs/blogcode.git
+	pushurl = git@github.com:leshylabs/blogcode.git
 [submodule "plugins/git/git-standup"]
 	path = plugins/git/git-standup
-	url = git@github.com:kamranahmedse/git-standup.git
+	url = https://github.com/kamranahmedse/git-standup.git
+	pushurl = git@github.com:kamranahmedse/git-standup.git
