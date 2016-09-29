@@ -151,7 +151,7 @@
 	pushInsteadOf = kde:
 [url "git://github.com/"]
 	insteadOf = hub:
-[url "ssh://git@github.com:"]
+[url "git@github.com:"]
     pushInsteadOf = hub:
 # [url "git@github.com:"]
 #     pushInsteadOf = hub:

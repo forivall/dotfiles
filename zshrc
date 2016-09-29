@@ -166,3 +166,8 @@ fi
 [[ -e "$SH_ROOT/api_keys.sh" ]] && source "$SH_ROOT/api_keys.sh"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+if [[ ! -e ~/.last-538 ]] || (( ( $(date +%s) - $(< ~/.last-538) ) > 86400 )) ; then
+  date +%s > ~/.last-538
+  538
+fi
