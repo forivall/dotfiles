@@ -77,7 +77,8 @@ function git() { # also put these in git-aliases for autocomplete
   local a;
   if [[ $___git_ran_once = n && "$1" =~ "clone|fetch|fetch-pack|pull|push|send-pack" ]] ; then
     ___git_ran_once=y
-    if ! $GIT_SSH_AGENT_CHECK >/dev/null; then
+
+    if ! $IS_OSX && ! $GIT_SSH_AGENT_CHECK >/dev/null; then
       $GIT_SSH_AGENT_ADD
     fi
   fi
