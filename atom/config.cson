@@ -186,6 +186,8 @@
     showIcons: true
     usePreviewTabs: true
   term3: {}
+  "test-status":
+    autorun: false
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
     syntaxThemeTwo: "today"
