@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=synclient
+Exec=synclient PalmMinWidth=1 PalmDetect=1 HorizTwoFingerScroll=1 VertScrollDelta=-58 HorizScrollDelta=-58
+StartupNotify=false
+Terminal=false
+Hidden=false

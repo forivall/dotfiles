@@ -119,13 +119,14 @@
   "git-projects": {}
   "git-wip":
     notify: false
+    warn: false
   "github-notifications":
     notificationAuthToken: " a77986444ecd25d526561a4606b0be8318c6cca7"
   "highlight-selected":
     lightTheme: true
     onlyHighlightWholeWords: true
   "ide-flow":
-    flowPath: "/home/forivall/.opam/system/bin/flow"
+    flowPath: "/usr/bin/flow"
   "indentation-indicator":
     indicatorPosition: "right"
     spaceAfterColon: true

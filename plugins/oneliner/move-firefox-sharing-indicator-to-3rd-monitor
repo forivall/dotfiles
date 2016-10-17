@@ -1,1 +1,1 @@
-wid="$(xdotool search --name 'Firefox - Sharing Indicator') | head -n1"; xdotool windowmove "$wid" $(( 1920 * 2 + 720 - 23 )) 180
+wid="$(xdotool search --name 'Firefox .*- Sharing Indicator') | head -n1"; xdotool windowmove "$wid" $(( 1920 * 2 + 720 - 23 )) 180
