@@ -75,6 +75,7 @@
     unstage = reset HEAD --
     dc = diff --cached
     amend = commit --amend --no-edit
+    reword = commit --amend
 
 [color]
 	# diff = always
