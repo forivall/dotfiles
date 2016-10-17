@@ -34,8 +34,6 @@ if $IS_LINUXY ; then
   #setbool HAS_ENVOY  whence envoy
 
   # todo: create a plugin for envoy
-  # load envoy before loading plugins so that autoupdate plugin can use ssh
-  #$HAS_ENVOY && eval $(envoy -ps)
 fi
 
 # core shell settings

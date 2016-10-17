@@ -20,13 +20,6 @@ atom-text-editor {
 }
 
 atom-workspace {
-   > atom-workspace-axis.horizontal {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
   // display: initial;
 
   // -webkit-font-smoothing: antialiased;
@@ -177,12 +170,13 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
 }
 
 // TODO: move into adwaita-pro-ui
-
-.tab-bar {
-  // TODO: make sure this is right from font size, etc.
-  min-height: 36px;
-  .tab {
-    &:hover {
+.theme-adwaita-pro-ui {
+  .tab-bar {
+    // TODO: make sure this is right from font size, etc.
+    min-height: 36px;
+    .tab {
+      &:hover {
+      }
     }
   }
 }

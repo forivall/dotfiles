@@ -51,6 +51,12 @@
   # emacs keybindings overwritten by packages
   "alt-ctrl-b": "editor:move-to-previous-subword-boundary",
   'alt-ctrl-d': 'find-and-replace:toggle-whole-word-option'
+
+  # TODO: create or find a bracket-matcher-extras
+  'ctrl-shift-m': 'bracket-matcher-extras:select-outside-brackets'
+
+  'alt-}': 'pane:show-next-item'
+  'alt-{': 'pane:show-previous-item'
 'atom-text-editor:not([mini])':
   'alt-shift-r': 'run-in-terminal:editor-start-terminal-here'
   'cmd-shift-r': 'atom-mac-terminal:open'
@@ -70,8 +76,8 @@
   'ctrl-k ctrl-h': 'fold-functions:unfold'
 
   # darwin only
-  'ctrl-left': 'editor:move-to-previous-subword-boundary'
-  'ctrl-right': 'editor:move-to-next-subword-boundary'
+  # 'ctrl-left': 'editor:move-to-previous-subword-boundary'
+  # 'ctrl-right': 'editor:move-to-next-subword-boundary'
 
   # emmet
   'ctrl-e ctrl-e': 'emmet:expand-abbreviation'

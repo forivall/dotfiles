@@ -16,7 +16,12 @@ function grep() {
     if [ -t 0 ] ; then
         # TODO: don't use -n for -o
         # shellcheck disable=SC2046
-        env $(whence grep) -n "$@" <&0
+        if [ "$1" = --no-n ] ; then
+            shift
+            env $(whence grep) "$@" <&0
+        else
+            env $(whence grep) -n "$@" <&0
+        fi
     else
         # echo 'piping'
         # shellcheck disable=SC2046
