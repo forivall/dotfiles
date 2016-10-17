@@ -190,16 +190,8 @@
     usePreviewTabs: true
   term3:
     colors:
-      brightWhite:
-        red: 214
-        green: 214
-        blue: 214
-        alpha: 1
-      foreground:
-        red: 219
-        green: 218
-        blue: 220
-        alpha: 1
+      brightWhite: "#d6d6d6"
+      foreground: "#dbdadc"
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
     syntaxThemeTwo: "base16-syntax"
