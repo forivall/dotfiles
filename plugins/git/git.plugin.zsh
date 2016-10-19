@@ -74,8 +74,16 @@ function git() { # also put these in git-aliases for autocomplete
     fi
   fi
   case "$1" in
+    fancy) shift;
+      local pager="$(git config core.pager || echo -n "less")"
+      git -c color.diff=always "$@" | diff-so-fancy | $pager;;
     age) shift; ~/code/git-repos/git-age/git-age $@;;
-    diff) shift; if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then /usr/bin/env git --no-pager diff $@ ; else /usr/bin/env git diff $@ ; fi;;
+    diff) shift;
+      if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
+        /usr/bin/env git --no-pager diff $@
+      else
+        /usr/bin/env git diff $@ ;
+      fi;;
     grep-gedit-open) shift; git-grep-gedit-open $@;;
     blameall) shift; ~/code/git-blameall.py $@;;
     stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
