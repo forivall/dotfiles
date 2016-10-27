@@ -206,21 +206,31 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
     .tab {
       flex-basis: 175px;
       max-width: none;
-    }
+    };;
   }
 }
 
+.npm-icon {
+  font-size: 15px;
+}
 .theme-native-ui {
+  // don't remove project icon
+  .project-root > .list-item > .icon-repo {
+    &:before {
+      display: inherit;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
+  .icon-file-text:before, .icon-file-binary:before, .icon-file-directory:before {
+    line-height: 11px;
+  }
   .list-group, .list-tree {
     .selected:before {
-      margin-top: 3px;
-      height: 20px;
+      height: 18px;
     }
-    li:not(.list-nested-item), li.list-nested-item > .list-item {
-      // line-height: 16px;
-      margin-top: -4px;
-      // padding-top: 2px;
-      // margin-bottom: -2px;
+    .entry:not(.list-nested-item), .entry.list-nested-item > .list-item {
+      line-height: 18px;
     }
   }
 }

@@ -56,6 +56,7 @@
       "run-in-terminal"
       "git-wip"
       "autocomplete-flow"
+      "whitespace"
     ]
     ignoredNames: [
       ".git"
