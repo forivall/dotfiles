@@ -168,11 +168,9 @@ fi
 # added by travis gem
 [ -f /home/forivall/.travis/travis.sh ] && source /home/forivall/.travis/travis.sh
 
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+
 [[ -e "$SH_ROOT/api_keys.sh" ]] && source "$SH_ROOT/api_keys.sh"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-if [[ ! -e ~/.last-538 ]] || (( ( $(date +%s) - $(< ~/.last-538) ) > 86400 )) ; then
-  date +%s > ~/.last-538
-  538
-fi

@@ -55,6 +55,8 @@ if [[ ! -d ~/.vim ]] ; then
   curl -Lo- https://bit.ly/janus-bootstrap | bash
 fi
 
+o ln -fs "$(realpath vim.janus)" ~/.janus
+
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
 o ln -fs "$(realpath gitignore)" ~/.gitignore

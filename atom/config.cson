@@ -79,7 +79,7 @@
     ]
     themes: [
       "native-ui"
-      "base16-syntax"
+      "today"
     ]
   "cursor-history":
     flashColor: "success"
@@ -96,7 +96,6 @@
   editor:
     backUpBeforeSaving: true
     fontFamily: "Fantasque Sans Mono"
-    fontSize: 13
     invisibles:
       cr: " "
       eol: " "
@@ -105,6 +104,7 @@
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
+    softWrapAtPreferredLineLength: true
   "es-identifier-highlight":
     lightTheme: false
   "exception-reporting":
@@ -219,7 +219,8 @@
     showIcons: true
   welcome:
     showOnStartup: false
-  whitespace: {}
+  whitespace:
+    ensureSingleTrailingNewline: false
   wrap: {}
   "you-complete-me":
     pythonExecutable: "/usr/bin/python2"

@@ -18,3 +18,6 @@
 	path = plugins/git/git-standup
 	url = https://github.com/kamranahmedse/git-standup.git
 	pushurl = git@github.com:kamranahmedse/git-standup.git
+[submodule "vim.janus/editorconfig"]
+	path = vim.janus/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim.git
