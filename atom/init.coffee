@@ -18,3 +18,5 @@ fixTreeView = ->
   setTimeout(fixTreeView, 600000)
 
 setTimeout(fixTreeView, 600)
+
+require('electron').webFrame.setZoomFactor(1.5)

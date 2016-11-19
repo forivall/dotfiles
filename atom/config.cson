@@ -51,9 +51,31 @@
       "tree-view-breadcrumb"
       "welcome"
       "wrap-guide"
-      "run-in-terminal"
       "git-wip"
       "autocomplete-flow"
+      "you-complete-me"
+      "atom-mac-terminal"
+      "term3"
+      "atom-trello"
+      "Stylus"
+      "autocomplete-paths"
+      "change-case"
+      "cursor-history"
+      "dbus"
+      "dev-tools-themes"
+      "es-identifier-highlight"
+      "expose"
+      "file-types"
+      "fold-comments"
+      "graphviz-preview"
+      "ide-flow"
+      "linter-shellcheck"
+      "emmet"
+      "git-diff-details"
+      "imdone-atom"
+      "imdone-atom-github"
+      "tablr"
+      "multi-wrap-guide"
     ]
     ignoredNames: [
       ".git"
@@ -83,6 +105,9 @@
     crActive: false
     eolActive: false
     spaceActive: false
+  "dev-tools-themes":
+    "display-help": false
+    theme: "zerodarkmatrix"
   docblockr:
     indentation_spaces: 2
     indentation_spaces_same_para: 0
@@ -118,6 +143,8 @@
     warn: false
   "github-notifications":
     notificationAuthToken: " a77986444ecd25d526561a4606b0be8318c6cca7"
+  "gtk-dark-theme":
+    enabled: false
   "highlight-selected":
     lightTheme: true
     onlyHighlightWholeWords: true
@@ -197,6 +224,7 @@
     alwaysOpenExisting: true
     hideIgnoredNames: true
     refreshVcsStatusOnProjectOpen: 5
+    squashDirectoryNames: true
   "tree-view-breadcrumb":
     displayProjectRoot: true
     displayProjectRootName: true
