@@ -100,11 +100,15 @@ atom-workspace.theme-quantum-ui {
       // @current-line-highlight;
     }
     .line.cursor-line {
-      border-top: @current-line-highlight-border 1px dotted;
-      border-bottom: @current-line-highlight-border 1px dotted;
-      margin-top: -1px;
-      margin-bottom: -1px;
-      background:@current-line-highlight;
+      background-image: linear-gradient(to bottom,
+        @current-line-highlight-border,
+        @current-line-highlight-border 3%,
+        @current-line-highlight 3%,
+        @current-line-highlight 97%,
+        @current-line-highlight-border 97%,
+        @current-line-highlight-border
+      );
+      // background-image: fadein(@current-line-highlight, 1%);
     }
 
     .line.cursor-line + .line.cursor-line{
