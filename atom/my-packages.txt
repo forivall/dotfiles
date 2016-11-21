@@ -1,5 +1,6 @@
 
 adwaita-pro-ui
+api-workbench
 atom-beautify
 atom-mac-terminal
 atom-ternjs
@@ -47,6 +48,7 @@ language-json5
 language-lua
 language-mscgen
 language-pug
+language-nunjucks
 language-qml
 language-rust
 language-tacoscript
@@ -62,6 +64,7 @@ linter-shellcheck
 linter-stylint
 linter-xo
 markdown-table-formatter
+merge-conflicts
 minimap
 minimap-autohide
 minimap-git-diff
@@ -70,7 +73,8 @@ minimap-selection
 mscgen-preview
 multirow-tabs
 multi-wrap-guide
-number-slider
+native-ui
+omnisharp-atom
 open-git-modified-files
 pane-by-type
 project-find-navigation
@@ -85,9 +89,9 @@ remember-folds
 require-opener
 run-in-terminal
 sort-lines
-speckjs
-string-looper
+string-case
 Stylus
+svg-preview
 symbols-tree-view
 tablr
 term3
@@ -96,4 +100,3 @@ today
 tomorrow-ya
 tree-view
 tree-view-breadcrumb
-tree-view-git-projects
