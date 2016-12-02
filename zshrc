@@ -27,6 +27,7 @@ setbool IS_INTERACTIVE  tty -s
 setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
 setbool IS_OSX  $([[ "$(uname)" == "Darwin" ]])
 setbool IS_LINUXY  $(! $IS_WINDOWS && ! $IS_OSX)  # could also be BSD
+setbool IS_XDG $(() { local _XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg:/foo/bar}; local xdg_config_dirs=(${(@s/:/)_XDG_CONFIG_DIRS}); [[ -d ${xdg_config_dirs[1]} ]] })
 
 if $IS_LINUXY ; then
   # https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
@@ -169,7 +170,3 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-if [[ ! -e ~/.last-538 ]] || (( ( $(date +%s) - $(< ~/.last-538) ) > 86400 )) ; then
-  date +%s > ~/.last-538
-  538
-fi

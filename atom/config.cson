@@ -33,6 +33,7 @@
   "base16-syntax":
     scheme: "Eighties"
   core:
+    audioBeep: false
     autoHideMenuBar: true
     destroyEmptyPanes: false
     disabledPackages: [
@@ -41,8 +42,6 @@
       "block-comment"
       "custom-invisibles"
       "hard-wrap"
-      "linter-flake8"
-      "linter-jshint"
       "linter-scss-lint"
       "linter-stylint"
       "pane-by-type"
@@ -51,8 +50,6 @@
       "tree-view-breadcrumb"
       "welcome"
       "wrap-guide"
-      "git-wip"
-      "autocomplete-flow"
       "you-complete-me"
       "atom-mac-terminal"
       "term3"
@@ -72,10 +69,9 @@
       "linter-shellcheck"
       "emmet"
       "git-diff-details"
-      "imdone-atom"
-      "imdone-atom-github"
       "tablr"
       "multi-wrap-guide"
+      "linter-jshint"
     ]
     ignoredNames: [
       ".git"

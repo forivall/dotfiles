@@ -1,7 +1,6 @@
 
 adwaita-pro-ui
 atom-beautify
-atom-mac-terminal
 atom-ternjs
 atom-trello
 autocomplete-flow
