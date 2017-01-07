@@ -1,5 +1,5 @@
 # ls
-alias ls="$(whence ls) --hide=\*~"
+alias ls="$(whence ls) -F --color=auto --hide=\*~ "
 alias lsd="ls --group-directories-first"
 alias sl="ls"
 alias ll='ls -alF'

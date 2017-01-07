@@ -7,6 +7,8 @@
     fontFamily: "Oxygen-Sans"
     fontSize: 13
     iconTheme: "Octicons"
+  "api-workbench":
+    openConsoleInSplitPane: false
   "atom-beautify":
     general:
       _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
@@ -38,12 +40,48 @@
     useAlternateScoring: false
   "base16-syntax":
     scheme: "Tomorrow"
+  "bracket-matcher": {}
+  broadcast:
+    broadcastToOthers: true
+    codeHighlight: false
+    getEmojisFromCheatSheetSite: true
+    hostname: "0.0.0.0"
+    port: 8888
   core:
     autoHideMenuBar: true
+    customFileTypes:
+      "source.asp.vb.net": [
+        "frm"
+        "bas"
+      ]
+      "source.ini": [
+        ".buckconfig"
+        ".hgrc"
+        ".flowconfig"
+      ]
+      "source.json": [
+        ".arcconfig"
+        "BUCK.autodeps"
+      ]
+      "source.perl": [
+        "el"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
+      "source.vbnet": [
+        "frm"
+      ]
+      "text.xml": [
+        "edmx"
+        "emsd"
+        "spdata"
+        "svcinfo"
+        "svcmap"
+        "datasource"
+      ]
     disabledPackages: [
       "background-tips"
-      "block-comment"
-      "es-identifier-highlight"
       "fold-comments"
       "fold-functions"
       "fold-search-results"
@@ -51,7 +89,6 @@
       "git-wip"
       "github-notifications"
       "gtk-dark-theme"
-      "highlight-selected"
       "html2jade-plus"
       "imdone-atom-github"
       "imdone-atom"
@@ -60,23 +97,20 @@
       "linter-nplint"
       "linter-scss-lint"
       "linter-stylint"
-      "omnisharp-atom"
       "open-git-modified-files"
       "pane-by-type"
       "preview-plus"
       "project-find-navigation"
-      "promote-folder-to-project"
-      "raml"
       "remember-file-positions"
       "require-opener"
       "run-in-terminal"
       "string-case"
-      "symbols-tree-view"
       "tablr"
-      "term3"
       "tree-view-breadcrumb"
       "welcome"
       "wrap-guide"
+      "editorconfig"
+      "language-mscgen"
     ]
     ignoredNames: [
       ".git"
@@ -127,7 +161,6 @@
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
-    softWrapAtPreferredLineLength: true
   "es-identifier-highlight":
     lightTheme: false
   "exception-reporting":
@@ -136,6 +169,25 @@
   "file-types":
     el: "source.perl"
   "fold-functions": {}
+  "formatter-jsbeautify":
+    a:
+      executablePath: "/Users/jordanklassen/.nvm/versions/node/v4.6.1/bin/js-beautify"
+      nodePath: "/Users/jordanklassen/.nvm/versions/node/v4.6.1/bin/node"
+  "formatter-tidy":
+    html:
+      arguments: [
+        "--wrap"
+        "160"
+        "--preserve-entities"
+        "true"
+        "--wrap-attributes"
+        "false"
+      ]
+    xml:
+      arguments: [
+        "--wrap"
+        "160"
+      ]
   "fuzzy-finder":
     preserveLastSearch: true
     searchAllPanes: true
@@ -177,6 +229,8 @@
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "markdown-preview":
+    useGitHubStyle: true
   "markdown-table-formatter": {}
   mdattachment:
     commonDirName: "."
@@ -190,6 +244,39 @@
     scrollAnimationDuration: 100
     textOpacity: 0.5
   "minimap-codeglance": {}
+  "mscgen-preview":
+    cannedStyleTemplate: "classic"
+  "multi-wrap-guide": {}
+  nuclide:
+    "nuclide-file-tree":
+      allowKeyboardPrefixNavigation: false
+    use:
+      "nuclide-adb-logcat": false
+      "nuclide-arcanist": false
+      "nuclide-atom-notifications": false
+      "nuclide-bookshelf": false
+      "nuclide-buck": false
+      "nuclide-clang": false
+      "nuclide-console": false
+      "nuclide-debugger-iwdp": false
+      "nuclide-debugger-native": false
+      "nuclide-debugger-php": false
+      "nuclide-diagnostics-datatip-provider": false
+      "nuclide-diagnostics-store": false
+      "nuclide-diagnostics-ui": false
+      "nuclide-distraction-free-mode": false
+      "nuclide-file-tree": false
+      "nuclide-hack": false
+      "nuclide-home": false
+      "nuclide-ios-simulator-logs": false
+      "nuclide-language-hack": false
+      "nuclide-language-reason": false
+      "nuclide-nux": false
+      "nuclide-ocaml": false
+      "nuclide-react-native": false
+      "nuclide-side-bar": false
+      "nuclide-swift": false
+      "nuclide-ui": false
   "one-light-ui":
     fontSize: 13
   pigments:
@@ -219,18 +306,18 @@
     colors:
       brightWhite: "#d6d6d6"
       foreground: "#dbdadc"
-  "test-status":
-    autorun: false
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
-    syntaxThemeTwo: "base16-syntax"
+    syntaxThemeTwo: "today"
     uiThemeOne: "native-ui"
     uiThemeTwo: "native-ui"
+  "tool-bar":
+    iconSize: "12px"
+    position: "Left"
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
     refreshVcsStatusOnProjectOpen: 5
-    squashDirectoryNames: true
   "tree-view-breadcrumb":
     displayProjectRoot: true
     displayProjectRootName: true

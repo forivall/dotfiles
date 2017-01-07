@@ -8,11 +8,11 @@ set ignorecase
 set smartcase
 
 " A tab produces a 2-space indentation
-set softtabstop=4
-set shiftwidth=4
+set softtabstop=2
+set shiftwidth=2
 "set expandtab
 "set noexpandtab
-set tabstop=4
+set tabstop=2
 
 "set t_Co=256
 

@@ -79,8 +79,14 @@ atom-workspace.theme-quantum-ui {
 
 .theme-today {
   atom-text-editor::shadow {
+    .meta {
+      &.class {
+        color: inherit;
+      }
+    }
     .entity.name.type {
       text-decoration: none;
+      font-style: italic;
     }
     .punctuation.section.embedded {
       color: @orange;
