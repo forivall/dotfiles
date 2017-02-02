@@ -246,7 +246,12 @@
   "minimap-codeglance": {}
   "mscgen-preview":
     cannedStyleTemplate: "classic"
-  "multi-wrap-guide": {}
+    mirrorEntities: true
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+    locked: true
   nuclide:
     "nuclide-file-tree":
       allowKeyboardPrefixNavigation: false

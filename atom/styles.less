@@ -30,7 +30,7 @@ atom-workspace {
   // -webkit-text-stroke-width: 0.1pt;
 }
 atom-text-editor {
-  &::shadow {
+  &.editor {
     -webkit-text-stroke-width: initial;
   }
   -webkit-text-stroke-width: initial;
@@ -45,7 +45,7 @@ atom-pane-container {
 }
 // To style other content in the text editor's shadow DOM, use the ::shadow
 // expression
-atom-text-editor::shadow .cursor {
+atom-text-editor.editor .cursor {
 
 }
 
@@ -78,7 +78,7 @@ atom-workspace.theme-quantum-ui {
 // }
 
 .theme-today {
-  atom-text-editor::shadow {
+  atom-text-editor.editor {
     .meta {
       &.class {
         color: inherit;
@@ -96,9 +96,7 @@ atom-workspace.theme-quantum-ui {
   @current-line-highlight: fade(mix(@syntax-text-color, @syntax-background-color, 99%), 3.6%);
   @current-line-highlight-border: fade(mix(@syntax-text-color, @syntax-background-color, 99%), 15%);
 
-  atom-text-editor.is-focused,
-  atom-text-editor.is-focused::shadow,
-  :host(.is-focused) {
+  atom-text-editor.is-focused {
     .line-number.cursor-line {
       // border-top: @current-line-highlight-border 1px solid;
       background-color: transparent;
@@ -119,16 +117,6 @@ atom-workspace.theme-quantum-ui {
 
     .line.cursor-line + .line.cursor-line{
       border-top-width: 0px;
-    }
-  }
-  atom-text-editor,
-  atom-text-editor::shadow,
-  :host(.is-focused) {
-    .line-number.cursor-line {
-      // border-top: @current-line-highlight-border 1px solid;
-      background-color: transparent;
-      background-image: linear-gradient(to right, #3b3b3b, fade(#3b3b3b, 75%) 70%, fade(#3b3b3b, 0%));
-      // @current-line-highlight;
     }
   }
 }
@@ -177,6 +165,11 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
 @blue:            #4271ae; // 0D
 @purple:          #8959a8; // 0E
 @dark-red:        #a3685a; // 0F
+
+.npm-icon::before {
+  top: 3px;
+  line-height: 12px;
+}
 
 .indent-guide-improved {
   background-color: mix(@gray, @light-gray, 50);
@@ -229,9 +222,6 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
   }
 }
 
-.npm-icon {
-  font-size: 15px;
-}
 .theme-native-ui {
   // don't remove project icon
   .project-root > .list-item > .icon-repo {
