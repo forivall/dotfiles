@@ -96,27 +96,47 @@ atom-workspace.theme-quantum-ui {
   @current-line-highlight: fade(mix(@syntax-text-color, @syntax-background-color, 99%), 3.6%);
   @current-line-highlight-border: fade(mix(@syntax-text-color, @syntax-background-color, 99%), 15%);
 
-  atom-text-editor.is-focused {
-    .line-number.cursor-line {
-      // border-top: @current-line-highlight-border 1px solid;
-      background-color: transparent;
-      background-image: linear-gradient(to right, #3b3b3b, fade(#3b3b3b, 75%) 70%, fade(#3b3b3b, 0%));
-      // @current-line-highlight;
+  atom-text-editor {
+    .gutter {
+      .line-number.cursor-line,
+      .line-number.cursor-line-no-selection {
+        // border-top: @current-line-highlight-border 1px solid;
+        background-color: transparent;
+        background-image:
+            linear-gradient(to right, #3b3b3b, fade(#3b3b3b, 75%) 70%, fade(#3b3b3b, 0%))
+            , linear-gradient(to bottom,
+              @current-line-highlight-border,
+              @current-line-highlight-border 3%,
+              rgba(0, 0, 0, 0) 3%,
+              rgba(0, 0, 0, 0) 97%,
+              @current-line-highlight-border 97%,
+              @current-line-highlight-border
+            )
+        ;
+        background-size: cover;
+        // @current-line-highlight;
+      }
     }
+
     .line.cursor-line {
       background-image: linear-gradient(to bottom,
-        @current-line-highlight-border,
-        @current-line-highlight-border 3%,
-        @current-line-highlight 3%,
-        @current-line-highlight 97%,
-        @current-line-highlight-border 97%,
-        @current-line-highlight-border
+        @current-line-highlight,
+        @current-line-highlight
       );
       // background-image: fadein(@current-line-highlight, 1%);
     }
-
-    .line.cursor-line + .line.cursor-line{
-      border-top-width: 0px;
+    .is-focused {
+      .line.cursor-line {
+        background-image: linear-gradient(to bottom,
+          @current-line-highlight-border,
+          @current-line-highlight-border 3%,
+          @current-line-highlight 3%,
+          @current-line-highlight 97%,
+          @current-line-highlight-border 97%,
+          @current-line-highlight-border
+        );
+        // background-image: fadein(@current-line-highlight, 1%);
+      }
     }
   }
 }
@@ -132,7 +152,7 @@ tree-view-breadcrumb {
   padding-bottom: 2px;
   overflow-x: hidden;
   .btn {
-    font-size: 10px;
+    // font-size: 10px;
     height: auto;
     line-height: inherit;
   }
@@ -252,8 +272,10 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
     }
   }
 
-  .icon-file-text:before, .icon-file-binary:before, .icon-file-directory:before {
-    line-height: 11px;
+  .icon-file-text, .icon-file-binary, .icon-file-directory, .groovy-icon {
+    &:before {
+      line-height: 11px;
+    }
   }
   .list-group, .list-tree {
     .selected:before {
@@ -261,6 +283,16 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
     }
     .entry:not(.list-nested-item), .entry.list-nested-item > .list-item {
       line-height: 18px;
+    }
+  }
+
+  linter-bottom-tab {
+    line-height: 21px;
+    &:first-of-type {
+      border-radius: 4px 0 0 4px;
+    }
+    &:nth-child(2) {
+      border-radius: 0;
     }
   }
 }

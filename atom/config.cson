@@ -223,13 +223,25 @@
     underlineIssues: false
   "linter-clang": {}
   "linter-eslint": {}
+  "linter-hdevtools":
+    hdevtoolsExecutablePath: "$HOME/.cabal/bin/hdevtools"
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
   "linter-scss-lint":
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "markdown-image-insertion":
+    general:
+      imageCode: '''
+        <img alt="" src="{url}" width="">
+        
+      '''
   "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus":
+    enablePandoc: true
+    pandocPath: "/usr/local/bin/pandoc"
     useGitHubStyle: true
   "markdown-table-formatter": {}
   mdattachment:
@@ -282,6 +294,8 @@
       "nuclide-side-bar": false
       "nuclide-swift": false
       "nuclide-ui": false
+  "omnisharp-atom":
+    autoStartOnCompatibleFile: false
   "one-light-ui":
     fontSize: 13
   pigments:
