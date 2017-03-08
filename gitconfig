@@ -1,5 +1,5 @@
 [user]
-	name = EJ Klassen
+	name = E Klassen
 	email = forivall@gmail.com
 [core]
 	#autocrlf = input
@@ -13,6 +13,7 @@
 	renames = false
 	# renames = copies # makes genco choke
 [alias]
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
 	ci = commit
 	co = checkout
@@ -58,24 +59,18 @@
 	# custom commands, before adding scripts to bin
 	age = !/home/jklassen/code/git-age/git-age
 	diffuse = !/code/git/forivall_dotfiles_scripts/scripts/git-diffuse
-	genco = !/code/git/forivall_dotfiles_scripts/scripts/git-genco
-	genpatch = !/code/git/forivall_dotfiles_scripts/scripts/git-genpatch
-	gerrit-submit = !/code/git/forivall_dotfiles_scripts/scripts/git-gerrit-submit
-	grep-gedit-open = "!exec echo"
-	prepare-eco = !/code/git/forivall_dotfiles_scripts/scripts/git-prepare-eco
-	review-merge = !/code/git/forivall_dotfiles_scripts/scripts/git-review-merge
 	store-untracked-files = !/code/git/forivall_dotfiles_scripts/scripts/git-archive-untracked-files
-    blameall = !/code/git/forivall_dotfiles_scripts/scripts/git-blameall
-    branch-archive = !/code/git/forivall_dotfiles_scripts/scripts/git-branch-archive
+	blameall = !/code/git/forivall_dotfiles_scripts/scripts/git-blameall
+	branch-archive = !/code/git/forivall_dotfiles_scripts/scripts/git-branch-archive
 
-    # aliases for custom commands
-    sm = subl-modified
-    sp = subl-projects
-    cl = clone
-    unstage = reset HEAD --
-    dc = diff --cached
-    amend = commit --amend --no-edit
-    reword = commit --amend
+	# aliases for custom commands
+	sm = subl-modified
+	sp = subl-projects
+	cl = clone
+	unstage = reset HEAD --
+	dc = diff --cached
+	amend = commit --amend --no-edit
+	reword = commit --amend
 
 [color]
 	# diff = always
@@ -117,7 +112,7 @@
 [merge]
     #tool = diffuse_windows
     #tool = diffuse_custom
-	tool = meld
+	tool = meld_merged
 	conflictstyle = diff3
 [rerere]
 	enabled = 1
