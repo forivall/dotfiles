@@ -194,6 +194,7 @@
   "project-view": {}
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
+    launchdir: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= mate-terminal --tab \"{working_directory}\""
     save_before_launch: false
     terminal: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= mate-terminal --tab"
   "save-session":
@@ -211,7 +212,7 @@
   "terminal-fusion":
     ansiColors:
       normal:
-        black: "#212121"
+        black: "#343d46"
         blue: "#81a2be"
         cyan: "#8abeb7"
         green: "#b5bd68"
@@ -238,12 +239,14 @@
       red: "#cc6666"
       yellow: "#f0c674"
     style:
+      animationSpeed: 0
       defaultPanelHeight: "200px"
       fontFamily: "Fantasque Sans Mono"
-      fontSize: "14"
+      fontSize: "14.5"
       theme: "dracula"
     toggles:
       autoClose: true
+      runInsertedText: false
   "test-status":
     autorun: false
   "theme-switcher":
