@@ -67,7 +67,6 @@
       "graphviz-preview"
       "ide-flow"
       "linter-shellcheck"
-      "emmet"
       "git-diff-details"
       "tablr"
       "multi-wrap-guide"
@@ -209,6 +208,42 @@
     showIcons: true
     usePreviewTabs: true
   term3: {}
+  "terminal-fusion":
+    ansiColors:
+      normal:
+        black: "#212121"
+        blue: "#81a2be"
+        cyan: "#8abeb7"
+        green: "#b5bd68"
+        magenta: "#b294bb"
+        red: "#cc6666"
+        white: "#ededed"
+        yellow: "#f0c674"
+      zBright:
+        brightBlack: "#343d46"
+        brightBlue: "#81a2be"
+        brightCyan: "#8abeb7"
+        brightGreen: "#b5bd68"
+        brightMagenta: "#b294bb"
+        brightRed: "#cc6666"
+        brightWhite: "#ededed"
+        brightYellow: "#f0c674"
+    iconColors:
+      blue: "#81a2be"
+      cyan: "#8abeb7"
+      green: "#b5bd68"
+      magenta: "#f351f3"
+      pink: "#ea9bc2"
+      purple: "#b294bb"
+      red: "#cc6666"
+      yellow: "#f0c674"
+    style:
+      defaultPanelHeight: "200px"
+      fontFamily: "Fantasque Sans Mono"
+      fontSize: "14"
+      theme: "dracula"
+    toggles:
+      autoClose: true
   "test-status":
     autorun: false
   "theme-switcher":
