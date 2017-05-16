@@ -4,8 +4,8 @@
     screenShake:
       enabled: false
   "adwaita-pro-ui":
-    fontFamily: "Oxygen-Sans"
-    fontSize: 13
+    fontFamily: "Droid Sans"
+    fontSize: 12
     iconTheme: "Octicons"
   "api-workbench":
     openConsoleInSplitPane: false
@@ -97,20 +97,18 @@
       "linter-nplint"
       "linter-scss-lint"
       "linter-stylint"
-      "open-git-modified-files"
-      "pane-by-type"
       "preview-plus"
-      "project-find-navigation"
       "remember-file-positions"
-      "require-opener"
       "run-in-terminal"
       "string-case"
-      "tablr"
-      "tree-view-breadcrumb"
       "welcome"
-      "wrap-guide"
-      "editorconfig"
       "language-mscgen"
+      "minimap-highlight-selected"
+      "markdown-preview"
+      "autocomplete-clang"
+      "sync-settings"
+      "linter-flow"
+      "flow-ide"
     ]
     ignoredNames: [
       ".git"
@@ -130,6 +128,8 @@
       "emmet"
       "imdone-atom"
       "es-identifier-highlight"
+      "api-workbench"
+      "omnisharp-atom"
     ]
     themes: [
       "native-ui"
@@ -198,6 +198,7 @@
     warn: false
   "github-notifications":
     notificationAuthToken: " a77986444ecd25d526561a4606b0be8318c6cca7"
+  "graphviz-preview-plus": {}
   "gtk-dark-theme":
     enabled: false
   "highlight-selected":
@@ -231,6 +232,7 @@
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "linter-ui-default": {}
   "markdown-image-insertion":
     general:
       imageCode: '''
@@ -255,6 +257,9 @@
     scrollAnimation: true
     scrollAnimationDuration: 100
     textOpacity: 0.5
+  "minimap-autohider":
+    TimeToHide: 1000
+    TransitionDuration: 200
   "minimap-codeglance": {}
   "mscgen-preview":
     cannedStyleTemplate: "classic"
@@ -263,16 +268,25 @@
     columns: [
       80
     ]
-    locked: true
+    enabled: false
   nuclide:
+    "nuclide-definition-preview": {}
+    "nuclide-distraction-free-mode":
+      hideStatusBar: true
     "nuclide-file-tree":
       allowKeyboardPrefixNavigation: false
+    "nuclide-health":
+      toolbarJewel: "None"
     use:
       "nuclide-adb-logcat": false
+      "nuclide-adb-sdb": false
       "nuclide-arcanist": false
       "nuclide-atom-notifications": false
+      "nuclide-blame": false
+      "nuclide-blame-provider-hg": false
       "nuclide-bookshelf": false
       "nuclide-buck": false
+      "nuclide-buck-ios": false
       "nuclide-clang": false
       "nuclide-console": false
       "nuclide-debugger-iwdp": false
@@ -281,9 +295,11 @@
       "nuclide-diagnostics-datatip-provider": false
       "nuclide-diagnostics-store": false
       "nuclide-diagnostics-ui": false
-      "nuclide-distraction-free-mode": false
       "nuclide-file-tree": false
       "nuclide-hack": false
+      "nuclide-hg-conflict-resolver": false
+      "nuclide-hg-repository": false
+      "nuclide-hhvm": false
       "nuclide-home": false
       "nuclide-ios-simulator-logs": false
       "nuclide-language-hack": false
@@ -293,7 +309,6 @@
       "nuclide-react-native": false
       "nuclide-side-bar": false
       "nuclide-swift": false
-      "nuclide-ui": false
   "omnisharp-atom":
     autoStartOnCompatibleFile: false
   "one-light-ui":
@@ -358,3 +373,6 @@
   wrap: {}
   "you-complete-me":
     pythonExecutable: "/usr/bin/python2"
+".editorconfig.source":
+  editor:
+    softWrapAtPreferredLineLength: false
