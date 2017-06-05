@@ -243,12 +243,9 @@
       "scss-lint"
     ]
     lintOnChange: false
-    lintOnFly: false
-    showErrorTabLine: true
     subtleLinterErrors: [
       "shellcheck"
     ]
-    underlineIssues: false
   "linter-clang": {}
   "linter-eslint": {}
   "linter-hdevtools":
