@@ -11,6 +11,14 @@ alias http="http --pretty=colors"
 #alias res="echo -en \"\ec\e[3J\""
 alias res="echo -n '$(tput reset)'"
 
+if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]] ; then
+    alias res="echo -n '$(tput reset)' && osascript -e 'tell application \"System Events\" to keystroke \"k\" using {option down, command down}'"
+fi
+
+if [[ "$TERM_PROGRAM" == "iTerm.app" ]] ; then
+    alias res="osascript -e 'tell application \"System Events\" to keystroke \"k\" using {command down}'"
+fi
+
 type xclip > /dev/null && alias clip="xclip -selection c"
 
 # shellcheck disable=SC2059
@@ -122,3 +130,17 @@ cheat() {
 }
 
 alias klogout="qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1"
+
+if [[ $IS_OSX ]] ; then
+    xs() {
+
+        local script="
+        tell application \"Xamarin Studio\"
+            activate
+            open \"$(realpath "$1")\"
+        end tell
+        "
+        # echo "$script"
+        osascript -e "$script"
+    }
+fi

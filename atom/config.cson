@@ -7,6 +7,8 @@
     fontFamily: "Droid Sans"
     fontSize: 13
     iconTheme: "Octicons"
+  "api-workbench":
+    openConsoleInSplitPane: false
   "atom-beautify":
     general:
       _analyticsUserId: "fb921142-84d5-4639-8d26-e13dc763a02c"
@@ -27,45 +29,110 @@
     args: "--tab"
   "atom-ternjs":
     lint: false
+  "autocomplete-flow":
+    pathToFlowExecutable: "/usr/bin/flow"
   "autocomplete-plus":
+    autoActivationDelay: 150
+    backspaceTriggersAutocomplete: true
     confirmCompletion: "tab"
     includeCompletionsFromAllBuffers: true
+    maxVisibleSuggestions: 20
+    useAlternateScoring: false
   "base16-syntax":
     scheme: "Eighties"
+  broadcast:
+    broadcastToOthers: true
+    codeHighlight: false
+    getEmojisFromCheatSheetSite: true
+    hostname: "0.0.0.0"
+    port: 8888
   core:
     audioBeep: false
     autoHideMenuBar: true
+    customFileTypes:
+      "source.asp.vb.net": [
+        "frm"
+        "bas"
+      ]
+      "source.ini": [
+        ".buckconfig"
+        ".hgrc"
+        ".flowconfig"
+      ]
+      "source.json": [
+        ".arcconfig"
+        "BUCK.autodeps"
+      ]
+      "source.perl": [
+        "el"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
+      "source.vbnet": [
+        "frm"
+      ]
+      "text.xml": [
+        "edmx"
+        "emsd"
+        "spdata"
+        "svcinfo"
+        "svcmap"
+        "datasource"
+      ]
     destroyEmptyPanes: false
     disabledPackages: [
       "atom-beautify"
+      "atom-mac-terminal"
+      "atom-trello"
+      "autocomplete-clang"
+      "autocomplete-paths"
       "background-tips"
       "block-comment"
-      "custom-invisibles"
-      "linter-scss-lint"
-      "pane-by-type"
-      "preview-plus"
-      "tree-view-breadcrumb"
-      "welcome"
-      "you-complete-me"
-      "atom-mac-terminal"
-      "term3"
-      "atom-trello"
-      "autocomplete-paths"
       "change-case"
       "cursor-history"
+      "custom-invisibles"
       "dbus"
       "dev-tools-themes"
       "es-identifier-highlight"
       "expose"
       "file-types"
+      "flow-ide"
       "fold-comments"
-      "graphviz-preview"
-      "ide-flow"
-      "linter-shellcheck"
+      "fold-functions"
+      "fold-search-results"
       "git-diff-details"
-      "tablr"
+      "git-gui"
+      "github-notifications"
+      "git-wip"
+      "graphviz-preview"
+      "gtk-dark-theme"
+      "html2jade-plus"
+      "ide-flow"
+      "imdone-atom"
+      "imdone-atom-github"
+      "language-mscgen"
+      "linter-flake8"
+      "linter-flow"
       "linter-jshint"
+      "linter-nplint"
+      "linter-scss-lint"
+      "linter-shellcheck"
+      "linter-stylint"
+      "markdown-preview"
+      "minimap-highlight-selected"
+      "pane-by-type"
+      "preview-plus"
+      "remember-file-positions"
+      "run-in-terminal"
+      "string-case"
+      "sync-settings"
+      "tablr"
+      "term3"
+      "tree-view-breadcrumb"
+      "welcome"
       "wrap-guide"
+      "you-complete-me"
     ]
     ignoredNames: [
       ".git"
@@ -77,6 +144,8 @@
       ".imdone"
       "tags"
       "npm-debug.log"
+      "$RECYCLE.BIN"
+      "*.localized"
     ]
     packagesWithKeymapsDisabled: [
       "sort-lines"
@@ -115,7 +184,7 @@
     showIndentGuide: true
     showInvisibles: true
   "es-identifier-highlight":
-    lightTheme: true
+    lightTheme: false
   "exception-reporting":
     userId: "d669d80a-cb48-445f-92bf-5ae1bb0d0696"
   "file-icons":
@@ -124,6 +193,25 @@
   "file-types":
     el: "source.perl"
   "fold-functions": {}
+  "formatter-jsbeautify":
+    a:
+      executablePath: "/Users/jordanklassen/.nvm/versions/node/v4.6.1/bin/js-beautify"
+      nodePath: "/Users/jordanklassen/.nvm/versions/node/v4.6.1/bin/node"
+  "formatter-tidy":
+    html:
+      arguments: [
+        "--wrap"
+        "160"
+        "--preserve-entities"
+        "true"
+        "--wrap-attributes"
+        "false"
+      ]
+    xml:
+      arguments: [
+        "--wrap"
+        "160"
+      ]
   "fuzzy-finder":
     preserveLastSearch: true
     searchAllPanes: true
@@ -134,6 +222,7 @@
     warn: false
   "github-notifications":
     notificationAuthToken: " a77986444ecd25d526561a4606b0be8318c6cca7"
+  "graphviz-preview-plus": {}
   "gtk-dark-theme":
     enabled: false
   "highlight-selected":
@@ -159,6 +248,8 @@
     underlineIssues: false
   "linter-clang": {}
   "linter-eslint": {}
+  "linter-hdevtools":
+    hdevtoolsExecutablePath: "$HOME/.cabal/bin/hdevtools"
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
   "linter-scss-lint":
@@ -167,6 +258,18 @@
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
   "linter-ui-default":
     showPanel: true
+  "markdown-image-insertion":
+    general:
+      imageCode: '''
+        <img alt="" src="{url}" width="">
+
+      '''
+  "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus":
+    enablePandoc: true
+    pandocPath: "/usr/local/bin/pandoc"
+    useGitHubStyle: true
   "markdown-table-formatter": {}
   mdattachment:
     commonDirName: "."
@@ -179,7 +282,60 @@
     scrollAnimation: true
     scrollAnimationDuration: 100
     textOpacity: 0.5
+  "minimap-autohider":
+    TimeToHide: 1000
+    TransitionDuration: 200
   "minimap-codeglance": {}
+  "mscgen-preview":
+    cannedStyleTemplate: "classic"
+    mirrorEntities: true
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+    enabled: false
+  nuclide:
+    "nuclide-definition-preview": {}
+    "nuclide-distraction-free-mode":
+      hideStatusBar: true
+    "nuclide-file-tree":
+      allowKeyboardPrefixNavigation: false
+    "nuclide-health":
+      toolbarJewel: "None"
+    use:
+      "nuclide-adb-logcat": false
+      "nuclide-adb-sdb": false
+      "nuclide-arcanist": false
+      "nuclide-atom-notifications": false
+      "nuclide-blame": false
+      "nuclide-blame-provider-hg": false
+      "nuclide-bookshelf": false
+      "nuclide-buck": false
+      "nuclide-buck-ios": false
+      "nuclide-clang": false
+      "nuclide-console": false
+      "nuclide-debugger-iwdp": false
+      "nuclide-debugger-native": false
+      "nuclide-debugger-php": false
+      "nuclide-diagnostics-datatip-provider": false
+      "nuclide-diagnostics-store": false
+      "nuclide-diagnostics-ui": false
+      "nuclide-file-tree": false
+      "nuclide-hack": false
+      "nuclide-hg-conflict-resolver": false
+      "nuclide-hg-repository": false
+      "nuclide-hhvm": false
+      "nuclide-home": false
+      "nuclide-ios-simulator-logs": false
+      "nuclide-language-hack": false
+      "nuclide-language-reason": false
+      "nuclide-nux": false
+      "nuclide-ocaml": false
+      "nuclide-react-native": false
+      "nuclide-side-bar": false
+      "nuclide-swift": false
+  "omnisharp-atom":
+    autoStartOnCompatibleFile: false
   "one-light-ui":
     fontSize: 13
   pigments:
@@ -254,6 +410,9 @@
     syntaxThemeTwo: "today"
     uiThemeOne: "adwaita-pro-ui"
     uiThemeTwo: "adwaita-pro-ui"
+  "tool-bar":
+    iconSize: "12px"
+    position: "Left"
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true

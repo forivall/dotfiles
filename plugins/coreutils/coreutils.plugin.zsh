@@ -1,5 +1,5 @@
 # ls
-alias ls="$(whence ls) --hide=\*~"
+alias ls="$(whence ls) -F --color=auto --hide=\*~ "
 alias lsd="ls --group-directories-first"
 alias sl="ls"
 alias ll='ls -alF'
@@ -43,6 +43,10 @@ function mkcd() { mkdir -p "$@" ; cd "$@" ; }
 function --a() { ( ( "$@" > /dev/null 2>&1 ) & ) ; }
 if type yelp >/dev/null ; then
   function gman() { --a yelp "man:$1" ; }
+elif [[ -d /Applications/Preview.app ]] ; then
+  gman() {
+    man -t "$@" | open -f -a /Applications/Preview.app/
+  }
 fi
 
 # touch

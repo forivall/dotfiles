@@ -4,10 +4,6 @@ if [[ -e /etc/profile.d/vte.sh ]] ; then
   source /etc/profile.d/vte.sh
 fi
 
-if ! type realpath >/dev/null ; then
-  realpath() { readlink -f "$@"; }
-fi
-
 # echo $NODE_PATH
 # source() {
 #   echo $NODE_PATH
@@ -19,8 +15,6 @@ fi
 
 [[ "$HOST" == "shrubbery-ni" ]] && export VAGRANT_HOME=/mnt/Peng/vagrant-home-linux
 
-SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
-
 setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=return; 2=$code; fi; if ("$@") 2>&1 >/dev/null ; then eval "$arg=true"; else eval "$arg=false"; fi; }
 
 setbool IS_INTERACTIVE  tty -s
@@ -28,6 +22,19 @@ setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
 setbool IS_OSX  $([[ "$(uname)" == "Darwin" ]])
 setbool IS_LINUXY  $(! $IS_WINDOWS && ! $IS_OSX)  # could also be BSD
 setbool IS_XDG $(() { local _XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg:/foo/bar}; local xdg_config_dirs=(${(@s/:/)_XDG_CONFIG_DIRS}); [[ -d ${xdg_config_dirs[1]} ]] })
+
+if $IS_OSX ; then
+  if [ -x /usr/libexec/path_helper ]; then
+    eval `/usr/libexec/path_helper -s`
+  fi
+  path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
+fi
+
+if ! type realpath >/dev/null ; then
+  realpath() { readlink -f "$@"; }
+fi
+
+SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
 
 if $IS_LINUXY ; then
   # https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
@@ -87,10 +94,6 @@ PURE_PROMPT_SYMBOL="%B»%b"
 export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
 
-if $IS_OSX ; then
-  path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
-fi
-
 source "$SH_ROOT/zgen/zgen.zsh"
 
 if ! zgen saved; then
@@ -139,7 +142,7 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/unsorted"
   zgen load "$SH_ROOT/plugins/simple-history-search"
   zgen load "$SH_ROOT/plugins/zgen-autoupdate"
-  [[ "$HOST" == *Ledcor* ]] && zgen load "$SH_ROOT/plugins/ledcor"
+  [[ "$HOST" == *ledcor* ]] && zgen load "$SH_ROOT/plugins/ledcor"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
@@ -165,6 +168,8 @@ fi
 
 # added by travis gem
 [ -f /home/forivall/.travis/travis.sh ] && source /home/forivall/.travis/travis.sh
+
+[ -f /usr/local/opt/chruby/share/chruby/chruby.sh ] && source /usr/local/opt/chruby/share/chruby/chruby.sh
 
 [[ -e "$SH_ROOT/api_keys.sh" ]] && source "$SH_ROOT/api_keys.sh"
 

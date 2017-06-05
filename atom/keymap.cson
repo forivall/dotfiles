@@ -59,7 +59,6 @@
   'alt-{': 'pane:show-previous-item'
 'atom-text-editor:not([mini])':
   'alt-shift-r': 'run-in-terminal:editor-start-terminal-here'
-  'cmd-shift-r': 'atom-mac-terminal:open'
   'alt-shift-g': 'require-opener:open-selections-on-npm'
   'alt-shift-n': 'require-opener:open-selections-on-github'
   'alt-shift-o': 'require-opener:open-selections-in-atom'
@@ -75,9 +74,14 @@
   'ctrl-k ctrl-j': 'fold-functions:fold'
   'ctrl-k ctrl-h': 'fold-functions:unfold'
 
+
+  'cmd-k cmd-j': 'fold-functions:fold'
+  'cmd-k cmd-h': 'fold-functions:unfold'
+  'cmd-k cmd-/': 'fold-comments:toggle'
+
   # darwin only
-  # 'ctrl-left': 'editor:move-to-previous-subword-boundary'
-  # 'ctrl-right': 'editor:move-to-next-subword-boundary'
+  'ctrl-left': 'editor:move-to-previous-subword-boundary'
+  'ctrl-right': 'editor:move-to-next-subword-boundary'
 
   # emmet
   'ctrl-e ctrl-e': 'emmet:expand-abbreviation'

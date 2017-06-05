@@ -14,3 +14,10 @@
 	path = plugins/external-tools/leshylabs-blogcode
 	url = https://github.com/leshylabs/blogcode.git
 	pushurl = git@github.com:leshylabs/blogcode.git
+[submodule "plugins/git/git-standup"]
+	path = plugins/git/git-standup
+	url = https://github.com/kamranahmedse/git-standup.git
+	pushurl = git@github.com:kamranahmedse/git-standup.git
+[submodule "vim.janus/editorconfig"]
+	path = vim.janus/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim.git

@@ -1,0 +1,19 @@
+{
+  "name": "forivall-dotfiles-plugin-ledcor",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "mcs-get-cookie": "get-cookie.nightmare.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie": "^0.3.1",
+    "nightmare": "^2.5.1",
+    "nightmare-upload": "^0.1.1"
+  }
+}

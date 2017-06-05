@@ -10,9 +10,17 @@ alias gla='git la'
 alias gps='git push'
 alias gp='git pull'
 
-alias git-blameview="perl /usr/share/doc/git/contrib/blameview/blameview.perl"
+# GIT_CONTRIB_ROOT="/usr/share/doc/git/contrib"
+GIT_CONTRIB_ROOT="/usr/share/git"
+if $IS_OSX ; then
+  GIT_REALPATH="$(readlink -f "$(whence -p git)")"
+  GIT_CONTRIB_ROOT="${GIT_REALPATH%/bin/git}/share/git-core/contrib"
+fi
+
+# alias git-blameview="perl /usr/share/doc/git/contrib/blameview/blameview.perl"
 # alias git-new-workdir="sh /usr/share/doc/git/contrib/workdir/git-new-workdir"
-alias git-new-workdir="/usr/share/git/workdir/git-new-workdir"
+#
+alias git-new-workdir="$GIT_CONTRIB_ROOT/workdir/git-new-workdir"
 # alias gitview="python /usr/share/doc/git/contrib/gitview/gitview"
 alias gitview="/usr/share/git/gitview/gitview"
 
@@ -69,7 +77,8 @@ function git() { # also put these in git-aliases for autocomplete
   local a;
   if [[ $___git_ran_once = n && "$1" =~ "clone|fetch|fetch-pack|pull|push|send-pack" ]] ; then
     ___git_ran_once=y
-    if ! $GIT_SSH_AGENT_CHECK >/dev/null; then
+
+    if ! $IS_OSX && ! $GIT_SSH_AGENT_CHECK >/dev/null; then
       $GIT_SSH_AGENT_ADD
     fi
   fi

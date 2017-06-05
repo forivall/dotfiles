@@ -55,6 +55,8 @@ if [[ ! -d ~/.vim ]] ; then
   curl -Lo- https://bit.ly/janus-bootstrap | bash
 fi
 
+o ln -fs "$(realpath vim.janus)" ~/.janus
+
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
 o ln -fs "$(realpath gitignore)" ~/.gitignore
@@ -77,6 +79,15 @@ if [[ -n "$BABUN_HOME" ]]; then
 fi
 
 if type systemctl >/dev/null 2>/dev/null ; then
+  if ! type ssh-agent ; then
+    if type yum >/dev/null 2>/dev/null ; then
+      o sudo yum install openssh-askpass
+    else
+      echo please install ssh-agent
+      exit 1
+    fi
+  fi
+
   o mkdir -p ~/.config/systemd/user
   o cp ./systemd/ssh-agent.service ~/.config/systemd/user
 

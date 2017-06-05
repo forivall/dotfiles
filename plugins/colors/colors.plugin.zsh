@@ -11,6 +11,7 @@ if [[ -n "$TERM" ]] ; then
     grey=''
     reset=''
   else
+    black=$(tput -T $TERM_ setaf 0)
     red=$(tput -T $TERM_ setaf 1)
     green=$(tput -T $TERM_ setaf 2)
     yellow=$(tput -T $TERM_ setaf 3)
@@ -19,6 +20,14 @@ if [[ -n "$TERM" ]] ; then
     teal=$(tput -T $TERM_ setaf 6)
     grey=$(tput -T $TERM_ setaf 7)
     reset=$(tput -T $TERM_ sgr0)
+    blackbg=$(tput -T $TERM_ setab 0)
+    redbg=$(tput -T $TERM_ setab 1)
+    greenbg=$(tput -T $TERM_ setab 2)
+    yellowbg=$(tput -T $TERM_ setab 3)
+    bluebg=$(tput -T $TERM_ setab 4)
+    purplebg=$(tput -T $TERM_ setab 5)
+    tealbg=$(tput -T $TERM_ setab 6)
+    greybg=$(tput -T $TERM_ setab 7)
   fi
 else
     red='\e[0;31m'
@@ -30,6 +39,7 @@ else
     grey='\e[0;37m'
     reset='\e[0m'
 fi
+eol=$'\x1b[K'
 # txtblk='\e[0;30m' # Black - Regular
 # txtred='\e[0;31m' # Red
 # txtgrn='\e[0;32m' # Green
