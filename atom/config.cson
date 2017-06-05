@@ -5,7 +5,7 @@
       enabled: false
   "adwaita-pro-ui":
     fontFamily: "Droid Sans"
-    fontSize: 13
+    fontSize: 12
     iconTheme: "Octicons"
   "api-workbench":
     openConsoleInSplitPane: false
@@ -151,6 +151,9 @@
       "sort-lines"
       "emmet"
       "imdone-atom"
+      "es-identifier-highlight"
+      "api-workbench"
+      "omnisharp-atom"
     ]
     themes: [
       "adwaita-pro-ui"
@@ -179,7 +182,7 @@
       cr: " "
       eol: " "
       space: " "
-    lineHeight: 1.2
+    lineHeight: 1.3
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
@@ -426,9 +429,19 @@
     pathStyle: true
   "tree-view-git-projects":
     alphabetizeRoots: false
+  "unity-dark-ui":
+    colorStatusIndicatorsInTreeView: true
+    showIcons: true
+  "unity-ui":
+    colorStatusIndicatorsInTreeView: true
+    showIcons: true
   welcome:
     showOnStartup: false
-  whitespace: {}
+  whitespace:
+    ensureSingleTrailingNewline: false
   wrap: {}
   "you-complete-me":
     pythonExecutable: "/usr/bin/python2"
+".editorconfig.source":
+  editor:
+    softWrapAtPreferredLineLength: false
