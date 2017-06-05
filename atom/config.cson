@@ -41,20 +41,15 @@
       "background-tips"
       "block-comment"
       "custom-invisibles"
-      "hard-wrap"
       "linter-scss-lint"
-      "linter-stylint"
       "pane-by-type"
-      "pigments"
       "preview-plus"
       "tree-view-breadcrumb"
       "welcome"
-      "wrap-guide"
       "you-complete-me"
       "atom-mac-terminal"
       "term3"
       "atom-trello"
-      "Stylus"
       "autocomplete-paths"
       "change-case"
       "cursor-history"
@@ -69,8 +64,8 @@
       "linter-shellcheck"
       "git-diff-details"
       "tablr"
-      "multi-wrap-guide"
       "linter-jshint"
+      "wrap-guide"
     ]
     ignoredNames: [
       ".git"
@@ -110,6 +105,7 @@
   editor:
     backUpBeforeSaving: true
     fontFamily: "Fantasque Sans Mono"
+    fontSize: 15
     invisibles:
       cr: " "
       eol: " "
@@ -169,6 +165,8 @@
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "linter-ui-default":
+    showPanel: true
   "markdown-table-formatter": {}
   mdattachment:
     commonDirName: "."
@@ -190,6 +188,8 @@
     ]
     sortPaletteColors: "by color"
   "preview-plus": {}
+  "project-find-navigation":
+    showEndOfLifeWarning: false
   "project-manager": {}
   "project-view": {}
   "recent-files-fuzzy-finder": {}

@@ -15,6 +15,11 @@ _is_xdg() {
 }
 if _is_xdg ; then is_xdg=true ; else is_xdg=false ; fi
 
+o() {
+  echo "$@"
+  "$@"
+}
+
 if $is_xdg ; then
   : ${XDG_CONFIG_HOME:=$HOME/.config}
   # Move this dir into XDG_CONFIG_HOME, and then symlink back to the old spot
@@ -39,11 +44,6 @@ if ! type realpath >/dev/null ; then
   fi
 fi
 
-
-o() {
-  echo "$@"
-  "$@"
-}
 
 o git submodule update --init
 o ln -fs "$(realpath zshrc)" ~/.zshrc

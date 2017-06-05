@@ -170,3 +170,8 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+. /etc/profile.d/cnf.sh
+
+export QT_QPA_PLATFORMTHEME='gnome'
+
+true
