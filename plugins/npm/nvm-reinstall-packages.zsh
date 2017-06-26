@@ -13,8 +13,17 @@ list-packages () {
   )
 }
 
-set -e
-nvm use $1
-packages=($(comm -13 <(list-packages) <(list-packages $2)))
-echo npm i -g $packages
-npm i -g $packages
+() {
+  if (( $# > 1 )); then nvm use $2 || return ; fi
+  local new="$(list-packages)"
+  local old="$(list-packages $1)"
+  # echo "$curr"; echo ===; echo "$old"
+  packages=($(comm -13 <(echo "$curr") <(echo "$old"))) || return
+  echo npm i -g $packages
+
+  echo -n 'Continue? (y/n) '
+  read yn
+  [[ "$yn" == 'y' ]] && npm i -g $packages
+
+  unfunction list-packages
+} "$@"

@@ -78,12 +78,17 @@ atom-workspace.theme-quantum-ui {
 // }
 
 .theme-today {
-  atom-text-editor.editor {
-    .meta {
-      &.class {
-        color: inherit;
-      }
+  .syntax--meta {
+    &.syntax--class {
+      color: inherit;
     }
+  }
+  .meta {
+    &.class {
+      color: inherit;
+    }
+  }
+  atom-text-editor.editor {
     .entity.name.type {
       text-decoration: none;
       font-style: italic;

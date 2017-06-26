@@ -4,6 +4,9 @@
 __zsh_forivall_git_plugin_location=$0:A
 __zsh_forivall_git_plugin_location=${__zsh_forivall_git_plugin_location%/*}
 PATH="$PATH:${__zsh_forivall_git_plugin_location}/bin"
+if $IS_OSX ; then
+  PATH="$PATH:${__zsh_forivall_git_plugin_location}/bin-osx"
+fi
 
 alias gl='git l'
 alias gla='git la'

@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+set -e
+pkg="$(pkgrepo $1 --format=json|jq -r ".\"$1\"")"
+echo "$pkg"
+git clone "$pkg"
