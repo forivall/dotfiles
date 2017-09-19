@@ -1,4 +1,7 @@
 "*":
+  Zen:
+    fullscreen: false
+    softWrap: true
   "activate-power-mode":
     autoToggle: false
     screenShake:
@@ -24,6 +27,8 @@
     fontSize: "Big"
     panelContrast: true
     showTabIcons: true
+  "atom-package-deps":
+    ignored: []
   "atom-terminal":
     app: "roxterm"
     args: "--tab"
@@ -124,6 +129,7 @@
       "linter-eslint"
       "nuclide"
       "language-typescript-grammars-only"
+      "linter-tidy"
     ]
     ignoredNames: [
       ".git"
@@ -131,6 +137,8 @@
       ".svn"
       ".DS_Store"
       "._*"
+      "~$*"
+      "*~"
       "Thumbs.db"
       ".imdone"
       "tags"
@@ -146,6 +154,7 @@
       "api-workbench"
       "omnisharp-atom"
     ]
+    telemetryConsent: "limited"
     themes: [
       "native-ui"
       "today"
@@ -238,14 +247,17 @@
   "linter-clang": {}
   "linter-eslint": {}
   "linter-hdevtools":
-    hdevtoolsExecutablePath: "$HOME/.cabal/bin/hdevtools"
+    hdevtoolsExecutablePath: "/Users/jordanklassen/.cabal/bin/hdevtools"
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
   "linter-scss-lint":
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "linter-tslint":
+    enableSemanticRules: true
   "linter-ui-default":
+    panelHeight: 69
     showProviderName: true
     statusBarRepresents: "Current File"
   "markdown-image-insertion":
@@ -355,6 +367,10 @@
       "*"
     ]
     sortPaletteColors: "by color"
+  "prettier-atom":
+    prettierOptions:
+      bracketSpacing: false
+      singleQuote: true
   "preview-plus": {}
   "project-manager": {}
   "project-view": {}

@@ -243,7 +243,18 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
     .tab {
       flex-basis: 175px;
       max-width: none;
-    };;
+    }
+  }
+  // temp: for when i want to look at ignored items
+  .status-ignored.status-ignored.status-ignored.status-ignored {
+    &, & > .list-item, & > .list-item::before {
+      color: #444;
+    }
+    &.list-item, .list-item {
+      background-image: linear-gradient(135deg, #F7A550, #F7A550 4px, fade(#F7A550, 0%) 4px, rgba(0,0,0,0));
+      // background-image: linear-gradient(to right, #3b3b3b, fade(#3b3b3b, 75%) 70%, fade(#3b3b3b, 0%));
+      background-size: cover;
+    }
   }
 }
 
@@ -282,12 +293,14 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
       line-height: 11px;
     }
   }
-  .list-group, .list-tree {
-    .selected:before {
-      height: 18px;
-    }
-    .entry:not(.list-nested-item), .entry.list-nested-item > .list-item {
-      line-height: 18px;
+  .tree-view {
+    .list-group, .list-tree {
+      .selected:before {
+        height: 18px;
+      }
+      .entry:not(.list-nested-item), .entry.list-nested-item > .list-item {
+        line-height: 18px;
+      }
     }
   }
 

@@ -28,6 +28,12 @@ function grep() {
     fi
 }
 
+function grepr() {
+  local dir="$1"
+  shift
+  grep "$@" -r "$dir"
+}
+
 # sed
 autoload -U sedml
 

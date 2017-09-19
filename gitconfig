@@ -1,6 +1,5 @@
 [user]
-	name = E Klassen
-	email = forivall@gmail.com
+	useConfigOnly = true
 [core]
 	#autocrlf = input
 	# pager = less -F
@@ -71,6 +70,7 @@
 	dc = diff --cached
 	amend = commit --amend --no-edit
 	reword = commit --amend
+	config-user = "!git config user.name \"$1\" && git config user.email \"$2\" && :"
 
 [color]
 	# diff = always
@@ -101,7 +101,6 @@
 	last = false
 	ll = true
 	ls-files = true
-	stash = less
 [giggle]
 	file-view-vpane-position = 807
 	history-view-vpane-position = 216
@@ -113,6 +112,7 @@
     #tool = diffuse_windows
     #tool = diffuse_custom
 	tool = meld_merged
+  # tool = meld
 	conflictstyle = diff3
 [rerere]
 	enabled = 1
