@@ -1,0 +1,10 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("docs.lexmark.com") {
+  .wrapper {
+    max-width: inherit !important;
+  }
+  table[width="75%"] {
+    width: 95% !important;
+  }
+}
