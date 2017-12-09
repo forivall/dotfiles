@@ -40,9 +40,6 @@ atom-text-editor {
   flex-direction: column;
 }
 
-atom-pane-container {
-  background-color: @app-background-color;
-}
 // To style other content in the text editor's shadow DOM, use the ::shadow
 // expression
 atom-text-editor.editor .cursor {
@@ -215,6 +212,10 @@ tree-view-breadcrumb::-webkit-scrollbar-thumb {
       &:hover {
       }
     }
+  }
+
+  atom-pane-container {
+    background-color: @app-background-color;
   }
 }
 

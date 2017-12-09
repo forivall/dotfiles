@@ -1,1 +1,1 @@
-git clone "$(npm info --json "$1"|jq -r '(.repository.url // .repository)')" "$1"
+git clone "$(npm info --json "$1"|jq -r '(.repository.url // .repository)' | sed 's/^git+http/http/')" "$1"

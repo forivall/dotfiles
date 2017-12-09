@@ -121,15 +121,14 @@
       "welcome"
       "language-mscgen"
       "minimap-highlight-selected"
-      "markdown-preview"
       "autocomplete-clang"
       "sync-settings"
-      "linter-flow"
       "flow-ide"
       "linter-eslint"
       "nuclide"
-      "language-typescript-grammars-only"
       "linter-tidy"
+      "linter"
+      "language-gfm"
     ]
     ignoredNames: [
       ".git"

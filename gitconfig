@@ -71,6 +71,7 @@
 	amend = commit --amend --no-edit
 	reword = commit --amend
 	config-user = "!git config user.name \"$1\" && git config user.email \"$2\" && :"
+	d = diff
 
 [color]
 	# diff = always
@@ -168,3 +169,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
