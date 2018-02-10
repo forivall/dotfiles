@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo meld "$@"
+
+exec /Applications/Meld.app/Contents/MacOS/Meld "$@"

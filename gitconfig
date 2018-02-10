@@ -1,6 +1,7 @@
 [user]
 	name = Emily Marigold Klassen
 	email = forivall@gmail.com
+	useConfigOnly = true
 [core]
 	#autocrlf = input
 	# pager = less -F
@@ -71,6 +72,8 @@
 	dc = diff --cached
 	amend = commit --amend --no-edit
 	reword = commit --amend
+	config-user = "!git config user.name \"$1\" && git config user.email \"$2\" && :"
+	d = diff
 
 [color]
 	# diff = always
@@ -101,7 +104,6 @@
 	last = false
 	ll = true
 	ls-files = true
-	stash = less
 [giggle]
 	file-view-vpane-position = 807
 	history-view-vpane-position = 216
@@ -113,6 +115,7 @@
     #tool = diffuse_windows
     #tool = diffuse_custom
 	tool = meld_merged
+  # tool = meld
 	conflictstyle = diff3
 [rerere]
 	enabled = 1
@@ -168,3 +171,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P

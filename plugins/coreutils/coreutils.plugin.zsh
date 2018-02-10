@@ -1,6 +1,5 @@
 # ls
-alias ls="$(whence ls) -F --color=auto --hide=\*~ "
-alias lsd="ls --group-directories-first"
+alias ls="$(whence ls) --group-directories-first -F --color=auto --hide=\*~ "
 alias sl="ls"
 alias ll='ls -alF'
 alias la='ls -A'
@@ -27,6 +26,12 @@ function grep() {
         # shellcheck disable=SC2046
         env $(whence grep) "$@" <&0
     fi
+}
+
+function grepr() {
+  local dir="$1"
+  shift
+  grep "$@" -r "$dir"
 }
 
 # sed

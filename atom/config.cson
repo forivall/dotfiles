@@ -1,4 +1,7 @@
 "*":
+  Zen:
+    fullscreen: false
+    softWrap: true
   "activate-power-mode":
     autoToggle: false
     screenShake:
@@ -24,6 +27,8 @@
     fontSize: "Big"
     panelContrast: true
     showTabIcons: true
+  "atom-package-deps":
+    ignored: []
   "atom-terminal":
     app: "roxterm"
     args: "--tab"
@@ -46,9 +51,21 @@
     getEmojisFromCheatSheetSite: true
     hostname: "0.0.0.0"
     port: 8888
+  "copy-with-style":
+    preset1:
+      font_family: "Fantasque Sans Mono"
+      font_size: 12
+      name: "HTML"
+    preset2:
+      background_color: "#212121"
+      font_family: "Fantasque Sans Mono"
+      font_size: 13
+      format: "RTF"
+      name: "RTF"
   core:
     audioBeep: false
     autoHideMenuBar: true
+    automaticallyUpdate: false
     customFileTypes:
       "source.asp.vb.net": [
         "frm"
@@ -89,12 +106,17 @@
       "background-tips"
       "block-comment"
       "change-case"
+      "color-picker"
       "cursor-history"
       "custom-invisibles"
       "dbus"
       "dev-tools-themes"
+      "docblockr"
+      "editorconfig"
+      "emmet"
       "es-identifier-highlight"
       "expose"
+      "file-icons"
       "file-types"
       "flow-ide"
       "fold-comments"
@@ -102,14 +124,17 @@
       "fold-search-results"
       "git-diff-details"
       "git-gui"
-      "github-notifications"
+      "git-time-machine"
       "git-wip"
+      "github-notifications"
       "graphviz-preview"
       "gtk-dark-theme"
       "ide-flow"
-      "imdone-atom"
       "imdone-atom-github"
+      "imdone-atom"
+      "language-gfm"
       "language-mscgen"
+      "linter-eslint"
       "linter-flake8"
       "linter-flow"
       "linter-jshint"
@@ -117,27 +142,25 @@
       "linter-scss-lint"
       "linter-shellcheck"
       "linter-stylint"
+      "linter-tidy"
+      "linter"
+      "minimap-highlight-selected"
+      "minimap-selection"
+      "multi-wrap-guide"
+      "multirow-tabs"
+      "nuclide"
       "pane-by-type"
       "preview-plus"
       "remember-file-positions"
       "string-case"
+      "symbols-tree-view"
       "sync-settings"
       "tablr"
       "term3"
+      "terminal-fusion"
       "tree-view-breadcrumb"
       "welcome"
       "you-complete-me"
-      "terminal-fusion"
-      "editorconfig"
-      "emmet"
-      "multi-wrap-guide"
-      "symbols-tree-view"
-      "color-picker"
-      "docblockr"
-      "file-icons"
-      "git-time-machine"
-      "multirow-tabs"
-      "minimap-selection"
     ]
     ignoredNames: [
       ".git"
@@ -145,6 +168,8 @@
       ".svn"
       ".DS_Store"
       "._*"
+      "~$*"
+      "*~"
       "Thumbs.db"
       ".imdone"
       "tags"
@@ -160,6 +185,7 @@
       "api-workbench"
       "omnisharp-atom"
     ]
+    telemetryConsent: "limited"
     themes: [
       "adwaita-pro-ui"
       "tomorrow-ya"
@@ -247,21 +273,26 @@
       "scss-lint"
     ]
     lintOnChange: false
+    lintPreviewTabs: false
     subtleLinterErrors: [
       "shellcheck"
     ]
   "linter-clang": {}
   "linter-eslint": {}
   "linter-hdevtools":
-    hdevtoolsExecutablePath: "$HOME/.cabal/bin/hdevtools"
+    hdevtoolsExecutablePath: "/Users/jordanklassen/.cabal/bin/hdevtools"
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
   "linter-scss-lint":
     executablePath: "/usr/bin/scss-lint"
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
+  "linter-tslint":
+    enableSemanticRules: true
   "linter-ui-default":
-    panelHeight: 60
+    panelHeight: 69
+    showProviderName: true
+    statusBarRepresents: "Current File"
   "markdown-image-insertion":
     general:
       imageCode: '''
@@ -300,16 +331,22 @@
     ]
     enabled: false
   nuclide:
-    "nuclide-definition-preview": {}
+    "nuclide-definition-preview":
+      editorHeight: 60
     "nuclide-distraction-free-mode":
       hideStatusBar: true
     "nuclide-file-tree":
       allowKeyboardPrefixNavigation: false
     "nuclide-health":
       toolbarJewel: "None"
+    "nuclide-outline-view": {}
     use:
+      "atom-ide-code-format": false
+      hyperclick: false
+      "hyperclick-preview-datatip": false
       "nuclide-adb-logcat": false
       "nuclide-adb-sdb": false
+      "nuclide-arc-lint": false
       "nuclide-arcanist": false
       "nuclide-atom-notifications": false
       "nuclide-blame": false
@@ -317,28 +354,44 @@
       "nuclide-bookshelf": false
       "nuclide-buck": false
       "nuclide-buck-ios": false
+      "nuclide-busy-signal": false
       "nuclide-clang": false
+      "nuclide-clipboard-path": false
       "nuclide-console": false
       "nuclide-debugger-iwdp": false
       "nuclide-debugger-native": false
       "nuclide-debugger-php": false
       "nuclide-diagnostics-datatip-provider": false
+      "nuclide-diagnostics-extras": false
       "nuclide-diagnostics-store": false
       "nuclide-diagnostics-ui": false
+      "nuclide-distraction-free-mode": false
       "nuclide-file-tree": false
+      "nuclide-file-watcher": false
+      "nuclide-fuzzy-filename-provider": false
       "nuclide-hack": false
+      "nuclide-health": false
       "nuclide-hg-conflict-resolver": false
       "nuclide-hg-repository": false
       "nuclide-hhvm": false
       "nuclide-home": false
+      "nuclide-http-request-sender": false
       "nuclide-ios-simulator-logs": false
       "nuclide-language-hack": false
       "nuclide-language-reason": false
       "nuclide-nux": false
       "nuclide-ocaml": false
+      "nuclide-paste-base": false
       "nuclide-react-native": false
+      "nuclide-remote-atom": false
+      "nuclide-remote-projects": false
       "nuclide-side-bar": false
+      "nuclide-ssh-tunnel": false
       "nuclide-swift": false
+      "nuclide-task-runner": false
+      "nuclide-test-runner": false
+      "nuclide-working-sets": false
+      "nuclide-workspace-view-locations": false
   "omnisharp-atom":
     autoStartOnCompatibleFile: false
   "one-light-ui":
@@ -348,6 +401,10 @@
       "*"
     ]
     sortPaletteColors: "by color"
+  "prettier-atom":
+    prettierOptions:
+      bracketSpacing: false
+      singleQuote: true
   "preview-plus": {}
   "project-find-navigation":
     showEndOfLifeWarning: false

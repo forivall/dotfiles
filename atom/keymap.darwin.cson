@@ -13,10 +13,8 @@
 'atom-workspace':
 # 'atom-text-editor.source.js':
 # 'atom-text-editor[data-grammer~=js]':
-  'alt-.': 'cursor-history:next'
-  'alt-,': 'cursor-history:prev'
-  'alt-;': 'cursor-history:next'
-  'alt-l': 'cursor-history:prev'
+  'alt-.': 'last-cursor-position:next'
+  'alt-,': 'last-cursor-position:previous'
   'alt-t alt-t': 'imdone-atom:tasks'
 
   'f9': 'tree-view:toggle'

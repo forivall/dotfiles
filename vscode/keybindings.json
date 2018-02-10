@@ -1,0 +1,13 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+  { "key": "cmd+j",                "command": "editor.action.joinLines",
+                                     "when": "editorTextFocus && !editorReadonly" },
+ 
+  { "key": "cmd+f7",                 "command": "workbench.action.togglePanel" },
+  { "key": "cmd+f8",                 "command": "workbench.action.toggleSidebarVisibility" },
+  { "key": "shift+cmd+h",           "command": "workbench.action.replaceInFiles",
+    "when": "!editorFocus" },
+{ "key": "shift+cmd+h",           "command": "workbench.action.replaceInFilesWithSelectedText",
+    "when": "editorFocus" },
+    {"key": "cmd+;", "command": "editor.action.quickFix"}
+]

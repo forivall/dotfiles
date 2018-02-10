@@ -1,0 +1,73 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontSize": 13.4,
+    "editor.fontFamily": "Fantasque Sans Mono",
+    "editor.tabSize": 2,
+    "editor.rulers": [80],
+    "editor.renderWhitespace": "none",
+    "editor.renderIndentGuides": true,
+    "editor.mouseWheelZoom": false,
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 18,
+    "workbench.colorTheme": "Base16 Tomorrow Dark",
+    "launcher.terminal": {
+        "executable": "/Users/emilyklassen/Code/public-repos/dotfiles/scripts/itermTab.sh",
+        "parameters": "\"%item_path%\""
+    },
+    "quickOpenFile.peekLanguages": [
+        "lua",
+        "javascript",
+        "typescript"
+    ],
+    "quickOpenFile.extensionInclude": [
+        "lua",
+        "js",
+        "ts"
+    ],
+    "quickOpenFile.suffixList": [
+        ".ts"
+    ],
+    "window.zoomLevel": 0,
+    "typescript.npm": "/Users/emilyklassen/.nvm/versions/node/v6.11.1/bin/npm",
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "terminal.external.osxExec": "iTerm.app",
+    "editor.renderControlCharacters": false,
+    "markdown.preview.fontSize": 14,
+    "markdown.preview.lineHeight": 1.2,
+    "markdown.styles": [
+        "/Users/emilyklassen/Code/public-repos/dotfiles/vscode/markdown.css"
+    ],
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "editor.detectIndentation": true,
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontFamily": "Fantasque Sans Mono",
+    "tslint.run": "onSave",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/~$*.{doc,xls,ppt}x": true,
+        "**/.alm": true,
+        "**/.nyc_output": true
+    },
+    "quickOpenRelatedFiles.patternsToStrip": [
+        "{EXTENSION}",
+        "/[_\\.]?[sS]pec$/",
+        "/[_\\.]?[tT]est$/",
+        "/_ts\//"
+    ],
+    "typescript.format.enable": false,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "autoimport.spaceBetweenBraces": false,
+    "fuzzydefinitions.integrateWithGoToDefinition": false,
+    "autoimport.doubleQuotes": false,
+    "npm-intellisense.importQuotes": "'",
+    "typescriptHero.resolver.stringQuoteStyle": "'",
+    "prettier.singleQuote": true,
+    "typescriptHero.resolver.insertSpaceBeforeAndAfterImportBraces": false,
+    "[diff]": {},
+    "terminal.explorerKind": "integrated"
+}

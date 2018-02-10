@@ -1,0 +1,23 @@
+
+* {
+  -webkit-font-smoothing: subpixel-antialiased;
+  /* -webkit-text-stroke: 0.4pt; */
+}
+code {
+  /* font-size: 0.8rem; */
+  color: #c5c8c6 !important;
+  /* color: red !important; */
+  font-size: 13.4px;
+  line-height: 18px;
+  font-family:
+    "Fantasque Sans Mono",
+    Menlo,
+    Monaco,
+    Consolas,
+    "Droid Sans Mono",
+    "Courier New",
+    monospace,
+    "Droid Sans Fallback"
+  ;
+  overflow-x: auto;
+}

@@ -1,0 +1,55 @@
+#!/usr/bin/env zsh
+
+if (( $(git status -s | wc -l) > 0 )) ; then
+  echo "Has local changes"
+  exit 1
+fi
+
+if (( $(git stash list | wc -l) > 0 )) ; then
+  echo "Has stashes"
+  exit 1
+fi
+
+remotes=("${(f)$(git remote)}")
+typeset -U remote_refs # unique
+remote_refs=()
+
+echo "collecting remotes"
+
+for remote in $remotes ; do
+  git fetch $remote
+  remote_refs+=("${(f)$(git ls-remote --tags --heads $remote | cut -d"$(printf '\t')" -f1)}")
+done
+
+echo "filtering for valid refs"
+
+valid_remote_refs=()
+for rev in $remote_refs ; do
+  if \
+  git rev-parse --verify "$rev^{commit}" -- > /dev/null 2> /dev/null ||
+  git rev-parse --verify "$rev^{tag}" -- > /dev/null 2> /dev/null ; then
+    valid_remote_refs+=($rev)
+  fi
+done
+
+echo "listing ancestors"
+
+typeset -U all_remote_refs # unique
+all_remote_refs=($valid_remote_refs)
+for ref in $valid_remote_refs ; do
+  all_remote_refs+=("${(f)$(git rev-list $ref)}")
+done
+
+ecode=0
+
+local_refs=("${(f)$(git rev-parse --exclude='refs/remotes/*' --all)}")
+for ref in $local_refs ; do
+  if [[ -n "${all_remote_refs[(r)$ref]}" ]] ; then
+    echo $ref exists
+  else
+    ecode=1
+    echo $ref doesnt
+  fi
+done
+
+exit $ecode

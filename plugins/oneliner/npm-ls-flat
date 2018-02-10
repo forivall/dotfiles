@@ -1,14 +1,11 @@
 setopt localoptions nonomatch nocshnullglob nonullglob
 local -a nm
 nm=(
-  node_modules/*(/)
-  node_modules/*/node_modules/*(/)
-  node_modules/*/node_modules/*/node_modules/*(/)
-  node_modules/*/node_modules/*/node_modules/*/node_modules/*(/)
-  node_modules/*/node_modules/*/node_modules/*/node_modules/*/node_modules/*(/)
-  node_modules/*/node_modules/*/node_modules/*/node_modules/*/node_modules/*/node_modules/*(/)
+  node_modules/*(/^@)
+  node_modules/**/node_modules/*(/^@)
 )
-echo ${(F)nm//node_modules//} | sed  -e 's|//||' -e 's|///| |g' | sort -f -V |
-  sed -r ':a;/.*\b /!b;s//\n&\n/;h;s/.*\n(.*)\n.*/\1/;s/./ /g;G;s/(.*)\n(.*)\n.*\n/\2\1/;ta'
+echo ${(F)nm//node_modules//} |
+sed  -e 's|//||' -e 's|///| |g' | sort -f -V |
+sed -r ':a;/.*\b /!b;s//\n&\n/;h;s/.*\n(.*)\n.*/\1/;s/./ /g;G;s/(.*)\n(.*)\n.*\n/\2\1/;ta'
 
 # http://stackoverflow.com/questions/16005578/substitute-text-with-equal-length-using-sed

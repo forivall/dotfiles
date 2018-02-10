@@ -62,6 +62,7 @@ o ln -fs "$(realpath gitconfig)" ~/.gitconfig
 o ln -fs "$(realpath gitignore)" ~/.gitignore
 o ln -fs "$(realpath hgrc)" ~/.hgrc
 o ln -fs "$(realpath vimrc.after)" ~/.vimrc.after
+o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc

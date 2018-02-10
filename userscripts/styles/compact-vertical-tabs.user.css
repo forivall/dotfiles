@@ -1,0 +1,15 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* hide tab close button */
+
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab {
+  border-image-source: none !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  min-height: 24px !important;
+  /*max-height: 24px !important;*/
+}
+
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tab-stack {
+  min-height: 16px !important;
+}

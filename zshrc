@@ -74,6 +74,7 @@ setopt bareglobqual
 BARE_GLOB_QUAL=true
 COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
+export C9_USER='Emily Klassen' # override for `fullname` on npm
 
 PURE_HIGHLIGHT_REPO=1
 
@@ -97,6 +98,29 @@ PURE_PROMPT_SYMBOL="%B»%b"
 # PURE_PROMPT_SYMBOL="$"
 export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
+path=(~/.local/bin $path ~/.zgen/deliciousinsights/git-stree-master ~/.cargo/bin ~/.fastlane/bin)
+zle_highlight+=(paste:none)
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
+export GOPATH="$HOME/.gocode"
+
+if [[ "$PERF_TEST" == y ]] ; then exit; else true; fi
+
+# unfunction source
+# unalias .
+if $IS_WINDOWS ; then
+  export NVM_DIR="/c/Users/forivall/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
+
+# added by travis gem
+[ -f /home/forivall/.travis/travis.sh ] && source /home/forivall/.travis/travis.sh
+
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+
+[[ -e "$SH_ROOT/api_keys.sh" ]] && source "$SH_ROOT/api_keys.sh"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 source "$SH_ROOT/zgen/zgen.zsh"
 
@@ -117,6 +141,9 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/meteor
   zgen oh-my-zsh plugins/git-extras
   # zgen oh-my-zsh plugins/jump
+
+  zgen load srijanshetty/zsh-pandoc-completion ''
+
   zgen load "$SH_ROOT/plugins/jump"
   # zgen oh-my-zsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async
@@ -126,6 +153,7 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
   zgen load deliciousinsights/git-stree
+  zgen load lukechilds/zsh-better-npm-completion
   # zgen load jocelynmallon/zshimarks
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
@@ -152,6 +180,7 @@ if ! zgen saved; then
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
+  zgen load zsh-users/zsh-syntax-highlighting
   zgen save
 fi
 unsetopt nomatch

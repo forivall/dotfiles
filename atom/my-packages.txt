@@ -88,8 +88,8 @@ minimap-highlight-selected
 minimap-selection
 mscgen-preview
 multirow-tabs
-multi-wrap-guide
 native-ui
+nuclide
 omnisharp-atom
 open-this
 project-manager
