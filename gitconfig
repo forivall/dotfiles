@@ -152,7 +152,7 @@
 # [url "git@github.com:"]
 #     pushInsteadOf = hub:
 [credential]
-	helper = manager
+	helper = cache
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false

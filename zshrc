@@ -21,8 +21,12 @@ setbool IS_INTERACTIVE  tty -s
 setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
 setbool IS_OSX  $([[ "$(uname)" == "Darwin" ]])
 setbool IS_LINUXY  $(! $IS_WINDOWS && ! $IS_OSX)  # could also be BSD
-setbool IS_XDG $(() { local _XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg:/foo/bar}; local xdg_config_dirs=(${(@s/:/)_XDG_CONFIG_DIRS}); [[ -d ${xdg_config_dirs[1]} ]] })
-
+IS_XDG() {
+  local _XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg:/foo/bar};
+  local xdg_config_dirs=(${(@s/:/)_XDG_CONFIG_DIRS});
+  [[ -d ${xdg_config_dirs[1]} ]]
+}
+setbool IS_XDG IS_XDG
 if $IS_OSX ; then
   if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
@@ -126,6 +130,8 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
+
+  zgen load lukechilds/zsh-better-npm-completion
   zgen load "$SH_ROOT/plugins/oneliner"
   zgen load "$SH_ROOT/plugins/external-tools"
   zgen load "$SH_ROOT/plugins/dimensions-in-title"
@@ -151,9 +157,31 @@ fi
 unsetopt nomatch
 autoload -U cygcd
 
+if [[ "$VSCODE_CLI" == 1 ]] {
+  AMD_ENTRYPOINT=
+  ELECTRON_NO_ASAR=
+  ELECTRON_NO_ATTACH_CONSOLE=
+  ELECTRON_RUN_AS_NODE=
+  GOOGLE_API_KEY=
+  PIPE_LOGGING=
+  VERBOSE_LOGGING=
+  VSCODE_CLI=
+  VSCODE_HANDLES_UNCAUGHT_ERRORS=
+  VSCODE_IPC_HOOK=
+  VSCODE_IPC_HOOK_EXTHOST=
+  VSCODE_LOG_STACK=
+  VSCODE_NLS_CONFIG=
+  VSCODE_PID=
+  VSCODE_WINDOW_ID=
+}
+
 clean-env
 
 path=($path ~/.zgen/deliciousinsights/git-stree-master)
+
+if $IS_LINUX && [ -d /usr/lib/couchdb/bin ]; then
+  path=($path /usr/lib/couchdb/bin)
+fi
 
 export GOPATH="$HOME/.gocode"
 

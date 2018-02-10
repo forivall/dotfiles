@@ -32,7 +32,7 @@
   "autocomplete-flow":
     pathToFlowExecutable: "/usr/bin/flow"
   "autocomplete-plus":
-    autoActivationDelay: 150
+    autoActivationDelay: 300
     backspaceTriggersAutocomplete: true
     confirmCompletion: "tab"
     includeCompletionsFromAllBuffers: true
@@ -86,7 +86,6 @@
       "atom-mac-terminal"
       "atom-trello"
       "autocomplete-clang"
-      "autocomplete-paths"
       "background-tips"
       "block-comment"
       "change-case"
@@ -107,7 +106,6 @@
       "git-wip"
       "graphviz-preview"
       "gtk-dark-theme"
-      "html2jade-plus"
       "ide-flow"
       "imdone-atom"
       "imdone-atom-github"
@@ -119,20 +117,27 @@
       "linter-scss-lint"
       "linter-shellcheck"
       "linter-stylint"
-      "markdown-preview"
-      "minimap-highlight-selected"
       "pane-by-type"
       "preview-plus"
       "remember-file-positions"
-      "run-in-terminal"
       "string-case"
       "sync-settings"
       "tablr"
       "term3"
       "tree-view-breadcrumb"
       "welcome"
-      "wrap-guide"
       "you-complete-me"
+      "terminal-fusion"
+      "editorconfig"
+      "emmet"
+      "multi-wrap-guide"
+      "symbols-tree-view"
+      "color-picker"
+      "docblockr"
+      "file-icons"
+      "git-time-machine"
+      "multirow-tabs"
+      "minimap-selection"
     ]
     ignoredNames: [
       ".git"
@@ -157,7 +162,7 @@
     ]
     themes: [
       "adwaita-pro-ui"
-      "today"
+      "tomorrow-ya"
     ]
   "cursor-history":
     flashColor: "success"
@@ -177,7 +182,6 @@
   editor:
     backUpBeforeSaving: true
     fontFamily: "Fantasque Sans Mono"
-    fontSize: 15
     invisibles:
       cr: " "
       eol: " "
@@ -257,7 +261,7 @@
   "linter-stylint":
     stylintExecutablePath: "/home/forivall/.nvm/versions/node/v0.12.1/bin/stylint"
   "linter-ui-default":
-    showPanel: true
+    panelHeight: 60
   "markdown-image-insertion":
     general:
       imageCode: '''
@@ -277,6 +281,7 @@
   minimap:
     charHeight: 1.5
     charWidth: 0.7
+    devicePixelRatioRounding: false
     displayPluginsControls: false
     interline: 0.4
     scrollAnimation: true
