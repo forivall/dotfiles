@@ -19,4 +19,4 @@ fixTreeView = ->
 
 setTimeout(fixTreeView, 600)
 
-require('electron').webFrame.setZoomFactor(1.5)
+# require('electron').webFrame.setZoomFactor(1.5)
