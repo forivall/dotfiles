@@ -9,5 +9,40 @@
     "when": "!editorFocus" },
 { "key": "shift+cmd+h",           "command": "workbench.action.replaceInFilesWithSelectedText",
     "when": "editorFocus" },
-    {"key": "cmd+;", "command": "editor.action.quickFix"}
+    {
+        "key": "cmd+;",
+        "command": "editor.action.quickFix"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-workbench.action.files.openFolder"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-editor.action.openLink"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-editor.action.openLink"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-workbench.action.files.openFolder"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "editor.action.selectToBracket"
+    },
+    {
+        "key": "shift+alt+tab",
+        "command": "editor.action.toggleTabFocusMode"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "-editor.action.toggleTabFocusMode"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "-markdown.showPreviewToSide"
+    }
 ]

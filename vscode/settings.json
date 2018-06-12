@@ -1,73 +1,176 @@
-// Place your settings in this file to overwrite the default settings
 {
-    "editor.fontSize": 13.4,
-    "editor.fontFamily": "Fantasque Sans Mono",
-    "editor.tabSize": 2,
-    "editor.rulers": [80],
-    "editor.renderWhitespace": "none",
-    "editor.renderIndentGuides": true,
-    "editor.mouseWheelZoom": false,
-    "editor.fontLigatures": true,
-    "editor.lineHeight": 18,
-    "workbench.colorTheme": "Base16 Tomorrow Dark",
-    "launcher.terminal": {
-        "executable": "/Users/emilyklassen/Code/public-repos/dotfiles/scripts/itermTab.sh",
-        "parameters": "\"%item_path%\""
-    },
-    "quickOpenFile.peekLanguages": [
-        "lua",
-        "javascript",
-        "typescript"
-    ],
-    "quickOpenFile.extensionInclude": [
-        "lua",
-        "js",
-        "ts"
-    ],
-    "quickOpenFile.suffixList": [
-        ".ts"
-    ],
-    "window.zoomLevel": 0,
-    "typescript.npm": "/Users/emilyklassen/.nvm/versions/node/v6.11.1/bin/npm",
     "atomKeymap.promptV3Features": true,
+    "autoimport.doubleQuotes": false,
+    "autoimport.spaceBetweenBraces": false,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.detectIndentation": true,
+    "editor.fontFamily": "Fantasque Sans Mono",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13.4,
+    "editor.lineHeight": 18,
+    "editor.mouseWheelZoom": false,
     "editor.multiCursorModifier": "ctrlCmd",
-    "terminal.external.osxExec": "iTerm.app",
     "editor.renderControlCharacters": false,
+    "editor.renderIndentGuides": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [
+        80
+    ],
+    "editor.tabSize": 2,
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "rainbow1",
+                "settings": {
+                    "foreground": "#cc6666"
+                }
+            },
+            {
+                "scope": "keyword.rainbow2",
+                "settings": {
+                    "fontStyle": "italic",
+                    "foreground": "#de935f"
+                }
+            },
+            {
+                "scope": "entity.name.function.rainbow3",
+                "settings": {
+                    "foreground": "#f0c674"
+                },
+            },
+            {
+                "scope": "comment.rainbow4",
+                "settings": {
+                    "fontStyle": "italic",
+                    "foreground": "#b5bd68"
+                },
+            },
+            {
+                "scope": "string.rainbow5",
+                "settings": {
+                    "foreground": "#8abeb7"
+                },
+            },
+            {
+                "scope": "variable.parameter.rainbow6",
+                "settings": {
+                    "fontStyle": "italic",
+                    "foreground": "#81a2be"
+                },
+            },
+            {
+                "scope": "constant.numeric.rainbow7",
+                "settings": {
+                    "foreground": "#b294bb"
+                },
+            },
+            {
+                "scope": "entity.name.type.rainbow8",
+                "settings": {
+                    "fontStyle": "italic",
+                    "foreground": "#a5816a"
+                },
+            },
+            {
+                "scope": "markup.bold.rainbow9",
+                "settings": {
+                    "foreground": "#969896"
+                },
+            },
+            {
+                "scope": "invalid.rainbow10",
+                "settings": {
+                    "fontStyle": "italic",
+                    "foreground": "#c5c8c6"
+                },
+            }
+        ]
+    },
+    "explorer.confirmDragAndDrop": false,
+    "files.exclude": {
+        "**/.DS_Store": true,
+        "**/.alm": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.nyc_output": true,
+        "**/.svn": true,
+        "**/CVS": true,
+        "**/~$*.{doc,xls,ppt}x": true
+    },
+    "fuzzydefinitions.integrateWithGoToDefinition": false,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": true,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.keymap": "chorded",
+    "launcher.terminal": {
+        "executable": "open",
+        "parameters": "-a iTerm \"%item_path%\""
+    },
     "markdown.preview.fontSize": 14,
     "markdown.preview.lineHeight": 1.2,
-    "markdown.styles": [
-        "/Users/emilyklassen/Code/public-repos/dotfiles/vscode/markdown.css"
-    ],
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
-    "editor.detectIndentation": true,
-    "terminal.integrated.fontSize": 15,
-    "terminal.integrated.fontFamily": "Fantasque Sans Mono",
-    "tslint.run": "onSave",
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/~$*.{doc,xls,ppt}x": true,
-        "**/.alm": true,
-        "**/.nyc_output": true
-    },
-    "quickOpenRelatedFiles.patternsToStrip": [
-        "{EXTENSION}",
-        "/[_\\.]?[sS]pec$/",
-        "/[_\\.]?[tT]est$/",
-        "/_ts\//"
-    ],
-    "typescript.format.enable": false,
-    "editor.acceptSuggestionOnEnter": "smart",
-    "autoimport.spaceBetweenBraces": false,
-    "fuzzydefinitions.integrateWithGoToDefinition": false,
-    "autoimport.doubleQuotes": false,
+    "material-icon-theme.folders.theme": "specific",
+    "material-icon-theme.hidesExplorerArrows": true,
+    "npm.enableScriptExplorer": true,
     "npm-intellisense.importQuotes": "'",
-    "typescriptHero.resolver.stringQuoteStyle": "'",
+    "prettier.arrowParens": "always",
+    "prettier.bracketSpacing": false,
+    "prettier.parser": "typescript",
+    "prettier.proseWrap": "always",
+    "prettier.semi": false,
     "prettier.singleQuote": true,
+    "search.location": "panel",
+    "search.smartCase": true,
+    "sort-imports.on-save": false,
+    "spellright.groupDictionaries": false,
+    "spellright.language": "en_CA",
+    "team.showWelcomeMessage": false,
+    "terminal.explorerKind": "integrated",
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "Fantasque Sans Mono",
+    "terminal.integrated.fontSize": 15,
+    "tfvc.location": "/usr/local/bin/tf",
+    "tslint.alwaysShowStatus": true,
+    "tslint.run": "onSave",
+    "typescript.format.enable": false,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "typescript.npm": "/Users/emilyklassen/.nvm/versions/node/v6.11.1/bin/npm",
     "typescriptHero.resolver.insertSpaceBeforeAndAfterImportBraces": false,
-    "[diff]": {},
-    "terminal.explorerKind": "integrated"
+    "typescriptHero.resolver.stringQuoteStyle": "'",
+    "window.zoomLevel": 0,
+    "workbench.colorCustomizations": {
+        "editorIndentGuide.activeBackground": "#969896"
+    },
+    "workbench.colorTheme": "Tomorrow Night",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "newUntitledFile",
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.defaultDateFormat": "YYYY-MMM-DD h:mma",
+    "gitlens.historyExplorer.location": "scm",
+    "terminal.integrated.shellArgs.osx": [],
+    "terminal.integrated.env.osx": {
+        "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+        "C9_USER": null,
+        "EDITOR": null,
+        "GOPATH": null,
+        "GREP_COLORS": null,
+        "HOMEBREW_GITHUB_API_TOKEN": null,
+        "ITERM_SHELL_INTEGRATION_INSTALLED": null,
+        "LSCOLORS": null,
+        "MARKPATH": null,
+        "NVM_BIN": null,
+        "NVM_CD_FLAGS": null,
+        "NVM_DIR": null,
+        "UNTRACKED_FILES_STORAGE": null,
+        "VISUAL": null,
+    }
 }
