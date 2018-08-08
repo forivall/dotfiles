@@ -6,7 +6,7 @@
 // @copyright    2018, Emily Marigold Klassen (http://forivall.com)
 // @author       Emily Marigold Klassen <forivall@gmail.com>
 // @updateURL    https://openuserjs.org/meta/forivall/Jell_project_tag_helper.meta.js
-// @source       https://github.com/forivall/dotfiles/blob/osx/userscripts/jell.user.js
+// @source       https://github.com/forivall/dotfiles/blob/master/userscripts/jell.user.ts
 // @license      ISC
 // @match        https://jell.com/app/organizations/*/home
 // @match        https://jell.com/app/teams/*/status*
@@ -17,7 +17,7 @@
 // @run-at document-idle
 // ==/UserScript==
 
-import 'greasemonkey'
+/// <reference types="greasemonkey" />
 
 (function() {
 //
