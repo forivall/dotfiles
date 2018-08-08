@@ -125,8 +125,6 @@
       "html2jade-plus"
       "imdone-atom-github"
       "imdone-atom"
-      "linter-flake8"
-      "linter-jshint"
       "linter-nplint"
       "linter-scss-lint"
       "linter-stylint"
@@ -294,8 +292,14 @@
   minimap:
     charHeight: 1.5
     charWidth: 0.7
-    displayPluginsControls: false
     interline: 0.4
+    plugins:
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      "minimap-autohider": true
+      "minimap-autohiderDecorationsZIndex": 0
+      selection: true
+      selectionDecorationsZIndex: 0
     scrollAnimation: true
     scrollAnimationDuration: 100
     textOpacity: 0.5

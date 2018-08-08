@@ -118,7 +118,7 @@ source /usr/local/opt/chruby/share/chruby/chruby.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 source "$SH_ROOT/zgen/zgen.zsh"
-
+setopt extendedglob
 if ! zgen saved; then
   zgen oh-my-zsh
   # zgen oh-my-zsh plugins/git

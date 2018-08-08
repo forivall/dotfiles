@@ -131,7 +131,7 @@ function git-on-that-day {
 }
 function git-on-this-day {
     local author
-    author='--author=jordan'
+    author='--author=emily'
     if [[ $1 == '--all' ]] ; then author= ; shift ; fi
     local a; a="$1"; shift;
     local b; b="$1"; shift;

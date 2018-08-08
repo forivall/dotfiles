@@ -6,7 +6,7 @@
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
 WINUSERPROFILE="/c/Users/forivall"
-DOTFILESPATH="/e/Jordan/Code/repos/git@forivall/dotfiles"
+DOTFILESPATH="/e/forivall/Code/repos/git@forivall/dotfiles"
 
 rm "$WINUSERPROFILE/.zshrc"
 mklinksu "$WINUSERPROFILE/.zshrc" "$DOTFILESPATH/zshrc"

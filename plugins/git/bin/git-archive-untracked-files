@@ -24,7 +24,8 @@ encode_url () {
 
 url="$(git config --get remote.origin.url)" || url="$(git config --get "remote.$(git remote|head -n1).url")" || url="$(basename $gitroot)"
 
-d="$UNTRACKED_FILES_STORAGE/$(encode_url "$url")/$b/$(date +%Y-%m-%d)"
+d="$UNTRACKED_FILES_STORAGE/$(encode_url "$url")/$b/$(date +%Y-%m-%d)/$(git rev-parse --show-prefix)"
+d=${d%/}
 mkparentdir () {
   mkdir -p "$d"
   mkparentdir() { :; }
@@ -33,9 +34,9 @@ mkparentdir () {
 OIFS=$IFS
 IFS="
 "
-for line in $(git status --porcelain) ; do
-  if [[ "$line" == \?\?\ * ]] ; then
-    f=${line#?? }
+for line in $(git status --porcelain=2 .) ; do
+  if [[ "$line" == \?\ * ]] ; then
+    f=${line#? }
     echo $f
     if [[ "$f" != ".gitignore" && -e "$f" ]] &&
         [[ ! -h "$f" ]]; then

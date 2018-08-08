@@ -98,6 +98,7 @@
 [grep]
 	lineNumber = true
 [pager]
+	branch = false
 	ahead = less
 	last = false
 	ll = true
@@ -110,10 +111,11 @@
 	main-window-view = HistoryView
 	show-graph = true
 [merge]
-    #tool = diffuse_windows
-    #tool = diffuse_custom
-	tool = meld_merged
-  # tool = meld
+	#tool = diffuse_windows
+	#tool = diffuse_custom
+	tool = vscode
+	# tool = meld
+	# tool = meld_merged
 	conflictstyle = diff3
 [rerere]
 	enabled = 1
@@ -172,3 +174,5 @@
 [merge "npm-merge-driver"]
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
+[mergetool "vscode"]
+	cmd = code --wait \"$MERGED\"
