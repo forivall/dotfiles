@@ -210,8 +210,8 @@
   "fold-functions": {}
   "formatter-jsbeautify":
     a:
-      executablePath: "/Users/jordanklassen/.nvm/versions/node/v4.6.1/bin/js-beautify"
-      nodePath: "/Users/jordanklassen/.nvm/versions/node/v4.6.1/bin/node"
+      executablePath: "/Users/emilyklassen/.nvm/versions/node/v9.8.0/bin/js-beautify"
+      nodePath: "/Users/emilyklassen/.nvm/versions/node/v9.8.0/bin/node"
   "formatter-tidy":
     html:
       arguments: [
@@ -262,7 +262,7 @@
   "linter-clang": {}
   "linter-eslint": {}
   "linter-hdevtools":
-    hdevtoolsExecutablePath: "/Users/jordanklassen/.cabal/bin/hdevtools"
+    hdevtoolsExecutablePath: "/Users/emilyklassen/.cabal/bin/hdevtools"
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
   "linter-scss-lint":
@@ -377,6 +377,8 @@
     autoStartOnCompatibleFile: false
   "one-light-ui":
     fontSize: 13
+  "open-terminal-here":
+    command: "/Users/emilyklassen/Code/public-repos/dotfiles/scripts/itermTab.sh \"$PWD\""
   pigments:
     ignoredNames: [
       "*"

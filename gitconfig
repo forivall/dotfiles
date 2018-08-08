@@ -4,7 +4,7 @@
 	#autocrlf = input
 	# pager = less -F
 	pager = most
-	excludesfile = /Users/jordanklassen/.gitignore_global
+	excludesfile = /Users/emilyklassen/.gitignore_global
 	trustctime = false
 	editor = vim
 	# trustctime = false

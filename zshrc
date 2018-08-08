@@ -169,7 +169,7 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/unsorted"
   zgen load "$SH_ROOT/plugins/simple-history-search"
   zgen load "$SH_ROOT/plugins/zgen-autoupdate"
-  [[ "$HOST" == *ledcor* ]] && zgen load "$SH_ROOT/plugins/ledcor"
+  [[ "$HOST" == *(#i)(ledcor)* ]] && zgen load "$SH_ROOT/plugins/ledcor"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
@@ -182,5 +182,5 @@ autoload -U cygcd
 clean-env
 
 autoload bashcompinit && bashcompinit
-source '/Users/jordanklassen/.local/lib/azure-cli/az.completion'
+source '/Users/emilyklassen/.local/lib/azure-cli/az.completion'
 
