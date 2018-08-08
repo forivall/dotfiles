@@ -6,7 +6,7 @@
 // @match      http://dochub.io/*
 // @require    http://code.jquery.com/jquery-2.0.0.min.js
 // @require    http://cdn.craig.is/js/mousetrap/mousetrap.min.js?c13bc
-// @copyright  2013+, Jordan Klassen (forivall)
+// @copyright  2013+, Emily Marigold Klassen (forivall)
 // ==/UserScript==
 
 var jQuery_2 = $.noConflict();

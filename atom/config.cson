@@ -331,6 +331,13 @@
     devicePixelRatioRounding: false
     displayPluginsControls: false
     interline: 0.4
+    plugins:
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      "minimap-autohider": true
+      "minimap-autohiderDecorationsZIndex": 0
+      selection: true
+      selectionDecorationsZIndex: 0
     scrollAnimation: true
     scrollAnimationDuration: 100
     textOpacity: 0.5
