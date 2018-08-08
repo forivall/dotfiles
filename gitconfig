@@ -1,4 +1,6 @@
 [user]
+	name = Emily Marigold Klassen
+	email = forivall@gmail.com
 	useConfigOnly = true
 [core]
 	#autocrlf = input
@@ -155,7 +157,7 @@
 # [url "git@github.com:"]
 #     pushInsteadOf = hub:
 [credential]
-	helper = manager
+	helper = cache
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false
@@ -167,7 +169,7 @@
 	required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

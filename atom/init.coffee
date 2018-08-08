@@ -9,14 +9,7 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
-atom.workspace.observePanes (pane) ->
-  console.log(pane)
 
-fixTreeView = ->
-  treeViewResizer = document.querySelector(".tree-view-resizer")
-  if treeViewResizer? then treeViewResizer.style.display = null
-  setTimeout(fixTreeView, 600000)
+window.devicePixelRatio = 2
 
-setTimeout(fixTreeView, 600)
-
-# require('electron').webFrame.setZoomFactor(1.5)
+require('electron').webFrame.setZoomFactor(1.12)

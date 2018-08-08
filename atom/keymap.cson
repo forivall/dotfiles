@@ -109,3 +109,6 @@
   'alt-shift-k': 'emmet:select-next-item'
   'alt-shift-j': 'emmet:select-previous-item'
   'ctrl-shift-j': 'emmet:merge-lines'
+
+'.platform-linux atom-workspace atom-text-editor':
+  'alt-shift-t': 'terminal-fusion:new'

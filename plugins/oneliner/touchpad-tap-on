@@ -1,0 +1,1 @@
+synclient MaxTapTime=90 SingleTapTimeout=90 TapButton1=1 TapButton2=3 TapButton3=2 PalmMinZ=50 PressureMotionMinZ=90 AreaRightEdge=1800

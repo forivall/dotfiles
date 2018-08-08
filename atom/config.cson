@@ -53,7 +53,7 @@
   "autocomplete-flow":
     pathToFlowExecutable: "/usr/local/bin/flow"
   "autocomplete-plus":
-    autoActivationDelay: 150
+    autoActivationDelay: 300
     backspaceTriggersAutocomplete: true
     confirmCompletion: "tab"
     includeCompletionsFromAllBuffers: true
@@ -80,6 +80,7 @@
       format: "RTF"
       name: "RTF"
   core:
+    audioBeep: false
     autoHideMenuBar: true
     automaticallyUpdate: false
     customFileTypes:
@@ -113,36 +114,70 @@
         "svcmap"
         "datasource"
       ]
+    destroyEmptyPanes: false
     disabledPackages: [
+      "atom-beautify"
+      "atom-mac-terminal"
+      "atom-trello"
+      "autocomplete-clang"
       "background-tips"
+      "block-comment"
+      "change-case"
+      "color-picker"
+      "cursor-history"
+      "custom-invisibles"
+      "dbus"
+      "dev-tools-themes"
+      "docblockr"
+      "editorconfig"
+      "emmet"
+      "es-identifier-highlight"
+      "expose"
+      "file-icons"
+      "file-types"
+      "flow-ide"
       "fold-comments"
       "fold-functions"
       "fold-search-results"
+      "git-diff-details"
       "git-gui"
+      "git-time-machine"
       "git-wip"
       "github-notifications"
+      "graphviz-preview"
       "gtk-dark-theme"
-      "html2jade-plus"
+      "ide-flow"
       "imdone-atom-github"
       "imdone-atom"
+      "language-gfm"
+      "language-mscgen"
+      "linter-eslint"
+      "linter-flake8"
+      "linter-flow"
+      "linter-jshint"
       "linter-nplint"
       "linter-scss-lint"
+      "linter-shellcheck"
       "linter-stylint"
-      "preview-plus"
-      "remember-file-positions"
-      "run-in-terminal"
-      "string-case"
-      "welcome"
-      "language-mscgen"
-      "minimap-highlight-selected"
-      "autocomplete-clang"
-      "sync-settings"
-      "flow-ide"
-      "linter-eslint"
-      "nuclide"
       "linter-tidy"
       "linter"
-      "language-gfm"
+      "minimap-highlight-selected"
+      "minimap-selection"
+      "multi-wrap-guide"
+      "multirow-tabs"
+      "nuclide"
+      "pane-by-type"
+      "preview-plus"
+      "remember-file-positions"
+      "string-case"
+      "symbols-tree-view"
+      "sync-settings"
+      "tablr"
+      "term3"
+      "terminal-fusion"
+      "tree-view-breadcrumb"
+      "welcome"
+      "you-complete-me"
     ]
     ignoredNames: [
       ".git"
@@ -202,7 +237,9 @@
     lightTheme: false
   "exception-reporting":
     userId: "d669d80a-cb48-445f-92bf-5ae1bb0d0696"
-  "file-icons": {}
+  "file-icons":
+    coloured: false
+    onChanges: true
   "file-types":
     el: "source.perl"
   "fold-functions": {}
@@ -292,6 +329,8 @@
   minimap:
     charHeight: 1.5
     charWidth: 0.7
+    devicePixelRatioRounding: false
+    displayPluginsControls: false
     interline: 0.4
     plugins:
       "git-diff": true
@@ -393,10 +432,13 @@
       bracketSpacing: false
       singleQuote: true
   "preview-plus": {}
+  "project-find-navigation":
+    showEndOfLifeWarning: false
   "project-manager": {}
   "project-view": {}
   "recent-files-fuzzy-finder": {}
   "run-in-terminal":
+    launchdir: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= mate-terminal --tab \"{working_directory}\""
     save_before_launch: false
     terminal: "ATOM_HOME= CHROME_DESKTOP= GOOGLE_API_KEY= NODE_ENV= NODE_PATH= PYTHON= mate-terminal --tab"
   "save-session":
@@ -410,10 +452,47 @@
   tabs:
     showIcons: true
     usePreviewTabs: true
-  term3:
-    colors:
-      brightWhite: "#d6d6d6"
-      foreground: "#dbdadc"
+  term3: {}
+  "terminal-fusion":
+    ansiColors:
+      normal:
+        black: "#343d46"
+        blue: "#81a2be"
+        cyan: "#8abeb7"
+        green: "#b5bd68"
+        magenta: "#b294bb"
+        red: "#cc6666"
+        white: "#ededed"
+        yellow: "#f0c674"
+      zBright:
+        brightBlack: "#343d46"
+        brightBlue: "#81a2be"
+        brightCyan: "#8abeb7"
+        brightGreen: "#b5bd68"
+        brightMagenta: "#b294bb"
+        brightRed: "#cc6666"
+        brightWhite: "#ededed"
+        brightYellow: "#f0c674"
+    iconColors:
+      blue: "#81a2be"
+      cyan: "#8abeb7"
+      green: "#b5bd68"
+      magenta: "#f351f3"
+      pink: "#ea9bc2"
+      purple: "#b294bb"
+      red: "#cc6666"
+      yellow: "#f0c674"
+    style:
+      animationSpeed: 0
+      defaultPanelHeight: "200px"
+      fontFamily: "Fantasque Sans Mono"
+      fontSize: "14.5"
+      theme: "dracula"
+    toggles:
+      autoClose: true
+      runInsertedText: false
+  "test-status":
+    autorun: false
   "theme-switcher":
     syntaxThemeOne: "tomorrow-ya"
     syntaxThemeTwo: "today"
@@ -426,6 +505,7 @@
     alwaysOpenExisting: true
     hideIgnoredNames: true
     refreshVcsStatusOnProjectOpen: 5
+    squashDirectoryNames: true
   "tree-view-breadcrumb":
     displayProjectRoot: true
     displayProjectRootName: true

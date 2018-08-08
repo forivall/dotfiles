@@ -1,9 +1,6 @@
 
-api-blueprint-preview
-atom-formatter-jsbeautify
-atom-ide-ui
-atom-import-sort
-atom-mac-terminal
+adwaita-pro-ui
+atom-beautify
 atom-ternjs
 atom-typescript
 autocomplete-clang
