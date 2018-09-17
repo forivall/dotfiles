@@ -56,13 +56,6 @@
 	# unpublish = !legit unpublish \"$@\"
 
 	exec = "!exec "
-	# see bashrc
-	# custom commands, before adding scripts to bin
-	age = !/home/jklassen/code/git-age/git-age
-	diffuse = !/code/git/forivall_dotfiles_scripts/scripts/git-diffuse
-	store-untracked-files = !/code/git/forivall_dotfiles_scripts/scripts/git-archive-untracked-files
-	blameall = !/code/git/forivall_dotfiles_scripts/scripts/git-blameall
-	branch-archive = !/code/git/forivall_dotfiles_scripts/scripts/git-branch-archive
 
 	# aliases for custom commands
 	sm = subl-modified
