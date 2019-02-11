@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+
+local pager="$(git config core.pager || ( [[ -n "$PAGER" ]] && echo "$PAGER" ) || echo "less")"
+rg --pretty "$@" | most

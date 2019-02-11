@@ -1,0 +1,1 @@
+for l in $1/bin/*(@); do p=$(readlink $l); ln -s $1/${p#../} ${l##*/}; done
