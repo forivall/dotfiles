@@ -1,7 +1,7 @@
 [user]
-	name = Emily Marigold Klassen
-	email = forivall@gmail.com
+	name = 
 	useConfigOnly = true
+	email = 
 [core]
 	#autocrlf = input
 	# pager = less -F
@@ -11,8 +11,8 @@
 	editor = vim
 	# trustctime = false
 [diff]
-	renames = false
-	# renames = copies # makes genco choke
+	# renames = false
+	renames = copies # makes genco choke
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
@@ -162,7 +162,7 @@
 	required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -171,3 +171,5 @@
 	driver = npx npm-merge-driver merge %A %O %B %P
 [mergetool "vscode"]
 	cmd = code --wait \"$MERGED\"
+[commit]
+	template = /Users/emilyklassen/.stCommitMsg
