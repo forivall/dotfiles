@@ -12,4 +12,4 @@
 
 window.devicePixelRatio = 2
 
-require('electron').webFrame.setZoomFactor(1.12)
+# require('electron').webFrame.setZoomFactor(1.12)
