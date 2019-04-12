@@ -17,6 +17,20 @@
 // @run-at document-idle
 // ==/UserScript==
 
+/*
+current tags:
+0110992 LTC / InEight
+0111030 Expense Management (Concur)
+0111066 Drop Tracker Migration
+0111070 HR2020
+0111072 PACE Integration
+0111076 FWP
+0111079 HSE IIA
+IMS healthandsafety
+TechDebt
+
+ */
+
 import 'greasemonkey'
 
 (function() {
