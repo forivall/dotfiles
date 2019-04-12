@@ -182,6 +182,9 @@ if ! zgen saved; then
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   zgen load zsh-users/zsh-syntax-highlighting
+
+  $IS_OSX && zgen load nilsonholger/osx-zsh-completions
+
   zgen save
 fi
 unsetopt nomatch
