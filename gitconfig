@@ -13,6 +13,9 @@
 [diff]
 	# renames = false
 	renames = copies # makes genco choke
+	tool = vscode
+[difftool]
+	prompt = false
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
@@ -24,6 +27,7 @@
 	ahead = log --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph HEAD ^origin/HEAD
 	ahead-root = !git --no-pager log --oneline HEAD ^origin/HEAD
 	ahead2 = log --name-status --abbrev-commit --pretty=oneline --graph --decorate HEAD ^origin/HEAD
+	exclude = "!f() { for p in \"$@\" ; do echo \"$GIT_PREFIX$p\" >> .git/info/exclude ; done; }; f"
 	diffc = diff --cached
 	last = show --oneline --name-status --decorate
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
@@ -124,13 +128,13 @@
 	cmd = /usr/bin/env meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 	#"
 [mergetool "diffuse_windows"]
-    cmd = \"C:\\Program Files (x86)\\Diffuse\\diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
-    #"
+		cmd = \"C:\\Program Files (x86)\\Diffuse\\diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+		#"
 [mergetool "diffuse_cygwindows"]
-    cmd = \"/cygdrive/c/Program Files (x86)/Diffuse/diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
-    #"
+		cmd = \"/cygdrive/c/Program Files (x86)/Diffuse/diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+		#"
 [mergetool "meld_windows"]
-    cmd = \"C:\\Program Files (x86)\\Meld\\meld\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+		cmd = \"C:\\Program Files (x86)\\Meld\\meld\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 [github]
 	user = forivall
 # [push]
@@ -146,7 +150,7 @@
 [url "git://github.com/"]
 	insteadOf = hub:
 [url "git@github.com:"]
-    pushInsteadOf = hub:
+		pushInsteadOf = hub:
 # [url "git@github.com:"]
 #     pushInsteadOf = hub:
 [credential]
@@ -163,6 +167,8 @@
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+[difftool "vscode"]
+	cmd = code \"$LOCAL\" \"$REMOTE\" --diff
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

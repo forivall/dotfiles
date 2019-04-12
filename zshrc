@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
-if [[ -e /etc/profile.d/vte.sh ]] ; then
-  source /etc/profile.d/vte.sh
-fi
+sourceIfExists() { [[ -e "$1" ]] && source "$1" }
+sourceIfExists /etc/profile.d/vte.sh
 
 # echo $NODE_PATH
 # source() {
@@ -27,6 +26,8 @@ IS_XDG() {
   [[ -d ${xdg_config_dirs[1]} ]]
 }
 setbool IS_XDG IS_XDG
+unset IS_XDG
+
 if $IS_OSX ; then
   if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
@@ -113,14 +114,10 @@ if $IS_WINDOWS ; then
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 fi
 
-# added by travis gem
-[ -f /home/forivall/.travis/travis.sh ] && source /home/forivall/.travis/travis.sh
-
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-
-[[ -e "$SH_ROOT/api_keys.sh" ]] && source "$SH_ROOT/api_keys.sh"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+sourceIfExists /home/forivall/.travis/travis.sh
+sourceIfExists /usr/local/opt/chruby/share/chruby/chruby.sh
+sourceIfExists "$SH_ROOT/api_keys.sh"
+sourceIfExists "${HOME}/.iterm2_shell_integration.zsh"
 
 source "$SH_ROOT/zgen/zgen.zsh"
 setopt extendedglob
@@ -135,7 +132,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/command-not-found
   # zgen oh-my-zsh plugins/virtualenv
   # zgen oh-my-zsh plugins/npm
-  zgen oh-my-zsh plugins/nvm
+  # zgen oh-my-zsh plugins/nvm
   zgen oh-my-zsh plugins/colorize
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/meteor
@@ -159,6 +156,7 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
 
+  zgen load lukechilds/zsh-nvm
   zgen load lukechilds/zsh-better-npm-completion
   zgen load "$SH_ROOT/plugins/oneliner"
   zgen load "$SH_ROOT/plugins/external-tools"
@@ -171,12 +169,15 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/github"
   zgen load "$SH_ROOT/plugins/magic-cd"
   zgen load "$SH_ROOT/plugins/npm"
+  # zgen load "$SH_ROOT/plugins/nvm"
   zgen load "$SH_ROOT/plugins/subl"
   zgen load "$SH_ROOT/plugins/trash"
   zgen load "$SH_ROOT/plugins/unsorted"
   zgen load "$SH_ROOT/plugins/simple-history-search"
   zgen load "$SH_ROOT/plugins/zgen-autoupdate"
-  [[ "$HOST" == *(#i)(ledcor)* ]] && zgen load "$SH_ROOT/plugins/ledcor"
+  setopt NO_CASE_MATCH
+  [[ "$HOST" =~ ledcor ]] && zgen load "$SH_ROOT/plugins/ledcor"
+  unsetopt NO_CASE_MATCH
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
@@ -186,7 +187,7 @@ fi
 unsetopt nomatch
 autoload -U cygcd
 
-if [[ "$VSCODE_CLI" == 1 ]] {
+if [[ "$VSCODE_CLI" == 1 ]] ; then
   AMD_ENTRYPOINT=
   ELECTRON_NO_ASAR=
   ELECTRON_NO_ATTACH_CONSOLE=
@@ -202,11 +203,15 @@ if [[ "$VSCODE_CLI" == 1 ]] {
   VSCODE_NLS_CONFIG=
   VSCODE_PID=
   VSCODE_WINDOW_ID=
-}
+fi
 
 clean-env
 
 autoload bashcompinit && bashcompinit
-source '/Users/emilyklassen/.local/lib/azure-cli/az.completion'
+sourceIfExists '/Users/emilyklassen/.local/lib/azure-cli/az.completion'
+sourceIfExists "/opt/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh"
+
+unset setbool
+unset sourceIfExists
 
 true

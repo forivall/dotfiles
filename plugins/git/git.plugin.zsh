@@ -85,10 +85,17 @@ function git() { # also put these in git-aliases for autocomplete
       $GIT_SSH_AGENT_ADD
     fi
   fi
+
+  local cont=true
+  local opts
+  opts=()
+  while $cont; do
+  cont=false
   case "$1" in
+    -*) opts+=($1 $2); shift; shift; cont=true;;
     fancy) shift;
-      local pager="$(git config core.pager || echo -n "less")"
-      git -c color.diff=always "$@" | diff-so-fancy | $pager;;
+      local pager="$(git "${opts[@]}" config core.pager || echo -n "less")"
+      git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager;;
     age) shift; ~/code/git-repos/git-age/git-age $@;;
     diff) shift;
       if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
@@ -101,8 +108,9 @@ function git() { # also put these in git-aliases for autocomplete
     stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
     checkout|cherry-pick|commit|fetch|merge|pull|push) /usr/bin/env git "$@" && ___git_indent_helper git st --no-files; echo  ;;
     # diffuse) shift; ~/scripts/git-diffuse "$@";;
-    *) /usr/bin/env git "$@";;
+    *) /usr/bin/env git "${opts[@]}" "$@";;
   esac
+  done
 }
 
 _git-stashed() {
