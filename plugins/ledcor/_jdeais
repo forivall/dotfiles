@@ -1,0 +1,24 @@
+#compdef jdeais
+
+local -a _jdeais_commands
+_commands=(
+  amend-inputs
+  deep-probe
+  generate
+  get-saved-query
+  ls-remote
+  ls
+  open-shortcut
+  repl
+  split-logged-requests
+  upload-media-object
+  upload-mo
+)
+_jdeais_commands() {
+  _describe -t commands "jdeais subcommand" _commands
+}
+_arguments -C \
+  '1: :_jdeais_commands' \
+  '*: :_files' && ret=0
+
+return $ret

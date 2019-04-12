@@ -1,0 +1,53 @@
+#compdef ledis
+
+# echo "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}"
+
+local -a _ledis_commands
+local -a _ledis_rest
+_commands=(
+  help
+  ad
+  package
+  bundledeps
+  csv
+  dev-server
+  download-certs
+  extract-mcs-package
+  format-json-for-boomi
+  generate-api
+  http-proxy
+  http-sink
+  json-schema-bundle
+  mcs-list-impls
+  upload-spec
+  mcs-logs
+  logs
+  mcs-trash-impls
+  upload-spec
+  mcs-upload-impl
+  upload
+  mcs-upload-raml
+  upload-spec
+  mcs-users
+  mock-api
+  msal-token
+  odata-to-swagger
+  package
+  raml-flatten
+  register-db
+  swagger-to-dts
+  users
+)
+
+_ledis_commands() {
+  _describe -t commands "ledis subcommand" _commands
+}
+_ledis_rest() {
+  # TODO: cache results
+  compadd -- `ledis --compzsh --compgen "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}"`
+}
+_arguments -C \
+  '1: :_ledis_commands' \
+  '*: :_files' && ret=0
+
+return $ret
