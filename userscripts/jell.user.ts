@@ -25,9 +25,17 @@
 if (window.top !== window) {
   return
 }
-console.log('loaded Jell project tag helper')
+console.log('Loaded Jell project tag helper')
 
 const style = `
+custom-tag-helper {
+  display: block;
+}
+custom-tag-helper.in-tasks {
+  padding-bottom: 21px;
+  border-bottom: 2px solid #e2e6e7;
+  margin-bottom: 21px;
+}
 custom-tag-helper .btn {
   min-width: 10px;
   -webkit-user-select: auto;
@@ -95,7 +103,7 @@ custom-tag-helper .form-group-sm .input-group-addon {
   padding-bottom: 2px;
 }
 custom-tag-helper .form-group.form-group-sm {
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 custom-tag-helper .input-group-sm .input-group-addon:first-child {
   padding-right: 1px;
@@ -103,8 +111,22 @@ custom-tag-helper .input-group-sm .input-group-addon:first-child {
 custom-tag-helper .input-group-sm .input-group-addon:first-child + .form-control {
   padding-left: 1px;
 }
+custom-tag-helper .input-group-sm .form-control:last-child {
+  padding-right: 1px;
+}
+custom-tag-helper .input-group-sm .form-control:first-child {
+  padding-left: 1px;
+}
+custom-tag-helper .input-group-sm .btn-link {
+  margin-top: 3px;
+  padding: 6px 6px;
+}
 custom-tag-helper .form-group-sm .input-group-addon .btn {
   margin-top: 0;
+}
+custom-tag-helper .btn-link.btn--compact {
+  padding: 0;
+  margin: 0;
 }
 `
 let styleTag = document.getElementById('jell-project-tag-helper-style') as HTMLStyleElement
@@ -126,13 +148,13 @@ const linkTmpl = (projects) => (pn) => `
 `
 
 const mgmtTmpl = () => `
-<form class="js-create-tag-form">
+<form class="js-create-tag-form create-tag-form">
 <div class="form-group form-group-sm form-group--flex">
   <div class="input-group input-group-sm input-group--no-border">
     <span class="input-group-addon">#</span>
     <input type="text" class="js-tag-name form-control" aria-label="Tag" placeholder="Tag">
   </div>
-  <div class="input-group input-group--no-border">
+  <div class="input-group input-group-sm input-group--no-border">
     <input type="text" class="js-tag-desc form-control" aria-label="Description" placeholder="Description (Optional)">
     <span class="input-group-addon">
       <button type="submit" href="" title="Add tag" class="link--gray btn btn-link" tabindex="-1" data-bs-tooltip="" data-animation="am-fade-and-scale" data-toggle="tooltip" data-placement="bottom">
@@ -144,7 +166,7 @@ const mgmtTmpl = () => `
 </form>
 <form>
 <div class="form-group form-group-sm text-right">
-  <a class="btn btn-link btn-sm js-show-delete">Delete Tag</a>
+  <a class="btn btn-link btn-sm btn--compact js-show-delete">Delete Tag</a>
 </div>
 </form>
 `
@@ -174,6 +196,7 @@ async function createTagHelper() {
   const projects = await loadProjects()
 
   const el = document.createElement('custom-tag-helper')
+  el.classList.add(inProductivity ? 'in-productivity' : 'in-tasks')
 
   let linksHtml = Object.keys(projects).map(linkTmpl(projects)).join('');
   linksHtml = `<div class="btn-flex-cloud form-group">${linksHtml}</div>`
@@ -182,10 +205,10 @@ async function createTagHelper() {
   let mgmtHtml = mgmtTmpl()
   if (inProductivity) mgmtHtml = `<div class="col-md-12">${mgmtHtml}</div>`
 
-  el.innerHTML = `<div>
+  el.innerHTML = `
     <div class="row">${linksHtml}</div>
     <div class="row">${mgmtHtml}</div>
-  </div>`
+  `
 
   let activeElement = document.activeElement
   function cacheActiveElement() {
