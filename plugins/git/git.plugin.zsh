@@ -37,7 +37,7 @@ ge() {
     else
         first=git
     fi
-    for d in */.git(#q:s/\\/.git//)(/); do echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
+    for d in */.git; do e="${d%/.git}"; echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
 }
 alias gr="git r"
 alias grg="git r git"
@@ -96,18 +96,13 @@ function git() { # also put these in git-aliases for autocomplete
     fancy) shift;
       local pager="$(git "${opts[@]}" config core.pager || echo -n "less")"
       git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager;;
-    age) shift; ~/code/git-repos/git-age/git-age $@;;
     diff) shift;
       if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
         /usr/bin/env git --no-pager diff $@
       else
         /usr/bin/env git diff $@ ;
       fi;;
-    grep-gedit-open) shift; git-grep-gedit-open $@;;
-    blameall) shift; ~/code/git-blameall.py $@;;
     stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
-    checkout|cherry-pick|commit|fetch|merge|pull|push) /usr/bin/env git "$@" && ___git_indent_helper git st --no-files; echo  ;;
-    # diffuse) shift; ~/scripts/git-diffuse "$@";;
     *) /usr/bin/env git "${opts[@]}" "$@";;
   esac
   done
