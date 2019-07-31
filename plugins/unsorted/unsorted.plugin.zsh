@@ -6,8 +6,6 @@ autoload -U shcat
 
 alias ccat="ccat -G String=darkgreen -G Comment=faint -G Keyword=purple -G Punctuation=teal -G Type=darkred -G Literal=darkred -G Plaintext=reset -G Tag=red"
 
-alias http="http --pretty=colors"
-
 #alias res="echo -en \"\ec\e[3J\""
 alias res="echo -n '$(tput reset)'"
 

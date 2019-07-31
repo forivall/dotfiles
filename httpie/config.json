@@ -6,6 +6,7 @@
     },
     "default_options": [
         "--pretty=colors",
-        "--style=solarized"
+        "--style=solarized",
+        "--style=tomorrownight"
     ]
 }

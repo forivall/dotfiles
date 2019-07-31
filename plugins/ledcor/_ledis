@@ -4,6 +4,7 @@
 
 local -a _ledis_commands
 local -a _ledis_rest
+
 _commands=(
   help
   ad
@@ -11,43 +12,58 @@ _commands=(
   bundledeps
   csv
   dev-server
-  download-certs
   extract-mcs-package
   format-json-for-boomi
   generate-api
   http-proxy
   http-sink
   json-schema-bundle
+  mcs-download-certs
   mcs-list-impls
-  upload-spec
   mcs-logs
-  logs
+  mcs-register-db
   mcs-trash-impls
-  upload-spec
   mcs-upload-impl
-  upload
   mcs-upload-raml
-  upload-spec
   mcs-users
   mock-api
   msal-token
   odata-to-swagger
+  omh-download-certs
+  omh-policies
+  omh-register-db
+  omh-upload-impl
+  omh-upload-raml
   package
+  postman-env
   raml-flatten
-  register-db
   swagger-to-dts
-  users
+)
+
+_subcommands_omh_policies=(
+  set-auth-token-config
 )
 
 _ledis_commands() {
-  _describe -t commands "ledis subcommand" _commands
+  _describe -t commands "ledis command" _commands
+}
+
+_ledis_subcommands() {
+  case ${line[1]} in
+    omh-policies)
+      _describe -t commands "ledis omh-policies subcommand" _subcommands_omh_policies ;;
+    *)
+      _files
+  esac
 }
 _ledis_rest() {
   # TODO: cache results
   compadd -- `ledis --compzsh --compgen "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}"`
 }
 _arguments -C \
-  '1: :_ledis_commands' \
+  '1:command:_ledis_commands' \
+  '2: :_ledis_subcommands' \
   '*: :_files' && ret=0
+
 
 return $ret
