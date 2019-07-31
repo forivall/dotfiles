@@ -23,7 +23,7 @@ if [[ -z "$epoch_target" ]]; then
   epoch_target=13
 fi
 
-if [ -f ~/.zsh-update ]
+if [[ -f ~/.zsh-update ]]
 then
   . ~/.zsh-update
 
@@ -32,9 +32,9 @@ then
   fi
 
   epoch_diff=$(($(_zgen-autoupdate_current_epoch) - $LAST_EPOCH))
-  if [ $epoch_diff -gt $epoch_target ]
+  if [[ $epoch_diff -gt $epoch_target ]]
   then
-    if [ "$DISABLE_UPDATE_PROMPT" = "true" ]
+    if [[ "$DISABLE_UPDATE_PROMPT" = "true" ]]
     then
       _zgen-autoupdate_upgrade_zsh
     else

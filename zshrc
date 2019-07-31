@@ -1,16 +1,18 @@
 #!/usr/bin/env zsh
 
-sourceIfExists() { [[ -e "$1" ]] && source "$1" }
-sourceIfExists /etc/profile.d/vte.sh
+# setopt XTRACE
 
-# echo $NODE_PATH
+# Uncomment the below to profile startup
+# zmodload zsh/datetime
 # source() {
-#   echo $NODE_PATH
-#   echo source "$@"
-#   grep NODE_PATH "$1"
+#   local now=$EPOCHREALTIME
 #   builtin source "$@"
+#   echo $(( EPOCHREALTIME - now )) source "$@"
 # }
 # alias .=source
+
+sourceIfExists() { [[ -e "$1" ]] && source "$1" }
+sourceIfExists /etc/profile.d/vte.sh
 
 [[ "$HOST" == "shrubbery-ni" ]] && export VAGRANT_HOME=/mnt/Peng/vagrant-home-linux
 
@@ -114,9 +116,9 @@ if $IS_WINDOWS ; then
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 fi
 
-sourceIfExists /home/forivall/.travis/travis.sh
-sourceIfExists /usr/local/opt/chruby/share/chruby/chruby.sh
-sourceIfExists "$SH_ROOT/api_keys.sh"
+# sourceIfExists /home/forivall/.travis/travis.sh
+# sourceIfExists /usr/local/opt/chruby/share/chruby/chruby.sh
+# sourceIfExists "$SH_ROOT/api_keys.sh"
 sourceIfExists "${HOME}/.iterm2_shell_integration.zsh"
 
 source "$SH_ROOT/zgen/zgen.zsh"
@@ -129,13 +131,13 @@ if ! zgen saved; then
   # zgen oh-my-zsh plugins/pip
   # zgen oh-my-zsh plugins/python
   zgen oh-my-zsh plugins/web-search
-  zgen oh-my-zsh plugins/command-not-found
+  # zgen oh-my-zsh plugins/command-not-found # very slow
   # zgen oh-my-zsh plugins/virtualenv
   # zgen oh-my-zsh plugins/npm
   # zgen oh-my-zsh plugins/nvm
   zgen oh-my-zsh plugins/colorize
   zgen oh-my-zsh plugins/cp
-  zgen oh-my-zsh plugins/meteor
+  # zgen oh-my-zsh plugins/meteor
   zgen oh-my-zsh plugins/git-extras
   # zgen oh-my-zsh plugins/jump
 
@@ -149,35 +151,31 @@ if ! zgen saved; then
   ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
-  zgen load deliciousinsights/git-stree
+  # zgen load deliciousinsights/git-stree
+  # zgen load lukechilds/zsh-nvm
   zgen load lukechilds/zsh-better-npm-completion
   # zgen load jocelynmallon/zshimarks
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
 
-  zgen load lukechilds/zsh-nvm
-  zgen load lukechilds/zsh-better-npm-completion
   zgen load "$SH_ROOT/plugins/oneliner"
   zgen load "$SH_ROOT/plugins/external-tools"
   zgen load "$SH_ROOT/plugins/dimensions-in-title"
   zgen load "$SH_ROOT/plugins/colors"
-  zgen load "$SH_ROOT/plugins/rubygems"
+  # zgen load "$SH_ROOT/plugins/rubygems"
   zgen load "$SH_ROOT/plugins/coreutils"
   zgen load "$SH_ROOT/plugins/git"
   zgen load "$SH_ROOT/plugins/git-ftp"
   zgen load "$SH_ROOT/plugins/github"
   zgen load "$SH_ROOT/plugins/magic-cd"
   zgen load "$SH_ROOT/plugins/npm"
-  zgen load "$SH_ROOT/plugins/nvm"
-  zgen load "$SH_ROOT/plugins/subl"
+  # zgen load "$SH_ROOT/plugins/nvm"
+  # zgen load "$SH_ROOT/plugins/subl"
   zgen load "$SH_ROOT/plugins/trash"
   zgen load "$SH_ROOT/plugins/unsorted"
   zgen load "$SH_ROOT/plugins/simple-history-search"
-  zgen load "$SH_ROOT/plugins/zgen-autoupdate"
-  setopt NO_CASE_MATCH
-  [[ "$HOST" =~ ledcor ]] && zgen load "$SH_ROOT/plugins/ledcor"
-  unsetopt NO_CASE_MATCH
+  # zgen load "$SH_ROOT/plugins/zgen-autoupdate" # TODO: figure out why this is slooooow!
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
@@ -211,8 +209,6 @@ fi
 clean-env
 
 autoload bashcompinit && bashcompinit
-sourceIfExists '/Users/emilyklassen/.local/lib/azure-cli/az.completion'
-sourceIfExists "/opt/lib/oracle-cli/lib/python3.7/site-packages/oci_cli/bin/oci_autocomplete.sh"
 
 unset setbool
 unset sourceIfExists

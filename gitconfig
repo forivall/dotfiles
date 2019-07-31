@@ -178,4 +178,4 @@
 [mergetool "vscode"]
 	cmd = code --wait \"$MERGED\"
 [commit]
-	template = /Users/emilyklassen/.stCommitMsg
+	# template = /Users/emilyklassen/.stCommitMsg
