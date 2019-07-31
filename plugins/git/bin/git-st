@@ -29,6 +29,6 @@ default_paths () {
 git -c 'color.status=always' status -b -s -uno "$@" &&
 git -c 'color.status=always' -c 'color.status.untracked=magenta' -c 'column.status=always,dense' -c 'advice.statusHints=false'\
     status  "$@" $(default_paths) |
-    sed -e "1,/Untracked files/d" -e "/^no changes/,/$/d" -e "/^$/,/$/d" -e "s/\t/   /"
+    sed -e "1,/Untracked files/d" -e "/^no changes/,/$/d" -e "/^$/,/$/d" -e "s/\\t/   /"
 # )"
 # echo "$BUF"
