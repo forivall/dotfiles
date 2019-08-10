@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+#when we create new function or install new bin , the default zsh cant get the new completion for us,so we 
+#can add a new function for this problem,you can add the blow content in your .zshrc file
+function reload-function() {
+         if [[ "$#*" -eq 0 ]]; then
+                 test -r /etc/zsh/zsh-oli && . /etc/zsh/zsh-oli
+                 test -r ~/.zshrc && . ~/.zshrc
+                 return 0
+         else
+                 local fn
+                 for fn in $*; do
+                    unfunction $fn
+                    autoload -U $fn
+                 done
+         fi
+}
+
+compdef _functions reload-function

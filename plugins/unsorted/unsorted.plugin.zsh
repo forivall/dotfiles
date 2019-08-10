@@ -1,8 +1,9 @@
-__zsh_unsorted_plugin_location=$0:A
-__zsh_unsorted_plugin_location=${__zsh_oneliner_plugin_location%/*}
+__zsh_unsorted_plugin_location=$0:A:h
 
 autoload -U clean-env
 autoload -U shcat
+autoload -U reload-function
+compdef _functions reload-function
 
 alias ccat="ccat -G String=darkgreen -G Comment=faint -G Keyword=purple -G Punctuation=teal -G Type=darkred -G Literal=darkred -G Plaintext=reset -G Tag=red"
 
