@@ -187,7 +187,6 @@ if ! zgen saved; then
   zgen save
 fi
 unsetopt nomatch
-autoload -U cygcd
 
 if [[ "$VSCODE_CLI" == 1 ]] ; then
   AMD_ENTRYPOINT=
