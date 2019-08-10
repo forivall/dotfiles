@@ -158,6 +158,7 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/functional"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
+  $IS_OSX && zgen load "$SH_ROOT/plugins/iterm2"
 
   zgen load "$SH_ROOT/plugins/oneliner"
   zgen load "$SH_ROOT/plugins/external-tools"
