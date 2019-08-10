@@ -172,6 +172,8 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/magic-cd"
   zgen load "$SH_ROOT/plugins/npm"
   # zgen load "$SH_ROOT/plugins/nvm"
+  zgen load "$SH_ROOT/plugins/yarn"
+  zgen load "$SH_ROOT/plugins/yargs"
   # zgen load "$SH_ROOT/plugins/subl"
   zgen load "$SH_ROOT/plugins/trash"
   zgen load "$SH_ROOT/plugins/unsorted"

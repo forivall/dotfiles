@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+
+__zsh_yargs_plugin__rebuild() {
+  local execPath=$(whence $ZSH_NAME)
+  has_yargs() {
+    [[ $1 == '/' ]] && return 1
+    if [[ -f "${1}/package.json" ]] ; then
+      jq -e '.dependencies.yargs and halt' "${1}/package.json" > /dev/null
+      return $?
+    fi
+    has_yargs $1:h
+  }
+  p() {
+    echo "$@" >&2
+    local help_output_file="${__zsh_yargs_plugin__dirname}/__${command}_help_output"
+    if ! "$@" | tee $help_output_file ; then
+      tput setaf 1 >&2
+      < $compfile >&2
+      tput sgr0 >&2
+    fi
+    rm $help_output_file
+  }
+  for command command_path in ${(kv)commands}; do
+    whence _$command > /dev/null && continue
+    if has_yargs $command_path:A &&
+        file -b $command_path | grep 'node script' > /dev/null &&
+        p "$command" --help | grep "$command completion"
+    then
+      echo "Generating completion for ${command}..."
+      local compfile="${__zsh_yargs_plugin__dirname}/_${command}"
+      echo "#compdef ${command}" > $compfile
+      if ! SHELL=$execPath $command completion >> $compfile ; then
+        tput setaf 1
+        tail -n +2 $compfile
+        tput sgr0
+        echo "${command} Completion generation failed, deleting completion file"
+        rm $compfile
+      fi
+    fi
+  done
+
+  echo 'You should run `zgen reset` to ensure that zcompdump get rebuilt'
+}
