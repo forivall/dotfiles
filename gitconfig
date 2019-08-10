@@ -4,8 +4,8 @@
 	email = 
 [core]
 	#autocrlf = input
-	# pager = less -F
-	pager = most
+	pager = less
+	# pager = most
 	excludesfile = /Users/emilyklassen/.gitignore_global
 	trustctime = false
 	editor = vim
