@@ -152,7 +152,7 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
   # zgen load deliciousinsights/git-stree
-  # zgen load lukechilds/zsh-nvm
+  zgen load lukechilds/zsh-nvm
   zgen load lukechilds/zsh-better-npm-completion
   # zgen load jocelynmallon/zshimarks
   zgen load "$SH_ROOT/plugins/functional"
