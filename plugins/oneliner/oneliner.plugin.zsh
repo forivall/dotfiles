@@ -1,6 +1,4 @@
-__zsh_oneliner_plugin_location=$0:A
-__zsh_oneliner_plugin_location=${__zsh_oneliner_plugin_location%/*}
-
+__zsh_oneliner_plugin_location=${0:A:h}
 
 oneliner() {
   local cmd="${1}"
