@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-__zsh_yargs_plugin__rebuild() {
+__zsh_yargs_plugin__build_completions() {
   local execPath=$(whence $ZSH_NAME)
   has_yargs() {
     [[ $1 == '/' ]] && return 1
@@ -11,7 +11,7 @@ __zsh_yargs_plugin__rebuild() {
     has_yargs $1:h
   }
   p() {
-    echo "$@" >&2
+    [[ $__zsh_yargs_plugin_debug == 1 ]] && echo "$@" >&2
     local help_output_file="${__zsh_yargs_plugin__dirname}/__${command}_help_output"
     if ! "$@" | tee $help_output_file ; then
       tput setaf 1 >&2
@@ -21,12 +21,12 @@ __zsh_yargs_plugin__rebuild() {
     rm $help_output_file
   }
   for command command_path in ${(kv)commands}; do
-    whence _$command > /dev/null && continue
+    # whence _$command > /dev/null && continue
     if has_yargs $command_path:A &&
         file -b $command_path | grep 'node script' > /dev/null &&
-        p "$command" --help | grep "$command completion"
+        p "$command" --help | grep "$command completion" > /dev/null
     then
-      echo "Generating completion for ${command}..."
+      echo "Generating completion for ${command}..." >&2
       local compfile="${__zsh_yargs_plugin__dirname}/_${command}"
       echo "#compdef ${command}" > $compfile
       if ! SHELL=$execPath $command completion >> $compfile ; then
@@ -39,5 +39,5 @@ __zsh_yargs_plugin__rebuild() {
     fi
   done
 
-  echo 'You should run `zgen reset` to ensure that zcompdump get rebuilt'
+  [[ -f "${ZGEN_INIT}" ]] && echo 'You should run `zgen reset` to ensure that zcompdump get rebuilt'
 }

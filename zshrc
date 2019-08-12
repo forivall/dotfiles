@@ -169,6 +169,7 @@ if ! zgen saved; then
   zgen load "$SH_ROOT/plugins/git"
   zgen load "$SH_ROOT/plugins/git-ftp"
   zgen load "$SH_ROOT/plugins/github"
+  zgen load "$SH_ROOT/plugins/lab"
   zgen load "$SH_ROOT/plugins/magic-cd"
   zgen load "$SH_ROOT/plugins/npm"
   # zgen load "$SH_ROOT/plugins/nvm"
@@ -185,6 +186,15 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
+
+  # Build completions files
+  local ofpath=(${fpath})
+  fpath=(${(q)ZGEN_COMPLETIONS[@]} ${fpath})
+  for func in ${(kM)functions:#*__build_completions} ; do
+    # echo "Running $func..." >&2
+    $func
+  done
+  fpath=(${ofpath})
 
   zgen save
 fi

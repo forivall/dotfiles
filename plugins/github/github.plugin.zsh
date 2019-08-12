@@ -1,6 +1,7 @@
 __zsh_github_plugin_location=$0:A
 __zsh_github_plugin_location=${__zsh_github_plugin_location%/*}
 
+# TODO: use https://scoop.sh/ instead
 PATH="$PATH:$__zsh_github_plugin_location"
 if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   __zsh_github_do_upgrade() {

@@ -4,4 +4,4 @@ npm-debug.log
 .cygwin_antigen_cache
 
 /plugins/yargs/_*
-!/plugins/yargs/__zsh_yargs_plugin__rebuild
+!/plugins/yargs/__zsh_yargs_plugin__*
