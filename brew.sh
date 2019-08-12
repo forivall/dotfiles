@@ -1,16 +1,43 @@
 #!/bin/sh
 
+xcode-select --install
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install node
 brew install coreutils findutils dateutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt
-brew install most colordiff trash htop tree
-brew install git hub git-extras git-lfs git-credential-manager git-tf tee-clc
+brew install most colordiff trash htop tree ripgrep vim
+brew install libtool autoconf automake
+brew install git hub git-extras git-lfs git-credential-manager zaquestion/tap/lab
+# for TFS:
+# brew cask install java
+# brew install git-tf tee-clc # requires java
 brew install jq httpie
 brew install python-markdown
 brew install flow shellcheck pandoc
-brew install mongodb caskroom/cask/robomongo
+brew install mongodb
 brew install diffuse homebrew/gui/meld
 
 brew install graphviz
-brew install caskroom/cask/java
-brew install Caskroom/cask/bwana Caskroom/cask/manopen
-brew install imagemagick --with-rsvg --with-wmf --with-littlecms --with-littlecms2 --with-pango --with-ghostscript --with-fontconfig
-brew install packer Caskroom/cask/vagrant
+brew install imagemagick -- --with-webp --with-librsvg --with-wmf --with-little-cms --with-little-cms2 --with-pango --with-ghostscript --with-fontconfig
+brew install gollum github-markdown-toc
+
+brew cask install docker
+brew cask install google-chrome
+brew cask install firefox
+brew cask install spotify
+brew cask install visual-studio-code
+brew cask install iterm2
+brew cask install karabiner-elements
+brew cask install beardedspice
+brew cask install skim
+brew cask install keka kekadefaultapp
+brew cask install typora
+brew cask install postgres
+brew cask install robo-3t
+
+brew tap homebrew/cask-fonts
+brew cask install font-fantasque-sans-mono
+
+npm i -g yarn
+npm i -g bash-language-server
+npm i -g npm-name-cli
