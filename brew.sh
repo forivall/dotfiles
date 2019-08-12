@@ -5,7 +5,7 @@ xcode-select --install
 
 brew install node
 brew install coreutils findutils dateutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt
-brew install most colordiff trash htop tree ripgrep vim
+brew install most colordiff trash htop tree ripgrep fd vim
 brew install libtool autoconf automake
 brew install git hub git-extras git-lfs git-credential-manager zaquestion/tap/lab
 # for TFS:
