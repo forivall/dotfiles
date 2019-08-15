@@ -135,12 +135,10 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   # }
 fi
 
-
-# whatever...
-forever() { while eval "$@" || (echo "Exited Abnormally! Restarting in 1 second."; sleep 1); do : ; done; }
-
-function sleep_until {
-  seconds=$(( $(date -d "$*" +%s) - $(date +%s) )) # Use $* to eliminate need for quotes
-  echo "Sleeping for $seconds seconds"
-  sleep $seconds
-}
+# https://wiki.archlinux.org/index.php/Zsh#Help_command
+autoload -U run-help
+autoload run-help-git
+autoload run-help-svn
+autoload run-help-svk
+unalias run-help 2> /dev/null || true
+alias help=run-help

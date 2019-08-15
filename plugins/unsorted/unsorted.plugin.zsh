@@ -143,3 +143,12 @@ if [[ $IS_OSX ]] ; then
         osascript -e "$script"
     }
 fi
+
+# whatever...
+forever() { while eval "$@" || (echo "Exited Abnormally! Restarting in 1 second."; sleep 1); do : ; done; }
+
+function sleep_until {
+  seconds=$(( $(date -d "$*" +%s) - $(date +%s) )) # Use $* to eliminate need for quotes
+  echo "Sleeping for $seconds seconds"
+  sleep $seconds
+}
