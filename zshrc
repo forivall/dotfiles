@@ -1,20 +1,11 @@
 #!/usr/bin/env zsh
 
+__zshrc_filename=${${(%):-%N}:A}
+__zshrc_dirname=${__zshrc_filename:h}
+
 # TODO: separate out all os-specific code so that we only run the platform
 # detection code on zgen reset
-setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=return; 2=$code; fi; if ("$@") 2>&1 >/dev/null ; then eval "$arg=true"; else eval "$arg=false"; fi; }
-
-setbool IS_INTERACTIVE  tty -s
-setbool IS_WINDOWS  $([[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]])
-setbool IS_OSX  $([[ "$(uname)" == "Darwin" ]])
-setbool IS_LINUXY  $(! $IS_WINDOWS && ! $IS_OSX)  # could also be BSD
-IS_XDG_() {
-  local _XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg:/foo/bar};
-  local xdg_config_dirs=(${(@s/:/)_XDG_CONFIG_DIRS});
-  [[ -d ${xdg_config_dirs[1]} ]]
-}
-setbool IS_XDG IS_XDG_
-unset IS_XDG_
+source "${__zshrc_dirname}/scripts/detect-platform.zsh"
 
 sourceIfExists() { [[ -e "$1" ]] && source "$1" }
 $IS_LINUXY && sourceIfExists /etc/profile.d/vte.sh
@@ -30,12 +21,12 @@ if ! type realpath >/dev/null ; then
   realpath() { readlink -f "$@"; }
 fi
 
-SH_ROOT="$(dirname "$(realpath ~/.zshrc)")"
-
 if $IS_LINUXY ; then
   # https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
   export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=return; 2=$code; fi; if ("$@") 2>&1 >/dev/null ; then eval "$arg=true"; else eval "$arg=false"; fi; }
   #setbool HAS_ENVOY  whence envoy
+  unset setbool
 
   # todo: create a plugin for envoy
 fi
@@ -76,7 +67,9 @@ path=(~/.local/bin $path ~/.zgen/deliciousinsights/git-stree-master)
 
 sourceIfExists "${HOME}/.iterm2_shell_integration.zsh"
 
-source "$SH_ROOT/zgen/zgen.zsh"
+unset sourceIfExists
+
+source "$__zshrc_dirname/zgen/zgen.zsh"
 setopt extendedglob
 if ! zgen saved; then
   zgen oh-my-zsh
@@ -89,7 +82,7 @@ if ! zgen saved; then
 
   zgen load srijanshetty/zsh-pandoc-completion ''
 
-  zgen load "$SH_ROOT/plugins/jump"
+  zgen load "$__zshrc_dirname/plugins/jump"
   # zgen oh-my-zsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async
   # ! $IS_WINDOWS && zgen load sindresorhus/pure
@@ -100,33 +93,33 @@ if ! zgen saved; then
   ! $IS_WINDOWS && zgen load lukechilds/zsh-nvm 
   zgen load lukechilds/zsh-better-npm-completion
   # zgen load jocelynmallon/zshimarks
-  zgen load "$SH_ROOT/plugins/functional"
-  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-functions"
-  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/cygwin-sudo"
-  $IS_OSX && zgen load "$SH_ROOT/plugins/iterm2"
+  zgen load "$__zshrc_dirname/plugins/functional"
+  $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-functions"
+  $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-sudo"
+  $IS_OSX && zgen load "$__zshrc_dirname/plugins/iterm2"
 
-  zgen load "$SH_ROOT/plugins/oneliner"
-  zgen load "$SH_ROOT/plugins/external-tools"
-  zgen load "$SH_ROOT/plugins/dimensions-in-title"
-  zgen load "$SH_ROOT/plugins/colors"
-  # zgen load "$SH_ROOT/plugins/rubygems"
-  zgen load "$SH_ROOT/plugins/coreutils"
-  zgen load "$SH_ROOT/plugins/git"
-  zgen load "$SH_ROOT/plugins/git-ftp"
-  zgen load "$SH_ROOT/plugins/github"
-  zgen load "$SH_ROOT/plugins/lab"
-  zgen load "$SH_ROOT/plugins/magic-cd"
-  zgen load "$SH_ROOT/plugins/npm"
-  $IS_WINDOWS && zgen load "$SH_ROOT/plugins/npm"
+  zgen load "$__zshrc_dirname/plugins/oneliner"
+  zgen load "$__zshrc_dirname/plugins/external-tools"
+  zgen load "$__zshrc_dirname/plugins/dimensions-in-title"
+  zgen load "$__zshrc_dirname/plugins/colors"
+  # zgen load "$__zshrc_dirname/plugins/rubygems"
+  zgen load "$__zshrc_dirname/plugins/coreutils"
+  zgen load "$__zshrc_dirname/plugins/git"
+  zgen load "$__zshrc_dirname/plugins/git-ftp"
+  zgen load "$__zshrc_dirname/plugins/github"
+  zgen load "$__zshrc_dirname/plugins/lab"
+  zgen load "$__zshrc_dirname/plugins/magic-cd"
+  zgen load "$__zshrc_dirname/plugins/npm"
+  $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
 
-  # zgen load "$SH_ROOT/plugins/nvm"
-  zgen load "$SH_ROOT/plugins/yarn"
-  zgen load "$SH_ROOT/plugins/yargs"
-  # zgen load "$SH_ROOT/plugins/subl"
-  zgen load "$SH_ROOT/plugins/trash"
-  zgen load "$SH_ROOT/plugins/unsorted"
-  zgen load "$SH_ROOT/plugins/simple-history-search"
-  # zgen load "$SH_ROOT/plugins/zgen-autoupdate" # TODO: figure out why this is slooooow!
+  # zgen load "$__zshrc_dirname/plugins/nvm"
+  zgen load "$__zshrc_dirname/plugins/yarn"
+  zgen load "$__zshrc_dirname/plugins/yargs"
+  # zgen load "$__zshrc_dirname/plugins/subl"
+  zgen load "$__zshrc_dirname/plugins/trash"
+  zgen load "$__zshrc_dirname/plugins/unsorted"
+  zgen load "$__zshrc_dirname/plugins/simple-history-search"
+  # zgen load "$__zshrc_dirname/plugins/zgen-autoupdate" # TODO: figure out why this is slooooow!
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
@@ -170,7 +163,5 @@ clean-env
 
 autoload bashcompinit && bashcompinit
 
-unset setbool
-unset sourceIfExists
 
 true
