@@ -6,6 +6,9 @@
 # unmark FOO: delete a mark
 # marks: lists all marks
 #
+# This is a fork of https://github.com/robbyrussell/oh-my-zsh/edit/master/plugins/jump/jump.plugin.zsh
+# which registers the marks as zsh static named directories
+#
 : ${MARKPATH:=$HOME/.marks}
 export MARKPATH
 
