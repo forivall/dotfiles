@@ -94,7 +94,7 @@ function git() { # also put these in git-aliases for autocomplete
   case "$1" in
     -*) opts+=($1 $2); shift; shift; cont=true;;
     fancy) shift;
-      local pager="$(git "${opts[@]}" config core.pager || echo -n "less")"
+      local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager;;
     diff) shift;
       if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then

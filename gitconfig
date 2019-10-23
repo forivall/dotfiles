@@ -4,7 +4,7 @@
 	email = 
 [core]
 	#autocrlf = input
-	pager = less
+	pager = less -x2
 	# pager = most
 	excludesfile = /Users/emilyklassen/.gitignore_global
 	trustctime = false
@@ -44,6 +44,7 @@
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged
 	root = rev-parse --show-toplevel
+	tag-column = !git tag "$@" | column
 	# useful to force make to rebuild changed files; just `| xargs touch`
 	show-files-only = show --pretty="format:" --name-only
 	serve = daemon --export-all --base-path=. --verbose

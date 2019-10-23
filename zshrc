@@ -36,6 +36,7 @@ export EDITOR=vim
 export VISUAL=vim
 HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
+tabs -2
 
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
@@ -72,12 +73,15 @@ unset sourceIfExists
 source "$__zshrc_dirname/zgen/zgen.zsh"
 setopt extendedglob
 if ! zgen saved; then
+  zgen load zsh-users/zsh-syntax-highlighting
+
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/web-search
   # zgen oh-my-zsh plugins/command-not-found # very slow
   zgen oh-my-zsh plugins/colorize
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/git-extras
+  zgen oh-my-zsh plugins/docker
   # zgen oh-my-zsh plugins/jump
 
   zgen load srijanshetty/zsh-pandoc-completion ''
@@ -89,6 +93,7 @@ if ! zgen saved; then
   ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
+  zgen load zsh-users/zsh-history-substring-search
   # zgen load deliciousinsights/git-stree
   ! $IS_WINDOWS && zgen load lukechilds/zsh-nvm 
   zgen load lukechilds/zsh-better-npm-completion
@@ -123,7 +128,6 @@ if ! zgen saved; then
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
-  zgen load zsh-users/zsh-syntax-highlighting
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
 

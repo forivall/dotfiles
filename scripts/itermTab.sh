@@ -1,6 +1,6 @@
 #!/bin/sh
 
-real_path="`/usr/local/bin/greadlink -f "$1"`"
+real_path="`/usr/local/bin/greadlink -f "${1:-$PWD}"`"
 
 osascript -e "
 tell application \"iTerm2\"

@@ -56,6 +56,8 @@ if [[ ! -d ~/.vim ]] ; then
 fi
 
 o ln -fs "$(realpath vim.janus)" ~/.janus
+o ln -fs ~/.vim ~/.config/nvim
+o ln -fs ~/.vimrc ~/.config/nvim/init.vim
 
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig

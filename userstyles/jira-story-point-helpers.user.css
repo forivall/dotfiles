@@ -1,0 +1,12 @@
+@-moz-document domain("owl.atlassian.net") {
+  [data-test-id="issue.views.issue-base.context.context-items.primary-items"]::after {
+      content: '1 2 3 5 8 13 21';
+      color: rgba(0,0,0, 0.5);
+      font-style: italic;
+      /**/
+      font-weight: 200;
+      word-spacing: 1em;
+      font-size: smaller;
+      /**/
+  }
+  }
