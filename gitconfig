@@ -31,7 +31,9 @@
 	diffc = diff --cached
 	last = show --oneline --name-status --decorate
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
-	la = log --pretty=oneline --abbrev-commit --decorate --graph --all
+	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude='refs/remotes/*/archive/**' --all
+	laa = log --pretty=oneline --abbrev-commit --decorate --graph --all
+	lo = log --pretty=oneline --abbrev-commit --decorate --graph --remotes=origin --branches
 	l2 = log --pretty="tformat:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph --no-notes
 	l3 = log --pretty="tformat:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
 	lg = log --name-status --pretty=oneline --abbrev-commit --decorate --graph
