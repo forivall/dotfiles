@@ -4,7 +4,8 @@
 	email = 
 [core]
 	#autocrlf = input
-	pager = less -x2
+	# pager = delta --dark --theme base16
+	pager = less +X -x2 -R
 	# pager = most
 	excludesfile = /Users/emilyklassen/.gitignore_global
 	trustctime = false
@@ -31,7 +32,7 @@
 	diffc = diff --cached
 	last = show --oneline --name-status --decorate
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
-	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude='refs/remotes/*/archive/**' --all
+	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --all
 	laa = log --pretty=oneline --abbrev-commit --decorate --graph --all
 	lo = log --pretty=oneline --abbrev-commit --decorate --graph --remotes=origin --branches
 	l2 = log --pretty="tformat:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph --no-notes

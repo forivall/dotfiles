@@ -47,6 +47,8 @@ HYPHEN_INSENSITIVE=true
 COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 
+BAT_PAGER="less +X -x2 -FR"
+
 # zsh settings
 setopt extended_glob
 setopt bareglobqual

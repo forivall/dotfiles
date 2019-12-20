@@ -96,6 +96,9 @@ function git() { # also put these in git-aliases for autocomplete
     fancy) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager;;
+    delta) shift;
+      local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
+      git "${opts[@]}" -c color.diff=always "$@" | delta --theme=base16 --highlight-removed | $pager;;
     diff) shift;
       if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
         /usr/bin/env git --no-pager diff $@

@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+local service=$1; shift;
+docker-compose $@ stop -t1 $service &&
+# docker-compose $@ create $service &&
+docker-compose $@ start $service
