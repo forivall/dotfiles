@@ -5,8 +5,8 @@ elif $IS_OSX; then
   if ! type trash >/dev/null 2>/dev/null ; then
     brew install trash
   fi
-  alias rm=trash
-  alias rmsu="sudo trash"
+  alias rm="trash -F"
+  alias rmsu="sudo trash -F"
 elif [ -z "${KDE_SESSION_UID+x}" ] ; then
   if whence gio 2>/dev/null >/dev/null ; then
     alias rm="gio trash --"
