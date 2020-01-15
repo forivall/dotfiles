@@ -33,7 +33,7 @@ fi
 
 # core shell settings
 export EDITOR=vim
-export VISUAL=vim
+export VISUAL=code
 HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
 tabs -2

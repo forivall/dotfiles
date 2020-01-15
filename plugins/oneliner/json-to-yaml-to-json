@@ -1,0 +1,11 @@
+if (( $# > 0 )) ; then
+  for json in $@ ; do
+    local yaml=${json%.json}.yaml
+    # brew install yq
+    echo yq r $1 '>' $yaml
+    yq r $1 > $yaml
+  done
+fi
+
+# npm i -g chokidar-cli js-yaml
+chokidar --verbose "${1:h}/*.yaml" -c 'f="{path}"; js-yaml $f > ${f%.yaml}.json'
