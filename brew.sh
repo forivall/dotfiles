@@ -29,11 +29,11 @@ brew cask install firefox
 brew cask install spotify
 brew cask install visual-studio-code
 brew cask install iterm2
-brew cask install karabiner-elements
+brew cask install karabiner-elements middleclick
 brew cask install beardedspice
 brew cask install skim
 brew cask install keka kekadefaultapp
-brew cask install typora
+brew cask install typora notable
 brew cask install postgres
 brew cask install robo-3t
 brew cask install cheatsheet

@@ -137,7 +137,7 @@ if ! zgen saved; then
   local ofpath=(${fpath})
   fpath=(${(q)ZGEN_COMPLETIONS[@]} ${fpath})
   for func in ${(kM)functions:#*__build_completions} ; do
-    # echo "Running $func..." >&2
+    echo "Running $func..." >&2
     $func
   done
   fpath=(${ofpath})
