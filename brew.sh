@@ -17,6 +17,8 @@ brew install flow shellcheck pandoc
 brew install mongodb
 brew install diffuse homebrew/gui/meld
 
+brew install bat
+brew install git-delta -s --HEAD --verbose
 brew install graphviz
 brew install imagemagick -- --with-webp --with-librsvg --with-wmf --with-little-cms --with-little-cms2 --with-pango --with-ghostscript --with-fontconfig
 brew install gollum github-markdown-toc
