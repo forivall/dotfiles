@@ -1,1 +1,5 @@
-cd ~owl/repos${PWD#~owl2-env/packages}
+local worktree=~owl/repos${PWD#~owl2-env/packages}
+if ! [[ -d $worktree ]] ; then
+  git worktree add $worktree -b $(git symbolic-ref HEAD --short)+worktree
+fi
+cd $worktree
