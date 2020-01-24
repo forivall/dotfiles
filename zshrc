@@ -146,6 +146,10 @@ if ! zgen saved; then
 fi
 unsetopt nomatch
 
+# todo: move into docker plugin
+source /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion
+source /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion
+
 # TODO: move to a vscode plugin
 if [[ "$VSCODE_CLI" == 1 ]] ; then
   AMD_ENTRYPOINT=
