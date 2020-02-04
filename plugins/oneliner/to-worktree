@@ -1,5 +1,15 @@
 local worktree=~owl/repos${PWD#~owl2-env/packages}
-if ! [[ -d $worktree ]] ; then
-  git worktree add $worktree -b $(git symbolic-ref HEAD --short)+worktree
+if [[ ! -d $worktree ]] ; then
+  local toplevel
+  if toplevel=$(git rev-parse --show-toplevel) ; then
+    local root=~owl/repos${toplevel#~owl2-env/packages}
+    local branch
+    if branch=$(git symbolic-ref HEAD --short) ; then
+      git worktree add $root -b $branch+worktree ||
+      git worktree add $root $branch+worktree
+    else
+      git worktree add $root --detach
+    fi
+  fi
 fi
 cd $worktree

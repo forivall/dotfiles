@@ -41,6 +41,7 @@ brew cask install gitup
 brew cask install rowanj-gitx
 # brew cask install postman
 brew cask install insomnia
+brew cask install clipy
 
 brew tap homebrew/cask-fonts
 brew cask install font-fantasque-sans-mono
