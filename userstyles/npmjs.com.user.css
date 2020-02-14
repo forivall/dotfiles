@@ -201,12 +201,10 @@ Their github is https://github.com/AlcaDesign
 
   ._1gHZ2.rtKBH:hover {
     /* 	background: inherit; */
-    ;
   }
 
   ._1gHZ2._3sUHq:hover {
-    /* 	hsla(302, 57%, 50%, 0.2) */
-    ;
+    /* hsla(302, 57%, 50%, 0.2); */
   }
 
   /* ... */
@@ -289,8 +287,7 @@ Their github is https://github.com/AlcaDesign
   }
 
   ._3yof6 table {
-    /* 	border-bottom-color: hsla(0, 0%, 100%, 0.1) */
-    ;
+    /* border-bottom-color: hsla(0, 0%, 100%, 0.1); */
   }
 
   ._3yof6 td,
@@ -523,7 +520,7 @@ Their github is https://github.com/AlcaDesign
     color: hsl(0, 0%, 100%);
   }
 
-  @ media screen and (min-width: 60em) {
+  @media screen and (min-width: 60em) {
     ._1gHZ2 {
       border-left: none;
       border-bottom: 2px solid #cb3837;
@@ -587,8 +584,7 @@ Their github is https://github.com/AlcaDesign
   }
 
   ._1gHZ2.rtKBH ._2tDwu {
-    /* 	color: rgb(41, 0, 138); */
-    ;
+    /* color: rgb(41, 0, 138); */
   }
 
   ._1gHZ2.rtKBH svg,
