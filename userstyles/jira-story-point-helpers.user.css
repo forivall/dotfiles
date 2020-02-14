@@ -1,3 +1,11 @@
+/* ==UserStyle==
+@name         Jira - Story Point Helpers
+@namespace    github.com/openstyles/stylus
+@version      1.0.0
+@license      unlicense
+@preprocessor default
+==/UserStyle== */
+
 @-moz-document domain("owl.atlassian.net") {
   [data-test-id="issue.views.issue-base.context.context-items.primary-items"]::after {
       content: '1 2 3 5 8 13 21';
