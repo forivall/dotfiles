@@ -1,0 +1,107 @@
+[
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1566615568795,
+		"name": "codesandbox.io",
+		"sections": [
+			{
+				"code": "body, body * {\n    -webkit-font-smoothing: auto !important;  \n    font-smoothing: auto !important;\n    text-rendering: unset !important;\n}\n",
+				"domains": [
+					"codesandbox.io"
+				]
+			}
+		],
+		"updateDate": 1566615895898,
+		"id": 1,
+		"_id": "0253f9c1-eaee-4cbb-8dc3-97dc9a43e91f",
+		"_rev": 1580756359775
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1568831503367,
+		"name": "gitlab.dev.owl.co",
+		"sections": [
+			{
+				"code": "* {\n  -moz-tab-size: 2;\n  tab-size: 2;\n}",
+				"domains": [
+					"gitlab.dev.owl.co"
+				]
+			}
+		],
+		"updateDate": 1568831503367,
+		"id": 2,
+		"_id": "caa8a604-6d9b-48cb-8f6c-59593b8fb098",
+		"_rev": 1580756359775
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1569265350670,
+		"name": "JIRA story point guide",
+		"sections": [
+			{
+				"code": "[data-test-id=\"issue.views.issue-base.context.context-items.primary-items\"]::after {\n    content: '1 2 3 5 8 13 21';\n    color: rgba(0,0,0, 0.5);\n    font-style: italic;\n    /**/\n    font-weight: 100;\n    word-spacing: 1em;\n    font-size: smaller;\n    /**/\n}",
+				"domains": [
+					"owl.atlassian.net"
+				]
+			}
+		],
+		"updateDate": 1569265577483,
+		"id": 3,
+		"_id": "d834cc1c-cc36-48ad-8d37-d63c90421340",
+		"_rev": 1580756359775
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1569353472782,
+		"name": "tasks.google.com",
+		"sections": [
+			{
+				"code": "body[style] {\n  display: initial !important;\n}",
+				"urlPrefixes": [
+					"https://tasks.google.com/embed/"
+				]
+			}
+		],
+		"updateDate": 1569353634596,
+		"id": 4,
+		"_id": "cb820504-9988-4b89-8a9d-edeaccfe1bf6",
+		"_rev": 1580756359775
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1582071187904,
+		"name": "dropbox.com",
+		"sections": [
+			{
+				"code": "#onboarding-sidebar-pagelet, #prompt-silo {\n    display: none;\n}",
+				"domains": [
+					"dropbox.com"
+				]
+			}
+		],
+		"updateDate": 1582071363016,
+		"_id": "e2637994-3106-4866-a37c-eeaf814a9f29",
+		"_rev": 1582071363016,
+		"id": 5
+	}
+]

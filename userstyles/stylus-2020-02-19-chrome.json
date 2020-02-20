@@ -1,0 +1,23 @@
+[
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1565754514088,
+		"name": "youtube.com move search to bottom",
+		"sections": [
+			{
+				"code": "#masthead-container.ytd-app {\n    top: unset;\n    bottom: 0;\n}\n#page-manager.ytd-app {\n    margin-top: unset;\n    margin-bottom: var(--ytd-masthead-height, 56px);\n}\n#skip-navigation,\n#guide-spacer {\n    display: none;\n}\nytd-mini-guide-renderer.ytd-app {\n    z-index: initial;\n    top: 0;\n}\nytd-watch-flexy:not([theater]):not([fullscreen]):not([is-two-columns_]) #primary.ytd-watch-flexy {\n    padding-top: 0;\n}\nytd-watch-flexy[flexy_] {\n    --ytd-watch-flexy-space-below-player: 1px;\n}\nytd-watch-flexy[flexy_]:not([is-two-columns_]) #player-container-outer.ytd-watch-flexy,\nytd-watch-flexy[flexy_]:not([is-two-columns_]) #primary.ytd-watch-flexy {\n    /* */\n    margin-left: 0;\n    padding-right: 0;\n    /* * /\n\t    margin-right: -48px;\n\t    /* */\n}\nytd-watch-flexy:not([theater]):not([fullscreen]):not([is-two-columns_]) .html5-video-player .video-stream {\n    /* TODO: get actual scrollbar width instead of hardcoding 15px */\n    /* width: calc(100vw - 15px) !important; */\n    width: 100% !important;\n    height: calc( (100vw - var(--ytd-watch-flexy-scrollbar-width)) * var(--ytd-watch-flexy-height-ratio) / var(--ytd-watch-flexy-width-ratio)) !important;\n}\nytm-app.sticky-player {\n    padding-top: 0 !important;\n}\nytm-mobile-topbar-renderer.sticky-player,\nytm-header-bar.sticky-player.in,\nytm-mobile-topbar-renderer.sticky-player.in {\n    top: unset !important;\n    bottom: 0 !important;\n}\n\n.player-container.sticky-player {\n    top: 0 !important;\n}\n\n\n:root::-webkit-scrollbar {\n    width: 15px;\n  /*     height: 8px; */\n  background-color: var(--yt-spec-general-background-a, rgb(25, 26, 27));\n}\n\n:root::-webkit-scrollbar-thumb {\n  min-height: 25px;\n  background: #ffffff1a;\n  /**/ border: 3px var(--yt-spec-general-background-a, rgb(25, 26, 27)) solid; /**/\n  border-right-width: 4px;\n  border-top-width: 2px;\n  border-bottom-width: 2px;\n  border-radius: 10px;\n}\n:root::-webkit-scrollbar-thumb:hover {\n  background: #ffffff30;\n}",
+				"domains": [
+					"youtube.com"
+				]
+			}
+		],
+		"updateDate": 1582141415967,
+		"id": 1,
+		"_id": "e60f7417-a405-4322-8317-78838f3888ce",
+		"_rev": 1582141415967
+	}
+]

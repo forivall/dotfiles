@@ -1,0 +1,2746 @@
+*
+
+INVERT
+.jfk-bubble
+
+CSS
+.vimvixen-hint {
+    background-color: ${#ffd76e} !important;
+    border-color: ${#c59d00} !important;
+    color: ${#302505} !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+
+:root {
+  scrollbar-color: rgba(175, 175, 175, 0.5) hsl(0, 0%, 10%) !important;
+  scrollbar-width: thin !important;
+}
+
+================================
+
+*.atlassian.net
+
+CSS
+#jira-issue-header {
+    background-color: #1b1d1e;
+    box-shadow: #1b1d1e 0px 2px;
+}
+.hXTvNB {
+  background-color: #1b1d1e;
+}
+.gbUDFI {
+  box-shadow: #1b1d1e 0px 2px 0px 0px inset;
+}
+
+================================
+
+01net.com
+
+CSS
+html, body {
+    color: ${#090702} !important;
+}
+
+================================
+
+3.basecamp.com
+
+CSS
+body, .nav__main {
+    background-color: ${white};
+}
+@media screen and (min-width: 768px){
+    .panel--perma, .panel--project {
+        box-shadow: rgba(0, 0, 0, 0.05) 0px -1px 10px, rgba(0, 0, 0, 0.1) 0px 1px 4px, rgb(24, 26, 27) 0px 10px 30px;
+    }
+}
+
+================================
+
+4pda.ru
+
+CSS
+.catend {
+    background: ${#e8e8e8} !important;
+}
+
+================================
+
+abandonia.com
+
+CSS
+.alt1G2 {
+    background-image: none !important;
+}
+.alt2G2 {
+    background-image: none !important;
+}
+
+================================
+
+akinator.com
+
+INVERT
+.bubble
+.bubble-body
+
+CSS
+.bubble {
+    background-color: ${black} !important;
+    color: ${white} !important;
+}
+.bubble-body {
+    background-color: ${white} !important;
+    color: ${black} !important;
+}
+.question-number {
+    color: ${white} !important;
+}
+
+================================
+
+angrymetalguy.com
+
+INVERT
+.plbrand
+
+CSS
+.thepage {
+    background-color: ${white} !important;
+}
+.content-pad {
+    background-color: ${white} !important;
+}
+
+================================
+
+anilist.co
+
+CSS
+:root {
+    --color-background: 39,44,56 !important;
+    --color-foreground: 31,35,45 !important;
+    --color-foreground-grey: 25,29,38 !important;
+    --color-foreground-grey-dark: 16,20,25 !important;
+    --color-foreground-blue: 25,29,38 !important;
+    --color-foreground-blue-dark: 19,23,29 !important;
+    --color-text: 159,173,189 !important;
+    --color-text-light: 129,140,153 !important;
+    --color-text-lighter: 133,150,165 !important;
+}
+
+================================
+
+app.datadoghq.com
+
+INVERT
+.HostMap-canvas
+
+CSS
+.log-dt-event.active, .log-dt-event.active:hover, .log-dt-event:hover {
+    background-color: rgb(37, 45, 58) !important;
+}
+svg text.time_cursor {
+    fill: ${black} !important;
+}
+
+================================
+
+app.mysms.com
+
+CSS
+.message a {
+     color: grey;
+}
+
+================================
+
+app.timelyapp.com
+
+INVERT
+.Clock__clock_css_icon___LfBr6
+.Clock__stopwatch___2G-CB
+
+CSS
+.Day__container___1Fpnl.Day__showBackground___3CXnw {
+     background-image: none;
+}
+
+================================
+
+app.youneedabudget.com
+
+CSS
+[data-darkreader-inline-fill] {
+    fill: ${black} !important;
+}
+
+================================
+
+arstechnica.com
+
+CSS
+.listing, .video-thumbnail {
+    background-blend-mode: initial !important;
+}
+.article-single figure img {
+    mix-blend-mode: initial !important;
+}
+
+================================
+
+askubuntu.com
+*.stackexchange.com
+
+INVERT
+.math
+
+CSS
+body {
+  background-image: none !important;
+}
+.profile-cards--graph .line {
+    stroke: Green;
+    fill: none;
+}
+.fc-light {
+    /* background-color: #181a1b; */
+}
+#content {
+  border-left-color: #181a1b !important;
+}
+
+================================
+
+atcoder.jp
+
+CSS
+#fixed-server-timer {
+    color: #333;
+}
+
+================================
+
+aws.amazon.com
+
+INVERT
+a.lb-trigger
+.img-wrapper
+img[alt^="WEB_FreeTier"]
+.lb-is-lazyloaded
+.lb-none-v-margin.lb-img
+
+================================
+
+baike.baidu.com
+
+INVERT
+.formula
+
+================================
+
+bbc.com/news
+bbc.com/sport
+bbc.com/weather
+bbc.com/travel
+bbc.com/capital
+bbc.com/autos
+bbc.com/culture
+bbc.com/future
+bbc.com/sounds
+bbc.com/food
+bbc.com/bitesize
+bbc.com/earth
+
+INVERT
+.orb-nav-section.orb-nav-blocks
+.orb-icon.orb-icon-arrow
+
+================================
+
+bgp.he.net
+
+INVERT
+img[src="/helogo.gif"]
+img[src*="chart.googleapis.com"]
+img[src^="/graphs/"]
+
+================================
+
+bigocheatsheet.com
+
+INVERT
+.gray
+
+CSS
+.green,
+.orange,
+.yellow,
+.yellow-green {
+    color: black !important;
+}
+
+================================
+
+bitbucket.org
+
+INVERT
+a[href="/product"]
+.registration-hero .form-prompt
+
+================================
+
+blogger.com
+
+INVERT
+.gb_ua
+.feedflare
+
+================================
+
+booking.com
+
+INVERT
+.bui-calendar__control
+.-iconset-close
+.-iconset-navarrow_left
+.-iconset-navarrow_right
+.sort_more_options__button
+.mb-ico
+.-iconset-review_great
+.-iconset-review_poor
+.-iconset-chat_bubbles
+
+================================
+
+cheapshark.com
+
+CSS
+.header {
+    border-top: 10px solid #000 !important;
+}
+
+================================
+
+chtoes.li
+
+INVERT
+.illustration
+.menu-page
+.menu-item
+
+================================
+
+code.qt.io
+
+INVERT
+div#cgit
+td[class="logo"]
+select
+input
+
+================================
+
+codecademy.com
+
+INVERT
+.CodeMirror-cursors
+.CodeMirror-selected
+span[class^="burger"]
+
+================================
+
+cookiepedia.co.uk
+
+INVERT
+.main-logo
+.footer-logo
+
+================================
+
+coopgames.eu
+
+INVERT
+img[alt="Online Co-Op"]
+img[alt="Local Co-Op"]
+img[title="PS2"]
+img[title="PS3"]
+img[title="PS4"]
+img[title="PSP"]
+img[title="PS Vita"]
+img[title="DS"]
+img[title="3DS"]
+img[title="Switch"]
+
+================================
+
+courses.fit.cvut.cz
+
+CSS
+body {
+    color: #909090;
+}
+
+.App.in-search {
+    background-color: #212121 !important;
+}
+
+.UserMenu .user-initials {
+    background-color: #616161 !important;
+}
+
+.CoursesItem .column-info > a:hover {
+    color: #58c1ffba;
+}
+
+header {
+    background-color: #212121 !important;
+}
+
+pre {
+    color: #a8a6ab
+}
+
+.header {
+    background: none;
+    border-bottom: 1px solid #676767;
+}
+
+main img {
+    opacity: 0.8;
+}
+
+a {
+    color: #58c1ffba
+}
+
+================================
+
+cplusplus.com
+
+CSS
+img[src$=".png"] {
+    background-color: white;
+}
+
+================================
+
+darksky.net
+
+INVERT
+.currentLocationButton
+.searchButton
+span[class^="skycon swip"]
+#right-arrow
+#left-arrow
+
+================================
+
+datacamp.com
+
+CSS
+video#vjs_video_3_html5_api.vjs-tech {
+    transform: translate(0px, 0px) !important;
+    background-color: rgb(175, 175, 175, 0.5);
+}
+
+================================
+
+decathlon.pl
+
+INVERT
+.dkt_logo
+.benefit-icon
+
+================================
+
+developer.mozilla.org
+
+INVERT
+.logo
+mark
+
+================================
+
+dictionary.cambridge.org
+
+INVERT
+.cb.hao.lpt-2
+.cb.hv-2.lmr-10
+
+================================
+
+digg.com
+
+CSS
+.digg-story__title-link {
+    color: ${black} !important;
+}
+.digg-story__description {
+    color: ${black} !important;
+}
+
+================================
+
+docs.google.com
+
+INVERT
+.docs-icon
+.punch-filmstrip-controls-icon
+#docs-editor canvas
+.docs-homescreen-icon
+.kix-equation-toolbar-icon
+.kix-equation-toolbar-palette-icon
+.cell-input
+
+CSS
+.cell-input {
+  background-color: ${black} !important;
+  color: ${white} !important;
+}
+
+.cell-input > span, .cell-input > font {
+  --darkreader-inline-color: ${white} !important;
+}
+
+================================
+
+dropbox.com
+
+INVERT
+.dl-dropbox
+
+================================
+
+drupal.org
+
+CSS
+input[type="image"] {
+  background: none;
+}
+
+================================
+
+dtf.ru
+
+INVERT
+mark
+
+================================
+
+duolingo.com
+
+INVERT
+.qLLbC
+._2boWj
+
+================================
+
+education.github.com
+
+INVERT
+img[alt="GitHub Education"]
+.octicon-logo-github
+
+================================
+
+elearning.utdallas.edu
+
+INVERT
+.contentBox.contentBox-edit
+.content.clearfix
+
+================================
+
+endomondo.com
+
+INVERT
+.header-shop-logo
+
+================================
+
+etsy.com
+
+INVERT
+.banner-container
+.secondary-banner-title
+
+================================
+
+evernote.com
+
+INVERT
+.global-logo svg
+
+================================
+
+exmo.me
+
+INVERT
+canvas
+
+================================
+
+facebook.com
+
+INVERT
+._3qb- img
+._2o7_
+._2o89
+._2q08
+.sx_af7fe0
+.sx_7ed17e
+.sx_a4a936
+.sx_4d607f
+._xlt
+.sx_aca067
+.sx_77228a
+.sx_51302f
+._2yu5
+._3iiv
+._3pao
+.kv0qyzoi
+.sx_426ea6
+.sx_b77acf
+._2gb3
+._7sjb
+._4k6w
+.sx_b9f33b
+._3w97
+.sx_2e7846
+._-op i
+.sx_6d18f4
+.monochrome
+.hu5pjgll.sp_66mIw9cKlB9
+.repliedLast
+.hu5pjgll.eb18blue
+.sx_0f440a
+.sx_73ef60
+.sx_f77c61
+
+CSS
+.fbNubButton {
+    background-image: none !important;
+}
+.jewelItemNew ._33e {
+    background-color: ${#d0d1d3} !important;
+}
+._5qxm {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-blend-mode: color;
+}
+.sx_cf4e6b {
+    filter: brightness(250%) !important;
+}
+._34k2 {
+    filter: brightness(1000%) !important;
+}
+
+================================
+
+fantasy.premierleague.com
+
+INVERT
+.ism-table
+
+================================
+
+farside.ph.utexas.edu
+mathpages.com
+mathprofi.ru
+mathprofi.net
+mathworld.wolfram.com
+reference.wolfram.com
+terrytao.wordpress.com
+
+INVERT
+img
+
+================================
+
+fastmail.com/mail
+
+CSS
+.app-listItem.is-focused,
+.app-source.is-selected {
+    background-color: ${lightgray} !important;
+}
+.app-source.is-focused {
+    background-color: ${lightblue} !important;
+    color: ${black} !important;
+}
+.v-MailboxItem-unreadbadge {
+    background-color: ${darkblue} !important;
+}
+.v-Message-body {
+    border-color: transparent !important;
+}
+
+================================
+
+ffmpeg.zeranoe.com
+
+INVERT
+.active
+
+================================
+
+firebase.google.com
+
+INVERT
+.devsite-site-logo
+
+================================
+
+fivethirtyeight.com
+
+INVERT
+.logo
+.site-logo
+#searchform
+.header-espn-link
+
+================================
+
+flow.polar.com
+
+INVERT
+.brand
+.detail-data-panel__icon
+.sleep-chart-yaxis.end
+
+CSS
+.highlight {
+    color: ${#ffffff} !important;
+}
+.altitudetitle {
+    color: ${#ffffff} !important;
+}
+.altdescmax {
+    color: ${#ffffff} !important;
+}
+.altdescmin {
+    color: ${#ffffff} !important;
+}
+.zonedesctitle {
+    color: ${#ffffff} !important;
+}
+.zonedescmax {
+    color: ${#ffffff} !important;
+}
+.zonedesclight {
+    color: ${#ffffff} !important;
+}
+.highcharts-container svg {
+    fill: ${#3f3f3f} !important;
+}
+.card__item-icon--rounded img {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    background-blend-mode: color;
+}
+
+================================
+
+foobar2000.org
+
+INVERT
+img[src="/foobarlogo.png"]
+
+================================
+
+forum.miranda-ng.org
+
+CSS
+.firstlevel {
+    color: ${#666666} !important;
+}
+
+================================
+
+garmin.com
+
+INVERT
+.gh__logo
+
+================================
+
+gazeta.pl
+
+INVERT
+.column
+
+CSS
+.top_section_bg, .bottom_section_bg {
+    background-color: ${#e5e5e5} !important;
+}
+
+================================
+
+gazetawroclawska.pl
+
+INVERT
+.atomsNavigationFooterLegal
+.componentsSiteHeader
+.atomsNavigationFooterAccordion
+.atomsNavigationFooterSocialmedia__link
+.atomsNavigationFooterSocialmedia__button
+.atomsArticlePollVoting__pulseDescription
+.atomsArticlePollVoting__form
+.atomsArticlePollVoting__voteTitle
+.componentsArticleGallery__captionDescription
+.componentsPromotionsVideo__title
+.layoutsGrid
+article .atomsArticleTile__tileImg
+.layoutsGrid--last .atomsArticleTile__tileImg
+.componentsArticleGallery__img
+.componentsArticleGallery__thumbnail
+.atomsArticleFootTools__button
+.componentsPromotionsOffers__fakeImg
+.atomsNavigationFooterLinks__logoImg
+.ytp-cued-thumbnail-overlay
+.componentsRecommendationsSelected__photo
+.componentsPromotionsSubjectCategoryPromoted__image
+p.nieprzeczytane
+p.przeczytane
+article iframe
+.atomsPromotionsQuiz__imageWrapper
+.atomsPromotionsLink__imageWrapper
+
+================================
+
+get.todoist.help
+
+CSS
+.dth-page-body.dth-bg-contain.dth-bg-top-center.dth-bg-repeat-x {
+    background-image: none !important;
+}
+
+================================
+
+github.blog
+
+INVERT
+a[href="https://github.com"]
+.site-branding > svg
+
+================================
+
+github.com
+
+INVERT
+.octotree-sidebar
+.cc-pr__logo
+.cc-octicon
+
+CSS
+.markdown-body code,
+.markdown-body pre {
+    background-color: ${rgba(27, 31, 35, 0.1)} !important;
+}
+.markdown-body pre code {
+    background-color: transparent !important;
+}
+.refined-github .dashboard .js-all-activity-header + div {
+    background-color: ${#e4e5e9} !important;
+    border-color: ${#bbc1c9} !important;
+}
+.refined-github .dashboard-rollup-items .body {
+    border-top-color: ${#bbc1c9} !important;
+}
+.js-site-search-form {
+    background-color: #ffffff1a !important;
+    border-radius: 2pt !important;
+}
+.day[fill="#ebedf0"], .legend li[style*="background-color: rgb(235, 237, 240)"] {
+    fill: ${#ebedf0} !important;
+    background-color: ${#ebedf0} !important;
+}
+.day[fill="#c6e48b"], .legend li[style*="background-color: rgb(198, 228, 139)"] {
+    fill: ${#c6d4cb} !important;
+    background-color: ${#c6d4cb} !important;
+}
+.day[fill="#7bc96f"], .legend li[style*="background-color: rgb(123, 201, 111)"] {
+    fill: ${#7bb97f} !important;
+    background-color: ${#7bb97f} !important;
+}
+.day[fill="#239a3b"], .legend li[style*="background-color: rgb(35, 154, 59)"] {
+    fill: ${#238a3b} !important;
+    background-color: ${#238a3b} !important;
+}
+.day[fill="#196127"], .legend li[style*="background-color: rgb(25, 97, 39)"] {
+    fill: ${#196127} !important;
+    background-color: ${#196127} !important;
+}
+.blob-num:not(.cc-coverage-covered-border):not(.cc-coverage-missed-border) {
+    border-right: 0 !important;
+}
+.cc-issue-description {
+    color: #24292e !important;
+}
+.cc-readup-background {
+    background-color: rgb(28, 30, 31) !important
+}
+.cc-readup-content {
+    border-left: 1px solid grey !important;
+    color: rgb(216, 214, 208) !important;
+}
+.cc-readup-content blockquote {
+    border-left: 3px solid dimgrey !important;
+}
+.cc-pr__link-text {
+    color: darkgrey !important;
+}
+.cc-pr__tooltip {
+    background-color: rgb(28, 30, 31) !important;
+    color: darkgrey !important;
+}
+
+================================
+
+gitlab.com
+
+INVERT
+.js-contrib-calendar
+
+================================
+
+giveawayoftheday.com
+
+CSS
+.countdown-amount .diggit {
+    background: url(/images/sprite.png) 0 0 no-repeat !important;
+}
+
+================================
+
+google.*/maps
+google.*.*/maps
+
+INVERT
+#app-container.vasquette:not(.app-imagery-mode):not(.app-globe-mode) .widget-scene-canvas
+.widget-settings-button-icon
+.searchbox-hamburger::before
+.searchbox-searchbutton::before
+.maps-sprite-settings-chevron-left
+a.ita-kd-icon-button > span
+li.ita-kd-menuitem > span.ita-kd-menuitem-inputtool-icon
+li.ita-kd-menuitem > span.ita-kd-checkbox
+div.maps-sprite-common-chevron-left
+span.maps-sprite-common-chevron-right
+span.section-destination-via-line-icon
+div.section-directions-trip-travel-mode-icon
+div.goog-menu-button-dropdown
+button.searchbox-hamburger.white-foreground
+label.kd-radio-label:before
+label.kd-checkbox-label:before
+label.kd-checkbox-label:after
+button.section-directions-details-action-button
+div.section-loading-spinner
+a.gb_b > div
+a.gb_xc
+.gm-style img[role="presentation"]:not([src*="v=840"])
+.i4ewOd-xl07Ob
+.i4ewOd-LQLjdd li::before
+.un1lmc-j4gsHd
+.maps-sprite-settings-languages
+.gb_D.gb_oc
+
+================================
+
+gsuite.google.com
+
+INVERT
+.header--logo img
+
+================================
+
+habr.com
+
+INVERT
+img[src*="//tex.s2cms.ru/"]
+
+CSS
+html {
+    text-shadow: none !important;
+}
+
+================================
+
+hackerrank.com
+
+INVERT
+.badge-title
+.badge-star
+
+================================
+
+hdgo.cc
+vio.to
+
+INVERT
+.hdplayer .big_play_button div
+.hdplayer .hdgo_controls div.hdgo_pause_control div
+.hdplayer .hdgo_controls div.hdgo_play_control div
+
+================================
+
+hh.ru
+
+CSS
+html {
+    text-shadow: none !important;
+}
+
+================================
+
+imdb.com
+
+CSS
+#wrapper {
+    background: ${#e3e2dd} !important;
+}
+
+================================
+
+inoreader.com
+
+CSS
+.article_expanded {
+    background-color: rgb(31, 35, 38) !important;
+}
+
+================================
+
+instagram.com
+
+INVERT
+.s4Iyt
+.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm
+._47KiJ
+.ltpMr
+._7zQEa
+.fr66n
+._15y0l
+._5e4p
+.wmtNn
+._5fEvj
+.XfCBB ._6q-tv
+.u-__7
+.MWDvN
+.g9vPa
+
+================================
+
+instructure.com
+
+INVERT
+.title_3bek::after
+
+================================
+
+ipko.pl
+
+INVERT
+.ZLc3L
+
+CSS
+._1IGN3 {
+    background-size: 75px 56px !important;
+}
+._3cnGx::before {
+    background-size: 112px 80px !important;
+}
+
+================================
+
+jamboard.google.com
+
+INVERT
+.docs-icon-img-container
+.jam-button-content
+.jam-icon-palette-black
+.jam-icon-sticky-note-black
+
+================================
+
+java.com
+
+INVERT
+html #jvc0v2.bg1 .jvc0w1
+html #jvc0v2.bg3 .jvc0w1
+html #jvc0v2.bg5 .jvc0w1
+
+================================
+
+jira.*.com
+
+INVERT
+.aui-dropdown2-trigger::after
+
+================================
+
+jisho.org
+
+INVERT
+h1.logo
+
+================================
+
+keep.google.com
+
+INVERT
+.gb_oe
+.gb_je
+.gb_ef
+.gb_hc
+
+================================
+
+komputerswiat.pl
+
+INVERT
+.serviceIcon
+
+================================
+
+last.fm
+
+INVERT
+.header-new-love-button::before
+.resource-external-link--homepage::before
+
+CSS
+.user-dashboard-loved-tracks .user-dashboard-big-datapoint-value a {
+    color: ${#666666} !important;
+}
+.user-dashboard-catalogue-item-total a {
+    color: ${#666666} !important;
+}
+.masthead-logo {
+    filter: saturate(25); 
+}
+.highcharts-text-outline {
+    stroke: none !important;
+}
+.user-dashboard-scalable-content span {
+    color: ${#666666} !important;
+}
+
+================================
+
+lastpass.com
+
+INVERT
+.lp-header__logo--link
+
+================================
+
+lenovo.com
+
+INVERT
+.m-megaMenu
+
+CSS
+.m-mastheadUtilityLinks {
+    background: none !important;
+}
+
+================================
+
+linkedin.com
+
+INVERT
+.global-footer-compact__linkedin-logo
+.mb3:not(.container-with-shadow):not(.org-jobs-recently-posted-jobs-module)
+
+CSS
+.js-job-card-company-logo {
+    background-color: rgba(255, 255, 255, 0.20);
+    background-blend-mode: color;
+}
+
+================================
+
+lirc.org
+
+CSS
+body {
+    background: none !important;
+}
+
+================================
+
+magazynbieganie.pl
+
+INVERT
+.logo-box
+
+================================
+
+mail.google.com
+
+INVERT
+img.Hl
+img.Hk
+img.Ha
+.asor_t0
+.asor_i4
+.ita-icon-0
+.gb_df
+.gsfs
+
+================================
+
+marginalrevolution.com
+
+INVERT
+.logo-mobile
+.logo-desktop
+img[src$="mru-logo-450.png"]
+
+CSS
+nav {
+  background-color: #288d73 !important;
+}
+
+================================
+
+marketplace.visualstudio.com
+
+CSS
+.ux-updated-date {
+    color: ${rgb(55, 255, 0)} !important;
+}
+.ms-Grid-row {
+    color: ${rgba(0, 0, 0, .8)} !important;
+}
+
+================================
+
+marktplaats.nl
+
+INVERT
+.mp-Header-logo
+.mp-svg-messages
+.mp-svg-notification
+.mp-svg-profile
+.svg-icon-block
+
+================================
+
+mastarti.com
+streamguard.cc
+
+INVERT
+.fp-play-icon div
+.fp-pause-icon .fp-pause-block div
+.fp-volumebar em.fp-color
+.fp-fullscreen-line
+.fp-fullscreen-dot
+
+================================
+
+medium.com
+
+INVERT
+.svgIcon
+.svgIcon-use
+
+CSS
+a {
+  text-decoration-line: underline !important;
+}
+
+================================
+
+medium.freecodecamp.org
+
+CSS
+span.markup--quote.markup--p-quote.is-other {
+    background-image: linear-gradient(rgba(14, 255, 167, 0.2), rgba(14, 255, 167, 0.2)) !important;
+}
+
+================================
+
+messages.android.com
+
+INVERT
+.x4Tquc
+.QrWqSe
+.XCHXxd
+.pXeIKc
+
+================================
+
+messages.google.com
+
+INVERT
+.x4Tquc
+.QrWqSe
+.XCHXxd
+.pXeIKc
+
+CSS
+.input-background {
+  --input-bg-fade-color: #202124 !important;
+}
+
+================================
+
+messenger.com
+
+INVERT
+._4rv6
+a._4ce_
+
+================================
+
+meta.stackoverflow.com
+
+INVERT
+._glyph
+
+CSS
+.c-pointer{
+    color: gray;
+}
+
+================================
+
+metacritic.com
+
+INVERT
+img[src="/images/icons/dark_logo.png"]
+
+================================
+
+midkar.com
+
+CSS
+body {
+    background-image: unset !important;
+}
+
+================================
+
+moegirl.org
+
+CSS
+.heimu, .heimu * {
+  color: #252525 !important;
+}
+
+================================
+
+monstercat.com
+
+CSS
+.volume-slider-outer {
+  z-index: -99999999999;
+  background-color: ${#4d4d4d} !important;
+}
+.volume-slider-inner{
+  background-color: ${#1873cc} !important;
+}
+.volume-slider-handle {
+  background-color: ${#1d1d1d} !important;
+}
+.title, h3, .line-bottom, .line-top, a, .one-line-ellipsis {
+  color: ${#4b4e50} !important;
+}
+
+================================
+
+moodle.herzen.spb.ru
+
+INVERT
+.img-responsive
+
+================================
+
+moto.pl
+
+INVERT
+img[src="https://bi.im-g.pl/im/0/24525/m24525630.png"]
+
+CSS
+.main_wrapper {
+    background-color: ${#e5e5e5} !important;
+}
+
+================================
+
+my.nintendo.com
+
+CSS
+.Layout-app {
+    background-image: url(https://svgshare.com/i/HcN.svg);
+}
+
+================================
+
+naszemiasto.pl
+
+INVERT
+.componentsNavigationNavbar
+.atomsNavigationFooterLegal
+.componentsSiteHeader
+.atomsNavigationFooterAccordion
+.atomsNavigationFooterSocialmedia__link
+.atomsNavigationFooterSocialmedia__button
+.atomsArticlePollVoting__pulseDescription
+.atomsArticlePollVoting__form
+.atomsArticlePollVoting__voteTitle
+.componentsArticleGallery__captionDescription
+.componentsPromotionsVideo__title
+.layoutsGrid
+aside .atomsArticleTile__tileImg
+.componentsArticleGallery__img
+.componentsArticleGallery__thumbnail
+.atomsArticleFootTools__button
+.componentsPromotionsOffers__fakeImg
+.atomsNavigationFooterLinks__logoImg
+.ytp-cued-thumbnail-overlay
+.componentsPromotionsSubjectCategoryPromoted__image
+.componentsRecommendationsSelected__photo
+p.nieprzeczytane
+p.przeczytane
+article iframe
+.atomsPromotionsQuiz__imageWrapper
+.atomsPromotionsLink__imageWrapper
+
+================================
+
+natemat.pl
+
+INVERT
+.header__brand
+.header__box__list--social--search
+.header__facebook
+.header__hamburger
+
+================================
+
+news.ycombinator.com
+
+INVERT
+.votearrow
+
+================================
+
+nicehash.com
+
+INVERT
+.chart
+
+================================
+
+npmjs.com
+
+INVERT
+header a[href="/"] svg
+#orgs_panel img.h2
+#enterprise_detail_panel img.h2
+#customers_panel img[src*="adobe.full.png"]
+#customers_panel img[src*="bbc.full.png"]
+#customers_panel img[src*="conde-nast.full.png"]
+#customers_panel img[src*="netflix.full.png"]
+#customers_panel img[src*="visa.full.png"]
+
+================================
+
+ntlite.com
+
+CSS
+.fr-wrapper *::selection {
+    background-color: dodgerblue !important;
+}
+
+================================
+
+nzbget.*
+
+INVERT
+.icon-top
+.icon-bottom
+.icon-up
+.icon-down
+
+================================
+
+nzz.ch
+
+INVERT
+.logo
+
+CSS
+.logo {
+    background-color: unset !important;
+    color: ${white} !important;
+}
+
+================================
+
+onet.pl
+
+INVERT
+.websiteLogo
+.serviceIcon
+.serviceLogo
+.sheet
+.logoImage
+.locationName svg
+.logoImageRight
+
+================================
+
+online.rbb.bg
+
+INVERT
+.has-context:hover
+.active
+.btn
+
+================================
+
+op.gg
+
+INVERT
+.Level
+.ranking-highest__icon .ranking-highest__level
+
+================================
+
+opencollective.com
+
+CSS
+.kTvAgT {
+    background-image: unset !important;
+}
+
+================================
+
+pgatour.com
+
+CSS
+.score-card tr td.birdie {
+    background-image: initial;
+    background-color: rgb(1, 76, 181);
+}
+
+================================
+
+play.google.com
+
+INVERT
+.bUWb7c
+.WF1WQd
+img[src="https://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png"]
+.gb_D.gb_pc
+
+================================
+
+play.google.com/apps/publish
+
+INVERT
+.IXNAUGB-u-e
+.IXNAUGB-U-g img
+.IXNAUGB-U-g
+img[src^="data:image/png;"]
+.LTMPNY-u-e
+
+================================
+
+plus.google.com
+
+INVERT
+a.gb_b > div
+.gb_D.gb_oc
+
+================================
+
+polar.com
+
+INVERT
+.logo
+
+================================
+
+praca.money.pl
+
+CSS
+.dynks {
+    color: ${#666666} !important;
+}
+
+================================
+
+praca.pl
+
+INVERT
+.app-header__logo
+
+================================
+
+producthunt.com
+
+INVERT
+[class="icon_f5f81"]
+
+================================
+
+pyszne.pl
+
+INVERT
+.css-16gj3o1
+.css-13azwyo
+
+CSS
+.cover, .logowrapper, .restaurant-logo__inner, .orderoverview__restaurant-image-container-inner {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    background-blend-mode: color;
+}
+
+================================
+
+reddit.com
+
+INVERT
+header a[href="/"] svg:nth-child(2)
+
+CSS
+._1vyLCp-v-tE5QvZovwrASa {
+   background-color: ${#DAE0E6} !important;
+}
+
+._1ump7uMrSA43cqok14tPrG::before {
+  background: transparent !important;
+}
+
+================================
+
+richie-bendall.ml
+
+CSS
+.content--card {
+    background-color: #303030;
+}
+::-webkit-scrollbar {
+    width: 0;
+    color: transparent;
+}
+body {
+    background-color: #5c6bc0;
+}
+.app--bar, .drawer--content :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled) .mdc-list-item--activated:after, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled) .mdc-list-item--activated:before {
+    background-color: #3f51b5;
+}
+.btc-dialog .mdc-button {
+    color: #3f51b5;
+}
+.btc-dialog svg {
+    fill: white;
+}
+
+================================
+
+richiebendallstatus.ml
+
+CSS
+#page-container {
+    background-image: none;
+}
+.success-bg {
+    background-color: #80BA27;
+}
+.warning-bg {
+    background-color: #f7921e;
+}
+.success {
+    color: #80BA27;
+}
+.warning {
+    color: #f7921e;
+}
+.danger-bg {
+    background-color: #ff0000;
+}
+.paused-bg, .info-bg, .black-bg {
+    background-color: #17252e;
+}
+
+================================
+
+riptutorial.com
+
+CSS
+.whole-container {
+    background-image: none !important;
+}
+
+================================
+
+runkit.com
+
+INVERT
+.CodeMirror div.CodeMirror-cursor
+
+================================
+
+scratch.mit.edu/projects/editor
+
+CSS
+path.blocklyFlyoutBackground {
+    fill: rgb(32, 32, 32);
+}
+
+================================
+
+scribd.com
+
+INVERT
+.a
+.logo
+
+================================
+
+script.google.com
+
+INVERT
+.docs-icon
+.icon
+
+================================
+
+secure.ally.com
+
+INVERT
+.nobd-aob-day
+#lp_invite
+#manageNonAllyAccountsFrame .third-party-iframe
+#billPayFrame
+
+================================
+
+semmle.com
+
+CSS
+#Header-logo * {
+    fill: #ffffff !important;
+}
+
+================================
+
+senscritique.com
+
+INVERT
+.d-media-videos::before
+.eins-wish.black
+.eins-logo-small
+.header-navigation-main-item a img
+.eins-search-header
+.eins-poll
+.eins-compass
+.eins-compass-xl
+.eins-notification
+.eins-tv
+.eins-ticket
+.eins-current.black
+.eins-done.green
+.eins-done.white
+.eins-newspaper
+.juyLRn
+
+CSS
+.ecap-products-next, .ecap-products-prev {
+    background-color: hsla(100, 20%, 50%, .8) !important;
+    color: ${black} !important;
+}
+.d-chevron3-b, .d-chevron3-l, .d-chevron3-r, .d-chevron3-t {
+    background-image: -webkit-image-set(url(https://static.senscritique.com/img/layout/icons/chevrons/chevron-size3.png?201710121789416) 1x,url(https://static.senscritique.com/img/layout/icons/chevrons/chevron-size3@2x.png?201710121789416) 2x);
+}
+
+================================
+
+share.dmhy.org
+
+CSS
+.jmd_base td a {
+    color: ${#3391ff};
+}
+.jmd .today a {
+    color: ${#fff};
+}
+
+================================
+
+sharepoint.com
+
+CSS
+.ms-FocusZone {
+    background-color: ${white} !important;
+    color: ${black} !important;
+}
+.ms-DetailsRow-cell {
+    background-color: ${white} !important;
+    color: ${black} !important;
+}
+.ms-Button {
+    background-color: ${white} !important;
+    border-color: ${#F0F0F0} !important;
+    color: ${black} !important;
+}
+.od-ItemContent-title {
+    color: ${black} !important;
+}
+.ms-DetailsHeader-cellName {
+    color: ${black} !important;
+}
+
+================================
+
+skyscanner.*
+skyscanner.*.*
+backpack.github.io
+tianxun.cn
+whoflies.com
+
+CSS
+body {
+    background: ${white} !important;
+}
+[class*=bpk-flare-bar__curve] {
+    fill: ${white} !important;
+}
+
+================================
+
+slack.com
+
+INVERT
+.slack_logo > img
+
+================================
+
+slader.com
+
+INVERT
+.navigation__logo
+.explanation
+.solution-cell img
+.solution-content img
+.answer img
+
+================================
+
+soundcloud.com
+
+INVERT
+.notificationIcon.messages::before
+
+CSS
+body {
+    background: ${white} !important;
+}
+.listenEngagement, .commentForm__wrapper {
+    border: none !important;
+}
+.commentForm__wrapper {
+    background: none !important;
+}
+
+================================
+
+source.dot.net
+
+CSS
+.r {
+    border-style: none !important;
+}
+
+================================
+
+stackoverflow.com
+
+INVERT
+._glyph
+.h-auto
+.favicon
+a.js-gps-track::before
+
+CSS
+.profile-cards--graph .line {
+    stroke: Green;
+    fill: none;
+}
+.fc-light {
+    /* background-color: #181a1b; */
+}
+#left-sidebar {
+  border-right-color: #505455 !important;
+}
+#content {
+  border-left-color: #505455 !important;
+}
+div[class^="wmd-"], ul[class^="wmd-"], div.grippie {
+border-color: #505455;
+}
+
+.fs-headline1 {
+    color: white;
+}
+
+================================
+
+strava.com
+
+INVERT
+.icon-dark
+.labelGroup
+#effort-box
+
+CSS
+.base-chart .grid-line, 
+#athlete-history-chart .vgrid {
+  stroke: #555555;
+}
+#athlete-history-chart #effort-box {
+  fill: #3e3e3e;
+  stroke: black;
+}
+
+#basic-analysis .xaxis-container .background, 
+#basic-analysis rect.static-info-box,
+#basic-analysis rect.static-label-box {
+  fill: #2c2c2c;
+}
+.base-chart rect.simple-bar.segmentbar {
+  opacity: 1;
+}
+.base-chart rect.simple-bar {
+  fill: #444444;
+  stroke: #252627;
+}
+
+.current-week-label { fill: black; }
+.sum.no-rest { fill: black; }
+
+.options img {
+  filter: invert(40%);
+}
+
+#infoBox text {
+  color: black;
+}
+
+================================
+
+studio.youtube.com
+
+INVERT
+paper-radio-button
+.ytcp-home-button img
+
+================================
+
+subdivx.com
+
+INVERT
+#cabecera img
+#contenedor_foro .cita img
+#contenedor_foro .datos img[src*="/img/"]
+#perfil_izq img[src*="img/"]
+
+CSS
+BODY * {
+   color: ${#333};
+}
+A {
+    color: ${#0366d6} !important;
+}
+input[type="text"],
+input[type="password"],
+input[type="button"],
+input[type="submit"] {
+    background: ${#bbb};
+    border: 1px solid #999;
+}
+input[type="submit"]:hover {
+    background: ${#999};
+    border: 1px solid #999;
+}
+mark {
+    background: ${#f00} !important;
+    color: ${#fff} !important;
+}
+#barra a,
+#menu_largo a,
+#menu_largo_chat a,
+#foro_tema_menu a,
+#ultimos_foros_renglon .link_foro_tema,
+.titulo_menu_izq {
+    color: #ddd !important;
+}
+#wrapper {
+    background-image: none !important;
+}
+#contenedor_gral {
+    display: table;
+    background: ${#e0e0e0} !important;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 8px;
+    height: -webkit-fill-available !important;
+    width: fit-content !important;
+}
+#cabecera {
+    background: ${#e4e4e4};
+}
+#barra,
+#menu_top,
+#menu_detalle_buscador,
+#menu_detalle,
+#menu_largo,
+#menu_largo_chat,
+#prog_menu_detalle,
+#primer_msg_voto,
+#reg_menu_detalle,
+#drdivx_menu_detalle,
+#contenedor_foro .fecha,
+#perfil_menu,
+#foro_tema_menu {
+    background: ${rgb(153,173,206)} !important;
+    background: linear-gradient(to bottom, ${rgb(153,173,206)} 0%, ${rgb(75,110,171)} 100%) !important;
+}
+#foro_home,
+#foro_home_renglon,
+#cuadrados_izq,
+#cuadrados_izq_reng,
+#chat_reng,
+#contenedor_foro,
+#contenedor_foro .datos,
+#contenedor_foro .cita,
+#contenedor_foro .mensaje {
+    background: ${#fff} !important;
+}
+#foro_home_datos,
+#cuadrados_izq {
+   color: ${#999} !important;
+}
+#foro_home_datos a {
+   color: ${#669} !important;
+}
+
+================================
+
+superuser.com
+
+INVERT
+.h-auto
+.favicon
+
+CSS
+.profile-cards--graph .line {
+    stroke: Green;
+    fill: none;
+}
+.fc-light {
+    background-color: #181a1b;
+}
+
+================================
+
+teamtrees.org
+
+CSS
+.hypeTemplate_tano { 
+    background-color: ${white} !important;
+}
+
+================================
+
+technews.tw
+
+CSS
+div#main.wrapper {
+    background-color: #000;
+}
+a {
+    color: rgb(206, 202, 195); 
+}
+div {
+    background-color: #000 !important;
+}
+.widget-area .widget{
+    background-color: #000;
+}
+.site-header {
+    background-color: #000;
+}
+div.tipbar {
+   background-image:  none !important;
+}
+div.content table tr td h1.entry-title a{
+   color: rgb(206, 202, 195); 
+}
+
+================================
+
+theguardian.com
+
+INVERT
+.inline-the-guardian-logo__svg
+
+================================
+
+thenextweb.com
+
+INVERT
+.icon[class*="--dark"]
+
+================================
+
+theregister.co.uk
+
+INVERT
+.row_label.title_rhs_line
+
+CSS
+article {
+  background-color: ${white} !important;
+}
+
+================================
+
+theverge.com
+
+INVERT
+.c-global-header__logo-large
+.c-masthead__logo
+
+================================
+
+thunderbird.net
+
+INVERT
+.w-48
+
+================================
+
+tjournal.ru
+
+INVERT
+mark
+
+CSS
+mark a {
+  color: ${#346eb8} !important;
+}
+
+================================
+
+translate.google.*
+translate.google.*.*
+
+INVERT
+div.jfk-button-img
+.tlid-copy-translation-button
+.starbutton
+
+================================
+
+translate.yandex.*
+
+INVERT
+.button.button_tab.state-selected::before
+#optionsButton::after
+#clearButton::after
+#textNativeSpeaker
+#textSpeaker
+#microphone::after
+#keyboardButton::after
+#spellerButton::after
+.button.button_icon.button_icon_swap::after
+#favButton::after
+#translatorSpeaker
+#translatorNativeSpeaker
+#copyButton::after
+#shareButton::after
+#goodVoteButton::after
+#badVoteButton::after
+#editorButton::after
+.toggler::after
+.button.button_icon.button_icon_speaker
+.dictionary-example_toggler::after
+.dictionary-example_meta__vote-buttons
+.icon.button.button_icon.button_icon_sync::after
+.message.message_yellow.message_replace
+.placeholder
+.button.header-button.button_icon.button_icon_clear2::after
+#shareCopyLink::after
+
+================================
+
+translate.yandex.*/collections
+
+INVERT
+.button.header-button.button_icon.button_icon_clear2::after
+.record-line_speaker.button.button_icon.button_icon_speaker::after
+.button.button_icon.button_icon_lines::after
+.button.button_icon.button_icon_trash::after
+#shareCollectionCopy::after
+
+================================
+
+translate.yandex.*/doc
+
+INVERT
+.button.button_tab.state-selected::before
+.listbox-option::after
+
+================================
+
+translate.yandex.*/ocr
+
+INVERT
+.button.button_tab.state-selected::before
+.button.button_icon.button_icon_swap::after
+.button.button_icon.button_icon_plus::after
+.button.button_icon.button_icon_minus::after
+.button.button_icon.button_icon_lines::after
+.button.button_icon.button_icon_words::after
+.button button_icon.button_icon_blocks::after
+.button.button_icon.button_icon_blocks::after
+.button.button_icon.button_icon_reset::after
+
+================================
+
+translate.yandex.*/translate
+
+INVERT
+.button.button_tab.state-selected::before
+#shareButton::after
+.listbox-option::after
+#shareCopyLink::after
+
+================================
+
+tw.appledaily.com
+
+INVERT
+.caltrigger img
+
+CSS
+.ndgNav_second {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+.ndgTag_front img, .ndgTag_end img {
+   display: none;
+}
+[class^=ndgTag] {
+    border-top-color: transparent !important;
+}
+
+================================
+
+underconsideration.com/brandnew
+
+CSS
+.post-message {
+  color: ${black} !important;
+}
+
+================================
+
+vc.ru
+
+INVERT
+mark
+
+CSS
+#page_wrapper {
+  background-color: ${#fff4e0} !important;
+}
+
+================================
+
+virtualbox.org
+
+CSS
+body {
+    background: transparent !important;
+}
+
+================================
+
+w3.org
+
+INVERT
+img[alt~="equation"]
+img[alt~="Equation"]
+
+================================
+
+web.archive.org
+
+INVERT
+#wm-sparkline-canvas
+.yt
+.sparkline-canvas
+.sparkline-mouse-highlight
+.search-toolbar-logo
+#wm-logo
+
+CSS
+.measure {
+    z-index: 0 !important;
+}
+
+================================
+
+web.getslowly.com
+
+CSS
+.badge-active {
+    color: rgb(47, 51, 58);
+}
+
+================================
+
+web.telegram.org
+
+CSS
+.progress-bar {
+    background-color: rgba(255,255,255,.9) !important;
+}
+
+================================
+
+web.whatsapp.com
+
+INVERT
+.tail-container
+.selectable-text > span._3PxOr
+
+CSS
+._1pw2F {
+    border-color: white !important;
+    border-width: 15px !important;
+    border-style: solid !important;
+}
+
+================================
+
+webtoons.com
+
+CSS
+.card_item .info {
+    color: black;
+}
+.card_item .info .subj {
+    text-shadow: -1px 1px white; 
+}
+.card_item .update {
+    color: black;
+    text-shadow: -1px -1px white;
+}
+.card_item .info .author {
+    text-shadow: -1px -1px white;
+}
+
+================================
+
+wego.here.com
+
+INVERT
+.route_card_left
+.route_tooltip_icon
+
+================================
+
+what-if.xkcd.com
+
+INVERT
+.illustration
+.archive-image
+.logo
+
+================================
+
+whois.com
+
+INVERT
+img[src="/images/logo.gif"]
+img[src="//cdnassets.com/ui/resellerdata/120000_149999/129394/supersite2/supersite/themes/EliteGreen-ResponsiveTheme/images/logo.gif"]
+
+================================
+
+wikibooks.org
+
+INVERT
+.mwe-math-element
+
+================================
+
+wikipedia.org
+
+INVERT
+.mwe-math-element
+.mw-wiki-logo
+.central-textlogo__image
+.svg-Wikimedia-logo_black
+
+CSS
+div .thumbimage[src$=".png"],
+div .thumbimage img[src$=".png"] {
+    background-color: white;
+}
+
+================================
+
+wikiwand.com
+
+INVERT
+img.mwe-math-fallback-image-inline
+img.immediate.ntmb
+img.logo_img
+td.icon
+li.menu-tooltip:not(.lang_btn)
+
+================================
+
+www.bing.com
+
+CSS
+.b_searchboxForm {
+    box-shadow: ${rgba(0, 0, 0, 0.1)} 0px 0px 0px 1px !important;
+}
+.b_searchboxForm:hover {
+    box-shadow: ${rgba(0, 0, 0, 0.1)} 0px 0px 0px 1px !important;
+}
+.b_focus .b_searchboxForm {
+    box-shadow: ${rgba(0, 0, 0, 0.1)} 0px 0px 0px 1px !important;
+}
+#sw_as #sa_ul:not(:empty) {
+    box-shadow: ${rgba(0, 0, 0, 0.1)} 0px 0px 0px 1px !important;
+}
+#b_results > li.b_ans.b_topborder, #b_results > li.b_ans.b_topborder.b_tophb.b_topshad {
+    box-shadow: ${rgba(13, 13, 13, 0.05)} 0px 0px 0px 1px !important;
+}
+
+================================
+
+www.ebay.*
+www.ebay.*.*
+
+CSS
+html, body {
+    background-image: none !important;
+}
+
+================================
+
+www.gamer.com.tw
+forum.gamer.com.tw
+
+INVERT
+.gsc-search-box
+.TOP-msglist div.new a
+.BA-ctag1 a
+
+CSS
+body, .BA-topbg {
+    background: none;
+}
+.TOP-bh {
+    background: linear-gradient(to right, #117e96 0%, #116b80 35%, #125b6b 80%);
+}
+.TOP-msglist div.new a {
+    color: ${#3391ff};
+}
+
+================================
+
+www.google.*
+www.google.*.*
+
+INVERT
+.gb_hc
+.gb_ec
+.gb_x.gb_Vb
+.gb_x.gb_Ub
+.gb_0b
+#dictionary-modules img
+a.gb_b > div
+.gb_D.gb_oc
+.gb_C
+
+CSS
+.RNNXgb {
+    box-shadow: 0 0 2px 0 ${rgba(0,0,0,0.16)}, 0 0 0 1px ${rgba(0,0,0,0.08)} !important;
+}
+.Gor6zc {
+    background-color: white !important;
+}
+
+================================
+
+www.tinkercad.com/things
+
+CSS
+.editor-3d-container .viewcube__button {
+    background-color: white !important;
+}
+
+================================
+
+www.usaa.com
+
+CSS
+.pfmContent, .categoryInputElement, div.yui-overlay, .yui-dt-data td, body {
+    background-color: black !important;
+    background-image: none !important;
+}
+
+.tableContainer thead th {
+    background-image: none !important;
+    background-color: ${white} !important;
+
+}
+
+.tableContainer thead {
+    border: 2px solid white !important;
+}
+
+================================
+
+wx.qq.com
+wx2.qq.com
+
+CSS
+body {
+    background-image: none !important;
+}
+
+================================
+
+x-kom.pl
+
+INVERT
+.img-logo
+
+================================
+
+youtube.com
+
+CSS
+html[hide-scrollbar] ::-webkit-scrollbar {
+    display: none !important;
+}
+#contenteditable-textarea {
+    color: ${black} !important;
+}
+#like-bar {
+    background-color: ${rgb(144, 144, 144)} !important;
+}
+yt-formatted-string.ytd-video-primary-info-renderer {
+    color: ${black} !important;
+}
+html:not(.style-scope) {
+    --primary-text-color: ${#212121} !important;
+    --primary-background-color: ${#ffffff} !important;
+    --disabled-text-color: ${#9b9b9b} !important;
+    --divider-color: ${#dbdbdb} !important;
+    --error-color: ${#dd2c00} !important;
+    --primary-color: ${#3f51b5} !important;
+    --accent-color: ${#ff4081} !important;
+    --yt-live-chat-action-panel-background-color: ${hsla(0, 0%, 93.3%, .4)} !important;
+    --yt-live-chat-action-panel-background-color-transparent: ${hsla(0, 0%, 97%, .8)} !important;
+    --yt-live-chat-background-color: ${hsl(0, 0%, 100%)} !important;
+    --yt-live-chat-primary-text-color: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-live-chat-secondary-background-color: ${hsl(0, 0%, 93.3%)} !important;
+    --yt-live-chat-secondary-text-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-live-chat-tertiary-text-color: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --yt-live-chat-disabled-icon-button-color: ${hsla(0, 0%, 6.7%, .2)} !important;
+    --yt-live-chat-picker-button-color: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --yt-live-chat-text-input-field-suggestion-background-color: ${hsl(0, 0%, 100%)} !important;
+    --yt-live-chat-text-input-field-suggestion-background-color-hover: ${#eee} !important;
+    --yt-live-chat-text-input-field-suggestion-text-color: ${#666} !important;
+    --yt-live-chat-text-input-field-suggestion-text-color-hover: ${#333} !important;
+    --yt-live-chat-vem-background-color: ${hsl(0, 0, 93.3%)} !important;
+    --yt-emoji-picker-search-background-color: ${hsla(0, 0%, 100%, .6)} !important;
+    --yt-emoji-picker-search-color: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --yt-emoji-picker-search-placeholder-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-searchbox-border-color: ${hsla(0, 0%, 53.3%, .2)} !important;
+    --ytd-searchbox-legacy-border-color: ${#ccc} !important;
+    --ytd-searchbox-legacy-border-shadow-color: ${#eee} !important;
+    --ytd-searchbox-legacy-button-color: ${#f8f8f8} !important;
+    --ytd-searchbox-legacy-button-border-color: ${#d3d3d3} !important;
+    --ytd-searchbox-legacy-button-focus-color: ${#e9e9e9} !important;
+    --ytd-searchbox-legacy-button-hover-color: ${#f0f0f0} !important;
+    --ytd-searchbox-legacy-button-hover-border-color: ${#c6c6c6} !important;
+    --ytd-searchbox-legacy-button-icon-color: ${#333} !important;
+    --ytd-moderation-panel-background: ${hsla(0, 0%, 93.3%, .6)} !important;
+    --ytd-moderation-panel-hover: ${hsla(0, 0%, 93.3%, .8)} !important;
+    --ytd-moderation-panel-comment-text: ${hsl(0, 0%, 6.7%)} !important;
+    --ytd-moderation-panel-comment-metadata-text: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-moderation-icon-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-moderation-icon-hover-color: ${hsl(0, 0%, 6.7%)} !important;
+    --ytd-comment-text-color: ${hsl(0, 0%, 6.7%)} !important;
+    --ytd-watch-card-secondary-text-color: ${hsl(0, 0%, 53.3%)} !important;
+    --ytd-watch-card-album-header-background: ${hsl(0, 0%, 100%)} !important;
+    --ytd-backstage-metadata-text-color: ${hsl(0, 0%, 53.3%)} !important;
+    --ytd-backstage-video-link-background-color: ${hsla(0, 0%, 93.3%, .4)} !important;
+    --ytd-backstage-image-alert-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-backstage-cancel-background-color: ${hsl(0, 0%, 100%)} !important;
+    --ytd-backstage-cancel-color: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --ytd-backstage-attachment-background-color: ${hsl(0, 0%, 100%)} !important;
+    --ytd-backstage-creationbox-background-color: ${hsl(0, 0%, 98%)} !important;
+    --ytd-backstage-creationbox-background-color-focus: ${hsl(0, 0%, 96%)} !important;
+    --ytd-backstage-creationbox-inactive-color: ${hsla(0, 0%, 0%, .26)} !important;
+    --ytd-backstage-creationbox-text-color: ${hsla(0, 0%, 0%, .54)} !important;
+    --ytd-backstage-creationbox-input-text-color: ${hsla(0, 0%, 0%, .87)} !important;
+    --ytd-backstage-creationbox-disabled-button-color: ${hsla(0, 0%, 0%, .04)} !important;
+    --ytd-backstage-creationbox-disabled-button-text-color: ${hsl(0, 0%, 100%)} !important;
+    --ytd-backstage-attachment-icon-hover-color: ${hsla(0, 0%, 0%, .74)} !important;
+    --ytd-sponsorships-background-color-focus: ${hsla(0, 0%, 93.3%, .4)} !important;
+    --ytd-badge-disabled-color: ${hsla(0, 0%, 53.3%, .4)} !important;
+    --ytd-collection-badge-color: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --ytd-owner-badge-color: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --ytd-simple-badge-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-shopping-product-info: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --ytd-transcript-cue-hover-background-color: ${hsl(0, 0%, 93.3%)} !important;
+    --ytd-transcript-toolbar-background-color: ${hsl(0, 0%, 93.3%)} !important;
+    --ytd-transcript-toolbar-text: ${hsl(0, 0%, 6.7%)} !important;
+    --ytd-video-publish-date-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-vat-notice-text: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --ytd-offer-background-color: ${hsla(0, 0%, 93.3%, .4)} !important;
+    --ytd-video-game-watch-card-logo-color: ${hsl(0, 0%, 6.7%)} !important;
+    --ytd-watch-split-pane-sidebar-background-color: ${hsl(0, 0%, 98%)} !important;
+    --yt-swatch-icon-color: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --yt-swatch-primary: ${hsl(0, 0%, 100%)} !important;
+    --yt-swatch-primary-darker: ${rgb(230, 230, 230)} !important;
+    --yt-swatch-text: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --yt-swatch-input-text: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-swatch-textbox-bg: ${rgb(255, 255, 255)} !important;
+    --yt-spec-brand-background-solid: ${#FFFFFF} !important;
+    --yt-spec-brand-background-primary: ${rgba(255, 255, 255, 0.98)} !important;
+    --yt-spec-brand-background-secondary: ${rgba(255, 255, 255, 0.95)} !important;
+    --yt-spec-feed-background-a: ${#F9F9F9} !important;
+    --yt-spec-feed-background-b: ${#F3F3F3} !important;
+    --yt-spec-feed-background-c: ${#EDEDED} !important;
+    --yt-spec-error-background: ${#1F1F1F} !important;
+    --yt-spec-text-primary: ${#0A0A0A} !important;
+    --yt-spec-text-primary-inverse: ${#FFFFFF} !important;
+    --yt-spec-text-secondary: ${#606060} !important;
+    --yt-spec-text-disabled: ${#909090} !important;
+    --yt-spec-call-to-action: ${#065FD4} !important;
+    --yt-spec-icon-active-other: ${#606060} !important;
+    --yt-spec-icon-inactive: ${#909090} !important;
+    --yt-spec-icon-disabled: ${#CCCCCC} !important;
+    --yt-spec-badge-chip-background: ${rgba(0, 0, 0, 0.05)} !important;
+    --yt-spec-suggested-action: ${#F2F8FF} !important;
+    --yt-spec-button-chip-background-hover: ${rgba(0, 0, 0, 0.10)} !important;
+    --yt-spec-touch-response: ${#000000} !important;
+    --yt-spec-filled-button-text: ${#FFFFFF} !important;
+    --yt-spec-call-to-action-inverse: ${#3EA6FF} !important;
+    --yt-spec-brand-icon-active: ${#FF0000} !important;
+    --yt-spec-brand-icon-inactive: ${#606060} !important;
+    --yt-spec-brand-button-background: ${#CC0000} !important;
+    --yt-spec-brand-link-text: ${#CC0000} !important;
+    --yt-spec-filled-button-focus-outline: ${rgba(0, 0, 0, 0.60)} !important;
+    --yt-spec-call-to-action-button-focus-outline: ${rgba(6, 95, 212, 0.30)} !important;
+    --yt-spec-brand-text-button-focus-outline: ${rgba(204, 0, 0, 0.30)} !important;
+    --yt-spec-inactive-text-button-focus-outline: ${#CCCCCC} !important;
+    --yt-spec-brand-subscribe-button-background: ${#FF0000} !important;
+    --yt-spec-wordmark-text: ${#282828} !important;
+    --yt-spec-10-percent-layer: ${rgba(0, 0, 0, 0.10)} !important;
+    --yt-spec-selected-nav-text: ${#CC0000} !important;
+    --yt-spec-themed-blue: ${#065FD4} !important;
+    --yt-spec-themed-green: ${#107516} !important;
+    --yt-std-body-300: ${hsla(0, 0%, 0%, .54)} !important;
+    --yt-std-surface-200: ${hsl(0, 0%, 98%)} !important;
+    --yt-std-surface-300: ${hsl(0, 0%, 96%)} !important;
+    --yt-std-surface-400: ${hsl(0, 0%, 93%)} !important;
+    --yt-primary-color: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-primary-text-color: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-hovered-text-color: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --yt-secondary-text-color: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --yt-tertiary-text-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-placeholder-text-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-border-color: ${hsl(0, 0%, 93.3%)} !important;
+    --yt-commentbox-border-inactive: ${hsl(0, 0%, 93.3%)} !important;
+    --yt-commentbox-border-active: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-primary-disabled-button-text-color: ${hsl(0, 0%, 100%)} !important;
+    --yt-paper-button-ink-color: ${hsl(0, 0%, 53.3%)} !important;
+    --yt-icon-color: ${hsla(0, 0%, 6.7%, .4)} !important;
+    --yt-icon-hover-color: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --yt-icon-disabled-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-icon-active-color: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-expand-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-placeholder-text: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-playlist-background-header: ${hsl(0, 0%, 93.3%)} !important;
+    --yt-playlist-background-item: ${hsla(0, 0%, 93.3%, .6)} !important;
+    --yt-playlist-title-text: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-playlist-message-text: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-playlist-message-text-hover: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-button-active-color: ${hsl(0, 0%, 6.7%)} !important;
+    --yt-copyright-text: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-guide-entry-text-color: ${hsla(0, 0%, 6.7%, .8)} !important;
+    --yt-thumbnail-placeholder-color: ${hsl(0, 0%, 89%)} !important;
+    --yt-featured-channel-title-text-color: ${hsla(0, 0%, 0%, .54)} !important;
+    --yt-formatted-string-deemphasize-color: ${hsl(0, 0%, 53.3%)} !important;
+    --yt-alert-background: ${hsla(0, 0%, 93.3%, .4)} !important;
+    --yt-video-secondary-info-description-background: ${hsla(0, 0%, 93.3%, .6)} !important;
+    --yt-material-searchbox-inactive: ${hsla(0, 0%, 93.3%, .6)} !important;
+    --yt-material-searchbox-active: ${hsl(0, 0%, 100%)} !important;
+    --yt-material-searchbox-inactive-shadow: ${hsla(0, 0%, 53.3%, .2)} !important;
+    --yt-material-searchbox-active-shadow: ${hsla(0, 0%, 0%, .26)} !important;
+    --yt-material-searchbox-inset: ${hsla(0, 0%, 0%, .04)} !important;
+    --yt-simple-menu-header-background: ${hsl(0, 0%, 93.3%)} !important;
+    --yt-item-section-header-color: ${hsla(0, 0%, 6.7%, .6)} !important;
+    --yt-menu-hover-backgound-color: ${hsl(0, 0%, 93.3%)} !important;
+    --yt-menu-focus-background-color: ${hsla(0, 0%, 6.7%, .2)} !important;
+    --yt-chat-bubble-other-border-color: ${#CCCCCC} !important;
+    --yt-chat-bubble-other-background-color: ${#F9F9F9} !important;
+    --yt-chat-bubble-self-border-color: ${#CCCCCC} !important;
+    --yt-chat-bubble-self-background-color: ${#EDEDED} !important;
+    --yt-app-background: ${hsl(0, 0%, 100%)} !important;
+    --yt-main-app-background: ${hsl(0, 0%, 98%)} !important;
+    --yt-main-app-background-tmp: ${hsl(0, 0%, 100%)} !important;
+    --yt-guide-background: ${hsl(0, 0%, 96%)} !important;
+    --yt-dialog-background: ${hsl(0, 0%, 100%)} !important;
+    --yt-searchbox-background: ${hsl(0, 0%, 100%)} !important;
+    --yt-channel-header-background: ${hsl(0, 0%, 98%)} !important;
+    --yt-sidebar-background: ${hsl(0, 0%, 98%)} !important;
+    --yt-transcript-background: ${hsl(0, 0%, 100%)} !important;
+    --yt-spec-general-background-a: ${white} !important;
+    --yt-spec-general-background-b: ${#f1f1f1} !important;
+    --yt-spec-general-background-c: ${#e9e9e9} !important;
+}
+.ytp-volume-slider-handle {
+    background-color: white !important;
+}
+.ytp-volume-slider-handle::before {
+    background-color: white !important;
+}
+.ytp-volume-slider-handle::after {
+    background-color: rgba(255,255,255,.2) !important;
+}
+
+================================
+
+yuque.com
+
+INVERT
+.lake-math-content-preview-img > img
+.lake-math-container > img
+div[data-lake-card="mindmap"] > div > div > div
+
+================================
+
+zhuanlan.zhihu.com
+
+INVERT
+img[eeimg="1"]
