@@ -32,6 +32,7 @@ if $IS_LINUXY ; then
 fi
 
 # core shell settings
+export SHELL=$(whence $(ps wwwe -p $$ -o comm=))
 export EDITOR=vim
 export VISUAL=code
 HISTSIZE=50000; SAVEHIST=10000
