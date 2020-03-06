@@ -1,0 +1,3 @@
+node node_modules/types-publisher/bin/parse-definitions.js &&
+node node_modules/types-publisher/bin/calculate-versions.js &&
+node node_modules/types-publisher/bin/generate-packages.js --tgz

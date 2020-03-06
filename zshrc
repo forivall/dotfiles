@@ -15,6 +15,7 @@ if $IS_OSX ; then
     eval `/usr/libexec/path_helper -s`
   fi
   path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
+  [[ -d "/usr/local/opt/node@12/bin" ]] && path=(/usr/local/opt/node@12/bin $path)
 fi
 
 if ! type realpath >/dev/null ; then
@@ -33,6 +34,7 @@ fi
 
 # core shell settings
 export SHELL=$(whence $(ps wwwe -p $$ -o comm=))
+# export SHELL=zsh
 export EDITOR=vim
 export VISUAL=code
 HISTSIZE=50000; SAVEHIST=10000

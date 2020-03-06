@@ -65,21 +65,25 @@ property debug : false
 -- when the toolbar script icon is clicked 
 -- 
 on run
-	tell application "System Events"
-    tell process "Finder"
-			tell menu bar 1
-				tell menu bar item "Finder"
-					tell menu "Finder"
-						tell menu item "Services"
-							tell menu "Services"
-								click menu item "New iTerm2 Tab Here"
+	-- TODO: detect when the menu item is available
+	(* try
+		tell application "System Events"
+			tell process "Finder"
+				tell menu bar 1
+					tell menu bar item "Finder"
+						tell menu "Finder"
+							tell menu item "Services"
+								tell menu "Services"
+									click menu item "New iTerm2 Tab Here"
+								end tell
 							end tell
 						end tell
 					end tell
 				end tell
 			end tell
 		end tell
-		(*
+	on error *)
+	tell application "Finder"
 		try
 			set this_folder to (the target of the front window) as alias
 		on error
@@ -87,8 +91,10 @@ on run
 		end try
 		
 		my process_item(this_folder)
-		*)
+
 	end tell
+
+	-- end try
 end run
 
 

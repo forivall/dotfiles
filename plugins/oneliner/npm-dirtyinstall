@@ -1,0 +1,13 @@
+local pkg=$1
+local ver=$2
+local spec
+if [[ -n "$ver" ]] ; then
+  spec="$pkg@$ver"
+else
+  spec=$pkg
+fi
+
+local tarball
+tarball=$(npm pack $spec) &&
+mkdir -p node_modules/$pkg &&
+tar xf $tarball -C node_modules/$pkg --strip-components 1

@@ -15,10 +15,13 @@ brew install jq httpie
 brew install python-markdown
 brew install flow shellcheck pandoc
 brew install mongodb
+brew cask install redis postgres
+brew cask install gpg-suite-no-mail
 brew install diffuse homebrew/gui/meld
 
 brew install bat
 brew install git-delta -s --HEAD --verbose
+brew install asciinema
 brew install graphviz
 brew install imagemagick -- --with-webp --with-librsvg --with-wmf --with-little-cms --with-little-cms2 --with-pango --with-ghostscript --with-fontconfig
 brew install gollum github-markdown-toc
@@ -34,7 +37,6 @@ brew cask install beardedspice
 brew cask install skim
 brew cask install keka kekadefaultapp
 brew cask install typora notable
-brew cask install postgres
 brew cask install robo-3t
 brew cask install cheatsheet
 brew cask install gitup
@@ -42,9 +44,12 @@ brew cask install rowanj-gitx
 # brew cask install postman
 brew cask install insomnia
 brew cask install clipy
+brew cask install gimp
+brew cask install gpg-suite-no-mail
+brew cask install kap
 
 brew tap homebrew/cask-fonts
-brew cask install font-fantasque-sans-mono
+brew cask install font-fantasque-sans-mono font-fira-code
 
 npm i -g yarn
 npm i -g bash-language-server
