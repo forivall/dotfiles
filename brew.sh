@@ -50,6 +50,7 @@ brew cask install kap
 
 brew tap homebrew/cask-fonts
 brew cask install font-fantasque-sans-mono font-fira-code
+# TODO: add font-input with my preferred options - set up the options in the cask
 
 brew tap kde-mac/kde
 brew install okular
