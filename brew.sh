@@ -51,6 +51,9 @@ brew cask install kap
 brew tap homebrew/cask-fonts
 brew cask install font-fantasque-sans-mono font-fira-code
 
+brew tap kde-mac/kde
+brew install okular
+
 npm i -g yarn
 npm i -g bash-language-server
 npm i -g npm-name-cli
