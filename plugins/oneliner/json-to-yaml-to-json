@@ -2,8 +2,8 @@ if (( $# > 0 )) ; then
   for json in $@ ; do
     local yaml=${json%.json}.yaml
     # brew install yq
-    echo yq r $1 '>' $yaml
-    yq r $1 > $yaml
+    echo yq r -P $1 '>' $yaml
+    yq r -P $1 > $yaml
   done
 fi
 
