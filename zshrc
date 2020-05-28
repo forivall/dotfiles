@@ -60,6 +60,11 @@ setopt bareglobqual
 zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+# fuzzy completion (note that zsh-autocomplete provides this, but has lag issues right now 2020-05-28)
+zstyle ':completion:*' matcher-list 'r:|?=**'
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*' list-suffixes true
+
 # pure prompt settings
 PURE_HIGHLIGHT_REPO=1
 PURE_PROMPT_SYMBOL="%B»%b"
@@ -79,6 +84,7 @@ source "$__zshrc_dirname/zgen/zgen.zsh"
 setopt extendedglob
 if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zsh-users/zsh-autosuggestions
 
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/web-search
@@ -134,8 +140,8 @@ if ! zgen saved; then
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
-
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
+  # zgen load marlonrichert/zsh-autocomplete
 
   # Build completions files
   local ofpath=(${fpath})
