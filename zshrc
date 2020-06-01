@@ -60,10 +60,12 @@ setopt bareglobqual
 zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-# fuzzy completion (note that zsh-autocomplete provides this, but has lag issues right now 2020-05-28)
+# fuzzy completion
 zstyle ':completion:*' matcher-list 'r:|?=**'
 zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' list-suffixes true
+# zstyle ':autocomplete:list-choices:*' max-lines 40%
+zstyle ':autocomplete:list-choices:*' max-lines 24
 
 # pure prompt settings
 PURE_HIGHLIGHT_REPO=1
@@ -141,7 +143,7 @@ if ! zgen saved; then
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
-  # zgen load marlonrichert/zsh-autocomplete
+  zgen load marlonrichert/zsh-autocomplete
 
   # Build completions files
   local ofpath=(${fpath})
