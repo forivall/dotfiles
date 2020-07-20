@@ -6,3 +6,5 @@ npm-debug.log
 /plugins/yargs/_*
 !/plugins/yargs/__zsh_yargs_plugin__*
 .DS_Store
+/pythonhist
+/zsh_history_interactive
