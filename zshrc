@@ -66,6 +66,7 @@ zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' list-suffixes true
 # zstyle ':autocomplete:list-choices:*' max-lines 40%
 zstyle ':autocomplete:list-choices:*' max-lines 24
+zstyle ':autocomplete:tab:*' completion select
 
 # pure prompt settings
 PURE_HIGHLIGHT_REPO=1
@@ -87,6 +88,7 @@ setopt extendedglob
 if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
+  # zgen load marlonrichert/zsh-autocomplete
 
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/web-search
@@ -112,6 +114,7 @@ if ! zgen saved; then
   ! $IS_WINDOWS && zgen load lukechilds/zsh-nvm 
   zgen load lukechilds/zsh-better-npm-completion
   # zgen load jocelynmallon/zshimarks
+
   zgen load "$__zshrc_dirname/plugins/functional"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-sudo"
@@ -143,7 +146,6 @@ if ! zgen saved; then
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
-  zgen load marlonrichert/zsh-autocomplete
 
   # Build completions files
   local ofpath=(${fpath})
@@ -185,5 +187,6 @@ clean-env
 
 autoload bashcompinit && bashcompinit
 
+zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
 true

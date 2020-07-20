@@ -184,3 +184,5 @@
 	cmd = code --wait \"$MERGED\"
 [commit]
 	# template = /Users/emilyklassen/.stCommitMsg
+[pull]
+	ff = only
