@@ -37,6 +37,7 @@ export SHELL=$(whence $(ps wwwe -p $$ -o comm=))
 # export SHELL=zsh
 export EDITOR=vim
 export VISUAL=code
+export LC_ALL="en_CA.UTF-8"
 HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
 tabs -2
@@ -47,7 +48,7 @@ APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsa
 # omz settings
 DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
-COMPLETION_WAITING_DOTS=true
+# COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 
 BAT_PAGER="less +X -x2 -FR"
@@ -133,6 +134,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
+  zgen load "$__zshrc_dirname/plugins/twilio"
 
   # zgen load "$__zshrc_dirname/plugins/nvm"
   zgen load "$__zshrc_dirname/plugins/yarn"

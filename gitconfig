@@ -151,7 +151,7 @@
 	pushInsteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
-[url "git://github.com/"]
+[url "https://github.com/"]
 	insteadOf = hub:
 [url "git@github.com:"]
 		pushInsteadOf = hub:
