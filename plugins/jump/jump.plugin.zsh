@@ -56,9 +56,12 @@ unmark() {
 }
 
 marks() {
+	local fmtname="$fg[cyan]$reset_color"
+	local pad=$(( ${#fmtname} + 12 ))
 	for link in $MARKPATH/*(@); do
-		printf "$fg[cyan]%-10s$reset_color -> $fg[blue]%s\n$reset_color" \
-		                 ${link:t}                     $(readlink $link)
+		local markname="$fg[cyan]${link:t}$reset_color"
+		local markpath="$fg[blue]$(readlink $link)$reset_color"
+		printf "%-${pad}s -> %s\n" $markname $markpath
 	done
 }
 
