@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# zmodload zsh/zprof
 
 __zshrc_filename=${${(%):-%N}:A}
 __zshrc_dirname=${__zshrc_filename:h}
@@ -16,6 +17,13 @@ if $IS_OSX ; then
   fi
   path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
   [[ -d "/usr/local/opt/node@12/bin" ]] && path=(/usr/local/opt/node@12/bin $path)
+  export PLAN9="/usr/local/plan9"
+  [[ -d $PLAN9 ]] && path=($path $PLAN9/bin)
+  local OPENJDK
+  OPENJDK=/usr/local/opt/openjdk
+  [[ -d $OPENJDK/bin ]] && path=($OPENJDK/bin $path)
+  # For compilers to find openjdk you may need to set:
+  #   export CPPFLAGS="-I${OPENJDK}/include"
 fi
 
 if ! type realpath >/dev/null ; then
@@ -45,13 +53,23 @@ tabs -2
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
+# zgen settings
+ZGEN_AUTOLOAD_COMPINIT=0
+
 # omz settings
 DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 
+export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+CLOUDSDK_HOME="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 BAT_PAGER="less +X -x2 -FR"
+
+# zsh-nvm settings
+export NVM_COMPLETION=true
+export NVM_LAZY_LOAD=true
+sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
 
 # zsh settings
 setopt extended_glob
@@ -84,6 +102,11 @@ sourceIfExists "${HOME}/.iterm2_shell_integration.zsh"
 
 unset sourceIfExists
 
+autoload -Uz compinit && compinit -i
+autoload -Uz bashcompinit && bashcompinit
+
+zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
+
 source "$__zshrc_dirname/zgen/zgen.zsh"
 setopt extendedglob
 if ! zgen saved; then
@@ -98,7 +121,11 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/git-extras
   zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/docker-compose
+  zgen oh-my-zsh plugins/gcloud
   zgen oh-my-zsh plugins/rbenv
+  zgen oh-my-zsh plugins/pyenv
+  zgen oh-my-zsh plugins/kubectl
   # zgen oh-my-zsh plugins/jump
 
   zgen load srijanshetty/zsh-pandoc-completion ''
@@ -112,8 +139,11 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-completions src
   zgen load zsh-users/zsh-history-substring-search
   # zgen load deliciousinsights/git-stree
-  ! $IS_WINDOWS && zgen load lukechilds/zsh-nvm 
+
+  ! $IS_WINDOWS && zgen load forivall/zsh-nvm
+  zgen load "$__zshrc_dirname/plugins/nvm"
   zgen load lukechilds/zsh-better-npm-completion
+  zgen load g-plane/zsh-yarn-autocompletions
   # zgen load jocelynmallon/zshimarks
 
   zgen load "$__zshrc_dirname/plugins/functional"
@@ -136,7 +166,6 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
   zgen load "$__zshrc_dirname/plugins/twilio"
 
-  # zgen load "$__zshrc_dirname/plugins/nvm"
   zgen load "$__zshrc_dirname/plugins/yarn"
   zgen load "$__zshrc_dirname/plugins/yargs"
   # zgen load "$__zshrc_dirname/plugins/subl"
@@ -158,13 +187,16 @@ if ! zgen saved; then
   done
   fpath=(${ofpath})
 
+  local before=${#fpath}
   zgen save
-fi
-unsetopt nomatch
+  local count=$(( ${#fpath} - $before ))
 
-# todo: move into docker plugin
-source /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion
-source /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion
+  for plugindir in ${fpath[0,$count]} ; do
+    [[ -f ${plugindir}/zplug.zsh ]] && ${plugindir}/zplug.zsh
+  done
+fi
+unalias 9
+unsetopt nomatch
 
 # TODO: move to a vscode plugin
 if [[ "$VSCODE_CLI" == 1 ]] ; then
@@ -187,8 +219,9 @@ fi
 
 clean-env
 
-autoload bashcompinit && bashcompinit
+compinit -C
 
-zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
+# zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
+# zprof
 
 true

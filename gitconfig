@@ -7,7 +7,7 @@
 	# pager = delta --dark --theme base16
 	pager = less +X -x2 -R
 	# pager = most
-	excludesfile = /Users/emilyklassen/.gitignore_global
+	excludesfile = ~/.gitignore
 	trustctime = false
 	editor = vim
 	# trustctime = false

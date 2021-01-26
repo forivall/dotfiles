@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+__zsh_yargs_plugin__build_completions() {
+  unset NVM_LAZY_LOAD_GLOBAL_COMMANDS
+  (echo "export NVM_LAZY_LOAD_GLOBAL_COMMANDS=("
+  _zsh_nvm_global_binaries
+  echo ")") > "${__zsh_nvm_plugin__dirname}/cache"
+}

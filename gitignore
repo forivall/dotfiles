@@ -1,7 +1,7 @@
 *~
 ._sublime-project_count
 .tags
-tags
 npm-debug.log
 .imdone
-yarn.lock
+.DS_Store
+.ipynb_checkpoints

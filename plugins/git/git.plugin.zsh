@@ -8,17 +8,16 @@ if $IS_OSX ; then
   PATH="$PATH:${__zsh_forivall_git_plugin_location}/bin-osx"
 fi
 
-alias gl='git l'
-alias gla='git la'
-alias gps='git push'
-alias gp='git pull'
-
 # GIT_CONTRIB_ROOT="/usr/share/doc/git/contrib"
 GIT_CONTRIB_ROOT="/usr/share/git"
 if $IS_OSX ; then
   GIT_REALPATH="$(readlink -f "$(whence -p git)")"
   GIT_CONTRIB_ROOT="${GIT_REALPATH%/bin/git}/share/git-core/contrib"
 fi
+
+# for alias in g ga gap gam gcb gcm gco gcp gcs gcsb gd gds gdd gdds ge gf gfo gitify gg gl gla glf glfg glg glga glgs glgas gp gpr gprs gps gst gti gts gtv gtl gwip gunwip ; do
+#   whence $alias && echo "warning: $alias already set"
+# done
 
 # alias git-blameview="perl /usr/share/doc/git/contrib/blameview/blameview.perl"
 # alias git-new-workdir="sh /usr/share/doc/git/contrib/workdir/git-new-workdir"
@@ -28,7 +27,23 @@ alias git-new-workdir="$GIT_CONTRIB_ROOT/workdir/git-new-workdir"
 alias gitview="/usr/share/git/gitview/gitview"
 
 alias g=git
-alias gg="git grep"
+
+alias ga='git add'
+alias gap='git add -p'
+alias gam='git amend'
+
+alias gcb='git checkout -b'
+alias gcm='git commit'
+alias gco='git checkout'
+alias gcp='git cherry-pick'
+alias gcs='git switch'
+alias gcsb='git switch -c'
+
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gdd='git delta diff'
+alias gdds='git delta diff --staged'
+
 # alias ge="git each"
 ge() {
     local first; first="$1"
@@ -39,15 +54,9 @@ ge() {
     fi
     for d in */.git; do e="${d%/.git}"; echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
 }
-alias gr="git r"
-alias grg="git r git"
-alias gst="git st"
-alias gitify=gitify_node_module
-alias glg="git l3"
-alias glga="git l3 --all"
-alias glgs="git l3 --stat"
-alias glgas="git l3 --all --stat"
-alias gti="git"
+
+alias gf='git fetch'
+alias gfo='git fetch origin'
 
 # t is in a terrible place in querty, and I often hit space first
 # TODO: switch keyboard layouts.
@@ -63,6 +72,37 @@ function gi() {
         return $?
     fi
 }
+
+alias gitify=gitify_node_module
+
+alias gg="git grep"
+
+alias gl='git l'
+alias gla='git la'
+alias glf='git ls-files'
+alias glfg='git ls-files | grep'
+alias glg="git l3"
+alias glga="git l3 --all"
+alias glgs="git l3 --stat"
+alias glgas="git l3 --all --stat"
+alias gll='ogl'
+alias glla='ogl --all'
+
+alias gp='git pull'
+alias gpr='git pull --rebase'
+alias gprs='git pull --rebase --autostash'
+alias gps='git push'
+
+alias gst="git st"
+
+alias gti="git"
+alias gts='git tag -s'
+alias gtv='git tag | sort -V'
+alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
+
+# TODO: modify and put this in my gitignore
+# alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
+# alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 
 function ___git_indent_helper() {
     "$@" 2>/dev/null | (whitespace="↳ "; while read l; do echo "$whitespace$l"; whitespace="  "; done)
@@ -152,3 +192,5 @@ function git-on-this-day {
 
 # source "$__zsh_forivall_git_plugin_location/completions.zsh"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
+
+autoload ogl

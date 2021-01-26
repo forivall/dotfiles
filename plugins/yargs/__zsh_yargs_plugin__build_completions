@@ -22,8 +22,9 @@ __zsh_yargs_plugin__build_completions() {
   }
   for command command_path in ${(kv)commands}; do
     # whence _$command > /dev/null && continue
-    if has_yargs $command_path:A &&
+    if [[ -n "$command" ]] && has_yargs $command_path:A &&
         file -b $command_path | grep 'node script' > /dev/null &&
+        [[ "$command" != 'forever' ]] &&
         p "$command" --help | grep "$command completion" > /dev/null
     then
       echo "Generating completion for ${command}..." >&2
