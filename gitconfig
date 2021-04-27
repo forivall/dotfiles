@@ -147,8 +147,8 @@
 	default = simple
 [url "git://anongit.kde.org/"]
 	insteadOf = kde:
-[url "ssh://git@git.kde.org/"]
-	pushInsteadOf = kde:
+# [url "ssh://git@git.kde.org/"]
+# 	pushInsteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
 [url "https://github.com/"]

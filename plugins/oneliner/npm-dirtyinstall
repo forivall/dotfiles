@@ -1,13 +1,25 @@
-local pkg=$1
-local ver=$2
-local spec
-if [[ -n "$ver" ]] ; then
+local tarball
+local pkg
+local ver
+if [[ $1 == *.tgz && -e $1 ]] ; then
+  tarball=$1
+  local pkgjson="$(tar xf $tarball -O package/package.json)"
+  pkg="$(echo $pkgjson | jq -r .name)"
+  ver="$(echo $pkgjson | jq -r .version)"
   spec="$pkg@$ver"
-else
-  spec=$pkg
+else  
+  pkg=$1
+  ver=$2
+  local spec
+  if [[ -n "$ver" ]] ; then
+    spec="$pkg@$ver"
+  else
+    spec=$pkg
+    ver=${pkg#?*@}
+    pkg=${pkg%@*~*/*}
+  fi
+  tarball=$(npm pack $spec) || return
 fi
 
-local tarball
-tarball=$(npm pack $spec) &&
 mkdir -p node_modules/$pkg &&
 tar xf $tarball -C node_modules/$pkg --strip-components 1

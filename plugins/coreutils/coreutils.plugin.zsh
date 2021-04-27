@@ -1,9 +1,18 @@
 # ls
-alias ls="$(whence ls) --group-directories-first -F --color=auto --hide=\*~ "
-alias sl="ls"
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+if whence exa > /dev/null ; then
+  alias ls="exa --group-directories-first -F --color=auto"
+  alias li="exa --group-directories-first -F --color=auto --icons"
+  alias ll="exa -alF --icons"
+  alias la="exa -a --icons"
+  alias l="exa -F"
+else
+  alias ls="$(whence ls) --group-directories-first -F --color=auto --hide=\*~ "
+  alias ll='ls -alF'
+  alias la='ls -A'
+  alias l='ls -CF'
+fi
+# use https://github.com/chmln/sl instead
+# alias sl="ls"
 
 # grep
 export GREP_COLORS='ms=01;31:mc=01;31:sl=:cx=:fn=35:ln=32:bn=32:se=36:ne'

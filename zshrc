@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 # zmodload zsh/zprof
 
+unset CI
+
 __zshrc_filename=${${(%):-%N}:A}
 __zshrc_dirname=${__zshrc_filename:h}
 
@@ -90,15 +92,16 @@ zstyle ':autocomplete:tab:*' completion select
 # pure prompt settings
 PURE_HIGHLIGHT_REPO=1
 PURE_PROMPT_SYMBOL="%B»%b"
+PURE_GIT_UNTRACKED_DIRTY=0
+zstyle :prompt:pure:git:stash show yes
+# $prompt_pure_git_stash
 
 zstyle ':completion:*' rehash true
 
 # local git plugin settings
 export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
-path=(~/.local/bin $path ~/.zgen/deliciousinsights/git-stree-master)
-
-sourceIfExists "${HOME}/.iterm2_shell_integration.zsh"
+path=(~/.local/bin ~/.cargo/bin $path ~/.zgen/deliciousinsights/git-stree-master)
 
 unset sourceIfExists
 

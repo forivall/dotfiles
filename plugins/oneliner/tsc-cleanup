@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
+
+set -G # nullglob
+
 local files=()
-for f in {src,test}/**/*.{js,d.ts}; if [[ ! -e ${${f%.*}%.d}.ts ]] files+=($f)
+for f in {src,lib,test}/**/*.{js,d.ts}; if [[ ! -e ${${f%.*}%.d}.ts ]] files+=($f)
 
 if (( ${#files} > 0 )) ; then
   echo trash $files
