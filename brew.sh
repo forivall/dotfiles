@@ -4,7 +4,7 @@ xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install node
-brew install coreutils findutils dateutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt colordiff rename
+brew install coreutils findutils dateutils moreutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt colordiff rename
 brew install most colordiff trash htop tree ripgrep fd vim
 brew install libtool autoconf automake
 brew install git hub git-extras git-lfs git-credential-manager zaquestion/tap/lab

@@ -152,3 +152,5 @@ function sleep_until {
   echo "Sleeping for $seconds seconds"
   sleep $seconds
 }
+
+isvg() { rsvg-convert "$@" | imgcat }

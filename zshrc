@@ -72,6 +72,7 @@ BAT_PAGER="less +X -x2 -FR"
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
+# TODO: use https://github.com/Schniz/fnm instead?
 
 # zsh settings
 setopt extended_glob
@@ -218,6 +219,10 @@ if [[ "$VSCODE_CLI" == 1 ]] ; then
   VSCODE_NLS_CONFIG=
   VSCODE_PID=
   VSCODE_WINDOW_ID=
+fi
+
+if [[ "$TERM_PROGRAM" != "vscode" ]] ; then
+  unset VSCODE_CWD
 fi
 
 clean-env
