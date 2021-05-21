@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+dot -Tpng -Gdpi=300 -Gbgcolor=transparent -Gfontcolor="#EEEEEE" -Gfontname=sansserif -Nfontname=sansserif -Nfontcolor="#EEEEEE" -Efontname=sansserif -Efontcolor="#EEEEEE" -Ncolor="#EEEEEE" -Ecolor="#EEEEEE" "$@" | imgcat

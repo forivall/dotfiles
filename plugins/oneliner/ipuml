@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# good themes for dark terminal:
+# spacelab
+# superhero-outline
+# hacker
+# cyborg-outline
+# black-knight
+
+# TODO: read the dimensions from the output svg, and set viewer dimensions appropriately.
+plantuml -pipe -theme superhero-outline -tsvg | rsvg-convert --dpi-x=300 --dpi-y=300 | viu - -w 64
