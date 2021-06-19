@@ -227,7 +227,13 @@ fi
 
 clean-env
 
-compinit -C
+# https://gist.github.com/ctechols/ca1035271ad134841284
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+1) ]]; then
+	compinit
+  compdump
+else
+	compinit -C # dont check cache
+fi;
 
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 # zprof
