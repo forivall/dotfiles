@@ -2,7 +2,7 @@ import * as path from 'path'
 
 import * as webpack from 'webpack'
 
-const p = (...s) => path.resolve(__dirname, ...s)
+const p = (...s: string[]) => path.resolve(__dirname, ...s)
 const t = <T>() => <U extends T>(val: U) => val
 
 export default t<webpack.Configuration>()({
