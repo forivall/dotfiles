@@ -4,7 +4,7 @@
   "description": "",
   "main": "dochub_keyboard_shortcuts.user.js",
   "scripts": {
-    "build": "webpack --require ts-node/register",
+    "build": "wp --require ts-node/register",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,7 +18,7 @@
     "ts-loader": "^4.4.1",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.2",
-    "webpack": "^4.12.0",
-    "webpack-command": "^0.2.1"
+    "webpack": "^5.39.1",
+    "webpack-nano": "^1.1.1"
   }
 }
