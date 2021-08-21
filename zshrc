@@ -73,9 +73,10 @@ export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
 # TODO: use https://github.com/Schniz/fnm instead?
+export TSC_NONPOLLING_WATCHER=true
 
 # zsh settings
-setopt extended_glob
+setopt no_extended_glob # breaks `git show HEAD^`
 setopt bareglobqual
 
 # zsh highlighting settings
@@ -201,6 +202,8 @@ if ! zgen saved; then
 fi
 unalias 9
 unsetopt nomatch
+# from oh-my-zsh web-search. github is from github desktop.
+unalias github
 
 # TODO: move to a vscode plugin
 if [[ "$VSCODE_CLI" == 1 ]] ; then

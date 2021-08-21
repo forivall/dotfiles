@@ -155,8 +155,10 @@
 	insteadOf = hub:
 [url "git@github.com:"]
 		pushInsteadOf = hub:
-# [url "git@github.com:"]
-#     pushInsteadOf = hub:
+[url "https://gitlab.com/"]
+	insteadOf = lab:
+[url "git@gitlab.com:"]
+	pushInsteadOf = lab:
 [credential]
 	helper = cache
 [mergetool]
