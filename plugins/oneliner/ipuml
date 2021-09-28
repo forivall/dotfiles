@@ -7,4 +7,17 @@
 # black-knight
 
 # TODO: read the dimensions from the output svg, and set viewer dimensions appropriately.
-plantuml -pipe -theme superhero-outline -tsvg | rsvg-convert --dpi-x=300 --dpi-y=300 | viu - -w 64
+f=$(mktemp --suffix=.png)
+plantuml -pipe -theme superhero-outline -tsvg | rsvg-convert --dpi-x=300 --dpi-y=300 > $f
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+  # TERM_PROGRAM=iTerm viu -w $COLUMNS $f
+  wezterm imgcat --width '100%' $f 2>/dev/null
+else
+  # 280 * 13 = 3640
+  h=($(gm identify -format '%h' $f))
+  if (( h > 3640 )); then
+    viu $f -h 280
+  else
+    viu $f
+  fi
+fi

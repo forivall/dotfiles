@@ -1,2 +1,12 @@
 #!/usr/bin/env zsh
-dot -Tpng -Gdpi=300 -Gbgcolor=transparent -Gfontcolor="#EEEEEE" -Gfontname=sansserif -Nfontname=sansserif -Nfontcolor="#EEEEEE" -Efontname=sansserif -Efontcolor="#EEEEEE" -Ncolor="#EEEEEE" -Ecolor="#EEEEEE" "$@" | imgcat
+f=$(mktemp --suffix=.png)
+dot -Tpng \
+-Gdpi=240 -Gbgcolor=transparent -Gfontcolor="#EEEEEE" -Gfontname=sansserif \
+-Nfontname=sansserif -Nfontcolor="#EEEEEE" -Ncolor="#EEEEEE" \
+-Efontname=sansserif -Efontcolor="#EEEEEE" -Ecolor="#EEEEEE" "$@" > $f
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+  # TERM_PROGRAM=iTerm viu -w $COLUMNS $f
+  wezterm imgcat --width '100%' $f 2>/dev/null
+else
+  imgcat $f
+fi

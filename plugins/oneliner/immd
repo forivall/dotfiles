@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
-immd_node=~"/.nvm/versions/node/v14.16.1"
+immd_node=~"/.nvm/versions/node/v14.17.4"
 f=$(mktemp --suffix=.png)
-cat | $immd_node/bin/node $immd_node/bin/mmdc -o $f -b transparent --width 1920 --theme dark $@
-imgcat $f
+cat | $immd_node/bin/node $immd_node/bin/mmdc -o $f -b transparent --width 2880 --theme dark $@
+gm convert -trim $f $f
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+  # TERM_PROGRAM=iTerm viu -w $COLUMNS $f
+  wezterm imgcat --width '100%' $f 2>/dev/null
+else
+  imgcat $f
+fi

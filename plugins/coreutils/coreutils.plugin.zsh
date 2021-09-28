@@ -61,6 +61,10 @@ elif [[ -d /Applications/Preview.app ]] ; then
   gman() {
     man -t "$@" | open -f -a /Applications/Preview.app/
   }
+elif [[ -d /System/Applications/Preview.app ]] ; then
+  gman() {
+    man -t "$@" | open -f -a /System/Applications/Preview.app/
+  }
 fi
 
 # touch

@@ -8,3 +8,4 @@ npm-debug.log
 .DS_Store
 /pythonhist
 /zsh_history_interactive
+__pycache__
