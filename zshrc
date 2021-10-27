@@ -168,6 +168,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/git-ftp"
   zgen load "$__zshrc_dirname/plugins/github"
   zgen load "$__zshrc_dirname/plugins/lab"
+  zgen load "$__zshrc_dirname/plugins/glab"
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
@@ -199,7 +200,10 @@ if ! zgen saved; then
   local count=$(( ${#fpath} - $before ))
 
   for plugindir in ${fpath[0,$count]} ; do
-    [[ -f ${plugindir}/zplug.zsh ]] && ${plugindir}/zplug.zsh
+    if [[ -f ${plugindir}/zplug.zsh ]] ; then
+      # echo "Running ${plugindir}/zplug.zsh" >&2
+      (builtin cd $plugindir && ./zplug.zsh)
+    fi
   done
 fi
 unalias 9

@@ -1,0 +1,13 @@
+# What protocol to use when performing git operations. Supported values: ssh, https
+git_protocol: ssh
+# What editor glab should run when creating issues, merge requests, etc.  This is a global config that cannot be overridden by hostname.
+editor:
+# What browser glab should run when opening links. This is a global config that cannot be overridden by hostname.
+browser:
+# Set your desired markdown renderer style. Available options are [dark, light, notty] or set a custom style. Refer to https://github.com/charmbracelet/glamour#styles
+glamour_style: dark
+# Allow glab to automatically check for updates and notify you when there are new updates
+check_update: false
+# configuration specific for gitlab instances
+hosts:
+  # omitted

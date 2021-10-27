@@ -1,0 +1,3 @@
+ci: pipeline ci
+co: mr checkout
+mrb: mr view --web

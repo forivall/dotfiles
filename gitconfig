@@ -21,6 +21,7 @@
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
 	ci = commit
+	cie = commit-edit
 	co = checkout
 	st = status -b -s
 	stat = status -b -s
@@ -51,6 +52,8 @@
 	# useful to force make to rebuild changed files; just `| xargs touch`
 	show-files-only = show --pretty="format:" --name-only
 	serve = daemon --export-all --base-path=. --verbose
+	commit-edit = "!git commit --edit --file \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\""
+	env = "!env"
 
 	# legit
 	# branches = !legit branches
@@ -105,7 +108,7 @@
 	ahead = less
 	last = false
 	ll = true
-	ls-files = true
+	ls-files = false
 [giggle]
 	file-view-vpane-position = 807
 	history-view-vpane-position = 216

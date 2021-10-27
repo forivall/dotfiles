@@ -77,7 +77,7 @@ alias gitify=gitify_node_module
 
 alias gg="git grep"
 
-alias gl='git l'
+# alias gl='git l'  # aliased to glab instead.
 alias gla='git la'
 alias glf='git ls-files'
 alias glfg='git ls-files | grep'

@@ -1,0 +1,64 @@
+{
+  "appearanceName" : "NSAppearanceNameAqua",
+  "name" : "Yesterday (Light)",
+  "styles" : {
+    "Comment" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#8E908CFF"
+    },
+    "Current Statement" : {
+      "backgroundColor" : "#0000000D"
+    },
+    "Cursor" : {
+      "foregroundColor" : "#000000FF"
+    },
+    "Dollar-Quoted String Constant" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#DA761AFF"
+    },
+    "Invalid Syntax" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#FF453AFF"
+    },
+    "Line Comment" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#8E908CFF"
+    },
+    "Line Number" : {
+      "backgroundColor" : "#FFFFFFFF",
+      "foregroundColor" : "#B2B2B2FF"
+    },
+    "Matching Parenthesis" : {
+      "backgroundColor" : "#FFFF0059",
+      "foregroundColor" : "#32807AFF"
+    },
+    "Mismatched Parenthesis" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#FF9980FF"
+    },
+    "Plain Text" : {
+      "backgroundColor" : "#FFFFFFFF",
+      "foregroundColor" : "#242423FF"
+    },
+    "Quoted Identifier" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#997800FF"
+    },
+    "Reserved Keyword" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#8959A8FF"
+    },
+    "Selection" : {
+      "backgroundColor" : "#DFC5DFFF"
+    },
+    "String Constant" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#718C00FF"
+    },
+    "Unreserved Keyword" : {
+      "backgroundColor" : "#FFFFFF00",
+      "foregroundColor" : "#C82829FF"
+    }
+  },
+  "uuid" : "48A9F964-DD05-4AE7-B513-E52BF353D35C"
+}
