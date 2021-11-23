@@ -1,1 +1,2 @@
-alias gl=glab
+alias lb=glab
+alias glb=glab

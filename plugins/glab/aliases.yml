@@ -1,3 +1,7 @@
 ci: pipeline ci
 co: mr checkout
 mrb: mr view --web
+mrc: mr create --web --assignee emily --fill --fill-commit-body
+my-mrs: mr list --all --author=@me
+brb: "!REMOTE=`git remote show`; BRANCH=`git rev-parse --abbrev-ref --symbolic-full-name '@{u}' | sd $REMOTE/ ''`; glab repo view --branch $BRANCH --web"
+browse: repo view --web

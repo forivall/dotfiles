@@ -66,8 +66,11 @@ o ln -fs "$(realpath hgrc)" ~/.hgrc
 o ln -fs "$(realpath vimrc.after)" ~/.vimrc.after
 o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist
-mkdir -p ~/.config/glab-cli
+o mkdir -p ~/.config/glab-cli
 o ln -fs "$(realpath plugins/glab/aliases.yml)" ~/.config/glab-cli/aliases.yml
+o mkdir -p ~/.config/htop
+o ln -fs "$(realpath htop)" ~/.config/htop/htoprc
+o ln -fs "$(realpath ctop)" ~/.ctop
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion

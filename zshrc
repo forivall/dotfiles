@@ -63,6 +63,7 @@ DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
+ZSH_PYENV_QUIET=true
 
 export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
 CLOUDSDK_HOME="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
@@ -113,7 +114,6 @@ autoload -Uz bashcompinit && bashcompinit
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
 source "$__zshrc_dirname/zgen/zgen.zsh"
-setopt extendedglob
 if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions

@@ -1,9 +1,9 @@
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew cask install iterm2
-brew cask install firefox
+brew install --cask iterm2
+brew install --cask firefox
 brew install zsh
 brew search lastpass
-brew cask install lastpass
+brew install --cask lastpass
 brew install zsh
 ssh-keygen
 ssh-add -K ~/.ssh/id_rsa
