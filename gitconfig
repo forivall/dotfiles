@@ -29,7 +29,7 @@
 	ahead = log --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph HEAD ^origin/HEAD
 	ahead-root = !git --no-pager log --oneline HEAD ^origin/HEAD
 	ahead2 = log --name-status --abbrev-commit --pretty=oneline --graph --decorate HEAD ^origin/HEAD
-	exclude = "!f() { for p in \"$@\" ; do echo \"$GIT_PREFIX$p\" >> .git/info/exclude ; done; }; f"
+	exclude = "!f() { for p in \"$@\" ; do echo \"$GIT_PREFIX$p\" >> $GIT_DIR/info/exclude ; done; }; f"
 	diffc = diff --cached
 	last = show --oneline --name-status --decorate
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
@@ -54,6 +54,9 @@
 	serve = daemon --export-all --base-path=. --verbose
 	commit-edit = "!git commit --edit --file \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\""
 	env = "!env"
+	checkout-pull-detach = "!f() { git checkout \"$@\" && git pull && git detach-head; }; f"
+	worktree-dirs = "!git worktree list --porcelain | rg '^worktree ' | sd '^worktree ' ''"
+	worktree-main = "!git worktree list --porcelain | head -n1 | sd '^worktree ' ''"
 
 	# legit
 	# branches = !legit branches
@@ -193,3 +196,5 @@
 	ff = only
 [init]
 	defaultBranch = main
+[extensions]
+  worktreeConfig = true

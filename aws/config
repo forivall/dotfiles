@@ -1,0 +1,7 @@
+[default]
+output = yaml
+cli_pager = bat --plain -l yaml
+
+[profile json]
+output = json
+cli_pager = bat --plain -l json
