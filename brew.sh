@@ -53,6 +53,7 @@ brew install git-delta -s --HEAD --verbose
 brew install go
 brew install duf # df alternative
 # brew install ncdu
+brew tap dart-lang/dart
 brew install dart sass
 brew install mint # swift
 
@@ -65,7 +66,7 @@ brew install optipng pngcrush advancecomp jpegoptim gifsicle pngquant # image co
 # brew install exiftool libexif jhead gexiv2
 # brew install pngpaste argyll-cms
 brew install gollum github-markdown-toc
-brew install jwt-cli
+# brew tap mike-engel/jwt-cli && brew install jwt-cli
 # brew install gocr ocrad zbar # ocr & barcode qr pdf417 tools
 brew install sejda-pdf briss # good pdf tools
 # brew install pdfsandwich pdfcpu pdftk-java pdfcrack pdfsandwich mupdf mupdf-tools unpaper
@@ -83,7 +84,7 @@ brew install --cask visual-studio-code
 brew install --cask iterm2
 brew install --cask karabiner-elements middleclick
 brew install --cask beardedspice
-brew install --cask skim
+brew install --cask skim # foxitreader
 brew install --cask keka kekadefaultapp
 brew install --cask typora notable
 brew install --cask robo-3t
@@ -97,6 +98,9 @@ brew install --cask gimp
 brew install --cask gpg-suite-no-mail
 brew install --cask kap
 brew install --cask menumeters && brew install osx-cpu-temp
+# brew install --cask postico dbschema
+# brew install --cask fontgoggles inkscape
+# brew install --cask xscreensaver
 
 brew tap homebrew/cask-fonts
 brew install --cask font-fantasque-sans-mono font-fira-code
@@ -110,12 +114,16 @@ npm i -g yarn
 npm i -g bash-language-server
 npm i -g npm-name-cli
 
-clojure babashka clj-kondo just leiningen
+# brew tap clojure/tools
+# brew tap borkdude/brew
+# brew install clojure babashka clj-kondo just leiningen
 
+brew tap jesseduffield/lazygit
 brew install lazydocker lazygit spotify-tui gitui tig magic-wormhole
 brew install bottom ctop dust procs pv timg
 brew install p7zip unar
-brew install csvkit visidata
+# brew tap saulpw/vd
+# brew install csvkit visidata
 # brew install mercurial subversion
 # brew install grex # a regex tool
 # brew install youtube-dl instalooter yt-dlp
@@ -124,4 +132,7 @@ brew install csvkit visidata
 # brew install python@2
 # brew install dbus
 
+# # for cleaning up and checking packages that arent in here:
 # comm -13 <(< brew.sh sd ' ' '\n' | huniq | sort) <(comm -13 <(brew deps --installed --installed | cut -d: -f2 | sd ' ' '\n' | huniq | sort) <(brew ls --formulae | sort))
+# mupdf: mesa
+# toilet: imlib2 libxi libcaca
