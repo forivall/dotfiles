@@ -75,7 +75,7 @@ function gi() {
 
 alias gitify=gitify_node_module
 
-alias gg="git grep"
+alias gg="git grep-pretty"
 
 alias gl='git l'
 alias gla='git la'

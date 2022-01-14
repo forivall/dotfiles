@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+for d in $(cd $1 && fd -H '.vscode/**' && echo node_modules/.vscode); mkdir -p $d && eval cp $1/$d/* $d

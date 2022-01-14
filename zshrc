@@ -64,7 +64,7 @@ HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
 ZSH_PYENV_QUIET=true
-ENABLE_CORRECTION=true
+# ENABLE_CORRECTION=true
 
 export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
 CLOUDSDK_HOME="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"

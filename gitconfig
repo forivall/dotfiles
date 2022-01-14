@@ -57,6 +57,9 @@
 	checkout-pull-detach = "!f() { git checkout \"$@\" && git pull && git detach-head; }; f"
 	worktree-dirs = "!git worktree list --porcelain | rg '^worktree ' | sd '^worktree ' ''"
 	worktree-main = "!git worktree list --porcelain | head -n1 | sd '^worktree ' ''"
+	# looks like ripgrep
+	grep-pretty = "grep --break --heading"
+	rg = "grep --break --heading"
 
 	# legit
 	# branches = !legit branches
@@ -103,6 +106,9 @@
 	# added = green
 	# changed = green
 	untracked = magenta
+[color "grep"]
+  linenumber="green"
+  filename="magenta"
 
 [grep]
 	lineNumber = true

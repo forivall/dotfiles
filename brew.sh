@@ -12,7 +12,7 @@ brew install node fnm
 # brew install watchman
 brew install direnv # .envrc files
 brew install coreutils findutils dateutils moreutils util-linux telnet \
-             gnu-tar gnu-sed gawk gnutls gssh gnu-indent gnu-getopt colordiff rename expect
+             gnu-tar gnu-sed gawk gnutls gssh gnu-indent gnu-getopt colordiff rename expect pgrep
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
 brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim

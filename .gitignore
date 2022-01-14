@@ -9,3 +9,5 @@ npm-debug.log
 /pythonhist
 /zsh_history_interactive
 __pycache__
+
+scripts/*.workflow/Contents/QuickLook/Thumbnail.png
