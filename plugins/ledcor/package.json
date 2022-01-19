@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cookie": "^0.3.1",
+    "cookie": "^0.4.1",
     "nightmare": "^2.5.1",
     "nightmare-upload": "^0.1.1"
   }
