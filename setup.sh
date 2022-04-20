@@ -38,7 +38,7 @@ fi
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
 if ! type realpath >/dev/null ; then
-  if ! type grealpath >/dev/null ; then
+  if type grealpath >/dev/null ; then
     realpath() { grealpath "$@"; }
   else
     realpath() { readlink -f "$@"; }
@@ -57,6 +57,7 @@ if [[ ! -d ~/.vim ]] ; then
 fi
 
 o ln -fs "$(realpath vim.janus)" ~/.janus
+mkdir -p ~/.config
 o ln -fs ~/.vim ~/.config/nvim
 o ln -fs ~/.vimrc ~/.config/nvim/init.vim
 

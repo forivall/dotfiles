@@ -17,7 +17,10 @@ if $IS_OSX ; then
   if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
   fi
+  # old homebrew config
   path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
+  # new homebrew config
+  path=(/opt/homebrew/bin $path)
   [[ -d "/usr/local/opt/node@12/bin" ]] && path=(/usr/local/opt/node@12/bin $path)
   export PLAN9="/usr/local/plan9"
   [[ -d $PLAN9 ]] && path=($path $PLAN9/bin)
@@ -43,7 +46,7 @@ if $IS_LINUXY ; then
 fi
 
 # core shell settings
-export SHELL=$(whence $(ps wwwe -p $$ -o comm=))
+# export SHELL=$(whence $(ps wwwe -p $$ -o comm=))  # broken on m1 mac
 # export SHELL=zsh
 export EDITOR=vim
 export VISUAL=code
@@ -128,7 +131,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/git-extras
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
-  zgen oh-my-zsh plugins/gcloud
+  [[ -d /usr/local/Caskroom/google-cloud-sdk ]] && zgen oh-my-zsh plugins/gcloud
   zgen oh-my-zsh plugins/rbenv
   zgen oh-my-zsh plugins/pyenv
   whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl

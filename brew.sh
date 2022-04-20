@@ -104,7 +104,7 @@ brew install --cask menumeters && brew install osx-cpu-temp
 # brew install --cask xscreensaver
 
 brew tap homebrew/cask-fonts
-brew install --cask font-fantasque-sans-mono font-fira-code
+brew install --cask font-fantasque-sans-mono font-fira-code font-input font-fira-code-nerd-font font-fantasque-sans-mono-nerd-font
 # TODO: add font-input with my preferred options - set up the options in the cask
 
 brew tap kde-mac/kde
