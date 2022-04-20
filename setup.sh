@@ -4,7 +4,6 @@ set -e
 
 cd "$(dirname "$0")" || exit
 
-
 _is_xdg() {
   local _XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg:/foo/bar};
   local OIFS="$IFS"
@@ -14,6 +13,8 @@ _is_xdg() {
   [[ -d ${xdg_config_dirs[0]} ]]
 }
 if _is_xdg ; then is_xdg=true ; else is_xdg=false ; fi
+
+if [[ "$(uname)" == "Darwin" ]] ; then IS_OSX=true; else IS_OSX=false; fi
 
 o() {
   echo "$@"
@@ -75,6 +76,12 @@ o ln -fs "$(realpath ctop)" ~/.ctop
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion
 o ln -fs "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
+
+
+if $IS_OSX ; then
+  mkdir -p ~/.config/mackup
+  o ln -fs "$(realpath mackup.cfg)" ~/.mackup.cfg
+fi
 
 if [[ -n "$BABUN_HOME" ]]; then
     BINPATH="$(cygpath "$HOMEPATH")/.local/bin"

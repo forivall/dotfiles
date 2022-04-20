@@ -1,0 +1,1 @@
+for f in *.jpg(.Lk+480) ; jpegoptim -S480 $f --stdout > ${f%.jpg}_sm.jpg

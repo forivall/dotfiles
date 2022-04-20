@@ -18,6 +18,7 @@ brew install curl-openssl
 brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
+brew install MisterTea/et/et # eternal terminal
 # brew install gitlab-runner lab
 # brew install twilio
 # brew install git-cola
