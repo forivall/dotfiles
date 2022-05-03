@@ -1,3 +1,4 @@
+// https://github.com/forivall/dotfiles/blob/osx/userscripts/github-review-keyboard-shortcuts.js
 /* global document */
 ;(() => {
   /**
@@ -9,7 +10,7 @@
     const ae = document.activeElement
     if (ae && ae.nodeName !== 'BODY') return
     const handler = handlers[event.key]
-    return handler && handler(event)
+    return handler?.(event)
   }
 
   /** @type {string=} */
@@ -22,6 +23,29 @@
     }
     return prev;
   }
+  
+  /** @param a {HTMLAnchorElement | null} */
+  const focusFile = (a) => {
+    if (!a) return
+    prev = a.href
+    const h = new URL(prev).hash;
+    // github a11y bug! it says expanded on initial page load even if it is hidden. So use the classes instead
+    const wasExpanded = !document.querySelector(
+      h + ' [aria-label="Toggle diff contents"] .octicon-chevron-right.Details-content--shown,' +
+      h + ' [aria-label="Toggle diff contents"][aria-expanded="false"]'
+    );
+    a.click()
+    if (wasExpanded) return;
+
+    setTimeout(() => {
+    /** @type {HTMLInputElement | null} */
+    const t = document.querySelector(h + ' .js-reviewed-checkbox')
+    if (t?.checked) {
+      /** @type {HTMLButtonElement | null} */
+      const expander = document.querySelector(h + ' [aria-label="Toggle diff contents"][aria-expanded="true"]');
+      expander?.click();
+    }}, 10)
+  }
   const navHandler =
     /** @param {1 | -1} offset */
     (offset) => /** @param {KeyboardEvent} ev */ (ev) => {
@@ -29,18 +53,13 @@
       if (!h) {
         /** @type {HTMLAnchorElement | null} */
         const a = document.querySelector('.file-info a[href^="#"]')
-        if (!a) return
-        prev = a.href
-        a.click()
-        return
+        return focusFile(a)
       }
 
       /** @type {NodeListOf<HTMLAnchorElement>} */
       const files = document.querySelectorAll('.file-info a[href^="#"]')
-      const i = [...files].findIndex((el) => el.href.endsWith(h))
-      const a = files[i + offset]
-      prev = a.href
-      a.click()
+      const i = [...files].findIndex((a) => a.href.endsWith(h))
+      return focusFile(files[i + offset])
     }
 
   document.onkeyup = reviewKeyboardHandler({
@@ -51,7 +70,7 @@
       if (!h) return
       /** @type {HTMLElement | null} */
       const t = document.querySelector(h + ' .js-reviewed-toggle')
-      t && t.click()
+      t?.click()
     },
     // D: () => { debugger }
   })

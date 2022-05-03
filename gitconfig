@@ -15,8 +15,15 @@
 	# renames = false
 	renames = copies # makes genco choke
 	tool = vscode
+	colorMoved = default
 [difftool]
 	prompt = false
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	minus-style = syntax auto
+	syntax-theme = base16
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
@@ -82,7 +89,9 @@
 	dc = diff --cached
 	amend = commit --amend --no-edit
 	reword = commit --amend
-	config-user = "!git config user.name \"$1\" && git config user.email \"$2\" && :"
+	config-user = "!git config --local user.name \"$1\" && git config --local user.email \"$2\" && :"
+	# for ease of use, add a `git-config-signing` in ~/.local/bin with the key id as default
+	config-signing = "!git config --local user.signingkey \"$1\" && git config --local commit.gpgSign true && :"
 	d = diff
 
 [color]
@@ -107,8 +116,8 @@
 	# changed = green
 	untracked = magenta
 [color "grep"]
-  linenumber="green"
-  filename="magenta"
+	linenumber="green"
+	filename="magenta"
 
 [grep]
 	lineNumber = true
@@ -173,6 +182,8 @@
 	pushInsteadOf = lab:
 [credential]
 	helper = cache
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false
@@ -204,3 +215,5 @@
 	defaultBranch = main
 [extensions]
   worktreeConfig = true
+[credential "https://dev.azure.com"]
+	useHttpPath = true

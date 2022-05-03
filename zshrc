@@ -58,6 +58,11 @@ tabs -2
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
+# TODO: switch to
+# https://github.com/jandamm/zgenom or
+# https://github.com/zdharma-continuum/zinit or
+# https://github.com/marlonrichert/zsh-snap or
+# https://github.com/zimfw/zimfw
 # zgen settings
 ZGEN_AUTOLOAD_COMPINIT=0
 
@@ -126,6 +131,7 @@ if ! zgen saved; then
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/web-search
   # zgen oh-my-zsh plugins/command-not-found # very slow
+  $IS_OSX && zgen oh-my-zsh plugins/brew
   zgen oh-my-zsh plugins/colorize
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/git-extras
@@ -171,8 +177,9 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/git"
   zgen load "$__zshrc_dirname/plugins/git-ftp"
   zgen load "$__zshrc_dirname/plugins/github"
-  zgen load "$__zshrc_dirname/plugins/lab"
-  zgen load "$__zshrc_dirname/plugins/glab"
+  $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
+  whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
+  whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"

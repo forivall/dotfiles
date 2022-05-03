@@ -56,16 +56,17 @@ if [[ ! -d ~/.vim ]] ; then
   curl -Lo- https://bit.ly/janus-bootstrap | bash
 fi
 
-o ln -fs "$(realpath vim.janus)" ~/.janus
+o ln -Ffs "$(realpath vim.janus)" ~/.janus
 mkdir -p ~/.config
-o ln -fs ~/.vim ~/.config/nvim
+o ln -Ffs ~/.vim ~/.config/nvim
 o ln -fs ~/.vimrc ~/.config/nvim/init.vim
+o ln -fs "$(realpath vimrc.before)" ~/.vimrc.before
+o ln -fs "$(realpath vimrc.after)" ~/.vimrc.after
 
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
 o ln -fs "$(realpath gitignore)" ~/.gitignore
 o ln -fs "$(realpath hgrc)" ~/.hgrc
-o ln -fs "$(realpath vimrc.after)" ~/.vimrc.after
 o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist
 o mkdir -p ~/.config/glab-cli

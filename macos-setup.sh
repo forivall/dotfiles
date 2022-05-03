@@ -9,4 +9,5 @@ git clone git@github.com:forivall/dotfiles.git
 brew install coreutils
 ./dotfiles/setup.sh 
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
 brew install --cask visual-studio-code

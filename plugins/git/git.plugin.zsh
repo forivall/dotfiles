@@ -135,16 +135,23 @@ function git() { # also put these in git-aliases for autocomplete
     -*) opts+=($1 $2); shift; shift; cont=true;;
     fancy) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
-      git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager;;
+      git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager
+      ;;
     delta) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
-      git "${opts[@]}" -c color.diff=always "$@" | delta --theme=base16 --highlight-removed | $pager;;
+      if (( $# == 0 )); then 
+        git "${opts[@]}" -c color.diff=always diff "$@" | delta | $pager
+      else
+        git "${opts[@]}" -c color.diff=always "$@" | delta | $pager
+      fi
+      ;;
     diff) shift;
       if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
         /usr/bin/env git --no-pager diff $@
       else
-        /usr/bin/env git diff $@ ;
-      fi;;
+        /usr/bin/env git diff $@
+      fi
+      ;;
     stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
     *) /usr/bin/env git "${opts[@]}" "$@";;
   esac
