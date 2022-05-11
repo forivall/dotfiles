@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+__plugin_dirname=${0:a:h:h}
+
+args=()
+pretty=()
+
+while (( $# > 0 )); do
+case "$1" in
+    --pretty=*) ; pretty=($1); shift; continue; ;;
+    --pretty) ; pretty=($1 $2); shift; shift; continue; ;;
+    *) args+=($1); shift; continue; ;;
+esac
+break;
+done
+
+output=()
+hashes="$(git log --pretty=%h --max-count=100 ${args[@]})"
+for commit in ${(f)hashes}; do
+  output+=("<(git show $commit ${pretty[@]} | delta)")
+done
+
+eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}
+
+wait

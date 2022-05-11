@@ -57,15 +57,29 @@ function mkcd() { mkdir -p "$@" ; cd "$@" ; }
 function --a() { ( ( "$@" > /dev/null 2>&1 ) & ) ; }
 if type yelp >/dev/null ; then
   function gman() { --a yelp "man:$1" ; }
-elif [[ -d /Applications/Preview.app ]] ; then
+elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ; then
   gman() {
-    man -t "$@" | open -f -a /Applications/Preview.app/
-  }
-elif [[ -d /System/Applications/Preview.app ]] ; then
-  gman() {
-    man -t "$@" | open -f -a /System/Applications/Preview.app/
+    local preview_app
+    preview_app=/System/Applications/Preview.app
+    [[ -d /Applications/Preview.app ]] && preview_app=/Applications/Preview.app
+    [[ -d /Applications/Skim.app ]] && preview_app=/Applications/Skim.app
+
+    local manfile
+    if type groff > /dev/null; then
+      mantmp=$(mktemp -d)/"man $*".pdf
+      local manfile=$(man -w "$@")
+      < $manfile tbl | groff -m mandoc -c -Tpdf -dpaper=legal -P-plegal -f H > $mantmp || return
+      if type exiftool > /dev/null; then
+        exiftool -quiet -Title="man $*" $mantmp
+      fi
+    else
+      mantmp=$(mktemp -d)/"man $*".ps
+      man -t "$@" > $mantmp || return
+    fi
+    open -a $preview_app $mantmp
   }
 fi
+compdef gman=man
 
 # touch
 function touche {

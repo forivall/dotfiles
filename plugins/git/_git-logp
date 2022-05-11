@@ -1,0 +1,6 @@
+#compdef git-logp
+#description show commit contents interactively
+
+_git-logp () {
+  _git-log
+}

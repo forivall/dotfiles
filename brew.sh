@@ -4,6 +4,7 @@ xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install zsh zsh-completions
+brew install oil # alternative unix shell for scripting, not interactive
 brew install mackup # mac settings sync
 brew install node fnm
 # brew install emscripten binaryen wapm wasm-pack wasmer
@@ -13,6 +14,7 @@ brew install node fnm
 brew install direnv # .envrc files
 brew install coreutils findutils dateutils moreutils util-linux telnet \
   gnu-tar gnu-sed gawk gnutls gssh gnu-indent gnu-getopt colordiff rename expect pgrep
+brew install less # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
 brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim
@@ -95,6 +97,7 @@ brew install --cask google-chrome
 brew install --cask firefox
 brew install --cask spotify
 brew install --cask visual-studio-code
+brew install --cask sublime-merge sublime-text # sublime merge uses installed sublime text syntaxes
 brew install --cask iterm2 termhere
 
 brew install --cask karabiner-elements middleclick
@@ -128,6 +131,7 @@ brew install --cask monitorcontrol
 # brew install --cask fontgoggles inkscape
 # brew install --cask xscreensaver
 # brew install --cask microsoft-teams zoom webex-meetings
+# brew install --cask loom
 
 brew install --cask font-smoothing-adjuster
 brew tap homebrew/cask-fonts

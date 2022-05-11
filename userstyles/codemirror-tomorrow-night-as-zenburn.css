@@ -1,0 +1,21 @@
+.cm-s-zenburn div.CodeMirror-selected { background: hsl(216, 8%, 24%) !important; }
+.cm-s-zenburn .CodeMirror-gutter { background: hsl(210,6%,12%); border-right: 1px solid hsl(0, 0%, 19%) !important; }
+.cm-s-zenburn .CodeMirror-gutter-text { color: hsl(0, 0%, 29%) !important; }
+.cm-s-zenburn .CodeMirror-cursor { border-left: 1px solid white !important; }
+
+.cm-s-zenburn { background: hsl(210,6%,12%)!important; color: hsl(140,2%,77%) !important; }
+.cm-s-zenburn .CodeMirror-activeline-background { background-color: hsl(210,6%,15%)!important;}
+.cm-s-zenburn span.cm-comment { color: hsl(120,0%,59%) !important; }
+.cm-s-zenburn span.cm-atom, .cm-s-zenburn span.cm-number, .cm-s-zenburn span.cm-attribute { color: hsl(24,65%,62%) !important; }
+.cm-s-zenburn span.cm-keyword { color: hsl(286,22%,65%) !important; }
+.cm-s-zenburn span.cm-keyword { font-weight: normal; }
+.cm-s-zenburn span.cm-string, .cm-s-zenburn span.cm-string-2 { color: hsl(65,39%,57%) !important; }
+.cm-s-zenburn span.cm-meta { color: hsl(171,28%,64%) !important; }
+.cm-s-zenburn span.cm-variable, span.cm-variable-2, .cm-s-zenburn span.cm-def { color: #cc6666 !important; }
+.cm-s-zenburn .cm-s-zenburn span.cm-tag { color: hsl(39,80%,69%) !important; }
+.cm-s-zenburn span.cm-variable-3 { color: hsl(39,80%,69%) !important; }
+.cm-s-zenburn span.cm-error { color: #d75a64 !important; }
+.cm-s-zenburn span.cm-bracket { color: hsl(0, 0%, 50%) !important; }
+.cm-s-zenburn span.cm-builtin, .cm-s-zenburn span.cm-special { color:hsl(207,31%,62%) !important; }
+.cm-s-zenburn span.cm-link, .cm-s-zenburn span.cm-deffunc, .cm-s-zenburn span.cm-property { color: hsl(207,31%,62%) !important; }
+.cm-s-zenburn span.cm-operator { color: rgb(124, 124, 124) !important; }
