@@ -64,6 +64,9 @@
 	checkout-pull-detach = "!f() { git checkout \"$@\" && git pull && git detach-head; }; f"
 	worktree-dirs = "!git worktree list --porcelain | rg '^worktree ' | sd '^worktree ' ''"
 	worktree-main = "!git worktree list --porcelain | head -n1 | sd '^worktree ' ''"
+	worktree-ls = worktree list
+	worktree-mv = worktree move
+	worktree-rm = worktree remove
 	# looks like ripgrep
 	grep-pretty = "grep --break --heading"
 	rg = "grep --break --heading"
@@ -217,3 +220,7 @@
   worktreeConfig = true
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[sequence]
+	editor = interactive-rebase-tool
+[rebase]
+	autoSquash = true

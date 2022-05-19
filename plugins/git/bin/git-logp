@@ -4,12 +4,32 @@ __plugin_dirname=${0:a:h:h}
 
 args=()
 pretty=()
+files=()
+dashdash=false
+allfiles=false
 
 while (( $# > 0 )); do
 case "$1" in
-    --pretty=*) ; pretty=($1); shift; continue; ;;
-    --pretty) ; pretty=($1 $2); shift; shift; continue; ;;
-    *) args+=($1); shift; continue; ;;
+  -h)
+    git log -h | sd 'usage: git log' 'usage: git logp' | rg -v 'or: git show'
+    echo '    --all-files           filter commits on files, but show all files'
+    echo
+    echo 'in the less pager, use j / k to navigate history backward / forward'
+    exit
+  ;;
+  --pretty=*|--stat|--name-only|--name-status)
+    pretty+=($1); shift; continue; ;;
+  --pretty) pretty+=($1 $2); shift; shift; continue; ;;
+  --all-files) allfiles=true; shift; continue; ;;
+  --) dashdash=true; args+=($1); shift; continue; ;;
+  *)
+    args+=($1)
+    if $dashdash || [[ -e $1 ]]; then
+      files+=($1)
+    fi
+    shift
+    continue
+  ;;
 esac
 break;
 done
@@ -17,7 +37,11 @@ done
 output=()
 hashes="$(git log --pretty=%h --max-count=100 ${args[@]})"
 for commit in ${(f)hashes}; do
-  output+=("<(git show $commit ${pretty[@]} | delta)")
+  if $allfiles; then
+    output+=("<(git show --color ${(q+@)commit} ${(q+@)pretty[@]} | delta)")
+  else
+    output+=("<(git show --color ${(q+@)commit} ${(q+@)pretty[@]} -- ${(q+@)files[@]} | delta)")
+  fi
 done
 
 eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}

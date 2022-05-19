@@ -67,8 +67,9 @@ elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ;
     local manfile
     if type groff > /dev/null; then
       mantmp=$(mktemp -d)/"man $*".pdf
-      local manfile=$(man -w "$@")
-      < $manfile tbl | groff -m mandoc -c -Tpdf -dpaper=legal -P-plegal -f H > $mantmp || return
+      local target
+      target=$(man -w "$@") || return
+      < $target tbl | groff -m mandoc -c -Tpdf -dpaper=legal -P-plegal -f H > $mantmp || return
       if type exiftool > /dev/null; then
         exiftool -quiet -Title="man $*" $mantmp
       fi

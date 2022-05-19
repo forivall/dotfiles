@@ -24,6 +24,7 @@ function npm() {
     *) ${npm_cmd[@]} "$@";;
   esac
 }
+compdef npm=npm
 
 npm-git-get-branch() {
   local m="$1"

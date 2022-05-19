@@ -1,15 +1,22 @@
-local worktree=~owl/repos${PWD#~owl2-env/packages}
-if [[ ! -d $worktree ]] ; then
-  local toplevel
-  if toplevel=$(git rev-parse --show-toplevel) ; then
-    local root=~owl/repos${toplevel#~owl2-env/packages}
+local toplevel
+if toplevel=$(git rev-parse --show-toplevel) ; then
+  local name=${1:-pr}
+  local root=${toplevel:h}/$name-worktrees/${toplevel:t}
+  if [[ ! -d $root ]] ; then
     local branch
-    if branch=$(git symbolic-ref HEAD --short) ; then
-      git worktree add $root -b $branch+worktree ||
-      git worktree add $root $branch+worktree
-    else
+    if (( $#>=2 )); then
+      branch=$2
+    elif branch=$(git symbolic-ref HEAD --short) ; then
+      branch=$branch+$name
+    fi
+    if [[ -z $branch ]]; then
       git worktree add $root --detach
+    else
+      git worktree add $root -b $branch ||
+      git worktree add $root $branch
     fi
   fi
+  cd $root
+else
+  echo 'not in git dir'
 fi
-cd $worktree

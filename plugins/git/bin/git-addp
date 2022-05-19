@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+__plugin_dirname=${0:a:h:h}
+
+# set -e
+
+while ! git diff-files --quiet; do
+  # git diff --name-only | selecta --height 4 | read file
+  items=($(git diff --name-only))
+  # $ python3 -m pip install simple-term-menu
+  simple-term-menu ${items[@]}
+  i=$?
+  if (( $i == 0 )) ; then exit; fi
+  file=${items[i]}
+  git add -p $file
+done
+
+echo 'Nothing left to add'

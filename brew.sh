@@ -20,6 +20,7 @@ brew install curl-openssl
 brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
+brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
 brew install MisterTea/et/et # eternal terminal
 brew install bottom ctop dust procs pv timg
 brew install p7zip unar
@@ -64,6 +65,7 @@ brew install mint # swift
 
 brew install asciinema cmatrix
 brew install figlet toilet utimer && pip3 install termdown
+python3 -m pip install simple-term-menu
 brew install graphviz # xdot plantuml
 # brew install imagemagick -- --with-webp --with-librsvg --with-wmf --with-little-cms --with-little-cms2 --with-pango --with-ghostscript --with-fontconfig
 brew install graphicsmagick
@@ -132,6 +134,7 @@ brew install --cask monitorcontrol
 # brew install --cask xscreensaver
 # brew install --cask microsoft-teams zoom webex-meetings
 # brew install --cask loom
+brew install --cask cameracontroller logitech-camera-settings
 
 brew install --cask font-smoothing-adjuster
 brew tap homebrew/cask-fonts

@@ -1,0 +1,6 @@
+#compdef git-addp
+#description show commit contents interactively
+
+_git-addp () {
+  _git-add
+}

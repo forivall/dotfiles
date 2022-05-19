@@ -127,35 +127,58 @@ function git() { # also put these in git-aliases for autocomplete
   fi
 
   local cont=true
+  local gitcommand gitcommandopts
   local opts
   opts=()
-  while $cont; do
+  while $cont && (( $# > 0 )); do
   cont=false
   case "$1" in
-    -*) opts+=($1 $2); shift; shift; cont=true;;
+    -*) opts+=($1 $2); shift; (( $# > 0 )) && shift; cont=true;;
     fancy) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
-      git "${opts[@]}" -c color.diff=always "$@" | diff-so-fancy | $pager
+      git -c color.diff=always "${opts[@]}" "$@" | diff-so-fancy | $pager
       ;;
     delta) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       if (( $# == 0 )); then 
-        git "${opts[@]}" -c color.diff=always diff "$@" | delta | $pager
+        git -c color.diff=always diff "${opts[@]}" "$@" | delta | $pager
       else
-        git "${opts[@]}" -c color.diff=always "$@" | delta | $pager
+        git -c color.diff=always "${opts[@]}" "$@" | delta | $pager
       fi
       ;;
     diff) shift;
       if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
-        /usr/bin/env git --no-pager diff $@
+        command git --no-pager "${opts[@]}" diff $@
       else
-        /usr/bin/env git diff $@
+        command git "${opts[@]}" diff $@
       fi
       ;;
-    stashed) shift; git stash save && /usr/bin/env git "$@" && git stash pop;;
-    *) /usr/bin/env git "${opts[@]}" "$@";;
+    stashed) shift; git stash save && command git "$@" && git stash pop;;
+    wt) gitcommand=worktree; gitcommandopts=${#opts}; shift; cont=true;;
+    sm) gitcommand=submodule; gitcommandopts=${#opts}; shift; cont=true;;
+    sbt) gitcommand=subtree; gitcommandopts=${#opts}; shift; cont=true;;
+    worktree|submodule|subtree) gitcommand=$1; gitcommandopts=${#opts}; shift; cont=true;;
   esac
   done
+
+  if [[ -n $gitcommand ]]; then
+    if (( $# == 0 )) ; then
+      command git "${opts[@]:0:$gitcommandopts}" $gitcommand "${opts[@]:$gitcommandopts}"
+      if (( $opts[(Ie)-h] )); then
+        command git --no-pager config --get-regex "alias.$gitcommand-.*" | sd "^alias\.$gitcommand-(\S+)" "   or: git $gitcommand \$1  = "
+      fi
+    else
+      local alias="$gitcommand-$1"
+      if git config --get alias.$alias > /dev/null; then
+        shift
+        command git "${opts[@]}" $alias "$@"
+      else
+        command git "${opts[@]:0:$gitcommandopts}" $gitcommand "${opts[@]:$gitcommandopts}" "$@"
+      fi
+    fi
+  else
+    command git "${opts[@]}" "$@"
+  fi
 }
 
 _git-stashed() {
