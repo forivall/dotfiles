@@ -137,6 +137,7 @@ function git() { # also put these in git-aliases for autocomplete
     fancy) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       git -c color.diff=always "${opts[@]}" "$@" | diff-so-fancy | $pager
+      return
       ;;
     delta) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
@@ -145,13 +146,15 @@ function git() { # also put these in git-aliases for autocomplete
       else
         git -c color.diff=always "${opts[@]}" "$@" | delta | $pager
       fi
+      return
       ;;
     diff) shift;
-      if [[ "$1" == '--name-status' || "$1" == '--name-only' ]] ; then
+      if [[ "$1" == '--name-status' || "$1" == '--name-only' || "$1" == '--stat' ]] ; then
         command git --no-pager "${opts[@]}" diff $@
       else
         command git "${opts[@]}" diff $@
       fi
+      return
       ;;
     stashed) shift; git stash save && command git "$@" && git stash pop;;
     wt) gitcommand=worktree; gitcommandopts=${#opts}; shift; cont=true;;

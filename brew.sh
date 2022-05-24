@@ -125,6 +125,7 @@ brew install --cask clipy
 # also, https://langui.net/clipboard-viewer/
 curl -OL https://langui.net/files/ClipboardViewer.zip && open ClipboardViewer.zip && mv ClipboardViewer.app /Applications
 brew install --cask gimp
+brew install --cask marta
 brew install --cask gpg-suite-no-mail
 brew install --cask kap
 brew install --cask menumeters eul && brew install osx-cpu-temp
