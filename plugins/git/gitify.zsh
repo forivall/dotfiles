@@ -1,10 +1,22 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+
+gitify_vscode_plugin() {
+  if git rev-parse --show-toplevel 2> /dev/null; then
+    local ecode=$?
+    echo already a git repo!
+    return $ecode
+  fi
+  git clone "$(jq -r '(.repository.url // .repository)' package.json | sd '^git+http' http)" _tmp
+  mv _tmp/.git .git
+  command rm -r _tmp
+}
+
 # usage: cd node_modules; gitify_node_module ../../vidi-server ../../vidi-shop-server ...
 # or, even quicker: gitify_node_module ../../*
 gitify_node_module() {
   local d; local m; local ad; #local others;
   # others=()
-  rmdir _tmp
+  [[ -d _tmp ]] && rmdir _tmp
   for d in "$@" ; do       # for d in process.argv
     ad="$(realpath "$d")"
     m="${d##*/}";          #   m = _.last(d.split('/'))

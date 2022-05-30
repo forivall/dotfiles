@@ -117,8 +117,8 @@ path=(~/.local/bin ~/.cargo/bin $path ~/.zgen/deliciousinsights/git-stree-master
 
 unset sourceIfExists
 
-autoload -Uz compinit && compinit -i
 autoload -Uz bashcompinit && bashcompinit
+autoload -Uz compinit && compinit -i
 
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 

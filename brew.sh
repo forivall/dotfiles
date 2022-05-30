@@ -95,6 +95,7 @@ brew install iconsur
 
 brew install --cask docker
 # brew install --cask google-cloud-sdk
+# brew install minikube kubectl skaffold
 brew install --cask google-chrome
 brew install --cask firefox
 brew install --cask spotify
@@ -136,6 +137,7 @@ brew install --cask monitorcontrol
 # brew install --cask microsoft-teams zoom webex-meetings
 # brew install --cask loom
 brew install --cask cameracontroller logitech-camera-settings
+brew install --cask launchcontrol
 
 brew install --cask font-smoothing-adjuster
 brew tap homebrew/cask-fonts

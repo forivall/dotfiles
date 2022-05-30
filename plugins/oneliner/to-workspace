@@ -1,1 +1,0 @@
-cd ~owl2-env/packages${PWD#~owl/repos}

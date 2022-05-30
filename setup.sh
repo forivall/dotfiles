@@ -73,6 +73,8 @@ o mkdir -p ~/.config/glab-cli
 o ln -fs "$(realpath plugins/glab/aliases.yml)" ~/.config/glab-cli/aliases.yml
 o mkdir -p ~/.config/htop
 o ln -fs "$(realpath htoprc)" ~/.config/htop/htoprc
+o mkdir -p ~/.config/gh
+o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
 o ln -fs "$(realpath ctop)" ~/.ctop
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
@@ -84,6 +86,7 @@ if $IS_OSX ; then
   mkdir -p ~/.config/mackup
   o ln -fs "$(realpath mackup.cfg)" ~/.mackup.cfg
 fi
+# TODO: gnu stow or some other alternative to mackup for linux.
 
 if [[ -n "$BABUN_HOME" ]]; then
     BINPATH="$(cygpath "$HOMEPATH")/.local/bin"

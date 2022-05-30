@@ -67,3 +67,5 @@ oneliner-list() {
     fi
   done
 }
+
+compdef rgp=rg

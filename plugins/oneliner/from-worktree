@@ -1,0 +1,2 @@
+cd $(git worktree-main)/$(git rev-parse --show-prefix)
+

@@ -1,3 +1,16 @@
-node node_modules/types-publisher/bin/parse-definitions.js &&
-node node_modules/types-publisher/bin/calculate-versions.js &&
-node node_modules/types-publisher/bin/generate-packages.js --tgz
+() {
+  local repo_dir=$(git rev-parse --show-toplevel)
+  if [[ ${repo_dir:t} == 'DefinitelyTyped' ]] ; then
+    repo_dir+=-tools
+  fi
+  maybe_popd=popd
+  if [[ $repo_dir == $PWD ]]; then maybe_popd=:; else pushd $repo_dir; fi
+
+  [[ ! -x yarn ]] && (( ${+functions[_zsh_nvm_load]} )) && _zsh_nvm_load
+  yarn run build
+  yarn workspace @definitelytyped/publisher run parse
+  yarn workspace @definitelytyped/publisher run calculate-versions
+  yarn workspace @definitelytyped/publisher run generate
+
+  $maybe_popd
+}
