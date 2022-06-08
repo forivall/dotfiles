@@ -11,6 +11,7 @@ brew install node fnm
 # brew install mujs
 # brew install argon2 jemalloc # node native addon speedups
 # brew install watchman
+brew install entr # run command on change
 brew install direnv # .envrc files
 brew install coreutils findutils dateutils moreutils util-linux telnet \
   gnu-tar gnu-sed gawk gnutls gssh gnu-indent gnu-getopt colordiff rename expect pgrep

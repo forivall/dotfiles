@@ -53,6 +53,8 @@
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graphlast = show --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged
+	update-branch-upstream = "!f() { branch=$1; shift; git update-ref \"refs/heads/$branch\" \"$branch@{u}\"; }; f"
+	reset-upstream = reset @{u}
 	root = rev-parse --show-toplevel
 	tag-column = !git tag "$@" | column
 	# useful to force make to rebuild changed files; just `| xargs touch`
@@ -61,6 +63,7 @@
 	commit-edit = "!git commit --edit --file \"$(git rev-parse --git-dir)/COMMIT_EDITMSG\""
 	env = "!env"
 	checkout-pull-detach = "!f() { git checkout \"$@\" && git pull && git detach-head; }; f"
+	detach-head = checkout --detach HEAD
 	worktree-dirs = "!git worktree list --porcelain | rg '^worktree ' | sd '^worktree ' ''"
 	worktree-main = "!git worktree list --porcelain | head -n1 | sd '^worktree ' ''"
 	worktree-ls = worktree list

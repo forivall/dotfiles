@@ -146,15 +146,18 @@ function git() { # also put these in git-aliases for autocomplete
       fi
       return
       ;;
-    diff) shift;
-      if [[ "$1" == '--name-status' || "$1" == '--name-only' || "$1" == '--stat' ]] ; then
-        command git --no-pager "${opts[@]}" diff $@
+    diff|diffc) gitcommand=$1; shift;
+      if (( $@[(Ie)--name-status] )) || (( $@[(Ie)--name-only] )) || (( $@[(Ie)--stat] )) ; then
+        command git --no-pager "${opts[@]}" $gitcommand $@
       else
-        command git "${opts[@]}" diff $@
+        command git "${opts[@]}" $gitcommand $@
       fi
       return
       ;;
-    stashed) shift; git stash save && command git "$@" && git stash pop;;
+    stashed) shift;
+      git stash save && git "${opts[@]}" "$@" && git stash pop
+      return
+      ;;
     wt) gitcommand=worktree; gitcommandopts=${#opts}; shift; cont=true;;
     sm) gitcommand=submodule; gitcommandopts=${#opts}; shift; cont=true;;
     sbt) gitcommand=subtree; gitcommandopts=${#opts}; shift; cont=true;;

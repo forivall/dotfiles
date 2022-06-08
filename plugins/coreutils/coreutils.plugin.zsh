@@ -163,6 +163,12 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   # }
 fi
 
+# ps
+pcmd() {
+  ps -o command $@ | tail +2
+}
+compdef pcmd=ps
+
 # https://wiki.archlinux.org/index.php/Zsh#Help_command
 autoload -U run-help
 autoload run-help-git
