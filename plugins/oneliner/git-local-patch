@@ -1,0 +1,18 @@
+GIT_DIR="$(git rev-parse --git-dir)"
+mkdir -p $GIT_DIR/info
+ATTRIBUTES="/$(git rev-parse --show-prefix)$1 filter=local-patch"
+EXCLUDE="/$(git rev-parse --show-prefix)$1.patch"
+[[ -f $1.patch ]] && rm $1.patch
+if [[ -f $GIT_DIR/info/attributes ]]; then
+  sd -s $ATTRIBUTES '' $GIT_DIR/info/attributes
+fi
+if [[ -f $GIT_DIR/info/exclude ]]; then
+  sd -s $EXCLUDE '' $GIT_DIR/info/exclude
+fi
+git reset $1
+if git diff --exit-code $1 > $1.patch; then
+  command rm $1.patch
+else
+  echo $ATTRIBUTES >> $GIT_DIR/info/attributes
+  echo $EXCLUDE >> $GIT_DIR/info/exclude
+fi
