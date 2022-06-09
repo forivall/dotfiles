@@ -46,13 +46,13 @@ alias gdds='git delta diff --staged'
 
 # alias ge="git each"
 ge() {
-    local first; first="$1"
-    if whence "$first" >/dev/null 2>/dev/null ; then
-        shift
-    else
-        first=git
-    fi
-    for d in */.git; do e="${d%/.git}"; echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
+  local first; first="$1"
+  if whence "$first" >/dev/null 2>/dev/null ; then
+    shift
+  else
+    first=git
+  fi
+  for d in */.git; do e="${d%/.git}"; echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
 }
 
 alias gf='git fetch'
@@ -61,16 +61,16 @@ alias gfo='git fetch origin'
 # t is in a terrible place in querty, and I often hit space first
 # TODO: switch keyboard layouts.
 function gi() {
-    local firstarg
-    firstarg=$1
-    if [[ "${firstarg}" == t* ]] ; then
-        shift
-        git "${firstarg:1}" "$@"
-        return $?
-    else
-        env gi "$@"
-        return $?
-    fi
+  local firstarg
+  firstarg=$1
+  if [[ "${firstarg}" == t* ]] ; then
+    shift
+    git "${firstarg:1}" "$@"
+    return $?
+  else
+    env gi "$@"
+    return $?
+  fi
 }
 
 alias gg="git grep-pretty"
@@ -103,7 +103,7 @@ alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
 # alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 
 function ___git_indent_helper() {
-    "$@" 2>/dev/null | (whitespace="↳ "; while read l; do echo "$whitespace$l"; whitespace="  "; done)
+  "$@" 2>/dev/null | (whitespace="↳ "; while read l; do echo "$whitespace$l"; whitespace="  "; done)
 }
 
 GIT_SSH_AGENT_CHECK=(ssh-add -l)
@@ -194,34 +194,34 @@ _git-stashed() {
 ggjs() { gg "$@" -- '*.js' ; }
 ggcs() { gg "$@" -- '*.coffee' ; }
 ggb() {
-    if (( $# < 1 )) ; then gg "$@" ; return 255; fi
-    local arg1="$1"
-    shift
-    gg -I '\b'"$arg1"'\b' "$@" ;
+  if (( $# < 1 )) ; then gg "$@" ; return 255; fi
+  local arg1="$1"
+  shift
+  gg -I '\b'"$arg1"'\b' "$@" ;
 }
 
 
 git-get-logrefs() { git for-each-ref --format='%(refname)' refs/** | grep -E -v '(heads|remotes/[^/]+)/gh-pages|refs/stash' ; }
 
 function git-on-that-day {
-    local all; if [[ $1 == '--all' ]] ; then all=$1 ; shift ; fi
-    local a; a="$1"; shift;
-    local b; b="$1"; shift;
-    git-on-this-day $all "$a $b" "$a $(( $b + 1 ))" "$@"
+  local all; if [[ $1 == '--all' ]] ; then all=$1 ; shift ; fi
+  local a; a="$1"; shift;
+  local b; b="$1"; shift;
+  git-on-this-day $all "$a $b" "$a $(( $b + 1 ))" "$@"
 }
 function git-on-this-day {
-    local author
-    author='--author=emily'
-    if [[ $1 == '--all' ]] ; then author= ; shift ; fi
-    local a; a="$1"; shift;
-    local b; b="$1"; shift;
-    local until_; until_="$([[ -n "$b" ]] && echo "$b" || echo "$a")";
-    local dirname
-    for d in */.git ; do
-      dirname="${d%.git}"
-      l="$(cd "$dirname"; git --no-pager -c color=always l3 --all --since "$a" --until "$until_" "$author" "$@")"  # "
-      (( $? > 0 )) || (( $(echo -n "$l"|wc -l) > 0 )) && (echo; echo "${d%/.git}"; echo "$l")
-    done
+  local author
+  author='--author=emily'
+  if [[ $1 == '--all' ]] ; then author= ; shift ; fi
+  local a; a="$1"; shift;
+  local b; b="$1"; shift;
+  local until_; until_="$([[ -n "$b" ]] && echo "$b" || echo "$a")";
+  local dirname
+  for d in */.git ; do
+    dirname="${d%.git}"
+    l="$(cd "$dirname"; git --no-pager -c color=always l3 --all --since "$a" --until "$until_" "$author" "$@")"  # "
+    (( $? > 0 )) || (( $(echo -n "$l"|wc -l) > 0 )) && (echo; echo "${d%/.git}"; echo "$l")
+  done
 }
 
 # source "$__zsh_forivall_git_plugin_location/completions.zsh"
