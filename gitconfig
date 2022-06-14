@@ -50,6 +50,7 @@
 	lg3 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
 	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
+	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph `git rev-parse --symbolic --branches | while read branch; do echo $branch; git rev-parse --symbolic $branch@{u} 2>/dev/null; done`"
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graphlast = show --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged

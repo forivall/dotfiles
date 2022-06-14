@@ -1,20 +1,27 @@
-# Set the theme to "TwoDark"
+# This is `bat`s configuration file. Each line either contains a comment or
+# a command-line option that you want to pass to `bat` by default. You can
+# run `bat --help` to get a list of all possible configuration options.
+
+# Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
+# for a list of all available themes
 --theme="base16"
 
-# Show line numbers, Git modifications and file header (but no grid)
-# --style="numbers,changes,header"
+# Enable this to use italic text on the terminal. This is not supported on all
+# terminal emulators (like tmux, by default):
+#--italic-text=always
 
-# Use italic text on the terminal (not supported on all terminals)
---italic-text=always
+# Uncomment the following line to disable automatic paging:
+#--paging=never
 
-# Add mouse scrolling support in less (does not work with older
-# versions of "less")
-# --pager="less -x2"
---pager="less +X -x2 -FR"
-# --pager="most -s"
+# Uncomment the following line if you are using less version >= 551 and want to
+# enable mouse scrolling support in `bat` when running inside tmux. This might
+# disable text selection, unless you press shift.
+#--pager="less +X -x2 -FR"
 
-# Use C++ syntax (instead of C) for .h header files
-# --map-syntax h:cpp
+# Syntax mappings: map a certain filename pattern to a language.
+#   Example 1: use the C++ syntax for Arduino .ino files
+#   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
+#--map-syntax "*.ino:C++"
+#--map-syntax ".ignore:Git Ignore"
 
-# Use "gitignore" highlighting for ".ignore" files
-# --map-syntax .ignore:.gitignore
+--style=snip
