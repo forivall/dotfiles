@@ -103,7 +103,7 @@ function touche {
 }
 
 # diff
-function diff { colordiff -u "$@" | most ; }
+function diff { colordiff -u "$@" | less -f +X -x2 -R ; }
 alias diff_=/usr/bin/diff
 
 # # find

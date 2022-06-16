@@ -204,23 +204,31 @@ ggb() {
 
 git-get-logrefs() { git for-each-ref --format='%(refname)' refs/** | grep -E -v '(heads|remotes/[^/]+)/gh-pages|refs/stash' ; }
 
-function git-on-that-day {
+function git-on-those-days {
   local all; if [[ $1 == '--all' ]] ; then all=$1 ; shift ; fi
   local a; a="$1"; shift;
-  local b; b="$1"; shift;
+  local b; if (( $# > 0 )); then b="$1"; shift; fi
   git-on-this-day $all "$a $b" "$a $(( $b + 1 ))" "$@"
 }
 function git-on-this-day {
   local author
   author='--author=emily'
   if [[ $1 == '--all' ]] ; then author= ; shift ; fi
-  local a; a="$1"; shift;
-  local b; b="$1"; shift;
-  local until_; until_="$([[ -n "$b" ]] && echo "$b" || echo "$a")";
+  local since_; since_="$1"; shift;
+  local until_="$1";
+  if (( $# > 0 )); then
+    shift;
+  else
+    local sinceParsed=$(python3 -c "import approxidate; print(int(approxidate.approx(\"$since_\")))")
+    until_="$(( $sinceParsed + 86400 ))"
+  fi
   local dirname
+  local cmd
+  cmd=(git --no-pager l3 --color=always --no-graph --all --since "$since_" --until "$until_" $author "$@")
+  echo $cmd
   for d in */.git ; do
     dirname="${d%.git}"
-    l="$(cd "$dirname"; git --no-pager -c color=always l3 --all --since "$a" --until "$until_" "$author" "$@")"  # "
+    l="$(cd "$dirname"; $cmd)"
     (( $? > 0 )) || (( $(echo -n "$l"|wc -l) > 0 )) && (echo; echo "${d%/.git}"; echo "$l")
   done
 }
