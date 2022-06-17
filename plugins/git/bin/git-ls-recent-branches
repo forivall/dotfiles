@@ -1,5 +1,4 @@
-#!/bin/zsh
-#!/bin/bash
+#!/usr/bin/env zsh
 
 # ;& syntax uses bash >= 4.0; zsh probably more up to date
 autoload -U colors  && colors
@@ -57,9 +56,13 @@ fi
 
 # print the branch name of the most recent unique 10 checkouts
 _i=0
-(for i in {1..999} ; do
+(
+errs=0
+for i in {1..999} ; do
     branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
-    if (( $? != 0 )) ; then break ; fi
+    if (( $? != 0 )) ; then errs=$(( $errs + 1 )) ; else errs=0; fi
+    if (( $errs > 50 )) ; then break; fi
+    if [[ $branchname == "@{-$i}" || -z "$branchname" ]] ; then continue; fi
     # printf '%-7s ' @{-$i}
     echo @{-$i} ${branchname#refs/heads/}
 done) | awk '!x[$2]++' | while read branchname ; do
