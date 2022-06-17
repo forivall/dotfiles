@@ -1,0 +1,14 @@
+#compdef git-ls-recent-branches
+#description list recent branches
+
+_git-ls-recent-branches () {
+
+  _arguments -S \
+    '-n[limit how much to show]' \
+    '(-c --commit)'{-c,--commit}'[order by commit time]' \
+    '(-r -u --author --creation)'{-r,-u,--author,--creation}'[order by author time]' \
+    '--access[order by access]' \
+    && ret=0
+
+  return ret
+}

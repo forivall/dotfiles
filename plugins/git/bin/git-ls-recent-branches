@@ -21,8 +21,12 @@ case "$1" in
     --commit) ;&
     -c) by_commit=true; shift; continue;
     ;;
+    --author) ;&
     --creation) ;&
+    -u) ;&
     -r) by_creation=true; shift; continue;
+    ;;
+    --access) :; shift; continue;
     ;;
     *)
     break
@@ -58,10 +62,8 @@ fi
 _i=0
 (
 errs=0
-for i in {1..999} ; do
+for i in {1..99} ; do
     branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
-    if (( $? != 0 )) ; then errs=$(( $errs + 1 )) ; else errs=0; fi
-    if (( $errs > 50 )) ; then break; fi
     if [[ $branchname == "@{-$i}" || -z "$branchname" ]] ; then continue; fi
     # printf '%-7s ' @{-$i}
     echo @{-$i} ${branchname#refs/heads/}
