@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+__filename=${0:A}
+__dirname=${0:h}
+
+autoload colors && colors
+
+prompt_and_delete() {
+  echo -n "Delete merged branch $1? (y/N) "
+  read -k 1 yn
+  echo
+  [[ $yn == y ]] && git branch -d $1
+}
+
+for branch in $(git rev-parse --symbolic --branches); do
+  if [[ $branch == *+* ]]; then
+    basebranch=${branch%+*}
+    if git merge-base --is-ancestor $branch $basebranch; then
+      prompt_and_delete $branch
+      continue
+    fi
+  fi
+  if [[ $branch == feature/* ]]; then
+    if git merge-base --is-ancestor $branch origin/dev; then
+      prompt_and_delete $branch
+    else
+      echo "${fg[grey]}$branch is not merged into origin/dev$reset_color"
+    fi
+  elif [[ $branch == hotfix/* ]]; then
+    if git merge-base --is-ancestor $branch origin/master; then
+      prompt_and_delete $branch
+    else
+      echo "${fg[grey]}$branch is not merged into origin/master$reset_color"
+    fi
+  fi
+done

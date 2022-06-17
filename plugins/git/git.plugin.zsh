@@ -53,7 +53,7 @@ ge() {
   else
     first=git
   fi
-  for d in */.git; do e="${d%/.git}"; echo "$yellow❯ $teal$d$reset" >&2; (cd "$d"; "$first" "$@"); done;
+  for d in */.git; do e="${d%/.git}"; echo "${fg[yellow]}❯ ${fg[cyan]}$d$reset_color" >&2; (cd "$d"; "$first" "$@"); done;
 }
 
 alias gf='git fetch'

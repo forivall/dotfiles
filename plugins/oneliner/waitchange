@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+[[ $# == 0 ]] && return 1
+onchange "$@" -- __nonexistent-command__ 2>/dev/null
+[[ $? == 1 ]]

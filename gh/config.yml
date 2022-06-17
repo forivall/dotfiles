@@ -8,10 +8,13 @@ prompt: enabled
 pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
-    mrb: pr view --web
-    prb: pr view --web
-    brb: '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "" )'
+  co: pr checkout
+  mrb: pr view --web
+  prb: pr view --web
+  ib: issue view --web
+  brb:
+    '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u}
+    | sd "^[^/]*/" "" )'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

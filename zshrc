@@ -169,7 +169,6 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/oneliner"
   zgen load "$__zshrc_dirname/plugins/external-tools"
   zgen load "$__zshrc_dirname/plugins/dimensions-in-title"
-  zgen load "$__zshrc_dirname/plugins/colors"
   zgen load "$__zshrc_dirname/plugins/ruby"
   zgen load "$__zshrc_dirname/plugins/coreutils"
   zgen load "$__zshrc_dirname/plugins/git"

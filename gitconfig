@@ -90,7 +90,6 @@
 	# aliases for custom commands
 	sm = subl-modified
 	sp = subl-projects
-	cl = clone
 	unstage = reset HEAD --
 	dc = diff --cached
 	amend = commit --amend --no-edit
@@ -98,7 +97,19 @@
 	config-user = "!git config --local user.name \"$1\" && git config --local user.email \"$2\" && :"
 	# for ease of use, add a `git-config-signing` in ~/.local/bin with the key id as default
 	config-signing = "!git config --local user.signingkey \"$1\" && git config --local commit.gpgSign true && :"
-	d = diff
+
+	archive-untracked-files = !git-archive-untracked-files
+	blameall = !git-blameall
+	branch-archive = !git-branch-archive
+	changed-lines = !git-changed-lines
+	cleanup-merged = !git-cleanup-merged
+	file-size-diff = !git-file-size-diff
+	find-blob = !git-find-blob
+	has-changes = !git-has-changes
+	ls-recent-branches = !git-ls-recent-branches
+	resolve-conflicts = !git-resolve-conflicts
+	show-workdirs = !git-show-workdirs
+	store-untracked-files = !git-store-untracked-files
 
 [color]
 	# diff = always
