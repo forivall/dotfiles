@@ -7,6 +7,9 @@ pretty=()
 files=()
 dashdash=false
 allfiles=false
+reflog=false
+stash=false
+showdiff=true
 
 while (( $# > 0 )); do
 case "$1" in
@@ -17,7 +20,10 @@ case "$1" in
     echo 'in the less pager, use j / k to navigate history backward / forward'
     exit
   ;;
-  --pretty=*|--stat|--name-only|--name-status)
+  stash) stash=true; args+=(stash); pretty+=(--pretty=medium) ;&
+  --walk-reflogs) reflog=true; shift; continue; ;;
+  --stat|--name-only|--name-status) showdiff=false ;&
+  --pretty=*)
     pretty+=($1); shift; continue; ;;
   --pretty) pretty+=($1 $2); shift; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
@@ -34,13 +40,25 @@ esac
 break;
 done
 
+if $reflog; then
+  refspecs="$(git reflog --pretty=format:%gd --max-count=100 ${args[@]})"
+else
+  refspecs="$(git log --pretty=%h --max-count=100 ${args[@]})"
+fi
+
+dashdash=""
+$allfiles || dashdash+="${(q+@)files[@]} "
+
 output=()
-hashes="$(git log --pretty=%h --max-count=100 ${args[@]})"
-for commit in ${(f)hashes}; do
-  if $allfiles; then
-    output+=("<(git show --color ${(q+@)commit} ${(q+@)pretty[@]} | delta)")
+for commit in ${(f)refspecs}; do
+  if $reflog; then
+    if $showdiff; then
+      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; git show --color --pretty= ${(q+@)commit} -- $dashdash| delta)")
+    else
+      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash| delta)")
+    fi
   else
-    output+=("<(git show --color ${(q+@)commit} ${(q+@)pretty[@]} -- ${(q+@)files[@]} | delta)")
+    output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| delta)")
   fi
 done
 
