@@ -214,22 +214,29 @@ function git-on-this-day {
   local author
   author='--author=emily'
   if [[ $1 == '--all' ]] ; then author= ; shift ; fi
+  if [[ $1 == --author=* ]] ; then author=$1 ; shift ; fi
   local since_; since_="$1"; shift;
+  if [[ $1 == --author=* ]] ; then author=$1 ; shift ; fi
   local until_="$1";
   if (( $# > 0 )); then
     shift;
   else
     local sinceParsed=$(python3 -c "import approxidate; print(int(approxidate.approx(\"$since_\")))")
+    # local sinceParsed=$($__zsh_forivall_git_plugin_location/parse_date/parse_date $since_)
     until_="$(( $sinceParsed + 86400 ))"
   fi
   local dirname
   local cmd
   cmd=(git --no-pager l3 --color=always --no-graph --all --since "$since_" --until "$until_" $author "$@")
-  echo $cmd
+  echo ${(q-)cmd}
   for d in */.git ; do
     dirname="${d%.git}"
     l="$(cd "$dirname"; $cmd)"
-    (( $? > 0 )) || (( $(echo -n "$l"|wc -l) > 0 )) && (echo; echo "${d%/.git}"; echo "$l")
+    if (( $? > 0 )) || (( $(echo -n "$l"|wc -l) > 0 )) ; then
+      echo;
+      echo "${d%/.git}";
+      echo "$l"
+    fi
   done
 }
 

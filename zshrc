@@ -55,8 +55,13 @@ HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
 tabs -2
 
+# bindkey -M emacs "^\`" _complete_help
+
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
+
+# Bun
+export BUN_INSTALL=~/.bun
 
 # TODO: switch to
 # https://github.com/jandamm/zgenom or
@@ -111,7 +116,7 @@ zstyle ':completion:*' rehash true
 # local git plugin settings
 export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
-path=(~/.local/bin ~/.cargo/bin $path ~/.zgen/deliciousinsights/git-stree-master)
+path=(~/.local/bin ~/.cargo/bin "$BUN_INSTALL/bin" $path ~/.zgen/deliciousinsights/git-stree-master)
 
 unset sourceIfExists
 
@@ -177,6 +182,7 @@ if ! zgen saved; then
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
   whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
   whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
+  whence nx > /dev/null && zgen load jscutlery/nx-completion
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
@@ -193,6 +199,8 @@ if ! zgen saved; then
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
+
+  zgen load dim-an/cod
 
   # Build completions files
   local ofpath=(${fpath})

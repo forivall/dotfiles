@@ -14,7 +14,7 @@
 [diff]
 	renames = copies
 	tool = vscode
-	colorMoved = default
+	# colorMoved = default
 [difftool]
 	prompt = false
 [interactive]

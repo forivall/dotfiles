@@ -1,0 +1,37 @@
+{
+  "title": "Trackball as scrollwheel",
+  "rules": [
+    {
+      "description": "Change Logitech Trackball to ScrollWheel",
+      "available_since": "12.3.0",
+      "manipulators": [
+        {
+          "type": "mouse_motion_to_scroll",
+          "options": {
+            "speed_multiplier": 2.5,
+            "momentum_scroll_enabled": false
+          },
+          "from": {
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "description": "Logitech Trackball",
+                  "vendor_id": 1133,
+                  "product_id": 50180
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

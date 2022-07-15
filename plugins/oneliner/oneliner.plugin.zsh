@@ -68,4 +68,4 @@ oneliner-list() {
   done
 }
 
-compdef rgp=rg
+[[ -n ${_comps[rg]} ]] && compdef rgp=rg

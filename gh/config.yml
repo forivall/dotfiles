@@ -8,6 +8,7 @@ prompt: enabled
 pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
+  b: browse
   co: pr checkout
   mrb: pr view --web
   prb: pr view --web

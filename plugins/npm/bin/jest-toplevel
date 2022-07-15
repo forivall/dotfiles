@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+jest-toplevel() {
+  local noTestPatterns=true
+  for arg in $@; do
+    if [[ $arg != -* ]]; then
+      noTestPatterns=false
+      break
+    fi
+  done
+  local testPathPattern=()
+  $noTestPatterns && testPathPattern=("$(git rev-parse --show-prefix)")
+  npx jest --config "$(git rev-parse --show-cdup)jest.config.js" $testPathPattern $@
+}
+
+if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
+  jest-toplevel "$@"
+fi

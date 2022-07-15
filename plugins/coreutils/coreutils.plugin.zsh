@@ -163,6 +163,62 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   # }
 fi
 
+# cp/mv
+
+CLIPBOARD_FILE=~/.config/.pseudo-clipboard
+
+# mark the file(s) for later use with cp or mv
+xm() {
+  if [[ $1 == -c ]]; then
+    printf '' > $CLIPBOARD_FILE
+    return
+  fi
+  if [[ $1 == -p ]]; then
+    cat $CLIPBOARD_FILE
+    return
+  fi
+  if [[ $1 == -- ]]; then
+    shift
+  fi
+  for f in "$@"; do
+    realpath "$f" >> "$CLIPBOARD_FILE"
+  done
+}
+
+# copy the marked files
+xcp() {
+  if ! [[ -s $CLIPBOARD_FILE ]]; then
+    echo No files marked! use \`xm\` to mark files
+    return 1
+  fi
+
+  local files dest
+  while read line; do
+    files+=("$line")
+  done < "$CLIPBOARD_FILE"
+  dest=("$@")
+  if (( ${#dest} <= 0 )); then
+    dest+=(.)
+  fi
+  echo cp $files $dest
+  cp $files $dest
+}
+
+# move the marked files
+xmv() {
+  local files dest
+  while read line; do
+    files+=("$line")
+  done < "$CLIPBOARD_FILE"
+  dest=("$@")
+  if (( ${#dest} <= 0 )); then
+    dest+=(.)
+  fi
+  echo mv $files $dest
+  mv $files $dest
+  printf '' > $CLIPBOARD_FILE
+}
+
 # ps
 pcmd() {
   ps -o command $@ | tail +2
