@@ -23,6 +23,7 @@ brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim c
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
 brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
+brew install jarred-sumner/git-peek/git-peek
 curl -sL https://github.com/onilton/ogl/releases/download/v0.0.2/ogl-macos.tar | tar x -C ~/.local/bin
 brew install MisterTea/et/et # eternal terminal
 brew install bottom ctop dust procs pv timg

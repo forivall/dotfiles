@@ -192,16 +192,24 @@ xcp() {
     return 1
   fi
 
-  local files dest
+  local files dest flags
   while read line; do
     files+=("$line")
   done < "$CLIPBOARD_FILE"
-  dest=("$@")
+  flags=()
+  dest=()
+  for opt in "$@"; do
+    case "$opt"; in
+      -*) flags+=("$opt"); shift;;
+      --) dest+=("$@"); break;;
+      *) dest+=("$opt"); shift;;
+    esac
+  done
   if (( ${#dest} <= 0 )); then
     dest+=(.)
   fi
-  echo cp $files $dest
-  cp $files $dest
+  echo cp $flags $files $dest
+  cp $flags $files $dest
 }
 
 # move the marked files

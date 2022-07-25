@@ -17,18 +17,21 @@ if $IS_OSX ; then
   if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
   fi
-  # old homebrew config
-  path=(/usr/local/opt/coreutils/libexec/gnubin /usr/local/opt/gnu-sed/libexec/gnubin $path)
-  # new homebrew config
-  path=(/opt/homebrew/bin $path)
-  [[ -d "/usr/local/opt/node@12/bin" ]] && path=(/usr/local/opt/node@12/bin $path)
-  export PLAN9="/usr/local/plan9"
-  [[ -d $PLAN9 ]] && path=($path $PLAN9/bin)
-  local OPENJDK
-  OPENJDK=/usr/local/opt/openjdk
-  [[ -d $OPENJDK/bin ]] && path=($OPENJDK/bin $path)
-  # For compilers to find openjdk you may need to set:
-  #   export CPPFLAGS="-I${OPENJDK}/include"
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+  elif [[ -x /usr/local/opt/bin/brew ]]; then
+    HOMEBREW_PREFIX="/usr/local/opt"
+  fi
+
+  if [[ -n "$HOMEBREW_PREFIX" ]]; then
+    path=(
+      $HOMEBREW_PREFIX/bin
+      $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin 
+      $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
+      $path
+    )
+  fi
 fi
 
 if ! type realpath >/dev/null ; then
@@ -61,7 +64,10 @@ $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
 # Bun
-export BUN_INSTALL=~/.bun
+if [[ -x ~/.bun/bin/bun ]] {
+  export BUN_INSTALL=~/.bun
+  path=("$BUN_INSTALL/bin" $path)
+}
 
 # TODO: switch to
 # https://github.com/jandamm/zgenom or
@@ -116,7 +122,12 @@ zstyle ':completion:*' rehash true
 # local git plugin settings
 export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
-path=(~/.local/bin ~/.cargo/bin "$BUN_INSTALL/bin" $path ~/.zgen/deliciousinsights/git-stree-master)
+path=(
+  ~/.local/bin
+  ~/.cargo/bin
+  $path
+  ~/.zgen/deliciousinsights/git-stree-master
+)
 
 unset sourceIfExists
 
@@ -130,6 +141,8 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
   # zgen load marlonrichert/zsh-autocomplete
+
+  $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
 
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/web-search
@@ -179,7 +192,6 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/git"
   zgen load "$__zshrc_dirname/plugins/git-ftp"
   zgen load "$__zshrc_dirname/plugins/github"
-  $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
   whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
   whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
   whence nx > /dev/null && zgen load jscutlery/nx-completion
