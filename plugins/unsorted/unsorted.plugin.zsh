@@ -34,6 +34,8 @@ function scat2() { source-highlight -fesc "$@" -o STDOUT; }
 
 condalias gcloud="PAGER=cat %s" gcloud
 
+condalias klogout="%s org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1" qdbus
+
 unfunction condalias
 
 ### open
@@ -124,17 +126,14 @@ __cheat_has_opt () {
 
 cheat() {
   if ! __cheat_has_opt "$@" ; then
-    /usr/local/bin/cheat "$@" | most
+    /usr/local/bin/cheat "$@" | $PAGER
   else
     /usr/local/bin/cheat "$@"
   fi
 }
 
-alias klogout="qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1"
-
 if [[ $IS_OSX ]] ; then
   xs() {
-
     local script="
     tell application \"Xamarin Studio\"
       activate
