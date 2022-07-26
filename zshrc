@@ -153,7 +153,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/git-extras
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
-  [[ -d /usr/local/Caskroom/google-cloud-sdk ]] && zgen oh-my-zsh plugins/gcloud
+  [[ -d $CLOUDSDK_HOME ]] && zgen oh-my-zsh plugins/gcloud
   zgen oh-my-zsh plugins/rbenv
   zgen oh-my-zsh plugins/pyenv
   whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl
