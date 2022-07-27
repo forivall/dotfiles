@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # zmodload zsh/zprof
 
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+
 unset CI
 
 __zshrc_filename=${${(%):-%N}:A}
@@ -274,5 +277,11 @@ fi;
 
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 # zprof
+
+# dont override my variables, ya arse.
+FIG_DOTFILES_SOURCED=1
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
 
 true
