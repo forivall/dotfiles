@@ -45,23 +45,13 @@ if ! type realpath >/dev/null ; then
   fi
 fi
 
-
 o git submodule update --init
 o ln -fs "$(realpath zshrc)" ~/.zshrc
 o ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
 
-
-if [[ ! -d ~/.vim ]] ; then
-  echo 'Bootstrapping the janus vim config...'
-  curl -Lo- https://bit.ly/janus-bootstrap | bash
-fi
-
-o ln -Ffs "$(realpath vim.janus)" ~/.janus
 mkdir -p ~/.config
-o ln -Ffs ~/.vim ~/.config/nvim
-o ln -fs ~/.vimrc ~/.config/nvim/init.vim
-o ln -fs "$(realpath vimrc.before)" ~/.vimrc.before
-o ln -fs "$(realpath vimrc.after)" ~/.vimrc.after
+
+./vim/setup.sh
 
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
