@@ -61,17 +61,19 @@
       const i = [...files].findIndex((a) => a.href.endsWith(h))
       return focusFile(files[i + offset])
     }
+  const toggle = () => {
+    const h = getCurrentLink()
+    if (!h) return
+    /** @type {HTMLElement | null} */
+    const t = document.querySelector(h + ' .js-reviewed-toggle')
+    t?.click()
+  }
 
   document.onkeyup = reviewKeyboardHandler({
     j: navHandler(1),
     k: navHandler(-1),
-    v: () => {
-      const h = getCurrentLink()
-      if (!h) return
-      /** @type {HTMLElement | null} */
-      const t = document.querySelector(h + ' .js-reviewed-toggle')
-      t?.click()
-    },
+    v: toggle,
+    x: toggle,
     // D: () => { debugger }
   })
 })()
