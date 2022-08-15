@@ -142,6 +142,8 @@ brew install --cask monitorcontrol
 # brew install --cask loom
 brew install --cask cameracontroller logitech-camera-settings
 brew install --cask launchcontrol
+brew install dark-mode
+curl -OL $(curl --silent https://su.darkmodebuddy.app/appcast.xml | xq -r '.rss.channel.item.enclosure."@url"') && open DarkModeBuddy*.dmg
 
 brew install --cask font-smoothing-adjuster
 brew tap homebrew/cask-fonts

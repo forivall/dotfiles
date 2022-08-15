@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+autoload colors && colors
+
+__plugin_dirname=${0:a:h:h}
+
+output=$(git -c pager.show=false show --oneline --decorate --name-status --color)
+first=true
+for line in ${(f)output}; do
+  if $first; then
+    echo $line
+    first=false
+    continue
+  fi
+  case ${line} in
+    A*) echo ${line:s/A/${fg[green]}A${reset_color}} ;;
+    M*) echo ${line:s/M/${fg[cyan]}M${reset_color}} ;;
+    D*) echo ${line:s/D/${fg[red]}D${reset_color}} ;;
+    *) echo $line
+  esac
+done
+

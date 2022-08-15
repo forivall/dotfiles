@@ -49,16 +49,21 @@ fi
 dashdash=""
 $allfiles || dashdash+="${(q+@)files[@]} "
 
+deltaOpts=()
+if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+  deltaOpts+=(--light)
+fi
+
 output=()
 for commit in ${(f)refspecs}; do
   if $reflog; then
     if $showdiff; then
-      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; git show --color --pretty= ${(q+@)commit} -- $dashdash| delta)")
+      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; git show --color --pretty= ${(q+@)commit} -- $dashdash| delta "${deltaOpts[@]}")")
     else
-      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash| delta)")
+      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash| delta "${deltaOpts[@]}")")
     fi
   else
-    output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| delta)")
+    output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| delta "${deltaOpts[@]}")")
   fi
 done
 

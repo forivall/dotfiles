@@ -153,7 +153,7 @@
 	tool = vscode
 	# tool = meld
 	# tool = meld_merged
-	conflictstyle = diff3
+	# conflictstyle = diff3
 [rerere]
 	enabled = 1
 [mergetool "diffuse_custom"]
@@ -219,7 +219,7 @@
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
 [mergetool "vscode"]
-	cmd = code --wait \"$MERGED\"
+	cmd = code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\"
 [commit]
 	# template = /Users/emilyklassen/.stCommitMsg
 [pull]

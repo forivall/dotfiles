@@ -140,10 +140,14 @@ function git() { # also put these in git-aliases for autocomplete
       ;;
     delta) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
+      local deltaOpts=()
+      if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+        deltaOpts+=(--light)
+      fi
       if (( $# == 0 )); then 
-        git -c color.diff=always diff "${opts[@]}" "$@" | delta | $pager
+        git -c color.diff=always diff "${opts[@]}" "$@" | delta "${deltaOpts[@]}" | $pager
       else
-        git -c color.diff=always "${opts[@]}" "$@" | delta | $pager
+        git -c color.diff=always "${opts[@]}" "$@" | delta "${deltaOpts[@]}" | $pager
       fi
       return
       ;;
@@ -182,7 +186,11 @@ function git() { # also put these in git-aliases for autocomplete
       fi
     fi
   else
-    command git "${opts[@]}" "$@"
+    local configArgs=()
+    if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+      configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) --light")
+    fi
+    command git "${configArgs[@]}" "${opts[@]}" "$@"
   fi
 }
 

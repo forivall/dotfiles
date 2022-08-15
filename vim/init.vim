@@ -6,6 +6,7 @@ Plug 'tpope/vim-sensible'
 " Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'sheerun/vim-polyglot'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -25,6 +26,9 @@ set tabstop=2
 "set t_Co=256
 
 :colorscheme Tomorrow-Night
+:if system("dark-mode status") == "off"
+:  colorscheme Tomorrow
+:endif
 
 " style "no-resize-handle"
 " {
