@@ -26,7 +26,7 @@ set tabstop=2
 "set t_Co=256
 
 :colorscheme Tomorrow-Night
-:if system("dark-mode status") == "off"
+:if system("dark-mode status")[0:2] ==? "off"
 :  colorscheme Tomorrow
 :endif
 
