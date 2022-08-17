@@ -61,18 +61,18 @@ alias gfo='git fetch origin'
 
 # t is in a terrible place in querty, and I often hit space first
 # TODO: switch keyboard layouts.
-function gi() {
-  local firstarg
-  firstarg=$1
-  if [[ "${firstarg}" == t* ]] ; then
-    shift
-    git "${firstarg:1}" "$@"
-    return $?
-  else
-    env gi "$@"
-    return $?
+function zlegitypo() {
+  emulate -L zsh
+  setopt extendedglob
+
+  local MATCH
+  LBUFFER=${LBUFFER#(#m)gi t}
+  if [[ -n "$MATCH" ]]; then
+    LBUFFER="git $LBUFFER"
   fi
 }
+autoload -U add-zle-hook-widget
+add-zle-hook-widget -Uz line-finish zlegitypo
 
 alias gg="git grep-pretty"
 
