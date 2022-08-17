@@ -4,6 +4,11 @@ __plugin_dirname=${0:a:h:h}
 
 # set -e
 
+configArgs=()
+if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+  configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) (--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})")
+fi
+
 while ! git diff-files --quiet; do
   # git diff --name-only | selecta --height 4 | read file
   items=($(git diff --name-only))
@@ -12,7 +17,7 @@ while ! git diff-files --quiet; do
   i=$?
   if (( $i == 0 )) ; then exit; fi
   file=${items[i]}
-  git add -p $file
+  git "${configArgs[@]}" add -p $file
 done
 
 echo 'Nothing left to add'

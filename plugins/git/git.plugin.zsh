@@ -114,11 +114,11 @@ GIT_SSH_AGENT_ADD=(ssh-add)
 # GIT_SSH_AGENT_CHECK=(envoy -l)
 # GIT_SSH_AGENT_ADD=(envoy -a)
 
-___git_ran_once=n
+___git_first_run=true
 function git() { # also put these in git-aliases for autocomplete
   local a;
-  if [[ $___git_ran_once = n && "$1" =~ "clone|fetch|fetch-pack|pull|push|send-pack" ]] ; then
-    ___git_ran_once=y
+  if [[ $___git_first_run && "$1" =~ "clone|fetch|fetch-pack|pull|push|send-pack" ]] ; then
+    ___git_first_run=false
 
     if ! $IS_OSX && ! $GIT_SSH_AGENT_CHECK >/dev/null; then
       $GIT_SSH_AGENT_ADD
@@ -142,7 +142,7 @@ function git() { # also put these in git-aliases for autocomplete
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       local deltaOpts=()
       if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-        deltaOpts+=(--light)
+        deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
       fi
       if (( $# == 0 )); then 
         git -c color.diff=always diff "${opts[@]}" "$@" | delta "${deltaOpts[@]}" | $pager
@@ -188,7 +188,7 @@ function git() { # also put these in git-aliases for autocomplete
   else
     local configArgs=()
     if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-      configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) --light")
+      configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) (--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})")
     fi
     command git "${configArgs[@]}" "${opts[@]}" "$@"
   fi

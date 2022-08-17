@@ -24,7 +24,7 @@
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	minus-style = syntax auto
-	syntax-theme = base16
+	syntax-theme = base16-tomorrow-night
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch

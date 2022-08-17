@@ -56,7 +56,18 @@ brew install ruby rbenv rbenv-bundler # ruby-build
 # brew install php composer
 
 brew install rust rustup-init
+
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog
+mkdir -p ~/.config/bat/themes
+(
+  cd ~/.config/bat/themes
+  curl -OL https://github.com/chriskempson/tomorrow-theme/raw/master/textmate/Tomorrow-Night.tmTheme
+  curl -OL https://github.com/chriskempson/tomorrow-theme/raw/master/textmate/Tomorrow.tmTheme
+  curl -OL https://github.com/chriskempson/base16-textmate/raw/master/Themes/base16-tomorrow.tmTheme
+  curl -OL https://github.com/chriskempson/base16-textmate/raw/master/Themes/base16-tomorrow-night.tmTheme
+)
+bat cache --build
+
 brew install git-delta -s --HEAD --verbose
 # brew install nushell
 

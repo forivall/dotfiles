@@ -51,7 +51,7 @@ $allfiles || dashdash+="${(q+@)files[@]} "
 
 deltaOpts=()
 if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-  deltaOpts+=(--light)
+  deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
 fi
 
 output=()

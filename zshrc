@@ -88,7 +88,8 @@ DISABLE_AUTO_TITLE=false
 ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
 
-BAT_PAGER="less +X -x2 -FR"
+export BAT_PAGER="less +X -x2 -FR"
+export DELTA_LIGHT_THEME=base16-tomorrow
 
 # zsh-nvm settings
 export NVM_COMPLETION=true
