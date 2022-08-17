@@ -188,7 +188,7 @@ function git() { # also put these in git-aliases for autocomplete
   else
     local configArgs=()
     if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-      configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) (--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})")
+      configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) --light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub}")
     fi
     command git "${configArgs[@]}" "${opts[@]}" "$@"
   fi
