@@ -252,12 +252,14 @@ function git-watch-staged {
   local glob="$1"; shift
   local -a changed
   local waitcolor
-  echo -en "${fg[green]}Waiting for changes...\r"
-  while changed=(${(f)$(git-stagechange-wait "$glob")}); do
-    if [[ "${#changed}" == "0" ]]; then continue; fi
-    echo -en "${fg[cyan]}Changed ${#changed} file(s)...\r"
-    $@ $changed && waitcolor=green || waitcolor=red
-    echo -en "${fg[$waitcolor]}Waiting for changes...            \r"
+  echo -en "${fg[green]}Waiting for changes...$reset_color\r"
+  local output
+  while output="${$(git-stagechange-wait "$glob")}"; do
+    changed=(${(f)output})
+    if [[ "${#changed[@]}" == "0" ]]; then continue; fi
+    echo -en "${fg[cyan]}Changed ${#changed} file(s)...$reset_color  \r"
+    $@ "${changed[@]}" && waitcolor=green || waitcolor=red
+    echo -en "${fg[$waitcolor]}Waiting for changes...$reset_color            \r"
   done
 }
 
