@@ -1,16 +1,48 @@
 #!/usr/bin/env zsh
 
 jest-toplevel() {
+  local gitPrefix="$(git rev-parse --show-prefix)"
   local noTestPatterns=true
+  local dashArg=false
+  local jestArgs=()
+  local RESOLVED
   for arg in $@; do
     if [[ $arg != -* ]]; then
+      if $dashArg; then
+        jestArgs+=($arg)
+        dashArg=false
+      else
+        resolve_path $gitPrefix $arg
+        jestArgs+=($RESOLVED)
+      fi
       noTestPatterns=false
-      break
+    else
+      jestArgs+=($arg)
+      dashArg=true
     fi
   done
   local testPathPattern=()
-  $noTestPatterns && testPathPattern=("$(git rev-parse --show-prefix)")
-  npx jest --config "$(git rev-parse --show-cdup)jest.config.js" $testPathPattern $@
+  $noTestPatterns && jestArgs=($gitPrefix $jestArgs)
+  npx --prefix=$PWD jest --config "$(git rev-parse --show-cdup)jest.config.js" "${jestArgs[@]}"
+}
+
+resolve_path() {
+  setopt extendedglob
+
+  local prefix=$1
+  local target=$2
+  local MATCH
+  while true; do
+    MATCH=
+    target=${target#(#m)./}
+    if [[ -n "$MATCH" ]]; then continue; fi;
+    MATCH=
+    target=${target#(#m)../}
+    if [[ -z "$MATCH" ]]; then break; fi;
+    prefix=${prefix:h}/
+  done
+
+  RESOLVED=$prefix$target
 }
 
 if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
