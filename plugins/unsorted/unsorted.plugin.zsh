@@ -15,7 +15,7 @@ if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]] ; then
 fi
 
 if [[ "$TERM_PROGRAM" == "iTerm.app" ]] ; then
-  alias res="osascript -e 'tell application \"System Events\" to keystroke \"k\" using {command down}'"
+  alias res="printf '\e]1337;ClearScrollback\a'"
 fi
 
 type xclip > /dev/null && alias clip="xclip -selection c"

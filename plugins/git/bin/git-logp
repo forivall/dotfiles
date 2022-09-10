@@ -10,6 +10,7 @@ allfiles=false
 reflog=false
 stash=false
 showdiff=true
+dry=false
 
 while (( $# > 0 )); do
 case "$1" in
@@ -27,6 +28,7 @@ case "$1" in
     pretty+=($1); shift; continue; ;;
   --pretty) pretty+=($1 $2); shift; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
+  --dry) dry=true; shift; continue; ;;
   --) dashdash=true; args+=($1); shift; continue; ;;
   *)
     args+=($1)
@@ -67,6 +69,12 @@ for commit in ${(f)refspecs}; do
   fi
 done
 
-eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}
+if $dry; then
+  for c in ${output[@]}; do
+    echo ${${c#<\(}%)}
+  done
+else
+  eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}
 
-wait
+  wait
+fi

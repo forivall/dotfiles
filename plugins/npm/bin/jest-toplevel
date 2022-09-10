@@ -18,7 +18,16 @@ jest-toplevel() {
       noTestPatterns=false
     else
       jestArgs+=($arg)
-      dashArg=true
+      if [[
+        $arg != (-h|-b|-e|-o|-f|-i|-u) &&
+        $arg != (--(no-|)(help|version|all|automock|bail|cache|changedFilesWithAncestor|ci|clearCache|clearMocks|collectCoverage|color(s|))) &&
+        $arg != (--(no-|)(coverage|detectLeaks|detectOpenHandles|errorOnDeprecated|expand|findRelatedTests|forceExit|lastCommit|listTests)) &&
+        $arg != (--(no-|)(logHeapUsage|noStackTrace|notify|onlyChanged|onlyFailures|passWithNoTests|resetMocks|resetModules|restoreMocks)) &&
+        $arg != (--(no-|)(runInBand|showConfig|silent|skipFilter|testLocationInResults|updateSnapshot|useStderr|verbose|watch|watchAll|watchman))
+      ]]; then
+        echo dasharg: $arg 
+        dashArg=true
+      fi
     fi
   done
   local testPathPattern=()
