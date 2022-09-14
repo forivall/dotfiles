@@ -2,13 +2,15 @@
 
 __plugin_dirname=${0:a:h:h}
 
+# kqwait is on mac os - brew install kqwait
 filewait=kqwait
 if ((+commands[inotifywait])); then
+  # inotifywait is on linux - apt-get install inotify-tools
   filewait=inotifywait
 fi
 
 changed=$(
-  $filewait .git/index $(
+  $filewait $(git rev-parse --git-dir)/index $(
     comm -23 <(git diffc --name-only --diff-filter=AMCR $@) <(git diff --name-only --diff-filter=D $@)
   )
 )
