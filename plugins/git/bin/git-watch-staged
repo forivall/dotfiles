@@ -1,6 +1,12 @@
 #!/usr/bin/env zsh
 
 function git-watch-staged {
+  local asglob=false;
+  if [[ $1 = --asglob ]]; then
+    asglob=true
+    shift
+  fi
+
   local glob="$1"; shift
 
   if [[ glob = --help ]]; then
@@ -17,6 +23,9 @@ function git-watch-staged {
     changed=(${(f)output})
     if [[ "${#changed[@]}" == "0" ]]; then continue; fi
     echo -en "${fg[cyan]}Changed ${#changed} file(s)...$reset_color  \r"
+    if $asglob && (( ${#changed} > 1 )); then
+      changed="{${(j/,/)changed}}"
+    fi
     $@ "${changed[@]}" && waitcolor=green || waitcolor=red
     echo -en "${fg[$waitcolor]}Waiting for changes...$reset_color            \r"
   done

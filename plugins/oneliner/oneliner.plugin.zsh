@@ -1,5 +1,7 @@
 __zsh_oneliner_plugin_location=${0:A:h}
 
+path+=($path $__zsh_oneliner_plugin_location/bin)
+
 oneliner() {
   local cmd="${1}"
   if [[ -z "${cmd}" ]]; then

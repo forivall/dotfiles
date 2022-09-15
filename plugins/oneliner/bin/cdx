@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# change to a directory and run a command. simple.
+
+set -e
+
+cd $1
+shift
+printf '\e]1337;CurrentDir=%s\a' $PWD
+command -v direnv &>/dev/null && eval "$(direnv export zsh)";
+$@
