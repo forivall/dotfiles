@@ -7,6 +7,7 @@ Plug 'tpope/vim-sensible'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 

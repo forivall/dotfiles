@@ -145,9 +145,9 @@ function git() { # also put these in git-aliases for autocomplete
         deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
       fi
       if (( $# == 0 )); then 
-        git -c color.diff=always diff "${opts[@]}" "$@" | delta "${deltaOpts[@]}" | $pager
+        git -c color.diff=always diff "${opts[@]}" "$@" | command delta "${deltaOpts[@]}" | $pager
       else
-        git -c color.diff=always "${opts[@]}" "$@" | delta "${deltaOpts[@]}" | $pager
+        git -c color.diff=always "${opts[@]}" "$@" | command delta "${deltaOpts[@]}" | $pager
       fi
       return
       ;;

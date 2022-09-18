@@ -68,20 +68,22 @@ function _get_package_root() {
     _next_cd "$@"
   else
     local d
-    d="$PWD"
+    local r
+    d="${PWD:h}"
     while [[ "$d" != "/" ]]; do
-      d="${d:h}"
-      if [[ -f "$d/package.json" ]]; then
+      r=("$d/"(package.json|Cargo.lock))
+      if [[ -f "${r[1]}" ]]; then
         PACKAGE_ROOT="$d"
         break
       fi
+      d="${d:h}"
     done
   fi
 }
 
 function _cd_to_file() {
     if [[ -f "$1" ]]; then
-        builtin cd $(dirname "$1")
+        builtin cd "$(dirname "$1")"
     else
         _next_cd "$@"
     fi

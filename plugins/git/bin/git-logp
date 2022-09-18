@@ -60,12 +60,12 @@ output=()
 for commit in ${(f)refspecs}; do
   if $reflog; then
     if $showdiff; then
-      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; git show --color --pretty= ${(q+@)commit} -- $dashdash| delta "${deltaOpts[@]}")")
+      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; git show --color --pretty= ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
     else
-      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash| delta "${deltaOpts[@]}")")
+      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
     fi
   else
-    output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| delta "${deltaOpts[@]}")")
+    output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
   fi
 done
 

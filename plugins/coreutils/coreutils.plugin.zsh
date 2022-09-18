@@ -105,6 +105,13 @@ function touche {
 # diff
 function diff { colordiff -u "$@" | less -f +X -x2 -R ; }
 alias diff_=/usr/bin/diff
+function delta {
+  local deltaOpts=()
+  if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+    deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
+  fi
+  command delta "${deltaOpts[@]}" $@
+}
 
 # # find
 # cleanup() { find -name __tmp; }
