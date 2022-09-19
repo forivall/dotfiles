@@ -1,0 +1,21 @@
+/* WARNING */
+/* THIS FEATURE IS POTENTIALLY DANGEROUS */
+/* IF YOU ARE NOT A DEVELOPER CLOSE THIS EDITOR NOW */
+
+/* Write some custom CSS here... */
+
+html[is-theme-light="true"] .viewbar {
+	background-color: #f5f5f5 !important;
+	background-color: #ebebeb !important;
+	box-shadow: inset -1px 0 0 0px #d6d6d6;
+}
+html[is-theme-light="true"] .viewbar .button,
+html[is-theme-light="true"] .viewbar .spacer,
+html[is-theme-light="true"] .viewbar .toolbar-spacer-y {
+	color: #1f1f1f !important;
+	background-color: transparent !important;
+}
+html[is-theme-light="true"] .viewbar .button:not(.active):not(:active):hover {
+	background-color: #e1e1e1 !important;
+	color: #1f1f1fbf !important;
+}
