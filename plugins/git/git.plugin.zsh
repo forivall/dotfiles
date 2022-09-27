@@ -70,6 +70,11 @@ function zlegitypo() {
   if [[ -n "$MATCH" ]]; then
     LBUFFER="git $LBUFFER"
   fi
+
+  LBUFFER=${LBUFFER#(#m)gti }
+  if [[ -n "$MATCH" ]]; then
+    LBUFFER="git $LBUFFER"
+  fi
 }
 autoload -U add-zle-hook-widget
 add-zle-hook-widget -Uz line-finish zlegitypo

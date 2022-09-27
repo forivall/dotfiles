@@ -108,6 +108,7 @@ brew install --cask docker
 # brew install minikube kubectl skaffold
 brew install --cask google-chrome
 brew install --cask firefox
+brew install --cask sizzy
 brew install --cask spotify
 brew install --cask visual-studio-code
 brew install --cask sublime-merge sublime-text # sublime merge uses installed sublime text syntaxes

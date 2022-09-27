@@ -59,11 +59,22 @@ fi
 output=()
 for commit in ${(f)refspecs}; do
   if $reflog; then
-    if $showdiff; then
-      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; git show --color --pretty= ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
+    local reflog_command="git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit};"
+    if $stash; then
+      local commitbase="$commit^"
+      if $showdiff; then
+        reflog_command+="git diff --color --pretty= ${(q+@)commitbase} ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
+      else
+        reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
+      fi
     else
-      output+=("<(git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit}; echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
+      if $showdiff; then
+        reflog_command+="git show --color --pretty= ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
+      else
+        reflog_command+="echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
+      fi
     fi
+    output+=("<($reflog_command)")
   else
     output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
   fi

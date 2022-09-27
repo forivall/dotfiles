@@ -20,7 +20,8 @@ if toplevel=$(git rev-parse --show-toplevel) ; then
       git worktree add $root $branch
     fi
   fi
-  cd $root/$(git rev-parse --show-prefix)
+  local prefix="$(git rev-parse --show-prefix)"
+  while [[ -n "$prefix" ]] && ! cd "$root/$prefix"; do prefix=${prefix:h}; done;
 else
   echo 'not in git dir'
 fi

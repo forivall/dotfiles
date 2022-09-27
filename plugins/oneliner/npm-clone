@@ -1,1 +1,7 @@
-git clone "$(npm info --json "$1"|jq -r '(.repository.url // .repository)' | sed 's/^git+http/http/')" "$1"
+#!/usr/bin/env zsh
+local repo="$(
+  npm info --json "$1"|jq -r '(.repository.url // .repository)' |
+  sed 's/^git+http/http/'
+)"
+echo git clone "$repo" "$1"
+git clone "$repo" "$1"

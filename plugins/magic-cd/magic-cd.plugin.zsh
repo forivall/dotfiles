@@ -91,6 +91,7 @@ function _cd_to_file() {
 
 function _real_cd() {
     builtin cd "$@"
+    local exitcode=$?
 
     # if the new directory is a symlink, print the actual physical directory
     local REAL_PWD
@@ -101,6 +102,7 @@ function _real_cd() {
         # echo " ('cd -P .' to go there)" >&2
     fi
 
+    return $exitcode
 }
 
 function cd() {
