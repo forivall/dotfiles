@@ -33,7 +33,6 @@ if $IS_OSX ; then
       $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin 
       $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
       $path
-      ~/Library/Python/3.10/bin
     )
   fi
 fi
@@ -160,6 +159,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/docker-compose
   [[ -d $CLOUDSDK_HOME ]] && zgen oh-my-zsh plugins/gcloud
   zgen oh-my-zsh plugins/rbenv
+  zgen load "$__zshrc_dirname/plugins/python"
   zgen oh-my-zsh plugins/python
   zgen oh-my-zsh plugins/pyenv
   whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl
