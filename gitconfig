@@ -236,3 +236,4 @@
 	editor = interactive-rebase-tool
 [rebase]
 	autoSquash = true
+	updateRefs = true
