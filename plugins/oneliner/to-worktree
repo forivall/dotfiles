@@ -21,7 +21,7 @@ if toplevel=$(git rev-parse --show-toplevel) ; then
     fi
   fi
   local prefix="$(git rev-parse --show-prefix)"
-  while [[ -n "$prefix" ]] || ! cd "$root/$prefix"; do prefix=${prefix:h}; done;
+  while ! cd "$root/$prefix"; do prefix=${prefix:h}; [[ -z "$prefix" ]] && break; done;
 else
   echo 'not in git dir'
 fi

@@ -1,2 +1,3 @@
-cd $(git worktree-main)/$(git rev-parse --show-prefix)
-
+local root="$(git worktree-main)"
+local prefix="$(git rev-parse --show-prefix)"
+while ! cd "$root/$prefix"; do prefix=${prefix:h}; [[ -z "$prefix" ]] && break; done;
