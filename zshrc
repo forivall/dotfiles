@@ -2,7 +2,7 @@
 # zmodload zsh/zprof
 
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 
 unset CI
 
@@ -89,6 +89,7 @@ ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
 
 export BAT_PAGER="less +X -x2 -FR"
+export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow
 
 # zsh-nvm settings
@@ -285,6 +286,6 @@ fi;
 FIG_DOTFILES_SOURCED=1
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
 true

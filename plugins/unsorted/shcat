@@ -3,11 +3,16 @@
 nl='
 '
 
+local opts=()
+if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+  opts+=(--theme ${BAT_LIGHT_THEME:-GitHub})
+fi
+
 for file in "$@" ; do
   tput bold; tput setab 226; tput setaf 16;  echo -n " $file "; tput sgr0; echo
   # pygmentize -f 16m -O style=tomorrownight "$file"
   # pygmentize -f 256 -O style=tomorrownight "$file"
-  bat --paging=never $file
+  bat --color=always --paging=never $opts $file
   # source-highlight -fesc -o STDOUT -i $file 2>/dev/null || cat "$file"
   if [[ "$(tail -c1 $file)" != "" ]] ; then tput setaf 16; tput setab 15; echo -n "%"; tput sgr0; echo; fi
   echo
