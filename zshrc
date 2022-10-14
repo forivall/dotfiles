@@ -13,6 +13,11 @@ __zshrc_dirname=${__zshrc_filename:h}
 # detection code on zgen reset
 source "${__zshrc_dirname}/scripts/detect-platform.zsh"
 
+if $IS_OSX; then
+  fpath[$fpath[(i)/opt/homebrew/share/zsh/site-functions]]=()
+  fpath=($fpath /opt/homebrew/share/zsh/site-functions)
+fi
+
 sourceIfExists() { [[ -e "$1" ]] && source "$1" }
 $IS_LINUXY && sourceIfExists /etc/profile.d/vte.sh
 
@@ -201,7 +206,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/github"
   whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
   whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
-  whence nx > /dev/null && zgen load jscutlery/nx-completion
+  zgen load jscutlery/nx-completion . main
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"

@@ -143,13 +143,21 @@ function git() { # also put these in git-aliases for autocomplete
       git -c color.diff=always "${opts[@]}" "$@" | diff-so-fancy | $pager
       return
       ;;
+    deltac) shift;
+      git delta "${opts[@]}" diffc "$@";
+      return
+      ;;
+    deltas) shift;
+      git delta "${opts[@]}" show "$@";
+      return
+      ;;
     delta) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       local deltaOpts=()
       if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
         deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
       fi
-      if (( $# == 0 )); then 
+      if (( $# == 0 )) || [[ $1 == -* ]] || ! command git --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
         git -c color.diff=always diff "${opts[@]}" "$@" | command delta "${deltaOpts[@]}" | $pager
       else
         git -c color.diff=always "${opts[@]}" "$@" | command delta "${deltaOpts[@]}" | $pager
@@ -179,7 +187,7 @@ function git() { # also put these in git-aliases for autocomplete
     if (( $# == 0 )) ; then
       command git "${opts[@]:0:$gitcommandopts}" $gitcommand "${opts[@]:$gitcommandopts}"
       if (( $opts[(Ie)-h] )); then
-        command git --no-pager config --get-regex "alias.$gitcommand-.*" | sd "^alias\.$gitcommand-(\S+)" "   or: git $gitcommand \$1  = "
+        command git --no-pager config --get-regex '^alias\.'"$gitcommand"'-.*' | sd "^alias\.$gitcommand-(\S+)" "   or: git $gitcommand \$1  = "
       fi
     else
       local alias="$gitcommand-$1"
