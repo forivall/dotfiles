@@ -1,1 +1,2 @@
+#!/usr/bin/env zsh
 node -p "require(os.homedir + '/.config/yarn/global/node_modules/find-yarn-workspace-root')()"

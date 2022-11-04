@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 if (( $# > 0 )) ; then
   for json in $@ ; do
     local yaml=${json%.json}.yaml

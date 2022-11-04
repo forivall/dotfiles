@@ -1,0 +1,119 @@
+html:not(:focus-within):not(:hover) .Widgets .Slot,
+html:not(:focus-within):not(:hover) .Overlay {
+  opacity: 0.2;
+  filter: blur(1.5px);
+}
+html:not(:focus-within):not(:hover) .Widgets .Slot:not(.topRight) {
+  color: silver;
+}
+html:not(:focus-within):not(:hover) .Widgets .Slot.topRight {
+  opacity: 0.4;
+  filter: blur(0.1px);
+}
+html:not(:focus-within):not(:hover) .Widgets .Slot.middleCentre {
+  opacity: 0;
+}
+html:not(:focus-within):not(:hover) .credit {
+  opacity: 0.1;
+}
+:root, .Overlay,
+.Widgets, .Slot,
+.credit {
+  transition:
+    opacity 0.5s ease-out,
+    color 0.5s ease-out,
+    filter 0.5s ease-out;
+}
+.image.fullscreen {
+  transition: filter 0.5s ease-out;
+}
+html:not(:focus-within):not(:hover) .image.fullscreen[style] {
+  filter: blur(0.5px) !important;
+}
+
+.topCentre .Greeting:first-child {
+  margin-top: 3rem;
+}
+
+.topCentre .Widget:first-child {
+  transform: translateX(-14.5vw);
+}
+.middleCentre .Widget:first-child {
+  transform: translateY(-9vw);
+}
+
+.Time:not(.Time>.Time) {
+  text-align: center;
+}
+.Time {
+  font-size: calc(max(1.4vw, 11px));
+}
+.Time h1 {
+  font-size: calc(max(3.4vw, 26px));
+}
+.Time h3 {
+  font-size: calc(max(1.6vw, 12px));
+}
+.Time hr {
+  margin: 0.4em 0.5rem;
+  opacity: 0.8;
+}
+.topRight {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.topRight .Time {
+  margin-top: 2.25rem;
+}
+.Widget:first-child .Time {
+  font-size: 1vw;
+}
+.Widget:first-child .Time h1 {
+  font-size: 5vw;
+}
+.Widget:first-child .Time h3 {
+  font-size: 2.5vw;
+}
+.Time.Analogue {
+  text-align: right;
+}
+.Time.Analogue {
+  margin: 1.8em calc(2rem + 1em) 1.4em calc(1em - 0.5rem);
+}
+.Time.Analogue svg {
+  display: inline-block;
+  max-width: 12vw;
+}
+.Time.Analogue svg line {
+  transition: transform 0.99s linear;
+}
+.Search>input:placeholder-shown:not(:focus) {
+  border-bottom-color: transparent;
+}
+.Search>input:focus:placeholder-shown {
+  border-bottom-color: rgba(255,255,255,0.5);
+}
+.Search>input:focus {
+  width: auto;
+}
+.Search>input::placeholder {
+  color: transparent;
+}
+.Search>input:placeholder-shown:not(:focus) {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(128,128,128,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+}
+
+.topLeft .Search>input {
+  text-align: left;
+}
+.topLeft .Search>input:placeholder-shown:not(:focus) {
+  background-position: left;
+}
+.credit {
+  opacity: 0.4;
+}
+.middleCentre {
+  width: 100%;
+}

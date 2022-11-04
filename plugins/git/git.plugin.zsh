@@ -69,6 +69,7 @@ function zlegitypo() {
   LBUFFER=${LBUFFER#(#m)gi t}
   if [[ -n "$MATCH" ]]; then
     LBUFFER="git $LBUFFER"
+    return
   fi
 
   LBUFFER=${LBUFFER#(#m)gti }

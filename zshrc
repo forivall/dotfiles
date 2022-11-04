@@ -188,6 +188,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/nvm"
   zgen load lukechilds/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
+  # zgen load forivall/zsh-yarn-autocompletions '' main
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
   # zgen load jocelynmallon/zshimarks
 
@@ -206,7 +207,8 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/github"
   whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
   whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
-  zgen load jscutlery/nx-completion . main
+  zgen load jscutlery/nx-completion '' main
+  # zgen load forivall/nx-completion '' update
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
@@ -225,6 +227,7 @@ if ! zgen saved; then
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
 
   zgen load dim-an/cod
+  # zgen load forivall/cod '' feat/zsh-local-build
 
   # Build completions files
   local ofpath=(${fpath})

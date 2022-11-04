@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 local tarball
 local pkg
 local ver

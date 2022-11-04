@@ -1,1 +1,2 @@
+#!/usr/bin/env zsh
 local p=${1%.*} ; mkdir $p && mv $1 $p/index.${1#*.}

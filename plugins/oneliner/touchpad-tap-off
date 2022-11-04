@@ -1,1 +1,2 @@
+#!/usr/bin/sh
 synclient MaxTapTime=90 SingleTapTimeout=90 TapButton1=0 TapButton2=0 TapButton3=0 PalmMinZ=50 PressureMotionMinZ=90 AreaRightEdge=0

@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 GIT_DIR="$(git rev-parse --git-dir)"
 mkdir -p $GIT_DIR/hooks
 cat << 'END' > $GIT_DIR/hooks/local-patch.sh

@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# local tools=$(jq -r '.devDependencies | keys_unsorted | .[] | if startswith("@definitelytyped/") then [.] else [] end | .[]' package.json)
+# yarn upgrade $@ "${${(f)$(tools)}[@]}"
+
+yarn upgrade --scope @definitelytyped $@

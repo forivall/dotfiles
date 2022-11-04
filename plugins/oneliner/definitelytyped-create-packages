@@ -10,7 +10,7 @@
   yarn run build
   yarn workspace @definitelytyped/publisher run parse
   yarn workspace @definitelytyped/publisher run calculate-versions
-  yarn workspace @definitelytyped/publisher run generate
+  yarn workspace @definitelytyped/publisher run generate --tgz
 
   $maybe_popd
 }

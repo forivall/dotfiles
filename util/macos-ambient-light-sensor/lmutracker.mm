@@ -84,7 +84,8 @@ void stdinRegister() {
   CFRunLoopAddSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
 }
 
-int main(void) {
+int main(int argc, char* argv[]) {
+  double value;
   kern_return_t kr;
   io_service_t serviceObject;
   CFRunLoopTimerRef updateTimer;
@@ -108,10 +109,18 @@ int main(void) {
       fprintf(stderr, "failed to get ambient light sensor event\n");
       exit(1);
     }
+
+    value = IOHIDEventGetFloatValue(event, IOHIDEventFieldBase(kAmbientLightSensorEvent));
+
     CFRelease(event);
 
     setbuf(stdout, NULL);
-    printf("%8f", 0.0);
+    printf("%8f", value);
+
+    if (argc < 2 || strcmp(argv[1], "--watch") != 0) {
+      printf("\n");
+      exit(0);
+    }
 
     updateTimer = CFRunLoopTimerCreate(kCFAllocatorDefault,
                     CFAbsoluteTimeGetCurrent() + updateInterval, updateInterval,
@@ -131,9 +140,22 @@ int main(void) {
       mach_error("IOServiceOpen:", kr);
       exit(kr);
     }
+    uint32_t outputs = 2;
+    uint64_t values[outputs];
+    kr = IOConnectCallMethod(dataPort, 0, nil, 0, nil, 0, values, &outputs, nil, 0);
+    if (kr != KERN_SUCCESS) {
+      mach_error("IOServiceOpen:", kr);
+      exit(kr);
+    }
+    value = IOHIDEventGetFloatValue(event, IOHIDEventFieldBase(kAmbientLightSensorEvent));
 
     setbuf(stdout, NULL);
-    printf("%8ld %8ld", 0L, 0L);
+    printf("%8f", value);
+
+    if (argc < 2 || strcmp(argv[1], "--watch") != 0) {
+      printf("\n");
+      exit(0);
+    }
 
     updateTimer = CFRunLoopTimerCreate(kCFAllocatorDefault,
                     CFAbsoluteTimeGetCurrent() + updateInterval, updateInterval,

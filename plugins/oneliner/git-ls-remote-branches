@@ -1,1 +1,2 @@
+#!/usr/bin/sh
 git for-each-ref --format='%(refname:strip=2)' refs/remotes/$1

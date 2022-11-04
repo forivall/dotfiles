@@ -1,1 +1,2 @@
+#!/usr/bin/sh
 nvidia-settings --assign CurrentMetaMode="DPY-1: 1920x1080_120_vt1350 @1920x1080 +0+0, DPY-5: nvidia-auto-select @1920x1080 +1920+0, DPY-4: nvidia-auto-select @1440x900 +3840+180"

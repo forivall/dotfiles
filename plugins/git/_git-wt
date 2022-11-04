@@ -1,0 +1,144 @@
+#compdef git-wt
+#description manage multiple working dirs attached to the same repository (alias)
+
+__git_wt_extract_aliases () {
+  local -a tmp
+  tmp=(${${(0)"$(_call_program aliases "git config -z --get-regexp '^alias.worktree-'")"}#alias.worktree-})
+  if (( ${#tmp} > 0 )); then
+      wt_aliases=(${^tmp/$'\n'/:alias for \'}\')
+  else
+      wt_aliases=()
+  fi
+}
+
+_git-wt() {
+  if (( CURRENT > 2 )); then
+    local -a aliases
+    local -A git_wt_aliases
+    local a k v
+    local endopt='!(-)--end-of-options'
+    aliases=(${(0)"$(_call_program aliases git config -z --get-regexp '\^alias\\.')"})
+    for a in ${aliases}; do
+        k="${${a/$'\n'*}/alias.}"
+        v="${a#*$'\n'}"
+        git_wt_aliases[$k]="$v"
+    done
+
+    if (( $+git_wt_aliases[$words[2]] && !$+commands[git-$words[2]] && !$+functions[_git-$words[2]] )); then
+      local -a tmpwords expalias
+      expalias=(${(z)git_wt_aliases[$words[2]]})
+      tmpwords=(${words[1]} ${expalias})
+      if [[ -n "${words[3,-1]}" ]] ; then
+          tmpwords+=(${words[3,-1]})
+      fi
+      [[ -n ${words[$CURRENT]} ]] || tmpwords+=('')
+      (( CURRENT += ${#expalias} - 1 ))
+      words=("${tmpwords[@]}")
+      unset tmpwords expalias
+    fi
+
+    unset git_wt_aliases aliases
+  fi
+
+  local curcontext="$curcontext" state state_descr line ret=1
+  declare -A opt_args
+
+  _arguments -C \
+    ': :->command' \
+    '*::: := ->option-or-argument' && ret=0
+
+  case $state in
+    (command)
+      declare -a commands args
+
+      commands=(
+        add:'create a new working tree'
+        prune:'prune working tree information'
+        list:'list details of each worktree'
+        lock:'prevent a working tree from being pruned'
+        move:'move a working tree to a new location'
+        remove:'remove a working tree'
+        unlock:'allow working tree to be pruned, moved or deleted'
+      )
+
+      local -a wt_aliases
+      __git_wt_extract_aliases
+      local cmdtype len dup sep
+      local -a allcmds allmatching alts disp expl
+
+      zstyle -s ":completion:${curcontext}:" list-separator sep || sep=--
+      for cmdtype in commands wt_aliases; do
+        if [[ $cmdtype = wt_aliases ]]; then
+          for dup in ${${wt_aliases%:*}:*allcmds}; do
+            wt_aliases=( ${wt_aliases:#$dup:*} )
+          done
+        fi
+        local -a ${cmdtype}_m
+        set -A ${cmdtype}_m ${(P)cmdtype%%:*}
+        allcmds+=( ${(P)${:-${cmdtype}_m}} )
+      done
+      zstyle -T ":completion:${curcontext}:" verbose && disp=(-ld '${cmdtype}_d')
+      _description '' expl '' # get applicable matchers
+      compadd "$expl[@]" -O allmatching -a allcmds
+      len=${#${(O)allmatching//?/.}[1]} # length of longest match
+      for cmdtype in wt_aliases commands; do
+        local -a ${cmdtype}_d
+        (( $#disp )) && set -A ${cmdtype}_d \
+            ${${(r.COLUMNS-4.)${(P)cmdtype}/(#s)(#m)[^:]##:/${(r.len.)MATCH[1,-2]} $sep }%% #}
+        alts+=( "${cmdtype//_/-}:${${cmdtype//_/ }%%(e|)s}:compadd ${(e)disp} -a ${cmdtype}_m" )
+      done
+
+      _alternative $alts
+      # _describe -t commands command commands && ret=0
+    ;;
+    (option-or-argument)
+      curcontext=${curcontext%:*}-$line[1]:
+      case $line[1] in
+        (add)
+          if (( $words[(I)--detach] )); then
+            args=( ':branch:__git_branch_names' )
+          else
+            args=( ':commit:__git_commits' )
+          fi
+          _arguments -S $endopt \
+            '(-f --force)'{-f,--force}'[checkout branch even if already checked out in another worktree]' \
+            '(-B --detach)-b+[create a new branch]: :__git_branch_names' \
+            '(-b --detach)-B+[create or reset a branch]: :__git_branch_names' \
+            '(-b -B)--detach[detach HEAD at named commit]' \
+            '--no-checkout[suppress file checkout in new worktree]' \
+            '--lock[keep working tree locked after creation]' \
+            ':path:_directories' $args && ret=0
+        ;;
+        (prune)
+          _arguments -S $endopt \
+            '(-n --dry-run)'{-n,--dry-run}"[don't remove, show only]" \
+            '(-v --verbose)'{-v,--verbose}'[report pruned objects]' \
+            '--expire[expire objects older than specified time]:time' && ret=0
+        ;;
+        (list)
+          _arguments -S $endopt '--porcelain[machine-readable output]' && ret=0
+        ;;
+        (lock)
+          _arguments -C -S $endopt '--reason=[specify reason for locking]:reason' ': :->worktrees' && ret=0
+        ;;
+        (move)
+          _arguments -C \
+            ': :->worktrees' \
+            ':location:_directories' && ret=0
+        ;;
+        (remove)
+          _arguments -C -S $endopt '--force[remove working trees that are not clean or that have submodules]' \
+            ': :->worktrees' && ret=0
+        ;;
+        (unlock)
+          state=worktrees
+        ;;
+      esac
+      if [[ $state = worktrees ]]; then
+        __git_worktrees && ret=0
+      fi
+    ;;
+  esac
+  return ret
+}
+_git-wt "$@"

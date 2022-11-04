@@ -1,1 +1,2 @@
+#!/usr/bin/sh
 kbuildsycoca5 && kquitapp plasmashell && kstart plasmashell

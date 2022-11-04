@@ -1,1 +1,2 @@
+#!/usr/bin/sh
 node -e "var stdin = ''; process.stdin.on('readable', function() {var chunk; while(chunk = process.stdin.read()) { stdin += chunk; }}).on('end', function() {$1});"

@@ -67,6 +67,7 @@
 	env = "!env"
 	checkout-pull-detach = "!f() { git checkout \"$@\" && git pull && git detach-head; }; f"
 	detach-head = checkout --detach HEAD
+	wt = "worktree"
 	worktree-dirs = "!git worktree list --porcelain | rg '^worktree ' | sd '^worktree ' ''"
 	worktree-main = "!git worktree list --porcelain | head -n1 | sd '^worktree ' ''"
 	worktree-ls = worktree list
