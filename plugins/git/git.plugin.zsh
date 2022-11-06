@@ -109,16 +109,15 @@ alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
 # alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
 # alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 
-function ___git_indent_helper() {
-  "$@" 2>/dev/null | (whitespace="↳ "; while read l; do echo "$whitespace$l"; whitespace="  "; done)
-}
-
 GIT_SSH_AGENT_CHECK=(ssh-add -l)
 GIT_SSH_AGENT_ADD=(ssh-add)
 
 # ssh-add works fine if envoy is started in ssh-agent mode
 # GIT_SSH_AGENT_CHECK=(envoy -l)
 # GIT_SSH_AGENT_ADD=(envoy -a)
+
+autoload -Uz git-worktree-rm--interactive
+autoload -Uz ogl
 
 ___git_first_run=true
 function git() { # also put these in git-aliases for autocomplete
@@ -209,7 +208,7 @@ function git() { # also put these in git-aliases for autocomplete
 }
 
 _git-stashed() {
-    _git "$@"
+  _git "$@"
 }
 
 ## aliases
@@ -239,4 +238,3 @@ source "$__zsh_forivall_git_plugin_location/bin/git-watch-staged"
 # source "$__zsh_forivall_git_plugin_location/completions.zsh"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
 
-autoload ogl
