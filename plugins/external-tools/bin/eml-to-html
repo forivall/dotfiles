@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+
+# https://gist.github.com/davidmintz/0a1c63be0973324326ffbcc4a16680a0
+
+# useful for development and testing, this gets the html payload from
+# .eml files (e.g., as produced by Zend\Mail) and prints it to STDOUT
+
+from email import parser
+import argparse
+
+import sys
+
+args = argparse.ArgumentParser()
+args.add_argument("filename", help="path to .eml file")
+filename = args.parse_args().filename
+data = open(filename) if filename else sys.stdin
+msg = parser.Parser().parse(data)
+html = msg.get_payload()[1]
+thing = str(html.get_payload(decode=True))
+print(thing.replace("\\n", "\n"))

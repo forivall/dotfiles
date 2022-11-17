@@ -35,6 +35,7 @@ alias gam='git amend'
 alias gcb='git checkout -b'
 alias gcm='git commit'
 alias gco='git checkout'
+alias gcop='git checkoutp'
 alias gsco='git stashed checkout'
 alias gcp='git cherry-pick'
 alias gcs='git switch'
@@ -119,6 +120,43 @@ GIT_SSH_AGENT_ADD=(ssh-add)
 autoload -Uz git-worktree-rm--interactive
 autoload -Uz ogl
 
+__git_worktree_relative_py='
+import sys
+import os.path
+for line in sys.stdin:
+  if line.startswith("worktree "):
+    target = line[9:].rstrip()
+    rel = os.path.relpath(target)
+    print("worktree", rel if len(rel) < len(target) else target)
+  else:
+    sys.stdout.write(line)
+'
+__git_wt_directories='git worktree list --porcelain | python3 -c "$__git_worktree_relative_py"'
+zstyle ':completion::complete:git-wt-cd:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-wt-lock:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-wt-move:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-wt-mv:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-wt-remove:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-wt-rm:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-wt-unlock:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-cd:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-lock:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-move:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-mv:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-remove:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-rm:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:git-worktree-unlock:*:directories' command "$__git_wt_directories"
+zstyle ':completion::complete:cd:*:directories' command "$__git_wt_directories"
+
+# zstyle ':completion:git-worktree-lock:*:directories'
+zstyle ':completion:*:*:git-wt-cd:*:*' menu yes select
+zstyle ':completion:*:*:git-worktree-cd:*:*' menu yes select
+zstyle ':completion:*:*:git-wt-cd:*:*' insert automenu
+zstyle ':completion:*:*:git-worktree-cd:*:*' insert automenu
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories __git_worktrees
+
+bindkey -M menuselect '^M' .accept-line
+
 ___git_first_run=true
 function git() { # also put these in git-aliases for autocomplete
   local a;
@@ -191,7 +229,9 @@ function git() { # also put these in git-aliases for autocomplete
       fi
     else
       local alias="$gitcommand-$1"
-      if git config --get alias.$alias > /dev/null; then
+      if [[ $alias == worktree-cd ]]; then
+        "$@"
+      elif git config --get alias.$alias > /dev/null; then
         shift
         command git "${opts[@]}" $alias "$@"
       else

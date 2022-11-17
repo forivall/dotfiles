@@ -1,0 +1,1 @@
+alias httpp=http-prompt

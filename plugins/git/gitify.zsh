@@ -9,6 +9,7 @@ gitify_vscode_plugin() {
   git clone "$(jq -r '(.repository.url // .repository)' package.json | sd '^git+http' http)" _tmp
   mv _tmp/.git .git
   command rm -r _tmp
+  git checkout $(git diff --name-only --diff-filter=D)
 }
 
 # usage: cd node_modules; gitify_node_module ../../vidi-server ../../vidi-shop-server ...

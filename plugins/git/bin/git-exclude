@@ -1,0 +1,57 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+args=()
+files=()
+dashdash=false
+edit=false
+anchor=true
+
+while (( $# > 0 )); do
+case "$1" in
+  -h)
+    echo 'git exclude [flags] [...files]'
+    echo '    --edit           edit exclude file'
+    echo '    --no-anchor      dont prefix pattern with "/"'
+    exit
+  ;;
+  .envrc|.direnv) files+=(.envrc .direnv) ;;
+  --edit) edit=true; shift; continue; ;;
+  --no-anchor) anchor=false; shift; continue; ;;
+  --) dashdash=true; args+=($1); shift; continue; ;;
+  -*)
+    args+=($1)
+    if $dashdash || [[ -e $1 ]]; then
+      files+=($1)
+    fi
+    shift
+    continue
+  ;;
+  *)
+    files+=($1)
+    shift
+    continue
+  ;;
+esac
+break;
+done
+
+if [[ -v GIT_CONFIG_PARAMETERS ]]; then
+  git_config_args=('-c '${^${(z)GIT_CONFIG_PARAMETERS}})
+  git_config_args=(${(z)git_config_args})
+fi
+
+local excludefile=$(git ${(Q)git_config_args} rev-parse --git-dir)/info/exclude
+
+if $anchor; then
+  files=('/'${^files})
+fi
+
+echo ${(F)files} >> $excludefile
+
+if $edit; then
+  exec $(git ${(Q)git_config_args} var GIT_EDITOR) $excludefile
+fi

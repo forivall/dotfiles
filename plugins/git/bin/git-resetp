@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+local configArgs=()
+
+__git-resetp-hasfiles() {
+  ! git diff-index --cached HEAD --quiet $@
+}
+__git-resetp-getitems() {
+  git diff --cached --name-only $@
+}
+__git-resetp-dointeractive() {
+  git "${configArgs[@]}" reset -p $@
+}
+source $__plugin_dirname/__git-patch-filepicker \
+  __git-resetp-{hasfiles,getitems,dointeractive} $@
+
+echo 'No changes are currently staged'

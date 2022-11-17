@@ -71,7 +71,7 @@ function _get_package_root() {
     local r
     d="${PWD:h}"
     while [[ "$d" != "/" ]]; do
-      r=("$d/"(package.json|Cargo.lock))
+      r=("$d/"(package.json|Cargo.lock|pyproject.toml))
       if [[ -f "${r[1]}" ]]; then
         PACKAGE_ROOT="$d"
         break

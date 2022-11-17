@@ -1,23 +1,35 @@
 #!/usr/bin/env zsh
 
+set -eo pipefail
+
 __plugin_dirname=${0:a:h:h}
 
-# set -e
+local configArgs=()
 
-configArgs=()
-if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-  configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) (--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})")
-fi
+__git-addp-hasfiles() {
+  ! git diff-files --quiet $@ ||
+  ! git ls-files --other --exclude-standard $@ | sed q1 > /dev/null
+}
+__git-addp-getitems() {
+  git diff --name-only $@
+  git ls-files --other --exclude-standard $@
+}
+__git-addp-dointeractive() {
+  if git ls-files --error-unmatch $@ 2> /dev/null; then
+    git "${configArgs[@]}" add -p $@
+  else
+    git "${configArgs[@]}" add $@
+    local display_cmd=(git "${configArgs[@]}" diff --cached $@)
+    local diff_filter=$(git config interactive.diffFilter)
+    if [[ -n $diff_filter ]]; then
+      $display_cmd | eval $diff_filter
+    else
+      $display_cmd
+    fi
+    echo Added $@
+  fi
+}
+source $__plugin_dirname/__git-patch-filepicker \
+  __git-addp-{hasfiles,getitems,dointeractive} $@
 
-while ! git diff-files --quiet; do
-  # git diff --name-only | selecta --height 4 | read file
-  items=($(git diff --name-only))
-  # $ python3 -m pip install simple-term-menu
-  simple-term-menu ${items[@]}
-  i=$?
-  if (( $i == 0 )) ; then exit; fi
-  file=${items[i]}
-  git "${configArgs[@]}" add -p $file
-done
-
-echo 'Nothing left to add'
+echo 'Nothing left to stage'

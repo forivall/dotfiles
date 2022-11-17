@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 if [[ "$1" == "--porcelain" ]] ; then
     porcelain=1
     search="$2"

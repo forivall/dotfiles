@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+# code: language=shellscript
+
+__git-patch-filepicker() {
+  if [[ -v configArgs ]]; then
+    if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+      configArgs+=(-c interactive.diffFilter="$(command git config interactive.diffFilter) (--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})")
+    fi
+  fi
+  hasfiles=$1
+  shift
+  getitems=$1
+  shift
+  dointeractive=$1
+  shift
+
+  cdup=$(git rev-parse --show-cdup)
+  while $hasfiles $@; do
+    # git diff --name-only | selecta --height 4 | read file
+    items=($($getitems $@))
+    # $ python3 -m pip install simple-term-menu
+    
+    simple-term-menu ${items[@]} && i=0 || i=$?
+    if (( $i == 0 )) ; then exit; fi
+    file=${items[i]}
+    $dointeractive $cdup$file
+  done
+}
+
+__git-patch-filepicker $@

@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+local configArgs=()
+
+__git-checkoutp-hasfiles() {
+  ! git diff-files --quiet $@
+}
+__git-checkoutp-getitems() {
+  git diff --name-only $@
+}
+__git-checkoutp-dointeractive() {
+  git "${configArgs[@]}" checkout -p $@
+}
+source $__plugin_dirname/__git-patch-filepicker \
+  __git-checkoutp-{hasfiles,getitems,dointeractive} $@
+
+echo 'No changes left to discard'

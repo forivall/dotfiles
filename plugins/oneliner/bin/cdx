@@ -8,4 +8,4 @@ cd $1
 shift
 printf '\e]1337;CurrentDir=%s\a' $PWD
 command -v direnv &>/dev/null && eval "$(direnv export zsh)";
-$@
+eval $@

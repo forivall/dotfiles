@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+local api_key_file=~/.config/libraries.io/API_KEY
+local clipboard_contents
+if [[ ! -f $api_key_file ]]; then
+  echo "Missing API_KEY!" >&2
+  echo "$ open https://libraries.io/account" >&2
+  echo "# copy the api key" >&2
+  echo "$ pbpaste > $api_key_file" >&2
+  clipboard_contents=$(pbpaste)
+  if [[ $clipboard_contents =~ "[a-f0-9]{32}" ]]; then
+    echo -n "is the api key currently on the clipboard? (y/N) " >&2
+    read yn
+    if [[ "$yn" =~ [Yy](es)? ]]; then
+      mkdir -p ${api_key_file:h}
+      echo $clipboard_contents > $api_key_file
+    fi
+  fi
+fi
+if [[ ! -f $api_key_file ]]; then
+  open --url https://libraries.io/account
+  local old_clipboard_contents=$clipboard_contents
+  while sleep 1; do
+    clipboard_contents=$(pbpaste)
+    if [[ $clipboard_contents != $old_clipboard_contents ]]; then
+      if [[ $clipboard_contents =~ "[a-f0-9]{32}" ]]; then
+        mkdir -p ${api_key_file:h}
+        echo $clipboard_contents > $api_key_file
+        break
+      else
+        old_clipboard_contents=$clipboard_contents
+      fi
+    fi
+  done
+fi
+echo $api_key_file

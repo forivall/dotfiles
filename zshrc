@@ -68,6 +68,12 @@ tabs -2
 
 # bindkey -M emacs "^\`" _complete_help
 
+zmodload -i zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
@@ -205,6 +211,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/git"
   zgen load "$__zshrc_dirname/plugins/git-ftp"
   zgen load "$__zshrc_dirname/plugins/github"
+  zgen load "$__zshrc_dirname/plugins/go"
   whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
   whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
   zgen load jscutlery/nx-completion '' main
