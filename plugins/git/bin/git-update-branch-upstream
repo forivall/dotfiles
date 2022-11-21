@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+# code: language=shellscript
+
+branch=$1
+shift
+git update-ref \"refs/heads/$branch\" \"$branch@{u}\" $@

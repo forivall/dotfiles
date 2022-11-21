@@ -8,11 +8,11 @@ local configArgs=()
 
 __git-addp-hasfiles() {
   ! git diff-files --quiet $@ ||
-  ! git ls-files --other --exclude-standard $@ | sed q1 > /dev/null
+  ! git ls-files --other --directory --exclude-standard $@ | sed q1 > /dev/null
 }
 __git-addp-getitems() {
   git diff --name-only $@
-  git ls-files --other --exclude-standard $@
+  git ls-files --other --directory --exclude-standard $@
 }
 __git-addp-dointeractive() {
   if git ls-files --error-unmatch $@ 2> /dev/null; then

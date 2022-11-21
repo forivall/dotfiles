@@ -31,6 +31,7 @@
 	ci = commit
 	cie = commit-edit
 	co = checkout
+	cop = checkoutp
 	st = status -b -s
 	stat = status -b -s
 	# --pretty=format:"%H%x20%an%x09%ad%x09%s"
@@ -42,6 +43,7 @@
 	last = show --oneline --name-status --decorate
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
 	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --all
+	las = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --all --simplify-by-decoration
 	laa = log --pretty=oneline --abbrev-commit --decorate --graph --all
 	lo = log --pretty=oneline --abbrev-commit --decorate --graph --remotes=origin --branches
 	l2 = log --pretty="tformat:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph --no-notes
@@ -52,7 +54,9 @@
 	lg3 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
 	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
-	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph `git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done`"
+	branches-with-upstreams = "!git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done"
+	llu = "log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
+	llus = "log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration  $(git branches-with-upstreams)"
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graphlast = show --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged
@@ -73,6 +77,7 @@
 	worktree-ls = worktree list
 	worktree-mv = worktree move
 	worktree-rm = worktree remove
+	worktree-cd = "worktree cd"
 	# looks like ripgrep
 	grep-pretty = "grep --break --heading"
 	rg = "grep --break --heading"
@@ -201,8 +206,8 @@
 	pushInsteadOf = lab:
 [credential]
 	helper = cache
-	helper =
-	helper = /usr/local/share/gcm-core/git-credential-manager-core
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false

@@ -1,0 +1,13 @@
+#compdef git-update-branch-upstream
+#description list recent branches
+
+_git-update-branch-upstream () {
+
+  _arguments -S \
+    ':branch-name:__git_branch_names' \
+    ':*:_git-update-ref' \
+    && ret=0
+
+  return ret
+}
+_git-update-branch-upstream

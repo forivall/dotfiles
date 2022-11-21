@@ -6,7 +6,7 @@
    * @returns {(event: KeyboardEvent) => any}
    */
   const reviewKeyboardHandler = (handlers) => (event) => {
-    if (!document.location.pathname.endsWith('/files')) return
+    if (!/\/files(?:\/[0-9a-f]{40}..[0-9a-f]{40})?$/.test(document.location.pathname)) return
     const ae = document.activeElement
     if (ae && ae.nodeName !== 'BODY') return
     const handler = handlers[event.key]

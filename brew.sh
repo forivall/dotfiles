@@ -19,7 +19,6 @@ brew install less # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
 brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim cfonts ruplacer
-# cargo install huniq
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
 brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
@@ -37,11 +36,14 @@ brew install p7zip unar
 # brew install git-tf tee-clc # requires java
 brew install python@3.10 pyenv pyenv-virtualenv bpython numpy
 brew install python-markdown
+python3 -m pip install pypi-command-line
 # brew install perl cpanminus cpansearch
 
-brew install jq yq httpie curlie xh brimdata/tap/zq
+brew install jq yq httpie http-prompt curlie xh brimdata/tap/zq dasel
+brew install --cask httpie
 # brew install mitmproxy
-# brew install python-yq
+brew install --no-binaries python-yq
+(cd $HOMEBREW_PREFIX/bin; for f in $(brew list python-yq); do [[ $f = */{y,toml}q ]] && ln -s $f; done)
 brew install flow shellcheck pandoc
 brew install mongodb sqlite postgresql
 brew install mariadb # groonga
@@ -56,6 +58,8 @@ brew install ruby rbenv rbenv-bundler # ruby-build
 # brew install php composer
 
 brew install rust rustup-init
+cargo install toml-cli
+cargo install huniq
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog
 mkdir -p ~/.config/bat

@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+local configArgs=()
+local revs=(${(f)$(git rev-parse --revs-only $@)})
+
+__git-deltap-hasfiles() {
+  local ref="${1:-HEAD}"
+  (( $# > 0 )) && shift
+  ! git "${configArgs[@]}" diff-index --quiet $ref $@
+}
+__git-deltap-getitems() {
+  git "${configArgs[@]}" diff --name-only $@
+}
+__git-deltap-dointeractive() {
+  git "${configArgs[@]}" delta "${revs[@]}" $@
+}
+source $__plugin_dirname/__git-patch-filepicker \
+  __git-deltap-{hasfiles,getitems,dointeractive} $@
+

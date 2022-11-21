@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+local pager=($(git config core.pager || echo -n "less"))
+local deltaOpts=()
+if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+  deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
+fi
+if (( $# == 0 )) || [[ $1 == -* ]] || ! command git ${(Q)git_config_args} --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
+  git -c color.diff=always diff "$@" | command delta "${deltaOpts[@]}" | $pager
+else
+  git -c color.diff=always "$@" | command delta "${deltaOpts[@]}" | $pager
+fi

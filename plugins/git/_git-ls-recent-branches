@@ -12,3 +12,5 @@ _git-ls-recent-branches () {
 
   return ret
 }
+
+_git-ls-recent-branches

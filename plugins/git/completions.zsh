@@ -1,6 +1,4 @@
-# NOTE: i doubt this compdef works, I just have this file source'd from
-# my zshrc
-##compdef -p git
+# this file is currently unused
 
 _git-branch-archive() { _arguments ':branch-name:__git_branch_names' }
 _git-gerrit-query() { _arguments ':branch-name:__git_commits' ; }
