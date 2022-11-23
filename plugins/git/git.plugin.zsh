@@ -202,7 +202,7 @@ function git() { # also put these in git-aliases for autocomplete
       fi
       return
       ;;
-    diff|diffc) gitcommand=$1; shift;
+    diff|diffc|show) gitcommand=$1; shift;
       if ! ( (( $@[(Ie)--patch] )) || (( $@[(Ie)-p] )) ) && (
         (( $@[(Ie)--no-patch] )) ||
         (( $@[(Ie)--name-status] )) ||

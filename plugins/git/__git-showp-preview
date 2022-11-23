@@ -1,0 +1,67 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+autoload colors && colors
+
+echo ---
+
+show_lines=("${(f)$(git show --format='' --raw --numstat --summary --follow $@)}")
+rawstat=($(echo ${show_lines[1]}))
+numstat=($(echo ${show_lines[2]}))
+summary=($(echo ${show_lines[3]}))
+added=${numstat[1]}
+removed=${numstat[2]}
+if (( added > 0 || removed > 0 )); then
+  if (( removed > 0 )); then
+    if (( added > 0 )); then
+      if [[ "${rawstat[5]}" = C* ]]; then
+        echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
+      elif [[ "${rawstat[5]}" = R* ]]; then
+        echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
+      else
+        echo "${fg[cyan]}Changed${reset_color} $added new, $removed removed line(s)"
+      fi
+    else
+      if [[ "${rawstat[5]}" = D ]]; then
+        echo "${fg[cyan]}Deleted${reset_color} with $removed line(s)"
+      elif [[ "${rawstat[5]}" = C* ]]; then
+        echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $removed removed line(s)"
+      elif [[ "${rawstat[5]}" = R* ]]; then
+        echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $removed removed line(s)"
+      else
+        echo "${fg[cyan]}Changed${reset_color} $removed removed line(s)"
+      fi
+    fi
+  else
+    if [[ "${rawstat[5]}" = A ]]; then
+      echo "${fg[cyan]}New${reset_color} with $added line(s)"
+    elif [[ "${rawstat[5]}" = C* ]]; then
+      echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new line(s)"
+    elif [[ "${rawstat[5]}" = R* ]]; then
+      echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new line(s)"
+    else
+      echo "${fg[cyan]}Changed${reset_color} $added new line(s)"
+    fi
+  fi
+
+  total=$(( added + removed ))
+  totallen=${#total}
+  STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
+  if $(( total > STAT_COLUMNS )); then
+    added=$(( STAT_COLUMNS * added / total ))
+    removed=$(( STAT_COLUMNS * added / total ))
+  fi
+  echo $total ${fg[green]}${(l:${added}::+:)}${fg[red]}${(l:${removed}::-:)}${reset_color}
+else
+  if [[ "${rawstat[5]}" = C* ]]; then
+    echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  elif [[ "${rawstat[5]}" = R* ]]; then
+    echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  else
+    echo "${fg[cyan]}Created empty file${reset_color}"
+  fi
+fi
+
+#  $@ | delta
+
