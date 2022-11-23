@@ -2,13 +2,20 @@
 
 set -eo pipefail
 
-local pager=($(git config core.pager || echo -n "less"))
+local gitcommand=()
+if (( $# == 0 )) || [[ $1 == -* ]] || ! command git ${(Q)git_config_args} --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
+  gitcommand+=(diff)
+fi
+
+if [[ $1 != --color ]] && ! [[ -t 1 ]]; then
+  git -c color.diff=never ${gitcommand[@]} "$@" | command delta | sd '\x1b\[[0-9;]*[mK]' ''
+  return
+  exit
+fi
+
+local pager=$(git config core.pager || echo -n "less")
 local deltaOpts=()
 if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
   deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
 fi
-if (( $# == 0 )) || [[ $1 == -* ]] || ! command git ${(Q)git_config_args} --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
-  git -c color.diff=always diff "$@" | command delta "${deltaOpts[@]}" | $pager
-else
-  git -c color.diff=always "$@" | command delta "${deltaOpts[@]}" | $pager
-fi
+git -c color.diff=always "${gitcommand[@]}" "$@" | command delta "${deltaOpts[@]}" --pager "$pager"

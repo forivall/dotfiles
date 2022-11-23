@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+autoload colors && colors
+
+echo ---
+
+if git ls-files --error-unmatch $@ 2>/dev/null >/dev/null; then
+  numstat=($(git diff --numstat $@))
+  added=${numstat[1]}
+  removed=${numstat[2]}
+elif [[ -f $@ ]]; then
+  numstat=($(wc -l $@))
+  added=${numstat[1]}
+  removed="0"
+fi
+if (( added > 0 || removed > 0 )); then
+  total=$(( added + removed ))
+  totallen=${#total}
+  STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
+  if $(( total > STAT_COLUMNS )); then
+    added=$(( STAT_COLUMNS * added / total ))
+    removed=$(( STAT_COLUMNS * added / total ))
+  fi
+  echo $total ${fg[green]}${(l:${added}::+:)}${fg[red]}${(l:${removed}::-:)}${reset_color}
+  if (( removed > 0 )); then
+    echo "${fg[cyan]}Change${reset_color} $added new, $removed removed line(s)"
+  elif [[ -n $removed ]]; then
+    echo "${fg[cyan]}Add new file${reset_color}"
+  else
+    echo "${fg[cyan]}Change${reset_color} $added new line(s)"
+  fi
+elif [[ -d $@ ]]; then
+  COLUMNS=$COLUMNS exa --grid -x -F --git --color=always $@
+  files=()
+  echo "${fg[cyan]}Add ${fg[yellow]}$(git ls-files --other --exclude-standard $@ | wc -l)${fg[cyan]} new file(s)${reset_color}"
+else
+  echo "${fg[cyan]}Add empty file${reset_color}"
+fi
+
+
+#  $@ | delta
+

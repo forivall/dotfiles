@@ -10,26 +10,29 @@ __git-addp-hasfiles() {
   ! git diff-files --quiet $@ ||
   ! git ls-files --other --directory --exclude-standard $@ | sed q1 > /dev/null
 }
-__git-addp-getitems() {
-  git diff --name-only $@
-  git ls-files --other --directory --exclude-standard $@
+__git-addp-getitems_vars() {
+  items=(
+    $(git diff --name-only $@)
+    $(git ls-files --other --directory --no-empty-directory --exclude-standard $@)
+  )
+  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview {}")
 }
 __git-addp-dointeractive() {
-  if git ls-files --error-unmatch $@ 2> /dev/null; then
+  if git ls-files --error-unmatch $@ 2>/dev/null >/dev/null; then
     git "${configArgs[@]}" add -p $@
   else
     git "${configArgs[@]}" add $@
     local display_cmd=(git "${configArgs[@]}" diff --cached $@)
     local diff_filter=$(git config interactive.diffFilter)
     if [[ -n $diff_filter ]]; then
-      $display_cmd | eval $diff_filter
+      $display_cmd | eval $diff_filter | eval $(git var GIT_PAGER)
     else
-      $display_cmd
+      $display_cmd | eval $(git var GIT_PAGER)
     fi
     echo Added $@
   fi
 }
 source $__plugin_dirname/__git-patch-filepicker \
-  __git-addp-{hasfiles,getitems,dointeractive} $@
+  __git-addp-{hasfiles,getitems_vars,dointeractive} $@
 
 echo 'Nothing left to stage'

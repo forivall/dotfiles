@@ -203,7 +203,21 @@ function git() { # also put these in git-aliases for autocomplete
       return
       ;;
     diff|diffc) gitcommand=$1; shift;
-      if (( $@[(Ie)--name-status] )) || (( $@[(Ie)--name-only] )) || (( $@[(Ie)--stat] )) ; then
+      if ! ( (( $@[(Ie)--patch] )) || (( $@[(Ie)-p] )) ) && (
+        (( $@[(Ie)--no-patch] )) ||
+        (( $@[(Ie)--name-status] )) ||
+        (( $@[(Ie)--name-only] )) ||
+        (( $@[(Ie)--raw] )) ||
+        (( $@[(Ie)--cumulative] )) ||
+        (( $@[(Ie)--dirstat] )) ||
+        (( $@[(Ie)--dirstat-by-file] )) ||
+        (( $@[(Ie)--dirstat-by-file=*] )) ||
+        (( $@[(Ie)--stat] )) ||
+        (( $@[(Ie)--numstat] )) ||
+        (( $@[(Ie)--shortstat] )) ||
+        (( $@[(Ie)--summary] )) ||
+        (( $@[(Ie)--compact-summary] ))
+      ); then
         command git --no-pager "${opts[@]}" $gitcommand $@
       else
         command git "${opts[@]}" $gitcommand $@

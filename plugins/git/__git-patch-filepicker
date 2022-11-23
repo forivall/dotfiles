@@ -14,13 +14,23 @@ __git-patch-filepicker() {
   dointeractive=$1
   shift
 
+  local items
+  local term_menu_options
+
   cdup=$(git rev-parse --show-cdup)
   while $hasfiles $@; do
+    displayitems=()
+    term_menu_options=()
     # git diff --name-only | selecta --height 4 | read file
-    items=($($getitems $@))
+    if [[ $getitems = *_vars ]]; then
+      items=()
+      $getitems $@
+    else
+      items=($($getitems $@))
+    fi
     # $ python3 -m pip install simple-term-menu
     
-    simple-term-menu -i $(( i - 1 )) ${items[@]} && i=0 || i=$?
+    simple-term-menu -i $(( i - 1 )) $term_menu_options "${items[@]}" && i=0 || i=$?
     if (( $i == 0 )) ; then exit; fi
     file=${items[i]}
     $dointeractive $cdup$file

@@ -39,19 +39,21 @@ esac
 break;
 done
 
-if [[ -v GIT_CONFIG_PARAMETERS ]]; then
-  git_config_args=('-c '${^${(z)GIT_CONFIG_PARAMETERS}})
-  git_config_args=(${(z)git_config_args})
-fi
+# if [[ -v GIT_CONFIG_PARAMETERS ]]; then
+#   git_config_args=('-c '${^${(z)GIT_CONFIG_PARAMETERS}})
+#   git_config_args=(${(z)git_config_args})
+# fi
+# git ${(Q)git_config_args} ...
 
-local excludefile=$(git ${(Q)git_config_args} rev-parse --git-dir)/info/exclude
+local excludefile=$(git rev-parse --git-common-dir)/info/exclude
 
 if $anchor; then
   files=('/'${^files})
 fi
 
+[[ -d ${excludefile:A:h} ]] || mkdir -p ${excludefile:A:h}
 echo ${(F)files} >> $excludefile
 
 if $edit; then
-  exec $(git ${(Q)git_config_args} var GIT_EDITOR) $excludefile
+  exec $(git var GIT_EDITOR) $excludefile
 fi
