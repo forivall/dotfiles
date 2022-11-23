@@ -1,3 +1,5 @@
 #command
+h prev-file
 j prev-file
 k next-file
+l next-file

@@ -10,6 +10,7 @@ allfiles=false
 reflog=false
 stash=false
 showdiff=true
+forcediff=false
 dry=false
 
 while (( $# > 0 )); do
@@ -23,7 +24,8 @@ case "$1" in
   ;;
   stash) stash=true; args+=(stash); pretty+=(--pretty=medium) ;&
   --walk-reflogs) reflog=true; shift; continue; ;;
-  --stat|--name-only|--name-status) showdiff=false ;&
+  --patch|--p) forcediff=true; ;&
+  --no-patch|--name-status|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary) showdiff=false; ;&
   --pretty=*)
     pretty+=($1); shift; continue; ;;
   --pretty) pretty+=($1 $2); shift; shift; continue; ;;
@@ -62,13 +64,13 @@ for commit in ${(f)refspecs}; do
     local reflog_command="git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit};"
     if $stash; then
       local commitbase="$commit^"
-      if $showdiff; then
+      if $showdiff || $forcediff; then
         reflog_command+="git diff --color --pretty= ${(q+@)commitbase} ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
       else
         reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
       fi
     else
-      if $showdiff; then
+      if $showdiff || $forcediff; then
         reflog_command+="git show --color --pretty= ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
       else
         reflog_command+="echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
@@ -85,6 +87,7 @@ if $dry; then
     echo ${${c#<\(}%)}
   done
 else
+  export COLUMNS
   eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}
 
   wait

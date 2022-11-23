@@ -6,12 +6,12 @@ autoload colors && colors
 
 echo ---
 
-if git ls-files --error-unmatch $@ 2>/dev/null >/dev/null; then
-  numstat=($(git diff --numstat $@))
+if git ls-files --error-unmatch $1 2>/dev/null >/dev/null; then
+  numstat=($(git diff --numstat $1))
   added=${numstat[1]}
   removed=${numstat[2]}
 elif [[ -f $@ ]]; then
-  numstat=($(wc -l $@))
+  numstat=($(wc -l $1))
   added=${numstat[1]}
   removed=""
 fi
