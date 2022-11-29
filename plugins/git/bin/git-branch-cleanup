@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+__filename=${0:A}
+__dirname=${0:h}
+
+autoload colors && colors
+
+prompt_to_force_delete() {
+  echo -n "Force delete $1? (y/N) "
+  read -k 1 yn
+  echo
+  [[ $yn == y ]] && git branch -D $1
+}
+
+branches=($(git rev-parse --symbolic --branches))
+term_menu_options=(--no-preview-border --preview "git -c color.branch=always branch --list -vvv {}")
+i=0
+
+while (( ${#branches} > 0 )); do
+  simple-term-menu -i $(( i - 1 )) $term_menu_options "${branches[@]}" && i=0 || i=$?
+  if (( $i == 0 )) ; then exit; fi
+  branch=${branches[i]}
+
+  if git branch -d $branch || prompt_to_force_delete $branch; then
+    branches=("${(@)branches[1,$i-1]}" "${(@)branches[$i+1,$#branches]}")
+  fi
+done

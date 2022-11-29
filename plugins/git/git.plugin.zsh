@@ -36,8 +36,11 @@ alias gcb='git checkout -b'
 alias gcm='git commit'
 alias gco='git checkout'
 alias gcop='git checkoutp'
+alias gcob='git checkout-branch'
 alias gsco='git stashed checkout'
 alias gcp='git cherry-pick'
+alias gcpc='git cherry-pick --continue'
+alias gcps='git cherry-pick --skip'
 alias gcs='git switch'
 alias gcsb='git switch -c'
 
@@ -45,6 +48,38 @@ alias gd='git diff'
 alias gds='git diff --staged'
 alias gdd='git delta diff'
 alias gdds='git delta diff --staged'
+
+alias gf='git fetch'
+alias gfo='git fetch origin'
+
+alias gg="git grep-pretty"
+
+alias gl='git l'
+alias gla='git la'
+alias glf='git ls-files'
+alias glfg='git ls-files | grep'
+alias glg="git l3"
+alias glga="git l3 --all"
+alias glgs="git l3 --stat"
+alias glgas="git l3 --all --stat"
+alias gll='ogl'
+alias glla='ogl --all'
+
+alias gmt='git mergetool'
+
+alias gp='git pull'
+alias gpr='git pull --rebase'
+alias gprs='git pull --rebase --autostash'
+alias gps='git push'
+
+alias grbc='git rebase --continue'
+alias grbs='git rebase --skip'
+alias gst="git st"
+
+alias gti="git"
+alias gts='git tag -s'
+alias gtv='git tag | sort -V'
+alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
 
 # alias ge="git each"
 ge() {
@@ -56,9 +91,6 @@ ge() {
   fi
   for d in */.git; do e="${d%/.git}"; echo "${fg[yellow]}❯ ${fg[cyan]}$d$reset_color" >&2; (cd "$d"; "$first" "$@"); done;
 }
-
-alias gf='git fetch'
-alias gfo='git fetch origin'
 
 # t is in a terrible place in querty, and I often hit space first
 # TODO: switch keyboard layouts.
@@ -80,31 +112,6 @@ function zlegitypo() {
 }
 autoload -U add-zle-hook-widget
 add-zle-hook-widget -Uz line-finish zlegitypo
-
-alias gg="git grep-pretty"
-
-alias gl='git l'
-alias gla='git la'
-alias glf='git ls-files'
-alias glfg='git ls-files | grep'
-alias glg="git l3"
-alias glga="git l3 --all"
-alias glgs="git l3 --stat"
-alias glgas="git l3 --all --stat"
-alias gll='ogl'
-alias glla='ogl --all'
-
-alias gp='git pull'
-alias gpr='git pull --rebase'
-alias gprs='git pull --rebase --autostash'
-alias gps='git push'
-
-alias gst="git st"
-
-alias gti="git"
-alias gts='git tag -s'
-alias gtv='git tag | sort -V'
-alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
 
 # TODO: modify and put this in my gitignore
 # alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
@@ -195,7 +202,7 @@ function git() { # also put these in git-aliases for autocomplete
       if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
         deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
       fi
-      if (( $# == 0 )) || [[ $1 == -* ]] || ! command git --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
+      if (( $# == 0 )) || [[ $1 == -* ]] || [[ $1 == @* ]] || ! command git --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
         git -c color.diff=always diff "${opts[@]}" "$@" | command delta "${deltaOpts[@]}" | $pager
       else
         git -c color.diff=always "${opts[@]}" "$@" | command delta "${deltaOpts[@]}" | $pager

@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+__filename=${0:A}
+__dirname=${0:h}
+
+autoload colors && colors
+
+branches=($(git rev-parse --symbolic --branches))
+term_menu_options=(
+  --no-preview-border
+  --preview "git -c color.branch=always branch --list -vvv {}"
+)
+if (( $# > 0 )) && [[ "$1" == -s || "$1" == --search ]]; then
+  term_menu_options+=(--search-key none)
+  shift
+fi
+
+simple-term-menu $term_menu_options "${branches[@]}" && i=0 || i=$?
+if (( $i == 0 )) ; then exit; fi
+branch=${branches[i]}
+git checkout $@ $branch

@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+args=($@)
+
+fileargs=($(git rev-parse --no-revs --no-flags $@))
+
+if (( ${#fileargs} == 0 )); then
+  if git rev-parse --quiet --verify REBASE_HEAD >/dev/null 2>/dev/null; then
+    args+=($(git show --pretty='' --name-only REBASE_HEAD))
+  fi
+fi
+
+echo git update-index --unresolve ${args[@]}
+git update-index --unresolve ${args[@]}

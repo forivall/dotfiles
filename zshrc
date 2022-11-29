@@ -97,7 +97,7 @@ DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
-ZSH_PYENV_QUIET=true
+# ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
 
 export BAT_PAGER="less +X -x2 -FR"
@@ -174,7 +174,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/rbenv
   zgen load "$__zshrc_dirname/plugins/python"
   zgen oh-my-zsh plugins/python
-  zgen oh-my-zsh plugins/pyenv
+  # zgen oh-my-zsh plugins/pyenv
   whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl
   whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv
   # zgen oh-my-zsh plugins/jump
