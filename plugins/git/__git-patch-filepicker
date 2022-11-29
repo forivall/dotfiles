@@ -18,15 +18,15 @@ __git-patch-filepicker() {
   local term_menu_options
 
   cdup=$(git rev-parse --show-cdup)
-  while $hasfiles $@; do
+  while $hasfiles "$@"; do
     displayitems=()
     term_menu_options=()
     # git diff --name-only | selecta --height 4 | read file
     if [[ $getitems = *_vars ]]; then
       items=()
-      $getitems $@
+      $getitems "$@"
     else
-      items=($($getitems $@))
+      items=($($getitems "$@"))
     fi
     # $ python3 -m pip install simple-term-menu
     
@@ -37,4 +37,4 @@ __git-patch-filepicker() {
   done
 }
 
-__git-patch-filepicker $@
+__git-patch-filepicker "$@"

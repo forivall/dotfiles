@@ -2,20 +2,25 @@
 
 set -eo pipefail
 
-__plugin_dirname=${0:a:h:h}
+__dirname=${0:a:h}
 
 local configArgs=()
 
+local revs=(${(f)$(git rev-parse --revs-only "$@")})
+if (( ${#revs} == 0 )); then
+  revs+=(HEAD)
+fi
+
 __git-resetp-hasfiles() {
-  ! git diff-index --cached HEAD --quiet $@
+  ! git diff-index --quiet --cached $revs
 }
 __git-resetp-getitems() {
-  git diff --cached --name-only $@
+  git diff --cached --name-only "$@"
 }
 __git-resetp-dointeractive() {
-  git "${configArgs[@]}" reset -p $@
+  git "${configArgs[@]}" reset -p "${revs[@]}" "$@"
 }
-source $__plugin_dirname/__git-patch-filepicker \
-  __git-resetp-{hasfiles,getitems,dointeractive} $@
+source "$__dirname/../__git-patch-filepicker" \
+  __git-resetp-{hasfiles,getitems,dointeractive} "$@"
 
 echo 'No changes are currently staged'
