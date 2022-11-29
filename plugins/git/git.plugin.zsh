@@ -181,15 +181,15 @@ function git() { # also put these in git-aliases for autocomplete
       git -c color.diff=always "${opts[@]}" "$@" | diff-so-fancy | $pager
       return
       ;;
-    deltac) shift;
+    deltac|diffcd) shift;
       git delta "${opts[@]}" diffc "$@";
       return
       ;;
-    deltas) shift;
+    deltas|showd) shift;
       git delta "${opts[@]}" show "$@";
       return
       ;;
-    delta) shift;
+    delta|diffd) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       local deltaOpts=()
       if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then

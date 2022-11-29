@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+local configArgs=()
+local revs=(${(f)$(git rev-parse --revs-only $@)})
+local cdup=$(git rev-parse --show-cdup)
+
+__git-diffp-hasfiles() {
+  ! git diff-files --quiet $@ ||
+  ! git ls-files --other --directory --exclude-standard $@ | sed q1 > /dev/null
+}
+__git-diffp-getitems_vars() {
+  items=(
+    $(git diff --name-only $@)
+    $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
+  )
+  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{}")
+}
+__git-diffp-dointeractive() {
+  git-delta diff --format='' $revs $@
+}
+source $__plugin_dirname/__git-patch-filepicker \
+  __git-diffp-{hasfiles,getitems_vars,dointeractive} $@
+
+echo 'No changes'

@@ -49,9 +49,9 @@ o git submodule update --init
 o ln -fs "$(realpath zshrc)" ~/.zshrc
 o ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
 
-mkdir -p ~/.config
+o mkdir ~/.config
 
-./vim/setup.sh
+o ./vim/setup.sh
 
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
@@ -59,11 +59,12 @@ o ln -fs "$(realpath gitignore)" ~/.gitignore
 o ln -fs "$(realpath hgrc)" ~/.hgrc
 o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist
-o mkdir -p ~/.config/glab-cli
+o ln -fs "$(realpath plugins/direnv/config)" ~/.config/direnv
+o mkdir ~/.config/glab-cli
 o ln -fs "$(realpath plugins/glab/aliases.yml)" ~/.config/glab-cli/aliases.yml
-o mkdir -p ~/.config/htop
+o mkdir ~/.config/htop
 o ln -fs "$(realpath htoprc)" ~/.config/htop/htoprc
-o mkdir -p ~/.config/gh
+o mkdir ~/.config/gh
 o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
 o ln -fs "$(realpath ctop)" ~/.ctop
 
@@ -73,7 +74,7 @@ o ln -fs "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
 
 
 if $IS_OSX ; then
-  mkdir -p ~/.config/mackup
+  mkdir ~/.config/mackup
   o ln -fs "$(realpath mackup.cfg)" ~/.mackup.cfg
 fi
 # TODO: gnu stow or some other alternative to mackup for linux.

@@ -7,7 +7,7 @@ if [[ -e "$PWD/$2.patch" ]]; then
   d="`mktemp -d`"
   mkdir -p "$d/`dirname $2`"
   <&0 cat > "$d/$2"
-  patch -d "$d" "$1" -p1 -i "$PWD/$2.patch" > "$d/patch.out"
+  patch --forward -d "$d" "$1" -p1 -i "$PWD/$2.patch" > "$d/patch.out"
   < "$d/$2" cat
 else
   <&0 cat

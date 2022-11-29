@@ -10,7 +10,7 @@ local cdup=$(git rev-parse --show-cdup)
 
 __git-addp-hasfiles() {
   ! git diff-files --quiet $@ ||
-  ! git ls-files --other --directory --exclude-standard $@ | sed q1 > /dev/null
+  ! git ls-files --other --directory --no-empty-directory --exclude-standard $@ | sed q1 > /dev/null
 }
 __git-addp-getitems_vars() {
   items=(

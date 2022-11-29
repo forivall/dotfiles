@@ -7,18 +7,36 @@ autoload colors && colors
 echo ---
 
 if git ls-files --error-unmatch $1 2>/dev/null >/dev/null; then
-  numstat=($(git diff --numstat $1))
+  difflines=("${(f)$(git diff --raw --numstat --follow -- $1)}")
+  rawstat=($(echo ${difflines[1]}))
+  diffstat="${rawstat[5]}"
+  numstat=($(echo ${difflines[2]}))
   added=${numstat[1]}
   removed=${numstat[2]}
 elif [[ -f $@ ]]; then
+  diffstat=A
   numstat=($(wc -l $1))
   added=${numstat[1]}
-  removed=""
+  removed=0
 fi
 if (( added > 0 || removed > 0 )); then
   if (( removed > 0 )); then
-    echo "${fg[cyan]}Change${reset_color} $added new, $removed removed line(s)"
-  elif [[ -z "$removed" ]]; then
+    if (( added > 0 )); then
+      if [[ "$diffstat" = C* ]]; then
+        echo "${fg[cyan]}Copy${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
+      elif [[ "$diffstat" = R* ]]; then
+        echo "${fg[cyan]}Rename${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
+      else
+        echo "${fg[cyan]}Change${reset_color} $added new, $removed removed line(s)"
+      fi
+    else
+      if [[ "$diffstat" = D ]]; then
+        echo "${fg[cyan]}Delete${reset_color} with $removed removed line(s)"
+      else
+        echo "${fg[cyan]}Change${reset_color} $removed removed line(s)"
+      fi
+    fi
+  elif [[ "$diffstat" = A ]]; then
     echo "${fg[cyan]}Add${reset_color} new file with $added line(s)"
   else
     echo "${fg[cyan]}Change${reset_color} $added new line(s)"

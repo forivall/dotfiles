@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 # zmodload zsh/zprof
+# setopt xtrace
 
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"

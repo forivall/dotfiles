@@ -9,13 +9,16 @@ local configArgs=()
 __git-checkoutp-hasfiles() {
   ! git diff-files --quiet $@
 }
-__git-checkoutp-getitems() {
-  git diff --name-only $@
+__git-checkoutp-getitems_vars() {
+  items=(
+    $(git diff --name-only $@)
+  )
+  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{}")
 }
 __git-checkoutp-dointeractive() {
   git "${configArgs[@]}" checkout -p $@
 }
 source $__plugin_dirname/__git-patch-filepicker \
-  __git-checkoutp-{hasfiles,getitems,dointeractive} $@
+  __git-checkoutp-{hasfiles,getitems_vars,dointeractive} $@
 
 echo 'No changes left to discard'
