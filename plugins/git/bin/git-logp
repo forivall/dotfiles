@@ -12,6 +12,7 @@ stash=false
 showdiff=true
 forcediff=false
 dry=false
+navigate=${$(git config delta.navigate):-false}
 
 while (( $# > 0 )); do
 case "$1" in
@@ -29,6 +30,8 @@ case "$1" in
   --pretty=*)
     pretty+=($1); shift; continue; ;;
   --pretty) pretty+=($1 $2); shift; shift; continue; ;;
+  --navigate) navigate=true; shift; continue; ;;
+  --no-navigate) navigate=false; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
   --dry) dry=true; shift; continue; ;;
   --) dashdash=true; args+=($1); shift; continue; ;;
@@ -88,7 +91,30 @@ if $dry; then
   done
 else
   export COLUMNS
+  if $navigate; then
+    # replicate delta's navigate feture
+    # https://github.com/dandavison/delta/blob/0.14.0/src/utils/bat/output.rs#L162
+    # https://github.com/dandavison/delta/blob/0.14.0/src/features/navigate.rs#L62
+    # but default delta config.
+    if [[ ! -v LESSHISTFILE ]]; then
+      LESSHISTFILE=~/.lesshst
+      if [[ ! -e $LESSHISTFILE ]]; then
+        unset LESSHISTFILE
+      fi
+    fi
+    DELTA_HIST_FILE=$(mktemp)
+    if [[ -v LESSHISTFILE && $LESSHISTFILE != "-" && $LESSHISTFILE != "/dev/null" ]]; then
+      < $LESSHISTFILE > $DELTA_HIST_FILE
+    else
+      echo ".less-history-file:" > $DELTA_HIST_FILE
+    fi
+    echo ".search" >> $DELTA_HIST_FILE
+    printf '"^(commit%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> $DELTA_HIST_FILE
+    LESSHISTFILE=$DELTA_HIST_FILE
+    export LESSHISTFILE
+  fi
   eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}
 
   wait
+  rm $DELTA_HIST_FILE
 fi
