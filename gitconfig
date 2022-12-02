@@ -25,6 +25,7 @@
 	navigate = true  # use n and N to move between diff sections
 	minus-style = syntax auto
 	syntax-theme = base16-tomorrow-night
+	# hyperlinks = true
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
@@ -214,7 +215,7 @@
 	pushInsteadOf = lab:
 [credential]
 	helper = cache
-	helper = 
+	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [mergetool]
 	keeptemporaries = false

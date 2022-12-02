@@ -2,45 +2,79 @@
 
 set -eo pipefail
 
+__dirname=${0:A:h}
+
 autoload colors && colors
+
+file=$1
+items=$2
+shift 2
 
 echo ---
 
-if git ls-files --error-unmatch $1 2>/dev/null >/dev/null; then
-  difflines=("${(f)$(git diff --raw --numstat --follow -- $1)}")
+if (( $# > 0 )) || git ls-files $@ --error-unmatch $file 2>/dev/null >/dev/null; then
+  difflines=("${(f)$(git diff -w --raw --numstat --follow $@ -- $file)}")
   rawstat=($(echo ${difflines[1]}))
   diffstat="${rawstat[5]}"
   numstat=($(echo ${difflines[2]}))
   added=${numstat[1]}
   removed=${numstat[2]}
-elif [[ -f $@ ]]; then
+elif [[ -f $file ]]; then
   diffstat=A
-  numstat=($(wc -l $1))
+  numstat=($(wc -l $file))
   added=${numstat[1]}
   removed=0
 fi
-if (( added > 0 || removed > 0 )); then
-  if (( removed > 0 )); then
+if [[ -v diffstat ]]; then
+  suffix=""
+  if (( $# > 0 )) && [[ $1 != --cached ]] || (( $# > 1 )); then
+    case "$diffstat" in C*) suffix+=ied;; A) suffix+=e;& *) suffix+=d esac
+  else
+    case "$diffstat" in C*) suffix+=y;; esac
+  fi
+  if [[ "$diffstat" = C* ]]; then
+    intro="${fg[cyan]}Cop$suffix${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  elif [[ "$diffstat" = R* ]]; then
+    intro="${fg[cyan]}Rename$suffix${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  elif [[ "$diffstat" = D ]]; then
+    intro="${fg[cyan]}Delete$suffix${reset_color}"
+  elif [[ "$diffstat" = A ]]; then
+    intro="${fg[cyan]}Add$suffix${reset_color} new"
+  else
+    intro="${fg[cyan]}Change$suffix${reset_color}"
+  fi
+
+  [[ "$diffstat" != A ]] && (( removed == 0 && added == 0 )) && wsonly=true || wsonly=false
+  if $wsonly; then
+    numstat=($(git diff --numstat --follow $@ -- $file))
+    added=${numstat[1]}
+    removed=${numstat[2]}
+  fi
+  if (( removed > 0 || added > 0 )); then
+    case "$diffstat" in A) lineinfo+=" file";& C*|R*|D) lineinfo+=" with";; esac
     if (( added > 0 )); then
-      if [[ "$diffstat" = C* ]]; then
-        echo "${fg[cyan]}Copy${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
-      elif [[ "$diffstat" = R* ]]; then
-        echo "${fg[cyan]}Rename${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
-      else
-        echo "${fg[cyan]}Change${reset_color} $added new, $removed removed line(s)"
-      fi
-    else
-      if [[ "$diffstat" = D ]]; then
-        echo "${fg[cyan]}Delete${reset_color} with $removed removed line(s)"
-      else
-        echo "${fg[cyan]}Change${reset_color} $removed removed line(s)"
+      lineinfo+=" $added new"
+      if (( removed > 0 )); then
+        lineinfo+=","
       fi
     fi
+    if (( removed > 0 )); then
+      lineinfo+=" $removed removed"
+    fi
+    lineinfo+=" line"
+    if (( removed == 1 && added > 1 )); then
+      lineinfo+="(s)"
+    elif (( removed > 1 || added > 1 )); then
+      lineinfo+="s"
+    fi
   elif [[ "$diffstat" = A ]]; then
-    echo "${fg[cyan]}Add${reset_color} new file with $added line(s)"
-  else
-    echo "${fg[cyan]}Change${reset_color} $added new line(s)"
+    lineinfo+=" empty file"
   fi
+  if $wsonly; then
+    lineinfo+=" (whitespace only)"
+  fi
+  echo "$intro$lineinfo"
+
   total=$(( added + removed ))
   totallen=${#total}
   STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
@@ -48,18 +82,46 @@ if (( added > 0 || removed > 0 )); then
     added=$(( STAT_COLUMNS * added / total ))
     removed=$(( STAT_COLUMNS * added / total ))
   fi
-  echo $total ${fg[green]}${(l:${added}::+:)}${fg[red]}${(l:${removed}::-:)}${reset_color}
-elif [[ -d $@ ]]; then
-  if [[ -e $1/.git ]]; then
+  echo -n $total ${fg[green]}${(l:${added}::+:)}${fg[red]}${(l:${removed}::-:)}${reset_color}
+  DIFF_LINES=$(( LINES - items ))
+  if (( 8 < DIFF_LINES )); then
+    if [[ "$diffstat" = A ]]; then
+      echo
+      bat --color always $file
+    else
+      local deltaOpts=(
+        --features=interactive
+        --commit-style ''
+        --file-decoration-style ''
+        --file-style omit
+        --hunk-header-decoration-style ''
+        --hunk-header-file-style ''
+        --hunk-header-line-number-style ''
+        --hunk-header-style omit
+        --hunk-label ''
+        --inline-hint-style ''
+      )
+      local diffOpts=()
+      if ! $wsonly; then
+        diffOpts+=(-w)
+      fi
+      if (( 20 > DIFF_LINES )); then
+        diffOpts+=(--unified=0)
+      elif (( 30 > DIFF_LINES )); then
+        diffOpts+=(--unified=1)
+      elif (( 40 > DIFF_LINES )); then
+        diffOpts+=(--unified=2)
+      fi
+      source $__dirname/bin/git-delta --color "${diffOpts[@]}" $file
+    fi
+  fi
+elif [[ -d $file ]]; then
+  if [[ -e $file/.git ]]; then
     echo "${fg[cyan]}Add${reset_color} subproject"
   else
-    echo "${fg[cyan]}Add${reset_color} ${fg[yellow]}$(git ls-files --other --exclude-standard $@ | wc -l)${reset_color} new file(s)"
-    COLUMNS=$COLUMNS exa --grid -x -F --git --color=always $@
+    echo "${fg[cyan]}Add${reset_color} ${fg[yellow]}$(git ls-files --other --exclude-standard $file | wc -l)${reset_color} new file(s)"
+    COLUMNS=$COLUMNS exa --grid -x -F --git --color=always $file
   fi
 else
-  echo "${fg[cyan]}Add${reset_color} empty file"
+  echo "???"
 fi
-
-
-#  $@ | delta
-

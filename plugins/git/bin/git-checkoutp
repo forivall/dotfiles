@@ -5,15 +5,25 @@ set -eo pipefail
 __plugin_dirname=${0:a:h:h}
 
 local configArgs=()
+local revs=(${(f)$(git rev-parse --revs-only $@)})
+if (( ${#revs} == 0 )); then
+  revs+=(HEAD)
+fi
+local cdup=$(git rev-parse --show-cdup)
 
 __git-checkoutp-hasfiles() {
-  ! git diff-files --quiet $@
-}
-__git-checkoutp-getitems_vars() {
   items=(
     $(git diff --name-only $@)
   )
-  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{}")
+  if (( $# == 0 )); then
+    items+=(
+      $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
+    )
+  fi
+  (( ${#items} > 0 ))
+}
+__git-checkoutp-getitems_vars() {
+  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} $revs")
 }
 __git-checkoutp-dointeractive() {
   git "${configArgs[@]}" checkout -p $@

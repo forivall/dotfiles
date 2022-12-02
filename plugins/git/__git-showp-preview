@@ -12,38 +12,48 @@ numstat=($(echo ${show_lines[2]}))
 summary=($(echo ${show_lines[3]}))
 added=${numstat[1]}
 removed=${numstat[2]}
-if (( added > 0 || removed > 0 )); then
-  if (( removed > 0 )); then
-    if (( added > 0 )); then
-      if [[ "${rawstat[5]}" = C* ]]; then
-        echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
-      elif [[ "${rawstat[5]}" = R* ]]; then
-        echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new, $removed removed line(s)"
-      else
-        echo "${fg[cyan]}Changed${reset_color} $added new, $removed removed line(s)"
-      fi
-    else
-      if [[ "${rawstat[5]}" = D ]]; then
-        echo "${fg[cyan]}Deleted${reset_color} with $removed line(s)"
-      elif [[ "${rawstat[5]}" = C* ]]; then
-        echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $removed removed line(s)"
-      elif [[ "${rawstat[5]}" = R* ]]; then
-        echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $removed removed line(s)"
-      else
-        echo "${fg[cyan]}Changed${reset_color} $removed removed line(s)"
-      fi
-    fi
+  if [[ "$diffstat" = C* ]]; then
+    intro="${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  elif [[ "$diffstat" = R* ]]; then
+    intro="${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  elif [[ "$diffstat" = D ]]; then
+    intro="${fg[cyan]}Deleted${reset_color}"
+  elif [[ "$diffstat" = A ]]; then
+    intro="${fg[cyan]}Added${reset_color} new"
   else
-    if [[ "${rawstat[5]}" = A ]]; then
-      echo "${fg[cyan]}New${reset_color} with $added line(s)"
-    elif [[ "${rawstat[5]}" = C* ]]; then
-      echo "${fg[cyan]}Copied${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new line(s)"
-    elif [[ "${rawstat[5]}" = R* ]]; then
-      echo "${fg[cyan]}Renamed${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]} with $added new line(s)"
-    else
-      echo "${fg[cyan]}Changed${reset_color} $added new line(s)"
-    fi
+    intro="${fg[cyan]}Changed${reset_color}"
   fi
+
+  [[ "$diffstat" != A ]] && (( removed == 0 && added == 0 )) && wsonly=true || wsonly=false
+  if $wsonly; then
+    numstat=($(git diff --numstat --follow -- $1))
+    added=${numstat[1]}
+    removed=${numstat[2]}
+  fi
+  if (( removed > 0 || added > 0 )); then
+    case "$diffstat" in A) lineinfo+=" file";& C*|R*|D) lineinfo+=" with";; esac
+    if (( added > 0 )); then
+      lineinfo+=" $added new"
+      if (( removed > 0 )); then
+        lineinfo+=","
+      fi
+    fi
+    if (( removed > 0 )); then
+      lineinfo+=" $removed removed"
+    fi
+    lineinfo+=" line"
+    if (( removed == 1 && added > 1 )); then
+      lineinfo+="(s)"
+    elif (( removed > 1 || added > 1 )); then
+      lineinfo+="s"
+    fi
+  elif [[ "$diffstat" = A ]]; then
+    lineinfo+=" empty file"
+  fi
+  if $wsonly; then
+    lineinfo+=" (whitespace only)"
+  fi
+  echo "$intro$lineinfo"
 
   total=$(( added + removed ))
   totallen=${#total}
