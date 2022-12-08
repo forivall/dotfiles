@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -18,7 +18,7 @@ brew install coreutils findutils dateutils moreutils util-linux telnet \
 brew install less # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
-brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim cfonts ruplacer
+brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim ranger cfonts ruplacer
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
 brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
@@ -43,7 +43,7 @@ brew install jq yq httpie http-prompt curlie xh brimdata/tap/zq dasel
 brew install --cask httpie
 # brew install mitmproxy
 brew install --no-binaries python-yq
-(cd $HOMEBREW_PREFIX/bin; for f in $(brew list python-yq); do [[ $f = */{y,toml}q ]] && ln -s $f; done)
+(cd "$HOMEBREW_PREFIX/bin" && for f in $(brew list python-yq); do [[ $f = */yq || $f = */tomlq ]] && ln -s "$f" .; done)
 brew install flow shellcheck pandoc
 brew install mongodb sqlite postgresql
 brew install mariadb # groonga
@@ -63,7 +63,7 @@ cargo install huniq
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog
 mkdir -p ~/.config/bat
-ln -s ~/.config/bat/themes $(realpath ./bat/themes)
+ln -s ~/.config/bat/themes "$(realpath ./bat/themes)"
 ./bat/_themes.sh
 bat cache --build
 
@@ -154,7 +154,8 @@ brew install --cask monitorcontrol
 brew install --cask cameracontroller logitech-camera-settings
 brew install --cask launchcontrol
 brew install dark-mode
-curl -OL $(curl --silent https://su.darkmodebuddy.app/appcast.xml | xq -r '.rss.channel.item.enclosure."@url"') && open DarkModeBuddy*.dmg
+curl -OL "$(curl --silent https://su.darkmodebuddy.app/appcast.xml | xq -r '.rss.channel.item.enclosure."@url"')" &&
+  open DarkModeBuddy*.dmg
 
 brew install --cask font-smoothing-adjuster
 brew tap homebrew/cask-fonts

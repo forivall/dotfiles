@@ -1,19 +1,17 @@
 #!/usr/bin/env zsh
+# shellcheck disable=SC2168,SC2296
 
 set -eo pipefail
 
 __plugin_dirname=${0:a:h:h}
 
 local configArgs=()
-local revs=(${(f)$(git rev-parse --revs-only $@)})
-if (( ${#revs} == 0 )); then
-  revs+=(HEAD)
-fi
+local revs=(${(f)$(git rev-parse --revs-only "$@")})
 local cdup=$(git rev-parse --show-cdup)
 
 __git-checkoutp-hasfiles() {
   items=(
-    $(git diff --name-only $@)
+    $(git diff --name-only "$@")
   )
   if (( $# == 0 )); then
     items+=(
@@ -26,7 +24,7 @@ __git-checkoutp-getitems_vars() {
   term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} $revs")
 }
 __git-checkoutp-dointeractive() {
-  git "${configArgs[@]}" checkout -p $@
+  git "${configArgs[@]}" checkout $revs -p $@
 }
 source $__plugin_dirname/__git-patch-filepicker \
   __git-checkoutp-{hasfiles,getitems_vars,dointeractive} $@

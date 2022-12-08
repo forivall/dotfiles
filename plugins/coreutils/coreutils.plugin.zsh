@@ -103,7 +103,28 @@ function touche {
 }
 
 # diff
-function diff { colordiff -u "$@" | less -f +X -x2 -R ; }
+if (( ${+aliases[diff]} )); then
+  unalias diff;
+fi
+function diff {
+  local args=()
+  local usepager=true
+  for arg in "$@"; do
+    if [[ $arg == --no-pager ]]; then
+      usepager=false
+    else
+      args+=($arg)
+    fi
+  done
+  local differ=true
+  if command diff -q "${args[@]}" > /dev/null; then
+    differ=false
+    echo "Files have the same contents"
+  fi
+  if $usepager && $differ; then
+    colordiff -u "${args[@]}" | less -f +X -x2 -R
+  fi
+}
 alias diff_=/usr/bin/diff
 function delta {
   local deltaOpts=()
