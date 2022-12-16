@@ -7,7 +7,8 @@
 .linux.linux{--monaco-monospace-font:"FantasqueSansMono Nerd Font","Ubuntu Mono","Liberation Mono","DejaVu Sans Mono","Courier New",monospace}
 :root {
   --font-size-13: 12px;
-  --row-height: 18px; --factor: 0.81818; /* 18/22*/
+  /* --row-height: 18px; --factor: 0.81818; /* 18/22*/
+  --row-height: 22px; --factor: 1;
 }
 .mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.3px }
 .minimap { opacity: 0.5 }
@@ -53,7 +54,9 @@
 .monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label:not(span), .monaco-workbench .part.editor>.content .editor-group-container>.title .title-actions .action-label { height: 24px; min-width: 20px }
 .monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label.codicon.codicon-go-to-file { margin-top: -1px }
 .monaco-action-bar .action-label { margin-right: 2px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item>:first-child { margin-right: 2px; margin-left: 2px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="Gruntfuggly.activitusbar"]>:first-child { margin-right: 1px; margin-left: 0px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="Gruntfuggly.activitusbar"]>a { padding-left: 4px; padding-right: 4px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="grimmer.vscode-back-forward-button"]>:first-child { margin-right: 1px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="grimmer.vscode-back-forward-button"] + .statusbar-item[id="grimmer.vscode-back-forward-button"]>:first-child { margin-right: 3px; margin-left: 0px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item.has-background-color>:first-child { padding-left: 5px; padding-right: 5px }
@@ -88,7 +91,8 @@
 .monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.margin[style] { transform: translate3d(0px, 0px, 0px) translateY(5px) !important }
 .monaco-workbench .part.panel .title>.panel-switcher-container>.monaco-action-bar .action-item { padding-top: 0; padding-bottom: 0 }
 .monaco-workbench .part.panel .title .monaco-action-bar .markers-panel-action-filter .monaco-inputbox { height: 22px }
-.monaco-workbench .part.panel .title { height: 16px }
+.monaco-workbench .part.panel .title { line-height: 16px }
+.monaco-pane-view .pane>.pane-header { height: 18px }
 .monaco-pane-view .pane.vertical>.pane-header h3.title { margin-top: 1px }
 .monaco-pane-view .pane.horizontal:not(.expanded)>.pane-header { height: 100% !important }
 .part.panel.bottom .search-view .search-widget { display: flex; justify-content: space-between }
