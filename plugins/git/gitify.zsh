@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck disable=SC2299
 
 gitify_vscode_plugin() {
   if git rev-parse --show-toplevel 2> /dev/null; then
@@ -6,10 +7,20 @@ gitify_vscode_plugin() {
     echo already a git repo!
     return $ecode
   fi
-  git clone "$(jq -r '(.repository.url // .repository)' package.json | sd '^git+http' http)" _tmp
-  mv _tmp/.git .git
-  command rm -r _tmp
-  git checkout $(git diff --name-only --diff-filter=D)
+  local remote repo owd
+  remote="$(jq -r '(.repository.url // .repository)' package.json | sd '^git+http' http)"
+  echo "$remote"
+  repo=${${remote:t}%.git}
+  git clone "$remote" ~pubrepos/$repo || echo "~pubrepos/$repo" exists, using it... "(todo: check if it's the correct repo)"
+  owd=$PWD
+  cd ~pubrepos/$repo
+  mv $owd $owd.tmp
+  git worktree add $owd -b ${owd:t}
+  mv $owd/.git $owd.tmp
+  command rm -r $owd
+  mv $owd.tmp $owd
+  cd -
+  git checkout -- $(git diff --name-only --diff-filter=D)
 }
 
 # usage: cd node_modules; gitify_node_module ../../vidi-server ../../vidi-shop-server ...

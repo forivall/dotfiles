@@ -10,17 +10,21 @@ local revs=(${(f)$(git rev-parse --revs-only "$@")})
 if (( ${#revs} == 0 )); then
   revs+=(HEAD)
 fi
+local cdup=$(git rev-parse --show-cdup)
 
 __git-resetp-hasfiles() {
   ! git diff-index --quiet --cached $revs
 }
-__git-resetp-getitems() {
-  git diff --cached --name-only "$@"
+__git-resetp-getitems_vars() {
+  items=(
+    $(git diff --cached --name-only "$@")
+  )
+  term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs")
 }
 __git-resetp-dointeractive() {
   git "${configArgs[@]}" reset -p "${revs[@]}" "$@"
 }
 source "$__dirname/../__git-patch-filepicker" \
-  __git-resetp-{hasfiles,getitems,dointeractive} "$@"
+  __git-resetp-{hasfiles,getitems_vars,dointeractive} "$@"
 
 echo 'No changes are currently staged'

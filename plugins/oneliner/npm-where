@@ -1,9 +1,21 @@
 #!/usr/bin/env zsh
-npm why --json "$@" |
-  jq -r "
+# shellcheck disable=SC2168
+autoload colors && colors
+local header=true
+if [[ "$1" == --no-header ]]; then
+  local header=false
+  shift
+fi
+(
+  $header && echo -e 'SPEC\tVERSION\tLOCATION\tDEPENDENT(S)';
+  npm why --json "$@" |
+  jq -r '
+    map({ version: .version, dependent: .dependents[] | { spec: .spec, location: .from.location }, location: .location }) |
+    group_by(.dependent.spec + "\t" + .version + "\t" + .location) |
     .[] |
-      { version: .version, dependent: .dependents[], location: .location } |
-      .dependent.spec + \"\\t\" + .version + \"\\t\" + .location + \"\\t\" + .dependent.from.location
-" |
-  sort -r |
+    sort_by(if .dependent.location | startswith("node_modules") then 1 else 0 end) |
+    .[0].dependent.spec + "\t" + .[0].version + "\t" + .[0].location + "\t" +
+      (map(.dependent.location | if startswith("node_modules") then . else "'"$bold_color"'" + . + "'"$reset_color"'" end) | join(" "))
+' | sort -r
+) |
   column -t -s "$(echo -en '\t')"

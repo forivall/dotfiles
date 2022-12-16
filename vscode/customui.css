@@ -1,0 +1,118 @@
+.mac, .windows, .linux { letter-spacing: -0.02rem }
+/* .windows.windows{font-family:Segoe WPC,Segoe UI,sans-serif} */
+/* .linux.linux{font-family:system-ui,Ubuntu,Droid Sans,sans-serif} */
+.mac.mac {font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif}
+.mac.mac{--monaco-monospace-font:"FantasqueSansMono Nerd Font","SF Mono",Monaco,Menlo,Courier,monospace}
+.windows.windows{--monaco-monospace-font:"FantasqueSansMono Nerd Font",Consolas,"Courier New",monospace}
+.linux.linux{--monaco-monospace-font:"FantasqueSansMono Nerd Font","Ubuntu Mono","Liberation Mono","DejaVu Sans Mono","Courier New",monospace}
+:root {
+  --font-size-13: 12px;
+  --row-height: 18px; --factor: 0.81818; /* 18/22*/
+}
+.mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.3px }
+.minimap { opacity: 0.5 }
+.minimap:hover { opacity: 0.9 }
+.monaco-editor .indent-active { opacity: 0.50 !important }
+.monaco-editor .horizontal-bottom.indent-active { border-bottom-style: dashed }
+.monaco-editor .inline-folded:after { content: '   '; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%224%22%20width%3D%2214%22%3E%3Cg%20fill%3D%22rgba(238%2C%20238%2C%20238%2C%200.5)%22%3E%3Ccircle%20cx%3D%222%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%227%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") no-repeat center left }
+.editor-scrollable .decorationsOverviewRuler { opacity: 0.75 }
+.monaco-dialog-modal-block { align-items: flex-start; padding-top: 24px }
+.explorer-viewlet .monaco-icon-label:before { height: calc(var(--row-height) - 2px); padding-right: 2px;opacity: 0.9 }
+.explorer-folders-view .monaco-list-row { padding-left: 0 }
+.customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item { padding-left: 0; height: var(--row-height); line-height: var(--row-height) }
+.customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item .monaco-icon-label::before, .customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item>.custom-view-tree-node-item-icon { height: var(--row-height) }
+.search-view .monaco-list .monaco-list-row .monaco-icon-label::before { height: var(--row-height) }
+.search-view .filematch, .search-view .foldermatch { line-height: var(--row-height) }
+[aria-label='Focused Folder Section'] + .pane-body .tree-explorer-viewlet-tree-view .customview-tree .monaco-tl-twistie:not(.force-twistie) { background-image: none!important; width: 0!important; padding-right: 0!important; visibility: hidden; }
+[aria-label='Focused Folder Section'] + .pane-body .tree-explorer-viewlet-tree-view .customview-tree .monaco-tl-indent { margin-left: -4px; }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-actions .action-label { height: 24px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab { height: 24px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container { height: 24px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label { line-height: 24px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions { height: 24px; padding-right: 4px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .monaco-icon-label:before { height: 24px }
+.monaco-icon-label.file-icon.workspacetrusteditor-name-file-icon.ext-file-icon.tab-label:before { line-height: 26px !important }
+/* This isn't in the original CSS, but there's a pesky `style="height: 35px"` in a child element */
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-and-actions-container { height: 24px; overflow-y: hidden }
+@keyframes pulse_goto_definition_link { from { color: #4E94CE; } to { color: blue; } }
+.monaco-editor .goto-definition-link { animation: 0.7s cubic-bezier( 0.7, 0.2, 0.8, 0.9 ) infinite alternate pulse_goto_definition_link }
+/* side bar actions */
+.monaco-workbench .part>.title { height: 24px }
+.monaco-workbench .part>.title>.title-label { line-height: 24px }
+.monaco-workbench .part.sidebar>.title>.title-label { padding-left: 0 }
+.monaco-workbench .open-editors .monaco-list .monaco-list-row { padding-left: 2px }
+.monaco-workbench .open-editors .monaco-list .monaco-list-row .editor-group { margin-left: 16px }
+.monaco-workbench .open-editors .monaco-list .monaco-list-row>.editor-group + .monaco-action-bar { margin-right: 8px }
+.monaco-workbench .open-editors .monaco-list .monaco-list-row>.editor-group + .monaco-action-bar .action-item { margin-right: 4px }
+.monaco-workbench .part.basepanel>.composite.title>.panel-switcher-container>.monaco-action-bar .action-item .active-item-indicator { top: unset }
+.monaco-workbench .part.basepanel>.composite.title>.panel-switcher-container>.monaco-action-bar { height: 26px }
+.monaco-workbench .part>.title>.title-actions { height: 24px; padding-left: 2px }
+.monaco-workbench .part>.composite.title>.title-actions { padding-left: 2px }
+.monaco-workbench .part>.title>.title-actions .action-label { height: 24px; line-height: 24px }
+.monaco-workbench .part>.title>.title-actions .start-debug-action-item { margin-top: 0px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label:not(span), .monaco-workbench .part.editor>.content .editor-group-container>.title .title-actions .action-label { height: 24px; min-width: 20px }
+.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label.codicon.codicon-go-to-file { margin-top: -1px }
+.monaco-action-bar .action-label { margin-right: 2px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="Gruntfuggly.activitusbar"]>:first-child { margin-right: 1px; margin-left: 0px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="grimmer.vscode-back-forward-button"]>:first-child { margin-right: 1px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="grimmer.vscode-back-forward-button"] + .statusbar-item[id="grimmer.vscode-back-forward-button"]>:first-child { margin-right: 3px; margin-left: 0px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item.has-background-color>:first-child { padding-left: 5px; padding-right: 5px }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item.right.last-visible-item { padding-right: 0 }
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="status.notifications"].right.last-visible-item>:first-child { margin-right: 0 }
+.monaco-workbench .part.panel>.composite.title>.panel-switcher-container>.monaco-action-bar { height: 24px; line-height: 20px }
+/* with the default 35px, this would give a 6px margin on the bottom. Here, we have a 3px bottom margin.
+// The padding for this is top: 3px; bottom: 4px, which is exactly the offset we need. */
+.monaco-workbench .part.panel .composite.title>.panel-switcher-container>.monaco-action-bar .action-item { padding-top: 0; padding-bottom: 0 }
+.monaco-workbench .part.panel>.composite.title>.panel-switcher-container>.monaco-action-bar .action-item .action-label { padding-bottom: 0 }
+.monaco-workbench .part.panel .composite.title .monaco-action-bar .markers-panel-action-filter .monaco-inputbox { height: 22px }
+.markers-panel .monaco-tl-contents .marker-icon, .markers-panel .monaco-tl-contents .monaco-icon-label::before { height: var(--row-height) }
+.markers-panel .markers-panel-container .tree-container .monaco-tl-contents { line-height: var(--row-height) }
+.monaco-workbench .part.panel .composite.title { height: 26px }
+.monaco-workbench .part.panel.bottom>.content { margin-bottom: 9px }
+.monaco-workbench .part.panel.bottom>.content[style]>.composite { height: calc(100% + 9px) }
+.monaco-workbench .part.panel.bottom>.content [style]>.monaco-list { height: calc(100% + 19px) }
+.monaco-workbench .part.sidebar { height: calc(100% + 11px) }
+.monaco-workbench .part.sidebar>.content[style]>.composite { height: calc(100% + 11px) }
+.monaco-workbench .part.sidebar>.content>.composite>.monaco-pane-view>.monaco-split-view2.vertical>.monaco-scrollable-element>.split-view-container>.split-view-view.visible:last-child>.pane { height: calc(100% + 11px) }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance { height: calc(100% + 11px) }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style] { height: calc(100% + 11px) !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]> { height: calc(100% + 11px) !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element { height: 100% !important; transform: none !important; }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element>* { transform: translateY(5px) }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element>.lines-content[style] { transform: translate3d(0px, 0px, 0px) translateY(5px) !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element>.scrollbar { transform: none }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>* { transform: translateY(5px) !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.overlayWidgets { transform: none !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.overlayWidgets>.zone-widget { transform: translateY(5px) !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.scroll-decoration { transform: none !important }
+.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.margin[style] { transform: translate3d(0px, 0px, 0px) translateY(5px) !important }
+.monaco-workbench .part.panel .title>.panel-switcher-container>.monaco-action-bar .action-item { padding-top: 0; padding-bottom: 0 }
+.monaco-workbench .part.panel .title .monaco-action-bar .markers-panel-action-filter .monaco-inputbox { height: 22px }
+.monaco-workbench .part.panel .title { height: 16px }
+.monaco-pane-view .pane.vertical>.pane-header h3.title { margin-top: 1px }
+.monaco-pane-view .pane.horizontal:not(.expanded)>.pane-header { height: 100% !important }
+.part.panel.bottom .search-view .search-widget { display: flex; justify-content: space-between }
+.part.panel.bottom .search-view .search-widget .search-container { flex: 1 1 49.5% }
+.part.panel.bottom .search-view .search-widget .replace-container { margin-top: 0; margin-left: 1%;width: 49.5% }
+.part.panel.bottom .search-view .search-widget .replace-container .replace-input { width: 100%!important }
+.part.panel.bottom .search-view .search-widget .replace-container .replace-input>[style] { width: 100%!important }
+.part.panel.bottom .search-view .search-widget .replace-container .replace-input .ibwrapper>[style] { width: 100%!important }
+.part.panel.bottom .search-view .query-details.more h4 { padding-top: 2px; margin-bottom: -2px }
+.part.panel.bottom .search-view .query-details { display: flex; justify-content: space-between; min-height: 4px }
+.part.panel.bottom .search-view .query-details.more .file-types { flex-direction: column; width: 49.5% }
+.part.panel.bottom .search-view .query-details .ibwrapper>.input { max-width: calc(100% - 14px) }
+.part.panel.bottom .search-view .search-widgets-container { padding-bottom: 2px }
+.part.panel.bottom .search-view .message { padding-bottom: 2px }
+.markers-panel-container .monaco-action-bar.markers-panel-filter-container { margin-top:6px; margin-bottom: 4px }
+.monaco-workbench .tree-explorer-viewlet-tree-view .message { padding-bottom: 2px; padding-left: 16px }
+.codicon-search-hide-replace + .search-container .monaco-inputbox>.ibwrapper>.input { width:calc(100% + 4px) }
+/* pi-material-icons bookmark */
+.codicon-explorer-view-icon[title='Explorer: Mark Jump']::before { content: '\EA7C' !important }
+/* pi-material-icons book */
+.codicon-explorer-view-icon[title='Documentation: Documentation']::before { content: '\EA93' !important }
+/* Let the quick pick take the full window height, so that more bindings are visible. */
+.quick-input-widget > .quick-input-list > .monaco-list { max-height: 60vh !important; }
+/* Colorize icons uniformly and add some extra padding */
+.quick-input-widget > .quick-input-list .codicon { color: #83a598 !important; padding-right: 5px; }
+/* Colorize entries starting with a `+` differently */
+.quick-input-widget > .quick-input-list .monaco-list-row[aria-label*=" +"] .label-description { color: #8ec07c; }

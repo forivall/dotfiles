@@ -58,8 +58,8 @@
 	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
 	branches-with-upstreams = "!git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done"
-	llu = "log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
-	llus = "log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration  $(git branches-with-upstreams)"
+	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
+	llus = "!git log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration  $(git branches-with-upstreams)"
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graphlast = show --name-status --pretty="format:\"%C(yellow)%h%C(magenta) %an %Creset%Cblue%ar%Creset %s \"" --graph
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged
@@ -215,7 +215,6 @@
 	pushInsteadOf = lab:
 [credential]
 	helper = cache
-	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [mergetool]
 	keeptemporaries = false

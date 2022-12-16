@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+__dirname=${0:A:h}
+
 DATADIR=
 case "$(node -p process.platform)" in
   win32)
@@ -19,7 +21,9 @@ esac
 
 VSCODE_USER_DATADIR=$DATADIR/Code/User
 
-cp "$VSCODE_USER_DATADIR/settings.json" .
-cp "$VSCODE_USER_DATADIR/keybindings.json" .
-cp -r "$VSCODE_USER_DATADIR/snippets" .
-code --list-extensions > extensions.txt
+o() {
+  echo "$@"
+  "$@"
+}
+
+o ln -fs "$__dirname/customui.css" $VSCODE_USER_DATADIR/customui.css

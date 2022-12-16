@@ -1,0 +1,43 @@
+/* customization of https://github.com/EvHaus/google-redesigned/blob/master/css/calendar.user.css */
+@media (prefers-color-scheme: dark) {
+
+/* custom */
+.eh5oYe .hnGhZ::-webkit-scrollbar-thumb {
+  background-color: var(--GR8, inherit);
+  border-color: var(--GR0, inherit);
+}
+
+[data-eventchip][style*="background-color: rgb(226, 210, 231);"] {
+  background-color: rgb(162, 151, 165) !important;
+}
+
+
+/* ... */
+
+
+/* CREATE EVENT PAGE */
+
+.p9lUpf { background: var(--GR4) !important }
+
+	/* Checkboxes */
+	.dRjtd .i6LVBe, /* "All Day" */
+	.cAP2G .k2NHHb, /* "All Day" Event Popover (July 2020) */
+	.kMp0We .wimXt,  /* Guests Can */
+	.WefNYe .uVccjd, /* Settings Page */
+	.Lzfnue .uVccjd /* Trash Page */
+	/* .Ne8lhe .VfPpkd-muHVFf-bMcfAe:enabled:not(:checked):not(:indeterminate):not([data-indeterminate="true"]) ~ .VfPpkd-YQoJzd /* "Modify Event" */
+	{
+		border-color: var(--GRSELECTED) !important
+	}
+
+/* ... */
+
+		/* Checked */
+/* 		.Ne8lhe .VfPpkd-muHVFf-bMcfAe:enabled:checked ~ .VfPpkd-YQoJzd, */
+.Ne8lhe .VfPpkd-muHVFf-bMcfAe:enabled:indeterminate ~ .VfPpkd-YQoJzd, .Ne8lhe .VfPpkd-muHVFf-bMcfAe[data-indeterminate="true"]:enabled ~ .VfPpkd-YQoJzd {
+  background: var(--GRSELECTED) !important;
+  border-color: var(--GRSELECTED) !important;
+}
+
+/* ... */
+}

@@ -112,7 +112,7 @@ if [[ -v diffstat ]]; then
       elif (( 40 > DIFF_LINES )); then
         diffOpts+=(--unified=2)
       fi
-      source $__dirname/bin/git-delta --color "${diffOpts[@]}" $file
+      source $__dirname/bin/git-delta --color "${diffOpts[@]}" $@ $file
     fi
   fi
 elif [[ -d $file ]]; then

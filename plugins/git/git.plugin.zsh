@@ -51,6 +51,7 @@ alias gdds='git delta diff --staged'
 
 alias gf='git fetch'
 alias gfo='git fetch origin'
+alias gfa='git fetch --all'
 
 alias gg="git grep-pretty"
 

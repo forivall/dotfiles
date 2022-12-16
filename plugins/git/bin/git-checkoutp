@@ -3,7 +3,7 @@
 
 set -eo pipefail
 
-__plugin_dirname=${0:a:h:h}
+__dirname=${0:a:h}
 
 local configArgs=()
 local revs=(${(f)$(git rev-parse --revs-only "$@")})
@@ -21,12 +21,12 @@ __git-checkoutp-hasfiles() {
   (( ${#items} > 0 ))
 }
 __git-checkoutp-getitems_vars() {
-  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} $revs")
+  term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} $revs")
 }
 __git-checkoutp-dointeractive() {
   git "${configArgs[@]}" checkout $revs -p $@
 }
-source $__plugin_dirname/__git-patch-filepicker \
+source $__dirname/../__git-patch-filepicker \
   __git-checkoutp-{hasfiles,getitems_vars,dointeractive} $@
 
 echo 'No changes left to discard'
