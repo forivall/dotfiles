@@ -1,8 +1,8 @@
 __zsh_oneliner_plugin_location=${0:A:h}
 
-path+=($path $__zsh_oneliner_plugin_location/bin)
+path+=($path $__zsh_oneliner_plugin_location/bin);
 
-oneliner() {
+function oneliner() {
   local cmd="${1}"
   if [[ -z "${cmd}" ]]; then
     echo "usage: oneliner [create|...(todo!)]"

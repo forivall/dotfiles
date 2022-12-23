@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck disable=SC2168,SC2296,SC2299,SC2300
 
 __plugin_dirname=${0:a:h:h}
 
@@ -27,18 +28,18 @@ case "$1" in
   --walk-reflogs) reflog=true; shift; continue; ;;
   --patch|--p) forcediff=true; ;&
   --no-patch|--name-status|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary) showdiff=false; ;&
-  --pretty=*)
+  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines|--pretty=*)
     pretty+=($1); shift; continue; ;;
   --pretty) pretty+=($1 $2); shift; shift; continue; ;;
   --navigate) navigate=true; shift; continue; ;;
   --no-navigate) navigate=false; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
   --dry) dry=true; shift; continue; ;;
-  --) dashdash=true; args+=($1); shift; continue; ;;
+  --) dashdash=true; args+=("$1"); shift; continue; ;;
   *)
-    args+=($1)
+    args+=("$1")
     if $dashdash || [[ -e $1 ]]; then
-      files+=($1)
+      files+=("$1")
     fi
     shift
     continue
@@ -48,9 +49,9 @@ break;
 done
 
 if $reflog; then
-  refspecs="$(git reflog --pretty=format:%gd --max-count=100 ${args[@]})"
+  refspecs="$(git reflog --pretty=format:%gd --max-count=100 "${args[@]}")"
 else
-  refspecs="$(git log --pretty=%h --max-count=100 ${args[@]})"
+  refspecs="$(git log --pretty=%h --max-count=100 "${args[@]}")"
 fi
 
 dashdash=""
@@ -86,7 +87,7 @@ for commit in ${(f)refspecs}; do
 done
 
 if $dry; then
-  for c in ${output[@]}; do
+  for c in "${output[@]}"; do
     echo ${${c#<\(}%)}
   done
 else
@@ -104,17 +105,17 @@ else
     fi
     DELTA_HIST_FILE=$(mktemp)
     if [[ -v LESSHISTFILE && $LESSHISTFILE != "-" && $LESSHISTFILE != "/dev/null" ]]; then
-      < $LESSHISTFILE > $DELTA_HIST_FILE
+      cat < $LESSHISTFILE > "$DELTA_HIST_FILE"
     else
-      echo ".less-history-file:" > $DELTA_HIST_FILE
+      echo ".less-history-file:" > "$DELTA_HIST_FILE"
     fi
-    echo ".search" >> $DELTA_HIST_FILE
-    printf '"^(commit%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> $DELTA_HIST_FILE
+    echo ".search" >> "$DELTA_HIST_FILE"
+    printf '"^(commit%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> "$DELTA_HIST_FILE"
     LESSHISTFILE=$DELTA_HIST_FILE
     export LESSHISTFILE
   fi
-  eval less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey ${output[@]}
+  eval less -f +X -x2 -R --lesskey-src="${__plugin_dirname}/share/git-logp.lesskey" "${output[@]}"
 
   wait
-  rm $DELTA_HIST_FILE
+  rm "$DELTA_HIST_FILE"
 fi
