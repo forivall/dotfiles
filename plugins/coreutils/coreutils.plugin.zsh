@@ -1,3 +1,5 @@
+__coreutils__dirname=${0:A:h}
+
 # ls
 if whence exa > /dev/null ; then
   alias ls="exa --group-directories-first -F --color=auto"
@@ -56,7 +58,11 @@ function mkcd() { mkdir -p "$@" ; cd "$@" ; }
 # man
 function --a() { ( ( "$@" > /dev/null 2>&1 ) & ) ; }
 if type yelp >/dev/null ; then
-  function gman() { --a yelp "man:$1" ; }
+  function gman() {
+    local manpage=$1
+    shift
+    --a yelp "man:$manpage" $@;
+  }
 elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ; then
   gman() {
     local preview_app
@@ -64,20 +70,33 @@ elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ;
     [[ -d /Applications/Preview.app ]] && preview_app=/Applications/Preview.app
     [[ -d /Applications/Skim.app ]] && preview_app=/Applications/Skim.app
 
-    local manfile
+    local mantmp
+    local target
+    target="$(man -w "$@")" || return
+    mantmp="$(mktemp -d)/${target:t}"
     if type groff > /dev/null; then
-      mantmp=$(mktemp -d)/"man $*".pdf
-      local target
-      target=$(man -w "$@") || return
-      < $target tbl | groff -m mandoc -c -Tpdf -dpaper=legal -P-plegal -f H > $mantmp || return
+      < "$target" tbl | groff -m mandoc -c -Tpdf -dpaper=legal -P-plegal -f H > "$mantmp.pdf" || return
+      # if dark mode
+
+      # gs -o "${mantmp} (dark).pdf" \
+      #   -sDEVICE=pdfwrite  \
+      #   -c "{1 exch sub}{1 exch sub}{1 exch sub}{1 exch sub} setcolortransfer" \
+      #   -f "${mantmp}.pdf"
+
+      # mutool draw -G 1.4 -I -o "${mantmp} (dark).pdf" "${mantmp}.pdf"
+
+      # curl -OL https://github.com/acid1103/PDFInverter/releases/download/0.2.0/PDFInverter.jar
+      java -jar $__coreutils__dirname/PDFInverter.jar "${mantmp}.pdf" "${mantmp} (dark).pdf" "#AAAAAA"
+
       if type exiftool > /dev/null; then
-        exiftool -quiet -Title="man $*" $mantmp
+        exiftool -quiet -Title="man $*" "${mantmp}.pdf"
       fi
+      echo "${mantmp} (dark).pdf"
+      open -a $preview_app "${mantmp} (dark).pdf"
     else
-      mantmp=$(mktemp -d)/"man $*".ps
-      man -t "$@" > $mantmp || return
+      man -t "$@" > "$mantmp.ps" || return
+      open -a $preview_app "$mantmp.ps"
     fi
-    open -a $preview_app $mantmp
   }
 fi
 compdef gman=man
