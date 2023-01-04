@@ -13,11 +13,6 @@ __git-checkoutp-hasfiles() {
   items=(
     $(git diff --name-only "$@")
   )
-  if (( $# == 0 )); then
-    items+=(
-      $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
-    )
-  fi
   (( ${#items} > 0 ))
 }
 __git-checkoutp-getitems_vars() {

@@ -110,6 +110,7 @@ export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
 # TODO: use https://github.com/Schniz/fnm instead?
 export TSC_NONPOLLING_WATCHER=true
+export WATCHMAN_CONFIG_FILE=~/.config/watchman.json
 
 # zsh settings
 setopt no_extended_glob # breaks `git show HEAD^`
@@ -234,7 +235,7 @@ if ! zgen saved; then
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
 
-  zgen load dim-an/cod
+  # zgen load dim-an/cod
   # zgen load forivall/cod '' feat/zsh-local-build
 
   # Build completions files

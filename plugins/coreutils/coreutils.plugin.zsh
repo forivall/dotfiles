@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 __coreutils__dirname=${0:A:h}
 
 # ls
@@ -48,6 +49,8 @@ function grepr() {
 # sed
 autoload -U sedml
 
+alias no-trailing-nl "sd '\n$' ''"
+
 # du
 function jsdu() { du -Sah --apparent-size "$@" | grep "\\.js" | sort -h ; }
 function jsduK() { du -SaBK --apparent-size "$@" | grep "\\.js" | sort -n ; }
@@ -75,34 +78,32 @@ elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ;
     target="$(man -w "$@")" || return
     mantmp="$(mktemp -d)/${target:t}"
     if type groff > /dev/null; then
-      < "$target" tbl | groff -m mandoc -c -Tpdf -dpaper=legal -P-plegal -f H > "$mantmp.pdf" || return
-      # if dark mode
-
-      # gs -o "${mantmp} (dark).pdf" \
-      #   -sDEVICE=pdfwrite  \
-      #   -c "{1 exch sub}{1 exch sub}{1 exch sub}{1 exch sub} setcolortransfer" \
-      #   -f "${mantmp}.pdf"
-
-      # mutool draw -G 1.4 -I -o "${mantmp} (dark).pdf" "${mantmp}.pdf"
-
-      # curl -OL https://github.com/acid1103/PDFInverter/releases/download/0.2.0/PDFInverter.jar
-      java -jar $__coreutils__dirname/PDFInverter.jar "${mantmp}.pdf" "${mantmp} (dark).pdf" "#AAAAAA"
-
-      if type exiftool > /dev/null; then
-        exiftool -quiet -Title="man $*" "${mantmp}.pdf"
-      fi
-      echo "${mantmp} (dark).pdf"
-      open -a $preview_app "${mantmp} (dark).pdf"
+      < "$target" tbl | groff -m mandoc -c -Tps -dpaper=legal -P-plegal -f H > "$mantmp.ps" || return
     else
       man -t "$@" > "$mantmp.ps" || return
-      open -a $preview_app "$mantmp.ps"
     fi
+    # if dark mode
+
+    # gs -o "${mantmp} (dark).pdf" \
+    #   -sDEVICE=pdfwrite  \
+    #   -c "{1 exch sub}{1 exch sub}{1 exch sub}{1 exch sub} setcolortransfer" \
+    #   -f "${mantmp}.pdf"
+
+    # mutool draw -G 1.4 -I -o "${mantmp} (dark).pdf" "${mantmp}.pdf"
+
+    # curl -OL https://github.com/acid1103/PDFInverter/releases/download/0.2.0/PDFInverter.jar
+    # java -jar $__coreutils__dirname/PDFInverter.jar "${mantmp}.pdf" "${mantmp} (dark).pdf" "#AAAAAA"
+    ps2pdf "$mantmp"{.ps,.pdf}
+    if type exiftool > /dev/null; then
+      exiftool -quiet -Title="man $*" "${mantmp}.pdf"
+    fi
+    open -a $preview_app "$mantmp.pdf"
   }
 fi
 compdef gman=man
 
 # touch
-function touche {
+function touche() {
   typeset -a files args
   files=()
   args=("$@")
@@ -125,7 +126,7 @@ function touche {
 if (( ${+aliases[diff]} )); then
   unalias diff;
 fi
-function diff {
+function diff() {
   local args=()
   local usepager=true
   for arg in "$@"; do
@@ -145,12 +146,19 @@ function diff {
   fi
 }
 alias diff_=/usr/bin/diff
-function delta {
+function delta() {
   local deltaOpts=()
   if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
     deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
   fi
   command delta "${deltaOpts[@]}" $@
+}
+function bat() {
+  local batOpts=()
+  if [[ $1 != cache ]] && (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
+    batOpts+=(--theme "${DELTA_LIGHT_THEME:-GitHub}")
+  fi
+  command bat "${batOpts[@]}" "$@"
 }
 
 # # find
@@ -179,28 +187,32 @@ if [[ "$OS" == "Windows_NT" || -n "$CYGWIN_VERSION" ]]; then
   mklink() {
     local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
     # for i in {1..${#opts}}; do opts[$i]=${opts[$i]// /\\\\ }; done
-    local echoopts; echoopts=()
-    for i in {1..$#}; do
-      echoopts[$i]="${opts[$i]}"
-      if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
-        echoopts[$i]=\""${opts[$i]}"\"
-      fi
-    done
-    echo mklink "$echoopts"
-    env cmd '/D' '/C' mklink "$opts[@]"
+
+    # # this construction breaks vscode-shellcheck
+    # local echoopts; echoopts=()
+    # for i in {1..$#}; do
+    #   echoopts[$i]="${opts[$i]}"
+    #   if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
+    #     echoopts[$i]=\""${opts[$i]}"\"
+    #   fi
+    # done
+    # echo mklink "$echoopts"
+    env cmd '/D' '/C' mklink "${opts[@]}"
   }
   mklinksu() {
     local opts; opts=(); cygpath-w-convert-args opts --winargs "$@"
     # for i in {1..${#opts}}; do opts[$i]=${opts[$i]// /\\\\ }; done
-    local echoopts; echoopts=()
-    for i in {1..$#}; do
-      echoopts[$i]="${opts[$i]}"
-      if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
-        echoopts[$i]=\""${opts[$i]}"\"
-      fi
-    done
-    echo mklink "$echoopts[@]"
-    $(whence sudo) env cmd '/D' '/C' mklink "$echoopts[@]" '&' 'set' '/p' 'enter="Press enter to exit"'
+
+    # # this construction breaks vscode-shellcheck
+    # local echoopts; echoopts=()
+    # for i in {1..$#}; do
+    #   echoopts[i]="${opts[i]}"
+    #   if [[ "${(P)i}" == '/'* || "${(P)i}" == '.'* ]]; then
+    #     echoopts[$i]=\""${opts[$i]}"\"
+    #   fi
+    # done
+    # echo mklink "$echoopts[@]"
+    $(whence sudo) env cmd '/D' '/C' mklink "${opts[@]}" '&' 'set' '/p' 'enter="Press enter to exit"'
   }
   # cmd() {
   #   local opts; opts=(); cygpath-w-convert-args opts --winargs --rel "$@"
@@ -246,7 +258,7 @@ xcp() {
   flags=()
   dest=()
   for opt in "$@"; do
-    case "$opt"; in
+    case "$opt" in
       -*) flags+=("$opt"); shift;;
       --) dest+=("$@"); break;;
       *) dest+=("$opt"); shift;;

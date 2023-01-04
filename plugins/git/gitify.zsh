@@ -8,7 +8,7 @@ gitify_vscode_plugin() {
     return $ecode
   fi
   local remote repo owd
-  remote="$(jq -r '(.repository.url // .repository)' package.json | sd '^git+http' http)"
+  remote="$(jq -r '(.repository.url? // .repository)' package.json | sd '^git+http' http)"
   echo "$remote"
   repo=${${remote:t}%.git}
   git clone "$remote" ~pubrepos/$repo || echo "~pubrepos/$repo" exists, using it... "(todo: check if it's the correct repo)"

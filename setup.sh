@@ -67,6 +67,7 @@ o ln -fs "$(realpath htoprc)" ~/.config/htop/htoprc
 o mkdir ~/.config/gh
 o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
 o ln -fs "$(realpath ctop)" ~/.ctop
+o ln -fs "$(realpath config/watchman.json)" ~/.config/watchman.json
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion
