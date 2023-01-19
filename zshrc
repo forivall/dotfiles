@@ -1,12 +1,14 @@
 #!/usr/bin/env zsh
 # zmodload zsh/zprof
 # setopt xtrace
+# shellcheck disable=SC2168,2296
 
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 
 unset CI
 
+# shellcheck disable=2298
 __zshrc_filename=${${(%):-%N}:A}
 __zshrc_dirname=${__zshrc_filename:h}
 
@@ -14,17 +16,13 @@ __zshrc_dirname=${__zshrc_filename:h}
 # detection code on zgen reset
 source "${__zshrc_dirname}/scripts/detect-platform.zsh"
 
-if $IS_OSX; then
-  fpath[$fpath[(i)/opt/homebrew/share/zsh/site-functions]]=()
-  fpath=($fpath /opt/homebrew/share/zsh/site-functions)
-fi
-
-sourceIfExists() { [[ -e "$1" ]] && source "$1" }
+# shellcheck disable=SC1090
+sourceIfExists() { [[ -e "$1" ]] && source "$1"; }
 $IS_LINUXY && sourceIfExists /etc/profile.d/vte.sh
 
 if $IS_OSX ; then
   if [ -x /usr/libexec/path_helper ]; then
-    eval `/usr/libexec/path_helper -s`
+    eval "$(/usr/libexec/path_helper -s)"
   fi
 
   if [[ -x /opt/homebrew/bin/brew ]]; then
@@ -40,6 +38,8 @@ if $IS_OSX ; then
       $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
       $path
     )
+    fpath[${fpath[(i)$HOMEBREW_PREFIX/share/zsh/site-functions]}]=()
+    fpath=($fpath $HOMEBREW_PREFIX/share/zsh/site-functions)
   fi
 fi
 
@@ -50,11 +50,6 @@ fi
 if $IS_LINUXY ; then
   # https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
   export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-  setbool() { local code=$?; local arg="$1"; shift; if [[ -z "$@" ]]; then 1=return; 2=$code; fi; if ("$@") 2>&1 >/dev/null ; then eval "$arg=true"; else eval "$arg=false"; fi; }
-  #setbool HAS_ENVOY  whence envoy
-  unset setbool
-
-  # todo: create a plugin for envoy
 fi
 
 # core shell settings
@@ -79,10 +74,10 @@ $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
 # Bun
-if [[ -x ~/.bun/bin/bun ]] {
+if [[ -x ~/.bun/bin/bun ]]; then
   export BUN_INSTALL=~/.bun
   path=("$BUN_INSTALL/bin" $path)
-}
+fi
 
 # TODO: switch to
 # https://github.com/jandamm/zgenom or
@@ -100,9 +95,12 @@ DISABLE_AUTO_TITLE=false
 # ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
 
-export BAT_PAGER="less +X -x2 -FR"
+# export BAT_PAGER="less +X -x2 -FR"
+export LESS='-SRiF --mouse --wheel-lines=3'
+export BAT_PAGER="moar --no-linenumbers"
 export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow
+export MOAR="--statusbar=bold --no-linenumbers"
 
 # zsh-nvm settings
 export NVM_COMPLETION=true
@@ -110,7 +108,7 @@ export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
 # TODO: use https://github.com/Schniz/fnm instead?
 export TSC_NONPOLLING_WATCHER=true
-export WATCHMAN_CONFIG_FILE=~/.config/watchman.json
+export WATCHMAN_CONFIG_FILE="${__zshrc_dirname}/config/watchman.json"
 
 # zsh settings
 setopt no_extended_glob # breaks `git show HEAD^`
@@ -121,6 +119,8 @@ zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # fuzzy completion
+zstyle ':completion:*' completer _complete _correct
+zstyle ':completion:*:correct:::' max-errors 2 not-numeric
 zstyle ':completion:*' matcher-list 'r:|?=**'
 zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' list-suffixes true
@@ -184,7 +184,7 @@ if ! zgen saved; then
 
   zgen load "$__zshrc_dirname/plugins/jump"
   # zgen oh-my-zsh encode64
-  ! $IS_WINDOWS && zgen load mafredri/zsh-async
+  ! $IS_WINDOWS && zgen load mafredri/zsh-async '' main
   # ! $IS_WINDOWS && zgen load sindresorhus/pure
   ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
@@ -289,12 +289,15 @@ fi
 clean-env
 
 # https://gist.github.com/ctechols/ca1035271ad134841284
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+1) ]]; then
+# shellcheck disable=SC1036,SC1088
+shouldregenzcompdump="${ZDOTDIR:-$HOME}/.zcompdump"(N.mh+1)
+if [[ -n "$shouldregenzcompdump" ]]; then
 	compinit
   compdump
 else
 	compinit -C # dont check cache
 fi;
+unset shouldregenzcompdump
 
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 # zprof

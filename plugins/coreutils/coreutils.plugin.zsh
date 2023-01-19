@@ -46,6 +46,8 @@ function grepr() {
   grep "$@" -r "$dir"
 }
 
+alias rgb=batgrep
+
 # sed
 autoload -U sedml
 

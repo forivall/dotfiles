@@ -5,8 +5,9 @@
 [core]
 	#autocrlf = input
 	# pager = delta --dark --theme base16
-	pager = less +X -x2 -R
+	# pager = less +X -x2 -R
 	# pager = most
+	pager = moar --no-linenumbers
 	excludesfile = ~/.gitignore
 	trustctime = false
 	editor = vim

@@ -18,7 +18,7 @@ brew install coreutils findutils dateutils moreutils util-linux telnet \
 brew install less # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
-brew install most colordiff trash htop tree ripgrep fd sd exa broot choose vim ranger cfonts ruplacer
+brew install moar most colordiff trash htop tree ripgrep fd sd exa broot choose vim ranger cfonts ruplacer
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
 brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
@@ -62,6 +62,7 @@ cargo install toml-cli
 cargo install huniq
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog
+brew install eth-p/software/bat-extras
 mkdir -p ~/.config/bat
 ln -s ~/.config/bat/themes "$(realpath ./bat/themes)"
 ./bat/_themes.sh
