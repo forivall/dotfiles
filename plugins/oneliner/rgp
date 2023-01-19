@@ -1,4 +1,5 @@
 #!/usr/bin/zsh
 
-local pager="$(git config core.pager || ( [[ -n "$PAGER" ]] && echo "$PAGER" ) || echo "less")"
-rg --pretty "$@" | eval $pager -S
+# local pager="$(git config core.pager || ( [[ -n "$PAGER" ]] && echo "$PAGER" ) || echo "less")"
+local pager="$( ( [[ -n "$PAGER" ]] && echo "$PAGER" ) || echo "less")"
+rg --pretty "$@" | eval $pager
