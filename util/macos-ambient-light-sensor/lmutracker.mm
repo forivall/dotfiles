@@ -8,6 +8,7 @@
 #include <sys/event.h>
 #include <sys/termios.h>
 #import <Foundation/Foundation.h>
+#include <unistd.h>
 #import <IOKit/IOKitLib.h>
 #import <IOKit/hidsystem/IOHIDServiceClient.h>
 
@@ -25,7 +26,7 @@ extern "C" {
   IOHIDServiceClientRef ALCALSCopyALSServiceClient(void);
 }
 
-static char stdinbuf[1];
+static bool stdout_isatty;
 
 static CFStringRef kbdEventMode = CFSTR("com.forivall.lmutracker.kbd");
 
@@ -42,7 +43,8 @@ void updateTimerCallBackLegacy(CFRunLoopTimerRef timer, void *info) {
 
   kr = IOConnectCallMethod(dataPort, 0, nil, 0, nil, 0, values, &outputs, nil, 0);
   if (kr == KERN_SUCCESS) {
-    printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b%8lld %8lld", values[0], values[1]);
+    printf(stdout_isatty ? "\e[2K\r%8lld %8lld" : "%8lld %8lld\n",
+           values[0], values[1]);
     return;
   }
 
@@ -61,7 +63,7 @@ void updateTimerCallBack(CFRunLoopTimerRef timer, void *info) {
 
   value = IOHIDEventGetFloatValue(event, IOHIDEventFieldBase(kAmbientLightSensorEvent));
 
-  printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b%8f", value);
+  printf(stdout_isatty ? "\e[2K\r%8f" : "%8f\n", value);
 
   CFRelease(event);
 }
@@ -90,11 +92,12 @@ int main(int argc, char* argv[]) {
   io_service_t serviceObject;
   CFRunLoopTimerRef updateTimer;
 
-  // dont buffer input
+  stdout_isatty = isatty(STDOUT_FILENO);
+  // dont buffer input or echo
   termios tattr, newtattr;
   if (tcgetattr(STDIN_FILENO, &tattr) == 0) {
     newtattr = tattr;
-    newtattr.c_lflag &= ~(ICANON /* | ECHO */);
+    newtattr.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newtattr);
   }
   int oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
@@ -102,7 +105,10 @@ int main(int argc, char* argv[]) {
 
   client = ALCALSCopyALSServiceClient();
 
-  if (client) {
+  bool oneshot =
+      argc < 2 || strcmp(argv[1], "--watch") != 0 && strcmp(argv[1], "-w") != 0;
+
+                                                         if (client) {
     event = IOHIDServiceClientCopyEvent(client, kAmbientLightSensorEvent, 0, 0);
 
     if (event == NULL) {
@@ -117,15 +123,18 @@ int main(int argc, char* argv[]) {
     setbuf(stdout, NULL);
     printf("%8f", value);
 
-    if (argc < 2 || strcmp(argv[1], "--watch") != 0) {
+    if (oneshot) {
       printf("\n");
       exit(0);
+    } else if (!stdout_isatty) {
+      printf("\n");
     }
 
     updateTimer = CFRunLoopTimerCreate(kCFAllocatorDefault,
                     CFAbsoluteTimeGetCurrent() + updateInterval, updateInterval,
                     0, 0, updateTimerCallBack, NULL);
-  } else {
+  }
+  else {
     fprintf(stderr, "falling back to legacy api\n");
 
     serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleLMUController"));
@@ -152,16 +161,17 @@ int main(int argc, char* argv[]) {
     setbuf(stdout, NULL);
     printf("%8f", value);
 
-    if (argc < 2 || strcmp(argv[1], "--watch") != 0) {
+    if (oneshot) {
       printf("\n");
       exit(0);
+    } else if (!stdout_isatty) {
+      printf("\n");
     }
 
     updateTimer = CFRunLoopTimerCreate(kCFAllocatorDefault,
                     CFAbsoluteTimeGetCurrent() + updateInterval, updateInterval,
                     0, 0, updateTimerCallBackLegacy, NULL);
   }
-
 
   stdinRegister();
   CFRunLoopAddTimer(CFRunLoopGetCurrent(), updateTimer, kCFRunLoopDefaultMode);

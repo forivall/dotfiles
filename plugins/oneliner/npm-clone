@@ -1,7 +1,27 @@
 #!/usr/bin/env zsh
-local repo="$(
-  npm info --json "$1"|jq -r '(.repository.url // .repository)' |
-  sed 's/^git+http/http/'
-)"
+
+local npm_bin=$(npm -g bin)
+
+local repo
+if [[ -d "${npm_bin:h}/lib/node_modules/get-pkg-repo" ]]; then
+  local outvars=$(mktemp)
+  node -e "
+const getPkgRepo = require('${npm_bin:h}/lib/node_modules/get-pkg-repo');
+const pkg = JSON.parse(require('fs').readFileSync(process.argv[1]));
+const repo = getPkgRepo(pkg);
+
+console.log(repo.browse());
+fs.writeFileSync(process.argv[2],
+  'repo=' + JSON.stringify(repo.https().replace(/^git\+/, '')) + '\n'
+)
+" <(npm info --json "$1") $outvars
+  source $outvars
+else
+  repo="$(
+    npm info --json "$1"|jq -r '(.repository.url // .repository)' |
+    sed 's/^git+http/http/'
+  )"
+fi
+
 echo git clone "$repo" "$1"
 git clone "$repo" "$1"
