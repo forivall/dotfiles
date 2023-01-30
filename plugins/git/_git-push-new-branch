@@ -1,0 +1,9 @@
+#compdef git-wt
+#description push branch with matching name to upstream (default: origin)
+
+_git-push-new-branch() {
+  words=(push -w ${words[2,-1]})
+  _git-push
+}
+
+_git-push-new-branch "$@"
