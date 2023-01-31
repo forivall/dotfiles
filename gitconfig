@@ -172,7 +172,7 @@
 [merge]
 	#tool = diffuse_windows
 	#tool = diffuse_custom
-	tool = vscode
+	tool = smerge
 	# tool = meld
 	# tool = meld_merged
 	# conflictstyle = diff3
@@ -241,6 +241,8 @@
 	driver = npx npm-merge-driver merge %A %O %B %P
 [mergetool "vscode"]
 	cmd = code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\"
+[mergetool "smerge"]
+	cmd = smerge mergetool \"$REMOTE\" \"$LOCAL\" \"$BASE\" -o \"$MERGED\"
 [commit]
 	# template = /Users/emilyklassen/.stCommitMsg
 [pull]
@@ -256,3 +258,5 @@
 [rebase]
 	autoSquash = true
 	updateRefs = true
+[gui]
+	editor = vscode
