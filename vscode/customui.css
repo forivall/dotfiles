@@ -10,9 +10,12 @@
   /* --row-height: 18px; --factor: 0.81818; /* 18/22*/
   --row-height: 22px; --factor: 1;
 }
-.mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.2px }
+.mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.16px }
 @media (-webkit-max-device-pixel-ratio: 1), (max-resolution: 1dppx) {
   .mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.3px }
+}
+@media (-webkit-min-device-pixel-ratio: 2), (max-resolution: 2dppx) {
+  .mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json .suggest-widget { -webkit-text-stroke: 0.05px }
 }
 .minimap { opacity: 0.5 }
 .minimap:hover { opacity: 0.9 }
