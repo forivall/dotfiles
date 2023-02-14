@@ -20,7 +20,7 @@ gitify_vscode_plugin() {
   command rm -r $owd
   mv $owd.tmp $owd
   cd -
-  git checkout -- $(git diff --name-only --diff-filter=D)
+  git checkout -- "${(@f)$(git diff --name-only --diff-filter=D)}"
 }
 
 # usage: cd node_modules; gitify_node_module ../../vidi-server ../../vidi-shop-server ...

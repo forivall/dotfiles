@@ -1,3 +1,5 @@
+/// <reference types="@manuelpuyol/turbo" />
+/// <reference types="navigation-api-types" />
 (() => {
   const DEFAULT_CWD = '';
   const storageKey = 'userscript-vscode-repo-dir';
@@ -17,20 +19,45 @@
 
   container.appendChild(localRepoInput);
 
+  /** @type {{anchor: HTMLAnchorElement, loc: string, hash?: string | null}[]} */
   const anchors = [];
   document.querySelectorAll('clipboard-copy').forEach((element) => {
     const anchor = document.createElement('a');
     const loc = element.value;
+    /** @type {Element & Partial<Pick<HTMLAnchorElement, 'href'>> | null} */
+    const linkanchor = element.previousElementSibling;
+    const hash = linkanchor?.getAttribute('href');
     anchor.innerText = 'open';
     anchor.href = `vscode://file${cwd}/${loc}`;
     anchor.className = 'Link--onHover color-fg-muted ml-2 mr-2';
-    anchors.push({ anchor, loc });
+    anchors.push({ anchor, loc, hash });
     element.after(anchor);
   });
 
-  localRepoInput.onblur = () => {
-    anchors.forEach(({ anchor, loc }) => {
-      anchor.href = `vscode://file${cwd}/${loc}`;
+  let currenthash = '';
+  const update = () => {
+    anchors.forEach(({ anchor, loc, hash }) => {
+      if (hash && currenthash.startsWith(hash)) {
+        anchor.href = `vscode://file${cwd}/${loc}:${currenthash.slice(
+          hash.length + 1,
+        )}`;
+      } else {
+        anchor.href = `vscode://file${cwd}/${loc}`;
+      }
     });
   };
+
+  localRepoInput.onblur = update;
+  /** @type {typeof import('@manuelpuyol/turbo')} */
+  // const Turbo = window.Turbo;
+  // Turbo.navigator.history.onPopState
+  if (window.navigation) {
+    window.navigation.onnavigate = (ev) => {
+      const u = new URL(ev.destination.url);
+      if (u.hash) {
+        currenthash = u.hash;
+        update();
+      }
+    };
+  }
 })();

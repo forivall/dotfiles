@@ -2,22 +2,87 @@
 
 set -euo pipefail
 
-__filename=${0:A}
-__dirname=${0:h}
+__plugin_dirname=${0:a:h:h}
 
 autoload colors && colors
 
-branches=($(git rev-parse --symbolic --branches))
-term_menu_options=(
-  --no-preview-border
-  --preview "git -c color.branch=always branch --list -vvv {}"
-)
-if (( $# > 0 )) && [[ "$1" == -s || "$1" == --search ]]; then
-  term_menu_options+=(--search-key none)
-  shift
+OPTS_SPEC="\
+git checkout-branch [<options>] <args>...
+--
+h,help    show the help
+s,search  search mode
+a,all     all branches
+r,remote? remote
+f,force   use --force when checking out
+d,detach  use --detach when checking out
+"
+eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
+
+term_menu_options=()
+all=false
+remotes=false
+remote_option=
+checkout_options=()
+
+index=0
+for arg in $@; do
+  index=$((index+1))
+  case "$arg" in
+    --search) term_menu_options+=(--search-key none) ;;
+    --all) all=true; remotes=true ;;
+    --remote=*) remote_option="${arg#--remote=}" ;&
+    --remote) remotes=true ;;
+    --force|--detach) checkout_options+=(-$OPT) ;;
+    --) break; ;;
+  esac
+done
+
+shift $index
+
+if (( index == 1 && $# > 0 )); then
+  git checkout -b $@
+  exit
 fi
 
-simple-term-menu $term_menu_options "${branches[@]}" && i=0 || i=$?
+branches=()
+if ! $remotes || $all; then
+  branches=($(git rev-parse --symbolic --branches))
+fi
+remote_branches=()
+if $remotes; then
+  remote_branches=($(git rev-parse --symbolic --exclude="*/HEAD" $(print -l -- --exclude="*/"${^branches}) --remotes=$remote_option))
+
+  if ! $all && (( ${#remote_branches} == 0 )); then
+    echo "no tracking branches for remote $remote_option"
+    exit 1
+  fi
+fi
+
+branch_format="%(if)%(HEAD)%(then)* %(color:green)%(else)%(if)%(worktreepath)%(then)+ %(color:cyan)%(else)  %(color:normal)%(end)%(end)"
+
+term_menu_options+=(
+  --no-preview-border
+  --preview-size 0.6
+  --preview "$__plugin_dirname/__git-checkoutb-preview {}"
+)
+
+remote_options=()
+if $remotes; then
+  remote_options_str="$(printf '%1$s|--remotes %1$s\n' ${^remote_branches})"
+  remote_options=("${(f)remote_options_str[@]}")
+fi
+
+simple-term-menu $term_menu_options "${branches[@]}" "${remote_options[@]}" && i=0 || i=$?
 if (( $i == 0 )) ; then exit; fi
-branch=${branches[i]}
-git checkout $@ $branch
+if (( $i > ${#branches})); then
+  idx=$(( i - ${#branches}))
+  remote_branch=${remote_branches[idx]}
+  if [[ -z "$remote_option" ]]; then
+    git checkout "${checkout_options[@]}" -b ${remote_branch#*/} $remote_branch
+  else
+    git checkout "${checkout_options[@]}" -b $remote_branch $remote_option/$remote_branch
+  fi
+else
+  branch=${branches[i]}
+  git checkout "${checkout_options[@]}" $branch
+fi

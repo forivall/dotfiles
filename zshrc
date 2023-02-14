@@ -101,11 +101,13 @@ export BAT_PAGER="moar --no-linenumbers"
 export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow
 export MOAR="--statusbar=bold --no-linenumbers"
+export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
 
 # zsh-nvm settings
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
+
 # TODO: use https://github.com/Schniz/fnm instead?
 export TSC_NONPOLLING_WATCHER=true
 export WATCHMAN_CONFIG_FILE="${__zshrc_dirname}/config/watchman.json"

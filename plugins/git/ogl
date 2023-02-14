@@ -1,2 +1,2 @@
 # ogl is https://github.com/onilton/ogl
-/usr/bin/env ogl $@|less -F -S -R -K
+command ogl $@|less -F -S -R -K

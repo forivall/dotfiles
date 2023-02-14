@@ -30,3 +30,7 @@ then
   # For compilers to find openjdk you may need to set:
   #   export CPPFLAGS="-I${OPENJDK}/include"
 fi
+
+if open -Ra Gittyup 2> /dev/null ; then
+  alias gittyup="open -a Gittyup"
+fi

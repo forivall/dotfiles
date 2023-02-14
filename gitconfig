@@ -201,6 +201,8 @@
 # 	default = simple
 [push]
 	default = simple
+[hub]
+	protocol = https
 [url "git://anongit.kde.org/"]
 	insteadOf = kde:
 # [url "ssh://git@git.kde.org/"]

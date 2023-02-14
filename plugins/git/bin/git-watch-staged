@@ -11,7 +11,7 @@ function git-watch-staged {
 
   if [[ glob = --help ]]; then
     echo 'usage: git-watch-staged <glob> <command> [...arguments]'
-    echo 'example: git-watch-staged '*.[jt]s' npx eslint'
+    echo 'example: git-watch-staged '\''*.[jt]s'\'' npx eslint'
     return
   fi
 
@@ -23,13 +23,16 @@ function git-watch-staged {
     changed=(${(f)output})
     if [[ "${#changed[@]}" == "0" ]]; then continue; fi
     echo -en "${fg[cyan]}Changed ${#changed} file(s)...$reset_color  \r"
-    if $asglob && (( ${#changed} > 1 )); then
-      changed="{${(j/,/)changed}}"
+    if $asglob; then
+      if (( ${#changed} > 1 )); then
+        dojoin() { local IFS=, ; changed="{$changed}" }; dojoin
+      fi
     fi
     $@ "${changed[@]}" && waitcolor=green || waitcolor=red
     echo -en "${fg[$waitcolor]}Waiting for changes...$reset_color            \r"
   done
 }
+
 
 if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
   git-watch-staged $@

@@ -56,6 +56,7 @@ o ./vim/setup.sh
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
 o ln -fs "$(realpath gitignore)" ~/.gitignore
+o ln -fs "$(realpath oglrc)" ~/.ogl
 o ln -fs "$(realpath hgrc)" ~/.hgrc
 o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist

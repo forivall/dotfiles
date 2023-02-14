@@ -5,17 +5,75 @@
 
 set -e
 
-rm -rf /tmp/mp4_to_gif
-mkdir -p /tmp/mp4_to_gif/png
+missingdeps=false
+
+if ! type ffmpeg; then missingdeps=true; fi
+if ! type gifsicle; then missingdeps=true; fi
 
 fname="$1"
 shift
+
+rm -rf /tmp/mp4_to_gif
+mkdir -p /tmp/mp4_to_gif/png
+
+# Final filename
+filename=${fname//.mp4/.gif}
+
+printf 'Dimensions: '
+ffprobe -v 0 -of csv=s=x:p=0 -select_streams v:0 -show_entries stream=width,height Kapture\ 2023-02-13\ at\ 18.14.38.mp4
+printf 'Scale factor: ' ; read scale
+
+ffmpeg -i "$fname" -filter_complex "[0:v] palettegen" /tmp/mp4_to_gif/palette.png
+ffmpeg -i "$fname" -i /tmp/mp4_to_gif/palette.png -filter_complex "[0:v][1:v] paletteuse" /tmp/mp4_to_gif/wip.gif
+
+gifsicle --verbose --scale=$scale --resize-method=lanczos3 --merge -O3 --loop -o "$filename" /tmp/mp4_to_gif/wip.gif
+
+exit
+
+if ! type mplayer; then missingdeps=true; fi
+if ! type ffprobe; then missingdeps=true; fi
+if ! type gifsicle; then missingdeps=true; fi
+
+if type convert 2>/dev/null; then :
+elif type gm 2>/dev/null; then alias convert="gm convert"
+else
+    echo 'imagemagick or graphicsmagick required!'
+    missingdeps=true
+fi
+
+if $missingdeps; then
+    exit 1
+fi
+
 first_frame="$1"
 last_frame="$2"
+
+fps="$(ffprobe -v 0 -of csv=p=0 -select_streams v:0 -show_entries stream=r_frame_rate "$fname")"
 
 # Export into images
 echo mplayer -ao null "$@" "$fname" -vo png:outdir=/tmp/mp4_to_gif/png
 mplayer -ao null "$@" "$fname" -vo png:outdir=/tmp/mp4_to_gif/png
+
+numerator=${fps%/*}
+denominator=${fps#*/}
+delta=$(( numerator * denominator ))
+if (( numerator > denominator * 10 )); then
+    echo "dropping frames for target 10 fps"
+    n="$delta"
+    for png in /tmp/mp4_to_gif/png/*.png ; do
+        if (( n >= delta )); then
+            n=$(( (n % delta) + 10 * denominator ))
+        else
+            n=$(( n + 10 * denominator ))
+        fi
+    done
+else
+    delay=$(( ( 100 * denominator / numerator ) ))
+    if (( 100 * denominator % numerator > 0 )); then
+        delay=$(( delay + 1 ))
+    fi
+    echo "delay between frames = ${delay}0 ms "
+fi
 
 # Convert images to animated gif
 echo "Converting images folder to gif..."
@@ -33,15 +91,13 @@ for png in /tmp/mp4_to_gif/png/*.png ; do
     convert $png ${png//png/gif}
 done
 echo
-# Final filename
-original_filename="$fname"
-filename=${original_filename//mp4/gif}
+
 echo "$filename"
 
 # Optimize gif
 echo "Creating and optimizing animated gif..."
 # convert /tmp/mp4_to_gif.gif -fuzz 10% -layers Optimize "$filename"
-gifsicle -O3 --delay=10 --loop --colors 256 /tmp/mp4_to_gif/gif/*.gif > "$filename"
+gifsicle --verbose --merge -O3 --delay=$delay --loop --colors 256 -o "$filename" /tmp/mp4_to_gif/gif/*.gif
 
 # Cleans up tmp folders
 rm -rf /tmp/mp4_to_gif
