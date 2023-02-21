@@ -37,3 +37,7 @@ fi
 if open -Ra Gittyup 2> /dev/null ; then
   alias gittyup="open -a Gittyup"
 fi
+
+if type openman >/dev/null 2>/dev/null ; then
+  alias oman=openman
+fi

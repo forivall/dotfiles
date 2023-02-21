@@ -34,7 +34,7 @@ if $IS_OSX ; then
   if [[ -n "$HOMEBREW_PREFIX" ]]; then
     path=(
       $HOMEBREW_PREFIX/bin
-      $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin 
+      $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
       $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
       $path
     )
@@ -121,9 +121,11 @@ zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # fuzzy completion
-zstyle ':completion:*' completer _complete _correct
+zstyle ':completion:*' completer _prefix _complete _correct _approximate
 zstyle ':completion:*:correct:::' max-errors 2 not-numeric
 zstyle ':completion:*' matcher-list 'r:|?=**'
+zstyle ':completion:*:approximate:::' max-errors 2 numeric
+zstyle ':completion:*:complete:*:*:*' matcher-list '' 'm:{a-z}={A-Z}'
 zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' list-suffixes true
 # zstyle ':autocomplete:list-choices:*' max-lines 40%

@@ -58,8 +58,6 @@ brew install ruby rbenv rbenv-bundler # ruby-build
 # brew install php composer
 
 brew install rust rustup-init
-cargo install toml-cli
-cargo install huniq
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog
 brew install eth-p/software/bat-extras
@@ -79,8 +77,7 @@ brew install dart sass
 brew install mint # swift
 
 brew install asciinema cmatrix
-brew install figlet toilet utimer && pip3 install termdown
-python3 -m pip install simple-term-menu
+brew install figlet toilet utimer
 brew install graphviz # xdot plantuml
 # brew install imagemagick -- --with-webp --with-librsvg --with-wmf --with-little-cms --with-little-cms2 --with-pango --with-ghostscript --with-fontconfig
 brew install graphicsmagick
@@ -168,11 +165,6 @@ brew install --cask font-input font-sf-pro
 
 brew tap kde-mac/kde
 brew install okular
-
-# brew install yarn # nghttp2
-npm i -g yarn
-npm i -g bash-language-server
-npm i -g npm-name-cli
 
 # brew tap clojure/tools
 # brew tap borkdude/brew
