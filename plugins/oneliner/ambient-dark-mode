@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 
 local threshold=${1:-140}
-if (( $(ambient-light) < "$threshold" )); then dark-mode on; else dark-mode off; fi
+if (( $(ambient-light) < threshold )); then dark-mode on; else dark-mode off; fi

@@ -78,7 +78,7 @@ if [[ -v diffstat ]]; then
   total=$(( added + removed ))
   totallen=${#total}
   STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
-  if $(( total > STAT_COLUMNS )); then
+  if (( total > STAT_COLUMNS )); then
     added=$(( STAT_COLUMNS * added / total ))
     removed=$(( STAT_COLUMNS * added / total ))
   fi
