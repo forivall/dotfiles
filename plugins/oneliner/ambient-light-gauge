@@ -4,8 +4,8 @@ local npm_prefix=$(npm -g prefix)
 
 # require('gradient-string').pastel('■'.repeat(256)).split(/\b(?<=39m)/)
 ambient-light -w | node -e "
-var G = require('${npm_prefix:h}/lib/node_modules/npm/node_modules/gauge')
-var T = require('${npm_prefix:h}/lib/node_modules/npm/node_modules/gauge/lib/themes')
+var G = require('${npm_prefix}/lib/node_modules/npm/node_modules/gauge')
+var T = require('${npm_prefix}/lib/node_modules/npm/node_modules/gauge/lib/themes')
 var t = T.newTheme(T({hasUnicode: true, hasColor: true}), {
   preProgressbar: '',
   postProgressbar: '',
