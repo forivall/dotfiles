@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+local f=$(mktemp --suffix=.json)
+npx nx graph --file=$f > /dev/null
+cat $f

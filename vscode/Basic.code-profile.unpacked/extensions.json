@@ -1,0 +1,93 @@
+[
+  {
+    "identifier": {
+      "id": "be5invis.vscode-custom-css",
+      "uuid": "1b160753-ae5e-42bb-82ad-d115ce5c10f4"
+    },
+    "displayName": "Custom CSS and JS Loader"
+  },
+  {
+    "identifier": {
+      "id": "codezombiech.gitignore",
+      "uuid": "3e891cf9-53cb-49a3-8d01-8f0b1f0afb29"
+    },
+    "displayName": "gitignore"
+  },
+  {
+    "identifier": {
+      "id": "esbenp.prettier-vscode",
+      "uuid": "96fa4707-6983-4489-b7c5-d5ffdfdcce90"
+    },
+    "displayName": "Prettier - Code formatter"
+  },
+  {
+    "identifier": {
+      "id": "grimmer.vscode-back-forward-button",
+      "uuid": "0d104aa5-2e74-418a-9b81-279612302aa6"
+    },
+    "displayName": "Back and Forward buttons"
+  },
+  {
+    "identifier": {
+      "id": "gruntfuggly.activitusbar",
+      "uuid": "47137038-6832-49c2-a31c-9ad3d95187fc"
+    },
+    "displayName": "Activitus Bar"
+  },
+  {
+    "identifier": {
+      "id": "ilich8086.launcher",
+      "uuid": "a4a77c97-f789-42e1-a649-65ac1bf244f3"
+    },
+    "displayName": "Launcher"
+  },
+  {
+    "identifier": {
+      "id": "mechatroner.rainbow-csv",
+      "uuid": "3792588c-3d35-442d-91ea-fe6a755e8155"
+    },
+    "displayName": "Rainbow CSV"
+  },
+  {
+    "identifier": {
+      "id": "ms-vscode.atom-keybindings",
+      "uuid": "fa57ae0e-d21e-40d8-a0bb-a58b5fd9ead3"
+    },
+    "displayName": "Atom Keymap"
+  },
+  {
+    "identifier": {
+      "id": "pkief.material-icon-theme",
+      "uuid": "5db78037-f674-459f-a236-db622c427c5b"
+    },
+    "displayName": "Material Icon Theme"
+  },
+  {
+    "identifier": {
+      "id": "pkief.material-product-icons",
+      "uuid": "f797dacd-4e80-4f33-8b63-d665c0956013"
+    },
+    "displayName": "Material Product Icons"
+  },
+  {
+    "identifier": {
+      "id": "ryuta46.multi-command",
+      "uuid": "a92437f6-75af-47b2-b3e0-99764308b4be"
+    },
+    "displayName": "multi-command"
+  },
+  {
+    "identifier": {
+      "id": "trongthanh.theme-boxythemekit",
+      "uuid": "6df845ea-159a-4848-bdf4-60d9b2cbd13c"
+    },
+    "displayName": "Boxy Theme Kit"
+  },
+  {
+    "identifier": {
+      "id": "vspacecode.whichkey",
+      "uuid": "47ddeb9c-b4bb-4594-906b-412886e20e47"
+    },
+    "displayName": "Which Key"
+  }
+]

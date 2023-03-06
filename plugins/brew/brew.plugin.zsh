@@ -30,7 +30,6 @@ then
   # For compilers to find openjdk you may need to set:
   #   export CPPFLAGS="-I${OPENJDK}/include"
 
-  export MANPATH="$HOMEBREW_PREFIX/share/man:$HOMEBREW_PREFIX/man${MANPATH+:$MANPATH}:"
   export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
 fi
 

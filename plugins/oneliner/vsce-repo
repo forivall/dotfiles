@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+(
+  cd $(npm -g root)/vsce
+  local repo=$(node -e "
+require('./out/util').getPublicGalleryAPI()
+.getExtension('$1', 
+  [require('azure-devops-node-api/interfaces/GalleryInterfaces').ExtensionQueryFlags.AllAttributes]
+).then((extension) => {
+  console.log(JSON.stringify(extension, null, 2))
+})
+" | jq -r '.versions[0].properties | from_entries | ."Microsoft.VisualStudio.Services.Links.Source"')
+  echo $repo
+  open -u $repo
+)

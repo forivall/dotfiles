@@ -58,6 +58,7 @@
 	lg3 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
 	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
+	branches = branch --list
 	branches-with-upstreams = "!git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done"
 	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
 	llus = "!git log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration  $(git branches-with-upstreams)"

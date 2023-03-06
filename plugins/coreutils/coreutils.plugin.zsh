@@ -24,20 +24,20 @@ alias grep="$(whence grep) -I"
 # shellcheck disable=SC2139
 alias grepi="$(whence grep) -i"
 function grep() {
-    if [ -t 0 ] ; then
-        # TODO: don't use -n for -o
-        # shellcheck disable=SC2046
-        if [ "$1" = --no-n ] ; then
-            shift
-            env $(whence grep) "$@" <&0
-        else
-            env $(whence grep) -n "$@" <&0
-        fi
+  if [ -t 0 ] ; then
+    # TODO: don't use -n for -o
+    # shellcheck disable=SC2046
+    if [ "$1" = --no-n ] ; then
+      shift
+      env $(whence grep) "$@" <&0
     else
-        # echo 'piping'
-        # shellcheck disable=SC2046
-        env $(whence grep) "$@" <&0
+      env $(whence grep) -n "$@" <&0
     fi
+  else
+    # echo 'piping'
+    # shellcheck disable=SC2046
+    env $(whence grep) "$@" <&0
+  fi
 }
 
 function grepr() {
@@ -47,6 +47,7 @@ function grepr() {
 }
 
 alias rgb=batgrep
+alias bam=batman
 
 # sed
 autoload -U sedml

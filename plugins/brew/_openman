@@ -1,0 +1,6 @@
+#compdef openman
+#description open manpage viewer
+
+_openman () {
+  _man
+}

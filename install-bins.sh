@@ -11,6 +11,7 @@ cmds=(
   'npm i -g chokidar-cli'
   'npm i -g js-yaml'
   'npm i -g nx'
+  'npm i -g serve'
 
   'cargo install bingrep'
   'cargo install consoletimer'
