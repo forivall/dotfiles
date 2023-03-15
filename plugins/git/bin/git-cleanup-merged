@@ -23,16 +23,18 @@ for branch in $(git rev-parse --symbolic --branches); do
     fi
   fi
   if [[ $branch == feature/* ]]; then
-    if git merge-base --is-ancestor $branch origin/dev; then
+    upstream=${1:-origin/dev}
+    if git merge-base --is-ancestor $branch $upstream; then
       prompt_and_delete $branch
     else
-      echo "${fg[grey]}$branch is not merged into origin/dev$reset_color"
+      echo "${fg[grey]}$branch is not merged into $upstream$reset_color"
     fi
   elif [[ $branch == hotfix/* ]]; then
-    if git merge-base --is-ancestor $branch origin/master; then
+    upstream=${1:-origin/master}
+    if git merge-base --is-ancestor $branch $upstream; then
       prompt_and_delete $branch
     else
-      echo "${fg[grey]}$branch is not merged into origin/master$reset_color"
+      echo "${fg[grey]}$branch is not merged into $upstream$reset_color"
     fi
   fi
 done
