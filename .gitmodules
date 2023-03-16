@@ -21,3 +21,6 @@
 [submodule "vim.janus/editorconfig"]
 	path = vim.janus/editorconfig
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "scripts/Youtube2Webpage"]
+	path = scripts/Youtube2Webpage
+	url = https://github.com/obra/Youtube2Webpage.git

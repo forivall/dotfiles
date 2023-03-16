@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+
 import datetime
 import os
 import psutil
+import itertools
 
 uid = os.getuid()
 
@@ -20,34 +23,48 @@ def should_reap(proc: psutil.Process):
     if 'git-credential-manager' not in name:
         return False
 
-    proc.cpu_percent(0)
     created = datetime.datetime.fromtimestamp(proc.create_time())
     delta = created - datetime.datetime.now()
     return delta.seconds > 300  # 5 min
 
 
 def do_reap():
+    reaped = False
     for proc in psutil.process_iter():
         reap = False
         with proc.oneshot():
             reap = should_reap(proc)
 
         if reap:
-            proc.cpu_percent()
-            if proc.cpu_percent(0.2) > 98:
-                print('killing %r...' % proc)
-                proc.kill()
+            try:
+                proc.cpu_percent()
+                if proc.cpu_percent(0.2) > 98:
+                    print('killing %r...' % proc)
+                    proc.kill()
+                    reaped = True
+            except psutil.NoSuchProcess:
+                print('already killed %r!' % proc)
+    return reaped
 
 
 if __name__ == '__main__':
     import sys
 
-    do_reap()
+    reaped = do_reap()
+
+    if reaped and sys.stdin.isatty():
+        sys.stdout.write('!\033[D')
+        sys.stdout.flush()
 
     if '--watch' in sys.argv:
         import time
-        while True:
+        for i in itertools.count():
             time.sleep(60)
-            print('checking...')
-            do_reap()
+            if sys.stdin.isatty():
+                sys.stdout.write('.o0O'[i % 4] + '\033[D')
+                sys.stdout.flush()
+            reaped = do_reap()
 
+            if reaped and sys.stdin.isatty():
+                sys.stdout.write('!\033[D')
+                sys.stdout.flush()
