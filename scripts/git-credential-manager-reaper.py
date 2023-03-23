@@ -39,7 +39,8 @@ def do_reap():
             try:
                 proc.cpu_percent()
                 if proc.cpu_percent(0.2) > 98:
-                    print('killing %r...' % proc)
+                    now = datetime.datetime.now().strftime("%c")
+                    print(f'{now} | killing {proc!r}...')
                     proc.kill()
                     reaped = True
             except psutil.NoSuchProcess:

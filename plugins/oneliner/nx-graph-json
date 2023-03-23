@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
-local f=$(mktemp --suffix=.json)
-npx nx graph --file=$f > /dev/null
-cat $f
+# local f=$(mktemp --suffix=.json)
+# npx nx graph --file=$f > /dev/null
+# cat $f
+NX_DAEMON=false node -e "require('@nrwl/devkit').createProjectGraphAsync().then(JSON.stringify).then(console.log)"

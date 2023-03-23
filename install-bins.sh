@@ -6,12 +6,14 @@ installer="$1"
 
 cmds=(
   'corepack enable'
-  'npm i -g bash-language-server'
-  'npm i -g npm-name-cli'
-  'npm i -g chokidar-cli'
-  'npm i -g js-yaml'
-  'npm i -g nx'
-  'npm i -g serve'
+  'npm install -g bash-language-server'
+  'npm install -g npm-name-cli'
+  'npm install -g chokidar-cli'
+  'npm install -g js-yaml'
+  'npm install -g nx'
+  'npm install -g serve'
+  'npm install -g git-file-history'
+
 
   'cargo install bingrep'
   'cargo install consoletimer'

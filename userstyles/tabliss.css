@@ -1,12 +1,69 @@
+.Slot.bottomRight {
+  bottom: 0;
+}
+:is(.topLeft, .topCentre, .topRight, middleCentre, .bottomLeft, .bottomCentre, .bottomRight) .Weather {
+  display: flex;
+  align-items: center;
+}
+:is(.middleCentre, .topCentre, .bottomCentre) .Weather {
+  justify-content: center;
+}
+.bottomRight .Weather:last-child {
+  margin-bottom: 2.5rem;
+}
+.bottomRight .Widget.Widget {
+  margin-right: 4.25rem;
+}
+:is(.topLeft, .topCentre, .topRight, middleCentre, .bottomLeft, .bottomCentre, .bottomRight) .Weather .details {
+  display: flex;
+}
+.Weather .details dl {
+  margin: 1em;
+}
+:is(.topLeft, .topCentre, .topRight, middleCentre, .bottomLeft, .bottomCentre, .bottomRight) .Weather .details dl {
+  margin: 0 1em;
+}
+:is(.middleRight, .topRight, .bottomRight) .Weather .details dl:last-child {
+  margin-right: 0;
+}
+
+.Links {
+  grid-template-areas:
+  "a a a a a a a a a"
+  "b b b b b b b b b"
+  "c c c c c c c c c"
+  "d d d d d d d d d"
+  "e e e e e e e e e"
+  "f f f f f f f f f"
+  "g g g g g g g g g"
+  "h h h h h h h h h"
+  "i i i i i i i i i";
+  column-gap: 0;
+}
+.Links a {
+  text-align: center;
+}
+.Links a:nth-last-child(7) { grid-area: b; }
+.Links a:nth-last-child(6) { grid-area: c; }
+.Links a:nth-last-child(5) { grid-area: e; }
+.Links a:nth-last-child(4) { grid-area: f; } */
+.Links a:nth-last-child(3) { grid-area: g; }
+.Links a:nth-last-child(2) { grid-area: h; }
+.Links a:nth-last-child(1) { grid-area: i; }
+.LinkText:not(:empty) {
+  margin-left: 0.2em;
+}
+
 html:not(:focus-within):not(:hover) .Widgets .Slot,
+html:not(:focus-within):not(:hover) .Widgets .Slot:is(.topRight, .bottomRight) > .Widget > :not(.Time, .Weather),
 html:not(:focus-within):not(:hover) .Overlay {
   opacity: 0.2;
-  filter: blur(1.5px);
+  filter: blur(4px);
 }
-html:not(:focus-within):not(:hover) .Widgets .Slot:not(.topRight) {
+html:not(:focus-within):not(:hover) .Widgets .Slot:not(.topRight, .bottomRight) {
   color: silver;
 }
-html:not(:focus-within):not(:hover) .Widgets .Slot.topRight {
+html:not(:focus-within):not(:hover) .Widgets .Slot:is(.topRight, .bottomRight) {
   opacity: 0.4;
   filter: blur(0.1px);
 }
@@ -15,9 +72,11 @@ html:not(:focus-within):not(:hover) .Widgets .Slot.middleCentre {
 }
 html:not(:focus-within):not(:hover) .credit {
   opacity: 0.1;
+  filter: blur(5px);
 }
 :root, .Overlay,
 .Widgets, .Slot,
+.Widgets .Slot > .Widget > div,
 .credit {
   transition:
     opacity 0.5s ease-out,
@@ -87,6 +146,19 @@ html:not(:focus-within):not(:hover) .image.fullscreen[style] {
 .Time.Analogue svg line {
   transition: transform 0.99s linear;
 }
+
+.topLeft .Search>input {
+  text-align: left;
+}
+.topLeft .Search>input:placeholder-shown:not(:focus) {
+  background-position: left;
+}
+.credit {
+  opacity: 0.4;
+}
+.middleCentre {
+  width: 100%;
+}
 .Search>input:placeholder-shown:not(:focus) {
   border-bottom-color: transparent;
 }
@@ -103,17 +175,4 @@ html:not(:focus-within):not(:hover) .image.fullscreen[style] {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(128,128,128,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
-}
-
-.topLeft .Search>input {
-  text-align: left;
-}
-.topLeft .Search>input:placeholder-shown:not(:focus) {
-  background-position: left;
-}
-.credit {
-  opacity: 0.4;
-}
-.middleCentre {
-  width: 100%;
 }

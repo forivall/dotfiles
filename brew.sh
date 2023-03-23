@@ -176,7 +176,8 @@ brew install lazydocker lazygit spotify-tui gitui tig magic-wormhole
 # brew install csvkit visidata
 # brew install mercurial subversion
 # brew install grex # a regex tool
-# brew install youtube-dl instalooter yt-dlp
+# brew install youtube-dl instalooter
+brew install yt-dlp
 # brew install e2fsprogs
 # brew install gtk-mac-integration
 # brew install python@2

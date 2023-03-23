@@ -16,8 +16,6 @@
 	renames = copies
 	tool = vscode
 	# colorMoved = default
-[add "interactive"]
-	useBuiltin = false
 [difftool]
 	prompt = false
 [interactive]
@@ -45,6 +43,8 @@
 	last = show --oneline --name-status --decorate
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
 	lu = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}
+	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
+	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
 	li = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}  # <kbd>i</kbd> is much easier to hit than <kbd>u</kbd>
 	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --all
 	las = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --all --simplify-by-decoration
@@ -57,6 +57,7 @@
 	lg2 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph --no-notes
 	lg3 = log --name-status --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %aE %Creset%Cblue%ad%C(green)%gn%Creset %n%s\"" --graph --date=local
 	lgp = log -p --pretty="format:\"%C(yellow)%h%C(red bold)%d%C(magenta) %an %Creset%Cblue%ar%Creset %s\"" --graph
+  logp2 = logp --pretty='%C(yellow)%H%C(red bold)%d%C(magenta)%n%an <%ae>%Creset%nA: %Cblue%aD%Creset, C: %Cblue%cD%Creset%n%n%s%n%n%b'
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
 	branches = branch --list
 	branches-with-upstreams = "!git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done"
