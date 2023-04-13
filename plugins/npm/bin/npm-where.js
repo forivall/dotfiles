@@ -129,8 +129,9 @@ class Where extends ArboristWorkspaceCmd {
      */
     /** @type {table.Indexable<Writable<table.ColumnUserConfig>>} */
     const columns = widths.map((width) => ({ width }));
+    const space = widths.slice(0, 3).reduce((a, b) => a + b) + 4;
     columns[3].wrapWord = true;
-    columns[3].width = Math.min(columns[3].width, Math.max(40, process.stdout.columns - 40));
+    columns[3].width = Math.min(columns[3].width, Math.max(80, process.stdout.columns) - space);
 
     this.npm.output(
       table.table(data, {
