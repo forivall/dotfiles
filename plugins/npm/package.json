@@ -1,0 +1,10 @@
+{
+  "name": "~dotfiles__plugins__npm",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/npmcli__arborist": "^5.6.1"
+  },
+  "dependencies": {
+    "table": "^6.8.1"
+  }
+}

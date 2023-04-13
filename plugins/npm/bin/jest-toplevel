@@ -25,14 +25,23 @@ jest-toplevel() {
         $arg != (--(no-|)(logHeapUsage|noStackTrace|notify|onlyChanged|onlyFailures|passWithNoTests|resetMocks|resetModules|restoreMocks)) &&
         $arg != (--(no-|)(runInBand|showConfig|silent|skipFilter|testLocationInResults|updateSnapshot|useStderr|verbose|watch|watchAll|watchman))
       ]]; then
-        echo dasharg: $arg 
+        echo dasharg: $arg
         dashArg=true
       fi
     fi
   done
   local testPathPattern=()
   $noTestPatterns && jestArgs=($gitPrefix $jestArgs)
-  npx --prefix=$PWD jest --config "$(git rev-parse --show-cdup)jest.config.js" "${jestArgs[@]}"
+  local cdup="$(git rev-parse --show-cdup)"
+  local toplevelConfig="${cdup}jest.config.js"
+  for ext in ts mjs cjs json; do
+    if [[ -e "${cdup}jest.config.$ext" ]]; then
+      toplevelConfig="${cdup}jest.config.$ext"
+      break
+    fi
+  done
+  echo npx --prefix=$PWD jest --config "$toplevelConfig" "${jestArgs[@]}"
+  npx --prefix=$PWD jest --config "$toplevelConfig" "${jestArgs[@]}"
 }
 
 resolve_path() {

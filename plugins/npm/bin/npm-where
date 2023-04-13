@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+__dirname=${0:A:h}
+
+npm-where() {
+  autoload colors && colors
+  local header=true
+  if [[ "$1" == --no-header ]]; then
+    local header=false
+    shift
+  fi
+  local sorting='sort_by(.[0].version) | reverse'
+  if [[ "$1" == --sort-by ]]; then
+    shift
+    local sorting="sort_by(.[0].$1)"
+    shift
+  fi
+  node "${__dirname}/npm-where.js" $(npm prefix -g) $@
+  # (
+  # $header && echo -e 'SPEC\tVERSION\tLOCATION\tDEPENDENT(S)';
+  # node "${__dirname}/npm-where.js" $(npm prefix -g) --json $@ |
+  # jq -r '[
+  #   map({ version: .version, dependent: .dependents[] | { spec: .spec, location: .from.location }, location: .location }) |
+  #   group_by(.dependent.spec + "\t" + .version + "\t" + .location) |
+  #   .[] |
+  #   sort_by(if .dependent.location | startswith("node_modules") then 1 else 0 end)
+  # ] | '"$sorting"' | .[] |
+  #   .[0].dependent.spec + "\t" + .[0].version + "\t" + .[0].location + "\t" +
+  #     (map(.dependent.location | if startswith("node_modules") then . else "'"$bold_color"'" + . + "'"$reset_color"'" end) | join(" "))'
+  # ) | column -t -s "$(echo -en '\t')"
+}
+
+if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
+  npm-where "$@"
+fi
