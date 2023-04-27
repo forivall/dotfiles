@@ -232,14 +232,29 @@ function git() { # also put these in git-aliases for autocomplete
       fi
       return
       ;;
+    push) gitcommand=$1; shift;
+      if ! (
+          (( $@[(Ie)--dry-run] )) ||
+          (( $@[(Ie)-n] )) ||
+          (( $@[(Ie)--force] )) ||
+          (( $@[(Ie)-f] ))
+        ) && (
+        (( $@[(Ie)--tags] ))
+      ); then
+        command git "${opts[@]}" push-tags $@
+      else
+        command git "${opts[@]}" $gitcommand $@
+      fi
+      return
+      ;;
     stashed) shift;
       git stash save && git "${opts[@]}" "$@" && git stash pop
       return
       ;;
-    wt) gitcommand=worktree; gitcommandopts=${#opts}; shift; cont=true;;
-    sm) gitcommand=submodule; gitcommandopts=${#opts}; shift; cont=true;;
-    sbt) gitcommand=subtree; gitcommandopts=${#opts}; shift; cont=true;;
-    worktree|submodule|subtree) gitcommand=$1; gitcommandopts=${#opts}; shift; cont=true;;
+    wt) gitcommand=worktree; gitcommandopts=${#opts}; shift; cont=true; ;;
+    sm) gitcommand=submodule; gitcommandopts=${#opts}; shift; cont=true; ;;
+    sbt) gitcommand=subtree; gitcommandopts=${#opts}; shift; cont=true; ;;
+    worktree|submodule|subtree) gitcommand=$1; gitcommandopts=${#opts}; shift; cont=true; ;;
   esac
   done
 

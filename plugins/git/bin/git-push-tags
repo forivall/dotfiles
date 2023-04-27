@@ -1,0 +1,104 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+autoload colors && colors
+
+opts=()
+while (( $# > 0 )); do
+  if [[ $1 != --tags ]]; then
+    opts+=($1)
+  fi
+  shift
+done
+
+
+OPTS_SPEC="\
+git push-tags [<options>] <args>...
+--
+h,help    show the help
+tags*                passthrough
+atomic*              passthrough
+no-signed*           passthrough
+signed?*             passthrough
+force-with-lease?*   passthrough
+force-if-includes*   passthrough
+no-verify*           passthrough
+v,verbose*           passthrough
+q,quiet*             passthrough
+repo=*               passthrough
+all*                 passthrough
+mirror*              passthrough
+d,delete*            passthrough
+tags*                passthrough
+n,dry-run*           passthrough
+porcelain*           passthrough
+f,force*             passthrough
+force-with-lease=*   passthrough
+force-if-includes*   passthrough
+recurse-submodules=* passthrough
+thin*                passthrough
+exec,receive-pack=*  passthrough
+u,set-upstream*      passthrough
+progress*            passthrough
+prune*               passthrough
+no-verify*           passthrough
+follow-tags*         passthrough
+signed?*             passthrough
+atomic*              passthrough
+o,push-option=*      passthrough
+4,ipv4*              passthrough
+6,ipv6*              passthrough
+"
+eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "${opts[@]}" || echo "git push -h; exit $?")"
+
+term_menu_options=()
+all=false
+remotes=false
+remote_option=
+checkout_options=()
+
+index=0
+for arg in $@; do
+  index=$((index+1))
+  case "$arg" in
+    --) break; ;;
+  esac
+done
+
+shift $index
+
+if (( index == 1 && $# > 0 )); then
+  git checkout -b $@
+  exit
+fi
+
+tags_to_push=()
+git push --tags --dry-run --porcelain $@ | while read line; do
+  if [[ $line == '='* ]] || [[ $line == Done ]]; then
+    :
+  elif [[ $line == '*'* ]]; then
+    parts=(${=line})
+    tags_to_push+=("${parts[2]}")
+  else
+    echo $line
+  fi
+done
+
+if (( "${#tags_to_push[@]}" == 0 )); then
+  echo No tags to push!
+  exit 0
+fi
+
+while (( "${#tags_to_push[@]}" > 0 )); do
+  simple-term-menu $term_menu_options "${tags_to_push[@]}" && i=0 || i=$?
+  if (( $i == 0 )) ; then exit; fi
+
+  echo git push $@ "${tags_to_push[$i]}"
+
+  tags_to_push=("${(@)tags_to_push[1,$i-1]}" "${(@)tags_to_push[$i+1,$#tags_to_push]}")
+done
+
+echo Done

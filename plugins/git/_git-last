@@ -1,0 +1,8 @@
+#compdef git-last
+#description alias for git-show --oneline --decorate --name-status --color
+
+_git-last () {
+  words=(show --oneline --decorate --name-status --color "${words[@]:1}")
+  (( CURRENT += 4 ))
+  _git-show
+}

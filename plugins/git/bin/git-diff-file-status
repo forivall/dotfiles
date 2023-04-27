@@ -1,0 +1,56 @@
+#!/usr/bin/env zsh
+
+autoload colors && colors
+
+__plugin_dirname=${0:a:h:h}
+
+output=$(git -c pager.diff=false diff --oneline --name-status --color "$@")
+for line in ${(f)output}; do
+  case ${line} in
+    A*) echo ${line:s/A/${fg[green]}A${reset_color}} ;;
+    M*) echo ${line:s/M/${fg[blue]}M${reset_color}} ;;
+    D*) echo ${line:s/D/${fg[red]}D${reset_color}} ;;
+    R*|C*)
+      a=("${(s:	:)line}")
+      parts_old=("${(s:/:)${a[2]}}")
+      parts_new=("${(s:/:)${a[3]}}")
+      parts_count=${#parts_old}
+      if (( ${#parts_old} > ${#parts_new} )); then
+        parts_count=${#parts_new}
+      fi
+      for ((prefix_common=1; prefix_common <= parts_count; prefix_common++)); do
+        if [[ "${parts_old[$prefix_common]}" != "${parts_new[$prefix_common]}" ]]; then
+          break
+        fi
+      done
+      for ((suffix_common=1; suffix_common <= parts_count; suffix_common++)); do
+        if [[ "${parts_old[ -$suffix_common]}" != "${parts_new[ -$suffix_common]}" ]]; then
+          break
+        fi
+      done
+      if (( suffix_common == 1 && prefix_common == 1 )); then
+        if [[ ${a[1]} == C* ]]; then
+          echo ${fg[cyan]}${a[1]}${reset_color} ${a[@]:1}
+        else
+          echo ${fg[magenta]}${a[1]}${reset_color} ${a[@]:1}
+        fi
+      else
+        if [[ ${a[1]} == C* ]]; then
+          printf '%s ' ${fg[cyan]}${a[1]}${reset_color}
+        else
+          printf '%s ' ${fg[magenta]}${a[1]}${reset_color}
+        fi
+        if (( prefix_common > 1 )); then
+          printf '%s/' ${(j:/:)${parts_old[@]:0:$((prefix_common-1))}}
+        fi
+        printf '{%s => ' ${(j:/:)${parts_old[@]:$((prefix_common-1)): -$((suffix_common-1))}}
+        printf '%s}' ${(j:/:)${parts_new[@]:$((prefix_common-1)): -$((suffix_common-1))}}
+        if (( suffix_common > 1 )); then
+          printf '/%s' ${(j:/:)${parts_old[@]: -$((suffix_common-1))}}
+        fi
+        printf '\n'
+      fi
+      ;;
+    *) echo $line
+  esac
+done

@@ -1,0 +1,7 @@
+#compdef git-showp
+#description interactive git-show
+
+_git-showp () {
+  words=(show "${words[@]:1}")
+  _git-show
+}
