@@ -2,7 +2,7 @@
 --smart-case
 
 --glob
-!.git/*
+!**/.git/**
 
 --glob
 !package-lock.json
