@@ -25,7 +25,10 @@ __git-patch-filepicker() {
     if [[ $getitems = *_vars ]]; then
       $getitems "$@"
     else
+      local OIFS=$IFS
+      IFS=$'\n'
       items=($($getitems "$@"))
+      IFS="$OIFS"
     fi
     if $first && (( ${#items} == 1 )); then
       i=1

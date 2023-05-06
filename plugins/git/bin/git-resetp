@@ -16,9 +16,12 @@ __git-resetp-hasfiles() {
   ! git diff-index --quiet --cached $revs
 }
 __git-resetp-getitems_vars() {
+  local OIFS=$IFS
+  IFS=$'\n'
   items=(
     $(git diff --cached --name-only "$@")
   )
+  IFS="$OIFS"
   term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs")
 }
 __git-resetp-dointeractive() {

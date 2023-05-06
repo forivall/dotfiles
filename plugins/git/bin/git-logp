@@ -6,12 +6,15 @@ __plugin_dirname=${0:a:h:h}
 args=()
 pretty=()
 files=()
+haspretty=false
 dashdash=false
 allfiles=false
 reflog=false
 stash=false
 showdiff=true
 forcediff=false
+namestatus=false
+
 dry=false
 navigate=${$(git config delta.navigate):-false}
 
@@ -27,10 +30,12 @@ case "$1" in
   stash) stash=true; args+=(stash); pretty+=(--pretty=medium) ;&
   --walk-reflogs) reflog=true; shift; continue; ;;
   --patch|--p) forcediff=true; ;&
-  --no-patch|--name-status|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary) showdiff=false; ;&
-  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines|--pretty=*)
+  --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary) showdiff=false; ;&
+  --name-status) namestatus=true; shift; continue; ;;
+  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines)
     pretty+=($1); shift; continue; ;;
-  --pretty) pretty+=($1 $2); shift; shift; continue; ;;
+  --pretty=*) haspretty=true; pretty+=($1); shift; continue; ;;
+  --pretty) haspretty=true; pretty+=($1 $2); shift; shift; continue; ;;
   --navigate) navigate=true; shift; continue; ;;
   --no-navigate) navigate=false; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
@@ -62,6 +67,10 @@ if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
   deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
 fi
 
+if $namestatus && ! $haspretty; then
+  pretty+=(--pretty=medium)
+fi
+
 output=()
 for commit in ${(f)refspecs}; do
   if $reflog; then
@@ -70,17 +79,23 @@ for commit in ${(f)refspecs}; do
       local commitbase="$commit^"
       if $showdiff || $forcediff; then
         reflog_command+="git diff --color --pretty= ${(q+@)commitbase} ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
+      elif $namestatus; then
+        reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
       else
         reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
       fi
     else
       if $showdiff || $forcediff; then
         reflog_command+="git show --color --pretty= ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
+      elif $namestatus; then
+        reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
       else
         reflog_command+="echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
       fi
     fi
     output+=("<($reflog_command)")
+  elif $namestatus; then
+    output+=("<(git last --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash)")
   else
     output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
   fi

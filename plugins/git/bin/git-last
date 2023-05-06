@@ -4,12 +4,44 @@ autoload colors && colors
 
 __plugin_dirname=${0:a:h:h}
 
-output=$(git -c pager.show=false show --oneline --decorate --name-status --color "$@")
-first=true
+args=()
+pretty=()
+haspretty=false
+
+while (( $# > 0 )); do
+case "$1" in
+  --pretty=*) haspretty=true; pretty+=($1); shift; continue; ;;
+  --pretty) haspretty=true; pretty+=($1 $2); shift; shift; continue; ;;
+  *) args+=("$1"); shift; continue; ;;
+esac
+break
+done
+
+if ! $haspretty; then
+  pretty+=(--oneline)
+fi
+
+output=$(git -c pager.show=false show ${pretty[@]} --name-status --color "${args[@]}")
+first=1
+if [[ $pretty == *short* ]]; then
+  first=2
+elif [[ $pretty == *medium* ]]; then
+  first=3
+elif [[ $pretty == *fuller* ]]; then
+  first=5
+elif [[ $pretty == *full* ]]; then
+  first=3
+elif [[ $pretty == *%n* ]]; then
+  parts=("${(s:%n:)pretty}")
+  first="${#parts}"
+  (( first -= 1 ))
+fi
+
+
 for line in ${(f)output}; do
-  if $first; then
+  if (( first > 0 )); then
     echo $line
-    first=false
+    (( first -= 1 ))
     continue
   fi
   case ${line} in

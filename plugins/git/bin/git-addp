@@ -13,10 +13,13 @@ __git-addp-hasfiles() {
   ! git ls-files --other --directory --no-empty-directory --exclude-standard $@ | sed q1 > /dev/null
 }
 __git-addp-getitems_vars() {
+  local OIFS=$IFS
+  IFS=$'\n'
   items=(
     $(git diff --name-only $@)
     $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
   )
+  IFS="$OIFS"
   term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items}")
 }
 __git-addp-dointeractive() {

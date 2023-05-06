@@ -9,6 +9,8 @@ local revs=(${(f)$(git rev-parse --revs-only $@)})
 local cdup=$(git rev-parse --show-cdup)
 
 __git-diffp-hasfiles() {
+  local OIFS=$IFS
+  IFS=$'\n'
   items=(
     $(git diff --name-only $@)
   )
@@ -17,6 +19,7 @@ __git-diffp-hasfiles() {
       $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
     )
   fi
+  IFS="$OIFS"
   (( ${#items} > 0 ))
 }
 __git-diffp-getitems_vars() {

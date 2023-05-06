@@ -10,9 +10,12 @@ local revs=(${(f)$(git rev-parse --revs-only "$@")})
 local cdup=$(git rev-parse --show-cdup)
 
 __git-checkoutp-hasfiles() {
+  local OIFS=$IFS
+  IFS=$'\n'
   items=(
     $(git diff --name-only "$@")
   )
+  IFS="$OIFS"
   (( ${#items} > 0 ))
 }
 __git-checkoutp-getitems_vars() {

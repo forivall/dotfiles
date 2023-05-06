@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+if [[ $1 == --*\ * ]]; then
+  exec git -c color.branch=always branch --list -vvv ${1%% *} ${1#--* }
+fi
+exec git -c color.branch=always branch --list -vvv $1
