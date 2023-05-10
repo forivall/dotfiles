@@ -183,7 +183,7 @@ function git() { # also put these in git-aliases for autocomplete
   while $cont && (( $# > 0 )); do
   cont=false
   case "$1" in
-    -*) opts+=($1 $2); shift; (( $# > 0 )) && shift; cont=true;;
+    -*) opts+=($1 $2); shift; (( $# > 0 )) && shift; cont=true ;;
     fancy) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
       git -c color.diff=always "${opts[@]}" "$@" | diff-so-fancy | $pager
@@ -198,15 +198,10 @@ function git() { # also put these in git-aliases for autocomplete
       return
       ;;
     delta|diffd) shift;
-      local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
-      local deltaOpts=()
-      if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-        deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
-      fi
       if (( $# == 0 )) || [[ $1 == -* ]] || [[ $1 == @* ]] || ! command git --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
-        git -c color.diff=always diff "${opts[@]}" "$@" | command delta "${deltaOpts[@]}"
+        git -c core.pager=deltaw diff "${opts[@]}" "$@"
       else
-        git -c color.diff=always "${opts[@]}" "$@" | command delta "${deltaOpts[@]}"
+        git -c core.pager=deltaw "${opts[@]}" "$@"
       fi
       return
       ;;

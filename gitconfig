@@ -11,6 +11,7 @@
 	excludesfile = ~/.gitignore
 	trustctime = false
 	editor = vim
+	editor = nvim
 	# trustctime = false
 [diff]
 	renames = copies
