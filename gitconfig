@@ -11,7 +11,6 @@
 	excludesfile = ~/.gitignore
 	trustctime = false
 	editor = vim
-	editor = nvim
 	# trustctime = false
 [diff]
 	renames = copies
@@ -238,7 +237,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
 [difftool "vscode"]
-	cmd = code \"$LOCAL\" \"$REMOTE\" --diff
+	cmd = code --wait \"$LOCAL\" \"$REMOTE\" --diff
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

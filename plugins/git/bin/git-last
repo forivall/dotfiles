@@ -81,8 +81,13 @@ for line in ${(f)output}; do
         if (( prefix_common > 1 )); then
           printf '%s/' ${(j:/:)${parts_old[@]:0:$((prefix_common-1))}}
         fi
-        printf '{%s => ' ${(j:/:)${parts_old[@]:$((prefix_common-1)): -$((suffix_common-1))}}
-        printf '%s}' ${(j:/:)${parts_new[@]:$((prefix_common-1)): -$((suffix_common-1))}}
+        if (( suffix_common > 2)); then
+          printf '{%s => ' ${(j:/:)${parts_old[@]:$((prefix_common-1)): -$((suffix_common-1))}}
+          printf '%s}' ${(j:/:)${parts_new[@]:$((prefix_common-1)): -$((suffix_common-1))}}
+        else
+          printf '{%s => ' ${(j:/:)${parts_old[@]:$((prefix_common-1))}}
+          printf '%s}' ${(j:/:)${parts_new[@]:$((prefix_common-1))}}
+        fi
         if (( suffix_common > 1 )); then
           printf '/%s' ${(j:/:)${parts_old[@]: -$((suffix_common-1))}}
         fi
