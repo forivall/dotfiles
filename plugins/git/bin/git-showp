@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-__plugin_dirname=${0:a:h:h}
+__dirname=${0:a:h:h}
 
 git --no-pager show --no-patch "$@"
 echo
@@ -18,11 +18,13 @@ __git-showp-getitems_vars() {
   items=(
     $(git show --format='' --name-only "$@")
   )
-  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $@ -- {}")
+  term_menu_options=(--no-preview-border --preview "$__dirname/__git-showp-preview $cdup{} ${#items} $@")
 }
 __git-showp-dointeractive() {
   git-delta show --format='' $revs "$@"
 }
-source $__plugin_dirname/__git-patch-filepicker \
+source $__dirname/__git-patch-filepicker \
   __git-showp-{hasfiles,getitems_vars,dointeractive} "$@"
 
+
+git --no-pager show --format= --stat "$@"

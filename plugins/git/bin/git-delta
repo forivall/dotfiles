@@ -6,6 +6,9 @@ git-delta() {
   local gitcommand=()
   if (( $# == 0 )) || [[ $1 == -* ]] || ! command git ${(Q)git_config_args} --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
     gitcommand+=(diff)
+  else
+    gitcommand+=($1)
+    shift
   fi
 
   if [[ $1 != --color ]] && ! [[ -t 1 ]]; then
@@ -22,4 +25,7 @@ git-delta() {
   git -c color.diff=always "${gitcommand[@]}" "$@" | command delta "${deltaOpts[@]}" --pager "$pager"
 }
 
-git-delta "$@"
+if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
+  git-delta "$@"
+fi
+

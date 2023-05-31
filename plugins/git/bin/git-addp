@@ -38,6 +38,8 @@ __git-addp-dointeractive() {
   fi
 }
 source $__plugin_dirname/__git-patch-filepicker \
-  __git-addp-{hasfiles,getitems_vars,dointeractive} $@
+  __git-addp-{hasfiles,getitems_vars,dointeractive} $@ &&
 
 echo 'Nothing left to stage'
+
+true

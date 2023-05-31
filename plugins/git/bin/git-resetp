@@ -25,9 +25,15 @@ __git-resetp-getitems_vars() {
   term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs")
 }
 __git-resetp-dointeractive() {
-  git "${configArgs[@]}" reset -p "${revs[@]}" "$@"
+  git "${configArgs[@]}" reset -p "${revs[@]}" "$@" || local code=$?
+  if (( code != 134 )); then
+    return $code
+  fi
+  git "${configArgs[@]}" reset "${revs[@]}" "$@"
 }
 source "$__dirname/../__git-patch-filepicker" \
-  __git-resetp-{hasfiles,getitems_vars,dointeractive} "$@"
+  __git-resetp-{hasfiles,getitems_vars,dointeractive} "$@" &&
 
 echo 'No changes are currently staged'
+
+true

@@ -1,0 +1,96 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+if (( $# <= 0 )) || ! [[ $1 = diff || $1 = diffc || $1 = grep || $1 = rg || $1 = show ]]; then
+  gitcommand=show
+else
+  gitcommand=$1
+  shift
+fi
+
+
+local configArgs=()
+local flags=()
+local items=()
+
+local cdup=$(git rev-parse --show-cdup)
+
+case "$gitcommand" in
+  diffc)
+    flags+=(--cached); ;&
+  diff)
+    local revs=(${(f)$(git rev-parse --revs-only "$@")})
+    if (( ${#revs} == 0 )); then
+      revs+=(HEAD)
+    fi
+
+    __git-editp-hasfiles() {
+      ! git diff-index --quiet "${flags[@]}" $revs
+    }
+    __git-editp-getitems_vars() {
+      local OIFS=$IFS
+      IFS=$'\n'
+      items=(
+        $(git diff "${flags[@]}" --name-only "$@")
+      )
+      IFS="$OIFS"
+      term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} ${flags[@]} $revs")
+    }
+  ;;
+  grep)
+    __git-editp-hasfiles() {
+      local OIFS=$IFS
+      IFS=$'\n'
+      items=(
+        $(git -c color.grep=never grep --name-only $@)
+      )
+      IFS="$OIFS"
+      (( ${#items} > 0 ))
+    }
+    __git-editp-getitems_vars() {
+      usecdup=false
+      term_menu_options=(--no-preview-border --preview "git -c color.grep=always grep -h ${(q+@)@} -- {}")
+    }
+  ;;
+  rg)
+    __git-editp-hasfiles() {
+      local OIFS=$IFS
+      IFS=$'\n'
+      items=(
+        $(rg --files-with-matches $@)
+      )
+      IFS="$OIFS"
+      (( ${#items} > 0 ))
+    }
+    __git-editp-getitems_vars() {
+      usecdup=false
+      term_menu_options=(--no-preview-border --preview "rg --color=always --no-filename --line-number ${(q+@)@} -- {}")
+    }
+  ;;
+  show)
+    __git-editp-hasfiles() {
+      git rev-parse "$@" > /dev/null
+    }
+    __git-editp-getitems_vars() {
+      items=(
+        $(git show --format='' --name-only "$@")
+      )
+      term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@")
+    }
+  ;;
+esac
+
+__git-editp-dointeractive() {
+  # TODO: read editor option from git config
+  echo code "$@"
+  code "$@"
+}
+source "$__plugin_dirname/__git-patch-filepicker" \
+  __git-editp-{hasfiles,getitems_vars,dointeractive} "$@" &&
+
+echo 'No changes are currently staged'
+
+true

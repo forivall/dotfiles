@@ -133,7 +133,7 @@
 
 [color]
 	# diff = always
-	grep = always
+	grep = auto
 	interactive = always
 	status = always
 	ui = auto

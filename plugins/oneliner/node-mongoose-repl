@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+node --experimental-repl-await -i -e "
+console.log('Starting mongo memory server and connecting. please wait.');
+var { MongoMemoryServer } = require('mongodb-memory-server');
+var mongoose = require('mongoose');
+var mongod;
+MongoMemoryServer.create().then(async (it) => {
+  mongod = it;
+  await mongoose.connect(mongod.getUri());
+  console.log('Connected to', mongod.getUri());
+  process.stdout.write('> ');
+})"
