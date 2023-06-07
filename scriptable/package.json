@@ -1,0 +1,18 @@
+{
+  "name": "scriptable",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "emily",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/scriptable-ios": "^1.7.0",
+    "prettier": "^2.8.7"
+  }
+}

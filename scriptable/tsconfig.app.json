@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "noEmit": true,
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "types": ["scriptable-ios"]
+  },
+  "exclude": ["*.node.js"],
+  "include": ["*.scriptable.js"]
+}
