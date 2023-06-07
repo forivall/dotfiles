@@ -23,9 +23,9 @@ fi
 
 output=$(git -c pager.show=false show ${pretty[@]} --name-status --color "${args[@]}")
 first=1
-if [[ $pretty == *short* ]]; then
+if [[ $pretty == *short* ]] || [[ $pretty == *twoline* ]] || [[ $pretty == *twomore* ]]; then
   first=2
-elif [[ $pretty == *medium* ]]; then
+elif [[ $pretty == *medium* ]] || [[ $pretty == *concise* ]]; then
   first=3
 elif [[ $pretty == *fuller* ]]; then
   first=5

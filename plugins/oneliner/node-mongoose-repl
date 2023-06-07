@@ -1,12 +1,18 @@
 #!/usr/bin/env zsh
-node --experimental-repl-await -i -e "
+node --experimental-repl-await -r ts-node/register -i -e "
 console.log('Starting mongo memory server and connecting. please wait.');
 var { MongoMemoryServer } = require('mongodb-memory-server');
 var mongoose = require('mongoose');
 var mongod;
+var db;
+var ttc;
 MongoMemoryServer.create().then(async (it) => {
   mongod = it;
-  await mongoose.connect(mongod.getUri());
+  const connected = await mongoose.connect(mongod.getUri());
+  db = connected.connection;
   console.log('Connected to', mongod.getUri());
+  ttc = require('@ttc/tenthousandcoffees-schema');
+  console.log('Loaded variables: mongoose, mongod, db');
   process.stdout.write('> ');
-})"
+});
+"

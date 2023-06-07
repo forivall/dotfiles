@@ -18,6 +18,24 @@ local items=()
 
 local cdup=$(git rev-parse --show-cdup)
 
+get_first_added_line() {
+  set -o extendedglob
+  local head
+  local added
+  while read line; do
+    if [[ $line == @@*@@* ]]; then
+      head=${line#@@ #-<1->(|,<0->) ##+}
+      added=${head%% #@@*}
+      if [[ $added != *,0 ]]; then
+        echo ${added%,<1->}
+        return
+      fi
+    fi
+  done
+  echo 1
+}
+
+
 case "$gitcommand" in
   diffc)
     flags+=(--cached); ;&
@@ -39,8 +57,20 @@ case "$gitcommand" in
       IFS="$OIFS"
       term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} ${flags[@]} $revs")
     }
+    __git-editp-dointeractive() {
+      # TODO: read editor option from git config
+      echo git diff $revs $1
+      local goto="$1:$(git diff -U0 $revs $1 | get_first_added_line)"
+      echo code --goto "$goto"
+      code --goto "$goto"
+    }
   ;;
   grep)
+    args=()
+    for arg in "$@"; do
+      if [[ $arg == -- ]]; then break; fi
+      args+=($arg)
+    done
     __git-editp-hasfiles() {
       local OIFS=$IFS
       IFS=$'\n'
@@ -53,6 +83,14 @@ case "$gitcommand" in
     __git-editp-getitems_vars() {
       usecdup=false
       term_menu_options=(--no-preview-border --preview "git -c color.grep=always grep -h ${(q+@)@} -- {}")
+    }
+    __git-editp-dointeractive() {
+      # TODO: read editor option from git config
+      local loc=""
+      set -o extendedglob; local result="$(git grep -m 1 -h -n --column $args -- $1)";
+      [[ $result = (#b)(<0->:<0->)* ]] && loc=":${result[$mbegin[1],$mend[1]]}"
+      echo code --goto "$1$loc"
+      code --goto "$1$loc"
     }
   ;;
   rg)
@@ -69,6 +107,14 @@ case "$gitcommand" in
       usecdup=false
       term_menu_options=(--no-preview-border --preview "rg --color=always --no-filename --line-number ${(q+@)@} -- {}")
     }
+    __git-editp-dointeractive() {
+      # TODO: read editor option from git config
+      local loc=""
+      set -o extendedglob; local result="$(rg -m 1 -n --column $args -- $1)";
+      [[ $result = (#b)(<0->:<0->)* ]] && loc=":${result[$mbegin[1],$mend[1]]}"
+      echo code --goto "$1$loc"
+      code --goto "$1$loc"
+    }
   ;;
   show)
     __git-editp-hasfiles() {
@@ -80,14 +126,15 @@ case "$gitcommand" in
       )
       term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@")
     }
+    __git-editp-dointeractive() {
+      # TODO: read editor option from git config
+      local goto="$1:$(git show -U0 --format='' $revs $1 | get_first_added_line)"
+      echo code --goto "$goto"
+      code --goto "$goto"
+    }
   ;;
 esac
 
-__git-editp-dointeractive() {
-  # TODO: read editor option from git config
-  echo code "$@"
-  code "$@"
-}
 source "$__plugin_dirname/__git-patch-filepicker" \
   __git-editp-{hasfiles,getitems_vars,dointeractive} "$@" &&
 
