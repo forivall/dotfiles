@@ -26,7 +26,7 @@ __git-diffp-getitems_vars() {
   term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} $revs")
 }
 __git-diffp-dointeractive() {
-  git-delta diff --format='' $revs $@
+  git-delta diff --format='' $revs --rotate-to="$1"
 }
 source $__plugin_dirname/__git-patch-filepicker \
   __git-diffp-{hasfiles,getitems_vars,dointeractive} $@

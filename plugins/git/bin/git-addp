@@ -23,18 +23,18 @@ __git-addp-getitems_vars() {
   term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items}")
 }
 __git-addp-dointeractive() {
-  if git ls-files --error-unmatch $@ 2>/dev/null >/dev/null; then
-    git "${configArgs[@]}" add -p $@
+  if git ls-files --error-unmatch $1 2>/dev/null >/dev/null; then
+    git "${configArgs[@]}" add -p $1
   else
-    git "${configArgs[@]}" add $@
-    local display_cmd=(git "${configArgs[@]}" diff --cached $@)
+    git "${configArgs[@]}" add $1
+    local display_cmd=(git "${configArgs[@]}" diff --cached $1)
     local diff_filter=$(git config interactive.diffFilter)
     if [[ -n $diff_filter ]]; then
       $display_cmd | eval $diff_filter | eval $(git var GIT_PAGER)
     else
       $display_cmd | eval $(git var GIT_PAGER)
     fi
-    echo Added $@
+    echo Added $1
   fi
 }
 source $__plugin_dirname/__git-patch-filepicker \

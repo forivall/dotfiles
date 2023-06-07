@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+remote=$(git rev-parse --symbolic-full-name @{upstream})
+remote=${remote#refs/remotes/}
+
+repo=${remote%%/*}
+branch=${remote#*/}
+
+if [[ $branch != feature/* ]]; then
+  echo "Not a feature remote branch!"
+  exit 1
+fi
+
+tracking_deploy=feature-deploy/${branch#feature/}
+
+if (( $@[(Ie)-d] )) || (( $@[(Ie)--delete] )); then
+  echo "Deleting $tracking_deploy from remote"
+  echo git push "$@" $repo $tracking_deploy
+  git push "$@" $repo $tracking_deploy
+  exit
+fi
+
+ref=HEAD
+if (( $# > 0 )) && [[ $1 != -* ]]; then
+  ref=$1
+  shift
+fi
+
+echo git push "$@" $repo $ref:$tracking_deploy
+git push "$@" $repo $ref:$tracking_deploy
