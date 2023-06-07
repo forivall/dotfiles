@@ -25,11 +25,11 @@ __git-resetp-getitems_vars() {
   term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs")
 }
 __git-resetp-dointeractive() {
-  git "${configArgs[@]}" reset -p "${revs[@]}" "$@" || local code=$?
+  git "${configArgs[@]}" reset -p "${revs[@]}" "$1" || local code=$?
   if (( code != 134 )); then
     return $code
   fi
-  git "${configArgs[@]}" reset "${revs[@]}" "$@"
+  git "${configArgs[@]}" reset "${revs[@]}" "$1"
 }
 source "$__dirname/../__git-patch-filepicker" \
   __git-resetp-{hasfiles,getitems_vars,dointeractive} "$@" &&

@@ -60,12 +60,21 @@ html:not(:focus-within):not(:hover) .Overlay {
   opacity: 0.2;
   filter: blur(4px);
 }
-html:not(:focus-within):not(:hover) .Widgets .Slot:not(.topRight, .bottomRight) {
+html:not(:focus-within):not(:hover) .Widgets .Slot {
   color: silver;
 }
+.Widgets .Slot:is(.topRight, .bottomRight) {
+  text-shadow: #00000000 0 2px 80px;
+}
 html:not(:focus-within):not(:hover) .Widgets .Slot:is(.topRight, .bottomRight) {
-  opacity: 0.4;
+  color: #eeeeee;
+  opacity: 0.7;
   filter: blur(0.1px);
+  text-shadow: #000000C0 0 2px 60px;
+
+}
+html:not(:focus-within):not(:hover) .Dashboard.dark .Widgets .Slot:is(.topRight, .bottomRight) .theme-stroke {
+  stroke: #e0e0e0;
 }
 html:not(:focus-within):not(:hover) .Widgets .Slot.middleCentre {
   opacity: 0;
@@ -81,7 +90,8 @@ html:not(:focus-within):not(:hover) .credit {
   transition:
     opacity 0.5s ease-out,
     color 0.5s ease-out,
-    filter 0.5s ease-out;
+    filter 0.5s ease-out,
+    text-shadow 0.3s linear;
 }
 .image.fullscreen {
   transition: filter 0.5s ease-out;

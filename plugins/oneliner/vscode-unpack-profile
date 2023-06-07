@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+local tempfile=$(mktemp)
+jq . $1 > $tempfile
+mv $tempfile $1
+
+mkdir -p $1.unpacked
+for k in $(jq "keys[]" $1); do
+  case $k in
+    '"name"')
+      :
+      ;;
+    '"extensions"')
+      jq -r ".$k" $1 | jq . > $1.unpacked/$(echo "$k" | jq -r .).json
+      ;;
+    '"keybindings"'|'"settings"')
+      jq -r ".$k" $1 | jq -r ".$k" > $1.unpacked/$(echo $k | jq -r .).json
+      ;;
+    *)
+      echo "warning: $k was not unpacked!"
+  esac
+done

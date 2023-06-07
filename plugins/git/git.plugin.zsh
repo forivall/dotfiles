@@ -189,15 +189,7 @@ function git() { # also put these in git-aliases for autocomplete
       git -c color.diff=always "${opts[@]}" "$@" | diff-so-fancy | $pager
       return
       ;;
-    deltac|diffcd) shift;
-      git delta "${opts[@]}" diffc "$@";
-      return
-      ;;
-    deltas|showd) shift;
-      git delta "${opts[@]}" show "$@";
-      return
-      ;;
-    delta|diffd) shift;
+    delta) shift;
       if (( $# == 0 )) || [[ $1 == -* ]] || [[ $1 == @* ]] || ! command git --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
         git -c core.pager=deltaw diff "${opts[@]}" "$@"
       else
@@ -205,7 +197,7 @@ function git() { # also put these in git-aliases for autocomplete
       fi
       return
       ;;
-    diff|diffc|show) gitcommand=$1; shift;
+    diff|show|deltac|deltas|diffc|diffd|diffcd|showd|showd2) gitcommand=$1; shift;
       if ! ( (( $@[(Ie)--patch] )) || (( $@[(Ie)-p] )) ) && (
         (( $@[(Ie)--no-patch] )) ||
         (( $@[(Ie)--name-status] )) ||

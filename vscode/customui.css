@@ -2,9 +2,9 @@
 /* .windows.windows{font-family:Segoe WPC,Segoe UI,sans-serif} */
 /* .linux.linux{font-family:system-ui,Ubuntu,Droid Sans,sans-serif} */
 .mac.mac {font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif}
-.mac.mac{--monaco-monospace-font:"FantasqueSansMono Nerd Font","SF Mono",Monaco,Menlo,Courier,monospace}
-.windows.windows{--monaco-monospace-font:"FantasqueSansMono Nerd Font",Consolas,"Courier New",monospace}
-.linux.linux{--monaco-monospace-font:"FantasqueSansMono Nerd Font","Ubuntu Mono","Liberation Mono","DejaVu Sans Mono","Courier New",monospace}
+.mac.mac{--monaco-monospace-font:"FantasqueSansM Nerd Font","FantasqueSansMono Nerd Font","SF Mono",Monaco,Menlo,Courier,monospace}
+.windows.windows{--monaco-monospace-font:"FantasqueSansM Nerd Font","FantasqueSansMono Nerd Font",Consolas,"Courier New",monospace}
+.linux.linux{--monaco-monospace-font:"FantasqueSansM Nerd Font","FantasqueSansMono Nerd Font","Ubuntu Mono","Liberation Mono","DejaVu Sans Mono","Courier New",monospace}
 :root {
   --font-size-13: 12px;
   /* --row-height: 18px; --factor: 0.81818; /* 18/22*/
