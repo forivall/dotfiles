@@ -19,7 +19,7 @@
     "ts-loader": "^4.4.1",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.2",
-    "webpack": "^5.39.1",
+    "webpack": "^5.86.0",
     "webpack-nano": "^1.1.1"
   }
 }
