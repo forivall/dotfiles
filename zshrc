@@ -56,6 +56,11 @@ fi
 # export SHELL=$(whence $(ps wwwe -p $$ -o comm=))  # broken on m1 mac
 # export SHELL=zsh
 export EDITOR=vim
+if type nvim >/dev/null ; then
+  export EDITOR=nvim
+fi
+# TODO: kakoune (kak) or helix-term (hx)
+
 export VISUAL=code
 export LC_ALL="en_CA.UTF-8"
 HISTSIZE=50000; SAVEHIST=10000
@@ -223,6 +228,7 @@ if ! zgen saved; then
   zgen load jscutlery/nx-completion '' main
   # zgen load forivall/nx-completion '' update
   zgen load "$__zshrc_dirname/plugins/magic-cd"
+  zgen load "$__zshrc_dirname/plugins/ngrok"
   zgen load "$__zshrc_dirname/plugins/npm"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
   whence twilio > /dev/null && zgen load "$__zshrc_dirname/plugins/twilio"

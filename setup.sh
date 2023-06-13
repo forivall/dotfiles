@@ -78,6 +78,8 @@ o ln -fs "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
 if $IS_OSX ; then
   mkdir ~/.config/mackup
   o ln -fs "$(realpath mackup.cfg)" ~/.mackup.cfg
+  mkdir ~/.config/yabai
+  o ln -fs "$(realpath config/yabairc)" ~/.config/yabai/yabairc
 fi
 # TODO: gnu stow or some other alternative to mackup for linux.
 

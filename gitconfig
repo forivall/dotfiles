@@ -66,6 +66,7 @@
 	lg2 = log --name-status --pretty=onemore --graph --no-notes
 	lg3 = log --name-status --pretty=twoline --graph --date=local
 	lgp = log -p --pretty=onemore --graph
+	logd = -c core.pager=deltaw log --pretty=concise
   logp2 = logp --pretty=concise
   show2 = show --pretty=concise
   showd2 = showd --pretty=concise
@@ -170,7 +171,7 @@
 	ll = true
 	ls-files = false
 [pretty]
-	concise = "format:%C(yellow)%H%C(auto)%d%C(magenta)%n%an <%ae>%Creset%nA: %C(blue)%aD%Creset, C: %C(blue)%cD%Creset%n%n%-s%n%Creset%n%-b"
+	concise = "format:%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae>%Creset%n%C(blue)✍ %aD%C(reset) %C(cyan)⚓︎%cD%Creset%n%n%-s%n%Creset%n%-b"
 	onemore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset %s"
 	twomore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset%n%-s"
 	twoline = "format:%C(yellow)%h%C(auto)%d%C(magenta) %aE %Creset%C(blue)%ad%C(green)%gn%Creset %n%s"
