@@ -30,10 +30,13 @@ case "$1" in
   stash) stash=true; args+=(stash); pretty+=(--pretty=medium) ;&
   --walk-reflogs) reflog=true; shift; continue; ;;
   --patch|--p) forcediff=true; ;&
-  --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary) showdiff=false; ;&
-  --name-status) namestatus=true; shift; continue; ;;
+  --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary)
+      showdiff=false; pretty+=("$1"); shift;
+    ;;
+  --name-status) showdiff=false; namestatus=true; shift; continue; ;;
   --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines)
-    pretty+=($1); shift; continue; ;;
+      pretty+=($1); shift; continue;
+    ;;
   --pretty=*) haspretty=true; pretty+=($1); shift; continue; ;;
   --pretty) haspretty=true; pretty+=($1 $2); shift; shift; continue; ;;
   --navigate) navigate=true; shift; continue; ;;

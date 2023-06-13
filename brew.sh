@@ -116,7 +116,8 @@ brew install --cask visual-studio-code
 brew install --cask sublime-merge sublime-text # sublime merge uses installed sublime text syntaxes
 brew install --cask iterm2 termhere
 
-brew install --cask karabiner-elements middleclick
+brew install --cask karabiner-elements middleclick mos
+# brew install --cask mouse-fix linearmouse
 brew install --cask beardedspice
 brew install --cask rectangle
 # https://bahoom.com/hyperdock/

@@ -269,13 +269,17 @@ var t = T.newTheme(T({hasUnicode: true, hasColor: true}), {
   ]
 })
 var g = new G({theme: t});
-var n, max=200;
+var n, max=250;
+function easeOutQuad (t, b, c, d) {
+    if ((t /= d / 2) < 1) return c / 2 * t * t + b;
+    return -c / 2 * ((--t) * (t - 2) - 1) + b;
+}
 process.stdin.on('data', (d) => {
   g.pulse();
   var s = d.toString('utf-8').trim();
   if (s) n = Number(s);
   if (n > max) max = n;
-  g.show('brightness: ' + n.toFixed(1) + ' lux', Math.sqrt(n) / Math.sqrt(max))
+  g.show('brightness: ' + n.toFixed(1) + ' lux', easeOutQuad(n / max, 0, 1, 1))
 });
 process.stdin.on('end', () => {
   g.hide();

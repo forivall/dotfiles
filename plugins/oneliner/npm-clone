@@ -23,5 +23,13 @@ else
   )"
 fi
 
-echo git clone "$repo" "$1"
-git clone "$repo" "$1"
+dest=$1
+if (( $# > 1 )); then
+  dest=$2
+fi
+if [[ "$dest" != "--dry-run" ]]; then
+  echo git clone "$repo" "$dest"
+  git clone "$repo" "$dest"
+else
+  echo "$repo"
+fi
