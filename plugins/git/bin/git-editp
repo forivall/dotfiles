@@ -94,6 +94,11 @@ case "$gitcommand" in
     }
   ;;
   rg)
+    args=()
+    for arg in "$@"; do
+      if [[ $arg == -- ]]; then break; fi
+      args+=($arg)
+    done
     __git-editp-hasfiles() {
       local OIFS=$IFS
       IFS=$'\n'
@@ -105,7 +110,8 @@ case "$gitcommand" in
     }
     __git-editp-getitems_vars() {
       usecdup=false
-      term_menu_options=(--no-preview-border --preview "rg --color=always --no-filename --line-number ${(q+@)@} -- {}")
+
+      term_menu_options=(--no-preview-border --preview "rg --color=always --no-filename --line-number ${(q+@)args} -- {}")
     }
     __git-editp-dointeractive() {
       # TODO: read editor option from git config

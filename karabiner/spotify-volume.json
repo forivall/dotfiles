@@ -1,0 +1,122 @@
+{
+  "title": "Spotify Volume Control",
+  "rules": [
+    {
+      "description": "Control spotify volume with control + volume keys",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_increment",
+            "modifiers": {
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume + 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_decrement",
+            "modifiers": {
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume - 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Control spotify volume with cmd + F14/F15",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f15",
+            "modifiers": {
+              "mandatory": [
+                "left_gui"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume + 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f14",
+            "modifiers": {
+              "mandatory": [
+                "left_gui"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume - 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Control spotify volume with cmd + pause/scroll lock",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "pause",
+            "modifiers": {
+              "mandatory": [
+                "left_gui"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume + 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "scroll_lock",
+            "modifiers": {
+              "mandatory": [
+                "left_gui"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume - 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

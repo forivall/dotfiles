@@ -48,9 +48,11 @@
 	diffd = -c core.pager=deltaw diff
 	diffcd = -c core.pager=deltaw diff --cached
 	showd = -c core.pager=deltaw show
+	stashsd = -c core.pager=deltaw stash show -p
 	last = -c pager.show=off show --oneline --name-status --decorate
 	last2 = last --name-status --pretty=twomore
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
+	lr = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
 	lu = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
@@ -135,6 +137,7 @@
 	file-size-diff = !git-file-size-diff
 	find-blob = !git-find-blob
 	has-changes = !git-has-changes
+	push-feature-deploy = !git-push-feature-deploy
 	resolve-conflicts = !git-resolve-conflicts
 
 [color]
