@@ -17,6 +17,7 @@ aliases:
     '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u}
     | sd "^[^/]*/" "" ) "$@"'
   pr-merge-base: '!git merge-base ${1-HEAD} origin/$(gh pr view --json baseRefName -q .baseRefName)'
+  pr-merge-commit: pr view --json mergeCommit -q .mergeCommit.oid
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

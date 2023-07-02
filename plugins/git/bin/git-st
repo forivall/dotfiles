@@ -30,6 +30,7 @@ git -c 'color.status=always' status -b -s -uno "$@" &&
 echo -n '   '
 git status --porcelain "$@" $(default_paths) |
   rg '^\?\? ' |
+  sd '^\?\? '"$cwd_prefix"'$' "${fg[magenta]}./${reset_color}" |
   sd '^\?\? '"$cwd_prefix"'(.+)$' "${fg[magenta]}\$1${reset_color}" |
   sd '^\?\? "'"$cwd_prefix"'(.+)"$' "${fg[magenta]}\"\$1\"${reset_color}" |
   git column --nl='

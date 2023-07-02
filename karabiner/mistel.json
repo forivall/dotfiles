@@ -1,0 +1,80 @@
+{
+  "title": "Mistel",
+  "rules": [
+    {
+      "description": "Mistel: Remap obscure keycode for Menu/Pn to Fn",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "(number:207)",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": {
+            "key_code": "fn"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Mistel: Swap the escape behaviour",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1241,
+                  "product_id": 323,
+                  "is_keyboard": true
+                }
+              ],
+              "description": "Mistel MD600 RGB"
+            }
+          ],
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": {
+              "optional": []
+            }
+          },
+          "to": {
+            "key_code": "escape"
+          }
+        },{
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1241,
+                  "product_id": 323,
+                  "is_keyboard": true
+                }
+              ],
+              "description": "Mistel MD600 RGB"
+            }
+          ],
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": {
+            "key_code": "grave_accent_and_tilde"
+          }
+        }
+      ]
+    }
+  ]
+}
