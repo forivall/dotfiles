@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+# set -euo pipefail
+
+__filename=${0:A}
+__dirname=${0:h}
+
+autoload -U colors  && colors
+
+NUM=10
+
+while (( $# > 0 )); do
+case "$1" in
+    -n) NUM=$2; shift; shift; continue;
+    ;;
+esac
+break
+done
+
+entries=()
+branches=()
+
+_i=0
+(for i in {1..99} ; do
+    branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
+    if [[ $branchname == "@{-$i}" || -z "$branchname" ]] ; then continue; fi
+    # printf '%-7s ' @{-$i}
+    echo @{-$i} ${branchname#refs/heads/}
+done) | awk '!x[$2]++' | while read -A entry ; do
+    entries+=("${entry[1]} ${entry[2]}")
+    branches+=(${entry[1]})
+    _i=$(( $_i + 1 ))
+    if (( $_i >= $NUM )) ; then break; fi
+done
+
+simple-term-menu -i $(( i - 1 )) $term_menu_options "${entries[@]}" && i=0 || i=$?
+if (( $i == 0 )) ; then exit; fi
+
+branch=${branches[i]}
+echo '$' git checkout $branch
+git checkout $branch
