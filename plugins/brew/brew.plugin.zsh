@@ -40,3 +40,7 @@ fi
 if type openman >/dev/null 2>/dev/null ; then
   alias oman=openman
 fi
+
+if [[ -d /Applications/WebStorm.app/Contents/MacOS ]] ; then
+  path+=(/Applications/WebStorm.app/Contents/MacOS)
+fi
