@@ -1,0 +1,6 @@
+
+if [[ $1 == '--name' ]]; then
+  npm --workspaces ls --depth=0 --json | jq -r '.dependencies|keys|.[]'
+else
+  npm --workspaces ls --depth=0 --json | jq -r '.dependencies|.[]|.resolved|sub("file:../";"")'
+fi
