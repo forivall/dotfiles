@@ -4,8 +4,8 @@
 	pushurl = git@github.com:forivall/elevate.git
 [submodule "zgen"]
 	path = zgen
-	url = https://github.com/forivall/zgen.git
-	pushurl = git@github.com:forivall/zgen.git
+	url = https://github.com/jandamm/zgenom.git
+	pushurl = git@github.com:jandamm/zgenom.git
 [submodule "plugins/external-tools/fabiokr-dotfiles"]
 	path = plugins/external-tools/fabiokr-dotfiles
 	url = https://github.com/forivall/fabiokr-dotfiles.git

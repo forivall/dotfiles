@@ -84,11 +84,6 @@ if [[ -x ~/.bun/bin/bun ]]; then
   path=("$BUN_INSTALL/bin" $path)
 fi
 
-# TODO: switch to
-# https://github.com/jandamm/zgenom or
-# https://github.com/zdharma-continuum/zinit or
-# https://github.com/marlonrichert/zsh-snap or
-# https://github.com/zimfw/zimfw
 # zgen settings
 ZGEN_AUTOLOAD_COMPINIT=0
 
@@ -163,7 +158,8 @@ autoload -Uz compinit && compinit -i
 
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
-source "$__zshrc_dirname/zgen/zgen.zsh"
+source "$__zshrc_dirname/zgen/zgenom.zsh"
+alias zgen=zgenom
 if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
@@ -189,14 +185,14 @@ if ! zgen saved; then
   whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv
   # zgen oh-my-zsh plugins/jump
 
-  zgen load srijanshetty/zsh-pandoc-completion ''
+  zgen load srijanshetty/zsh-pandoc-completion /
 
   zgen load "$__zshrc_dirname/plugins/jump"
   # zgen oh-my-zsh encode64
-  ! $IS_WINDOWS && zgen load mafredri/zsh-async '' main
+  ! $IS_WINDOWS && zgen load mafredri/zsh-async / main
   # ! $IS_WINDOWS && zgen load sindresorhus/pure
-  ! $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name
-  $IS_WINDOWS && zgen load forivall/pure '' underline-repo-name-no-async
+  ! $IS_WINDOWS && zgen load forivall/pure / underline-repo-name
+  $IS_WINDOWS && zgen load forivall/pure / underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
   zgen load zsh-users/zsh-history-substring-search
   # zgen load deliciousinsights/git-stree
@@ -205,7 +201,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/nvm"
   zgen load lukechilds/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
-  # zgen load forivall/zsh-yarn-autocompletions '' main
+  # zgen load forivall/zsh-yarn-autocompletions / main
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
   # zgen load jocelynmallon/zshimarks
 
@@ -225,8 +221,8 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/go"
   whence lab > /dev/null && zgen load "$__zshrc_dirname/plugins/lab"
   whence glab > /dev/null && zgen load "$__zshrc_dirname/plugins/glab"
-  zgen load jscutlery/nx-completion '' main
-  # zgen load forivall/nx-completion '' update
+  zgen load jscutlery/nx-completion / main
+  # zgen load forivall/nx-completion / update
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/ngrok"
   zgen load "$__zshrc_dirname/plugins/npm"
@@ -246,7 +242,7 @@ if ! zgen saved; then
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
 
   # zgen load dim-an/cod
-  # zgen load forivall/cod '' feat/zsh-local-build
+  # zgen load forivall/cod / feat/zsh-local-build
 
   # Build completions files
   local ofpath=(${fpath})
