@@ -15,10 +15,10 @@ brew install entr # run command on change
 brew install direnv # .envrc files
 brew install coreutils findutils dateutils moreutils util-linux telnet \
   gnu-tar gnu-sed gawk gnutls gssh gnu-indent gnu-getopt colordiff rename expect pgrep
-brew install less # macos built in less uses posix regex; brew less uses pcre2
+brew install less lesspipe # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
-brew install moar most colordiff trash htop tree ripgrep fd sd exa broot choose vim ranger cfonts ruplacer
+brew install moar most colordiff trash htop tree ripgrep fd sd exa chafa broot choose vim ranger cfonts ruplacer
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
 brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
@@ -83,7 +83,8 @@ brew install graphviz # xdot plantuml
 brew install graphicsmagick
 brew install optipng pngcrush advancecomp jpegoptim gifsicle pngquant # image compression tools
 brew install ffmpeg
-# brew install exiftool libexif jhead gexiv2
+brew install exiftool
+# brew install libexif jhead gexiv2
 # brew install pngpaste argyll-cms
 brew install gollum github-markdown-toc
 # brew tap mike-engel/jwt-cli && brew install jwt-cli

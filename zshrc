@@ -103,6 +103,10 @@ export DELTA_LIGHT_THEME=base16-tomorrow
 export MOAR="--statusbar=bold --no-linenumbers"
 export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
 
+__FZF_BASE_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --exclude $HOME/Library"
+export FZF_DEFAULT_COMMAND="$__FZF_BASE_COMMAND --type f"
+export FZF_ALT_C_COMMAND="$__FZF_BASE_COMMAND --type d"
+
 # zsh-nvm settings
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
@@ -201,6 +205,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/nvm"
   zgen load lukechilds/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
+  zgenom load unixorn/fzf-zsh-plugin
   # zgen load forivall/zsh-yarn-autocompletions / main
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
   # zgen load jocelynmallon/zshimarks
