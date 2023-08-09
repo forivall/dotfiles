@@ -303,3 +303,13 @@ source "$__zsh_forivall_git_plugin_location/bin/git-watch-staged"
 # source "$__zsh_forivall_git_plugin_location/completions.zsh"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
 
+function fzf-git-checkout-unless-arguments() {
+  if (( $# == 0 )); then
+    exec fzf-git-checkout
+    return
+  fi
+  exec git checkout $@
+}
+if (( ${+commands[fzf-git-checkout]} )); then
+  alias gco=fzf-git-checkout-unless-arguments
+fi
