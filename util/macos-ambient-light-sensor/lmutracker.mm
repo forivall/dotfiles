@@ -2,7 +2,7 @@
 //
 // https://stackoverflow.com/a/18614019/490829
 //
-// clang -o lmutracker lmutracker.mm -framework IOKit -framework CoreFoundation
+// clang -o lmutracker lmutracker.mm -F /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/PrivateFrameworks -framework Foundation -framework IOKit -framework CoreFoundation -framework BezelServices
 
 #include <mach/mach.h>
 #include <sys/event.h>
@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
   else {
     fprintf(stderr, "falling back to legacy api\n");
 
-    serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleLMUController"));
+    serviceObject = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("AppleLMUController"));
     if (!serviceObject) {
       fprintf(stderr, "failed to find ambient light sensors\n");
       exit(1);
