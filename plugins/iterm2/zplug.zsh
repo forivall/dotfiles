@@ -25,6 +25,7 @@ else
   ) ; do
     echo -n . >&2
     curl -sOL $f
+    chmod +x $f
   done
   echo ' Done.' >&2
   popd

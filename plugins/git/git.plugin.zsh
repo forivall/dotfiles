@@ -305,10 +305,10 @@ source "$__zsh_forivall_git_plugin_location/gitify.zsh"
 
 function fzf-git-checkout-unless-arguments() {
   if (( $# == 0 )); then
-    exec fzf-git-checkout
+    fzf-git-checkout $@
     return
   fi
-  exec git checkout $@
+  git checkout $@
 }
 if (( ${+commands[fzf-git-checkout]} )); then
   alias gco=fzf-git-checkout-unless-arguments

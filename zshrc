@@ -103,7 +103,7 @@ export DELTA_LIGHT_THEME=base16-tomorrow
 export MOAR="--statusbar=bold --no-linenumbers"
 export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
 
-__FZF_BASE_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --exclude $HOME/Library"
+__FZF_BASE_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --exclude \$(realpath --relative-to=. $HOME/Library)"
 export FZF_DEFAULT_COMMAND="$__FZF_BASE_COMMAND --type f"
 export FZF_ALT_C_COMMAND="$__FZF_BASE_COMMAND --type d"
 

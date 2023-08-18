@@ -26,7 +26,10 @@ def get_footprint(proc: psutil.Process):
     marker = b'Physical footprint:'
     i = vmmap.stdout.find(marker) + len(marker)
     j = vmmap.stdout.find(b'\n', i)
-    return humanfriendly.parse_size(vmmap.stdout[i:j].strip().decode())
+    footprint_text = vmmap.stdout[i:j].strip().decode()
+    if not footprint_text:
+        return -1
+    return humanfriendly.parse_size(footprint_text)
 
 
 def get_processes():

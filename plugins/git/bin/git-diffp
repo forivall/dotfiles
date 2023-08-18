@@ -9,6 +9,23 @@ local revsOutput="$(git rev-parse --revs-only $@)"
 local revs=(${(f)revsOutput})
 local cdup=$(git rev-parse --show-cdup)
 
+pretty=()
+for i in {1..$#}; do
+_arg="${@[$i]}"
+case $_arg in
+  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines)
+    pretty+=($_arg);
+    ;;
+  --cached)
+    revs+=(--cached)
+    ;;
+  --)
+    break
+    ;;
+esac
+done
+
+
 __git-diffp-hasfiles() {
   local OIFS=$IFS
   IFS=$'\n'

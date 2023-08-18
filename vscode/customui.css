@@ -7,8 +7,113 @@
 .linux.linux{--monaco-monospace-font:"FantasqueSansM Nerd Font","FantasqueSansMono Nerd Font","Ubuntu Mono","Liberation Mono","DejaVu Sans Mono","Courier New",monospace}
 :root {
   --font-size-13: 12px;
-  /* --row-height: 18px; --factor: 0.81818; /* 18/22*/
-  --row-height: 22px; --factor: 1;
+  --row-height: 18px; --factor: 0.81818; /* 18/22
+  /* --row-height: 22px; --factor: 1; */
+}
+.keybindings-editor {
+  padding: 11px 0 0 0;
+}
+.keybindings-editor>.keybindings-header {
+  padding-left: 10px;
+}
+.custom-list-row .monaco-workbench .monaco-list-row .codicon[class*=codicon-] {
+  font-size: 16px;
+}
+
+.custom-list-row .timeline-tree-view .monaco-list .monaco-list-row .custom-view-tree-node-item>div.custom-view-tree-node-item-icon,
+.custom-list-row .customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item>.custom-view-tree-node-item-resourceLabel>div.custom-view-tree-node-item-icon,
+.custom-list-row .monaco-list-rows div.monaco-icon-label:before,
+.custom-list-row .search-view div.monaco-icon-label:before {
+  width: 16px;
+  background-size: 16px;
+}
+.custom-list-row .customview-tree .monaco-tree .monaco-tree-row .custom-view-tree-node-item>.custom-view-tree-node-item-icon,
+.custom-list-row .monaco-panel-view .panel>.panel-header>.actions .action-label.icon,
+.custom-list-row .customview-tree .monaco-tree .monaco-tree-row .custom-view-tree-node-item>.custom-view-tree-node-item-icon,
+.custom-list-row .monaco-pane-view .pane>.pane-header,
+.custom-list-row .monaco-pane-view .pane>.pane-header>.actions .action-label.icon,
+.custom-list-row .monaco-pane-view .pane>.pane-header>.actions .action-label.codicon {
+  background-size: 16px;
+}
+.custom-header .part.panel .monaco-action-bar .action-item .codicon:not(.extension-action),
+.custom-header .part.editor .monaco-action-bar .action-item .codicon:not(.extension-action),
+.custom-header .monaco-workbench .part.editor>.content .editor-group-container>.title div.monaco-icon-label:before {
+  background-size: 16px;
+}
+body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco-menu)>.monaco-action-bar .action-item.checked .active-item-indicator {
+  color: var(--vscode-activityBar-activeBorder);
+}
+body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco-menu)>.monaco-action-bar .action-item.checked .active-item-indicator:before {
+  bottom: unset;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  border-width: 3px;
+  border-style: solid;
+  border-top-style: solid;
+  /* border-top-color: transparent; */
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  box-sizing: border-box;
+}
+.horizontal-activitybar .monaco-workbench .activitybar .menubar,
+.custom-activitybar div.monaco-workbench div.activitybar>div.content div.monaco-action-bar ul.actions-container li.action-item a.action-label {
+  font-size: calc(var(--activity-bar-action-size) * 9 / 13);
+  -webkit-mask-size: calc(var(--activity-bar-action-size) * 9 / 13);
+  mask-size: calc(var(--activity-bar-action-size) * 9 / 13);
+}
+.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco-menu)>.monaco-action-bar .badge .badge-content {
+  padding: 0 2px;
+  height: 12px;
+  line-height: 12px;
+  top: 12px;
+  right: 0;
+  backdrop-filter: blur(1px);
+}
+.horizontal-activitybar .monaco-workbench .progress-badge>.badge-content:before {
+  width: 12px;
+  height: 12px;
+  -webkit-mask-size: 12px;
+  opacity: 0.8;
+}
+
+/* .horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.right:before,
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item:last-of-type.left:after {
+  background-color: var(--insert-border-color);
+}
+
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.right:after,
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.right:before,
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.left:after,
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.left:before {
+  transition-delay: 0s;
+} */
+
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item:before {
+  left: 1px;
+  margin-left: -2px;
+}
+.horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item:after {
+  right: 1px;
+  margin-right: -2px;
+}
+
+.horizontal-activitybar .monaco-workbench .activitybar>.content .composite-bar>.monaco-action-bar .action-item:after,
+.horizontal-activitybar .monaco-workbench .activitybar>.content .composite-bar>.monaco-action-bar .action-item:before {
+  width: 2px;
+  height: var(--activity-bar-action-size);
+}
+.monaco-workbench .monaco-action-bar:not(.vertical) .action-item.icon:hover .action-label:not(.disabled):hover {
+  background-color: unset;
+}
+.monaco-workbench .monaco-action-bar:not(.vertical) .action-item.icon:hover {
+  background-color: var(--vscode-toolbar-hoverBackground);
+}
+.monaco-workbench .activitybar .monaco-action-bar .action-label.action-label.activity-workbench-view-extension-js-notebook-inspector-f0b07fe8be4bbf4fdf9e656f027e5402a1b79493 {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M8%207.00003H4M8%2012H4M8%2017H4M12%203V21M9.2%2021H16.8C17.9201%2021%2018.4802%2021%2018.908%2020.782C19.2843%2020.5903%2019.5903%2020.2843%2019.782%2019.908C20%2019.4802%2020%2018.9201%2020%2017.8V6.20003C20%205.07993%2020%204.51987%2019.782%204.09205C19.5903%203.71573%2019.2843%203.40977%2018.908%203.21802C18.4802%203.00003%2017.9201%203.00003%2016.8%203.00003H9.2C8.07989%203.00003%207.51984%203.00003%207.09202%203.21802C6.71569%203.40977%206.40973%203.71573%206.21799%204.09205C6%204.51987%206%205.07993%206%206.20003V17.8C6%2018.9201%206%2019.4802%206.21799%2019.908C6.40973%2020.2843%206.71569%2020.5903%207.09202%2020.782C7.51984%2021%208.07989%2021%209.2%2021Z%22%20stroke%3D%22%23131A29%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3C%2Fsvg%3E%0A") 50% 50% / 24px no-repeat;
 }
 .mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.16px }
 @media (-webkit-max-device-pixel-ratio: 1), (max-resolution: 1dppx) {
@@ -56,7 +161,7 @@
 .monaco-editor .goto-definition-link { animation: 0.7s cubic-bezier( 0.7, 0.2, 0.8, 0.9 ) infinite alternate pulse_goto_definition_link }
 /* side bar actions */
 .monaco-workbench .part>.title { height: 24px }
-.monaco-workbench .part>.title>.title-label { line-height: 24px }
+.monaco-workbench .part>.title>.title-label { line-height: 25px }
 .monaco-workbench .part.sidebar>.title>.title-label { padding-left: 0 }
 .monaco-workbench .open-editors .monaco-list .monaco-list-row { padding-left: 2px }
 .monaco-workbench .open-editors .monaco-list .monaco-list-row .editor-group { margin-left: 16px }
@@ -137,3 +242,24 @@
 .quick-input-widget > .quick-input-list .codicon { color: #83a598 !important; padding-right: 5px; }
 /* Colorize entries starting with a `+` differently */
 .quick-input-widget > .quick-input-list .monaco-list-row[aria-label*=" +"] .label-description { color: #8ec07c; }
+
+.custom-list-row .quick-input-list .monaco-list.monaco-list .monaco-list-row.focused {
+  /* todo: use box-shadow instead of outline */
+  outline: 2px solid var(--vscode-quickInputList-focusBackground);
+}
+.custom-list-row .quick-input-header {
+  padding-bottom: 4px;
+}
+.custom-list-row .quick-input-widget > .quick-input-list > .monaco-list > .monaco-scrollable-element {
+  margin-top: 2px;
+}
+.custom-list-row .quick-input-widget > .quick-input-list > .monaco-list > .monaco-scrollable-element[style] {
+  overflow: visible !important;
+}
+.custom-list-row .quick-input-widget > .quick-input-list > .monaco-list > .monaco-scrollable-element > .monaco-list-rows[style] {
+  overflow: visible !important;
+  contain: layout !important;
+}
+.monaco-split-view2>.monaco-scrollable-element>.split-view-container>.split-view-view>.part.auxiliarybar.basepanel.right {
+  height: 100%;
+}
