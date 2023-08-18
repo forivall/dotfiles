@@ -8,6 +8,9 @@
 :is(.middleCentre, .topCentre, .bottomCentre) .Weather {
   justify-content: center;
 }
+:is(.topRight, .bottomRight) .Weather {
+  justify-content: flex-end;
+}
 .bottomRight .Weather:last-child {
   margin-bottom: 2.5rem;
 }

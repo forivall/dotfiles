@@ -28,8 +28,6 @@ extern "C" {
 
 static bool stdout_isatty;
 
-static CFStringRef kbdEventMode = CFSTR("com.forivall.lmutracker.kbd");
-
 static double updateInterval = 0.1;
 static io_connect_t dataPort = 0;
 
@@ -108,7 +106,7 @@ int main(int argc, char* argv[]) {
   bool oneshot =
       argc < 2 || strcmp(argv[1], "--watch") != 0 && strcmp(argv[1], "-w") != 0;
 
-                                                         if (client) {
+  if (client) {
     event = IOHIDServiceClientCopyEvent(client, kAmbientLightSensorEvent, 0, 0);
 
     if (event == NULL) {
@@ -133,8 +131,7 @@ int main(int argc, char* argv[]) {
     updateTimer = CFRunLoopTimerCreate(kCFAllocatorDefault,
                     CFAbsoluteTimeGetCurrent() + updateInterval, updateInterval,
                     0, 0, updateTimerCallBack, NULL);
-  }
-  else {
+  } else {
     fprintf(stderr, "falling back to legacy api\n");
 
     serviceObject = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("AppleLMUController"));

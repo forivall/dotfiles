@@ -4,6 +4,16 @@ set -eo pipefail
 
 __plugin_dirname=${0:a:h:h}
 
+pretty=()
+while (( $# > 0 )); do
+case "$1" in
+  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines)
+      pretty+=($1); shift; continue;
+    ;;
+esac
+break;
+done
+
 local configArgs=()
 local revs=(${(f)$(git rev-parse --revs-only $@)})
 
@@ -16,7 +26,7 @@ __git-deltap-getitems() {
   git "${configArgs[@]}" diff --name-only $@
 }
 __git-deltap-dointeractive() {
-  git "${configArgs[@]}" delta "${revs[@]}" $@
+  git "${configArgs[@]}" ${pretty[@]} delta "${revs[@]}" $@
 }
 source $__plugin_dirname/__git-patch-filepicker \
   __git-deltap-{hasfiles,getitems,dointeractive} $@

@@ -128,7 +128,7 @@
 	unresolve = checkout --conflict=merge
 	config-user = "!git config --local user.name \"$1\" && git config --local user.email \"$2\" && :"
 	# for ease of use, add a `git-config-signing` in ~/.local/bin with the key id as default
-	config-signing = "!git config --local user.signingkey \"$1\" && git config --local commit.gpgSign true && :"
+	config-signing = "!git config --local user.signingkey \"$1\" && git config --local commit.gpgSign true && git config --local tag.gpgSign true && :"
 
 	archive-untracked-files = !git-archive-untracked-files
 	branch-archive = !git-branch-archive
