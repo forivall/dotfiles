@@ -24,7 +24,20 @@
 	navigate = true  # use n and N to move between diff sections
 	minus-style = syntax auto
 	syntax-theme = base16-tomorrow-night
+	features = map-styles-dark
 	# hyperlinks = true
+[delta "map-styles-dark"]
+	map-styles = \
+		bold purple => syntax "#330f29", \
+		bold blue => syntax "#271344", \
+		bold cyan => syntax "#0d3531", \
+		bold yellow => syntax "#222f14"
+[delta "map-styles-light"]
+	map-styles = \
+		bold purple => syntax "#feecf7", \
+		bold blue => syntax "#e5dff6", \
+		bold cyan => syntax "#d8fdf6", \
+		bold yellow => syntax "#f4ffe0"
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	br = branch
@@ -69,9 +82,9 @@
 	lg3 = log --name-status --pretty=twoline --graph --date=local
 	lgp = log -p --pretty=onemore --graph
 	logd = -c core.pager=deltaw log --pretty=concise
-  logp2 = logp --pretty=concise
-  show2 = show --pretty=concise
-  showd2 = showd --pretty=concise
+	logp2 = logp --pretty=concise
+	show2 = show --pretty=concise
+	showd2 = showd --pretty=concise
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
 	branches = branch --list
 	branches-with-upstreams = "!git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done"
@@ -269,7 +282,7 @@
 [init]
 	defaultBranch = main
 [extensions]
-  worktreeConfig = true
+	worktreeConfig = true
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [sequence]
