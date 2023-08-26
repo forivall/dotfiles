@@ -21,15 +21,15 @@ navigate=${$(git config delta.navigate):-false}
 while (( $# > 0 )); do
 case "$1" in
   -h)
-    git log -h | sd 'usage: git log' 'usage: git logp' | rg -v 'or: git show'
+    git log -h | sd 'usage: git log' 'usage: git logp' | sd '\[<revision-range>\]' '[stash|<revision-range>]' | rg -v 'or: git show'
     echo '    --all-files           filter commits on files, but show all files'
     echo
     echo 'in the less pager, use j / k to navigate history backward / forward'
     exit
   ;;
   stash) stash=true; args+=(stash); pretty+=(--pretty=medium) ;&
-  --walk-reflogs) reflog=true; shift; continue; ;;
-  --patch|--p) forcediff=true; ;&
+  --walk-reflogs|-g) reflog=true; shift; continue; ;;
+  --patch|-p) forcediff=true; ;&
   --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary)
       showdiff=false; pretty+=("$1"); shift;
     ;;
@@ -37,8 +37,8 @@ case "$1" in
   --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines)
       pretty+=($1); shift; continue;
     ;;
-  --pretty=*) haspretty=true; pretty+=($1); shift; continue; ;;
-  --pretty) haspretty=true; pretty+=($1 $2); shift; shift; continue; ;;
+  --pretty=*|--format=*) haspretty=true; pretty+=($1); shift; continue; ;;
+  --pretty|--format) haspretty=true; pretty+=($1 $2); shift; shift; continue; ;;
   --navigate) navigate=true; shift; continue; ;;
   --no-navigate) navigate=false; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
