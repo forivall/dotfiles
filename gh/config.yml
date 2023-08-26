@@ -20,7 +20,7 @@ aliases:
   pr-merge-commit: pr view $1 --json mergeCommit -q .mergeCommit.oid
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
-  pr-diff: '!git diff $(gh pr-merge-base)...$(gh pr-ref)'
+  pr-diff: '!git diff $(gh pr-merge-base ${1-HEAD} $2)...$(gh pr-ref $2)'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

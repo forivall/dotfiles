@@ -2,7 +2,10 @@
 
 set -eo pipefail
 
+args=($1)
 if [[ $1 == --*\ * ]]; then
-  exec git -c color.branch=always branch --list -vvv ${1%% *} ${1#--* }
+  args=(${1%% *} ${1#--* })
 fi
-exec git -c color.branch=always branch --list -vvv $1
+
+git -c color.branch=always branch --list -vvv ${args[@]}
+git show --color=always --no-patch --pretty="format:%C(magenta)♘ %an <%ae>%Creset%n%C(blue)✍ %aD%C(reset) %C(cyan)♜ %cD%Creset%n" ${args[1]}

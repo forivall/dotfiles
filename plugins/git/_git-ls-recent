@@ -1,0 +1,21 @@
+#compdef git-ls-recent
+#description list recent refs
+
+_git-ls-recent () {
+
+  _arguments -S \
+    '(-n --count)'{-n,--count}'[limit how much to show]' \
+    '--access[sort by recently checked out (default)]' \
+    '(-c --commit)'{-c,--commit}'[order by commit time]' \
+    '(-u --author)'{-u,--author}'[sort by commit author date]' \
+    '(-e --creation)'{-e,--creation}'[sort by branch creation date]' \
+    '(-r --remote)'{-r,--remote}'[show remote branches (sort by commit)]' \
+    '(-a --all)'{-a,--all}'[show all (sort by commit)]' \
+    '(-t --tags)'{-t,--tags}'[show recent tags]' \
+    '(-b --branches)'{-b,--branches}'[show recent branches (default)]' \
+    && ret=0
+
+  return ret
+}
+
+_git-ls-recent
