@@ -1,0 +1,8 @@
+#compdef fzf-git-checkout-unless-arguments
+#description alias for git-checkout, using fzf unless supplied arguments
+
+_fzf-git-checkout-unless-arguments () {
+  autoload -Uz +X _git
+  (( $+functions[_git-add] )) || _git
+  _git-checkout
+}

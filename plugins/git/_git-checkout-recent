@@ -1,0 +1,22 @@
+#compdef git-checkout-recent
+#description interactively checkout a recent ref
+
+_git-checkout-recent () {
+  (( $+functions[__git_remotes] )) || _git
+
+  _arguments -S \
+    '(-n --count)'{-n,--count}'[limit how much to show]' \
+    '--access[sort by recently checked out (default)]' \
+    '(-c --commit)'{-c,--commit}'[order by commit time]' \
+    '(-u --author)'{-u,--author}'[sort by commit author date]' \
+    '(-e --creation)'{-e,--creation}'[sort by branch creation date]' \
+    '(-r --remote)'{-r,--remote=}'[show remote branches (sort by commit)]::remote:__git_remotes' \
+    '(-a --all)'{-a,--all}'[show all (sort by commit)]' \
+    '(-t --tags)'{-t,--tags}'[show recent tags]' \
+    '(-b --branches)'{-b,--branches}'[show recent branches (default)]' \
+    && ret=0
+
+  return ret
+}
+
+_git-checkout-recent

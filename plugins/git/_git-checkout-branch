@@ -1,0 +1,18 @@
+#compdef git-checkout-branch
+#description interactively checkout a branch
+
+_git-checkout-branch () {
+  # (( $+functions[__git_remotes] )) || _git
+
+  _arguments -S \
+    '(-s --search)'{-s,--search}'[use search mode]' \
+    '(-a --all)'{-a,--all}'[show all branches]' \
+    '(-r --remote)'{-r,--remote=}'[show remote branches]::remote:__git_remotes' \
+    '(-d --detach)'{-d,--detach}'[detach the HEAD at named commit]' \
+    '(-f --force)'{-f,--force}'[force branch switch/ignore unmerged entries]' \
+    && ret=0
+
+  return ret
+}
+
+_git-checkout-branch
