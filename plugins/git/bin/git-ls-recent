@@ -4,13 +4,13 @@
 autoload -U colors  && colors
 
 color_print() {
-    ONE=$1
-    shift
-    print -Pf "$fg[blue]%-7s $reset_color %s\n" "$ONE" "$*"
+  ONE=$1
+  shift
+  print -Pf "$fg[blue]%-7s $reset_color %s\n" "$ONE" "$*"
 }
 
 OPTS_SPEC="\
-git ls-recent-branches [<options>] <args>...
+git ls-recent [<options>] <args>...
 --
 h,help      show the help
 n,count=    show this many commits [default=10]
@@ -62,7 +62,7 @@ if $by_creation; then
     sort -rg | head -n $NUM |
     awk '{printf "%s %s",$1, $2 } ; $3 != "HEAD" { print " ←",$3 }; $3 == "HEAD" { print "" }' |
     while read line; do eval color_print $line; done
-  exitq
+  exit
 fi
 
 # default is by access

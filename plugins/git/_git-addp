@@ -4,3 +4,5 @@
 _git-addp () {
   _git-add
 }
+
+_git-addp

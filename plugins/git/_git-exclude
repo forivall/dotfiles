@@ -1,0 +1,24 @@
+#compdef git-exclude
+#description add entries to .git/info/exclude
+
+_git-exclude () {
+  # (( $+functions[__git_remotes] )) || _git
+
+  _arguments -S \
+    '--edit[open exclude file in editor]' \
+    '--no-anchor[dont prefix pattern with /]' \
+    '*:: :->file' \
+    && return
+
+  case $state in
+    (file)
+      _alternative \
+        'other-files::__git_ignore_line_inside_arguments __git_other_files' \
+        && ret=0
+      ;;
+  esac
+
+  return ret
+}
+
+_git-exclude

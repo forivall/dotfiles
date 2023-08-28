@@ -1,0 +1,8 @@
+#compdef git-logp
+#description show diff interactively
+
+_git-diffp () {
+  _git-diff
+}
+
+_git-diffp

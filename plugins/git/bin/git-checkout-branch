@@ -40,7 +40,12 @@ done
 shift $index
 
 if (( index == 1 && $# > 0 )); then
-  git checkout -b $@
+  if [[ $1 == +* ]]; then
+    branch_name=$(git rev-parse --symbolic-full-name HEAD)
+    git checkout -b ${branch_name#refs/heads/}$1
+  else
+    git checkout -b $@
+  fi
   exit
 fi
 

@@ -136,6 +136,7 @@ brew install --cask github # (github desktop)
 brew install --cask cheatsheet cacher
 brew install --cask gitup rowanj-gitx fork
 # brew install --cask postman
+brew install --cask firecamp
 brew install --cask insomnia
 brew install --cask clipy
 # also, https://langui.net/clipboard-viewer/

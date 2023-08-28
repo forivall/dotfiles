@@ -11,35 +11,67 @@ git checkout-recent [<options>] <args>...
 --
 h,help      show the help
 n,count=    show this many commits [default=10]
+access      sort by recently checked out [default]
+c,commit    sort by commit date
+u,author    sort by commit author date
+e,creation  sort by branch creation date
+r,remote?   show remote branches (sort by commit)
+a,all       show all (sort by commit)
+t,tags      show recent tags
+b,branches  show recent branches (default)
 "
 eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
 
 NUM=10
+by_commit=false
+by_creation=false
+sort=creatordate
+sort2=
+pattern=refs/heads/
 
 index=0
 for arg in $@; do
   index=$((index+1))
   case "$arg" in
     --count=*) NUM="${arg#--count=}" ;;
-    --) break ;;
+    --author) sort=authordate ;&
+    --commit) by_commit=true ;;
+    --creation) by_creation=true ;;
+    --remote) by_commit=true; pattern=refs/remotes/origin ;;
+    --remote=*) by_commit=true; pattern=refs/remotes/${arg#--remote=} ;;
+    --all) by_commit=true; pattern= ;;
+    --tags) by_commit=true; pattern=refs/tags; sort2=taggerdate ;;
+    --) break; ;;
   esac
 done
 
 entries=()
-branches=()
 
-_i=0
-(for i in {1..99} ; do
-  branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
-  if [[ $branchname == "@{-$i}" || -z "$branchname" ]] ; then continue; fi
-  # printf '%-7s ' @{-$i}
-  echo @{-$i} ${branchname#refs/heads/}
-done) | awk '!x[$2]++' | while read -A entry ; do
-  entries+=("${entry[1]} ${entry[2]}|${entry[1]}")
-  branches+=(${entry[1]})
-  _i=$(( $_i + 1 ))
-  if (( $_i >= $NUM )) ; then break; fi
-done
+if $by_commit; then
+  #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
+  git for-each-ref --sort=-$sort --format="%(${sort}:short) %(refname:short)|%(refname:short)" --count=$NUM $pattern |
+  while read line; do entries+=($line); done
+elif $by_creation; then
+  git branch | awk -F ' +' '! /\(no branch\)/ {print $2}'|
+    xargs -n1 git reflog show --date=short |
+    grep -i created |
+    sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3 \2 \5/' |
+    sort -rg | head -n $NUM |
+    awk '{printf "%s %s",$1,$2} ; $3 != "HEAD" { printf " ← %s",$3 }; {printf "|%s\n",$2}' |
+    while read line; do entries+=($line); done
+else
+  _i=0
+  (for i in {1..99} ; do
+    branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
+    if [[ $branchname == "@{-$i}" || -z "$branchname" ]] ; then continue; fi
+    # printf '%-7s ' @{-$i}
+    echo @{-$i} ${branchname#refs/heads/}
+  done) | awk '!x[$2]++' | while read -A entry ; do
+    entries+=("${entry[1]} ${entry[2]}|${entry[1]}")
+    _i=$(( $_i + 1 ))
+    if (( $_i >= $NUM )) ; then break; fi
+  done
+fi
 
 term_menu_options=(
   --no-preview-border
@@ -50,6 +82,6 @@ term_menu_options=(
 simple-term-menu $term_menu_options "${entries[@]}" && i=0 || i=$?
 if (( $i == 0 )) ; then exit; fi
 
-branch=${branches[i]}
+branch=${entries[i]#*|}
 echo '>' git checkout $branch
 git checkout $branch

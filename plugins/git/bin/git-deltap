@@ -18,12 +18,21 @@ local configArgs=()
 local revs=(${(f)$(git rev-parse --revs-only $@)})
 
 __git-deltap-hasfiles() {
-  local ref="${1:-HEAD}"
-  (( $# > 0 )) && shift
-  ! git "${configArgs[@]}" diff-index --quiet $ref $@
+  local OIFS=$IFS
+  IFS=$'\n'
+  items=(
+    $(git diff --name-only $@)
+  )
+  if (( $# == 0 )); then
+    items+=(
+      $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
+    )
+  fi
+  IFS="$OIFS"
+  (( ${#items} > 0 ))
 }
-__git-deltap-getitems() {
-  git "${configArgs[@]}" diff --name-only $@
+__git-deltap-getitems_vars() {
+  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} $revs")
 }
 __git-deltap-dointeractive() {
   git "${configArgs[@]}" ${pretty[@]} delta "${revs[@]}" $@
