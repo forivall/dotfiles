@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+run() {
+  echo '>' $@
+  exec $@
+}
+
+if [[ -f yarn.lock ]]; then
+  run yarn
+elif [[ -f pnpm-lock.yaml ]]; then
+  run pnpm install
+elif [[ -f package.json ]]; then
+  run npm install
+fi
+
+if [[ -f pyproject.toml ]]; then
+  echo todo: pyproject.toml, poetry or pdm, ensure that virtualenv is being used, etc.
+  exit 1
+fi
+
+if [[ -f Cargo.toml ]]; then
+  run cargo build
+fi

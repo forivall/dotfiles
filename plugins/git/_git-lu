@@ -1,0 +1,16 @@
+#compdef git-lu
+#description alias for 'logu --pretty=oneline --abbrev-commit --decorate --graph'
+
+_git-lu () {
+  tmpwords=(logu --pretty=oneline --abbrev-commit --decorate --graph)
+  if [[ -n "${words[3,-1]}" ]] ; then
+    tmpwords+=(${words[3,-1]})
+  fi
+  if [[ -z ${words[$CURRENT]} ]]; then
+    tmpwords+=('')
+  fi
+  (( CURRENT += 4 ))
+  words=("${tmpwords[@]}")
+  unset tmpwords
+  _git-logu
+}
