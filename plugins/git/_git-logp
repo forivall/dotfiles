@@ -4,3 +4,5 @@
 _git-logp () {
   _git-log
 }
+
+_git-logp

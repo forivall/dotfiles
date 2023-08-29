@@ -2,6 +2,16 @@
 #description show commit contents interactively
 
 _git-addp () {
+  tmpwords=(add --patch)
+  if [[ -n "${words[3,-1]}" ]] ; then
+    tmpwords+=(${words[3,-1]})
+  fi
+  if [[ -n ${words[$CURRENT]} ]]; then
+    tmpwords+=('')
+    (( CURRENT += 1 ))
+  fi
+  words=("${tmpwords[@]}")
+  unset tmpwords
   _git-add
 }
 

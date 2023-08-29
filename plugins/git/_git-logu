@@ -1,0 +1,8 @@
+#compdef git-logu
+#description show log from upstream
+
+_git-logu () {
+  _git-log
+}
+
+_git-logu

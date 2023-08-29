@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+if git symbolic-ref -q HEAD >/dev/null; then
+  exec git log HEAD @{u} "$@"
+else
+  headName=$(< $(git rev-parse --git-dir)/rebase-merge/head-name)
+  if [[ $headName = refs/heads/* ]]; then
+    branch=${headName#refs/heads/}
+    exec git log $branch $branch@{u} "$@"
+  fi
+fi
