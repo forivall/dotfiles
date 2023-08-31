@@ -1,0 +1,17 @@
+{
+  "name": "ubsersicht-app-support",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "emily",
+  "license": "ISC",
+  "devDependencies": {
+    "@emotion/styled": "^10.3.0",
+    "@types/react": "16.4",
+    "@types/superagent": "^4.1.18",
+    "emotion": "^10.0.27"
+  }
+}

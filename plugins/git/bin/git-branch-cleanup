@@ -2,8 +2,7 @@
 
 set -euo pipefail
 
-__filename=${0:A}
-__dirname=${0:h}
+__plugin_dirname=${0:a:h:h}
 
 autoload colors && colors
 
@@ -15,7 +14,11 @@ prompt_to_force_delete() {
 }
 
 branches=($(git rev-parse --symbolic --branches))
-term_menu_options=(--no-preview-border --preview "git -c color.branch=always branch --list -vvv {}")
+# term_menu_options=(--no-preview-border --preview "git -c color.branch=always branch --list -vvv {}")
+term_menu_options=(
+  --no-preview-border
+  --preview "$__plugin_dirname/__git-checkoutb-preview {}"
+)
 i=0
 
 while (( ${#branches} > 0 )); do

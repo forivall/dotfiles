@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+x() {
+  echo '>' $@
+  $@
+}
+
+if [[ "${PWD##*/}" != qmk_firmware ]] || ! git rev-parse --git-dir >/dev/null 2>/dev/null; then
+  x git clone hub:qmk/qmk_firmware
+  x cd qmk_firmware
+fi
+
+x git remote add sonix hub:SonixQMK/qmk_firmware
+x git remote add keychron hub:Keychron/qmk_firmware
+x git remote add massdrop hub:Massdrop/qmk_firmware
+x git remote add system76 hub:system76/qmk_firmware
+x git fetch --all
