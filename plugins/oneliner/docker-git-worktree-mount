@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+GIT_COMMON_DIR=$(git rev-parse --git-common-dir)
+echo type=bind,source=$GIT_COMMON_DIR,target=$GIT_COMMON_DIR

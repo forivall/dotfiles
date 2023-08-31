@@ -66,7 +66,7 @@
 	last2 = last --name-status --pretty=twomore
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
 	lr = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
-	lu = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}
+	lu = logu --pretty=oneline --abbrev-commit --decorate --graph
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
 	li = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}  # <kbd>i</kbd> is much easier to hit than <kbd>u</kbd>

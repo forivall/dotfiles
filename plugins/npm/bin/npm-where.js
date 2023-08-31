@@ -102,22 +102,25 @@ class Where extends ArboristWorkspaceCmd {
   }
 
   output(expls) {
-    const flattened = expls.flatMap(({ version, dependents, location}) =>
-      dependents.map(({ spec, from }) => ({ spec, location: from.location }))
-      .map(( dependent ) => ({ version, dependent, location }))
+    const flattened = expls.flatMap(({ version, dependents, location, dev, peer, optional, devOptional  }) =>{
+      const flags = peer ? 'peer' : devOptional ? 'devopt' : dev ? 'dev' : optional ? 'opt' : '';
+      return dependents.map(({ spec, from }) => ({ spec, location: from.location }))
+      .map(( dependent ) => ({ version, flags, dependent, location }))
       .sort((a, b) => ~~a.dependent.location.startsWith('node_modules') - ~~b.dependent.location.startsWith('node_modules'))
-    )
+    })
     const groups = Object.values(
       flattened.reduce(
-        (r, v, i, a, k = `${v.dependent.spec}\t${v.version}\t${v.location}` ) =>
+        (r, v, i, a, k = `${v.dependent.spec}\t${v.version}\t${v.flags}\t${v.location}` ) =>
           ((r[k] || (r[k] = [])).push(v), r),
         {}
       )
     )
-    const header = ['SPEC', 'VERSION', 'LOCATION', 'DEPENDENT(S)'];
+    const hasFlags = groups.some((g) => g[0].flags);
+    const header = ['SPEC', 'VERSION', ...(hasFlags ? [''] : []), 'LOCATION', 'DEPENDENT(S)'];
     const rows = groups.map((g) => [
       g[0].dependent.spec,
       g[0].version,
+      ...(hasFlags ? [g[0].flags] : []),
       g[0].location,
       g.map((it) => it.dependent.location).map((l) => l.startsWith('node_modules') ? l : this.npm.chalk.bold(l)).join(" "),
     ]);
@@ -127,11 +130,12 @@ class Where extends ArboristWorkspaceCmd {
      * @template T
      * @typedef {{-readonly [K in keyof T]: T[K]}} Writable
      */
-    /** @type {table.Indexable<Writable<table.ColumnUserConfig>>} */
+    /** @type {table.Indexable<Writable<table.ColumnUserConfig> & { width: number }>} */
     const columns = widths.map((width) => ({ width }));
     const space = widths.slice(0, 3).reduce((a, b) => a + b) + 4;
-    columns[3].wrapWord = true;
-    columns[3].width = Math.min(columns[3].width, Math.max(80, process.stdout.columns) - space);
+    const lastColumn = header.length - 1;
+    columns[lastColumn].wrapWord = true;
+    columns[lastColumn].width = Math.min(columns[lastColumn].width, Math.max(80, process.stdout.columns) - space);
 
     this.npm.output(
       table.table(data, {

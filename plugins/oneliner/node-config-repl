@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+node --experimental-repl-await -r ts-node/register -i -e "
+var fs = require('fs');
+var path = require('path');
+var __configDir = process.cwd();
+while (__configDir && !fs.readdirSync(__configDir).includes('config')) {
+  __configDir = path.dirname(__configDir);
+}
+if (__configDir !== process.cwd()) {
+  process.env.NODE_CONFIG_DIR = path.join(__configDir, 'config');
+  console.log('\rNODE_CONFIG_DIR=' + process.env.NODE_CONFIG_DIR);
+  process.stdout.write('> ');
+}
+"

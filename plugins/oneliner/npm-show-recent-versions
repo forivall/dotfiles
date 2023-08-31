@@ -1,0 +1,1 @@
+npm show $1 --json | jq '.time|with_entries(select(.value | sub("\\.[0-9]+Z"; "Z") | fromdate > now - 3600*24*30))'
