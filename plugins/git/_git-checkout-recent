@@ -6,6 +6,7 @@ _git-checkout-recent () {
 
   _arguments -S \
     '(-n --count)'{-n,--count}'[limit how much to show]' \
+    '(-d --date)'{-d,--date}'[use date format]:format:__git_date_formats' \
     '--access[sort by recently checked out (default)]' \
     '(-c --commit)'{-c,--commit}'[order by commit time]' \
     '(-u --author)'{-u,--author}'[sort by commit author date]' \

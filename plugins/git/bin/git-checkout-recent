@@ -11,6 +11,7 @@ git checkout-recent [<options>] <args>...
 --
 h,help      show the help
 n,count=    show this many commits [default=10]
+d,date=     use date format [default=short]
 access      sort by recently checked out [default]
 c,commit    sort by commit date
 u,author    sort by commit author date
@@ -28,6 +29,7 @@ by_creation=false
 sort=creatordate
 sort2=
 pattern=refs/heads/
+date=short
 
 index=0
 for arg in $@; do
@@ -37,6 +39,7 @@ for arg in $@; do
     --author) sort=authordate ;&
     --commit) by_commit=true ;;
     --creation) by_creation=true ;;
+    --date=*) date="${arg#--date=}" ;;
     --remote) by_commit=true; pattern=refs/remotes/origin ;;
     --remote=*) by_commit=true; pattern=refs/remotes/${arg#--remote=} ;;
     --all) by_commit=true; pattern= ;;
@@ -49,15 +52,17 @@ entries=()
 
 if $by_commit; then
   #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
-  git for-each-ref --sort=-$sort --format="%(${sort}:short) %(refname:short)|%(refname:short)" --count=$NUM $pattern |
+  git for-each-ref --sort=-$sort --format="%(${sort}:${date}) %(refname:short)|%(refname:short)" --count=$NUM $pattern |
   while read line; do entries+=($line); done
 elif $by_creation; then
-  git branch | awk -F ' +' '! /\(no branch\)/ {print $2}'|
-    xargs -n1 git reflog show --date=short |
-    grep -i created |
-    sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3 \2 \5/' |
+  git for-each-ref --format=%\(refname:short\) refs/heads/ | while read branchref; do
+    reflogunix=$(git --no-pager reflog show $branchref --date=unix --grep-reflog=Created | sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3/')
+    reflogformat=$(git --no-pager reflog show $branchref --date=${date} --grep-reflog=Created | sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([^\}]*)\}+: *(branch: Created (from [^H][^E]([^A]([^D].*)?)?))?.*/\3 \2 \5|\2/')
+    echo $reflogunix $reflogformat
+  done |
     sort -rg | head -n $NUM |
-    awk '{printf "%s %s",$1,$2} ; $3 != "HEAD" { printf " ← %s",$3 }; {printf "|%s\n",$2}' |
+    cut -d' ' -f2- |
+    # awk '{printf "%s %s",$2,$3} ; $4 != "HEAD" { printf " ← %s",$4 }; {printf "|%s\n",$3}' |
     while read line; do entries+=($line); done
 else
   _i=0
