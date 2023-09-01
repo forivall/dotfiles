@@ -14,6 +14,7 @@ git ls-recent [<options>] <args>...
 --
 h,help      show the help
 n,count=    show this many commits [default=10]
+d,date=     use date format [default=short]
 access      sort by recently checked out [default]
 c,commit    sort by commit date
 u,author    sort by commit author date
@@ -31,6 +32,7 @@ by_creation=false
 sort=creatordate
 sort2=
 pattern=refs/heads/
+date=short
 
 index=0
 for arg in $@; do
@@ -40,6 +42,7 @@ for arg in $@; do
     --author) sort=authordate ;&
     --commit) by_commit=true ;;
     --creation) by_creation=true ;;
+    --date=*) date="${arg#--date=}" ;;
     --remote) by_commit=true; pattern=refs/remotes/origin ;;
     --remote=*) by_commit=true; pattern=refs/remotes/${arg#--remote=} ;;
     --all) by_commit=true; pattern= ;;
@@ -55,13 +58,16 @@ if $by_commit; then
 fi
 
 if $by_creation; then
-  git branch | awk -F ' +' '! /\(no branch\)/ {print $2}'|
-    xargs -n1 git reflog show --date=short |
-    grep -i created |
-    sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3 \2 \5/' |
+  git for-each-ref --format=%\(refname:short\) refs/heads/ | while read branchref; do
+    reflogunix=$(git --no-pager reflog show $branchref --date=unix --grep-reflog=Created | sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3/')
+    reflogformat=$(git --no-pager reflog show --color $branchref --date=${date} --grep-reflog=Created | sed -E 's/^([^ ]+ )*([^@: ]*)@\{([^\}]*)\}+: *(branch: Created (from [^H][^E]([^A]([^D].*))?))?.*/\x1b\[34m\3\x1b\[00m \2 \x1b\[30m\5\x1b\[00m/')
+    echo $reflogunix $reflogformat
+  done |
     sort -rg | head -n $NUM |
-    awk '{printf "%s %s",$1, $2 } ; $3 != "HEAD" { print " ←",$3 }; $3 == "HEAD" { print "" }' |
-    while read line; do eval color_print $line; done
+    cut -d' ' -f2- |
+    # awk '{printf "%s %s",$2,$3} ; $4 != "HEAD" { printf " ← %s",$4 }; {printf "|%s\n",$3}' |
+    cat
+    # while read line; do entries+=($line); done
   exit
 fi
 
