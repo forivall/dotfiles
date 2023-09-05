@@ -11,7 +11,9 @@ git checkout-recent [<options>] <args>...
 --
 h,help      show the help
 n,count=    show this many commits [default=10]
-d,date=     use date format [default=short]
+d,date=     use date format [default=short-local]
+relative    use relative date format
+human       use human-local date format
 access      sort by recently checked out [default]
 c,commit    sort by commit date
 u,author    sort by commit author date
@@ -29,7 +31,7 @@ by_creation=false
 sort=creatordate
 sort2=
 pattern=refs/heads/
-date=short
+date=short-local
 
 index=0
 for arg in $@; do
@@ -40,6 +42,8 @@ for arg in $@; do
     --commit) by_commit=true ;;
     --creation) by_creation=true ;;
     --date=*) date="${arg#--date=}" ;;
+    --human) date=human-local ;;
+    --relative) date=relative ;;
     --remote) by_commit=true; pattern=refs/remotes/origin ;;
     --remote=*) by_commit=true; pattern=refs/remotes/${arg#--remote=} ;;
     --all) by_commit=true; pattern= ;;
@@ -56,6 +60,7 @@ if $by_commit; then
   while read line; do entries+=($line); done
 elif $by_creation; then
   git for-each-ref --format=%\(refname:short\) refs/heads/ | while read branchref; do
+    # TODO: use format instead of sed hacking
     reflogunix=$(git --no-pager reflog show $branchref --date=unix --grep-reflog=Created | sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3/')
     reflogformat=$(git --no-pager reflog show $branchref --date=${date} --grep-reflog=Created | sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([^\}]*)\}+: *(branch: Created (from [^H][^E]([^A]([^D].*)?)?))?.*/\3 \2 \5|\2/')
     echo $reflogunix $reflogformat
@@ -72,7 +77,8 @@ else
     # printf '%-7s ' @{-$i}
     echo @{-$i} ${branchname#refs/heads/}
   done) | awk '!x[$2]++' | while read -A entry ; do
-    entries+=("${entry[1]} ${entry[2]}|${entry[1]}")
+    reflogdate=$(git --no-pager reflog show ${entry[1]} --date=${date} -n1 --format=%gD)
+    entries+=("${entry[1]} ${${reflogdate#*@{}%\}} ${entry[2]}|${entry[1]}")
     _i=$(( $_i + 1 ))
     if (( $_i >= $NUM )) ; then break; fi
   done
