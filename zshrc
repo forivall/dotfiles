@@ -236,10 +236,12 @@ if ! zgen saved; then
 
   zgen load "$__zshrc_dirname/plugins/yarn"
   zgen load "$__zshrc_dirname/plugins/yargs"
+  zgen load "$__zshrc_dirname/plugins/yargs"
   # zgen load "$__zshrc_dirname/plugins/subl"
   zgen load "$__zshrc_dirname/plugins/trash"
   zgen load "$__zshrc_dirname/plugins/unsorted"
   zgen load "$__zshrc_dirname/plugins/simple-history-search"
+  zgen load "$__zshrc_dirname/plugins/zgen-zplug"
   # zgen load "$__zshrc_dirname/plugins/zgen-autoupdate" # TODO: figure out why this is slooooow!
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
@@ -258,16 +260,9 @@ if ! zgen saved; then
   done
   fpath=(${ofpath})
 
-  local before=${#fpath}
+  zgen-zplug-before-save
   zgen save
-  local count=$(( ${#fpath} - $before ))
-
-  for plugindir in ${fpath[0,$count]} ; do
-    if [[ -f ${plugindir}/zplug.zsh ]] ; then
-      # echo "Running ${plugindir}/zplug.zsh" >&2
-      (builtin cd $plugindir && ./zplug.zsh)
-    fi
-  done
+  zgen-zplug-after-save
 fi
 unalias 9
 unsetopt nomatch

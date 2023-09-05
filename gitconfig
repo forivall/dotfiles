@@ -187,7 +187,7 @@
 	ll = true
 	ls-files = false
 [pretty]
-	concise = "format:%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae>%Creset%n%C(blue)✍ %aD%C(reset) %C(cyan)⚓︎%cD%Creset%n%n%-s%n%Creset%n%-b"
+	concise = "format:%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae>%Creset%n%C(blue)✍ %aD%C(reset) %C(cyan)♔ %cD%Creset%n%n%-s%n%Creset%n%-b"
 	onemore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset %s"
 	twomore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset%n%-s"
 	twoline = "format:%C(yellow)%h%C(auto)%d%C(magenta) %aE %Creset%C(blue)%ad%C(green)%gn%Creset %n%s"

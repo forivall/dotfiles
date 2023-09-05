@@ -1,4 +1,5 @@
 __zsh_unsorted_plugin_location=$0:A:h
+path+=("$__zsh_unsorted_plugin_location/bin")
 
 autoload -U clean-env
 autoload -U shcat
