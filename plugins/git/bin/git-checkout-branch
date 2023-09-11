@@ -13,6 +13,7 @@ h,help    show the help
 s,search  search mode
 a,all     all branches
 r,remote? remote
+p,prefix  filter by current '+' prefix
 f,force   use --force when checking out
 d,detach  use --detach when checking out
 "
@@ -23,6 +24,7 @@ all=false
 remotes=false
 remote_option=
 checkout_options=()
+pattern=
 
 index=0
 for arg in $@; do
@@ -32,6 +34,10 @@ for arg in $@; do
     --all) all=true; remotes=true ;;
     --remote=*) remote_option="${arg#--remote=}" ;&
     --remote) remotes=true ;;
+    --prefix)
+      branch_name=$(git rev-parse --symbolic-full-name HEAD)
+      branch_name=${branch_name#refs/heads/}
+      pattern="${branch_name%+*}*" ;;
     --force|--detach) checkout_options+=(-$OPT) ;;
     --) break; ;;
   esac
@@ -51,7 +57,7 @@ fi
 
 branches=()
 if ! $remotes || $all; then
-  branches=($(git rev-parse --symbolic --branches))
+  branches=($(git rev-parse --symbolic --branches=$pattern))
 fi
 remote_branches=()
 if $remotes; then
@@ -77,17 +83,25 @@ if $remotes; then
   remote_options=("${(f)remote_options_str[@]}")
 fi
 
-simple-term-menu $term_menu_options "${branches[@]}" "${remote_options[@]}" && i=0 || i=$?
+if [[ ${#branches} == 0 && ${#remote_branches} == 0 ]]; then
+  i=1
+else
+  simple-term-menu $term_menu_options "${branches[@]}" "${remote_options[@]}" && i=0 || i=$?
+fi
 if (( $i == 0 )) ; then exit; fi
+
 if (( $i > ${#branches})); then
   idx=$(( i - ${#branches}))
   remote_branch=${remote_branches[idx]}
   if [[ -z "$remote_option" ]]; then
-    git checkout "${checkout_options[@]}" -b ${remote_branch#*/} $remote_branch
+    command=(git checkout "${checkout_options[@]}" -b ${remote_branch#*/} $remote_branch)
   else
-    git checkout "${checkout_options[@]}" -b $remote_branch $remote_option/$remote_branch
+    command=(git checkout "${checkout_options[@]}" -b $remote_branch $remote_option/$remote_branch)
   fi
 else
   branch=${branches[i]}
-  git checkout "${checkout_options[@]}" $branch
+  command=(git checkout "${checkout_options[@]}" $branch)
 fi
+
+echo '>' ${command[@]}
+${command[@]}

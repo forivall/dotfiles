@@ -1,10 +1,10 @@
-/// <reference types="@manuelpuyol/turbo" />
-/// <reference types="navigation-api-types" />
-// use terser compress: {evaluate: false, reduce_vars: false},
+// compress with terser `compress: {unsafe: true}`
 (async () => {
-  const DEFAULT_CWD = '';
-  /** @type {string} */
-  const PERSONAL_TOKEN = '';
+  /*@__NOINLINE__*/
+  const { DEFAULT_CWD, PERSONAL_TOKEN } = {
+    DEFAULT_CWD: '',
+    PERSONAL_TOKEN: '',
+  };
   const pathBase = document.location.pathname;
   const [owner, repoName, resource, prNumber] = pathBase
     .replace(/^\//, '')
@@ -31,9 +31,42 @@
   };
 
   const isFilesPage = container?.classList.contains('subnav-search');
-  container.appendChild(localRepoInput);
-
-  /** @type {{anchor: HTMLAnchorElement, loc: string, hash?: string | null}[]} */
+  if (container) {
+    container.appendChild(localRepoInput);
+  }
+  const gqlQuery = /*graphql*/ `{
+    repository(name: $name, owner: $owner) {
+      pullRequest(number: $pr) {
+        reviewThreads(first: 100) {
+          nodes {
+            line
+            path
+            id
+            comments(first: 100) {
+              nodes {
+                id
+                url
+              }
+            }
+            subjectType
+          }
+          totalCount
+          pageInfo {
+            hasNextPage
+            startCursor
+          }
+        }
+      }
+    }
+  }`
+    .replace(/\n  /g, ' ')
+    .replace(/   /g, ' ')
+    .replace(/   /g, ' ')
+    .replace(/   /g, ' ')
+    .replaceAll(' }', '}')
+    .replaceAll('{ ', '{')
+    .replaceAll(') ', ')');
+  /** @type {{anchor: HTMLAnchorElement, loc: string, hash?: string | null, lineNumber?: string }[]} */
   const anchors = [];
   if (!isFilesPage) {
     const apiQuery =
@@ -42,33 +75,13 @@
       owner &&
       resource === 'pull' &&
       Number(prNumber) &&
-      /*graphql*/ `{
-      repository(name: ${JSON.stringify(repoName)}, owner: ${JSON.stringify(
-        owner,
-      )}) {
-        pullRequest(number: ${JSON.stringify(Number(prNumber))}) {
-          reviewThreads(first: 100) {
-            nodes {
-              line
-              path
-              id
-              comments(first: 100) {
-                nodes {
-                  id
-                  url
-                }
-              }
-              subjectType
-            }
-            totalCount
-            pageInfo {
-              hasNextPage
-              startCursor
-            }
-          }
-        }
-      }
-    }`.replace(/\n */g, ' ');
+      gqlQuery.replace(
+        /\$\w+/g,
+        (
+          (vars) => (/** @type {string} */ n) =>
+            JSON.stringify(vars[n])
+        )({ $name: repoName, $owner: owner, $pr: Number(prNumber) }),
+      );
     const apiResponse =
       apiQuery &&
       (await fetch('https://api.github.com/graphql', {
@@ -80,6 +93,16 @@
         },
         body: JSON.stringify({ query: apiQuery }),
       }));
+    /** @typedef {0 | '' | false | null | undefined} Falsey */
+    /**
+     * @typedef ReviewThreadNode
+     * @property line
+     * @property {string} path
+     * @property {string} id
+     * @property {{ nodes: { id: string, url: string }[]}} comments
+     * @property {string} subjectType
+     */
+    /** @type {Falsey | { data: { repository: { pullRequest: { reviewThreads: { nodes: ReviewThreadNode[] } } } } }} */
     const apiResponseBody = apiResponse && (await apiResponse.json());
     const reviewThreads = apiResponseBody
       ? apiResponseBody.data.repository.pullRequest.reviewThreads.nodes
@@ -87,7 +110,9 @@
     const selector = `.js-comment-container a[href^=${JSON.stringify(
       `${pathBase}/files`,
     )}]`;
-    document.querySelectorAll(selector).forEach((element) => {
+    /** @type {NodeListOf<HTMLAnchorElement>} */
+    const commentLinks = document.querySelectorAll(selector);
+    commentLinks.forEach((element) => {
       const summary = element.closest('summary');
       /** @type {NodeListOf<HTMLAnchorElement> | undefined} */
       const commentLinks = summary?.parentElement?.querySelectorAll(
@@ -101,9 +126,11 @@
           thread.comments.nodes.some((it) => commentHrefs.has(it.url)),
         )?.path || element.innerText?.trim();
 
-      const lineNumber = summary?.nextElementSibling?.querySelector(
+      /** @type {HTMLElement | null | undefined} */
+      const lineNumberElement = summary?.nextElementSibling?.querySelector(
         '.blob-num-addition[data-line-number]',
-      )?.dataset.lineNumber;
+      );
+      const lineNumber = lineNumberElement?.dataset.lineNumber;
       const anchor = document.createElement('a');
       anchor.innerText = 'open';
       let href = `vscode://file${cwd}/${loc}`;
@@ -112,19 +139,31 @@
       }
       anchor.href = href;
       anchor.className = 'Link--onHover color-fg-muted ml-2 mr-2';
-      anchors.push({ anchor, loc });
+      anchors.push({ anchor, loc, lineNumber });
       element.parentElement?.classList.remove('mr-3');
       element.after(anchor);
     });
   }
-  document.querySelectorAll('clipboard-copy').forEach((element) => {
+  /** @typedef {HTMLElement & { value: string }} ClipboardCopyElement */
+  /** @type {NodeListOf<ClipboardCopyElement>} */
+  const copyElements = document.querySelectorAll('clipboard-copy');
+  copyElements.forEach((element) => {
     const anchor = document.createElement('a');
     const loc = element.value;
     /** @type {Element & Partial<Pick<HTMLAnchorElement, 'href'>> | null} */
     const linkanchor = element.previousElementSibling;
+    /** @type {HTMLElement | null | undefined} */
+    const lineNumberElement = element
+      .closest('.js-file')
+      ?.querySelector('.blob-num-addition[data-line-number]');
+    const lineNumber = lineNumberElement?.dataset.lineNumber;
+    let href = `vscode://file${cwd}/${loc}`;
+    if (lineNumber) {
+      href += `:${lineNumber}`;
+    }
     const hash = linkanchor?.getAttribute('href');
     anchor.innerText = 'open';
-    anchor.href = `vscode://file${cwd}/${loc}`;
+    anchor.href = href;
     anchor.className = 'Link--onHover color-fg-muted ml-2 mr-2';
     anchors.push({ anchor, loc, hash });
     element.after(anchor);
@@ -132,21 +171,22 @@
 
   let currenthash = '';
   const update = () => {
-    anchors.forEach(({ anchor, loc, hash }) => {
+    anchors.forEach(({ anchor, loc, hash, lineNumber }) => {
+      let href = `vscode://file${cwd}/${loc}`;
       if (hash && currenthash.startsWith(hash)) {
-        anchor.href = `vscode://file${cwd}/${loc}:${
-          currenthash.slice(hash.length + 1).split('-')[0]
-        }`;
-      } else {
-        anchor.href = `vscode://file${cwd}/${loc}`;
+        const hashLineNumber = currenthash.slice(hash.length + 1).split('-')[0];
+        if (hashLineNumber) {
+          lineNumber = hashLineNumber;
+        }
       }
+      if (lineNumber) {
+        href += `:${lineNumber}`;
+      }
+      anchor.href = href;
     });
   };
 
   localRepoInput.onblur = update;
-  /** @type {typeof import('@manuelpuyol/turbo')} */
-  // const Turbo = window.Turbo;
-  // Turbo.navigator.history.onPopState
   if (window.navigation) {
     window.navigation.onnavigate = (ev) => {
       const u = new URL(ev.destination.url);
