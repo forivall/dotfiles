@@ -1,0 +1,9 @@
+#compdef git-wt
+#description rename branch, and push to tracking upstream
+
+_git-branch-move-push() {
+  words=(branch -m ${words[2,-1]})
+  _git-branch
+}
+
+_git-branch-move-push "$@"

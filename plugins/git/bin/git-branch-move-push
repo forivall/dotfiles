@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+autoload colors && colors
+
+echo '>' git branch --move $@
+git branch --move $@
+branch_name=$(git rev-parse --symbolic --revs-only $@ | tail -n1)
+remote_rev=$(git rev-parse --symbolic-full-name ${branch_name}@{u})
+remote_rev=${remote_rev#refs/remotes/}
+remote_name=${remote_rev%%/*}
+remote_branch=${remote_rev#*/}
+
+if [[ -z $branch_name ]]; then
+  echo "unexpected branch name $branch_name"
+  exit 1
+fi
+
+echo '>' git push $remote_name ${remote_rev}:refs/heads/$branch_name :$remote_branch
+git push $remote_name ${remote_rev}:refs/heads/$branch_name :$remote_branch
+echo '>' git branch --set-upstream-to=${remote_name}/$branch_name
+git branch --set-upstream-to=${remote_name}/$branch_name
