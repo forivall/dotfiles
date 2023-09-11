@@ -37,6 +37,7 @@ alias gcm='git commit'
 alias gco='git checkout'
 alias gcop='git checkoutp'
 alias gcob='git checkout-branch'
+alias gcobp='git checkout-branch --prefix'
 alias gcor='git checkout-recent'
 alias gsco='git stashed checkout'
 alias gcp='git cherry-pick'
@@ -114,6 +115,24 @@ function zlegitypo() {
 }
 autoload -U add-zle-hook-widget
 add-zle-hook-widget -Uz line-finish zlegitypo
+
+function zlegitwtcd() {
+  emulate -L zsh
+  setopt extendedglob
+
+  local MATCH
+  LBUFFER=${LBUFFER#(#m)git wt cd }
+  if [[ -n "$MATCH" ]]; then
+    LBUFFER="cd $LBUFFER"
+    return
+  fi
+
+  LBUFFER=${LBUFFER#(#m)git worktree cd }
+  if [[ -n "$MATCH" ]]; then
+    LBUFFER="cd $LBUFFER"
+  fi
+}
+add-zle-hook-widget -Uz line-finish zlegitwtcd
 
 # TODO: modify and put this in my gitignore
 # alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
