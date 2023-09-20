@@ -1,1 +1,4 @@
 _poetry
+/_pyenv
+/_pdm
+pyenv-init.sh

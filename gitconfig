@@ -10,7 +10,7 @@
 	pager = moar --no-linenumbers
 	excludesfile = ~/.gitignore
 	trustctime = false
-	editor = vim
+	editor = hx
 	# trustctime = false
 [diff]
 	renames = copies

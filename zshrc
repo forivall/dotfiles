@@ -55,11 +55,7 @@ fi
 # core shell settings
 # export SHELL=$(whence $(ps wwwe -p $$ -o comm=))  # broken on m1 mac
 # export SHELL=zsh
-export EDITOR=vim
-if type nvim >/dev/null ; then
-  export EDITOR=nvim
-fi
-# TODO: kakoune (kak) or helix-term (hx)
+export EDITOR=hx
 
 export VISUAL=code
 export LC_ALL="en_CA.UTF-8"
@@ -203,8 +199,6 @@ if ! zgen saved; then
 
   ! $IS_WINDOWS && zgen load forivall/zsh-nvm
   zgen load "$__zshrc_dirname/plugins/nvm"
-  zgen load lukechilds/zsh-better-npm-completion
-  zgen load g-plane/zsh-yarn-autocompletions
   zgenom load unixorn/fzf-zsh-plugin
   # zgen load forivall/zsh-yarn-autocompletions / main
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
@@ -248,6 +242,8 @@ if ! zgen saved; then
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
+  zgen load surkin/zsh-better-npm-completion
+  zgen load g-plane/zsh-yarn-autocompletions
 
   # zgen load dim-an/cod
   # zgen load forivall/cod / feat/zsh-local-build

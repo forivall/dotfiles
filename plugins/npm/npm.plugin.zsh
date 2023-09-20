@@ -3,6 +3,11 @@ __zsh_npm_plugin_location=${0:A:h}
 path+=("${__zsh_npm_plugin_location}/bin")
 alias nr="npm run"
 
+if [[ -f $HOMEBREW_PREFIX/Cellar/zsh/$ZSH_VERSION/share/zsh/functions/_npm ]]; then
+  echo 'moving bad builtin npm completion'
+  mv $HOMEBREW_PREFIX/Cellar/zsh/$ZSH_VERSION/share/zsh/functions/{_npm,__bad_builtin_npm}
+fi
+
 function npm() {
   command=$1
   if [[ ${(k)functions[npm-$command]} == npm-$command ]] ; then
@@ -25,7 +30,7 @@ function npm() {
     *) ${npm_cmd[@]} "$@";;
   esac
 }
-compdef npm=npm
+compdef _npm npm
 
 npm-git-get-branch() {
   local m="$1"

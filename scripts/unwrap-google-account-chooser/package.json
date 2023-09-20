@@ -1,0 +1,24 @@
+{
+  "name": "unwrap-google-account-chooser",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "unwrap-google-account-chooser.js",
+  "scripts": {
+    "preplatypus": "trash '../Dato Google Meet.app' || true",
+    "platypus": "cd ..; platypus unwrap-google-account-chooser/platypus_entry.cjs -f unwrap-google-account-chooser --name 'Dato Google Meet'",
+    "postplatypus": "mv 'Dato Google Meet.app' ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "emily",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "nexe": "^4.0.0-rc.2",
+    "mac-appify": "^2019.4.13"
+  },
+  "dependencies": {
+    "open": "^9.1.0"
+  }
+}

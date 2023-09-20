@@ -1,0 +1,98 @@
+{
+  "title": "Brightness with Volume Control",
+  "rules": [
+    {
+      "description": "Control brightness with fn + volume keys (knob)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_increment",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ],
+              "optional": [
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "display_brightness_increment",
+              "modifiers": []
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_decrement",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ],
+              "optional": [
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "display_brightness_decrement",
+              "modifiers": []
+            }
+          ]
+        }
+      ]
+    },{
+        "description": "Control brightness with right cmd + volume keys (knob)",
+        "manipulators": [
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "volume_increment",
+              "modifiers": {
+                "mandatory": [
+                  "right_gui"
+                ],
+                "optional": [
+                  "shift",
+                  "option"
+                ]
+              }
+            },
+            "to": [
+              {
+                "key_code": "display_brightness_increment",
+                "modifiers": []
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "volume_decrement",
+              "modifiers": {
+                "mandatory": [
+                  "right_gui"
+                ],
+                "optional": [
+                  "shift",
+                  "option"
+                ]
+              }
+            },
+            "to": [
+              {
+                "key_code": "display_brightness_decrement",
+                "modifiers": []
+              }
+            ]
+          }
+        ]
+      }
+  ]
+}

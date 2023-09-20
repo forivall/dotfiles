@@ -14,4 +14,5 @@ x git remote add sonix hub:SonixQMK/qmk_firmware
 x git remote add keychron hub:Keychron/qmk_firmware
 x git remote add massdrop hub:Massdrop/qmk_firmware
 x git remote add system76 hub:system76/qmk_firmware
+x git remote add vial hub:vial-kb/vial-qmk
 x git fetch --all
