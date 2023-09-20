@@ -1,0 +1,19 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+		"TypeScript",
+	],
+	"installed_packages":
+	[
+		"CommandsBrowser",
+		"EditorConfig",
+		"LSP-typescript",
+		"Open Finder",
+		"Package Control",
+		"SCSS",
+		"termX",
+		"Tomorrow Color Schemes",
+		"TypeScript",
+	],
+}

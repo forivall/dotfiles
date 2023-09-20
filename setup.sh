@@ -60,7 +60,7 @@ o ln -fs "$(realpath oglrc)" ~/.ogl
 o ln -fs "$(realpath hgrc)" ~/.hgrc
 o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist
-o ln -fs "$(realpath plugins/direnv/config)" ~/.config/direnv
+o ln -fs -T "$(realpath plugins/direnv/config)" ~/.config/direnv
 o mkdir -p ~/.config/glab-cli
 o ln -fs "$(realpath plugins/glab/aliases.yml)" ~/.config/glab-cli/aliases.yml
 o mkdir -p ~/.config/htop

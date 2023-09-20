@@ -7,8 +7,8 @@ o() {
   "$@"
 }
 
-o ln -Ffs "$(realpath vim)" ~/.config/nvim
-o ln -Ffs "$(realpath vim)" ~/.vim
+o ln -TFfs "$(realpath vim)" ~/.config/nvim
+o ln -TFfs "$(realpath vim)" ~/.vim
 o ln -fs "$(realpath vim/init.vim)" ~/.vimrc
 
 o curl -fLo $__dirname/autoload/plug.vim --create-dirs \

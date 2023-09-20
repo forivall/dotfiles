@@ -73,6 +73,9 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
   right: 0;
   backdrop-filter: blur(1px);
 }
+.sticky-widget {
+  backdrop-filter: blur(1.5px);
+}
 .horizontal-activitybar .monaco-workbench .progress-badge>.badge-content:before {
   width: 12px;
   height: 12px;
