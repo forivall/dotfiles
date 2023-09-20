@@ -49,7 +49,7 @@ o git submodule update --init
 o ln -fs "$(realpath zshrc)" ~/.zshrc
 o ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
 
-o mkdir ~/.config
+o mkdir -p ~/.config
 
 o ./vim/setup.sh
 
@@ -61,12 +61,14 @@ o ln -fs "$(realpath hgrc)" ~/.hgrc
 o ln -fs "$(realpath nanorc)" ~/.nanorc
 o ln -fs "$(realpath pythonhist)" ~/.pythonhist
 o ln -fs "$(realpath plugins/direnv/config)" ~/.config/direnv
-o mkdir ~/.config/glab-cli
+o mkdir -p ~/.config/glab-cli
 o ln -fs "$(realpath plugins/glab/aliases.yml)" ~/.config/glab-cli/aliases.yml
-o mkdir ~/.config/htop
+o mkdir -p ~/.config/htop
 o ln -fs "$(realpath htoprc)" ~/.config/htop/htoprc
-o mkdir ~/.config/gh
+o mkdir -p ~/.config/gh
 o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
+o mkdir -p ~/.config/helix
+o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
 o ln -fs "$(realpath ctop)" ~/.ctop
 o ln -fs "$(realpath config/watchman.json)" ~/.config/watchman.json
 
@@ -76,9 +78,9 @@ o ln -fs "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
 
 
 if $IS_OSX ; then
-  mkdir ~/.config/mackup
+  mkdir -p ~/.config/mackup
   o ln -fs "$(realpath mackup.cfg)" ~/.mackup.cfg
-  mkdir ~/.config/yabai
+  mkdir -p ~/.config/yabai
   o ln -fs "$(realpath config/yabairc)" ~/.config/yabai/yabairc
 fi
 # TODO: gnu stow or some other alternative to mackup for linux.

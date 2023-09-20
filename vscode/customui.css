@@ -62,7 +62,7 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .horizontal-activitybar .monaco-workbench .activitybar .menubar,
 .custom-activitybar div.monaco-workbench div.activitybar>div.content div.monaco-action-bar ul.actions-container li.action-item a.action-label {
   font-size: calc(var(--activity-bar-action-size) * 9 / 13);
-  -webkit-mask-size: calc(var(--activity-bar-action-size) * 9 / 13);
+  -webkit-mask-size: calc(var(--activity-bar-action-size) * 9 / 13 - 4px);
   mask-size: calc(var(--activity-bar-action-size) * 9 / 13);
 }
 .horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco-menu)>.monaco-action-bar .badge .badge-content {
@@ -112,9 +112,12 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .monaco-action-bar:not(.vertical) .action-item.icon:hover {
   background-color: var(--vscode-toolbar-hoverBackground);
 }
-.monaco-workbench .activitybar .monaco-action-bar .action-label.action-label.activity-workbench-view-extension-js-notebook-inspector-f0b07fe8be4bbf4fdf9e656f027e5402a1b79493 {
+/* .monaco-workbench .activitybar .monaco-action-bar .action-label.action-label.activity-workbench-view-extension-js-notebook-inspector-f0b07fe8be4bbf4fdf9e656f027e5402a1b79493 {
   -webkit-mask: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M8%207.00003H4M8%2012H4M8%2017H4M12%203V21M9.2%2021H16.8C17.9201%2021%2018.4802%2021%2018.908%2020.782C19.2843%2020.5903%2019.5903%2020.2843%2019.782%2019.908C20%2019.4802%2020%2018.9201%2020%2017.8V6.20003C20%205.07993%2020%204.51987%2019.782%204.09205C19.5903%203.71573%2019.2843%203.40977%2018.908%203.21802C18.4802%203.00003%2017.9201%203.00003%2016.8%203.00003H9.2C8.07989%203.00003%207.51984%203.00003%207.09202%203.21802C6.71569%203.40977%206.40973%203.71573%206.21799%204.09205C6%204.51987%206%205.07993%206%206.20003V17.8C6%2018.9201%206%2019.4802%206.21799%2019.908C6.40973%2020.2843%206.71569%2020.5903%207.09202%2020.782C7.51984%2021%208.07989%2021%209.2%2021Z%22%20stroke%3D%22%23131A29%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3C%2Fsvg%3E%0A") 50% 50% / 24px no-repeat;
-}
+} */ /*
+.monaco-workbench .activitybar .monaco-action-bar .action-label.action-label.activity-workbench-view-extension-deoptexplorer-container-5f9a2d90f1a47f2d1c0d1aadb7ce93107efaa083 {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2224%22%20viewBox%3D%220%200%2012%2016%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.05.31c.81%202.17.41%203.38-.52%204.31C3.55%205.67%201.98%206.45.9%207.98c-1.45%202.05-1.7%206.53%203.53%207.7-2.2-1.16-2.67-4.52-.3-6.61-.61%202.03.53%203.33%201.94%202.86%201.39-.47%202.3.53%202.27%201.67-.02.78-.31%201.44-1.13%201.81%203.42-.59%204.78-3.42%204.78-5.56%200-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03%201.13-1.89%202.75.09%201.08-1.02%201.8-1.86%201.33-.67-.41-.66-1.19-.06-1.78C8.18%205.31%208.68%202.45%205.05.32L5.03.3l.02.01Z%22%2F%3E%3C%2Fsvg%3E") 50% 50% / 24px no-repeat;
+} */
 .mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.16px }
 @media (-webkit-max-device-pixel-ratio: 1), (max-resolution: 1dppx) {
   .mac.trongthanh-theme-boxythemekit-themes-Boxy-Yesterday-json { -webkit-text-stroke: 0.3px }

@@ -9,12 +9,23 @@ if [[ -f yarn.lock ]]; then
   run yarn
 elif [[ -f pnpm-lock.yaml ]]; then
   run pnpm install
+elif [[ -f bun.lockb ]]; then
+  run bun install
+elif [[ -f package-lock.json ]]; then
+  run npm install
 elif [[ -f package.json ]]; then
+  echo '# no lockfile found, using npm'
   run npm install
 fi
 
-if [[ -f pyproject.toml ]]; then
-  echo todo: pyproject.toml, poetry or pdm, ensure that virtualenv is being used, etc.
+if [[ -f pdm.lock ]]; then
+  run pdm install
+  # generate a .direnv instead (if none exists)
+  echo "# run \`eval $\(pdm venv activate)\` for virtualenv"
+elif [[ -f poetry.lock ]]
+  run poetry install
+elif [[ -f pyproject.toml ]]; then
+  echo unknown pyproject
   exit 1
 fi
 

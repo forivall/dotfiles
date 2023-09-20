@@ -1,0 +1,66 @@
+#!/usr/bin/env zsh
+
+# set -euo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+autoload -U colors  && colors
+
+action=pop
+if [[ "$1" == drop || "$1" == pop || "$1" == apply ]]; then
+  action="$1"
+  shift
+fi
+
+OPTS_SPEC="\
+git stashp [apply|pop|drop] [<options>] <args>...
+
+semi-interactive stash. pop by default
+--
+h,help      show the help
+index       try to reinstate the changes added to the index as well
+d,date=     use date format [default=short-local]
+relative    use relative date format
+human       use human-local date format
+"
+eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
+
+NUM=10
+date=short-local
+args=()
+
+for arg in $@; do
+  case "$arg" in
+    --count=*) NUM="${arg#--count=}" ;;
+    --index) args+=(--index) ;;
+    --date=*) date="${arg#--date=}" ;;
+    --human) date=human-local ;;
+    --relative) date=relative ;;
+    --) break; ;;
+  esac
+done
+
+entries=()
+
+_i=0
+for i in {1..99} ; do
+  stashname=$(git rev-parse --symbolic stash@{$i} 2>/dev/null) || break
+  if [[ -z "$stashname" ]] ; then continue; fi
+  message=$(git --no-pager reflog show ${stashname} --date=${date} -n1 --format='%s @ %cd')
+  entries+=("$stashname $message|$stashname")
+  _i=$(( $_i + 1 ))
+  if (( $_i >= $NUM )) ; then break; fi
+done
+
+term_menu_options=(
+  --no-preview-border
+  --preview-size 0.6
+  --preview "$__plugin_dirname/__git-stashp-preview {}"
+)
+
+simple-term-menu $term_menu_options "${entries[@]}" && i=0 || i=$?
+if (( $i == 0 )) ; then exit; fi
+
+entry=${entries[i]#*|}
+echo '>' git stash $action $args $entry
+git stash $action $args $entry

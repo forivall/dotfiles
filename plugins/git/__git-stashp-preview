@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__dirname=${0:A:h}
+
+autoload colors && colors
+
+echo -n "$reset_color"
+git -c color.diff=always show --stat --format='' $@
