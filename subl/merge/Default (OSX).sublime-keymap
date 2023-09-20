@@ -1,0 +1,30 @@
+[
+  {
+    "keys": ["shift+enter"],
+    "command": "resolve_merge_conflict",
+    "args": { "path": "$path" },
+    "context": [{"operator": "not_equal", "key": "merge_mode"}]
+  },
+  {
+    "keys": ["ctrl+enter"],
+    "command": "resolve_merge_conflict",
+    "args": { "path": "$path" },
+    "context": [{"operator": "not_equal", "key": "merge_mode"}]
+  },
+	{
+    "keys": ["super+w"], "command": "navigate_back",
+    "context": [{"key": "merge_mode"}]
+  },
+	{
+    "keys": ["escape"], "command": "navigate_back",
+    "context": [{"key": "merge_mode"}]
+  },
+	{ "keys": ["super+1"], "command": "focus_left", "context": [{"key": "merge_mode"}] },
+	{ "keys": ["super+2"], "command": "focus_middle", "context": [{"key": "merge_mode"}] },
+	{ "keys": ["super+3"], "command": "focus_right", "context": [{"key": "merge_mode"}] },
+	{ "keys": ["super+0"], "command": "toggle_merged_vs_base", "context": [{"key": "merge_mode"}] },
+  { "keys": ["ctrl+j"], "command": "next_conflict", "context": [{"key": "merge_mode"}] },
+	{ "keys": ["ctrl+k"], "command": "prev_conflict", "context": [{"key": "merge_mode"}] },
+	{ "keys": ["ctrl+l"], "command": "use_left_hunk" },
+	{ "keys": ["ctrl+h"], "command": "use_right_hunk" },
+]

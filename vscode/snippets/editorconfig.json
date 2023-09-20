@@ -1,0 +1,24 @@
+
+{
+  "EditorConfig template": {
+    "prefix": "editorconfig",
+		"isFileTemplate": true,
+    "description": ".editorconfig template (js, html, scss/css, py & md)",
+    "body": [
+      "; Docs: https://editorconfig.org",
+      "root = true",
+      "\n[*]",
+      "indent_style = space",
+      "end_of_line = ${endOfLine:lf}",
+      "charset = utf-8",
+      "trim_trailing_whitespace = true",
+      "insert_final_newline = true",
+      "\n[*.{js,css,scss,html}]",
+      "indent_size = 2",
+      "\n[*.{py,html,md}]",
+      "indent_size = 4",
+      "\n[*.md]",
+      "trim_trailing_whitespace = false\n"
+    ]
+  }
+}

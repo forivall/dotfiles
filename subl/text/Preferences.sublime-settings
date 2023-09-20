@@ -1,0 +1,12 @@
+{
+	"ignored_packages":
+	[
+		"TypeScript",
+		"Vintage",
+	],
+	"theme": "auto",
+	"color_scheme": "auto",
+	"light_color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow.tmTheme",
+	"dark_color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
+	"find_selected_text": true,	
+}

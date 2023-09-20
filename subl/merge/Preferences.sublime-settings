@@ -1,0 +1,17 @@
+{
+	"font_face": "Fantasque Sans Mono",
+	"font_options": ["no_calt", "no_liga", "no_clig", "subpixel_antialias", "round"],
+	"font_size": 14,
+	"tab_size": 2,
+	"theme": "auto",
+	"translate_tabs_to_spaces": true,
+	"render_commit_dialog_message_at_top": true,
+	"side_bar_layout": "tabs",
+	"always_show_command_status": false,
+	"ignore_diff_white_space": true,
+	"image_diff_style": "side-by-side",
+	"editor_path": "/usr/local/bin/code",
+	"editor_argument_format": "--goto ${file}:${line}:${col}",
+	"expand_merge_commits_by_default": false,
+	"themed_title_bar": false,
+}
