@@ -20,6 +20,7 @@ git ls-recent [<options>] <args>...
 --
 h,help      show the help
 n,count=    show this many commits [default=10]
+f,filter=   filter with shell condition
 d,date=     use date format [default=short]
 relative    use relative date format
 human       use human-local date format
@@ -41,6 +42,7 @@ sort=creatordate
 sort2=
 pattern=refs/heads/
 date=short
+filter=true
 
 index=0
 for arg in $@; do
@@ -51,6 +53,7 @@ for arg in $@; do
     --commit) by_commit=true ;;
     --creation) by_creation=true ;;
     --date=*) date="${arg#--date=}" ;;
+    --filter=*) filter="${arg#--filter=}" ;;
     --human) date=human-local ;;
     --relative) date=relative ;;
     --remote) by_commit=true; pattern=refs/remotes/origin ;;
@@ -62,13 +65,25 @@ for arg in $@; do
 done
 
 if $by_commit; then
+  if [[ $filter != true ]]; then
+    _i=0
+    git for-each-ref --sort=-$sort --format=%\(refname\) $pattern | while read ref; do
+      if ! eval $filter; then continue; fi
+      git for-each-ref --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" $ref
+      _i=$(( $_i + 1 ))
+      if (( $_i >= $NUM )) ; then break; fi
+    done
+    exit
+  fi
   #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
   git for-each-ref --sort=-$sort --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
   exit
 fi
 
 if $by_creation; then
-  git for-each-ref --format=%\(refname:short\) refs/heads/ | while read branchref; do
+  git for-each-ref --format=%\(refname:short\) refs/heads/ | while read ref; do
+    branchref=${ref#refs/heads/}
+    if ! eval $filter; then continue; fi
     reflogunix=$(git --no-pager reflog show $branchref --date=unix --grep-reflog=Created | sed -E 's/^([a-f0-9]+ )*([^@: ]*)@\{([0-9\-]*)\}+: *(branch: Created from (.*))?/\3/')
     reflogformat=$(git --no-pager reflog show --color $branchref --date=${date} --grep-reflog=Created | sed -E 's/^([^ ]+ )*([^@: ]*)@\{([^\}]*)\}+: *(branch: Created (from [^H][^E]([^A]([^D].*))?))?.*/\x1b\['${color[blue]}'m\3\x1b\['${color[none]}'m \2 \x1b\['${color[faint]}'m\5\x1b\['${color[none]}'m/')
     echo $reflogunix $reflogformat
@@ -97,9 +112,10 @@ for i in {1..99} ; do
 done) | awk '!x[$2]++' | while read -A entry ; do
     # if (( $_i == 0 )) ; then echo -n - ; else echo -n $_i ; fi ; echo -n ' '
     # echo "$branchname"
-
-    reflogdate=$(git --no-pager reflog show ${entry[1]} --date=${date} -n1 --format=%gD)
-    print -Pf "${fg[blue]}%-6s$reset_color ${faint_color}%12s$reset_color %s\n" "${entry[1]}" "${${reflogdate#*@{}%\}}" "${entry[2,-1]}"
+    ref=${entry[1]}
+    if ! eval $filter; then continue; fi
+    reflogdate=$(git --no-pager reflog show $ref --date=${date} -n1 --format=%gD)
+    print -Pf "${fg[blue]}%-6s$reset_color ${faint_color}%12s$reset_color %s\n" "$ref" "${${reflogdate#*@{}%\}}" "${entry[2,-1]}"
     _i=$(( $_i + 1 ))
     if (( $_i >= $NUM )) ; then break; fi
 done
