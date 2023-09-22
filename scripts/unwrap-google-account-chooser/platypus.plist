@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AcceptsFiles</key>
+	<false/>
+	<key>AcceptsText</key>
+	<false/>
+	<key>Authentication</key>
+	<false/>
+	<key>Author</key>
+	<string>Emily Klassen</string>
+	<key>BundledFiles</key>
+	<array>
+		<string>unwrap-google-account-chooser</string>
+	</array>
+	<key>Creator</key>
+	<string>Platypus-5.4.1</string>
+	<key>DeclareService</key>
+	<false/>
+	<key>Destination</key>
+	<string>Google Meet Launcher.app</string>
+	<key>DevelopmentVersion</key>
+	<false/>
+	<key>DocIconPath</key>
+	<string></string>
+	<key>Droppable</key>
+	<false/>
+	<key>ExecutablePath</key>
+	<string>/usr/local/share/platypus/ScriptExec</string>
+	<key>IconPath</key>
+	<string></string>
+	<key>Identifier</key>
+	<string>com.forivall.GoogleMeetLauncher</string>
+	<key>InterfaceType</key>
+	<string>None</string>
+	<key>InterpreterArgs</key>
+	<array/>
+	<key>InterpreterPath</key>
+	<string>/opt/homebrew/bin/node</string>
+	<key>Name</key>
+	<string>Google Meet Launcher</string>
+	<key>NibPath</key>
+	<string>/usr/local/share/platypus/MainMenu.nib</string>
+	<key>OptimizeApplication</key>
+	<false/>
+	<key>Overwrite</key>
+	<false/>
+	<key>PromptForFileOnLaunch</key>
+	<false/>
+	<key>RemainRunning</key>
+	<false/>
+	<key>RunInBackground</key>
+	<false/>
+	<key>ScriptArgs</key>
+	<array/>
+	<key>ScriptPath</key>
+	<string>unwrap-google-account-chooser/platypus_entry.cjs</string>
+	<key>SendNotifications</key>
+	<false/>
+	<key>StatusItemDisplayType</key>
+	<string>Text</string>
+	<key>StatusItemIcon</key>
+	<data>
+	</data>
+	<key>StatusItemIconIsTemplate</key>
+	<false/>
+	<key>StatusItemTitle</key>
+	<string>Title</string>
+	<key>StatusItemUseSystemFont</key>
+	<true/>
+	<key>Suffixes</key>
+	<array/>
+	<key>TextBackground</key>
+	<string>#ffffff</string>
+	<key>TextFont</key>
+	<string>Monaco</string>
+	<key>TextForeground</key>
+	<string>#000000</string>
+	<key>TextSize</key>
+	<real>13</real>
+	<key>URISchemes</key>
+	<array/>
+	<key>UniformTypes</key>
+	<array>
+		<string>public.item</string>
+		<string>public.folder</string>
+	</array>
+	<key>Version</key>
+	<string>1.0</string>
+</dict>
+</plist>

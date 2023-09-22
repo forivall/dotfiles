@@ -5,9 +5,8 @@
   "type": "module",
   "main": "unwrap-google-account-chooser.js",
   "scripts": {
-    "preplatypus": "trash '../Dato Google Meet.app' || true",
-    "platypus": "cd ..; platypus unwrap-google-account-chooser/platypus_entry.cjs -f unwrap-google-account-chooser --name 'Dato Google Meet'",
-    "postplatypus": "mv 'Dato Google Meet.app' ..",
+    "preplatypus": "trash '../Google Meet Launcher.app' || true",
+    "platypus": "cd ..; platypus -P unwrap-google-account-chooser/platypus.plist --app-icon ~/'Applications/Chrome Apps.localized/Google Meet.app/Contents/Resources/app.icns' 'Google Meet Launcher.app'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

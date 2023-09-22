@@ -1,4 +1,4 @@
-#compdef git-wt
+#compdef git-push-new-branch
 #description push branch with matching name to upstream (default: origin)
 
 _git-push-new-branch() {

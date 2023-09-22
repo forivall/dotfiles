@@ -1,0 +1,52 @@
+#compdef nightlight
+#description interactively checkout a branch
+
+_nightlight () {
+
+  _arguments -C \
+    '--help[show help]' \
+    ': :->command' \
+    '*:: :->option-or-argument' && ret=0
+
+  case $state in
+    (command)
+
+      local -a commands
+      commands=(
+        'on:Turn Night Shift on'
+        'off:Turn Night Shift off'
+        'status:View current on/off status'
+        'toggle:Toggle on or off based on current status'
+        'temp:View / set temperature preference'
+        'schedule:View / set the current schedule'
+      )
+
+      _describe -t commands command commands && ret=0
+      ;;
+    (option-or-argument)
+      curcontext=${curcontext%:*}-$line[1]:
+
+      case $line[1] in
+        (temp)
+          _arguments -S ': : _message "<0-100|3500K-6500K> Set temperature preference (does not affect on/off)" '
+          ;;
+        (schedule)
+          declare -a commands
+
+          commands=(
+            'start:Start schedule from sunset to sunrise'
+            'stop:Stop the current schedule'
+          )
+
+          _alternative \
+            'commands:: _describe -t commands command commands' \
+            'arguments:: _arguments "1:from" "2:to"' && ret=0
+          ;;
+      esac
+      ;;
+  esac
+
+  return ret
+}
+
+_nightlight
