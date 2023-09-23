@@ -1,0 +1,9 @@
+inherits = "base16_transparent"
+
+# "ui.cursor" = { modifiers = [], underline = { color = "#000000", style = "dotted"} }
+"ui.cursor.primary" = { modifiers = ["reversed"], underline = { color = "#000000", style = "line"}, fg = "#a0a0a0" }
+"ui.cursor.secondary" = { modifiers = ["reversed"], underline = { color = "#000000", style = "dotted"} }
+"ui.virtual.ruler" = { bg = "light-gray" }
+"markup.heading" = { fg = "cyan" }
+"markup.normal" = { fg = "black" }
+"comment" = { fg = "white", modifiers = ["italic"] }
