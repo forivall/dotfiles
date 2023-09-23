@@ -1035,7 +1035,10 @@
   "calva.paredit.defaultKeyMap": "original",
   "calva.paredit.hijackVSCodeDefaults": false,
   "multiCommand.commands": [
-
+    {
+      "command": "extension.multicommand.saveAndClose",
+      "sequence": ["workbench.action.files.save", "workbench.action.closeActiveEditor"]
+    },
     {
       "command": "extension.multiCommand.hideSearch",
       "sequence": ["search.action.clearSearchResults", "workbench.view.search"]
@@ -1338,6 +1341,7 @@
     "editor.foldingStrategy": "indentation",
     "editor.formatOnType": true,
     "editor.showFoldingControls": "always",
+    "editor.defaultFormatter": "ms-python.black-formatter",
     "explicitFolding.rules": [
       {"indentation": true},
       {
@@ -2633,6 +2637,12 @@
       ]
     }
   },
+  "command aliases": {
+    "explorer.newFile": "touch",
+    "explorer.newFolder": "mkdir",
+    "workbench.action.files.saveAll": "wall",
+    "extension.multicommand.saveAndClose": "wq"
+  },
   "circleci.notifications.areActive": "no",
   "search.useParentIgnoreFiles": true,
   "workbench.editor.untitled.hint": "hidden",
@@ -2642,7 +2652,8 @@
   "projectManager.git.maxDepthRecursion": 1,
   "markdownlint.config": {
     "first-line-h1": false,
-    "header-increment": false
+    "header-increment": false,
+    "no-duplicate-header": false
   },
   "evenBetterToml.schema.catalogs": [
     "https://www.schemastore.org/api/json/catalog.json"
@@ -2651,5 +2662,5 @@
     // ".*/pyproject\\.toml": "https://raw.githubusercontent.com/abravalheri/validate-pyproject/main/src/validate_pyproject/pyproject_toml.schema.json"
     // ".*/pyproject\\.toml": "https://json.schemastore.org/pyproject.json"
   },
-  "prettier.enableDebugLogs": true
+  "prettier.enableDebugLogs": true,
 }

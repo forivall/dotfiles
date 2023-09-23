@@ -1,0 +1,3 @@
+[[language]]
+name = "git-ignore"
+file-types = ["gitignore"]

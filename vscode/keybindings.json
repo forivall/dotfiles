@@ -1,6 +1,6 @@
 [
   { "key": "escape", "command": "whichkey.show",
-    "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasMultipleSelections && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && resourceScheme != 'vscode-interactive'"
+    "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && resourceScheme != 'vscode-interactive'"
   },
   // put escape keybinds after the whichkey escape binding.
   { "key": "escape", "command": "runCommands", "args": {"commands": ["search.action.clearSearchResults", "workbench.view.search"]},
@@ -15,8 +15,6 @@
                                     "when": "testing.isPeekVisible && !config.editor.stablePeek" },
   { "key": "escape",                "command": "cancelSelection",
                                     "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && editorHasSelection && textInputFocus" },
-  { "key": "escape",                "command": "removeSecondaryCursors",
-                                    "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && editorHasMultipleSelections && textInputFocus" },
   { "key": "escape",                "command": "notebook.cell.quitEdit",
                                     "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible" },
   { "key": "escape",                "command": "interactiveEditor.cancel",
@@ -1113,5 +1111,19 @@
     "key": ",",
     "command": "dance.selections.clear.secondary",
     "when": "editorTextFocus && dance.mode == 'normal'"
-  }
+  },
+  { "key": "x",       "command": "dance.select.line.below.extend", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+x", "command": "dance.selections.expandToLines", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  
+  // // not ready yet. https://github.com/71/dance/issues/299#issuecomment-1655509531
+  // {
+  //   "key": "v",
+  //   "command": "dance.modes.set.select",
+  //   "when": "editorTextFocus && dance.mode == 'normal'",
+  // },
+  // {
+  //   "key": "v",
+  //   "command": "-dance.openMenu",
+  //   "when": "editorTextFocus && dance.mode == 'normal'"
+  // },
 ]
