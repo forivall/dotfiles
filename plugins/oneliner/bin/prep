@@ -22,7 +22,7 @@ if [[ -f pdm.lock ]]; then
   run pdm install
   # generate a .direnv instead (if none exists)
   echo "# run \`eval $\(pdm venv activate)\` for virtualenv"
-elif [[ -f poetry.lock ]]
+elif [[ -f poetry.lock ]]; then
   run poetry install
 elif [[ -f pyproject.toml ]]; then
   echo unknown pyproject
@@ -31,4 +31,8 @@ fi
 
 if [[ -f Cargo.toml ]]; then
   run cargo build
+fi
+
+if [[ -f Podfile ]]; then
+  run pod install
 fi
