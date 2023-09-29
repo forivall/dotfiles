@@ -69,6 +69,7 @@ o mkdir -p ~/.config/gh
 o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
 o mkdir -p ~/.config/helix
 o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
+o ln -fs "$(realpath helix/themes)" ~/.config/helix/themes
 o ln -fs "$(realpath ctop)" ~/.ctop
 o ln -fs "$(realpath config/watchman.json)" ~/.config/watchman.json
 
