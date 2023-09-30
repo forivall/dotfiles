@@ -2588,7 +2588,7 @@
     },
     "insert": {
       "hiddenSelectionsIndicatorsDecoration": {},
-      "selectionBehavior": "character",
+      "selectionBehavior": "caret",
     },
     "normal": {
       "lineNumbers": "relative",
