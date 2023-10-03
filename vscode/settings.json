@@ -802,6 +802,8 @@
     },
     "[Boxy Tomorrow]": {
       "activityBar.activeBorder": "#ffffffee",
+      // "editorCursor.background": "#ff0000",
+      "editorCursor.foreground": "#e6e9e7bf",
       "editorStickyScroll.background": "#1d1f2178",
       "editorInlayHint.background": "#1a3f3c",
       "editorInlayHint.foreground": "#b5d1ce",
@@ -2829,7 +2831,7 @@
       "title": "Space",
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
-        "F": { "text": "Open file picker at current working directory", "command": "???"                                                                      },
+        "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                                      },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
         "j": { "text": "Open jumplist picker",                          "command": "???"                                                                      },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
