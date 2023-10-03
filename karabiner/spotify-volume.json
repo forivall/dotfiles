@@ -41,6 +41,45 @@
       ]
     },
     {
+      "description": "Control spotify volume with command + volume keys",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_increment",
+            "modifiers": {
+              "mandatory": [
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume + 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_decrement",
+            "modifiers": {
+              "mandatory": [
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'if application \"Spotify\" is running then' -e 'tell application \"Spotify\"' -e 'set the sound volume to sound volume - 5' -e 'end tell' -e 'end if'",
+              "repeat": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "Control spotify volume with cmd + F14/F15",
       "manipulators": [
         {
