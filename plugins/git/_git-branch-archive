@@ -1,0 +1,21 @@
+#compdef git-branch-archive
+#description convert a branch to an archive
+
+_git-branch-archive () {
+  # (( $+functions[__git_remotes] )) || _git
+
+  _arguments -S \
+    '-l[list existing branch archives]' \
+    '*:: :->branches' \
+    && ret=0
+
+  case $state in
+    (branches)
+      __git_recent_branches
+      ;;
+  esac
+
+  return ret
+}
+
+_git-branch-archive

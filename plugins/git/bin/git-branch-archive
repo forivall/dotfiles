@@ -15,7 +15,7 @@ for b in "$@" ; do
             tagname="archive/${b}_$time"
         fi
     fi
-    if git tag "$tagname" "$b" ; then
+    if git tag --no-sign "$tagname" "$b" ; then
         echo Created tag "$tagname"
         if git show-ref --tags --verify -- "refs/tags/$tagname" ; then
             git branch -D "$b"
