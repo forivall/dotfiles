@@ -154,15 +154,7 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .search-view .filematch, .search-view .foldermatch { line-height: var(--row-height) }
 [aria-label='Focused Folder Section'] + .pane-body .tree-explorer-viewlet-tree-view .customview-tree .monaco-tl-twistie:not(.force-twistie) { background-image: none!important; width: 0!important; padding-right: 0!important; visibility: hidden; }
 [aria-label='Focused Folder Section'] + .pane-body .tree-explorer-viewlet-tree-view .customview-tree .monaco-tl-indent { margin-left: -4px; }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-actions .action-label { height: 24px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab { height: 24px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container { height: 24px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label { line-height: 24px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions { height: 24px; padding-right: 4px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .monaco-icon-label:before { height: 24px }
 .monaco-icon-label.file-icon.workspacetrusteditor-name-file-icon.ext-file-icon.tab-label:before { line-height: 26px !important }
-/* This isn't in the original CSS, but there's a pesky `style="height: 35px"` in a child element */
-.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-and-actions-container { height: 24px; overflow-y: hidden }
 @keyframes pulse_goto_definition_link { from { color: #4E94CE; } to { color: blue; } }
 .monaco-editor .goto-definition-link { animation: 0.7s cubic-bezier( 0.7, 0.2, 0.8, 0.9 ) infinite alternate pulse_goto_definition_link }
 /* side bar actions */
@@ -179,8 +171,6 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .part>.composite.title>.title-actions { padding-left: 2px }
 .monaco-workbench .part>.title>.title-actions .action-label { height: 24px; line-height: 24px }
 .monaco-workbench .part>.title>.title-actions .start-debug-action-item { margin-top: 0px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label:not(span), .monaco-workbench .part.editor>.content .editor-group-container>.title .title-actions .action-label { height: 24px; min-width: 20px }
-.monaco-workbench .part.editor>.content .editor-group-container>.title .editor-actions .action-label.codicon.codicon-go-to-file { margin-top: -1px }
 .monaco-action-bar .action-label { margin-right: 2px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item>:first-child { margin-right: 2px; margin-left: 2px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="Gruntfuggly.activitusbar"]>:first-child { margin-right: 1px; margin-left: 0px }
