@@ -556,7 +556,7 @@
   { "key": "v",       "command": "dance.modes.set",        "args": { "mode": "select" },                                 "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+g", "command": "dance.select.lineStart", "args": { "shift": "jump" },                                  "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "g",       "command": "dance.openMenu",         "args": { "menu": "goto-hx", "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "shift+;", "command": "workbench.action.showCommands",                                                        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+;", "command": "workbench.action.showCommands",                                                        "when": "activeEditorGroupEmpty || editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "i",       "command": "dance.modes.insert.before",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "a",       "command": "dance.modes.insert.after",        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -649,7 +649,7 @@
   { "key": "alt+shift+;", "command": "dance.selections.faceForward", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": ".",           "command": "dance.history.repeat.edit",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
-  { "key": "escape",   "command": "dance.modes.set.normal",                                                                  "when": "editorTextFocus && dance.mode == 'normal' && dance.mode != 'insert'" },
+  { "key": "escape",   "command": "dance.modes.set.normal",                                                                  "when": "editorTextFocus && dance.mode != 'normal' && dance.mode != 'insert'" },
   { "key": "ctrl+b",   "command": "dance.select.vertically", "args": { "direction": -1, "by": "page",     "shift": "jump" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+f",   "command": "dance.select.vertically", "args": { "direction":  1, "by": "page",     "shift": "jump" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+u",   "command": "dance.select.vertically", "args": { "direction": -1, "by": "halfPage", "shift": "jump" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -664,7 +664,7 @@
   { "key": "ctrl+o", "command": "workbench.action.navigateBack",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+s", "command": "dance.selections.save",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
-  { "key": "space",   "command": "dance.openMenu", "args": { "menu": "leader-hx", "pass": [{ "shift": "jump" }]                 }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "space",   "command": "dance.openMenu", "args": { "menu": "leader-hx", "pass": [{ "shift": "jump" }]                 }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select' || activeEditorGroupEmpty" },
   { "key": "z",       "command": "dance.openMenu", "args": { "menu": "view-hx",   "pass": [{ "shift": "jump" }]                 }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+z", "command": "dance.openMenu", "args": { "menu": "view-hx",   "pass": [{ "shift": "jump" }], "locked": true }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 

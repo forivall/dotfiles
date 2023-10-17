@@ -93,6 +93,52 @@
             ]
           }
         ]
+      }, {
+        "description": "Scroll wheel with left ctrl + volume keys (knob)",
+        "manipulators": [
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "volume_increment",
+              "modifiers": {
+                "mandatory": [
+                  "left_control"
+                ],
+                "optional": [
+                  "shift"
+                ]
+              }
+            },
+            "to": [
+              {
+                "mouse_key": {
+                  "vertical_wheel": 32
+                }
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "volume_decrement",
+              "modifiers": {
+                "mandatory": [
+                  "left_control"
+                ],
+                "optional": [
+                  "shift"
+                ]
+              }
+            },
+            "to": [
+              {
+                "mouse_key": {
+                  "vertical_wheel": -32
+                }
+              }
+            ]
+          }
+        ]
       }
   ]
 }

@@ -92,7 +92,7 @@ DISABLE_AUTO_TITLE=false
 # ENABLE_CORRECTION=true
 
 # export BAT_PAGER="less +X -x2 -FR"
-export LESS='-SRiF --mouse --wheel-lines=1'
+export LESS='-SRiF'  # --mouse --wheel-lines=1  # scroll wheel used to freeze iterm2
 export BAT_PAGER="moar --no-linenumbers"
 export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow

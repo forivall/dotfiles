@@ -2921,7 +2921,8 @@
     "explorer.newFile": "touch",
     "explorer.newFolder": "mkdir",
     "workbench.action.files.saveAll": "wall",
-    "extension.multicommand.saveAndClose": "wq"
+    "extension.multicommand.saveAndClose": "wq",
+    "workbench.action.closeAllEditors": "qall",
   },
   "circleci.notifications.areActive": "no",
   "search.useParentIgnoreFiles": true,

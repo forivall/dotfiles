@@ -28,6 +28,7 @@ access      sort by recently checked out [default]
 c,commit    sort by commit date
 u,author    sort by commit author date
 e,creation  sort by branch creation date
+reverse     reverse sort order
 r,remote?   show remote branches (sort by commit)
 a,all       show all (sort by commit)
 t,tags      show recent tags
@@ -43,6 +44,8 @@ sort2=
 pattern=refs/heads/
 date=short
 filter=true
+sortorder=-
+sortopt=(-r)
 
 index=0
 for arg in $@; do
@@ -58,6 +61,7 @@ for arg in $@; do
     --relative) date=relative ;;
     --remote) by_commit=true; pattern=refs/remotes/origin ;;
     --remote=*) by_commit=true; pattern=refs/remotes/${arg#--remote=} ;;
+    --reverse) sortorder=''; sortopt=() ;;
     --all) by_commit=true; pattern= ;;
     --tags) by_commit=true; pattern=refs/tags; sort2=taggerdate ;;
     --) break; ;;
@@ -67,7 +71,7 @@ done
 if $by_commit; then
   if [[ $filter != true ]]; then
     _i=0
-    git for-each-ref --sort=-$sort --format=%\(refname\) $pattern | while read ref; do
+    git for-each-ref --sort=$sortorder$sort --format=%\(refname\) $pattern | while read ref; do
       if ! eval $filter; then continue; fi
       git for-each-ref --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" $ref
       _i=$(( $_i + 1 ))
@@ -76,7 +80,7 @@ if $by_commit; then
     exit
   fi
   #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
-  git for-each-ref --sort=-$sort --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
+  git for-each-ref --sort=$sortorder$sort --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
   exit
 fi
 
@@ -88,7 +92,7 @@ if $by_creation; then
     reflogformat=$(git --no-pager reflog show --color $branchref --date=${date} --grep-reflog=Created | sed -E 's/^([^ ]+ )*([^@: ]*)@\{([^\}]*)\}+: *(branch: Created (from [^H][^E]([^A]([^D].*))?))?.*/\x1b\['${color[blue]}'m\3\x1b\['${color[none]}'m \2 \x1b\['${color[faint]}'m\5\x1b\['${color[none]}'m/')
     echo $reflogunix $reflogformat
   done |
-    sort -rg | head -n $NUM |
+    sort "${sortopt[@]}" -g | head -n $NUM |
     cut -d' ' -f2- |
     # awk '{printf "%s %s",$2,$3} ; $4 != "HEAD" { printf " ← %s",$4 }; {printf "|%s\n",$3}' |
     cat
@@ -104,6 +108,7 @@ fi
 _i=0
 (
 errs=0
+# TODO: sortorder
 for i in {1..99} ; do
     branchname=$(git rev-parse --symbolic-full-name @{-$i} 2>/dev/null)
     if [[ $branchname == "@{-$i}" || -z "$branchname" ]] ; then continue; fi
