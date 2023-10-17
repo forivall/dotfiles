@@ -44,8 +44,14 @@ __git-diffp-getitems_vars() {
   term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} $revs")
 }
 __git-diffp-dointeractive() {
-  git -c core.pager=deltaw diff --format='' ${(@)revs} --rotate-to="$1"
+  local code=0
+  git -c core.pager=deltaw diff --format='' ${(@)revs} --rotate-to="$1" || code=$?
+  if (( code == 141 )); then
+    code=0
+  fi
+  return $code
 }
+
 source $__plugin_dirname/__git-patch-filepicker \
   __git-diffp-{hasfiles,getitems_vars,dointeractive} $@
 
