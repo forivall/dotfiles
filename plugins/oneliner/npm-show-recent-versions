@@ -16,5 +16,6 @@ for arg in $@; do
     --) break; ;;
   esac
 done
+args=${@:$((index+1))}
 
-npm show husky --json | jq '.time| to_entries | sort_by(.value | sub("\\.[0-9]+Z"; "Z") | fromdate) | .[-'"$NUM"':] | from_entries'
+npm show $args --json | jq '.time| to_entries | sort_by(.value | sub("\\.[0-9]+Z"; "Z") | fromdate) | .[-'"$NUM"':] | from_entries'
