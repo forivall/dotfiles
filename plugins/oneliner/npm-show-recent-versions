@@ -1,1 +1,20 @@
-npm show $1 --json | jq '.time|with_entries(select(.value | sub("\\.[0-9]+Z"; "Z") | fromdate > now - 3600*24*30))'
+#!/usr/bin/env zsh
+
+OPTS_SPEC="\
+npm show-recent-versions [<options>] <args>...
+--
+n,count=    show this many versions [default=10]
+"
+eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
+
+NUM=10
+index=0
+for arg in $@; do
+  index=$((index+1))
+  case "$arg" in
+    --count=*) NUM="${arg#--count=}" ;;
+    --) break; ;;
+  esac
+done
+
+npm show husky --json | jq '.time| to_entries | sort_by(.value | sub("\\.[0-9]+Z"; "Z") | fromdate) | .[-'"$NUM"':] | from_entries'

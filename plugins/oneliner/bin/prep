@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 
+wasrun=false
 run() {
+  wasrun=true
   echo '>' $@
   exec $@
 }
@@ -35,4 +37,8 @@ fi
 
 if [[ -f Podfile ]]; then
   run pod install
+fi
+
+if ! $wasrun; then
+  echo '# no supported manifest files found'
 fi

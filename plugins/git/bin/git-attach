@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+
+__plugin_dirname=${0:a:h:h}
+
+ref=$(git describe --exact-match --all)
+echo '>' git checkout ${ref#remotes/*/}
+git checkout ${ref#remotes/*/}
