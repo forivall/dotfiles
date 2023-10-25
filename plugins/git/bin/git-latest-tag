@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+# ;& syntax uses bash >= 4.0; zsh probably more up to date
+autoload -U colors  && colors
+
+() {
+  local lc=$'\e[' rc=m
+  typeset -Hg reset_color bold_color
+  faint_color="$lc${color[faint]}$rc"
+}
+
+git for-each-ref --sort=-taggerdate --format="%(refname:short)" --count=1 refs/tags
+# git for-each-ref --sort=-creatordate --format="%(refname:short)" --count=1 refs/tags

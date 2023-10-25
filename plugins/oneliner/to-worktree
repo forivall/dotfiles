@@ -1,10 +1,6 @@
 # code: language=shellscript
 local toplevel
-if toplevel=$(git rev-parse --show-toplevel) ; then
-  if [[ $toplevel != "$(git worktree-main)" ]]; then
-    echo Already in worktree!
-    return 1
-  fi
+if toplevel=$(git worktree list --porcelain | head -n1 | sd '^worktree ' '') ; then
   local name=${1:-pr}
   local root=${toplevel:h}/$name-worktrees/${toplevel:t}
   if [[ ! -d $root ]] ; then
