@@ -16,7 +16,8 @@
 				<key>caret</key>
 				<string>#AEAFAD</string>
 				<key>foreground</key>
-				<string>#4D4D4C</string>
+				<!-- <string>#4D4D4C</string> -->
+				<string>#2f2a27</string>
 				<key>invisibles</key>
 				<string>#D1D1D1</string>
 				<key>lineHighlight</key>

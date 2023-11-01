@@ -33,7 +33,7 @@
 				<key>caret</key>
 				<string>#4d4d4c</string>
 				<key>foreground</key>
-				<string>#4d4d4c</string>
+				<string>#2f2a27</string>
 				<key>invisibles</key>
 				<string>#8e908c</string>
 				<key>lineHighlight</key>
@@ -123,7 +123,7 @@
 			<key>name</key>
 			<string>Functions</string>
 			<key>scope</key>
-			<string>entity.name.function, meta.require, support.function.any-method, variable.function, variable.annotation, support.macro</string>
+			<string>entity.name.function, meta.require, support.function.any-method</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -149,7 +149,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#eab700</string>
+				<string>#b08a00</string>
 			</dict>
 		</dict>
 		<dict>
@@ -340,7 +340,7 @@
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
-				<string>#eab700</string>
+				<string>#b08a00</string>
 			</dict>
 		</dict>
 		<dict>
