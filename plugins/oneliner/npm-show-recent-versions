@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+__funcinfo=$(whence -v $0 2>&1)
+__filename=${__funcinfo#$0 is a shell function from }
+__dirname=${__filename:h}
+
 OPTS_SPEC="\
 npm show-recent-versions [<options>] <args>...
 --
@@ -18,4 +22,5 @@ for arg in $@; do
 done
 args=${@:$((index+1))}
 
-npm show $args --json | jq '.time| to_entries | sort_by(.value | sub("\\.[0-9]+Z"; "Z") | fromdate) | .[-'"$NUM"':] | from_entries'
+npm show $args --json | jq -L ${__dirname:h:h}/jq 'include "fromjsdate";
+.time | to_entries | sort_by(.value | fromjsdate) | .[-'"$NUM"':] | from_entries'
