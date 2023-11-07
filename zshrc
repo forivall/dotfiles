@@ -182,7 +182,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/python
   # zgen oh-my-zsh plugins/pyenv
   whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl
-  whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv
+  whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
   # zgen oh-my-zsh plugins/jump
 
   zgen load srijanshetty/zsh-pandoc-completion /
@@ -226,9 +226,9 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/ngrok"
   zgen load "$__zshrc_dirname/plugins/npm"
-  $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/npm"
   whence twilio > /dev/null && zgen load "$__zshrc_dirname/plugins/twilio"
 
+  zgen load "$__zshrc_dirname/plugins/wttr"
   zgen load "$__zshrc_dirname/plugins/yarn"
   zgen load "$__zshrc_dirname/plugins/yargs"
   zgen load "$__zshrc_dirname/plugins/yargs"

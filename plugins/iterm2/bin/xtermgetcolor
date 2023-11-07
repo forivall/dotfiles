@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+
+open=0
+reading=0
+
+# tmux requires unrecognized OSC sequences to be wrapped with DCS tmux;
+# <sequence> ST, and for all ESCs in <sequence> to be replaced with ESC ESC. It
+# only accepts ESC backslash for ST.
+function print_osc() {
+    if [[ $TERM == screen* || $TERM == tmux* ]] ; then
+        printf "\033Ptmux;\033\033]"
+    else
+        printf "\033]"
+    fi
+}
+
+# More of the tmux workaround described above.
+function print_st() {
+    if [[ $TERM == screen* || $TERM == tmux* ]] ; then
+        printf "\a\033\\"
+    else
+        printf "\a"
+    fi
+}
+
+# get_color key
+function getset_color() {
+    print_osc
+    printf '4;%s;%s' "$1" "${2:-?}"
+    print_st
+}
+
+function error() {
+    echo "ERROR: $*" 1>&2
+}
+
+function show_help() {
+    if [ $open = 1 ]; then
+      print_st
+    fi
+    echo "Usage"
+    echo ""
+    echo "To set a specific color to an RGB value:"
+    echo "  xtermgetsetcolor index [...more indexes of colors]" 1>& 2
+    echo "For example:"
+    echo "  xtermgetcolor 0"
+    echo ""
+    echo "index is the color index between 0 and 255. iterm2 also accepts"
+    echo "-1 for default foreground and -2 for default background"
+    echo ""
+}
+
+function check_dependency() {
+    if ! (builtin command -V "$1" >/dev/null 2>&1); then
+        error "missing dependency: can't find $1"
+        exit 1
+    fi
+}
+
+function cleanup() {
+    stty echo < /dev/tty
+}
+
+# Show help if no arguments and no stdin.
+if [ $# -eq 0 ]; then
+    show_help
+    exit
+fi
+
+check_dependency stty
+
+# Look for command line flags.
+while [ $# -gt 0 ]; do
+    case "$1" in
+    -h|--h|--help)
+        show_help
+        exit
+        ;;
+    *)
+        if [ $open = 0 ]; then
+            open=1
+            trap 'cleanup' EXIT
+            stty -echo < /dev/tty
+            exec 9<> /dev/tty
+            print_osc >&9
+            printf '4;' >&9
+        else
+            printf ";" >&9
+        fi
+        # name is not checked for validity because we'd like this to work with future colors, too.
+        ((reading+=1))
+        printf "%s;%s" "$1" "?" >&9
+        # [ $# -gt 1 ] && shift
+        ;;
+    esac
+    shift
+done
+
+if [ $open = 1 ]; then
+    print_st >&9
+
+    iterm_responses=()
+    i=1
+
+    until [ $i -gt $reading ]; do
+    read -r -t 5 -d $'\a' iterm_response <&9
+    iterm_responses+=("${iterm_response#$'\E]4;'}")
+    ((i=i+1))
+    done
+    exec 9>&-
+    stty echo < /dev/tty
+
+    printf '%q\n' "${iterm_responses[@]}"
+else
+    show_help
+fi
+
+exit 0
+

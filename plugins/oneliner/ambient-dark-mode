@@ -1,4 +1,10 @@
 #!/usr/bin/env zsh
 
-local threshold=${1:-140}
-if (( $(ambient-light) < threshold )); then dark-mode on; else dark-mode off; fi
+local threshold=$1
+local currentBrightness=$(ambient-light)
+if [[ -z $threshold ]]; then
+  threshold=$(plutil -extract darknessThreshold raw ~/Library/Preferences/codes.rambo.DarkModeBuddy.plist)
+  echo threshold: $threshold
+  echo currentBrightness: $currentBrightness
+fi
+if (( currentBrightness < threshold )); then dark-mode on; else dark-mode off; fi

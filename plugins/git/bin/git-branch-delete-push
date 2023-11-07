@@ -13,7 +13,7 @@ git() {
   git $@
 }
 
-git branch --move $@
+git branch --delete $@
 branch_name=$(git rev-parse --symbolic --revs-only $@ | tail -n1)
 remote_rev=$(git rev-parse --symbolic-full-name ${branch_name}@{u})
 remote_rev=${remote_rev#refs/remotes/}
@@ -25,5 +25,4 @@ if [[ -z $branch_name ]]; then
   exit 1
 fi
 
-git push $remote_name ${remote_rev}:refs/heads/$branch_name :$remote_branch
-git branch --set-upstream-to=${remote_name}/$branch_name
+git push $remote_name :$remote_branch
