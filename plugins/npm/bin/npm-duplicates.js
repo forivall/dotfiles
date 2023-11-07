@@ -5,15 +5,11 @@ const table = require('table')
 const {
   calculateMaximumColumnWidths,
 } = require('table/dist/src/calculateMaximumColumnWidths')
-const { relative, resolve } = require('path')
 const Npm = require(`${prefix}/lib/node_modules/npm/lib/npm`)
 const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arborist-cmd`)
 
 /** @type {typeof import('@npmcli/arborist')} */
 const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
-const validName = require(`${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`)
-const npa = require(`${prefix}/lib/node_modules/npm/node_modules/npm-package-arg`)
-const semver = require(`${prefix}/lib/node_modules/npm/node_modules/semver`)
 
 async function main() {
   const npm = new Npm()

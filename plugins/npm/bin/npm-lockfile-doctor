@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+npm-lockfile-doctor() {
+  __funcinfo=$(whence -v $0 2>&1)
+  __filename=${__funcinfo#$0 is a shell function from }
+  __dirname=${__filename:h}
+
+  autoload colors && colors
+  node "${__dirname}/npm-lockfile-doctor.js" $(npm prefix -g) $@
+}
+
+if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
+  npm-lockfile-doctor "$@"
+fi
