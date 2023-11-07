@@ -1,0 +1,9 @@
+#compdef git-branch-delete-push
+#description delete branch, and push to tracking upstream
+
+_git-branch-delete-push() {
+  words=(branch -m ${words[2,-1]})
+  _git-branch
+}
+
+_git-branch-delete-push "$@"

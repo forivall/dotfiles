@@ -1,8 +1,10 @@
 #!/usr/bin/env zsh
 
-__dirname=${0:A:h}
-
 npm-where() {
+  __funcinfo=$(whence -v $0 2>&1)
+  __filename=${__funcinfo#$0 is a shell function from }
+  __dirname=${__filename:h}
+
   autoload colors && colors
   local header=true
   if [[ "$1" == --no-header ]]; then

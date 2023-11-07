@@ -1,4 +1,4 @@
-#compdef git-wt
+#compdef git-branch-move-push
 #description rename branch, and push to tracking upstream
 
 _git-branch-move-push() {
