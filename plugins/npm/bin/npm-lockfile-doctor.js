@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const prefix = process.argv[2]
 process.argv[2] = 'lockfile-doctor'
 
@@ -8,10 +10,6 @@ const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arboris
 const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
 /** @type {typeof import('pacote')} */
 const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
-
-/** @type {typeof import('npm-package-arg')} */
-const npa = require(`${prefix}/lib/node_modules/npm/node_modules/npm-package-arg`)
-const semver = require(`${prefix}/lib/node_modules/npm/node_modules/semver`)
 
 async function main() {
   const npm = new Npm()
