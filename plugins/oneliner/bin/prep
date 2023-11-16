@@ -1,13 +1,20 @@
 #!/usr/bin/env zsh
 
+set -euo pipefail
+
 wasrun=false
 run() {
   wasrun=true
   echo '>' $@
-  exec $@
+  $@
 }
 
-if [[ -f yarn.lock ]]; then
+if [[ -f package.json ]] &&
+  jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
+then
+  run corepack prepare
+  run ${jsPackageManager%@*} install
+elif [[ -f yarn.lock ]]; then
   run yarn
 elif [[ -f pnpm-lock.yaml ]]; then
   run pnpm install
@@ -16,7 +23,7 @@ elif [[ -f bun.lockb ]]; then
 elif [[ -f package-lock.json ]]; then
   run npm install
 elif [[ -f package.json ]]; then
-  echo '# no lockfile found, using npm'
+  echo '# no lockfile found or packageManager defined, using npm'
   run npm install
 fi
 
