@@ -2,7 +2,8 @@
   "name": "~dotfiles__plugins__npm",
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "@types/npmcli__arborist": "^5.6.1"
+    "@types/npmcli__arborist": "^5.6.1",
+    "@types/semver": "^7.5.5"
   },
   "dependencies": {
     "table": "^6.8.1"

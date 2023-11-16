@@ -31,7 +31,7 @@ __git-showp-getitems_vars() {
   items=(
     $(git show --format='' --name-only "$@")
   )
-  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@")
+  term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $cdup{} ${#items}")
 }
 __git-showp-dointeractive() {
   git-delta show ${pretty[@]} --format='' $revs "$@"

@@ -175,7 +175,7 @@ class Where extends ArboristWorkspaceCmd {
       columns[0].width = 16
       columns[0].wrapWord = true
     }
-    const space = widths.slice(0, 3).reduce((a, b) => a + b) + 4
+    const space = widths.slice(0, -1).reduce((a, b) => a + b) + 4
     const lastColumn = header.length - 1
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(

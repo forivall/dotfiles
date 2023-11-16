@@ -70,4 +70,6 @@ npm-rm-parent-deps() {
 npm-rm-parent-deps-all() {
   for d in * ; do if [[ -d $d ]] ; then (cd $d; echo $d; npm-rm-parent-deps); fi ; done
 }
+source ${__zsh_npm_plugin_location}/bin/npm-duplicates
+source ${__zsh_npm_plugin_location}/bin/npm-lockfile-doctor
 source ${__zsh_npm_plugin_location}/bin/npm-where
