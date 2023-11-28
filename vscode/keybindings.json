@@ -748,7 +748,7 @@
     "code": [
       "await vscode.commands.executeCommand('dance.openMenu', { menu: 'goto-hx', pass: [{ shift: 'extend', count }] })"
     ]
-   }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+   }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "m",       "command": "dance.openMenu", "args": { "menu": "match-hx"                                                          }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "z",       "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+z", "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }], "locked": true }, "when": "editorTextFocus && dance.mode == 'select'" },
