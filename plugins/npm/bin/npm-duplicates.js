@@ -24,6 +24,7 @@ async function main() {
 
 /** @type {'every' | 'some'} */
 const SATISFIES_DEPENDENTS = 'every'
+const ALLOW_DOWNGRADE = false
 
 class Duplicates extends ArboristWorkspaceCmd {
   static description = 'Find duplicates'
@@ -33,6 +34,9 @@ class Duplicates extends ArboristWorkspaceCmd {
 
   static ignoreImplicitWorkspace = false
 
+  /**
+   * @param {string[]} args
+   */
   async exec(args) {
     const arb = new Arborist({
       path: this.npm.prefix,
@@ -78,14 +82,19 @@ class Duplicates extends ArboristWorkspaceCmd {
         continue
       }
       const rootPkg = rootPkgs.get(nodes.values().next().value.name)
+      const rootExpl = rootPkg && this.explain(rootPkg)
       const currentExpls = []
       for (const node of nodes) {
-        const expl = this.explain(node)
+        const expl = (node === rootPkg && rootExpl) || this.explain(node)
         if (
           !rootPkg?.package.version ||
           expl.dependents[SATISFIES_DEPENDENTS]((d) =>
             semver.satisfies(rootPkg.package.version, d.spec)
-          )
+          ) ||
+          ((ALLOW_DOWNGRADE || semver.gte(expl.version, rootExpl.version)) &&
+            rootExpl?.dependents[SATISFIES_DEPENDENTS]((d) =>
+              semver.satisfies(expl.version, d.spec)
+            ))
         ) {
           currentExpls.push(expl)
         }
@@ -156,6 +165,9 @@ class Duplicates extends ArboristWorkspaceCmd {
     return expl
   }
 
+  /**
+   * @param {Array<ReturnType<Duplicates['explain']>>} expls
+   */
   output(expls) {
     const flattened = expls.flatMap(
       ({ version, dependents, location, dev, peer, optional, devOptional }) => {

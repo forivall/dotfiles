@@ -12,6 +12,8 @@ const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arboris
 /** @type {typeof import('@npmcli/arborist')} */
 const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
 const validName = require(`${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`)
+/** @type {typeof import('pacote')} */
+const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
 
 /** @type {typeof import('npm-package-arg')} */
 const npa = require(`${prefix}/lib/node_modules/npm/node_modules/npm-package-arg`)
@@ -33,6 +35,9 @@ class Where extends ArboristWorkspaceCmd {
 
   static ignoreImplicitWorkspace = false
 
+  /**
+   * @param {string[]} args
+   */
   async exec(args) {
     if (!args.length) {
       throw this.usageError()
@@ -43,7 +48,6 @@ class Where extends ArboristWorkspaceCmd {
       ...this.npm.flatOptions,
     })
     const tree = await arb.loadActual()
-
     if (
       this.npm.flatOptions.workspacesEnabled &&
       this.workspaceNames &&
@@ -70,37 +74,13 @@ class Where extends ArboristWorkspaceCmd {
 
     const expls = []
     for (const node of nodes) {
-      const {
-        extraneous,
-        dev,
-        optional,
-        devOptional,
-        peer,
-        inBundle,
-        overridden,
-      } = node
-      const expl = node.explain()
-      expl.dependents = expl.dependents.map((d) => ({
-        ...d,
-        from: {
-          ...d.from,
-          dependents: undefined,
-          linksIn: d.from.linksIn?.map((l) => ({
-            ...l,
-            dependents: undefined,
-          })),
-        },
-      }))
-      if (extraneous) {
-        expl.extraneous = true
-      } else {
-        expl.dev = dev
-        expl.optional = optional
-        expl.devOptional = devOptional
-        expl.peer = peer
-        expl.bundled = inBundle
-        expl.overridden = overridden
-      }
+      let expl = this.explain(node)
+      expl.dependents = await Promise.all(
+        expl.dependents.map(async (dep) => ({
+          ...dep,
+          latest: await pacote.manifest(`${dep.name}@${dep.spec}`),
+        }))
+      )
       expls.push(expl)
     }
 
@@ -111,6 +91,64 @@ class Where extends ArboristWorkspaceCmd {
     }
   }
 
+  /**
+   * @param {import('@npmcli/arborist').Node} node
+   */
+  explain(node) {
+    const {
+      extraneous,
+      dev,
+      optional,
+      devOptional,
+      peer,
+      inBundle,
+      overridden,
+    } = node
+    /** @type {{version: string, dependents: any[]}} */
+    const nodeExpl = node.explain()
+    /**
+     * @typedef {object} Expl
+     * @property {string} version
+     * @property {{type: string; name: string; spec: string; latest?: import('pacote').AbbreviatedManifest; from: { name: string, version: string; location: string; isWorkspace: boolean, linksIn: { link?: boolean }[]}}[]} dependents
+     * @property {string} [location]
+     * @property {boolean} [extraneous]
+     * @property {boolean} [dev]
+     * @property {boolean} [peer]
+     * @property {boolean} [optional]
+     * @property {boolean} [devOptional]
+     * @property {boolean} [bundled]
+     * @property {boolean} [overridden]
+     * @property {boolean} [latest]
+     */
+    /** @type {Expl} */
+    const expl = { ...nodeExpl }
+    expl.dependents = expl.dependents.map((d) => ({
+      ...d,
+      from: {
+        ...d.from,
+        dependents: undefined,
+        linksIn: d.from.linksIn?.map((l) => ({
+          ...l,
+          dependents: undefined,
+        })),
+      },
+    }))
+    if (extraneous) {
+      expl.extraneous = true
+    } else {
+      expl.dev = dev
+      expl.optional = optional
+      expl.devOptional = devOptional
+      expl.peer = peer
+      expl.bundled = inBundle
+      expl.overridden = overridden
+    }
+    return expl
+  }
+
+  /**
+   * @param {Array<ReturnType<Where['explain']>>} expls
+   */
   output(expls) {
     const flattened = expls.flatMap(
       ({ version, dependents, location, dev, peer, optional, devOptional }) => {
@@ -124,7 +162,15 @@ class Where extends ArboristWorkspaceCmd {
           ? 'opt'
           : ''
         return dependents
-          .map(({ spec, from }) => ({ spec, location: from.location }))
+          .map(({ spec, from, latest }) => ({
+            spec,
+            location: from.location,
+            latest,
+            update:
+              !latest?.version || version === latest.version
+                ? ''
+                : latest.version,
+          }))
           .map((dependent) => ({ version, flags, dependent, location }))
           .sort(
             (a, b) =>
@@ -133,6 +179,7 @@ class Where extends ArboristWorkspaceCmd {
           )
       }
     )
+    /** @type {typeof flattened[]} */
     const groups = Object.values(
       flattened.reduce(
         (
@@ -142,13 +189,16 @@ class Where extends ArboristWorkspaceCmd {
           a,
           k = `${v.dependent.spec}\t${v.version}\t${v.flags}\t${v.location}`
         ) => ((r[k] || (r[k] = [])).push(v), r),
+        /** @type { [k: string]: typeof flattened } */
         {}
       )
     )
     const hasFlags = groups.some((g) => g[0].flags)
+    const hasUpdate = groups.some((g) => g[0].dependent.update)
     const header = [
       'SPEC',
       'VERSION',
+      ...(hasUpdate ? ['UPDATE'] : []),
       ...(hasFlags ? [''] : []),
       'LOCATION',
       'DEPENDENT(S)',
@@ -156,6 +206,7 @@ class Where extends ArboristWorkspaceCmd {
     const rows = groups.map((g) => [
       g[0].dependent.spec,
       g[0].version,
+      ...(hasUpdate ? [g[0].dependent.update] : []),
       ...(hasFlags ? [g[0].flags] : []),
       g[0].location,
       g
@@ -175,8 +226,8 @@ class Where extends ArboristWorkspaceCmd {
       columns[0].width = 16
       columns[0].wrapWord = true
     }
-    const space = widths.slice(0, -1).reduce((a, b) => a + b) + 4
     const lastColumn = header.length - 1
+    const space = widths.slice(0, -1).reduce((a, b) => a + b) + header.length
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(
       columns[lastColumn].width,
@@ -196,6 +247,7 @@ class Where extends ArboristWorkspaceCmd {
   /**
    * @param {import('@npmcli/arborist').Node} tree
    * @param {string} arg
+   * @returns {Iterable<import('@npmcli/arborist').Node>}
    */
   getNodes(tree, arg) {
     // if it's just a name, return packages by that name
@@ -228,6 +280,10 @@ class Where extends ArboristWorkspaceCmd {
     }
   }
 
+  /**
+   * @param {import('@npmcli/arborist').Node} tree
+   * @param {string} arg
+   */
   getNodesByVersion(tree, arg) {
     const spec = npa(arg, this.npm.prefix)
     if (spec.type !== 'version' && spec.type !== 'range') {

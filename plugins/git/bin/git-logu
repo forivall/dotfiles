@@ -2,7 +2,14 @@
 
 set -euo pipefail
 
-if git symbolic-ref -q HEAD >/dev/null; then
+revs=($(git rev-parse --revs-only --symbolic-full-name "$@"))
+if (( ${#revs} > 0 )); then
+  ups=()
+  for rev in $revs
+    ups+=(${rev#refs/heads/}@{u})
+  fi
+  git log HEAD ${ups[@]} "$@"
+elif git symbolic-ref -q HEAD >/dev/null; then
   exec git log HEAD @{u} "$@"
 else
   headName=$(< $(git rev-parse --git-dir)/rebase-merge/head-name)
