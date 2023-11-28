@@ -136,6 +136,8 @@
   { "command":  "workbench.action.acceptSelectedQuickOpenItem",            "key": "l", "when": "inQuickOpen && whichkeyVisible" },
   { "command":  "workbench.action.quickOpenSelectNext",                    "key": "j", "when": "inQuickOpen && whichkeyVisible" },
   { "command":  "workbench.action.quickOpenSelectPrevious",                "key": "k", "when": "inQuickOpen && whichkeyVisible" },
+  { "command":  "whichkey.triggerKey",                                     "key": "j", "args": "j", "when": "inQuickOpen && transientVisible" },
+  { "command":  "whichkey.triggerKey",                                     "key": "k", "args": "k", "when": "inQuickOpen && transientVisible" },
 
   { "command": "-actions.findWithSelection",                               "key": "cmd+e" },
   { "command":  "breadcrumbs.focus", "key": "ctrl+cmd+;", "when": "breadcrumbsPossible && breadcrumbsVisible" },

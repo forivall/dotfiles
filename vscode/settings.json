@@ -1648,12 +1648,14 @@
           {
             "command": "workbench.action.compareEditor.nextChange",
             "key": "j",
-            "name": "Next Change"
+            "name": "Next Change",
+            "hide": false
           },
           {
             "command": "workbench.action.compareEditor.previousChange",
             "key": "k",
-            "name": "Previous Change"
+            "name": "Previous Change",
+            "hide": false
           },
           {
             "commands": [
@@ -1694,6 +1696,26 @@
             "command": "pr.unmarkFileAsViewed",
             "key": "X",
             "name": "PR: Mark File As Not Viewed"
+          },
+          {
+            "command": "editorScroll",
+            "display": "hidden",
+            "key": " ",
+            "name": "Scroll down",
+            "hide": false,
+            "args": [
+              {
+                "to": "down",
+                "by": "halfPage"
+              }
+            ]
+          },
+          {
+            "command": "whichkey.toggleZenMode",
+            "display": "hidden",
+            "key": "z",
+            "name": "Toggle zen mode",
+            "hide": false
           }
         ],
         "title": "Pull Request Review"
