@@ -1236,9 +1236,11 @@
         "b":  { "text": "Align view bottom", "command": "dance.view.line", "args": [{ "at": "bottom" }]                                },
         "m":  { "text": "Align view middle", "command": "center-editor-window.center"                                                                          },
         "h":  { "text": "Scroll view left",  "command": "scrollLeft" },
+        "H":  { "text": "Scroll view far left",  "command": "extension.multiCommand.scrollFarLeft" },
         "j":  { "text": "Scroll view down",  "command": "editorScroll", "args": [{ "by": "line", "revealCursor": true, "to": "down" }] },
         "k":  { "text": "Scroll view up",    "command": "editorScroll", "args": [{ "by": "line", "revealCursor": true, "to": "up"   }] },
         "l":  { "text": "Scroll view right",  "command": "scrollRight" },
+        "L":  { "text": "Scroll view far right",  "command": "extension.multiCommand.scrollFarRight" },
         /*
         "C-b": { "text": "Move page up",        "command": "dance.select.vertically", "args": [{ "direction": -1, "by": "page"     }] },
         "C-f": { "text": "Move page down",      "command": "dance.select.vertically", "args": [{ "direction":  1, "by": "page"     }] },
@@ -2541,6 +2543,28 @@
       "sequence": [
         "search.action.focusSearchList",
         "search.focus.previousInputBox"
+      ]
+    },
+    {
+      "command": "extension.multiCommand.scrollFarLeft",
+      "interval": 45,
+      "sequence": [
+        "scrollLeft",
+        "scrollLeft",
+        "scrollLeft",
+        "scrollLeft",
+        "scrollLeft"
+      ]    
+    },
+    {
+      "command": "extension.multiCommand.scrollFarRight",
+      "interval": 45,
+      "sequence": [
+        "scrollRight",
+        "scrollRight",
+        "scrollRight",
+        "scrollRight",
+        "scrollRight"
       ]
     }
   ],
