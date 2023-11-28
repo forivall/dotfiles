@@ -565,7 +565,11 @@
 
   { "key": "v",       "command": "dance.modes.set",        "args": { "mode": "select" },                                 "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+g", "command": "dance.select.lineStart", "args": { "shift": "jump" },                                  "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "g",       "command": "dance.openMenu",         "args": { "menu": "goto-hx", "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "g",       "command": "dance.run", "args": {
+    "code": [
+      "await vscode.commands.executeCommand('dance.openMenu', { menu: 'goto-hx', pass: [{ shift: 'jump', count }] })"
+    ]
+   }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+;", "command": "workbench.action.showCommands",                                                        "when": "activeEditorGroupEmpty || editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "i",       "command": "dance.modes.insert.before",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -740,7 +744,11 @@
   { "key": "ctrl+d",   "command": "dance.select.vertically", "args": { "shift": "extend", "direction":  1, "by": "halfPage" }, "when": "editorTextFocus && dance.mode == 'select'" },
 
   { "key": "v",       "command": "dance.modes.set.normal",                                                                                  "when": "editorTextFocus && dance.mode == 'select'" },
-  { "key": "g",       "command": "dance.openMenu", "args": { "menu": "goto-hx",          "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
+  { "key": "g",       "command": "dance.run", "args": {
+    "code": [
+      "await vscode.commands.executeCommand('dance.openMenu', { menu: 'goto-hx', pass: [{ shift: 'extend', count }] })"
+    ]
+   }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "m",       "command": "dance.openMenu", "args": { "menu": "match-hx"                                                          }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "z",       "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+z", "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }], "locked": true }, "when": "editorTextFocus && dance.mode == 'select'" },

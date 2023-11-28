@@ -1107,7 +1107,11 @@
     "goto-hx": {
       "title": "Goto",
       "items": {
-        "g": { "text": "line number <n> else file start", "command": "dance.select.lineStart", "args": [{ "count": 1          }]     },
+        "g": { "text": "line number <n> else file start", "command": "dance.run", "args": [{
+        "code": [
+          "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend'",
+          "await vscode.commands.executeCommand('dance.select.lineStart', { count: Math.max(count, 1), shift })"
+        ] }]     },
         "e": { "text": "last line",                       "command": "dance.select.lineStart", "args": [{ "count": 2147483647 }]     },
         "f": { "text": "files in selection",              "command": "editor.action.openLink"                                        },
         "h": { "text": "line start",                      "command": "dance.select.lineStart"                                        },
