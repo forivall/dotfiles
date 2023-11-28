@@ -165,7 +165,6 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .open-editors .monaco-list .monaco-list-row .editor-group { margin-left: 16px }
 .monaco-workbench .open-editors .monaco-list .monaco-list-row>.editor-group + .monaco-action-bar { margin-right: 8px }
 .monaco-workbench .open-editors .monaco-list .monaco-list-row>.editor-group + .monaco-action-bar .action-item { margin-right: 4px }
-.monaco-workbench .part.basepanel>.composite.title>.panel-switcher-container>.monaco-action-bar .action-item .active-item-indicator { top: unset }
 .monaco-workbench .part.basepanel>.composite.title>.panel-switcher-container>.monaco-action-bar { height: 26px }
 .monaco-workbench .part>.title>.title-actions { height: 24px; padding-left: 2px }
 .monaco-workbench .part>.composite.title>.title-actions { padding-left: 2px }
@@ -180,11 +179,27 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item.has-background-color>:first-child { padding-left: 5px; padding-right: 5px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item.right.last-visible-item { padding-right: 0 }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="status.notifications"].right.last-visible-item>:first-child { margin-right: 0 }
-.monaco-workbench .part.panel>.composite.title>.panel-switcher-container>.monaco-action-bar { height: 24px; line-height: 20px }
+.monaco-workbench .part.panel>.composite.title>.panel-switcher-container>.monaco-action-bar,
+.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar {
+  height: 24px;
+  line-height: 20px;
+}
+
 /* with the default 35px, this would give a 6px margin on the bottom. Here, we have a 3px bottom margin.
 // The padding for this is top: 3px; bottom: 4px, which is exactly the offset we need. */
-.monaco-workbench .part.panel .composite.title>.panel-switcher-container>.monaco-action-bar .action-item { padding-top: 0; padding-bottom: 0 }
-.monaco-workbench .part.panel>.composite.title>.panel-switcher-container>.monaco-action-bar .action-item .action-label { padding-bottom: 0 }
+.monaco-workbench .part.panel .composite.title>.panel-switcher-container>.monaco-action-bar .action-item,
+.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item {
+  padding-top: 0; padding-bottom: 0;
+}
+.monaco-workbench .part.panel .composite.title>.panel-switcher-container>.monaco-action-bar .action-item .action-label,
+.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item .action-label {
+  padding-bottom: 0
+}
+
+.monaco-workbench .part.basepanel>.composite.title>.panel-switcher-container>.monaco-action-bar .action-item .active-item-indicator,
+.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item .active-item-indicator {
+  top: unset;
+}
 .monaco-workbench .part.panel .composite.title .monaco-action-bar .markers-panel-action-filter .monaco-inputbox { height: 22px }
 .markers-panel .monaco-tl-contents .marker-icon, .markers-panel .monaco-tl-contents .monaco-icon-label::before { height: var(--row-height) }
 .markers-panel .markers-panel-container .tree-container .monaco-tl-contents { line-height: var(--row-height) }
@@ -207,7 +222,7 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.overlayWidgets>.zone-widget { transform: translateY(5px) !important }
 .monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.scroll-decoration { transform: none !important }
 .monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.margin[style] { transform: translate3d(0px, 0px, 0px) translateY(5px) !important }
-.monaco-workbench .part.panel .title>.panel-switcher-container>.monaco-action-bar .action-item { padding-top: 0; padding-bottom: 0 }
+
 .monaco-workbench .part.panel .title .monaco-action-bar .markers-panel-action-filter .monaco-inputbox { height: 22px }
 .monaco-workbench .part.panel .title { line-height: 16px }
 .monaco-pane-view .pane>.pane-header { height: 18px }
