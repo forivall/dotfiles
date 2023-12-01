@@ -6,6 +6,7 @@ import psutil
 import itertools
 
 uid = os.getuid()
+PROC_NAMES = ('git-credential-manager', 'rg')
 
 
 def should_reap(proc: psutil.Process):
@@ -20,7 +21,7 @@ def should_reap(proc: psutil.Process):
     except (psutil.ZombieProcess, psutil.NoSuchProcess, psutil.AccessDenied):
         return False
 
-    if 'git-credential-manager' not in name:
+    if not any(proc_name in name for proc_name in PROC_NAMES):
         return False
 
     created = datetime.datetime.fromtimestamp(proc.create_time())

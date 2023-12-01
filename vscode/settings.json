@@ -1108,14 +1108,22 @@
       "title": "Goto",
       "items": {
         "g": { "text": "line number <n> else file start", "command": "dance.run", "args": [{
-        "code": [
-          "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend'",
-          "await vscode.commands.executeCommand('dance.select.lineStart', { count: Math.max(count, 1), shift })"
-        ] }]     },
+          "code": [
+            "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
+            "await vscode.commands.executeCommand('dance.select.lineStart', { count: Math.max(count, 1), shift });"
+          ]}
+        ]},
+        // "g": { "text": "line number <n> else file start", "command": "dance.select.lineStart", "args": [{ "count": 1          }]     },
         "e": { "text": "last line",                       "command": "dance.select.lineStart", "args": [{ "count": 2147483647 }]     },
         "f": { "text": "files in selection",              "command": "editor.action.openLink"                                        },
         "h": { "text": "line start",                      "command": "dance.select.lineStart"                                        },
-        "l": { "text": "line end",                        "command": "dance.select.lineEnd"                                          },
+        "l": { "text": "line end",                        "command": "dance.run", "args": [{
+          "code": [
+            "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
+            "await vscode.commands.executeCommand('dance.select.lineEnd', { shift })",
+            "if (shift === 'jump') { await vscode.commands.executeCommand('dance.select.left.jump') }",
+          ]}
+        ]},
         "s": { "text": "first non-blank in line",         "command": "dance.select.lineStart", "args": [{ "skipBlank": true }]       },
         "d": { "text": "definition",                      "command": "editor.action.revealDefinition"                                },
         "y": { "text": "type definition",                 "command": "editor.action.goToTypeDefinition"                              },
@@ -1774,6 +1782,18 @@
       "type": "command"
     },
     { "keys": "T.p", "command": "workbench.action.togglePanel",
+      "name": "Toggle bottom panel visibility",
+      "type": "command"
+    },
+    { "keys": "t.a", "command": "workbench.action.toggleAuxiliaryBar",
+      "name": "Toggle auxiliary panel visibility",
+      "type": "command"
+    },
+    { "keys": "t.b", "command": "workbench.action.toggleSidebarVisibility",
+      "name": "Toggle primary side bar visibility",
+      "type": "command"
+    },
+    { "keys": "t.p", "command": "workbench.action.togglePanel",
       "name": "Toggle main panel visibility",
       "type": "command"
     },
