@@ -133,6 +133,7 @@
   // -- end of escape keybinds
   { "command":  "whichkey.show",                                           "key": "shift+cmd+i" },
   { "command":  "whichkey.undoKey",                                        "key": "h", "when": "inQuickOpen && whichkeyVisible" },
+  { "command":  "whichkey.toggleZenMode",                                  "key": "`", "when": "transientVisible" },
   { "command":  "workbench.action.acceptSelectedQuickOpenItem",            "key": "l", "when": "inQuickOpen && whichkeyVisible" },
   { "command":  "workbench.action.quickOpenSelectNext",                    "key": "j", "when": "inQuickOpen && whichkeyVisible" },
   { "command":  "workbench.action.quickOpenSelectPrevious",                "key": "k", "when": "inQuickOpen && whichkeyVisible" },
@@ -294,9 +295,12 @@
   // { "command":  "workbench.action.previousEditor",                         "key": "shift+cmd+[",                   "when": "!panelFocus && !sideBarFocus && !auxiliaryBarFocus" },
   { "command":  "workbench.action.previousPanelView",                      "key": "shift+cmd+[",                   "when": "panelFocus || focusedView == 'git-history.history' || focusedView == 'git-history.changes'" },
   { "command":  "workbench.action.previousSideBarView",                    "key": "shift+cmd+[",                   "when": "sideBarFocus" },
-  { "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup", "key": "shift+cmd+]", "when": "!activeEditorGroupEmpty && !auxiliaryBarFocus && !panelFocus && !sideBarFocus" },
-  { "command": "workbench.action.quickOpenNavigateNextInEditorPicker",        "key": "shift+cmd+]", "when": "inEditorsPicker && inQuickOpen" },
-  { "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker",    "key": "shift+cmd+[", "when": "inEditorsPicker && inQuickOpen" },
+  { "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor",     "key": "shift+cmd+]",                   "when": "!activeEditorGroupEmpty && !auxiliaryBarFocus && !panelFocus && !sideBarFocus" },
+  { "command": "workbench.action.quickOpenNavigateNextInEditorPicker",     "key": "shift+cmd+]",                   "when": "inEditorsPicker && inQuickOpen" },
+  { "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker", "key": "shift+cmd+[",                   "when": "inEditorsPicker && inQuickOpen" },
+  { "command": "workbench.action.openPreviousEditorFromHistory",           "key": "shift+ctrl+]",                  "when": "!auxiliaryBarFocus && !panelFocus && !sideBarFocus" },
+  { "command": "workbench.action.quickOpenNavigateNextInFilePicker",       "key": "shift+ctrl+]",                   "when": "inFilesPicker && inQuickOpen" },
+  { "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",   "key": "shift+ctrl+[",                   "when": "inFilesPicker && inQuickOpen" },
   // { "command":  "workbench.action.replaceInFilesWithSelectedText",      "key": "shift+cmd+h", when": "editorFocus" },
   { "command":  "workbench.action.quickOpenWithModes",                     "key": "cmd+p", },
   { "command":  "workbench.action.quickOpen",                              "key": "alt+cmd+p",
@@ -530,6 +534,10 @@
   { "key": "j", "command": "dance.select.down.jump",             "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "k", "command": "dance.select.up.jump",               "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "l", "command": "dance.select.right.jump",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+
+  // https://github.com/helix-editor/helix/discussions/5764
+  { "key": "ctrl+j", "command": "editor.action.moveLinesDownAction",    "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'" },
+  { "key": "ctrl+k", "command": "editor.action.moveLinesUpAction",  "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'" },
 
   { "key": "t",       "command": "dance.seek",                   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "f",       "command": "dance.seek.included",          "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },

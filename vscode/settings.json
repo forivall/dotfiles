@@ -3,7 +3,7 @@
   "window.density.editorTabHeight": "compact",
   "window.dialogStyle": "custom",
   "window.nativeTabs": true,
-  "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${remoteName}",
+  "window.title": "${dirty}${activeEditorMedium}${separator}${rootPath} ${remoteName} ${profileName}",
   "window.titleBarStyle": "native",
   "window.titleSeparator": " ⠿ ",
   "apc.font.family": "SF Pro Display",
@@ -3001,4 +3001,9 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
   "zenMode.hideTabs": false
+  "testFileMaker.testFileName": "{FileName}.spec{FileNameExtention}",
+  "testFileMaker.currentFilePathRoot": "./",
+  "testFileMaker.importFileExports": "grouped",
+  "testFileMaker.testFramework": "jest",
+  "testFileMaker.testFilePath": "{FilePathFromRoot}",
 }

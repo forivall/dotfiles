@@ -144,6 +144,7 @@
 	config-signing = "!git config --local user.signingkey \"$1\" && git config --local commit.gpgSign true && git config --local tag.gpgSign true && :"
 
 	archive-untracked-files = !git-archive-untracked-files
+  attach = !git-attach
 	branch-archive = !git-branch-archive
 	changed-lines = !git-changed-lines
 	cleanup-merged = !git-cleanup-merged
