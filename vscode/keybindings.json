@@ -536,8 +536,34 @@
   { "key": "l", "command": "dance.select.right.jump",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   // https://github.com/helix-editor/helix/discussions/5764
-  { "key": "ctrl+j", "command": "editor.action.moveLinesDownAction",    "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'" },
-  { "key": "ctrl+k", "command": "editor.action.moveLinesUpAction",  "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'" },
+  { "key": "ctrl+j", "command": "dance.run",    "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'", "args": {
+    "code": [
+      "const _ = Context.current;",
+      "Selections.updateWithFallbackByIndex((_i, selection) => {",
+      "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.active).line);",
+      "  let end = Positions.lineBreak(Selections.seekFrom(selection, Direction.Forward, selection.anchor).line);",
+      "  let sel1 = Selections.fromStartEnd(start, end);",
+      "  let pos = Positions.lineStart(Lines.clamp(end.line + repetitions))",
+      "  let sel2 = Selections.fromStartEnd(pos, pos);",
+      "  rotateContents(1, [sel1, sel2])",
+      "  return mapBoth(selection, (p) => Positions.at(Lines.clamp(p.line + repetitions), p.character));",
+      "});"
+    ] }
+  },
+  { "key": "ctrl+k", "command": "dance.run",  "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'", "args": {
+    "code": [
+      "const _ = Context.current;",
+      "Selections.updateWithFallbackByIndex((_i, selection) => {",
+      "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.active).line);",
+      "  let end = Positions.lineBreak(Selections.seekFrom(selection, Direction.Forward, selection.anchor).line);",
+      "  let sel1 = Selections.fromStartEnd(start, end);",
+      "  let pos = Positions.lineStart(Lines.clamp(start.line - repetitions))",
+      "  let sel2 = Selections.fromStartEnd(pos, pos);",
+      "  rotateContents(1, [sel1, sel2])",
+      "  return mapBoth(selection, (p) => Positions.at(Lines.clamp(p.line - repetitions), p.character));",
+      "});"
+    ]}
+  },
 
   { "key": "t",       "command": "dance.seek",                   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "f",       "command": "dance.seek.included",          "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -660,9 +686,17 @@
   { "key": "shift+s",     "command": "dance.selections.split",           "when": "editorTextFocus && editorHasSelection && dance.mode == 'normal' || editorTextFocus && editorHasSelection && dance.mode == 'select'"  },
   { "key": ";",           "command": "dance.selections.reduce",          "when": "editorTextFocus && editorHasSelection && dance.mode == 'normal' || editorTextFocus && editorHasSelection && dance.mode == 'select'"  },
   { "key": "alt+;",       "command": "dance.selections.changeDirection", "when": "editorTextFocus && editorHasSelection && dance.mode == 'normal' || editorTextFocus && editorHasSelection && dance.mode == 'select'"  },
-  { "key": "ctrl+alt+o",       "command": "editor.action.smartSelect.expand", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
+  { "key": "ctrl+alt+o",  "command": "dance.run", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": {
+    "code": [
+      "for (; repetitions>0; repetitions--) { await vscode.commands.executeCommand('editor.action.smartSelect.expand'); }"
+    ] }
+  },
   { "key": "alt+o",       "command": "editor.action.smartSelect.expand", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
-  { "key": "ctrl+alt+i",       "command": "editor.action.smartSelect.shrink", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
+  { "key": "ctrl+alt+i",  "command": "dance.run", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": {
+    "code": [
+      "for (; repetitions>0; repetitions--) { await vscode.commands.executeCommand('editor.action.smartSelect.shrink'); }"
+    ] }
+  },
   { "key": "alt+i",       "command": "editor.action.smartSelect.shrink", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
   // { "key": "alt+p",       "command": "???",                              "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   // { "key": "alt+n",       "command": "???",                              "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },

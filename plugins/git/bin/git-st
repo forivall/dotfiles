@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -eo pipefail
+
 # a nice, short useful git status alternative.
 
 autoload colors && colors
