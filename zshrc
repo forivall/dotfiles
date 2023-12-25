@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# zmodload zsh/zprof
+zmodload zsh/zprof
 # setopt xtrace
 # shellcheck disable=SC2168,2296
 
@@ -293,14 +293,17 @@ clean-env
 
 # https://gist.github.com/ctechols/ca1035271ad134841284
 # shellcheck disable=SC1036,SC1088
-shouldregenzcompdump="${ZDOTDIR:-$HOME}/.zcompdump"(N.mh+1)
-if [[ -n "$shouldregenzcompdump" ]]; then
-	compinit
-  compdump
-else
-	compinit -C # dont check cache
-fi;
-unset shouldregenzcompdump
+() {
+  setopt extendedglob local_options
+
+  if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+    compdump
+  else
+    # echo nocache
+    compinit -C
+  fi
+}
 
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 # zprof

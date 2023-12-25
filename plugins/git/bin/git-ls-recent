@@ -28,10 +28,12 @@ access      sort by recently checked out [default]
 c,commit    sort by commit date
 u,author    sort by commit author date
 e,creation  sort by branch creation date
+sort=       sort specific field
 reverse     reverse sort order
 r,remote?   show remote branches (sort by commit)
 a,all       show all (sort by commit)
 t,tags      show recent tags
+tagger      show recent tags by taggerdate
 b,branches  show recent branches (default)
 "
 eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
@@ -40,7 +42,6 @@ NUM=10
 by_commit=false
 by_creation=false
 sort=creatordate
-sort2=
 pattern=refs/heads/
 date=short
 filter=true
@@ -56,6 +57,7 @@ for arg in $@; do
     --commit) by_commit=true ;;
     --creation) by_creation=true ;;
     --date=*) date="${arg#--date=}" ;;
+    --sort=*) sortoption="${arg#--sort=}" ;;
     --filter=*) filter="${arg#--filter=}" ;;
     --human) date=human-local ;;
     --relative) date=relative ;;
@@ -63,6 +65,7 @@ for arg in $@; do
     --remote=*) by_commit=true; pattern=refs/remotes/${arg#--remote=} ;;
     --reverse) sortorder=''; sortopt=() ;;
     --all) by_commit=true; pattern= ;;
+    --tagger) sort=taggerdate ;&
     --tags) by_commit=true; pattern=refs/tags; sort2=taggerdate ;;
     --) break; ;;
   esac
@@ -71,7 +74,7 @@ done
 if $by_commit; then
   if [[ $filter != true ]]; then
     _i=0
-    git for-each-ref --sort=$sortorder$sort --format=%\(refname\) $pattern | while read ref; do
+    git for-each-ref --sort=$sortorder${sortoption:-sort} --format=%\(refname\) $pattern | while read ref; do
       if ! eval $filter; then continue; fi
       git for-each-ref --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" $ref
       _i=$(( $_i + 1 ))
@@ -80,7 +83,7 @@ if $by_commit; then
     exit
   fi
   #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
-  git for-each-ref --sort=$sortorder$sort --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
+  git for-each-ref --sort=$sortorder${sortoption:-sort} --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
   exit
 fi
 

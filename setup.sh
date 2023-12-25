@@ -45,6 +45,10 @@ if ! type realpath >/dev/null ; then
   fi
 fi
 
+if ${USE_GNU_LN:-false} && type gln; then
+  ln() { gln "$@"; }
+fi
+
 o git submodule update --init
 o ln -fs "$(realpath zshrc)" ~/.zshrc
 o ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
@@ -75,7 +79,7 @@ o ln -fs "$(realpath config/watchman.json)" ~/.config/watchman.json
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion
-o ln -fs "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
+o ln -fs -T "$(realpath bash/bash_completion.d)" ~/.bash_completion.d
 
 
 if $IS_OSX ; then
