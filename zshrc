@@ -182,7 +182,6 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/python
   # zgen oh-my-zsh plugins/pyenv
   whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl
-  whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
   # zgen oh-my-zsh plugins/jump
 
   zgen load srijanshetty/zsh-pandoc-completion /
@@ -244,6 +243,7 @@ if ! zgen saved; then
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
   zgen load surkin/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
+  whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
   # zgen load dim-an/cod
   # zgen load forivall/cod / feat/zsh-local-build
@@ -261,10 +261,10 @@ if ! zgen saved; then
   zgen save
   zgen-zplug-after-save
 fi
-unalias 9
+[[ $(whence -w 9 2>/dev/null) == '9: alias' ]] && unalias 9
 unsetopt nomatch
 # from oh-my-zsh web-search. github is from github desktop.
-unalias github
+[[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
 
 # TODO: move to a vscode plugin
 if [[ "$VSCODE_CLI" == 1 ]] ; then

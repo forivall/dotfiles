@@ -275,6 +275,12 @@ function git() { # also put these in git-aliases for autocomplete
       local alias="$gitcommand-$1"
       if [[ $alias == worktree-cd ]]; then
         "$@"
+      elif [[ $alias == worktree-rm ]] && [[ $2 == '.' ]]; then
+        shift
+        shift
+        local olddir=$PWD
+        from-worktree
+        command git "${opts[@]}" $alias $olddir "$@"
       elif git config --get alias.$alias > /dev/null; then
         shift
         command git "${opts[@]}" $alias "$@"

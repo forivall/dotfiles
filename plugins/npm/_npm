@@ -9,7 +9,7 @@
 #   }
 # are commented out
 
-_npm_completion () {
+_npm () {
   local cword line point si words_prefix words_prefix_str
   # read -Ac words
   cword=$CURRENT
@@ -28,6 +28,6 @@ _npm_completion () {
   IFS="$si"
   compadd -- ${reply[@]}
 }
-# compctl -K _npm_completion npm
+# compctl -K _npm npm
 
-_npm_completion "$@"
+_npm "$@"

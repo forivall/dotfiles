@@ -2,6 +2,7 @@ const prefix = process.argv[2]
 process.argv[2] = 'where'
 
 const table = require('table')
+const path = require('path')
 const {
   calculateMaximumColumnWidths,
 } = require('table/dist/src/calculateMaximumColumnWidths')
@@ -11,6 +12,8 @@ const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arboris
 
 /** @type {typeof import('@npmcli/arborist')} */
 const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
+/** @type {typeof import('proc-log')} */
+const log = require(`${prefix}/lib/node_modules/npm/node_modules/proc-log`)
 const validName = require(`${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`)
 /** @type {typeof import('pacote')} */
 const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
@@ -39,6 +42,7 @@ class Where extends ArboristWorkspaceCmd {
    * @param {string[]} args
    */
   async exec(args) {
+    log.silly('npm-where')
     if (!args.length) {
       throw this.usageError()
     }
@@ -47,6 +51,8 @@ class Where extends ArboristWorkspaceCmd {
       path: this.npm.prefix,
       ...this.npm.flatOptions,
     })
+    log.silly('flatOptions', this.npm.flatOptions.omit)
+    log.silly('arb.loadActual')
     const tree = await arb.loadActual()
     if (
       this.npm.flatOptions.workspacesEnabled &&
@@ -58,6 +64,8 @@ class Where extends ArboristWorkspaceCmd {
       this.filterSet = arb.excludeWorkspacesDependencySet(tree)
     }
 
+    log.silly('getNodes')
+    /** @type {Set<import('@npmcli/arborist').Node>} */
     const nodes = new Set()
     for (const arg of args) {
       for (const node of this.getNodes(tree, arg)) {
@@ -74,12 +82,28 @@ class Where extends ArboristWorkspaceCmd {
 
     const expls = []
     for (const node of nodes) {
+      log.silly('explain', node.name, node.location)
       let expl = this.explain(node)
+      let dependents = expl.dependents
+      if (this.npm.flatOptions.omit.includes('dev')) {
+        dependents = expl.dependents.filter((dep) => dep.type !== 'dev')
+      }
       expl.dependents = await Promise.all(
-        expl.dependents.map(async (dep) => ({
-          ...dep,
-          latest: await pacote.manifest(`${dep.name}@${dep.spec}`),
-        }))
+        dependents.map(async (dep) => {
+          if (dep.spec.startsWith('file:')) {
+            const normspec = path.relative(
+              process.cwd(),
+              path.resolve(dep.from.location, dep.spec.slice(5))
+            )
+            return { ...dep, spec: 'file:' + normspec }
+          }
+          return {
+            ...dep,
+            latest: await pacote.manifest(`${dep.name}@${dep.spec}`, {
+              where: dep.from.location,
+            }),
+          }
+        })
       )
       expls.push(expl)
     }

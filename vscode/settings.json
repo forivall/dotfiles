@@ -2175,11 +2175,9 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
+    "*.js": "${capture}.spec.js,${capture}.integration.spec.js,${capture}.integration.test-*.js,${capture}.integration.*.spec.js,${capture}.test.js,${capture}.spec.ts,${capture}.integration.spec.ts,${capture}.integration.test-*.ts,${capture}.integration.*.spec.ts,${capture}.test.ts,${capture}.js.map",
+    "*.ts": "${capture}.spec.js,${capture}.integration.spec.js,${capture}.integration.test-*.js,${capture}.test.js,${capture}-ci.test.js,${capture}.spec.ts,${capture}.integration.spec.ts,${capture}.integration.test-*.ts,${capture}.test.ts,${capture}-ci.test.ts,${capture}.js.map",
     ".eslintrc.json": ".eslintrc.*.json",
-    // "*.js": "${capture}.js.map",
-    "*.js": "${capture}.spec.js,${capture}.spec.ts,${capture}.integration.spec.js,${capture}.integration.*.spec.js,${capture}.integration.spec.ts,${capture}.integration.test-*.js,${capture}.js.map",
-    // "*.ts": "${capture}.spec.js,${capture}.spec.ts,${capture}.integration.spec.js,${capture}.integration.spec.ts,${capture}.integration.test-*.js,${capture}.css,${capture}.html",
-    "*.ts": "${capture}.spec.js,${capture}.spec.ts,${capture}.integration.spec.js,${capture}.integration.spec.ts,${capture}.integration.test-*.js",
     "package.json": "package-lock.json,yarn.lock,pnpm-lock.yaml",
     "tsconfig.json": "tsconfig.*.json"
   },

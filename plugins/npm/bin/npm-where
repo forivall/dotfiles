@@ -6,18 +6,19 @@ npm-where() {
   __dirname=${__filename:h}
 
   autoload colors && colors
-  local header=true
-  if [[ "$1" == --no-header ]]; then
-    local header=false
-    shift
-  fi
-  local sorting='sort_by(.[0].version) | reverse'
-  if [[ "$1" == --sort-by ]]; then
-    shift
-    local sorting="sort_by(.[0].$1)"
-    shift
-  fi
   node "${__dirname}/npm-where.js" $(npm prefix -g) $@
+
+  # local header=true
+  # if [[ "$1" == --no-header ]]; then
+  #   local header=false
+  #   shift
+  # fi
+  # local sorting='sort_by(.[0].version) | reverse'
+  # if [[ "$1" == --sort-by ]]; then
+  #   shift
+  #   local sorting="sort_by(.[0].$1)"
+  #   shift
+  # fi
   # (
   # $header && echo -e 'SPEC\tVERSION\tLOCATION\tDEPENDENT(S)';
   # node "${__dirname}/npm-where.js" $(npm prefix -g) --json $@ |

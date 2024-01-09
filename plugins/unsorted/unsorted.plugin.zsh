@@ -11,6 +11,10 @@ alias ccat="ccat -G String=darkgreen -G Comment=faint -G Keyword=purple -G Punct
 #alias res="echo -en \"\ec\e[3J\""
 alias res="echo -n '$(tput reset)'"
 
+if [[ "$TERM_PROGRAM" == "vscode" ]] ; then
+  source "$(code --locate-shell-integration-path zsh)"
+fi
+
 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]] ; then
   alias res="echo -n '$(tput reset)' && osascript -e 'tell application \"System Events\" to keystroke \"k\" using {option down, command down}'"
 fi
