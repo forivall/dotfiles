@@ -19,29 +19,84 @@ async function main() {
   await command.cmdExec(npm.argv)
 }
 
+/**
+ * @param {Iterable<unknown>} iterable
+ */
+function isEmpty(iterable) {
+  for (const _unused of iterable) {
+    return false
+  }
+  return true
+}
+
+/**
+ * @template T
+ * @param {Iterable<T>} iterable
+ * @param {(value: T) => boolean} iteratee
+ */
+function every(iterable, iteratee) {
+  for (const value of iterable) {
+    if (!iteratee(value)) {
+      return false
+    }
+  }
+  return true
+}
+
 class LockfileDoctor extends ArboristWorkspaceCmd {
   static description = 'Clean up sha1 and extraneous deps'
   static name = 'lockfile-doctor'
   static usage = []
-  static params = ['json', 'workspace', 'dry-run', ...super.params]
+  static params = ['json', 'workspace', 'dry-run', 'force', ...super.params]
 
   static ignoreImplicitWorkspace = false
 
   async exec(args) {
-    const arb = new Arborist({
+    const opts = {
       path: this.npm.prefix,
+      workspaces: this.workspaceNames,
       ...this.npm.flatOptions,
-    })
-    const tree = await arb.buildIdealTree()
-
-    const removed = []
-    for (const fsChild of tree.fsChildren) {
-      if (fsChild.extraneous) {
-        removed.push(fsChild.location)
-        fsChild.parent = null
-        fsChild.root = null
-      }
     }
+    let arb = new Arborist(opts)
+    let tree = await arb.buildIdealTree()
+
+    const invalidLinks = []
+    ;(function removeInvalidLinks(node) {
+      for (const fsChild of node.fsChildren) {
+        for (const link of /** @type {Set<import('@npmcli/arborist').Link>} */ (
+          fsChild.linksIn
+        )) {
+          if (!every(link.edgesIn, (edge) => edge.valid)) {
+            invalidLinks.push(link.location)
+            link.parent = null
+          }
+        }
+        removeInvalidLinks(fsChild)
+      }
+    })(tree)
+
+    if (
+      this.npm.flatOptions.force &&
+      invalidLinks.length > 0 &&
+      !this.npm.flatOptions.dryRun
+    ) {
+      await tree.meta.save()
+      arb = new Arborist(opts)
+      tree = await arb.buildIdealTree()
+    }
+
+    const pruned = []
+    ;(function pruneExtraneous(node) {
+      for (const fsChild of node.fsChildren) {
+        if (fsChild.extraneous) {
+          pruned.push(fsChild.location)
+          fsChild.parent = null
+          fsChild.root = null
+        } else {
+          pruneExtraneous(fsChild)
+        }
+      }
+    })(tree)
 
     const localNodes = new Set(
       /** @returns {Generator<import('@npmcli/arborist').Node>} */
@@ -79,16 +134,26 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
     }
 
     if (this.npm.flatOptions.json) {
-      await this.npm.output(JSON.stringify({ removed, fixed }))
+      await this.npm.output(JSON.stringify({ invalidLinks, pruned, fixed }))
     } else {
-      if (removed.length > 0) {
-        console.log(
-          `removed ${removed.length} entries:\n  `,
-          removed.join('\n  ')
+      if (invalidLinks.length > 0) {
+        this.npm.output(
+          `removed ${invalidLinks.length} invalid links:\n  ` +
+            invalidLinks.join('\n  ')
+        )
+        if (!this.npm.flatOptions.force) {
+          this.npm.output('Run lockfile-doctor again to apply additional fixes')
+        }
+      }
+      if (pruned.length > 0) {
+        this.npm.output(
+          `pruned ${pruned.length} entries:\n  ` + pruned.join('\n  ')
         )
       }
       if (fixed.length > 0) {
-        console.log(`fixed ${fixed.length} entries:\n `, fixed.join('\n  '))
+        this.npm.output(
+          `fixed ${fixed.length} entries:\n  ` + fixed.join('\n  ')
+        )
       }
     }
   }
