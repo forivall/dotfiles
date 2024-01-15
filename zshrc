@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-zmodload zsh/zprof
+# zmodload zsh/zprof
 # setopt xtrace
 # shellcheck disable=SC2168,2296
 
@@ -158,6 +158,21 @@ autoload -Uz compinit && compinit -i
 
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
+# https://gist.github.com/ctechols/ca1035271ad134841284
+# shellcheck disable=SC1036,SC1088
+DO_COMPDUMP=false
+() {
+  setopt extendedglob local_options
+
+  if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+    DO_COMPDUMP=true
+  else
+    # echo nocache
+    compinit -C
+  fi
+}
+
 source "$__zshrc_dirname/zgen/zgenom.zsh"
 alias zgen=zgenom
 if ! zgen saved; then
@@ -291,19 +306,10 @@ fi
 
 clean-env
 
-# https://gist.github.com/ctechols/ca1035271ad134841284
-# shellcheck disable=SC1036,SC1088
-() {
-  setopt extendedglob local_options
-
-  if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-    compdump
-  else
-    # echo nocache
-    compinit -C
-  fi
-}
+if $DO_COMPDUMP; then
+  compdump
+fi
+unset DO_COMPDUMP
 
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 # zprof

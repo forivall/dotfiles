@@ -9,8 +9,13 @@ autoload colors && colors
 git() {
   if [[ $1 != rev-parse ]]; then
     echo '>' git $@
+    echo -n "Continue? (y/N) "
+    read -k 1 yn
+    echo
+    [[ $yn == y ]] && command git $@
+  else
+    command git $@
   fi
-  git $@
 }
 
 git branch --move $@

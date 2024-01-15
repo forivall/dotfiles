@@ -1,11 +1,11 @@
-#compdef fzf-git-checkout-unless-arguments
+#compdef git-fzf-checkout-unless-arguments
 #description alias for git-checkout, using fzf unless supplied arguments
 # vim:set filetype=sh:
 
-_fzf-git-checkout-unless-arguments () {
+_git-fzf-checkout-unless-arguments () {
   autoload -Uz +X _git
   (( $+functions[_git-checkout] )) || _git
   _git-checkout "$@"
 }
 
-_fzf-git-checkout-unless-arguments "$@"
+_git-fzf-checkout-unless-arguments "$@"

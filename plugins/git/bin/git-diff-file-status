@@ -10,6 +10,7 @@ for line in ${(f)output}; do
     A*) echo ${line:s/A/${fg[green]}A${reset_color}} ;;
     M*) echo ${line:s/M/${fg[blue]}M${reset_color}} ;;
     D*) echo ${line:s/D/${fg[red]}D${reset_color}} ;;
+    U*) echo ${line:s/U/${fg[red]}U${reset_color}} ;;
     R*|C*)
       a=("${(s:	:)line}")
       parts_old=("${(s:/:)${a[2]}}")

@@ -338,3 +338,12 @@ function fzf-git-checkout-unless-arguments() {
 if (( ${+commands[fzf-git-checkout]} )); then
   alias gco=fzf-git-checkout-unless-arguments
 fi
+autoload -Uz _fzf-git-checkout-unless-arguments
+compdef _fzf-git-checkout-unless-arguments fzf-git-checkout-unless-arguments
+# _fzf-git-checkout-unless-arguments() {
+#   words=(git checkout ${words[2,-1]})
+#   current+=1
+#   # _git "$@"
+#   echo comp
+# }
+# compdef _fzf-git-checkout-unless-arguments fzf-git-checkout-unless-arguments

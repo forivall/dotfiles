@@ -11,7 +11,9 @@ prompt_and_delete() {
   echo -n "Delete merged branch $1? (y/N) "
   read -k 1 yn
   echo
-  [[ $yn == y ]] && git branch -d $1
+  if [[ $yn == y ]] ; then
+    git branch -d $1
+  fi
 }
 
 for branch in $(git rev-parse --symbolic --branches); do
@@ -35,6 +37,12 @@ for branch in $(git rev-parse --symbolic --branches); do
       prompt_and_delete $branch
     else
       echo "${fg[grey]}$branch is not merged into $upstream$reset_color"
+    fi
+  elif [[ $# -gt 0 ]]; then
+    upstream=$1
+
+    if git merge-base --is-ancestor $branch $upstream; then
+      prompt_and_delete $branch
     fi
   fi
 done
