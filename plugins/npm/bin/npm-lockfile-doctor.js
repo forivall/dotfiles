@@ -117,9 +117,10 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
         const { pkgid, location } = node
         arb.addTracker('fixintegrity', node.name, node.location)
         fixed.push(location)
-        const info = await pacote.manifest(pkgid, tree.meta.resolveOptions)
+        const info = await pacote.manifest(pkgid, {...tree.meta.resolveOptions, preferOffline: true})
         node.resolved = info._resolved
         node.integrity = info._integrity
+        node.package.deprecated = info.deprecated
         arb.finishTracker('fixintegrity', node.name, node.location)
       }
       const nodePackage = node.package

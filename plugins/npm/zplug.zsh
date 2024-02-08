@@ -2,3 +2,7 @@
 
 cp ~/.bun/_bun .
 echo _bun >> _bun
+
+if (( ${+commands[appservices]} )); then
+  appservices completion zsh > _appservices
+fi

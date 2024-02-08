@@ -97,12 +97,17 @@ class Where extends ArboristWorkspaceCmd {
             )
             return { ...dep, spec: 'file:' + normspec }
           }
-          return {
-            ...dep,
-            latest: await pacote.manifest(`${dep.name}@${dep.spec}`, {
-              where: dep.from.location,
-            }),
+          try {
+            return {
+              ...dep,
+              latest: await pacote.manifest(`${dep.name}@${dep.spec}`, {
+                where: dep.from.location,
+              }),
+            }
+          } catch {
+            log.silly('explain', dep.name, 'NOT FOUND')
           }
+          return dep
         })
       )
       expls.push(expl)
@@ -251,11 +256,13 @@ class Where extends ArboristWorkspaceCmd {
       columns[0].wrapWord = true
     }
     const lastColumn = header.length - 1
-    const space = widths.slice(0, -1).reduce((a, b) => a + b) + header.length
+    const space =
+      widths.slice(0, -1).reduce((a, b) => a + Math.min(80, b), 0) +
+      header.length
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(
       columns[lastColumn].width,
-      Math.max(80, process.stdout.columns) - space
+      Math.max(20, Math.max(80, process.stdout.columns) - space)
     )
 
     this.npm.output(
