@@ -196,6 +196,7 @@
 
   { "command": "workbench.action.closeSidebar",  "key": "q",                         "when": "filesExplorerFocus && !inputFocus" },
   { "command": "dance.openMenu",                 "key": "m",  "args": { "input": "file-explorer" }, "when": "filesExplorerFocus && !inputFocus" },
+  { "command": "filesExplorer.openFilePreserveFocus", "key": "o", "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus" },
 
   { "command":  "goToNextReference",             "key": "alt+`",                         "when": "inReferenceSearchEditor || referenceSearchVisible" },
   { "command":  "goToPreviousReference",         "key": "shift+alt+`",                   "when": "inReferenceSearchEditor || referenceSearchVisible" },
@@ -325,7 +326,7 @@
   { "command":  "workbench.action.splitEditorRight",                       "key": "cmd+k cmd+right" },
   { "command":  "workbench.action.splitEditorUp",                          "key": "cmd+k cmd+up" },
   { "command":  "workbench.action.terminal.focus",                         "key": "ctrl+shift+`" },
-  { "command":  "workbench.action.terminal.new",                           "key": "ctrl+shift+`",        "when": "terminalFocus" },
+  { "command":  "workbench.action.terminal.newWithCwd",                    "key": "ctrl+shift+`",        "when": "terminalFocus || terminalCount == 0", "args": { "cwd": "${fileDirname}" } },
   { "command":  "workbench.action.terminal.kill",                          "key": "cmd+w",               "when": "terminalFocus" },
   { "command":  "workbench.action.terminal.split",                         "key": "cmd+d",               "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"  },
   { "command":  "workbench.action.toggleActivityBarVisibility",            "key": "shift+cmd+f9" },
@@ -473,7 +474,7 @@
   { "command":  "dance.selections.toggleIndices",   "key": "shift+enter",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "command":  "dance.edit.case.swap",             "key": "ctrl+alt+`",        "when": "editorTextFocus && dance.mode == 'normal'" },
   { "command":  "dance.history.undo.selections",    "key": "ctrl+u",            "when": "editorTextFocus && dance.mode == 'normal'" },
-  { "command":  "dance.modes.set.insert",           "key": "o",                 "when": "editorTextFocus && dance.mode == 'normal' && editorHasSelection" },
+  { "command":  "dance.modes.set.insert",           "key": "o",                 "when": "editorTextFocus && dance.mode == 'normal' && editorHasSelection || editorTextFocus && dance.mode == 'select' && editorHasSelection" },
   { "command":  "dance.selections.select.orLeap",   "key": "s",                 "when": "editorTextFocus && dance.mode == 'normal'" },
   { "command":  "dance.search.previous",            "key": "ctrl+n",            "when": "editorTextFocus && dance.mode == 'normal'" },
   { "command":  "dance.search.selection",           "key": "ctrl+shift+/",      "when": "editorTextFocus && dance.mode == 'normal'" },
@@ -537,6 +538,8 @@
   { "key": "j", "command": "dance.select.down.jump",             "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "k", "command": "dance.select.up.jump",               "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "l", "command": "dance.select.right.jump",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+
+  { "key": "ctrl+e", "command": "dance.select.lineEnd",   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   // https://github.com/helix-editor/helix/discussions/5764
   { "key": "ctrl+j", "command": "dance.run",    "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'", "args": {
@@ -760,7 +763,7 @@
   { "key": "alt+shift+0", "command": "dance.selections.rotate.both.reverse",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "alt+shift+;", "command": "dance.selections.faceForward", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": ".",           "command": "dance.history.repeat.edit",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": ". .",           "command": "dance.history.repeat.edit",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "escape",   "command": "dance.modes.set.normal",                                                                  "when": "editorTextFocus && dance.mode != 'normal' && dance.mode != 'insert'" },
   { "key": "ctrl+b",   "command": "dance.select.vertically", "args": { "direction": -1, "by": "page",     "shift": "jump" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -776,6 +779,7 @@
   { "key": "tab",    "command": "workbench.action.navigateForward", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+o", "command": "workbench.action.navigateBack",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+s", "command": "dance.selections.save",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+shift+s", "command": "dance.selections.restore",   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "space",   "command": "dance.openMenu", "args": { "menu": "leader-hx", "pass": [{ "shift": "jump" }]                 }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select' || activeEditorGroupEmpty && !inputFocus" },
   { "key": "z",       "command": "dance.openMenu", "args": { "menu": "view-hx",   "pass": [{ "shift": "jump" }]                 }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -941,6 +945,38 @@
   { "key": "ctrl+k", "command": "deleteAllRight",  "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "ctrl+h", "command": "deleteLeft",      "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "ctrl+d", "command": "deleteRight",     "when": "editorTextFocus && dance.mode == 'insert'" },
+
+  {
+    "key": "shift+cmd+\\",
+    "command": "runCommands", "args": {"commands": ["workbench.action.focusActivityBar", "workbench.action.navigateForward", "workbench.action.navigateForward", "workbench.action.navigateForward", "workbench.action.navigateForward"]},
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+p",
+    "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+cmd+tab",
+    "command": "workbench.action.showAllEditors"
+  },
+  {
+    "key": "alt+cmd+tab",
+    "command": "-workbench.action.showAllEditors"
+  },
+  {
+    "key": "ctrl+shift+alt+cmd+g",
+    "command": "EditorConfig.generate"
+  },
+  {
+    "key": "cmd+k .",
+    "command": "foldit.fold"
+  },
+  {
+    "key": ".",
+    "command": "-dance.history.repeat.edit",
+    "when": "editorTextFocus && dance.mode == 'normal'"
+  },
   // End.
 
 ]

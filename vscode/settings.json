@@ -351,6 +351,7 @@
     "terminal.integrated.persistentSessionReviveProcess",
     "terminal.integrated.scrollback",
     "terminal.integrated.splitCwd",
+    "terminal.integrated.stickyScroll.enabled",
     "terminal.integrated.tabs.location",
     "terminal.integrated.tabs.separator",
     "terminal.integrated.tabs.showActions",
@@ -1013,7 +1014,7 @@
     }
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
-  "editor.wordBasedSuggestions": true,
+  "editor.wordBasedSuggestions": "matchingDocuments",
   "editor.wordBasedSuggestionsMode": "currentDocument",
   "explorer.expandSingleFolderWorkspaces": true,
   "explorer.openEditors.visible": 3,
@@ -1052,11 +1053,15 @@
   "terminal.integrated.persistentSessionReviveProcess": "onExit",
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.splitCwd": "inherited",
+  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.enableImages": true,
+  "terminal.integrated.enableFileLinks": "notRemote",
+  "terminal.integrated.shellIntegration.suggestEnabled": true,
   "terminal.integrated.tabs.location": "left",
   "terminal.integrated.tabs.separator": " ",
   "terminal.integrated.tabs.showActions": "always",
   "terminal.integrated.tabs.showActiveTerminal": "always",
-  "update.mode": "start",
+  "update.mode": "default",
   "activitusbar.priority": 200000,
   "activitusbar.searchViewInPanel": true,
   "activitusbar.views": [
@@ -1102,7 +1107,7 @@
     "workbench.action.closeAllEditors": "qall",
     "workbench.action.files.saveAll": "wall"
   },
-  "dance.defaultMode": "insert",
+  "dance.defaultMode": "normal",
   "dance.menus": {
     "goto-hx": {
       "title": "Goto",
@@ -1647,6 +1652,23 @@
       "type": "command",
       "when": "textCompareEditorVisible"
     },
+    { "keys": "g.o", "command": "gitlens.openFileOnRemote",
+      "name": "Open File on Remote",
+      "type": "command"
+    },
+    { "keys": "g.R", "command": "gitlens.openFileFromRemote",
+      "name": "Open File from Remote",
+      "type": "command"
+    },
+    { "keys": "g.r", "command": "pr.openDescription",
+      "name": "View Pull Request Description",
+      "type": "command"
+    },
+    { "keys": "g.O", "command": "pr.openPullRequestOnGitHub",
+      "name": "Open Pull Request on GitHub",
+      "type": "command",
+      "when": "textCompareEditorVisible"
+    },
     { "keys": "g.P", "command": "settings.cycle.reviewMode",
       "name": "Toggle padding to make space for Code Review transient",
       "type": "command",
@@ -1656,6 +1678,13 @@
       "name": "Toggle git history display blame view",
       "type": "command"
     },
+    {
+      "command": "multiDiffEditor.collapseAll",
+      "keys": "g.]",
+      "name": "Collapse all in multidiff",
+      "hide": false,
+      "when": "activeEditor == 'multiDiffEditor'"
+    },
     { "keys": ["g", "."], "command": "whichkey.showTransient",
       "args": {
         "bindings": [
@@ -1663,13 +1692,59 @@
             "command": "workbench.action.compareEditor.nextChange",
             "key": "j",
             "name": "Next Change",
-            "hide": false
+            "hide": false,
+            "when": "textCompareEditorVisible"
           },
           {
             "command": "workbench.action.compareEditor.previousChange",
             "key": "k",
             "name": "Previous Change",
-            "hide": false
+            "hide": false,
+            "when": "textCompareEditorVisible"
+          },
+          {
+            // "command": "pr.goToNextDiffInPr",
+            "command": "editor.action.diffReview.next",
+            "display": "hidden",
+            "key": "J",
+            "name": "Next Diff",
+            "hide": false,
+            "when": "textCompareEditorVisible"
+          },
+          {
+            "command": "pr.goToPreviousDiffInPr",
+            "display": "hidden",
+            "key": "K",
+            "name": "Previous Diff",
+            "hide": false,
+            "when": "textCompareEditorVisible"
+          },
+          {
+            "command": "pr.createSingleComment",
+            "key": "c",
+            "name": "Add Line Comment",
+            "hide": false,
+            "when": "textCompareEditorVisible"
+          },
+          {
+            "command": "pr.addFileComment",
+            "key": "C",
+            "name": "Add File Comment",
+            "hide": false,
+            "when": "textCompareEditorVisible"
+          },
+          {
+            "command": "pr.editComment",
+            "key": "e",
+            "name": "Edit Comment",
+            "hide": false,
+            "when": "textCompareEditorVisible"
+          },
+          {
+            "command": "workbench.action.compareEditor.openSide",
+            "key": "o",
+            "name": "Open File",
+            "when": "textCompareEditorVisible"
           },
           {
             "commands": [
@@ -1712,7 +1787,7 @@
             "name": "PR: Mark File As Not Viewed"
           },
           {
-            "command": "editorScroll",
+            "command": "extension.multiCommand.scrollAndMoveCursorDown",
             "display": "hidden",
             "key": " ",
             "name": "Scroll down",
@@ -1870,7 +1945,6 @@
   "githubinator.contextMenu": "submenu",
   "javascript.inlayHints.enumMemberValues.enabled": true,
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "jest.autoRun": "off",
   "jest.coverageColors": {
@@ -1975,7 +2049,9 @@
     // "gitlens.codeLens.symbolScopes": [
     //   "!Module"
     // ],
-    "editor.foldingStrategy": "indentation",
+    "editor.foldingStrategy": "auto",
+    "editor.rulers": [79, 88],
+    "editor.defaultFoldingRangeProvider": "ms-python.python",
     "editor.formatOnType": true,
     "editor.showFoldingControls": "always",
     "explicitFolding.rules": [
@@ -2491,7 +2567,7 @@
   "markdownlint.config": {
     "first-line-h1": false,
     "header-increment": false,
-    "no-duplicate-header": false
+    "no-duplicate-heading": { "siblings_only": true },
   },
   "markdownPrism.theme": "tomorrow",
   "markJump.additionalTestPatterns": [
@@ -2564,6 +2640,25 @@
       ]
     },
     {
+      "command": "extension.multiCommand.scrollDownPage",
+      "interval": 1,
+      "sequence": [
+        "scrollLineUp",
+        "scrollLineUp",
+        "scrollLineUp",
+        "scrollLineUp",
+        "scrollPageDown"
+      ]
+    },
+    {
+      "command": "extension.multiCommand.scrollAndMoveCursorDown",
+      "interval": 120,
+      "sequence": [
+        { "command": "editorScroll", "args": { "to": "down", "by": "halfPage" } },
+        { "command": "dance.select.middleVisibleLine", "args": { "shift": "jump" } },
+      ]
+    },
+    {
       "command": "extension.multiCommand.scrollFarLeft",
       "interval": 45,
       "sequence": [
@@ -2572,7 +2667,7 @@
         "scrollLeft",
         "scrollLeft",
         "scrollLeft"
-      ]    
+      ]
     },
     {
       "command": "extension.multiCommand.scrollFarRight",
@@ -3004,4 +3099,18 @@
   "testFileMaker.importFileExports": "grouped",
   "testFileMaker.testFramework": "jest",
   "testFileMaker.testFilePath": "{FilePathFromRoot}",
+  // new items
+  "terminal.integrated.persistentSessionScrollback": 1000,
+  "terminal.integrated.enableBell": true,
+  "nxConsole.enableGenerateFromContextMenu": false,
+  "editorconfig.contextMenu.enabled": false,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  "flake8.ignorePatterns": [
+    "site-packages/**"
+  ],
+  "flake8.args": [
+    "--max-line-length=88"
+  ],
+  "search.followSymlinks": false,
+  "diffEditor.hideUnchangedRegions.enabled": true,
 }
