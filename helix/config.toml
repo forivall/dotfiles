@@ -5,3 +5,6 @@ theme = "thursday"
 
 [editor.cursor-shape]
 insert = "bar"
+
+[keys.normal]
+S-3 = ":reflow"
