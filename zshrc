@@ -57,7 +57,7 @@ fi
 # export SHELL=zsh
 export EDITOR=hx
 
-export VISUAL=code
+export VISUAL="wait-code"
 export LC_ALL="en_CA.UTF-8"
 HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
