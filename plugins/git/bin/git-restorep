@@ -1,0 +1,68 @@
+#!/usr/bin/env zsh
+# shellcheck disable=SC2168,SC2296
+
+set -eo pipefail
+
+__dirname=${0:a:h}
+
+local configArgs=()
+local rev=
+local diffargs=()
+local restoreargs=()
+local cdup=$(git rev-parse --show-cdup)
+
+pretty=()
+skip=false
+for i in {1..$#}; do
+if $skip; then skip=false; continue; fi
+_arg="${@[$i]}"
+case $_arg in
+  --source=*)
+    rev=${_arg%--source=};
+  ;;
+  --source|-s)
+    rev="${@[$(( i + 1 ))]}"
+    skip=true
+  ;;
+  --conflict|--pathspec-from-file)
+    restoreargs+=($_arg "${@[$(( i + 1 ))]}")
+    skip=true
+  ;;
+  --conflict=*|--ignore-skip-worktree-bits|--ignore-unmerged|--merge|-m|--no-progress|--ours|-2|--overlay|--pathspec-file-nul|--pathspec-from-file=*|--progress|--quiet|-q|--recurse-submodules|--source|-s|--staged|-S|--theirs|-3|--worktree|-W)
+    restoreargs+=($_arg)
+  ;;
+  *)
+    diffargs+=($_arg)
+  ;;
+esac
+done
+
+__git-restorep-hasfiles() {
+  local OIFS=$IFS
+  IFS=$'\n'
+  if [[ -z "$rev" ]]; then
+    items=(
+      $(git diff --name-only "${diffargs[@]}")
+    )
+  else
+    items=(
+      $(git diff --name-only "$rev" "${diffargs[@]}")
+    )
+  fi
+  IFS="$OIFS"
+  (( ${#items} > 0 ))
+}
+__git-restorep-getitems_vars() {
+  term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} $rev")
+}
+__git-restorep-dointeractive() {
+  if [[ -z "$rev" ]]; then
+    git "${configArgs[@]}" restore "${restoreargs[@]}" --patch $@
+  else
+    git "${configArgs[@]}" restore --source "$rev" "${restoreargs[@]}" --patch $@
+  fi
+}
+source $__dirname/../__git-patch-filepicker \
+  __git-restorep-{hasfiles,getitems_vars,dointeractive} $@
+
+echo 'No changes left to discard'

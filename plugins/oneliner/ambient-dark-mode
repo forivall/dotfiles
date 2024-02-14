@@ -5,6 +5,6 @@ local currentBrightness=$(ambient-light)
 if [[ -z $threshold ]]; then
   threshold=$(plutil -extract darknessThreshold raw ~/Library/Preferences/codes.rambo.DarkModeBuddy.plist)
   echo threshold: $threshold
-  echo currentBrightness: $currentBrightness
 fi
+echo currentBrightness: $currentBrightness
 if (( currentBrightness < threshold )); then dark-mode on; else dark-mode off; fi

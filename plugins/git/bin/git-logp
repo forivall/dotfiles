@@ -34,7 +34,7 @@ case "$1" in
       showdiff=false; pretty+=("$1"); shift;
     ;;
   --name-status) showdiff=false; namestatus=true; shift; continue; ;;
-  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines)
+  --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines|--show-signature)
       pretty+=($1); shift; continue;
     ;;
   --pretty=*|--format=*) haspretty=true; pretty+=($1); shift; continue; ;;

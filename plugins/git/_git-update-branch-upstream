@@ -1,5 +1,6 @@
 #compdef git-update-branch-upstream
-#description list recent branches
+#description reset branch to its upstream
+# code: language=shellscript
 
 _git-update-branch-upstream () {
 

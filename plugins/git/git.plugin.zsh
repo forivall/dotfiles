@@ -43,8 +43,12 @@ alias gsco='git stashed checkout'
 alias gcp='git cherry-pick'
 alias gcpc='git cherry-pick --continue'
 alias gcps='git cherry-pick --skip'
-alias gcs='git switch'
-alias gcsb='git switch -c'
+alias gsi='git switch'
+alias gsd='git switch --detach'
+alias gsb='git switch -c'
+alias gre='git restore'
+alias grp='git restorep'
+alias gres='git restore --source'
 
 alias gd='git diff'
 alias gds='git diff --staged'
@@ -80,7 +84,6 @@ alias grbs='git rebase --skip'
 alias gst="git st"
 
 alias gti="git"
-alias gts='git tag -s'
 alias gtv='git tag | sort -V'
 alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
 
@@ -328,22 +331,26 @@ source "$__zsh_forivall_git_plugin_location/bin/git-watch-staged"
 # source "$__zsh_forivall_git_plugin_location/completions.zsh"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
 
-function fzf-git-checkout-unless-arguments() {
-  if (( $# == 0 )); then
-    fzf-git-checkout $@
-    return
-  fi
-  git checkout $@
-}
-if (( ${+commands[fzf-git-checkout]} )); then
-  alias gco=fzf-git-checkout-unless-arguments
+if (( ${+commands[git]} )) && (( ${+commands[fzf]} )) && (( ${+commands[fzf-git-branch]} )); then
+  function zlefzfgitswitch() {
+    local branch
+    if [[ $LBUFFER == 'gsi' || $LBUFFER == 'git switch' || $LBUFFER == 'gco' ]]; then
+      echo
+      echo -n '\033[1B'
+      branch=$(fzf-git-branch)
+      echo -n '\033['$(( ${#LBUFFER} +  2 ))'C'
+      echo -n '\033[2A'
+      if [[ "$branch" = 'remotes/'* ]]; then
+        LBUFFER+=" --track"
+      fi
+      if [[ -z $branch && $LBUFFER == 'gco' ]]; then
+        LBUFFER=''
+        echo -n '\u005E\u005B   '
+      else
+        LBUFFER+=" $branch"
+      fi
+
+    fi
+  }
+  add-zle-hook-widget -Uz line-finish zlefzfgitswitch
 fi
-autoload -Uz _fzf-git-checkout-unless-arguments
-compdef _fzf-git-checkout-unless-arguments fzf-git-checkout-unless-arguments
-# _fzf-git-checkout-unless-arguments() {
-#   words=(git checkout ${words[2,-1]})
-#   current+=1
-#   # _git "$@"
-#   echo comp
-# }
-# compdef _fzf-git-checkout-unless-arguments fzf-git-checkout-unless-arguments

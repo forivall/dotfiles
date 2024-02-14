@@ -12,23 +12,23 @@ _arguments -C \
   {-L,--hardlink}'[Create hard links instead of renaming]' \
   {-M,--use}'[Load perl module]':Module \
   {-n,--just-print,--dry-run}'[Print changes that would be made]' \
-  {-N,--counter-format}'[Set a $N counter variable]':template \
+  {-N,--counter-format}'[Set a $N counter variable]':template:_message \
   {-p,--mkpath,--make-dirs}'[Create any non-existent directories in the target path]' \
   --stdin'[Always read filenames from stdin]' \
   --no-stdin'[Never read filenames from stdin]' \
   {-t,--sort-time}'[Process in order of file timestamps]' \
   {-T,--transcode}'[Decode from text encoding]':encoding \
   {-v,--verbose}'[Print additional information about the operations]' \
-  {-a,--append}:from:to'[Append a value to every filename]' \
-  {-A,--prepend}:from:to'[Prepend a value to every filename]' \
+  {-a,--append}'[Append a value to every filename]:from:_message:to:_message' \
+  {-A,--prepend}'[Prepend a value to every filename]:from:_message:to:_message' \
   {-c,--lower-case}'[Convert to all lower case]' \
   {-C,--upper-case}'[Convert to all upper case]' \
-  {-d,--delete}:str'[Remove the first occurrence]' \
-  {-D,--delete-all}:str'[Remove every occurrence]' \
-  {-e,--expr}:code'[Pass the filename to a Perl expression]' \
-  {-P,--pipe}:cmd'[Pass the filename to an external command]' \
-  {-s,--subst}:from:to'[Replace the first occurrence]' \
-  {-S,--subst-all}:from:to'[Replace every occurrence]' \
+  {-d,--delete}'[Remove the first occurrence]:str:_message' \
+  {-D,--delete-all}'[Remove every occurrence]:str:_message' \
+  {-e,--expr}'[Pass the filename to a Perl expression]:perl_code:_message' \
+  {-P,--pipe}'[Pass the filename to an external command]:external_command:_command_names -e' \
+  {-s,--subst}'[Replace the first occurrence]:from:_message:to:_message' \
+  {-S,--subst-all}'[Replace every occurrence]:from:_message:to:_message' \
   {-x,--remove-extension}'[Remove the last extension from a filename]' \
   {-X,--keep-extension}'[Omit the last extension from the operations]' \
   {-z,--sanitize}'[each of --nows --noctrl --nometa --trim]' \
