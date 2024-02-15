@@ -129,12 +129,28 @@ function touche() {
 if (( ${+aliases[diff]} )); then
   unalias diff;
 fi
+if (( ${+function[diff]} )); then
+  unfunction diff;
+fi
 function diff() {
   local args=()
-  local usepager=true
+  local usepager=false
+  local usecolor=false
+  local unified=true
+  if [[ -t 1 ]]; then
+    usepager=true
+    usecolor=true
+  fi
   for arg in "$@"; do
-    if [[ $arg == --no-pager ]]; then
+    if [[ $arg == --help ]] || [[ $arg == -h ]]; then
+      command diff "$@"
+      return $?
+    elif [[ $arg == --no-pager ]]; then
       usepager=false
+    elif [[ $arg == --no-color ]]; then
+      usecolor=false
+    elif [[ $arg == --no-unified ]]; then
+      unified=false
     else
       args+=($arg)
     fi
@@ -144,11 +160,22 @@ function diff() {
     differ=false
     echo "Files have the same contents"
   fi
-  if $usepager && $differ; then
-    colordiff -u "${args[@]}" | less -f +X -x2 -R
+  if $differ; then
+    local diffcommand=(command diff)
+    if $usecolor; then
+      diffcommand=(colordiff)
+    fi
+    if $unified; then
+      diffcommand+=(-u)
+    fi
+    if $usepager; then
+      "${diffcommand[@]}" "${args[@]}" | less -f +X -x2 -R
+    else
+      "${diffcommand[@]}" "${args[@]}"
+    fi
   fi
 }
-alias diff_=/usr/bin/diff
+alias diff_="command diff"
 function delta() {
   local deltaOpts=()
   if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
