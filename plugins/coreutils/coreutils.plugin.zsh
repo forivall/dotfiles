@@ -132,6 +132,13 @@ fi
 if (( ${+function[diff]} )); then
   unfunction diff;
 fi
+
+if ! (( ${+commands[colordiff]} )); then
+  if command diff --color /dev/null{,} &>/dev/null; then
+    alias colordiff="diff --color"
+  fi
+fi
+
 function diff() {
   local args=()
   local usepager=false
