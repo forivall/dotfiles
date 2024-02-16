@@ -82,6 +82,12 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
   -webkit-mask-size: 12px;
   opacity: 0.8;
 }
+.folded-background.folded-background {
+  background-color: transparent;
+  background:
+    linear-gradient(to top,    transparent, transparent 1.5px, var(--vscode-editor-foldBackground) 1.5px, var(--vscode-editor-foldBackground) 50%, transparent 50%),
+    linear-gradient(to bottom, transparent, transparent 1.5px, var(--vscode-editor-foldBackground) 1.5px, var(--vscode-editor-foldBackground) 50%, transparent 50%);
+}
 
 /* .horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item.right:before,
 .horizontal-activitybar .monaco-workbench .activitybar>.content>.composite-bar>.monaco-action-bar .action-item:last-of-type.left:after {

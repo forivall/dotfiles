@@ -95,6 +95,7 @@
       "terminal.selectionBackground": "#de935f40"
     },
     "[Boxy Yesterday]": {
+      "editor.foldBackground": "#6035780c",
       "activityBarBadge.background": "#007acca0",
       "activityBar.background": "#cabaaa",
       "activityBar.foreground": "#1c2a2e",
@@ -1332,6 +1333,7 @@
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
         "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                                      },
+        "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                               },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
         "j": { "text": "Open jumplist picker",                          "command": "???"                                                                      },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
@@ -3113,4 +3115,7 @@
   ],
   "search.followSymlinks": false,
   "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.renderSideBySide": false,
+  "typescriptFold.autoFold": false,
+  "typescriptFold.togglePerFile": true
 }

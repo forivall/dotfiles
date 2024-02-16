@@ -187,6 +187,7 @@
   { "command":  "editor.foldLevel3",                                       "key": "cmd+k 3",                       "when": "editorTextFocus" },
   { "command":  "editor.foldLevel4",                                       "key": "cmd+k 4",                       "when": "editorTextFocus" },
   { "command":  "editor.foldLevel5",                                       "key": "cmd+k 5",                       "when": "editorTextFocus" },
+  { "command":  "typescriptFold.toggle",                                   "key": "cmd+k t",                       "when": "editorTextFocus" },
   { "command":  "editor.gotoNextFold",                                     "key": "ctrl+down",                     "when": "!editorHasSelection" },
   { "command":  "editor.gotoNextSymbolFromResult",                         "key": "alt+cmd+a",                     "when": "hasSymbols" },
   { "command": "-editor.gotoNextSymbolFromResult",                         "key": "f12",                           "when": "hasSymbols" },
@@ -194,8 +195,10 @@
   { "command":  "editor.unfoldAll",                                        "key": "shift+alt+]",                   "when": "editorTextFocus" },
   { "command":  "explorer.newFile",                                        "key": "alt+cmd+n" },
 
-  { "command": "workbench.action.closeSidebar",  "key": "q",                         "when": "filesExplorerFocus && !inputFocus" },
-  { "command": "dance.openMenu",                 "key": "m",  "args": { "input": "file-explorer" }, "when": "filesExplorerFocus && !inputFocus" },
+  { "command": "workbench.action.closeSidebar",  "key": "shift+escape",                         "when": "filesExplorerFocus && !inputFocus" },
+  { "command": "workbench.action.focusActiveEditorGroup",  "key": "escape",                         "when": "filesExplorerFocus && !inputFocus" },
+  { "command": "dance.openMenu",                 "key": "shift+/",  "args": { "input": "file-explorer" }, "when": "filesExplorerFocus && !inputFocus" },
+  { "command": "list.toggleFilterOnType",        "key": "/",      "when": "filesExplorerFocus && !inputFocus" },
   { "command": "filesExplorer.openFilePreserveFocus", "key": "o", "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus" },
 
   { "command":  "goToNextReference",             "key": "alt+`",                         "when": "inReferenceSearchEditor || referenceSearchVisible" },
@@ -537,6 +540,22 @@
   { "key": "h", "command": "dance.select.left.jump",             "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "j", "command": "dance.select.down.jump",             "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "k", "command": "dance.select.up.jump",               "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "j", "command": "dance.run",             "when": "editorTextFocus && dance.mode == 'normal' && !editorHasSelection && !editorHasMultipleSelections", "args": {
+    "code": [
+      "if (repetitions > 1) {",
+      "  await vscode.commands.executeCommand('dance.select.down.jump', { count: repetitions })",
+      "} else {",
+      "  vscode.commands.executeCommand('cursorDown')",
+      "}"
+    ] } },
+  { "key": "k", "command": "dance.run",             "when": "editorTextFocus && dance.mode == 'normal' && !editorHasSelection && !editorHasMultipleSelections", "args": {
+    "code": [
+      "if (repetitions > 1) {",
+      "  await vscode.commands.executeCommand('dance.select.up.jump', { count: repetitions })",
+      "} else {",
+      "  vscode.commands.executeCommand('cursorUp')",
+      "}"
+    ] } },
   { "key": "l", "command": "dance.select.right.jump",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "ctrl+e", "command": "dance.select.lineEnd",   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
