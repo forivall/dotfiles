@@ -48,6 +48,7 @@
       "activityBar.activeBorder": "#ffffffee",
       // "editorCursor.background": "#ff0000",
       "editorCursor.foreground": "#e6e9e7bf",
+      "editor.stackFrameHighlightBackground": "#ccfd3c14",
       "editorStickyScroll.background": "#1d1f2178",
       "editorInlayHint.background": "#1a3f3c",
       "editorInlayHint.foreground": "#b5d1ce",
@@ -96,6 +97,7 @@
     },
     "[Boxy Yesterday]": {
       "editor.foldBackground": "#6035780c",
+      "editor.stackFrameHighlightBackground": "#dbff8c73",
       "activityBarBadge.background": "#007acca0",
       "activityBar.background": "#cabaaa",
       "activityBar.foreground": "#1c2a2e",
@@ -1452,6 +1454,11 @@
     },
     "select": {
       "inheritFrom": "normal",
+      "decorations": {
+        "applyTo": "main",
+        "backgroundColor": "$editor.stackFrameHighlightBackground",
+        "isWholeLine": true
+      },
       "onLeaveMode": [
         [
           ".selections.save",
