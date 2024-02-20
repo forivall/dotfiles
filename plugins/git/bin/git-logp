@@ -14,6 +14,7 @@ stash=false
 showdiff=true
 forcediff=false
 namestatus=false
+follow=false
 
 dry=false
 navigate=${$(git config delta.navigate):-false}
@@ -45,6 +46,7 @@ case "$1" in
   --dry) dry=true; shift; continue; ;;
   --) dashdash=true; args+=("$1"); shift; continue; ;;
   --grep) args+=("$1" "$2"); shift; shift; continue; ;;
+  --follow) follow=true ;&
   *)
     args+=("$1")
     fileargs+=("$1")
@@ -62,7 +64,13 @@ else
 fi
 
 dashdash=''
-$allfiles || dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
+if $follow; then
+  local followfiles=($(git log --name-only --relative --format= --follow $fileargs| huniq))
+  dashdash="$followfiles "
+  echo $dashdash
+elif ! $allfiles; then
+  $allfiles || dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
+fi
 
 deltaOpts=()
 if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then

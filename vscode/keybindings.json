@@ -559,6 +559,7 @@
   { "key": "l", "command": "dance.select.right.jump",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "ctrl+e", "command": "dance.select.lineEnd",   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+a", "command": "dance.select.lineStart", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   // https://github.com/helix-editor/helix/discussions/5764
   { "key": "ctrl+j", "command": "dance.run",    "when": "editorTextFocus && !editorReadonly && dance.mode == 'normal' || editorTextFocus && !editorReadonly && dance.mode == 'select'", "args": {

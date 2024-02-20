@@ -74,7 +74,7 @@ done
 if $by_commit; then
   if [[ $filter != true ]]; then
     _i=0
-    git for-each-ref --sort=$sortorder${sortoption:-sort} --format=%\(refname\) $pattern | while read ref; do
+    git for-each-ref --sort=$sortorder${sortoption:-$sort} --format=%\(refname\) $pattern | while read ref; do
       if ! eval $filter; then continue; fi
       git for-each-ref --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" $ref
       _i=$(( $_i + 1 ))
@@ -83,7 +83,7 @@ if $by_commit; then
     exit
   fi
   #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
-  git for-each-ref --sort=$sortorder${sortoption:-sort} --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
+  git for-each-ref --sort=$sortorder${sortoption:-$sort} --format="%(color:blue)%(${sort}:${date})%(color:reset) %(refname:short) %(color:dim)%(color:magenta)%(authorname)%(taggername)%(color:reset)" --count=$NUM $pattern
   exit
 fi
 
