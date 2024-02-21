@@ -1,0 +1,168 @@
+#!/usr/bin/env node
+
+'use strict'
+
+const columns = require('cli-columns')
+const chalk = require('chalk')
+const fs = require('fs')
+const path = require('path')
+const Module = require('module')
+
+/**
+ * @param {NodeJS.ReadStream} stream
+ */
+async function readAll(stream) {
+  let buffer = ''
+  for await (const chunk of stream) {
+    buffer += chunk
+  }
+  return buffer
+}
+
+const makeTrunc = (l) => (s) => s.length >= l ? s.slice(0, l - 1) + '…' : s
+
+async function main() {
+  const stdin = await readAll(process.stdin)
+  /** @type {import('../types').ProjectConfiguration & { description?: string }} */
+  const manifest = JSON.parse(stdin)
+
+  let packageJson = { scripts: {} }
+  try {
+    const nxDevkit = Module.createRequire(process.cwd() + '/dummy.js')(
+      '@nx/devkit'
+    )
+    const jsonPath = path.join(
+      nxDevkit.workspaceRoot,
+      manifest.root,
+      'package.json'
+    )
+    packageJson = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8' }))
+  } catch {}
+
+  const info = {
+    name: chalk.green(manifest.name),
+    root: chalk.green(manifest.root),
+    targets: manifest.targets || {},
+    description: manifest.description,
+    tags: manifest.tags || [],
+    projectType: manifest.projectType || chalk.red('unknown'),
+  }
+  if (info.projectType === 'library') {
+    info.projectType = chalk.cyan(info.projectType)
+  } else {
+    info.projectType = chalk.green(info.projectType)
+  }
+
+  console.log(
+    `${chalk.underline.bold(info.name)} @ ${chalk.underline.bold(info.root)}` +
+      ' | ' +
+      info.projectType
+  )
+  if (info.description) {
+    console.log(info.description)
+  }
+
+  if (info.tags.length) {
+    console.log('')
+    console.log('tags:', chalk.yellow(info.tags.join(', ')))
+  }
+
+  console.log('')
+  console.log('targets:')
+  const flatTargets = {}
+  const wrapQuotes = (s) => (s.includes(':') ? `"${s}"` : s)
+  for (const [target, config] of Object.entries(info.targets)) {
+    flatTargets[wrapQuotes(target)] = config
+    if (!['nx:run-script', 'nx:run-commands'].includes(config.executor)) {
+      continue
+    }
+    const { configurations, ...baseConfig } = config
+    for (const [configuration, options] of Object.entries(
+      configurations ?? {}
+    )) {
+      flatTargets[`${wrapQuotes(target)}:${wrapQuotes(configuration)}`] = {
+        ...baseConfig,
+        options: { ...baseConfig.options, ...options },
+      }
+    }
+  }
+  for (const [targetRaw, config] of Object.entries(flatTargets)) {
+    const target = chalk.blue(targetRaw)
+    const maxLen = Math.max(process.stdout.columns - (targetRaw.length + 5), 20)
+    const trunc = makeTrunc(maxLen)
+
+    if (config.executor === 'nx:run-script') {
+      if (config.options.script) {
+        const actualScript = packageJson.scripts[config.options.script]
+        if (actualScript) {
+          console.log(`.${target} :`, chalk.yellow(trunc(actualScript)))
+        } else {
+          console.log(
+            `.${target} :`,
+            chalk.yellow.underline('npm run ' + config.options.script)
+          )
+        }
+      } else {
+        console.log(`.${target} :`, chalk.red(config.executor))
+      }
+    } else if (config.executor === 'nx:run-commands') {
+      if (config.options.command) {
+        console.log(`.${target} :`, chalk.yellow(trunc(config.options.command)))
+      } else if (config.options.commands) {
+        console.log(
+          `.${target} :`,
+          chalk.yellow(
+            config.options.commands
+              .map(
+                makeTrunc(Math.floor(maxLen / config.options.commands.length))
+              )
+              .join(config.options.parallel ? ' & ' : ' && ')
+          )
+        )
+      } else {
+        console.log(`.${target} :`, chalk.red(config.executor))
+      }
+    } else {
+      console.log(`.${target} :`, chalk.underline.yellow(config.executor))
+      const configs = Object.keys(config.configurations ?? {})
+      if (configs.length) {
+        console.log(
+          columns(
+            configs.map((c) => `${wrapQuotes(target)}:${wrapQuotes(c)}`),
+            { width: process.stdout.columns - 2 }
+          )
+            .split('\n')
+            .map((s) => `  ${s}`)
+            .join('\n')
+        )
+      }
+    }
+    if (config.dependsOn?.length) {
+      console.log(
+        chalk.green('  dependsOn '),
+        columns(config.dependsOn.map(prettyDep), {
+          width: process.stdout.columns - 'dependsOn'.length - 4,
+        })
+          .split('\n')
+          .join('\n`             ')
+      )
+    }
+  }
+}
+
+/** @param {import('../types').TargetDependencyConfig | string} dep */
+function prettyDep(dep) {
+  if (typeof dep === 'string') {
+    return dep.startsWith('^')
+      ? `^${chalk.blue(dep.slice(1))}`
+      : chalk.blue(dep)
+  }
+  const projects = dep.projects
+    ? (typeof dep.projects === 'string'
+        ? dep.projects
+        : `(${dep.projects.map(chalk.underline).join(',')})`) + ':'
+    : ''
+  return (dep.dependencies ? '^' : '') + projects + chalk.blue(dep.target)
+}
+
+main()
