@@ -140,6 +140,8 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-editor .horizontal-bottom.indent-active { border-bottom-style: dashed }
 .monaco-editor .inline-folded:after { content: '   '; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%224%22%20width%3D%2214%22%3E%3Cg%20fill%3D%22rgba(238%2C%20238%2C%20238%2C%200.5)%22%3E%3Ccircle%20cx%3D%222%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%227%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") no-repeat center left }
 .editor-scrollable .decorationsOverviewRuler { opacity: 0.75 }
+.zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .margin-view-overlays .line-numbers { padding-right: 6px; padding-left: 6px; }
+/* .review-widget .body .comment-form .monaco-editor, .review-widget .body .edit-container .monaco-editor { padding-left: 0; } */
 .monaco-dialog-modal-block { align-items: flex-start; padding-top: 24px }
 .explorer-viewlet .monaco-icon-label:before { /* height: calc(var(--row-height) - 2px); */ padding-right: 2px;opacity: 0.9 }
 .explorer-folders-view .monaco-list-row { padding-left: 0 }
@@ -217,17 +219,6 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .part.sidebar>.content[style]>.composite { height: calc(100% + 11px) }
 .monaco-workbench .part.sidebar>.content>.composite>.monaco-pane-view>.monaco-split-view2.vertical>.monaco-scrollable-element>.split-view-container>.split-view-view.visible:last-child>.pane { height: calc(100% + 11px) }
 /* .monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance { height: calc(100% + 11px) } */
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style] { height: calc(100% + 11px) !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]> { height: calc(100% + 11px) !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element { height: 100% !important; transform: none !important; }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element>* { transform: translateY(5px) }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element>.lines-content[style] { transform: translate3d(0px, 0px, 0px) translateY(5px) !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.editor-scrollable.monaco-scrollable-element>.scrollbar { transform: none }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>* { transform: translateY(5px) !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.overlayWidgets { transform: none !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.overlayWidgets>.zone-widget { transform: translateY(5px) !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.scroll-decoration { transform: none !important }
-.monaco-workbench .part.editor>.content .editor-group-container>.editor-container[style]>.editor-instance>.monaco-editor>.overflow-guard[style]>.margin[style] { transform: translate3d(0px, 0px, 0px) translateY(5px) !important }
 
 .monaco-workbench .part.panel .title .monaco-action-bar .markers-panel-action-filter .monaco-inputbox { height: 22px }
 .monaco-workbench .part.panel .title { line-height: 16px }

@@ -6,3 +6,6 @@
 
 --glob
 !package-lock.json
+
+--max-columns
+256

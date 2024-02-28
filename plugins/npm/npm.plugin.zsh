@@ -30,7 +30,7 @@ function npm() {
     *) ${npm_cmd[@]} "$@";;
   esac
 }
-compdef _npm npm
+compdef _zbnc_zsh_better_npm_completion npm
 
 npm-git-get-branch() {
   local m="$1"

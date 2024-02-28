@@ -1,5 +1,28 @@
 #!/usr/bin/env zsh
-node --experimental-repl-await -r ts-node/register -i -e "
+
+local nodeEval=()
+local nodeArgs=(-i)
+local interactive=true
+local skip=false
+for i in {1..$#}; do
+if $skip; then skip=false; continue; fi
+_arg="${@[$i]}"
+case $_arg in
+  -e)
+    nodeEval+=("${@[$(( i + 1 ))]}");
+    skip=true;
+  ;;
+  --no-interactive)
+    interactive=false
+    shift 1 nodeArgs
+  ;;
+  *)
+    nodeArgs+=($_arg)
+  ;;
+esac
+done
+echo $nodeArgs
+node --experimental-repl-await -r ts-node/register -e "
 var fs = require('fs');
 var path = require('path');
 var __configDir = process.cwd();
@@ -9,6 +32,7 @@ while (__configDir && !fs.readdirSync(__configDir).includes('config')) {
 if (__configDir !== process.cwd()) {
   process.env.NODE_CONFIG_DIR = path.join(__configDir, 'config');
   console.log('\rNODE_CONFIG_DIR=' + process.env.NODE_CONFIG_DIR);
-  process.stdout.write('> ');
+  $($interactive && echo 'process.stdout.write('> ');')
 }
-"
+${(F)nodeEval}
+" "${nodeArgs[@]}"
