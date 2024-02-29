@@ -1,0 +1,1 @@
+cd ~/.pyenv/versions && for p in $HOMEBREW_PREFIX/opt/python@*; ln -f -s $p brew-${p##*@}

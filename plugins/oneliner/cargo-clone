@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+local npm_bin=$(npm -g bin)
+
+local repo
+repo="$(
+  curl "https://crates.io/api/v1/crates/$1" | jq -r .crate.repository |
+  sed 's/^git+http/http/'
+)"
+
+dest=$1
+if (( $# > 1 )); then
+  dest=$2
+fi
+if [[ "$dest" != "--dry-run" ]]; then
+  echo git clone "$repo" "$dest"
+  git clone "$repo" "$dest"
+else
+  echo "$repo"
+fi

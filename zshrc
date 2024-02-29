@@ -59,6 +59,9 @@ export EDITOR=hx
 
 export VISUAL="wait-code"
 export LC_ALL="en_CA.UTF-8"
+export HISTTIMEFORMAT=": %F %T:0;"
+export HISTFILESIZE=
+export HISTSIZE=
 HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
 tabs -2
@@ -121,7 +124,7 @@ zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # fuzzy completion
-zstyle ':completion:*' completer _prefix _complete _correct _approximate
+zstyle ':completion:*' completer _prefix _expand_alias _complete _correct _approximate
 zstyle ':completion:*:correct:::' max-errors 2 not-numeric
 zstyle ':completion:*' matcher-list 'r:|?=**'
 zstyle ':completion:*:approximate:::' max-errors 2 numeric
@@ -182,27 +185,28 @@ if ! zgen saved; then
 
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
 
-  zgen oh-my-zsh
-  zgen oh-my-zsh plugins/web-search
-  # zgen oh-my-zsh plugins/command-not-found # very slow
-  $IS_OSX && zgen oh-my-zsh plugins/brew
-  zgen oh-my-zsh plugins/colorize
-  zgen oh-my-zsh plugins/cp
-  zgen oh-my-zsh plugins/git-extras
-  zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/docker-compose
-  [[ -d $CLOUDSDK_HOME ]] && zgen oh-my-zsh plugins/gcloud
-  zgen oh-my-zsh plugins/rbenv
+  zgen ohmyzsh
+  zgen ohmyzsh plugins/web-search
+  # zgen ohmyzsh plugins/command-not-found # very slow
+  $IS_OSX && zgen ohmyzsh plugins/brew
+  zgen ohmyzsh plugins/colorize
+  zgen ohmyzsh plugins/cp
+  zgen ohmyzsh plugins/git-extras
+  zgen ohmyzsh plugins/docker
+  zgen ohmyzsh plugins/docker-compose
+  # zgen ohmyzsh plugins/npm
+  [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
+  zgen ohmyzsh plugins/rbenv
   zgen load "$__zshrc_dirname/plugins/python"
-  zgen oh-my-zsh plugins/python
-  # zgen oh-my-zsh plugins/pyenv
-  whence kubectl > /dev/null && zgen oh-my-zsh plugins/kubectl
-  # zgen oh-my-zsh plugins/jump
+  zgen ohmyzsh plugins/python
+  # zgen ohmyzsh plugins/pyenv
+  whence kubectl > /dev/null && zgen ohmyzsh plugins/kubectl
+  # zgen ohmyzsh plugins/jump
 
   zgen load srijanshetty/zsh-pandoc-completion /
 
   zgen load "$__zshrc_dirname/plugins/jump"
-  # zgen oh-my-zsh encode64
+  # zgen ohmyzsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async / main
   # ! $IS_WINDOWS && zgen load sindresorhus/pure
   ! $IS_WINDOWS && zgen load forivall/pure / underline-repo-name
@@ -256,12 +260,13 @@ if ! zgen saved; then
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
-  zgen load surkin/zsh-better-npm-completion
+  zgen load gentslava/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
-  whence direnv > /dev/null && zgen oh-my-zsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
+  whence direnv > /dev/null && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
   # zgen load dim-an/cod
   # zgen load forivall/cod / feat/zsh-local-build
+  zgen load "$__zshrc_dirname/plugins/local"
 
   # Build completions files
   local ofpath=(${fpath})
@@ -278,7 +283,7 @@ if ! zgen saved; then
 fi
 [[ $(whence -w 9 2>/dev/null) == '9: alias' ]] && unalias 9
 unsetopt nomatch
-# from oh-my-zsh web-search. github is from github desktop.
+# from ohmyzsh web-search. github is from github desktop.
 [[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
 
 # TODO: move to a vscode plugin

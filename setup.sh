@@ -71,6 +71,7 @@ o mkdir -p ~/.config/htop
 o ln -fs "$(realpath htoprc)" ~/.config/htop/htoprc
 o mkdir -p ~/.config/gh
 o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
+o ln -fs "$(realpath cargo)" ~/.cargo
 o mkdir -p ~/.config/helix
 o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
 o ln -fs "$(realpath helix/themes)" ~/.config/helix/themes

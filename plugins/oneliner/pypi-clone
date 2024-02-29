@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+local api_key=$(< $(libraries-io-api-key-file))
+
+get https://libraries.io/api/platforms \
+  api_key==$api_key
+# local repo="$(
+#   npm info --json "$1"|jq -r '(.repository.url // .repository)' |
+#   sed 's/^git+http/http/'
+# )"
+# echo git clone "$repo" "$1"
+# git clone "$repo" "$1"

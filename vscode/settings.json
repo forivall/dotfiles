@@ -41,7 +41,7 @@
   "terminal.integrated.fontSize": 13.4,
   "terminal.integrated.fontWeight": 200,
   "terminal.integrated.fontWeightBold": 600,
-  // "activitusbar.activeColour": "lightskyblue",
+  "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "[Boxy Tomorrow]": {
@@ -101,6 +101,8 @@
       "activityBarBadge.background": "#007acca0",
       "activityBar.background": "#cabaaa",
       "activityBar.foreground": "#1c2a2e",
+      "activityBarTop.foreground": "#00417e",
+      "activityBarTop.inactiveForeground": "#96a3b3",
       // "activityBar.foreground": "#3c4a4e",
       "editorInlayHint.foreground": "#4b7975",
       "editorInlayHint.background": "#d0e6e3",
@@ -253,6 +255,7 @@
     "terminal.integrated.fontSize",
     "terminal.integrated.fontWeight",
     "terminal.integrated.fontWeightBold",
+    "workbench.activityBar.iconClickBehavior",
     "workbench.activityBar.location",
     "workbench.colorCustomizations",
     "workbench.colorTheme",
@@ -1069,6 +1072,36 @@
   "activitusbar.searchViewInPanel": true,
   "activitusbar.views": [
     {
+      "name": "command.workbench.action.toggleActivityBarVisibility",
+      "codicon": "layout-activitybar-right",
+      "tooltip": "Activity Bar (⇧⌘F9)"
+    },
+    {
+      "name": "explorer",
+      "codicon": "explorer-view-icon",
+      "tooltip": "Explorer (⇧⌘E)"
+    },
+    {
+      "name": "debug",
+      "codicon": "run-view-icon",
+      "tooltip": "Run and Debug (⌥⌘D)"
+    },
+    {
+      "name": "scm",
+      "codicon": "source-control-view-icon",
+      "tooltip": "Source Control (⌃⇧G)"
+    },
+    {
+      "name": "pr:github",
+      "codicon": "github",
+      "tooltip": "Github (⌃⇧H)"
+    },
+    {
+      "name": "extensions",
+      "codicon": "extensions-view-icon",
+      "tooltip": "Extensions (⇧⌘X)"
+    },
+    {
       "codicon": "auxiliarybar-left-layout-icon",
       "name": "command.workbench.action.toggleSidebarVisibility",
       "tooltip": "Side Panel (⌘F9)"
@@ -1713,7 +1746,8 @@
           },
           {
             // "command": "pr.goToNextDiffInPr",
-            "command": "editor.action.diffReview.next",
+            // "command": "editor.action.diffReview.next",
+            "command": "editor.action.accessibleDiffViewer.next",
             "display": "hidden",
             "key": "J",
             "name": "Next Diff",
@@ -1721,7 +1755,8 @@
             "when": "textCompareEditorVisible"
           },
           {
-            "command": "pr.goToPreviousDiffInPr",
+            // "command": "pr.goToPreviousDiffInPr",
+            "command": "editor.action.accessibleDiffViewer.prev",
             "display": "hidden",
             "key": "K",
             "name": "Previous Diff",
@@ -1973,7 +2008,7 @@
     // "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "editor.tabCompletion": "onlySnippets"
@@ -1999,7 +2034,7 @@
       "strings": true
     },
     "editor.suggest.localityBonus": true,
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
@@ -2046,7 +2081,7 @@
     "editor.formatOnSave": false
   },
   "[mongodb]": {
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "editor.wordBasedSuggestionsMode": "currentDocument",
     // "editor.snippetSuggestions": "top",
     // "editor.suggest.preview": true,
@@ -3102,7 +3137,6 @@
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
-  "zenMode.hideTabs": false
   "testFileMaker.testFileName": "{FileName}.spec{FileNameExtention}",
   "testFileMaker.currentFilePathRoot": "./",
   "testFileMaker.importFileExports": "grouped",
@@ -3124,5 +3158,16 @@
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.renderSideBySide": false,
   "typescriptFold.autoFold": false,
-  "typescriptFold.togglePerFile": true
+  "typescriptFold.togglePerFile": true,
+  "betterFolding.excludedLanguages": [
+    "javascript", "typescript"
+  ],
+  "accessibility.signals.terminalBell": {
+    "sound": "on"
+  },
+  "terminal.integrated.enableVisualBell": true,
+  "vscode_custom_css.imports": [
+    "https://raw.githubusercontent.com/forivall/dotfiles/osx/vscode/customui.css"
+  ],
+  "window.customTitleBarVisibility": "never"
 }
