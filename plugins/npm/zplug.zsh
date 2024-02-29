@@ -8,3 +8,4 @@ if (( ${+commands[appservices]} )); then
 fi
 
 node ./tsc-completion.js >> _tsc
+node ./eslint-completion.js >> _eslint

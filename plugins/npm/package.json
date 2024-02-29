@@ -7,6 +7,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "eslint": "^8.57.0",
     "table": "^6.8.1"
   }
 }
