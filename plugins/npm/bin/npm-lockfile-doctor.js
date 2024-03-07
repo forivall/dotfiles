@@ -1,15 +1,27 @@
 #!/usr/bin/env node
 
-const prefix = process.argv[2]
+const npmExecPath =
+  process.env.npm_execpath ||
+  require('child_process')
+    .execFileSync('npm', ['exec', '-c', 'echo $npm_execpath'], {
+      encoding: 'utf8',
+    })
+    .trim()
+
 process.argv[2] = 'lockfile-doctor'
 
-const Npm = require(`${prefix}/lib/node_modules/npm/lib/npm`)
-const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arborist-cmd`)
+const Module = require('module')
+const path = require('path')
+const npmRequire = Module.createRequire(npmExecPath)
+const Npm = npmRequire('../lib/npm')
+const ArboristWorkspaceCmd = npmRequire('../lib/arborist-cmd')
 
+/** @type {typeof import('npmlog')} */
+const log = npmRequire('npmlog')
 /** @type {typeof import('@npmcli/arborist')} */
-const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
+const Arborist = npmRequire('@npmcli/arborist')
 /** @type {typeof import('pacote')} */
-const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
+const pacote = npmRequire('pacote')
 
 async function main() {
   const npm = new Npm()
@@ -43,6 +55,23 @@ function every(iterable, iteratee) {
   return true
 }
 
+/**
+ * @template T
+ * @param {Iterable<T>} iterable
+ * @param {(value: T) => boolean} iteratee
+ */
+function some(iterable, iteratee) {
+  for (const value of iterable) {
+    if (iteratee(value)) {
+      return true
+    }
+  }
+  return false
+}
+
+/** @param {string} to */
+const relPath = (to) => path.relative('.', to)
+
 class LockfileDoctor extends ArboristWorkspaceCmd {
   static description = 'Clean up sha1 and extraneous deps'
   static name = 'lockfile-doctor'
@@ -66,9 +95,18 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
         for (const link of /** @type {Set<import('@npmcli/arborist').Link>} */ (
           fsChild.linksIn
         )) {
-          if (!every(link.edgesIn, (edge) => edge.valid)) {
+          if (!some(link.edgesIn, (edge) => edge.valid)) {
             invalidLinks.push(link.location)
             link.parent = null
+          } else {
+            for (const edge of link.edgesIn) {
+              if (!edge.valid) {
+                log.warn(
+                  'invalid link',
+                  `from ${relPath(edge.from.path)} to ${relPath(edge.to.path)}`
+                )
+              }
+            }
           }
         }
         removeInvalidLinks(fsChild)
@@ -117,7 +155,10 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
         const { pkgid, location } = node
         arb.addTracker('fixintegrity', node.name, node.location)
         fixed.push(location)
-        const info = await pacote.manifest(pkgid, {...tree.meta.resolveOptions, preferOffline: true})
+        const info = await pacote.manifest(pkgid, {
+          ...tree.meta.resolveOptions,
+          preferOffline: true,
+        })
         node.resolved = info._resolved
         node.integrity = info._integrity
         node.package.deprecated = info.deprecated

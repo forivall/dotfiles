@@ -6,7 +6,7 @@ npm-lockfile-doctor() {
   __dirname=${__filename:h}
 
   autoload colors && colors
-  node "${__dirname}/npm-lockfile-doctor.js" $(npm prefix -g) $@
+  npm_execpath="$(npm prefix -g)/lib/node_modules/npm/bin/npm-cli.js" node "${__dirname}/npm-lockfile-doctor.js" $@
 }
 
 if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
