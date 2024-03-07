@@ -8,4 +8,4 @@
 !package-lock.json
 
 --max-columns
-256
+2048

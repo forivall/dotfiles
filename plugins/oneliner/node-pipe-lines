@@ -1,0 +1,14 @@
+#!/usr/bin/sh
+node -e 'const onLine = (line) => {'"$1"'};
+(async function() {
+  let buffer = "";
+  for await (const chunk of process.stdin) {
+    buffer += chunk;
+    const lines = buffer.split("\n");
+    buffer = lines.pop();
+    lines.forEach(onLine)
+  }
+  if (buffer.length) {
+    onLine(buffer)
+  }
+})()'
