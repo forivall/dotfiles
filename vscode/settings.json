@@ -3,7 +3,7 @@
   "window.density.editorTabHeight": "compact",
   "window.dialogStyle": "custom",
   "window.nativeTabs": true,
-  "window.title": "${dirty}${activeEditorMedium}${separator}${rootPath} ${remoteName} ${profileName}",
+  "window.title": "${rootPath}${separator}${activeRepositoryBranchName}${separator}${dirty}${activeEditorMedium}${separator}${remoteName}${profileName}",
   "window.titleBarStyle": "native",
   "window.titleSeparator": " ⠿ ",
   "apc.font.family": "SF Pro Display",
@@ -762,6 +762,15 @@
         },
         { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#26c567"}
+        },
+        { "scope": "text.jwt header",
+          "settings": {"foreground": "#c82829"}
+        },
+        { "scope": "text.jwt payload",
+          "settings": { "foreground": "#8959a8" }
+        },
+        { "scope": "text.jwt signature",
+          "settings": { "foreground": "#4271ae" }
         }
       ]
     },
@@ -892,6 +901,15 @@
         {
           "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#63d47b"}
+        },
+        { "scope": "text.jwt storage.header",
+          "settings": {"foreground": "#b294bb"}
+        },
+        { "scope": "text.jwt variable.payload",
+          "settings": { "foreground": "#cc6666" }
+        },
+        { "scope": "text.jwt string.signature",
+          "settings": { "foreground": "#81a2be" }
         }
       ]
     },
