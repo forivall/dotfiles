@@ -492,11 +492,19 @@
         "fontStyle": "bold"
       },
       "*.typeHint": {
+        "italic": true,
         "fontStyle": "italic"
       },
       "interface": {
+        "italic": true,
         "fontStyle": "italic"
-      }
+      },
+      "namespace": {
+        "italic": false,
+      },
+
+      "type": { "italic": true },
+      "typeParameter": { "italic": true },
     }
   },
   "editor.smoothScrolling": true,
@@ -763,13 +771,16 @@
         { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#26c567"}
         },
-        { "scope": "text.jwt header",
+        { "scope": "text.jwt meta.separator",
+          "settings": {"foreground": "#32807a"}
+        },
+        { "scope": "text.jwt storage.header",
           "settings": {"foreground": "#c82829"}
         },
-        { "scope": "text.jwt payload",
+        { "scope": "text.jwt variable.payload",
           "settings": { "foreground": "#8959a8" }
         },
-        { "scope": "text.jwt signature",
+        { "scope": "text.jwt string.signature",
           "settings": { "foreground": "#4271ae" }
         }
       ]
@@ -901,6 +912,9 @@
         {
           "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#63d47b"}
+        },
+        { "scope": "text.jwt meta.separator",
+          "settings": {"foreground": "#8abeb7"}
         },
         { "scope": "text.jwt storage.header",
           "settings": {"foreground": "#b294bb"}
@@ -1470,6 +1484,7 @@
   },
   "dance.modes": {
     "": {
+      "inheritFrom": null,
       "hiddenSelectionsIndicatorsDecoration": {
         "after": {
           "color": "$editorWarning.foreground",
@@ -1482,7 +1497,8 @@
         "borderStyle": "none",
         "borderWidth": "0",
         "isWholeLine": true,
-      }
+      },
+      "smartCase": true
     },
     "input": {
       "inheritFrom": "insert",
@@ -2156,7 +2172,8 @@
     "editor.fontLigatures": true
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.semanticHighlighting.enabled": "configuredByTheme"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -2956,6 +2973,8 @@
     "en_CA"
   ],
   "sqltools.highlightQuery": false,
+  "syntax.highlightTerms": [],
+  "syntax.highlightLanguages": [],
   "svelte.enable-ts-plugin": true,
   "svg.preview.background": "dark-transparent",
   "sync.autoUpload": true,
@@ -3187,5 +3206,7 @@
   "vscode_custom_css.imports": [
     "https://raw.githubusercontent.com/forivall/dotfiles/osx/vscode/customui.css"
   ],
-  "window.customTitleBarVisibility": "never"
+  "window.customTitleBarVisibility": "never",
+  "eslint.lintTask.options": ". --report-unused-disable-directives-severity warn",
+  "diffEditor.experimental.showMoves": true
 }
