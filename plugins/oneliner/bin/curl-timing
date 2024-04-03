@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+__zsh_oneliner_plugin_location=${0:A:h:h}
+
+curl --write-out "@${__zsh_oneliner_plugin_location}/etc/curl-timing-format.txt" $@

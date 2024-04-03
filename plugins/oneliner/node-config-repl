@@ -21,7 +21,7 @@ case $_arg in
   ;;
 esac
 done
-echo $nodeArgs
+
 node --experimental-repl-await -r ts-node/register -e "
 var fs = require('fs');
 var path = require('path');
@@ -32,7 +32,7 @@ while (__configDir && !fs.readdirSync(__configDir).includes('config')) {
 if (__configDir !== process.cwd()) {
   process.env.NODE_CONFIG_DIR = path.join(__configDir, 'config');
   console.log('\rNODE_CONFIG_DIR=' + process.env.NODE_CONFIG_DIR);
-  $($interactive && echo 'process.stdout.write('> ');')
+  $($interactive && echo "process.stdout.write('> ');")
 }
 ${(F)nodeEval}
 " "${nodeArgs[@]}"

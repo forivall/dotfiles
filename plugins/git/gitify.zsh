@@ -1,46 +1,34 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2299
 
-gitify_vscode_plugin() {
-  if git rev-parse --show-toplevel 2> /dev/null; then
+alias gitify_vscode_plugin=gitify_node_module
+
+gitify_node_module() {
+  if [[ $1 != --force ]] && git rev-parse --show-toplevel 2> /dev/null; then
     local ecode=$?
     echo already a git repo!
     return $ecode
   fi
   local remote repo owd
-  remote="$(jq -r '(.repository.url? // .repository)' package.json | sd '^git+http' http)"
+  remote="$(jq -r '(.repository.url? // .repository)' package.json | sd '^(remote-)?git\+http' http)"
   echo "$remote"
   repo=${${remote:t}%.git}
-  git clone "$remote" ~pubrepos/$repo || echo "~pubrepos/$repo" exists, using it... "(todo: check if it's the correct repo)"
+  rev=$(_gitify_node_module_get_rev)
+  echo $rev
+  if [[ -d ~pubrepos/$repo ]]; then
+    echo "~pubrepos/$repo" exists, using it... "(todo: check if it's the correct repo)"
+  else
+    git clone "$remote" ~pubrepos/$repo
+  fi
   owd=$PWD
   cd ~pubrepos/$repo
   mv $owd $owd.tmp
-  git worktree add $owd -b ${owd:t}
+  git worktree add $owd -b ${owd:t} $rev
   mv $owd/.git $owd.tmp
   command rm -r $owd
   mv $owd.tmp $owd
   cd -
   git checkout -- "${(@f)$(git diff --name-only --diff-filter=D)}"
-}
-
-# usage: cd node_modules; gitify_node_module ../../vidi-server ../../vidi-shop-server ...
-# or, even quicker: gitify_node_module ../../*
-gitify_node_module() {
-  local d; local m; local ad; #local others;
-  # others=()
-  [[ -d _tmp ]] && rmdir _tmp
-  for d in "$@" ; do       # for d in process.argv
-    ad="$(realpath "$d")"
-    m="${d##*/}";          #   m = _.last(d.split('/'))
-    if [[ -d $m ]]; then
-      if [[ ! -e $m/.git ]]; then  #   if fs.statSync(m).isDirectory() and not
-        (git-new-workdir "$d" _tmp "$(cd "$m"; _gitify_node_module_get_rev "$ad")" && mv _tmp/.git "$m" && rm -r _tmp) ||
-        ([[ -d _tmp ]] && mv _tmp/.git "$d.git")
-      else
-        echo "Skipping $m: already gitified"
-      fi
-    fi
-  done
 }
 
 # gitify_all() {
@@ -60,6 +48,10 @@ _gitify_node_module_get_rev() {
     fi
   fi
   [[ -z "$rev" || "$rev" == "null" ]] && [[ -f '.bower.json' ]] && rev="$(< .bower.json jq -r '._resolution.commit // ._release')"
-  [[ "$rev" == "null" ]] && return 1
-  echo "$rev"
+
+  if [[ "$rev" == "null" ]]; then
+    git tag -l $(jq -r .version package.json) | head -n1
+  else
+    echo "$rev"
+  fi
 }

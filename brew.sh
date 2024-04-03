@@ -190,3 +190,4 @@ brew install yt-dlp
 # comm -13 <(< brew.sh sd ' ' '\n' | huniq | sort) <(comm -13 <(brew deps --installed --installed | cut -d: -f2 | sd ' ' '\n' | huniq | sort) <(brew ls --formulae | sort))
 # mupdf: mesa
 # toilet: imlib2 libxi libcaca
+brew install dos2unix

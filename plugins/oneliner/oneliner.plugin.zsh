@@ -71,3 +71,4 @@ oneliner-list() {
 }
 
 [[ -n ${_comps[rg]} ]] && compdef rgp=rg
+[[ -n ${_comps[curl]} ]] && compdef curl-timing=curl

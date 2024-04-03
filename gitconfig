@@ -294,3 +294,5 @@
 	updateRefs = true
 [gui]
 	editor = vscode
+[column]
+	ui = auto
