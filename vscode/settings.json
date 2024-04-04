@@ -1403,7 +1403,7 @@
         "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                                      },
         "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                               },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
-        "j": { "text": "Open jumplist picker",                          "command": "???"                                                                      },
+        "j": { "text": "Open jumplist picker",                          "command": "bookmarksExplorer.focus"                                                                      },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
         "S": { "text": "Open workspace symbol picker",                  "command": "workbench.action.showAllSymbols"                                          },
         "d": { "text": "Open diagnostic picker",                        "command": "workbench.actions.view.problems"                                          },

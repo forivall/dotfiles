@@ -999,6 +999,11 @@
     "command": "-dance.history.repeat.edit",
     "when": "editorTextFocus && dance.mode == 'normal'"
   },
+  {
+    "key": "cmd+o",
+    "command": "file-browser.open",
+    "when": "!remoteFileDialogVisible && !inFileBrowser"
+  },
   // End.
 
 ]
