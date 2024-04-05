@@ -271,3 +271,8 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-split-view2>.monaco-scrollable-element>.split-view-container>.split-view-view>.part.auxiliarybar.basepanel.right {
   height: 100%;
 }
+.monaco-workbench.mac .debug-hover-widget .monaco-list-row .expression,
+.monaco-workbench.mac .debug-pane .monaco-list-row .expression {
+  font-size: 12.6px;
+  letter-spacing: -0.05ex;
+}

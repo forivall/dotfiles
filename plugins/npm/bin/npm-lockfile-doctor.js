@@ -8,7 +8,7 @@ const npmExecPath =
     })
     .trim()
 
-process.argv[2] = 'lockfile-doctor'
+process.argv.splice(2, 0, 'lockfile-doctor')
 
 const Module = require('module')
 const path = require('path')
@@ -136,6 +136,11 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
       }
     })(tree)
 
+    for (const packageName of tree.inventory.query('name')) {
+      const deduped = dedupeOrHoistPackage(tree, packageName, opts)
+      pruned.push(...deduped)
+    }
+
     const localNodes = new Set(
       /** @returns {Generator<import('@npmcli/arborist').Node>} */
       (function* iterLocalNodes(node) {
@@ -155,13 +160,20 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
         const { pkgid, location } = node
         arb.addTracker('fixintegrity', node.name, node.location)
         fixed.push(location)
-        const info = await pacote.manifest(pkgid, {
-          ...tree.meta.resolveOptions,
-          preferOffline: true,
-        })
-        node.resolved = info._resolved
-        node.integrity = info._integrity
-        node.package.deprecated = info.deprecated
+        let info
+        try {
+          info = await pacote.manifest(pkgid, {
+            ...tree.meta.resolveOptions,
+            preferOffline: true,
+          })
+        } catch (err) {
+          log.warn('pacote', err)
+        }
+        if (info) {
+          node.resolved = info._resolved
+          node.integrity = info._integrity
+          node.package.deprecated = info.deprecated
+        }
         arb.finishTracker('fixintegrity', node.name, node.location)
       }
       const nodePackage = node.package
@@ -199,6 +211,108 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
       }
     }
   }
+}
+
+/**
+ *
+ * @param {import('@npmcli/arborist').Node} tree
+ * @param {string} packageName
+ * @param {import('@npmcli/arborist').Options} options
+ * @returns
+ */
+function dedupeOrHoistPackage(tree, packageName, options) {
+  /** @type {Set<import('@npmcli/arborist').Node>} */
+  const nodeSet = tree.inventory.query('name', packageName)
+  if (1 >= nodeSet.size) {
+    const iterResult = nodeSet.values().next()
+    if (iterResult.done) {
+      return []
+    }
+    const node = iterResult.value
+    if (!node.resolveParent || !node.resolveParent.resolveParent) {
+      return []
+    }
+    log.info(
+      'hoist',
+      `${options.force ? 'hoisting' : 'could hoist'} ${
+        node.pkgid
+      } for ${packageName}`
+    )
+    if (options.force) {
+      node.parent = tree
+    }
+    return []
+  }
+  let rootDepNode
+  for (const node of nodeSet) {
+    if (!node.resolveParent || !node.resolveParent.resolveParent) {
+      rootDepNode = node
+      break
+    }
+  }
+  if (!rootDepNode) {
+    for (const node of nodeSet) {
+      if (!rootDepNode) {
+        rootDepNode = node
+      } else if (node.pkgid !== rootDepNode.pkgid) {
+        rootDepNode = undefined
+        break
+      }
+    }
+    if (rootDepNode) {
+      log.info('hoist', `hoisting ${rootDepNode.pkgid} for ${packageName}`)
+      rootDepNode.parent = tree
+    }
+  }
+  const pruned = []
+  if (rootDepNode) {
+    for (const node of nodeSet) {
+      if (node.canDedupe(options.preferDedupe)) {
+        for (const depNode of gatherDeps(
+          node,
+          (edge) => edge.to !== node && edge.valid
+        )) {
+          pruned.push(depNode.location)
+          depNode.parent = null
+        }
+      }
+    }
+  }
+  return pruned
+}
+
+/**
+ *
+ * @param {import('@npmcli/arborist').Node} node
+ * @param {(edge: import('@npmcli/arborist').Edge) => boolean} edgeFilter
+ * @returns
+ */
+function gatherDeps(node, edgeFilter) {
+  const deps = new Set([node])
+
+  for (const node of deps) {
+    for (const edge of node.edgesOut.values()) {
+      if (edge.to && edgeFilter(edge)) {
+        deps.add(edge.to)
+      }
+    }
+  }
+
+  let changed = true
+  while (changed && 0 < deps.size) {
+    changed = false
+    for (const dep of deps) {
+      for (const edge of dep.edgesIn) {
+        if (!deps.has(edge.from) && edgeFilter(edge)) {
+          changed = true
+          deps.delete(dep)
+          break
+        }
+      }
+    }
+  }
+
+  return deps
 }
 
 main().then(null, (error) => {

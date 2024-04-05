@@ -20,7 +20,7 @@ mkdir -p /tmp/mp4_to_gif/png
 filename=${fname//.mp4/.gif}
 
 printf 'Dimensions: '
-ffprobe -v 0 -of csv=s=x:p=0 -select_streams v:0 -show_entries stream=width,height Kapture\ 2023-02-13\ at\ 18.14.38.mp4
+ffprobe -v 0 -of csv=s=x:p=0 -select_streams v:0 -show_entries stream=width,height $fname
 printf 'Scale factor: ' ; read scale
 
 ffmpeg -i "$fname" -filter_complex "[0:v] palettegen" /tmp/mp4_to_gif/palette.png

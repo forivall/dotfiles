@@ -9,15 +9,28 @@ run() {
   $@
 }
 
+BUILD=false
+if (( $# > 0 )) && [[ $1 == build || $1 == b ]]; then
+  BUILD=true
+fi
+
+if [[ -f WORKSPACE ]] && run bazel info workspace ; then
+  if $BUILD; then
+    run bazel build //...
+  elif ${PREP_BAZEL_FETCH:-false}; then
+    run bazel fetch //...
+  fi
+fi
+
 if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
 then
   run corepack prepare
   run ${jsPackageManager%@*} install
 elif [[ -f yarn.lock ]]; then
-  run yarn
+  COREPACK_ENABLE_AUTO_PIN=0 run yarn
 elif [[ -f pnpm-lock.yaml ]]; then
-  run pnpm install
+  run pnpm install --filter .
 elif [[ -f bun.lockb ]]; then
   run bun install
 elif [[ -f package-lock.json ]]; then
@@ -39,11 +52,56 @@ elif [[ -f pyproject.toml ]]; then
 fi
 
 if [[ -f Cargo.toml ]]; then
-  run cargo build
+  if $BUILD; then
+    run cargo build
+  else
+    run cargo fetch
+  fi
 fi
 
 if [[ -f Podfile ]]; then
   run pod install
+fi
+
+if [[ -f conanfile.txt ]] || [[ -f conanfile.py ]]; then
+  run conan install
+elif [[ -f vcpkg.json ]]; then
+  run vcpkg install
+fi
+
+if [[ -f go.mod ]]; then
+  if $BUILD; then
+    run go build
+  else
+    run go mod download -x
+  fi
+fi
+
+if [[ -f pubspec.yaml ]]; then
+  run dart pub get
+fi
+
+if [[ -f CMakeLists.txt ]]; then
+  run cmake .
+fi
+
+if [[ -f meson.build ]]; then
+  run meson setup
+elif [[ -x ./configure ]]; then
+  run ./configure
+fi
+if [[ -f Makefile ]] && $BUILD; then
+  make
+fi
+
+if [[ -f pom.xml ]]; then
+  run mvn --help
+fi
+
+if [[ -f composer.json || -f composer.lock ]]; then
+  run php composer.phar install
+elif [[ -f phpkg.config.json ]]; then
+  run phpkg install
 fi
 
 if ! $wasrun; then

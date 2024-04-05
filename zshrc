@@ -244,6 +244,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/magic-cd"
   zgen load "$__zshrc_dirname/plugins/ngrok"
   zgen load "$__zshrc_dirname/plugins/npm"
+  zgen load "$__zshrc_dirname/plugins/pnpm"
   whence twilio > /dev/null && zgen load "$__zshrc_dirname/plugins/twilio"
 
   zgen load "$__zshrc_dirname/plugins/wttr"
@@ -262,6 +263,7 @@ if ! zgen saved; then
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
   zgen load gentslava/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
+  zgen load g-plane/pnpm-shell-completion
   whence direnv > /dev/null && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
   # zgen load dim-an/cod
