@@ -1367,8 +1367,8 @@
     "left-bracket-hx": {
       "title": "Left bracket",
       "items": {
-        "d": { "text": "Goto previous diagnostic",      "command": "editor.action.marker.prevInFiles"       },
-        "D": { "text": "Goto first diagnostic",         "command": "???"                                    },
+        "d": { "text": "Goto previous diagnostic",      "command": "editor.action.marker.prev"              },
+        "D": { "text": "Goto previous diagnostic (all)","command": "editor.action.marker.prevInFiles"       },
         "g": { "text": "Goto previous change",          "command": "workbench.action.editor.previousChange" },
         "G": { "text": "Goto first change",             "command": "???"                                    },
         "f": { "text": "Goto previous function",        "command": "dance.run", "args": [{ "commands": ["breadcrumbs.focusAndSelect", "list.focusUp", "list.select"] }] },
@@ -1383,8 +1383,8 @@
     "right-bracket-hx": {
       "title": "Right bracket",
       "items": {
-        "d": { "text": "Goto next diagnostic",      "command": "editor.action.marker.nextInFiles"   },
-        "D": { "text": "Goto last diagnostic",      "command": "???"                                },
+        "d": { "text": "Goto next diagnostic",      "command": "editor.action.marker.next"              },
+        "D": { "text": "Goto next diagnostic (all)","command": "editor.action.marker.nextInFiles"       },
         "g": { "text": "Goto next change",          "command": "workbench.action.editor.nextChange" },
         "G": { "text": "Goto last change",          "command": "???"                                },
         "f": { "text": "Goto next function",        "command": "dance.run", "args": [{ "commands": ["breadcrumbs.focusAndSelect", "list.focusDown", "list.select"] }] },
@@ -2034,7 +2034,7 @@
     }
   },
   "[css]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
+    "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[dart]": {
     "editor.rulers": [
@@ -3210,4 +3210,16 @@
   "window.customTitleBarVisibility": "never",
   "eslint.lintTask.options": ". --report-unused-disable-directives-severity warn",
   "diffEditor.experimental.showMoves": true
+  "symlink-follow.autoFollow": true,
+  "symlink-follow.showFileInExplorerAfterSymlinkFollow": true,
+  "gotoPackage.packageManagersList": [
+    {
+      "registry": "npm",
+      "file_to_search": "package.json",
+      "folder": "node_modules",
+      "regex": "(d|devD|peerD)ependencies\": {",
+      "pkg_name_regex": "\"(\\S*)\": ",
+      "showRemoveLink": false
+    }
+  ],
 }

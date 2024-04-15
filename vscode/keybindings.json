@@ -129,6 +129,8 @@
                                     "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'" },
   { "key": "shift+escape",          "command": "hideCodeActionWidget",
                                     "when": "codeActionMenuVisible" },
+  { "key": "shift+escape",          "command": "cloudcode.duetAI.rejectCompletion",
+                                    "when": "authLoggedIn && config.cloudcode.duetAI.enable && inlineSuggestionVisible" },
 
   // -- end of escape keybinds
   { "command":  "whichkey.show",                                           "key": "shift+cmd+i" },

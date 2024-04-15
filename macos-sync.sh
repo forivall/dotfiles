@@ -20,6 +20,9 @@ smerge_keymap=(  ./subl/merge      "$mu/$appsupport/Sublime Merge/Packages/User"
 subl_settings=(  ./subl/text       "$mu/$appsupport/Sublime Text 3/Packages/User" "*.sublime-settings")
 bat_themes=(     ./bat/themes      ~/.config/bat/themes                           "*")
 bat_config=(     ./bat             ~/.config/bat                                  config)
+lapce_config=(   ./config/lapce    ~/$appsupport/dev.lapce.Lapce-Stable           "*.toml")
+zed_config=(     ./config/zed      ~/.config/zed                                  "*.json")
+zed_themes=(     ./config/zed/themes ~/.config/zed/themes                         "*.json")
 
 entries=(
   vscode
@@ -29,6 +32,8 @@ entries=(
   subl_settings
   bat_themes
   bat_config
+  lapce_config
+  zed_config
 )
 
 for entry in $entries; do

@@ -115,8 +115,7 @@ brew install --cask sizzy
 brew install --cask spotify
 brew install --cask visual-studio-code
 brew install --cask sublime-merge sublime-text # sublime merge uses installed sublime text syntaxes
-brew install --cask iterm2 termhere
-brew install --cask contour
+brew install --cask iterm2 termhere contour
 
 brew install --cask karabiner-elements middleclick mos
 # brew install --cask mouse-fix linearmouse

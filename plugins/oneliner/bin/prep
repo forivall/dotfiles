@@ -47,8 +47,12 @@ if [[ -f pdm.lock ]]; then
 elif [[ -f poetry.lock ]]; then
   run poetry install
 elif [[ -f pyproject.toml ]]; then
-  echo unknown pyproject
-  exit 1
+  if tomlq -e '."build-system"."build-backend" == "hatchling.build"' pyproject.toml >/dev/null; then
+    run hatch status
+  else
+    echo unknown pyproject
+    exit 1
+  fi
 fi
 
 if [[ -f Cargo.toml ]]; then

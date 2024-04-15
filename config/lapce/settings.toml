@@ -1,0 +1,14 @@
+
+[core]
+modal = true
+custom-titlebar = false
+icon-theme = "Material Icons"
+color-theme = "Lapce Dark"
+
+[editor]
+font-family = "FantasqueSansM Nerd Font"
+line-height = 1.2
+tab-width = 2
+
+[ui]
+font-family = "Yantranamav"
