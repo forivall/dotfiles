@@ -184,8 +184,6 @@ function _qwt() {
       maintree=$tmp
       maintreebasename=${maintree:t}
       maintreedirname=${maintree:h}
-      echo maintreebasename=$maintreebasename
-      echo maintreedirname=$maintreedirname
     fi
     if [[ $tmp == $gittoplevel ]]; then continue; fi
     tmp=${tmp#$maintreedirname/}
