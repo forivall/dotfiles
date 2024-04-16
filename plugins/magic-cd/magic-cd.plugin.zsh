@@ -82,7 +82,7 @@ function _get_package_root() {
 }
 
 function _cd_to_file() {
-    if [[ -f "$1" ]]; then
+    if (( "$#" == 1 )) && [[ -f "$1" ]]; then
         builtin cd "$(dirname "$1")"
     else
         _next_cd "$@"
@@ -133,3 +133,78 @@ alias ..2="cd ..."
 alias ..3="cd ...."
 alias ..4="cd ....."
 alias ..5="cd ......"
+
+# quick worktree
+function qwt() {
+  local maintree gittoplevel
+  gittoplevel=$(_call_program toplevel git rev-parse --show-toplevel 2>/dev/null)
+  if maintree=$(git worktree list --porcelain | head -n1 | sd '^worktree ' '') ; then
+    if (( $# == 0 )) && [[ "$gittoplevel" != "$maintree" ]]; then
+      cd $maintree
+      return
+    fi
+    local name=${1:-pr}
+    local root=${maintree:h}/$name-worktrees/${maintree:t}
+    if [[ ! -d $root ]] ; then
+      local branch
+      if (( $#>=2 )); then
+        branch=$2
+      elif branch=$(git symbolic-ref HEAD --short) ; then
+        branch=$branch+$name
+      fi
+      if [[ -z $branch ]]; then
+        git worktree add $root --detach
+      else
+        git worktree add $root -b $branch ||
+        git worktree add $root $branch
+      fi
+    fi
+    local prefix="$(git rev-parse --show-prefix)"
+    while ! cd "$root/$prefix"; do prefix=${prefix:h}; [[ -z "$prefix" ]] && break; done;
+  else
+    echo 'not in git dir'
+  fi
+
+}
+
+function _qwt() {
+  local gittoplevel gittoplevelbasename maintree maintreebasename maintreedirname tmp ismain
+
+  gittoplevel=$(_call_program toplevel git rev-parse --show-toplevel 2>/dev/null)
+  gittoplevelbasename=${gittoplevel:t}
+
+  local -a records=( ${(ps.\n\n.)"$(_call_program directories git worktree list --porcelain)"} )
+  local -a directories descriptions
+  local i hash branch
+  ismain=true
+  for i in $records; do
+    tmp=${${i%%$'\n'*}#worktree }
+    if $ismain; then
+      ismain=false
+      maintree=$tmp
+      maintreebasename=${maintree:t}
+      maintreedirname=${maintree:h}
+      echo maintreebasename=$maintreebasename
+      echo maintreedirname=$maintreedirname
+    fi
+    if [[ $tmp == $gittoplevel ]]; then continue; fi
+    tmp=${tmp#$maintreedirname/}
+    tmp=${tmp%/$maintreebasename}
+    directories+=( ${tmp%-worktrees} )
+    hash=${${${"${(f)i}"[2]}#HEAD }[1,9]}
+    branch=${${"${(f)i}"[3]}#branch refs/heads/}
+
+    # Simulate the non-porcelain output
+    if [[ $branch == detached ]]; then
+      # TODO: show a ref that points at $hash here, like vcs_info does?
+      branch="(detached HEAD)"
+    else
+      branch="[$branch]"
+    fi
+
+    descriptions+=( "${directories[-1]}"$'\t'"$hash $branch" )
+  done
+  _wanted directories expl 'working tree' compadd -ld descriptions -S ' ' -f -M 'r:|/=* r:|=*' -a directories
+}
+
+compdef _qwt qwt
