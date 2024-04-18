@@ -134,8 +134,8 @@ alias ..3="cd ...."
 alias ..4="cd ....."
 alias ..5="cd ......"
 
-# quick worktree
-function qwt() {
+# change worktree
+function cwt() {
   local maintree gittoplevel
   gittoplevel=$(_call_program toplevel git rev-parse --show-toplevel 2>/dev/null)
   if maintree=$(git worktree list --porcelain | head -n1 | sd '^worktree ' '') ; then
@@ -167,7 +167,7 @@ function qwt() {
 
 }
 
-function _qwt() {
+function _cwt() {
   local gittoplevel gittoplevelbasename maintree maintreebasename maintreedirname tmp ismain
 
   gittoplevel=$(_call_program toplevel git rev-parse --show-toplevel 2>/dev/null)
@@ -205,4 +205,4 @@ function _qwt() {
   _wanted directories expl 'working tree' compadd -ld descriptions -S ' ' -f -M 'r:|/=* r:|=*' -a directories
 }
 
-compdef _qwt qwt
+compdef _cwt cwt
