@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Originally from https://gist.github.com/FradSer/de1ca0989a9d615bd15dc6eaf712eb93?permalink_comment_id=3649575#gistcomment-3649575
+
 import asyncio
 import iterm2
 
