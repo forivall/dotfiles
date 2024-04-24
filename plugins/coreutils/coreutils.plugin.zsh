@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh
-__coreutils__dirname=${0:A:h}
+__zsh_coreutils_plugin_location=${0:A:h}
+
+__zsh_coreutils_plugin_real_sl=$(whence -p sl)
+__fix_sl() {
+  path=($__zsh_coreutils_plugin_location/bin $path);
+  sd ' /[a-z/]+/sl' ' '$__zsh_coreutils_plugin_real_sl $__zsh_coreutils_plugin_location/bin/sl
+}
+
+path=($__zsh_coreutils_plugin_location/bin $path);
 
 # ls
 if whence exa > /dev/null ; then
@@ -95,7 +103,7 @@ elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ;
     # mutool draw -G 1.4 -I -o "${mantmp} (dark).pdf" "${mantmp}.pdf"
 
     # curl -OL https://github.com/acid1103/PDFInverter/releases/download/0.2.0/PDFInverter.jar
-    # java -jar $__coreutils__dirname/PDFInverter.jar "${mantmp}.pdf" "${mantmp} (dark).pdf" "#AAAAAA"
+    # java -jar $__zsh_coreutils_plugin_location/PDFInverter.jar "${mantmp}.pdf" "${mantmp} (dark).pdf" "#AAAAAA"
     ps2pdf "$mantmp"{.ps,.pdf}
     if type exiftool > /dev/null; then
       exiftool -quiet -Title="man $*" "${mantmp}.pdf"
