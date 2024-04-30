@@ -568,8 +568,9 @@
     "code": [
       "const _ = Context.current;",
       "Selections.updateWithFallbackByIndex((_i, selection) => {",
-      "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.active).line);",
-      "  let end = Positions.lineBreak(Selections.seekFrom(selection, Direction.Forward, selection.anchor).line);",
+      "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.start).line);",
+      "  let endSeek = Selections.seekFrom(selection, Direction.Forward, selection.end);",
+      "  let end = endSeek.character > 0 ? Positions.lineBreak(endSeek.line) : endSeek;",
       "  let sel1 = Selections.fromStartEnd(start, end);",
       "  let pos = Positions.lineStart(Lines.clamp(end.line + repetitions))",
       "  let sel2 = Selections.fromStartEnd(pos, pos);",
@@ -582,8 +583,9 @@
     "code": [
       "const _ = Context.current;",
       "Selections.updateWithFallbackByIndex((_i, selection) => {",
-      "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.active).line);",
-      "  let end = Positions.lineBreak(Selections.seekFrom(selection, Direction.Forward, selection.anchor).line);",
+      "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.start).line);",
+      "  let endSeek = Selections.seekFrom(selection, Direction.Forward, selection.end);",
+      "  let end = endSeek.character > 0 ? Positions.lineBreak(endSeek.line) : endSeek;",
       "  let sel1 = Selections.fromStartEnd(start, end);",
       "  let pos = Positions.lineStart(Lines.clamp(start.line - repetitions))",
       "  let sel2 = Selections.fromStartEnd(pos, pos);",
