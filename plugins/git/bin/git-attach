@@ -9,3 +9,5 @@ ref=${ref#heads/}
 ref=${ref#remotes/*/}
 echo '>' git checkout ${ref}
 git checkout ${ref}
+
+# TODO: fall back to `git for-each-ref --contains HEAD` and attach if it only contains one branch or one remote

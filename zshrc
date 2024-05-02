@@ -111,6 +111,8 @@ export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
 
+export DIRENV_WARN_TIMEOUT=1m
+
 # TODO: use https://github.com/Schniz/fnm instead?
 export TSC_NONPOLLING_WATCHER=true
 export WATCHMAN_CONFIG_FILE="${__zshrc_dirname}/config/watchman.json"

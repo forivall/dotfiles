@@ -166,8 +166,12 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
             ...tree.meta.resolveOptions,
             preferOffline: true,
           })
-        } catch (err) {
-          log.warn('pacote', err)
+        } catch (err1) {
+          try {
+            info = await pacote.manifest(pkgid, tree.meta.resolveOptions)
+          } catch (err) {
+            log.warn('pacote', err)
+          }
         }
         if (info) {
           node.resolved = info._resolved

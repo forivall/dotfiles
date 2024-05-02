@@ -12,12 +12,15 @@
   "buffer_font_size": 13.4,
   "buffer_font_family": "FantasqueSansM Nerd Font Mono",
   "ui_font_family": "SF Pro Display",
+  "format_on_save": "off",
   "theme": "One Dark",
+  "remove_trailing_whitespace_on_save": true,
   "buffer_line_height": "standard",
   "terminal": {
     "line_height": "standard",
     "shell": "system"
   },
+  "relative_line_numbers": true,
   "wrap_guides": [80],
   "experimental.theme_overrides": {
     "background": "#1d1f21",

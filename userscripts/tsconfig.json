@@ -1,8 +1,9 @@
 {
-  "extends": "./tsconfig.base.json",
-  "typeAcquisition": {"enable": true},
-  "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs"
-  }
+  "include": [],
+  "exclude": [],
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.bookmarklet.json" },
+    { "path": "./tsconfig.userscripts.json" }
+  ]
 }
