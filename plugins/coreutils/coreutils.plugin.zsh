@@ -10,12 +10,12 @@ __fix_sl() {
 path=($__zsh_coreutils_plugin_location/bin $path);
 
 # ls
-if whence exa > /dev/null ; then
-  alias ls="exa --group-directories-first -F --color=auto"
-  alias li="exa --group-directories-first -F --color=auto --icons"
-  alias ll="exa -alF --icons"
-  alias la="exa -a --icons"
-  alias l="exa -F"
+if whence eza > /dev/null ; then
+  alias ls="eza --group-directories-first -F --color=auto"
+  alias li="eza --group-directories-first -F --color=auto --icons"
+  alias ll="eza -alF --icons"
+  alias la="eza -a --icons"
+  alias l="eza -F"
 else
   alias ls="$(whence ls) --group-directories-first -F --color=auto --hide=\*~ "
   alias ll='ls -alF'
