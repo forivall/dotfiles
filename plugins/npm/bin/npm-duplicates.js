@@ -67,7 +67,7 @@ class Duplicates extends ArboristWorkspaceCmd {
       if (node.parent?.isRoot) {
         rootPkgs.set(node.name, node)
       }
-      if (!filteredOut) {
+      if (!filteredOut || this.npm.flatOptions.all) {
         pkgNodes.get(node.name)?.add(node) ??
           pkgNodes.set(node.name, new Set([node]))
       }
@@ -77,7 +77,9 @@ class Duplicates extends ArboristWorkspaceCmd {
     }
 
     const expls = []
-    for (const [pkg, nodes] of pkgNodes) {
+    const sortedEntries = Array.from(pkgNodes.entries())
+    sortedEntries.sort((a, b) => a[1].size - b[1].size)
+    for (const [pkg, nodes] of pkgNodes.entries()) {
       if (nodes.size <= 1) {
         continue
       }
@@ -87,6 +89,7 @@ class Duplicates extends ArboristWorkspaceCmd {
       for (const node of nodes) {
         const expl = (node === rootPkg && rootExpl) || this.explain(node)
         if (
+          this.npm.flatOptions.all ||
           !rootPkg?.package.version ||
           expl.dependents[SATISFIES_DEPENDENTS]((d) =>
             semver.satisfies(rootPkg.package.version, d.spec)
@@ -103,6 +106,12 @@ class Duplicates extends ArboristWorkspaceCmd {
         expls.push(...currentExpls)
       }
     }
+
+    expls.sort(
+      (a, b) =>
+        (pkgNodes.get(a.dependents[0].name)?.size ?? Number.MAX_SAFE_INTEGER) -
+        (pkgNodes.get(b.dependents[0].name)?.size ?? Number.MAX_SAFE_INTEGER)
+    )
 
     if (this.npm.flatOptions.json) {
       await this.npm.output(JSON.stringify(expls))
@@ -217,10 +226,12 @@ class Duplicates extends ArboristWorkspaceCmd {
       g[0].location,
       g
         .map((it) => it.dependent.location)
-        .map((l) => (l.startsWith('node_modules') ? l : this.npm.chalk.bold(l)))
+        .map((l) =>
+          l?.startsWith('node_modules') ? l : this.npm.chalk.bold(l)
+        )
         .join(' '),
     ])
-    const data = [header, ...rows]
+    let data = [header, ...rows]
     const widths = calculateMaximumColumnWidths(data)
     /**
      * @template T
@@ -232,8 +243,10 @@ class Duplicates extends ArboristWorkspaceCmd {
       columns[0].width = 16
       columns[0].wrapWord = true
     }
-    const space = widths.slice(0, -1).reduce((a, b) => a + b) + 4
     const lastColumn = header.length - 1
+    const space =
+      widths.slice(0, -1).reduce((a, b) => a + Math.min(80, b), 0) +
+      header.length
     columns[lastColumn].wrapWord = true
     const lastColAutoWidth = Math.max(80, process.stdout.columns) - space
     columns[lastColumn].width = Math.min(

@@ -1,0 +1,51 @@
+#!/usr/bin/env zsh
+
+local rawoid oid
+files=()
+pretty=()
+for i in {1..$#}; do
+_arg="${@[$i]}"
+case $_arg in
+  -b|-w|\
+  --color-moved|\
+  --color-words|\
+  --ignore-all-space|\
+  --ignore-blank-lines|\
+  --ignore-cr-at-eol|\
+  --ignore-space-at-eol|\
+  --ignore-space-change|\
+  --patience|\
+  --pretty)
+    pretty+=($_arg);
+    ;;
+  --cached)
+    revs+=(--cached)
+    ;;
+  --)
+    break
+    ;;
+  *)
+    if [[ -z $rawoid ]]; then
+      rawoid=$_arg
+    else
+      files+=($_arg)
+    fi
+esac
+done
+
+if [[ -z $rawoid ]] || (( ${#files} < 2 )); then
+  echo "Usage: git-diff-2way <oid-or-github-pr> <old-file> <new-file>"
+  return 1
+fi
+
+if oid=$(git rev-parse --verify --quiet ${rawoid}); then :
+elif oid=$(gh pr view ${rawoid} --json mergeCommit,potentialMergeCommit --jq '(.mergeCommit//.potentialMergeCommit).oid'); then :
+  rawoid=$oid
+else
+  echo 'Invalid oid or github pr number'
+  return 1
+fi
+
+oid=$(git rev-parse --verify --short $rawoid) || git fetch origin $rawoid && oid=$(git rev-parse --verify --short $rawoid)
+echo git diff $oid^1:${files[1]} $oid^2:${files[2]}
+git diff $oid^1:${files[1]} $oid^2:${files[2]}
