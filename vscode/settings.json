@@ -226,7 +226,6 @@
   "workbench.preferredHighContrastColorTheme": "Monochrome Dark Amplified (fork by dkamyshov)",
   "workbench.preferredHighContrastLightColorTheme": "Monochrome Light Amplified (fork by dkamyshov)",
   "workbench.preferredLightColorTheme": "Boxy Yesterday",
-  "workbench.productIconTheme": "material-product-icons",
   "workbench.quickOpen.closeOnFocusLost": true,
   "workbench.sash.size": 4,
   "workbench.settings.applyToAllProfiles": [
@@ -462,7 +461,7 @@
         "enumMember": { "foreground": "#d8d3d0" },
         "type": { "foreground": "#D8DAD9" },
         "method": { "foreground": "#81A2BE" },
-        "parameter": { "foreground": "#de8776" },
+        "parameter": { "foreground": "#ed8871" },
         "property": { "foreground": "#C5C8C6" },
         "property.declaration": { "foreground": "#D8DAD9" },
         "selfKeyword": { "foreground": "#c5717b" },
@@ -479,13 +478,14 @@
         "interface": { "foreground": "#b08a00" },
         "type": { "foreground": "#242423" },
         "method": { "foreground": "#4271AE" },
-        "parameter": { "foreground": "#c96d42" },
+        // "parameter": { "foreground": "#c26107" },
+        "parameter": { "foreground": "#ce6751" },
         "property": { "foreground": "#4d4d4c" },
         "property.declaration": { "foreground": "#242423" },
-        "selfKeyword": { "foreground": "#bf333f" },
-        "selfTypeKeyword": { "foreground": "#bf333f" },
+        "selfKeyword": { "foreground": "#c6282a" },
+        "selfTypeKeyword": { "foreground": "#c6282a" },
         "unresolvedReference": { "foreground": "#242423" },
-        "variable": { "foreground": "#c6282a" }
+        "variable": { "foreground": "#ad4b4d" }
       }
     },
     "rules": {
@@ -684,10 +684,10 @@
           }
         },
         { "scope": "variable.other property.declaration, entity.name.rust",
-          "settings": {"foreground": "#c82829"}
+          "settings": {"foreground": "#b55253"}
         },
         { "scope": "variable.language.self.rust",
-          "settings": {"foreground": "#bf333f", "fontStyle": ""}
+          "settings": {"foreground": "#c6282a", "fontStyle": ""}
         },
         { "scope": "meta.object-literal.key, variable.object.property",
           "settings": {"foreground": "#535352"}
@@ -1078,7 +1078,9 @@
   "settingsSync.ignoredSettings": [
     "apc.imports",
     "projectManager.git.baseFolders",
-    "workbench.colorTheme"
+    "workbench.colorTheme",
+    "cloudcode.duetAI.enable",
+    "cloudcode.duetAI.project"
   ],
   "terminal.explorerKind": "integrated",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
@@ -1400,10 +1402,11 @@
       "title": "Space",
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
-        "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                                      },
-        "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                               },
+        "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
+        "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                  },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
-        "j": { "text": "Open jumplist picker",                          "command": "bookmarksExplorer.focus"                                                                      },
+        "j": { "text": "Open jumplist picker",                          "command": "bookmarks.list"                                                           },
+        "J": { "text": "Open jumplist picker (all files)",              "command": "bookmarks.listFromAllFiles"                                               },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
         "S": { "text": "Open workspace symbol picker",                  "command": "workbench.action.showAllSymbols"                                          },
         "d": { "text": "Open diagnostic picker",                        "command": "workbench.actions.view.problems"                                          },
@@ -3175,6 +3178,19 @@
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": false,
+  "gotoPackage.packageManagersList": [
+    {
+      "registry": "npm",
+      "file_to_search": "package.json",
+      "folder": "node_modules",
+      "regex": "(d|devD|peerD)ependencies\": {",
+      "pkg_name_regex": "\"(\\S*)\": ",
+      "showRemoveLink": false
+    }
+  ],
+  "shell-syntax.defaultShell": "zsh",
+  "symlink-follow.autoFollow": true,
+  "symlink-follow.showFileInExplorerAfterSymlinkFollow": true,
   "testFileMaker.testFileName": "{FileName}.spec{FileNameExtention}",
   "testFileMaker.currentFilePathRoot": "./",
   "testFileMaker.importFileExports": "grouped",
@@ -3209,17 +3225,5 @@
   ],
   "window.customTitleBarVisibility": "never",
   "eslint.lintTask.options": ". --report-unused-disable-directives-severity warn",
-  "diffEditor.experimental.showMoves": true
-  "symlink-follow.autoFollow": true,
-  "symlink-follow.showFileInExplorerAfterSymlinkFollow": true,
-  "gotoPackage.packageManagersList": [
-    {
-      "registry": "npm",
-      "file_to_search": "package.json",
-      "folder": "node_modules",
-      "regex": "(d|devD|peerD)ependencies\": {",
-      "pkg_name_regex": "\"(\\S*)\": ",
-      "showRemoveLink": false
-    }
-  ],
+  "diffEditor.experimental.showMoves": true,
 }

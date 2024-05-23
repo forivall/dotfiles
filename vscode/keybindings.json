@@ -743,7 +743,11 @@
   { "key": "[", "command": "dance.openMenu", "args": { "menu": "left-bracket-hx",  "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "]", "command": "dance.openMenu", "args": { "menu": "right-bracket-hx", "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
-  { "key": "/",           "command": "dance.search",                 "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "/",           "command": "dance.run",                 "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": { "commands": [
+    [".run", { "code": "const r = Registers.get('/'), v = await r.get(); if (!v?.length || v.length === 1 && !v[0]) { r.set(v, ['(?i)']) }"}],
+    ".search"
+  ] }
+  },
   { "key": "shift+/",     "command": "dance.search.backward",        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "n",           "command": "dance.search.next",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+n",     "command": "dance.search.previous",        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -803,6 +807,9 @@
   { "key": "tab",    "command": "workbench.action.navigateForward", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+o", "command": "workbench.action.navigateBack",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+s", "command": "dance.selections.save",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+s", "command":  "dance.run",                       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": {
+    "commands": ["dance.selections.save", "bookmarks.toggle"],
+  }},
   { "key": "ctrl+shift+s", "command": "dance.selections.restore",   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "space",   "command": "dance.openMenu", "args": { "menu": "leader-hx", "pass": [{ "shift": "jump" }]                 }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select' || activeEditorGroupEmpty && !inputFocus" },
@@ -965,6 +972,7 @@
   // { "key": "ctrl+r", "command": "dance.edit.selectRegister-insert", "when": "editorTextFocus && dance.mode == 'insert'" },
 
   // { "key": "ctrl+s", "command": "???",             "when": "editorTextFocus && dance.mode == 'insert'" },
+  { "key": "ctrl+x", "command": "editor.action.triggerSuggest",  "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "ctrl+w", "command": "deleteWordLeft",  "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "alt+d",  "command": "deleteWordRight", "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "ctrl+u", "command": "deleteAllLeft",   "when": "editorTextFocus && dance.mode == 'insert'" },
