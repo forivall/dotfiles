@@ -1,5 +1,6 @@
 {
   "window.autoDetectColorScheme": true,
+  "window.customTitleBarVisibility": "never",
   "window.density.editorTabHeight": "compact",
   "window.dialogStyle": "custom",
   "window.nativeTabs": true,
@@ -42,7 +43,7 @@
   "terminal.integrated.fontWeight": 200,
   "terminal.integrated.fontWeightBold": 600,
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.activityBar.location": "top",
+  // "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "[Boxy Tomorrow]": {
       "activityBar.activeBorder": "#ffffffee",
@@ -230,6 +231,7 @@
   "workbench.sash.size": 4,
   "workbench.settings.applyToAllProfiles": [
     "window.autoDetectColorScheme",
+    "window.customTitleBarVisibility",
     "window.density.editorTabHeight",
     "window.dialogStyle",
     "window.nativeTabs",
@@ -3223,7 +3225,6 @@
   "vscode_custom_css.imports": [
     "https://raw.githubusercontent.com/forivall/dotfiles/osx/vscode/customui.css"
   ],
-  "window.customTitleBarVisibility": "never",
   "eslint.lintTask.options": ". --report-unused-disable-directives-severity warn",
   "diffEditor.experimental.showMoves": true,
 }
