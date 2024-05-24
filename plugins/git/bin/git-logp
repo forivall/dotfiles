@@ -15,6 +15,7 @@ showdiff=true
 forcediff=false
 namestatus=false
 follow=false
+maxcount=100
 
 dry=false
 navigate=${$(git config delta.navigate):-false}
@@ -46,6 +47,9 @@ case "$1" in
   --dry) dry=true; shift; continue; ;;
   --) dashdash=true; args+=("$1"); shift; continue; ;;
   --grep) args+=("$1" "$2"); shift; shift; continue; ;;
+  --max-count) maxcount="$2"; shift; shift; continue; ;;
+  --max-count=*) maxcount="${1#--max-count=}"; shift; continue; ;;
+  --no-max-count) maxcount=0; shift; continue; ;;
   --follow) follow=true ;&
   *)
     args+=("$1")
@@ -57,15 +61,20 @@ esac
 break;
 done
 
+maxcountargs=()
+if (( maxcount > 0 )); then
+  maxcountargs=("--max-count=$maxcount")
+fi
+
 if $reflog; then
-  refspecs="$(git reflog --pretty=format:%gd --max-count=100 "${args[@]}")"
+  refspecs="$(git reflog --pretty=format:%gd "${maxcountargs[@]}" "${args[@]}")"
 else
-  refspecs="$(git log --pretty=%h --max-count=100 "${args[@]}")"
+  refspecs="$(git log --pretty=%h "${maxcountargs[@]}" "${args[@]}")"
 fi
 
 dashdash=''
 if $follow; then
-  local followfiles=($(git log --name-only --relative --format= --follow $fileargs| huniq))
+  local followfiles=($(git log --name-only --relative --format= --follow "${args[@]}"| huniq))
   dashdash="$followfiles "
   echo $dashdash
 elif ! $allfiles; then
