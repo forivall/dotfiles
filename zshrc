@@ -30,6 +30,7 @@ if $IS_OSX ; then
   elif [[ -x /usr/local/opt/bin/brew ]]; then
     HOMEBREW_PREFIX="/usr/local/opt"
   fi
+  HOMEBREW_BUNDLE_FILE=${__zshrc_dirname}/Brewfile
 
   if [[ -n "$HOMEBREW_PREFIX" ]]; then
     path=(
