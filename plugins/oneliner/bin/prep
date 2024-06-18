@@ -5,7 +5,12 @@ set -euo pipefail
 wasrun=false
 run() {
   wasrun=true
-  echo '>' $@
+
+  printf '\e]133;A\a'
+  printf '\e[2m%s\e[22m %s ' 'prep' '>'
+  printf '\e]133;B\a'
+  echo $@
+  printf '\e]133;C\a'
   $@
 }
 

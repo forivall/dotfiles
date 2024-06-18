@@ -1,0 +1,1 @@
+local B=$(git branch --show-current) && git switch --detach HEAD && git branch -d $B

@@ -209,6 +209,11 @@
   "workbench.colorTheme": "Boxy Tomorrow",
   // "workbench.settings.useSplitJSON": true
   "workbench.editor.centeredLayoutAutoResize": true,
+  "workbench.editor.customLabels.patterns": {
+    "**/project.json": "project ‹${dirname}› .json",
+    "**/package.json": "package ‹${dirname}› .json",
+    "**/tsconfig.json": "tsconfig ‹${dirname}› .json",
+  },
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.perEditorGroup": true,
@@ -461,15 +466,16 @@
       "rules": {
         "builtinType": { "foreground": "#b294bb" },
         "enumMember": { "foreground": "#d8d3d0" },
+        // "interface": { "foreground": "#F0C674" },
         "type": { "foreground": "#D8DAD9" },
         "method": { "foreground": "#81A2BE" },
         "parameter": { "foreground": "#ed8871" },
         "property": { "foreground": "#C5C8C6" },
         "property.declaration": { "foreground": "#D8DAD9" },
-        "selfKeyword": { "foreground": "#c5717b" },
-        "selfTypeKeyword": { "foreground": "#c5717b" },
+        "selfKeyword": { "foreground": "#CC6666" },
+        "selfTypeKeyword": { "foreground": "#CC6666" },
         "unresolvedReference": { "foreground": "#D8DAD9" },
-        "variable": { "foreground": "#CC6666" }
+        "variable": { "foreground": "#de6e6e" }
       }
     },
     "[Boxy Yesterday]": {
@@ -828,7 +834,7 @@
         // personalizations
         {
           "scope": "variable.other property.declaration, entity.name.rust",
-          "settings": {"foreground": "#CC6666"}
+          "settings": {"foreground": "#de6e6e"}
         },
         {
           "scope": "meta.object-literal.key, variable.object.property",
@@ -970,7 +976,7 @@
         // personalizations
         {
           "scope": "variable.other property.declaration",
-          "settings": {"foreground": "#CC6666"}
+          "settings": {"foreground": "#de6e6e"}
         },
         {
           "scope": "meta.object-literal.key, variable.object.property",
@@ -1108,36 +1114,36 @@
   "activitusbar.priority": 200000,
   "activitusbar.searchViewInPanel": true,
   "activitusbar.views": [
-    {
-      "name": "command.workbench.action.toggleActivityBarVisibility",
-      "codicon": "layout-activitybar-right",
-      "tooltip": "Activity Bar (⇧⌘F9)"
-    },
-    {
-      "name": "explorer",
-      "codicon": "explorer-view-icon",
-      "tooltip": "Explorer (⇧⌘E)"
-    },
-    {
-      "name": "debug",
-      "codicon": "run-view-icon",
-      "tooltip": "Run and Debug (⌥⌘D)"
-    },
-    {
-      "name": "scm",
-      "codicon": "source-control-view-icon",
-      "tooltip": "Source Control (⌃⇧G)"
-    },
-    {
-      "name": "pr:github",
-      "codicon": "github",
-      "tooltip": "Github (⌃⇧H)"
-    },
-    {
-      "name": "extensions",
-      "codicon": "extensions-view-icon",
-      "tooltip": "Extensions (⇧⌘X)"
-    },
+    // {
+    //   "name": "command.workbench.action.toggleActivityBarVisibility",
+    //   "codicon": "layout-activitybar-right",
+    //   "tooltip": "Activity Bar (⇧⌘F9)"
+    // },
+    // {
+    //   "name": "explorer",
+    //   "codicon": "explorer-view-icon",
+    //   "tooltip": "Explorer (⇧⌘E)"
+    // },
+    // {
+    //   "name": "debug",
+    //   "codicon": "run-view-icon",
+    //   "tooltip": "Run and Debug (⌥⌘D)"
+    // },
+    // {
+    //   "name": "scm",
+    //   "codicon": "source-control-view-icon",
+    //   "tooltip": "Source Control (⌃⇧G)"
+    // },
+    // {
+    //   "name": "pr:github",
+    //   "codicon": "github",
+    //   "tooltip": "Github (⌃⇧H)"
+    // },
+    // {
+    //   "name": "extensions",
+    //   "codicon": "extensions-view-icon",
+    //   "tooltip": "Extensions (⇧⌘X)"
+    // },
     {
       "codicon": "auxiliarybar-left-layout-icon",
       "name": "command.workbench.action.toggleSidebarVisibility",
@@ -1337,6 +1343,8 @@
         "?": { "text": "Reverse search for regex pattern", "command": "dance.search.backward" },
         "n": { "text": "Select next search match",         "command": "dance.search.next"     },
         "N": { "text": "Select previous search match",     "command": "dance.search.previous" },
+        "[": { "text": "Unfold", "command": "editor.unfold"},
+        "]": { "text": "Fold", "command": "editor.fold"},
       },
     },
     "window-hx": {
@@ -1411,6 +1419,7 @@
         "J": { "text": "Open jumplist picker (all files)",              "command": "bookmarks.listFromAllFiles"                                               },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
         "S": { "text": "Open workspace symbol picker",                  "command": "workbench.action.showAllSymbols"                                          },
+        "o": { "text": "Focus outline",                                 "command": "outline.focus"},
         "d": { "text": "Open diagnostic picker",                        "command": "workbench.actions.view.problems"                                          },
         "D": { "text": "Open workspace diagnostic picker",              "command": "???"                                                                      },
         "a": { "text": "Perform code action",                           "command": "editor.action.quickFix"                                                   },
@@ -1423,7 +1432,7 @@
         "P": { "text": "Paste clipboard before selections",             "command": "dance.edit.insert", "args": [{ "handleNewLine": true, "where": "start" }] },
         "R": { "text": "Replace selections by clipboard content",       "command": "dance.edit.insert", "args": [{ "register": "dquote" }]                    },
         "/": { "text": "Global search in workspace folder",             "command": "search.action.openEditor"                                                 },
-        "k": { "text": "Show docs for item under cursor",               "command": "editor.action.showHover"                                                  },
+        "k": { "text": "Show docs for item under cursor",               "command": "dance.run", "args": [{ "commands": ["editor.action.showHover", "editor.action.showHover"]}] },
         "r": { "text": "Rename symbol",                                 "command": "editor.action.rename"                                                     },
         "h": { "text": "Select symbol references",                      "command": "dance.run", "args": [{ "commands": ["editor.action.selectHighlights", ".select.left.extend"] }] },
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
@@ -1553,6 +1562,11 @@
     },
   },
   "whichkey.bindingOverrides": [
+    { "keys": [" "],
+      "type": "command",
+      "name": "hx space",
+      "command": "dance.openMenu", "args": { "menu": "leader-hx", "pass": [{ "shift": "jump" }] }
+    },
     { "keys": ">", "command": "whichkey.repeatRecent",
       "name": "Show recent commands",
       "type": "command"
@@ -1702,6 +1716,15 @@
     { "keys": "g.w", "command": "git-worktrees.worktree.list",
       "name": "List/Switch Worktrees",
       "type": "command"
+    },
+    { "keys": "g.g", "name": "magit status", "type": "command",
+      "command": "magit.status"
+    },
+    { "keys": "g.F", "name": "magit file popup", "type": "command",
+      "command": "magit.file-popup"
+    },
+    { "keys": "g.G", "name": "magit dispatch", "type": "command",
+      "command": "magit.dispatch"
     },
     { "keys": "g.J", "name": "Next File", "type": "commands",
       "commands": [
@@ -1908,30 +1931,30 @@
       "name": "Search Editor: Open New Search Editor",
       "type": "command"
     },
-    { "keys": "S.e", "command": "activitusbar.showExplorerView",
-      "name": "Show explorer",
-      "type": "command"
-    },
-    { "keys": "S.D", "command": "activitusbar.showDebugView",
-      "name": "Show debug view",
-      "type": "command"
-    },
-    { "keys": "S.g", "command": "activitusbar.showScmView",
-      "name": "Show source control",
-      "type": "command"
-    },
-    { "keys": "S.t", "command": "activitusbar.showExtension.testView",
-      "name": "Show test",
-      "type": "command"
-    },
-    { "keys": "S.h", "command": "activitusbar.showExtension.github-pull-requestsView",
-      "name": "Show github",
-      "type": "command"
-    },
-    { "keys": "S.x", "command": "activitusbar.showExtensionsView",
-      "name": "Show extensions",
-      "type": "command"
-    },
+    // { "keys": "S.e", "command": "activitusbar.showExplorerView",
+    //   "name": "Show explorer",
+    //   "type": "command"
+    // },
+    // { "keys": "S.D", "command": "activitusbar.showDebugView",
+    //   "name": "Show debug view",
+    //   "type": "command"
+    // },
+    // { "keys": "S.g", "command": "activitusbar.showScmView",
+    //   "name": "Show source control",
+    //   "type": "command"
+    // },
+    // { "keys": "S.t", "command": "activitusbar.showExtension.testView",
+    //   "name": "Show test",
+    //   "type": "command"
+    // },
+    // { "keys": "S.h", "command": "activitusbar.showExtension.github-pull-requestsView",
+    //   "name": "Show github",
+    //   "type": "command"
+    // },
+    // { "keys": "S.x", "command": "activitusbar.showExtensionsView",
+    //   "name": "Show extensions",
+    //   "type": "command"
+    // },
     { "keys": "S.,", "command": "workbench.action.openSettings",
       "name": "Show settings",
       "type": "command"
@@ -3010,7 +3033,7 @@
     "UNTRACKED_FILES_STORAGE": null,
     "VISUAL": null
   },
-  "terminal.integrated.gpuAcceleration": "canvas",
+  "terminal.integrated.gpuAcceleration": "auto",
   "testExplorer.codeLens": false,
   "tfvc.location": "/usr/local/bin/tf",
   "thunder-client.showActivityFromCollection": true,
@@ -3218,6 +3241,7 @@
   "betterFolding.excludedLanguages": [
     "javascript", "typescript"
   ],
+  "accessibility.voice.autoSynthesize": true,
   "accessibility.signals.terminalBell": {
     "sound": "on"
   },
@@ -3227,4 +3251,8 @@
   ],
   "eslint.lintTask.options": ". --report-unused-disable-directives-severity warn",
   "diffEditor.experimental.showMoves": true,
+  "cloudcode.duetAI.inlineSuggestions.enableAuto": false,
+  "eslint.run": "onSave",
+  "interactiveWindow.executeWithShiftEnter": true,
+  "debugpy.debugJustMyCode": false,
 }

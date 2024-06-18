@@ -46,6 +46,7 @@ else
   return 1
 fi
 
-oid=$(git rev-parse --verify --short $rawoid) || git fetch origin $rawoid && oid=$(git rev-parse --verify --short $rawoid)
+git show --no-patch --format='' $rawoid || git fetch origin $rawoid
+oid=$(git rev-parse --verify --short $rawoid)
 echo git diff $oid^1:${files[1]} $oid^2:${files[2]}
 git diff $oid^1:${files[1]} $oid^2:${files[2]}

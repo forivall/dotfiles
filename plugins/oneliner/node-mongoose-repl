@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-node --experimental-repl-await -r ts-node/register -i -e "
+node --experimental-repl-await -r ts-node/register $@ -i -e "
 var fs = require('fs');
 var path = require('path');
 var __configDir = process.cwd();

@@ -1,0 +1,1 @@
+dust $(node -p 'require("ignore")().add(fs.readFileSync(".gitignore", "utf8"))._rules.map((r) => "-v " + r.regex.source.replace(/^\^/, "").replace("(?=$|\\/$)", "").replace("\\/$", "")).join("\n")') -X .git $@

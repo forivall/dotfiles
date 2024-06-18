@@ -67,13 +67,8 @@ HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
 tabs -2
 
-# bindkey -M emacs "^\`" _complete_help
 
 zmodload -i zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
@@ -127,7 +122,12 @@ zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # fuzzy completion
-zstyle ':completion:*' completer _prefix _expand_alias _complete _correct _approximate
+
+if $ENABLE_AUTOCOMPLETE; then
+  zstyle ':completion:*' completer _prefix _complete _correct _approximate
+else
+  zstyle ':completion:*' completer _prefix _expand_alias _complete _correct _approximate
+fi
 zstyle ':completion:*:correct:::' max-errors 2 not-numeric
 zstyle ':completion:*' matcher-list 'r:|?=**'
 zstyle ':completion:*:approximate:::' max-errors 2 numeric
@@ -135,8 +135,12 @@ zstyle ':completion:*:complete:*:*:*' matcher-list '' 'm:{a-z}={A-Z}'
 zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' list-suffixes true
 # zstyle ':autocomplete:list-choices:*' max-lines 40%
-zstyle ':autocomplete:list-choices:*' max-lines 24
+zstyle ':autocomplete:list-choices:*' max-lines 18
+zstyle ':autocomplete:history-search-backward:*' list-lines 2000
 zstyle ':autocomplete:tab:*' completion select
+zstyle ':autocomplete:*' min-input 3
+zstyle ':autocomplete:*' delay 0.1
+zstyle ':autocomplete:tab:*' widget-style menu-select
 
 # pure prompt settings
 PURE_HIGHLIGHT_REPO=1
@@ -159,32 +163,33 @@ path=(
 
 unset sourceIfExists
 
-autoload -Uz bashcompinit && bashcompinit
-autoload -Uz compinit && compinit -i
-
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
-# https://gist.github.com/ctechols/ca1035271ad134841284
-# shellcheck disable=SC1036,SC1088
-DO_COMPDUMP=false
-() {
-  setopt extendedglob local_options
+ENABLE_AUTOCOMPLETE=false
 
-  if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-    DO_COMPDUMP=true
-  else
-    # echo nocache
-    compinit -C
-  fi
-}
+DO_COMPDUMP=false
+if ! $ENABLE_AUTOCOMPLETE; then
+  autoload -Uz bashcompinit && bashcompinit
+  autoload -Uz compinit && compinit -i
+  # https://gist.github.com/ctechols/ca1035271ad134841284
+  # shellcheck disable=SC1036,SC1088
+  () {
+    setopt extendedglob local_options
+
+    if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+      compinit
+      DO_COMPDUMP=true
+    else
+      # echo nocache
+      compinit -C
+    fi
+  }
+fi
 
 source "$__zshrc_dirname/zgen/zgenom.zsh"
 alias zgen=zgenom
 if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zsh-users/zsh-autosuggestions
-  # zgen load marlonrichert/zsh-autocomplete
 
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
 
@@ -195,7 +200,7 @@ if ! zgen saved; then
   zgen ohmyzsh plugins/colorize
   zgen ohmyzsh plugins/cp
   zgen ohmyzsh plugins/git-extras
-  zgen ohmyzsh plugins/docker
+  # zgen ohmyzsh plugins/docker
   zgen ohmyzsh plugins/docker-compose
   # zgen ohmyzsh plugins/npm
   [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
@@ -205,22 +210,30 @@ if ! zgen saved; then
   # zgen ohmyzsh plugins/pyenv
   whence kubectl > /dev/null && zgen ohmyzsh plugins/kubectl
   # zgen ohmyzsh plugins/jump
+  # zgen ohmyzsh encode64
+
+  zgenom load unixorn/fzf-zsh-plugin
+  zgen load atuinsh/atuin
+  zgen load zsh-users/zsh-autosuggestions
+  if $ENABLE_AUTOCOMPLETE; then
+    zgen load marlonrichert/zsh-autocomplete
+  else
+    zgen load zsh-users/zsh-history-substring-search
+    zgen load "$__zshrc_dirname/plugins/simple-history-search"
+  fi
 
   zgen load srijanshetty/zsh-pandoc-completion /
 
   zgen load "$__zshrc_dirname/plugins/jump"
-  # zgen ohmyzsh encode64
   ! $IS_WINDOWS && zgen load mafredri/zsh-async / main
   # ! $IS_WINDOWS && zgen load sindresorhus/pure
   ! $IS_WINDOWS && zgen load forivall/pure / underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure / underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
-  zgen load zsh-users/zsh-history-substring-search
   # zgen load deliciousinsights/git-stree
 
   ! $IS_WINDOWS && zgen load forivall/zsh-nvm
   zgen load "$__zshrc_dirname/plugins/nvm"
-  zgenom load unixorn/fzf-zsh-plugin
   # zgen load forivall/zsh-yarn-autocompletions / main
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
   # zgen load jocelynmallon/zshimarks
@@ -229,6 +242,7 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-functions"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-sudo"
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/iterm2"
+
 
   zgen load "$__zshrc_dirname/plugins/oneliner"
   zgen load "$__zshrc_dirname/plugins/external-tools"
@@ -257,7 +271,6 @@ if ! zgen saved; then
   # zgen load "$__zshrc_dirname/plugins/subl"
   zgen load "$__zshrc_dirname/plugins/trash"
   zgen load "$__zshrc_dirname/plugins/unsorted"
-  zgen load "$__zshrc_dirname/plugins/simple-history-search"
   zgen load "$__zshrc_dirname/plugins/zgen-zplug"
   # zgen load "$__zshrc_dirname/plugins/zgen-autoupdate" # TODO: figure out why this is slooooow!
 
@@ -290,6 +303,12 @@ fi
 unsetopt nomatch
 # from ohmyzsh web-search. github is from github desktop.
 [[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
+
+# bindkey -M emacs "^\`" _complete_help
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 # TODO: move to a vscode plugin
 if [[ "$VSCODE_CLI" == 1 ]] ; then

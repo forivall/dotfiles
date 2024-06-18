@@ -5,9 +5,9 @@ set -euo pipefail
 revs=($(git rev-parse --revs-only --symbolic-full-name "$@"))
 if (( ${#revs} > 0 )); then
   ups=()
-  for rev in $revs
+  for rev in $revs; do
     ups+=(${rev#refs/heads/}@{u})
-  fi
+  done
   git log HEAD ${ups[@]} "$@"
 elif git symbolic-ref -q HEAD >/dev/null; then
   exec git log HEAD @{u} "$@"
