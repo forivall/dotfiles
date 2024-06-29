@@ -191,3 +191,4 @@ brew install yt-dlp
 # mupdf: mesa
 # toilet: imlib2 libxi libcaca
 brew install dos2unix
+brew install nnn

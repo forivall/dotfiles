@@ -1348,7 +1348,7 @@
       },
     },
     "window-hx": {
-      "title": "View",
+      "title": "Window",
       "items": {
         "w": { "text": "Goto next window",                              "command": "workbench.action.focusNextGroup"                       },
         "s": { "text": "Horizontal bottom split",                       "command": "workbench.action.splitEditorDown"                      },
@@ -1362,10 +1362,10 @@
         "j": { "text": "Jump to the split below",                       "command": "workbench.action.focusBelowGroup"                      },
         "k": { "text": "Jump to the split above",                       "command": "workbench.action.focusAboveGroup"                      },
         "l": { "text": "Jump to the split to the right",                "command": "workbench.action.focusRightGroup"                      },
-        "L": { "text": "Swap with the split to the right",              "command": "workbench.action.moveActiveEditorGroupRight"           },
-        "K": { "text": "Swap with the split above",                     "command": "workbench.action.moveActiveEditorGroupUp"              },
-        "H": { "text": "Swap with the split to the left",               "command": "workbench.action.moveActiveEditorGroupLeft"            },
-        "J": { "text": "Swap with the split below",                     "command": "workbench.action.moveActiveEditorGroupDown"            },
+        "L": { "text": "Move editor into the right group",              "command": "workbench.action.moveEditorToRightGroup"           },
+        "K": { "text": "Move editor into the above group",              "command": "workbench.action.moveEditorToAboveGroup"              },
+        "H": { "text": "Move editor into the left group",               "command": "workbench.action.moveEditorToLeftGroup"            },
+        "J": { "text": "Move editor into the below group",              "command": "workbench.action.moveEditorToBelowGroup"            },
         "n": { "text": "New split scratch buffer",                      "command": "dance.openMenu", "args": [{ "menu": "new-window-hx" }] },
       },
     },
@@ -1376,6 +1376,27 @@
         "v": { "text": "Vertical right split scratch buffer",    "command": "dance.run", "args": [{ "commands": ["workbench.action.splitEditorRight", "workbench.action.files.newUntitledFile"] }] },
       },
     },
+    "test-hx": {
+      "title": "Test",
+      "items": {
+        "x": { "text": "Cancel Run",                  "command": "testing.cancelRun" },
+        "A": { "text": "Debug all",                   "command": "testing.debugAll" },
+        "C": { "text": "Debug tests at cursor",       "command": "testing.debugAtCursor" },
+        "F": { "text": "Debug tests in current file", "command": "testing.debugCurrentFile" },
+        "E": { "text": "Debug fail tests",            "command": "testing.debugFailTests" },
+        "L": { "text": "Debug last run",              "command": "testing.debugLastRun" },
+        "M": { "text": "Open output peek",            "command": "testing.openOutputPeek" },
+        "e": { "text": "Re run fail tests",           "command": "testing.reRunFailTests" },
+        "l": { "text": "Re run last run",             "command": "testing.reRunLastRun" },
+        "r": { "text": "Refresh tests",               "command": "testing.refreshTests" },
+        "a": { "text": "Run all",                     "command": "testing.runAll" },
+        "c": { "text": "Run at cursor",               "command": "testing.runAtCursor" },
+        "f": { "text": "Run current file",            "command": "testing.runCurrentFile" },
+        "o": { "text": "Show most recent output",     "command": "testing.showMostRecentOutput" },
+        "I": { "text": "Toggle inline coverage",      "command": "testing.toggleInlineCoverage" },
+        "i": { "text": "Toggle inline test output",   "command": "testing.toggleInlineTestOutput" },
+      },
+    },
     "left-bracket-hx": {
       "title": "Left bracket",
       "items": {
@@ -1383,7 +1404,16 @@
         "D": { "text": "Goto previous diagnostic (all)","command": "editor.action.marker.prevInFiles"       },
         "g": { "text": "Goto previous change",          "command": "workbench.action.editor.previousChange" },
         "G": { "text": "Goto first change",             "command": "???"                                    },
-        "f": { "text": "Goto previous function",        "command": "dance.run", "args": [{ "commands": ["breadcrumbs.focusAndSelect", "list.focusUp", "list.select"] }] },
+        "f": { "text": "Goto previous function",        "command": "dance.run", "args": [{
+          "code": [
+            "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
+            "let n = Math.max(count, 1);",
+            "await vscode.commands.executeCommand('breadcrumbs.focusAndSelect');",
+            "for (let i = 0; i < n; i++) { await vscode.commands.executeCommand('list.focusUp') }",
+            "await vscode.commands.executeCommand('list.select');",
+          ],
+          // "commands": ["breadcrumbs.focusAndSelect", "list.focusUp", "list.select"]
+        }] },
         "t": { "text": "Goto previous type definition", "command": "???"                                    },
         "a": { "text": "Goto previous parameter",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.argument.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "c": { "text": "Goto previous comment",         "command": "???"                                    },
@@ -1399,7 +1429,16 @@
         "D": { "text": "Goto next diagnostic (all)","command": "editor.action.marker.nextInFiles"       },
         "g": { "text": "Goto next change",          "command": "workbench.action.editor.nextChange" },
         "G": { "text": "Goto last change",          "command": "???"                                },
-        "f": { "text": "Goto next function",        "command": "dance.run", "args": [{ "commands": ["breadcrumbs.focusAndSelect", "list.focusDown", "list.select"] }] },
+        "f": { "text": "Goto next function",        "command": "dance.run", "args": [{
+          "code": [
+            "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
+            "let n = Math.max(count, 1);",
+            "await vscode.commands.executeCommand('breadcrumbs.focusAndSelect');",
+            "for (let i = 0; i < n; i++) { await vscode.commands.executeCommand('list.focusDown') }",
+            "await vscode.commands.executeCommand('list.select');",
+          ],
+          // "commands": ["breadcrumbs.focusAndSelect", "list.focusDown", "list.select"]
+        }] },
         "t": { "text": "Goto next type definition", "command": "???"                                },
         "a": { "text": "Goto next parameter",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.argument.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "c": { "text": "Goto next comment",         "command": "???"                                },
@@ -1425,6 +1464,7 @@
         "a": { "text": "Perform code action",                           "command": "editor.action.quickFix"                                                   },
         "'": { "text": "Open last picker",                              "command": "???"                                                                      },
         "g": { "text": "Debug",                                         "command": "dance.openMenu", "args": [{ "menu": "debug-hx", "locked": true }]         },
+        "t": { "text": "Test",                                          "command": "dance.openMenu", "args": [{ "menu": "test-hx" }]},
         "w": { "text": "Window",                                        "command": "dance.openMenu", "args": [{ "menu": "window-hx" }]                        },
         "y": { "text": "Join and yank selections to clipboard",         "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "Y": { "text": "Yank main selection to clipboard",              "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
@@ -3255,4 +3295,5 @@
   "eslint.run": "onSave",
   "interactiveWindow.executeWithShiftEnter": true,
   "debugpy.debugJustMyCode": false,
+  "application.shellEnvironmentResolutionTimeout": 30,
 }
