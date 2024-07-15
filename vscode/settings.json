@@ -751,13 +751,13 @@
             "foreground": "#718c00"
           }
         },
+        { "scope": "constant.character.escape",
+          "settings": {"foreground": "#cea463"}
+        },
         // // regex
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
         { "scope": "string.regexp",
           "settings": {"foreground": "#718c00"}
-        },
-        { "scope": "string.regexp constant.character.escape, meta.embedded.block.js_regexp string.js.taggedTemplate.commentTaggedTemplate.js_regexp constant.character.escape, constant.character.escape, string.js.taggedTemplate.commentTaggedTemplate.js_regexp constant.character.escape",
-          "settings": {"foreground": "#cea463"}
         },
         { "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp meta.embedded.block.js_regexp keyword.operator, keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#8959a8"}
@@ -884,15 +884,15 @@
             // "foreground": "#32807a"
           }
         },
+        {
+          "scope": "constant.character.escape",
+          "settings": {"foreground": "#cea463"}
+        },
         // // regex
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
         {
           "scope": "string.regexp",
           "settings": {"foreground": "#b5bd68"}
-        },
-        {
-          "scope": "string.regexp constant.character.escape, meta.embedded.block.js_regexp constant.character.escape",
-          "settings": {"foreground": "#cea463"}
         },
         {
           "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
@@ -1012,13 +1012,13 @@
             // "foreground": "#32807a"
           }
         },
+        {
+          "scope": "constant.character.escape",
+          "settings": {"foreground": "#cea463"}
+        },
         // // regex
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
         {"scope": "string.regexp", "settings": {"foreground": "#b5bd68"}},
-        {
-          "scope": "string.regexp constant.character.escape, meta.embedded.block.js_regexp constant.character.escape",
-          "settings": {"foreground": "#cea463"}
-        },
         {
           "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#b294bb"}
