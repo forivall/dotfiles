@@ -322,7 +322,13 @@
   { "command":  "workbench.action.previousSideBarView",                    "key": "shift+cmd+[",                   "when": "sideBarFocus" },
   { "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor",     "key": "shift+cmd+]",                   "when": "!activeEditorGroupEmpty && !auxiliaryBarFocus && !panelFocus && !sideBarFocus" },
   { "command": "workbench.action.quickOpenNavigateNextInEditorPicker",     "key": "shift+cmd+]",                   "when": "inEditorsPicker && inQuickOpen" },
+  { "command": "workbench.action.quickOpenNavigateNextInEditorPicker",     "key": "cmd+]",                   "when": "inEditorsPicker && inQuickOpen" },
   { "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker", "key": "shift+cmd+[",                   "when": "inEditorsPicker && inQuickOpen" },
+  { "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker", "key": "cmd+[",                   "when": "inEditorsPicker && inQuickOpen" },
+  { "key": "shift+cmd+w", "command": "-workbench.action.closeWindow" },
+  { "key": "shift+cmd+w", "command": "workbench.action.closeWindow", "when": "!inEditorsPicker" },
+  { "key": "shift+cmd+w", "command": "widgetNavigation.focusNext", "when": "inEditorsPicker" },
+  { "key": "cmd+w", "command": "workbench.files.action.focusOpenEditorsView", "when": "inEditorsPicker" },
   { "command": "workbench.action.openPreviousEditorFromHistory",           "key": "shift+ctrl+]",                  "when": "!auxiliaryBarFocus && !panelFocus && !sideBarFocus" },
   { "command": "workbench.action.quickOpenNavigateNextInFilePicker",       "key": "shift+ctrl+]",                   "when": "inFilesPicker && inQuickOpen" },
   { "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",   "key": "shift+ctrl+[",                   "when": "inFilesPicker && inQuickOpen" },
@@ -355,7 +361,11 @@
   { "command":  "workbench.action.terminal.split",                         "key": "cmd+d",               "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"  },
   { "command":  "workbench.action.toggleActivityBarVisibility",            "key": "shift+cmd+f9" },
   { "command":  "workbench.action.togglePanel",                            "key": "cmd+f10" },
-  { "command":  "workbench.action.toggleSidebarVisibility",                "key": "cmd+f9" },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "alt+cmd+\\",
+    "when": "filesExplorerFocus"
+  },
   { "command":  "workbench.action.toggleSidebarVisibility",                "key": "cmd+k b", },
   { "command":  "workbench.action.toggleSplitEditorInGroup",               "key": "ctrl+shift+cmd+d", },
   { "command":  "workbench.action.toggleAuxiliaryBar",                     "key": "shift+cmd+f10", },
@@ -760,8 +770,15 @@
 
   { "key": "m", "command": "dance.openMenu", "args": { "menu": "match-hx"                                        }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "[", "command": "dance.openMenu", "args": { "menu": "left-bracket-hx",  "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "[", "command": "dance.run", "args": {
+    "code": [
+      "await vscode.commands.executeCommand('dance.openMenu',{ menu: 'left-bracket-hx', pass: [{ shift: 'jump', count }] })"
+    ] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "]", "command": "dance.openMenu", "args": { "menu": "right-bracket-hx", "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-
+  { "key": "]", "command": "dance.run", "args": {
+    "code": [
+      "await vscode.commands.executeCommand('dance.openMenu',{ menu: 'right-bracket-hx', pass: [{ shift: 'jump', count }] })"
+    ] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "/",           "command": "dance.run",                 "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": { "commands": [
     [".run", { "code": "const r = Registers.get('/'), v = await r.get(); if (!v?.length || v.length === 1 && !v[0]) { r.set(v, ['(?i)']) }"}],
     ".search"
@@ -955,7 +972,15 @@
   { "key": "shift+z", "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }], "locked": true }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+w",  "command": "dance.openMenu", "args": { "menu": "window-hx",        "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "[",       "command": "dance.openMenu", "args": { "menu": "left-bracket-hx",  "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
+  { "key": "[",       "command": "dance.run", "args": {
+    "code": [
+      "await vscode.commands.executeCommand('dance.openMenu',{ menu: 'left-bracket-hx', pass: [{ shift: 'extend', count }] })"
+    ] }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "]",       "command": "dance.openMenu", "args": { "menu": "right-bracket-hx", "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
+  { "key": "]",       "command": "dance.run", "args": {
+    "code": [
+      "await vscode.commands.executeCommand('dance.openMenu',{ menu: 'right-bracket-hx', pass: [{ shift: 'extend', count }] })"
+    ] }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "space",   "command": "dance.openMenu", "args": { "menu": "leader-hx",        "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
 
   { "key": "r",       "command": "dance.run", "args": { "commands": [".edit.replaceCharacters", ".modes.set.normal"] },                                                                                                          "when": "editorTextFocus && dance.mode == 'select'" },
@@ -1034,6 +1059,18 @@
     "key": "cmd+o",
     "command": "file-browser.open",
     "when": "!remoteFileDialogVisible && !inFileBrowser"
+  },
+  {
+    "key": "cmd+k delete",
+    "command": "deletecurrentfile.deleteCurrentFile"
+  },
+  {
+    "key": "cmd+d cmd+f",
+    "command": "-deletecurrentfile.deleteCurrentFile"
+  },
+  {
+    "key": "cmd+\\",
+    "command": "-workbench.action.toggleSidebarVisibility"
   },
   // End.
 

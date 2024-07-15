@@ -236,7 +236,7 @@ function dedupeOrHoistPackage(tree, packageName, options) {
     if (!node.resolveParent || !node.resolveParent.resolveParent) {
       return []
     }
-    log.info(
+    log.warn(
       'hoist',
       `${options.force ? 'hoisting' : 'could hoist'} ${
         node.pkgid
@@ -264,7 +264,7 @@ function dedupeOrHoistPackage(tree, packageName, options) {
       }
     }
     if (rootDepNode) {
-      log.info('hoist', `hoisting ${rootDepNode.pkgid} for ${packageName}`)
+      log.warn('hoist', `hoisting ${rootDepNode.pkgid} for ${packageName}`)
       rootDepNode.parent = tree
     }
   }

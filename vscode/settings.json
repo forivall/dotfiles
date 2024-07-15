@@ -756,28 +756,28 @@
         { "scope": "string.regexp",
           "settings": {"foreground": "#718c00"}
         },
-        { "scope": "string.regexp constant.character.escape",
+        { "scope": "string.regexp constant.character.escape, meta.embedded.block.js_regexp string.js.taggedTemplate.commentTaggedTemplate.js_regexp constant.character.escape, constant.character.escape, string.js.taggedTemplate.commentTaggedTemplate.js_regexp constant.character.escape",
           "settings": {"foreground": "#cea463"}
         },
-        { "scope": "string.regexp keyword.operator",
+        { "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp meta.embedded.block.js_regexp keyword.operator, keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#8959a8"}
         },
-        { "scope": "string.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#3e999f"}
         },
-        { "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#1eb0bb"}
         },
-        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#569f74"}
         },
-        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#2177d8"}
         },
-        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#7bb2b5"}
         },
-        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#26c567"}
         },
         { "scope": "text.jwt meta.separator",
@@ -891,35 +891,35 @@
           "settings": {"foreground": "#b5bd68"}
         },
         {
-          "scope": "string.regexp constant.character.escape",
+          "scope": "string.regexp constant.character.escape, meta.embedded.block.js_regexp constant.character.escape",
           "settings": {"foreground": "#cea463"}
         },
         {
-          "scope": "string.regexp keyword.operator",
+          "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#b294bb"}
         },
         {
-          "scope": "string.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#8abeb7"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#74e0d2"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#8cca99"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#7fc9ee"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#b0cdc8"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#63d47b"}
         },
         { "scope": "text.jwt meta.separator",
@@ -1016,35 +1016,35 @@
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
         {"scope": "string.regexp", "settings": {"foreground": "#b5bd68"}},
         {
-          "scope": "string.regexp constant.character.escape",
+          "scope": "string.regexp constant.character.escape, meta.embedded.block.js_regexp constant.character.escape",
           "settings": {"foreground": "#cea463"}
         },
         {
-          "scope": "string.regexp keyword.operator",
+          "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#b294bb"}
         },
         {
-          "scope": "string.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#8abeb7"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#74e0d2"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#8cca99"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#7fc9ee"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#b0cdc8"}
         },
         {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#63d47b"}
         }
       ]
@@ -1323,7 +1323,7 @@
     "view-hx": {
       "title": "View",
       "items": {
-        "cz": { "text": "Align view center", "command": "dance.view.line", "args": [{ "at": "center" }]                                },
+        "z": { "text": "Align view center", "command": "dance.view.line", "args": [{ "at": "center" }]                                },
         "t":  { "text": "Align view top",    "command": "dance.view.line", "args": [{ "at": "top"    }]                                },
         "b":  { "text": "Align view bottom", "command": "dance.view.line", "args": [{ "at": "bottom" }]                                },
         "m":  { "text": "Align view middle", "command": "center-editor-window.center"                                                                          },
@@ -1343,8 +1343,8 @@
         "?": { "text": "Reverse search for regex pattern", "command": "dance.search.backward" },
         "n": { "text": "Select next search match",         "command": "dance.search.next"     },
         "N": { "text": "Select previous search match",     "command": "dance.search.previous" },
-        "[": { "text": "Unfold", "command": "editor.unfold"},
-        "]": { "text": "Fold", "command": "editor.fold"},
+        "o[": { "text": "Unfold", "command": "editor.unfold"},
+        "i]": { "text": "Fold", "command": "editor.fold"},
       },
     },
     "window-hx": {

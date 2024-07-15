@@ -249,16 +249,19 @@ class Where extends ArboristWorkspaceCmd {
      * @template T
      * @typedef {{-readonly [K in keyof T]: T[K]}} Writable
      */
-    /** @type {table.Indexable<Writable<table.ColumnUserConfig> & { width: number }>} */
+    /** @type {Array<Writable<table.ColumnUserConfig> & { width: number }>} */
     const columns = widths.map((width) => ({ width }))
-    if (columns[0].width > 16) {
-      columns[0].width = 16
+    const MAX_FIRST_COLUMN_WIDTH = 16
+    if (columns[0].width > MAX_FIRST_COLUMN_WIDTH) {
+      columns[0].width = MAX_FIRST_COLUMN_WIDTH
       columns[0].wrapWord = true
     }
     const lastColumn = header.length - 1
-    const space =
-      widths.slice(0, -1).reduce((a, b) => a + Math.min(80, b), 0) +
-      header.length
+    const otherColumnWidth = columns
+      .map(({ width }) => width)
+      .slice(0, -1)
+      .reduce((a, b) => a + Math.min(80, b), 0)
+    const space = otherColumnWidth + header.length
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(
       columns[lastColumn].width,

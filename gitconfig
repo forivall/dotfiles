@@ -82,6 +82,7 @@
 	lg3 = log --name-status --pretty=twoline --graph --date=local
 	lgp = log -p --pretty=onemore --graph
 	logd = -c core.pager=deltaw log --pretty=concise
+	log2 = log --pretty=concise
 	logp2 = logp --pretty=concise
 	show2 = show --pretty=concise
 	showd2 = showd --pretty=concise

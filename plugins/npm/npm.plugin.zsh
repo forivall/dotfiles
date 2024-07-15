@@ -2,6 +2,7 @@ __zsh_npm_plugin_location=${0:A:h}
 
 path+=("${__zsh_npm_plugin_location}/bin")
 alias nr="npm run"
+alias nrw="npm run --workspaces --if-present"
 
 if [[ -f $HOMEBREW_PREFIX/Cellar/zsh/$ZSH_VERSION/share/zsh/functions/_npm ]]; then
   echo 'moving bad builtin npm completion'

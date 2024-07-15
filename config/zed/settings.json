@@ -20,6 +20,14 @@
     "line_height": "standard",
     "shell": "system"
   },
+  "vim": {
+    "use_smartcase_find": true
+  },
+  "outline_panel": {
+    "dock": "right",
+    "default_width": 220,
+    "indent_size": 16
+  },
   "relative_line_numbers": true,
   "wrap_guides": [80],
   "experimental.theme_overrides": {

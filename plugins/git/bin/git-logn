@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+# shellcheck disable=SC2168,SC2296,SC2299,SC2300
+
+__plugin_dirname=${0:a:h:h}
+
+export COLUMNS
+# replicate delta's navigate feture
+# https://github.com/dandavison/delta/blob/0.14.0/src/utils/bat/output.rs#L162
+# https://github.com/dandavison/delta/blob/0.14.0/src/features/navigate.rs#L62
+if [[ ! -v LESSHISTFILE ]]; then
+  LESSHISTFILE=~/.lesshst
+  if [[ ! -e $LESSHISTFILE ]]; then
+    unset LESSHISTFILE
+  fi
+fi
+DELTA_HIST_FILE=$(mktemp)
+if [[ -v LESSHISTFILE && $LESSHISTFILE != "-" && $LESSHISTFILE != "/dev/null" ]]; then
+  cat < $LESSHISTFILE > "$DELTA_HIST_FILE"
+else
+  echo ".less-history-file:" > "$DELTA_HIST_FILE"
+fi
+echo ".search" >> "$DELTA_HIST_FILE"
+printf '"^%s\n' "•" >> "$DELTA_HIST_FILE"
+LESSHISTFILE=$DELTA_HIST_FILE
+export LESSHISTFILE
+git -c 'core.pager='"less -f +X -x2 -R --lesskey-src=${__plugin_dirname}/share/git-logp.lesskey" log --pretty=concise "$@"
+
+wait
+rm "$DELTA_HIST_FILE"
