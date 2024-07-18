@@ -11,6 +11,7 @@ if (( ${#revs} == 0 )); then
   revs+=(HEAD)
 fi
 local cdup=$(git rev-parse --show-cdup)
+items_status=()
 
 __git-resetp-hasfiles() {
   ! git diff-index --quiet --cached $revs
@@ -18,14 +19,22 @@ __git-resetp-hasfiles() {
 __git-resetp-getitems_vars() {
   local OIFS=$IFS
   IFS=$'\n'
-  items=(
-    $(git diff --cached --name-only "$@")
+  items_status=(
+    $(git diff --cached --name-status "$@")
   )
   IFS="$OIFS"
+  items=()
+  for item in "${items_status[@]}"; do
+    items+=("${item#?$'\x09'}")
+  done
   term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs")
 }
 __git-resetp-dointeractive() {
-  git "${configArgs[@]}" reset -p "${revs[@]}" "$1" || local code=$?
+  if [[ "${items_status[$i]}" == U* ]]; then
+    git "${configArgs[@]}" reset "${revs[@]}" "$1" || local code=$?
+  else
+    git "${configArgs[@]}" reset -p "${revs[@]}" "$1" || local code=$?
+  fi
   if (( code != 134 )); then
     return $code
   fi

@@ -13,7 +13,10 @@ const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arboris
 /** @type {typeof import('@npmcli/arborist')} */
 const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
 /** @type {typeof import('proc-log')} */
-const log = require(`${prefix}/lib/node_modules/npm/node_modules/proc-log`)
+let log = require(`${prefix}/lib/node_modules/npm/node_modules/proc-log`)
+if (!log.silly && log.log) {
+  log = log.log
+}
 const validName = require(`${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`)
 /** @type {typeof import('pacote')} */
 const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
@@ -25,7 +28,9 @@ const semver = require(`${prefix}/lib/node_modules/npm/node_modules/semver`)
 async function main() {
   const npm = new Npm()
   await npm.load()
-  npm.argv.shift()
+  if (npm.argv[0] === 'where' && npm.argv.length > 1) {
+    npm.argv.shift()
+  }
   const command = new Where(npm)
   await command.exec(npm.argv)
 }

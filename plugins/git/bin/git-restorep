@@ -31,6 +31,10 @@ case $_arg in
   --conflict=*|--ignore-skip-worktree-bits|--ignore-unmerged|--merge|-m|--no-progress|--ours|-2|--overlay|--pathspec-file-nul|--pathspec-from-file=*|--progress|--quiet|-q|--recurse-submodules|--source|-s|--staged|-S|--theirs|-3|--worktree|-W)
     restoreargs+=($_arg)
   ;;
+  --ours|--theirs)
+    restoreargs+=($_arg)
+    diffargs+=($_arg)
+  ;;
   *)
     diffargs+=($_arg)
   ;;
