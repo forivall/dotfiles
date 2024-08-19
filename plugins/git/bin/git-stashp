@@ -7,13 +7,84 @@ __plugin_dirname=${0:a:h:h}
 autoload -U colors  && colors
 
 action=pop
-if [[ "$1" == drop || "$1" == pop || "$1" == apply ]]; then
+if [[ "$1" == drop || "$1" == pop || "$1" == apply || "$1" == push ]]; then
   action="$1"
   shift
 fi
 
+if [[ $action == push ]]; then
+  eval "$(echo "\
+git stashp push [<options>] <args>...
+
+semi-interactive stash. pop by default
+--
+h,help         show the help
+k,keep-index   all changes already added to the index are left intact
+m,message=     specify stash description
+no-keep-index  all changes already added to the index are undone
+p,patch        interactively select hunks from diff between HEAD and working tree to stash
+" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
+
+  local opts
+  local args
+  opts=()
+  args=()
+  ispatch=false
+  isopts=true
+  for arg in $@; do
+    case "$arg" in
+      --) isopts=false; ;;
+      --patch) ispatch=true ;&
+      *) if $isopts; then opts+=("$arg"); else args+=("$arg"); fi ;;
+    esac
+  done
+  if
+    git diff-files --quiet "${args[@]}" &&
+    git ls-files --other --directory --no-empty-directory --exclude-standard "${args[@]}" | gsed q1 > /dev/null
+  then
+    echo 'Nothing to do'
+    exit 1
+  fi
+
+  local cdup=$(git rev-parse --show-cdup)
+  local OIFS=$IFS
+  IFS=$'\n'
+  local items=(
+    $(git diff --name-only "${args[@]}")
+    $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard "${args[@]}")
+  )
+  IFS="$OIFS"
+  if ! menuoutput="$(
+    simple-term-menu -m \
+      --no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items}" \
+      "${items[@]}"
+  )"; then
+    selections=()
+    additions=()
+    for i in ${(s/,/)menuoutput}; do
+      item="${items[i]}"
+      if ! git ls-files --error-unmatch $item 2>/dev/null >/dev/null; then
+        additions+=($item)
+      fi
+      selections+=($item)
+    done
+    if (( ${#additions} > 0 && $ispatch )); then
+      echo '>' git add "${additions[@]}"
+      git add "${additions[@]}"
+    fi
+    if $ispatch; then
+      echo '>' git stash push "${opts[@]}" "${selections[@]}"
+      git stash push "${opts[@]}" "${selections[@]}"
+    else
+      echo '>' git stash push --include-untracked "${opts[@]}" "${selections[@]}"
+      git stash push --include-untracked "${opts[@]}" "${selections[@]}"
+    fi
+  fi
+  exit
+fi
+
 OPTS_SPEC="\
-git stashp [apply|pop|drop] [<options>] <args>...
+git stashp [apply|pop|drop|push] [<options>] <args>...
 
 semi-interactive stash. pop by default
 --
