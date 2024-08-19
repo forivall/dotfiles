@@ -1,5 +1,8 @@
 #!/usr/bin/sh
-node -e 'const onLine = (line) => {'"$1"'};
+
+node -e '
+'"$2"'
+const onLine = (line) => {'"$1"'};
 (async function() {
   let buffer = "";
   for await (const chunk of process.stdin) {

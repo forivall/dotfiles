@@ -41,8 +41,15 @@ elif [[ -f bun.lockb ]]; then
 elif [[ -f package-lock.json ]]; then
   run npm install
 elif [[ -f package.json ]]; then
-  echo '# no lockfile found or packageManager defined, using npm'
-  run npm install
+  local q p=$PWD
+  while q=$p; p=${p:h}; [[ $p != '/' && $p != $q ]] && ! ( [[ -f $p/package.json ]] && jq --exit-status .workspaces $p/package.json > /dev/null ); do :; done
+  if [[ $p == '/' ]]; then
+    echo '# no lockfile found or packageManager defined, using npm'
+    run npm install
+  else
+    source ${0:A:h:h:h}/jump/loadnameddirs.zsh
+    echo '# `package.json` found in in an npm workspace. Run `npm i` or `prep` in `'$(cd $p; print -P '%~')'` instead'
+  fi
 fi
 
 if [[ -f pdm.lock ]]; then
@@ -111,6 +118,14 @@ if [[ -f composer.json || -f composer.lock ]]; then
   run php composer.phar install
 elif [[ -f phpkg.config.json ]]; then
   run phpkg install
+fi
+
+if [[ -f dune-project ]]; then
+  run opam install . --deps-only --with-test --with-doc
+fi
+
+if [[ -f *.rockspec ]]; then
+  luarocks install --only-deps *.rockspec
 fi
 
 if ! $wasrun; then

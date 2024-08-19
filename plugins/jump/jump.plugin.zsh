@@ -15,13 +15,7 @@ export MARKPATH
 : ${MARK_NOCONFIRM:=false}
 : ${MARK_CREATENAMEDDIRS:=true}
 
-if $MARK_CREATENAMEDDIRS; then
-	# load all marks into hash
-    () {
-        setopt localoptions nullglob
-        for d in $MARKPATH/*(@); do hash -d "${d##*/}=${d:A}"; done
-    }
-fi
+source ${0:A:h}/loadnameddirs.zsh
 
 jump() {
 	cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"

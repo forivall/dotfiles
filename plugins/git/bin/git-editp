@@ -11,6 +11,25 @@ else
   shift
 fi
 
+if [[ $1 = --editor=* ]]; then
+  GIT_EDITOR=${1#--editor=}
+  shift
+else
+  GIT_EDITOR=$(git config --get core.guieditor || git config --get core.editor)
+fi
+
+run_editor() {
+  if [[ $GIT_EDITOR = code ]]; then
+    echo code --goto "$1$2"
+    code --goto "$1$2"
+  elif [[ $GIT_EDITOR = hx || $GIT_EDITOR = helix ]]; then
+    echo $GIT_EDITOR "$1$2"
+    $GIT_EDITOR "$1$2"
+  else
+    echo $GIT_EDITOR "$1"
+    $GIT_EDITOR "$1"
+  fi
+}
 
 local configArgs=()
 local flags=()
@@ -60,9 +79,9 @@ case "$gitcommand" in
     __git-editp-dointeractive() {
       # TODO: read editor option from git config
       echo git diff $revs $1
-      local goto="$1:$(git diff -U0 $revs $1 | get_first_added_line)"
-      echo code --goto "$goto"
-      code --goto "$goto"
+      local loc="$(git diff -U0 $revs $1 | get_first_added_line)"
+      if [[ -n $loc ]]; then loc=":$loc"; fi
+      run_editor $1 $loc
     }
   ;;
   grep)
@@ -89,8 +108,7 @@ case "$gitcommand" in
       local loc=""
       set -o extendedglob; local result="$(git grep -m 1 -h -n --column $args -- $1)";
       [[ $result = (#b)(<0->:<0->)* ]] && loc=":${result[$mbegin[1],$mend[1]]}"
-      echo code --goto "$1$loc"
-      code --goto "$1$loc"
+      run_editor "$1" "$loc"
     }
   ;;
   rg)
@@ -118,8 +136,7 @@ case "$gitcommand" in
       local loc=""
       set -o extendedglob; local result="$(rg -m 1 -n --column $args -- $1)";
       [[ $result = (#b)(<0->:<0->)* ]] && loc=":${result[$mbegin[1],$mend[1]]}"
-      echo code --goto "$1$loc"
-      code --goto "$1$loc"
+      run_editor --goto "$1" "$loc"
     }
   ;;
   show)
@@ -133,10 +150,9 @@ case "$gitcommand" in
       term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@")
     }
     __git-editp-dointeractive() {
-      # TODO: read editor option from git config
-      local goto="$1:$(git show -U0 --format='' $revs $1 | get_first_added_line)"
-      echo code --goto "$goto"
-      code --goto "$goto"
+      local loc="$(git show -U0 --format='' $revs $1 | get_first_added_line)"
+      if [[ -n $loc ]]; then loc=":$loc"; fi
+      run_editor "$1" "$loc"
     }
   ;;
 esac

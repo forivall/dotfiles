@@ -18,7 +18,7 @@ aliases:
     '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u}
     | sd "^[^/]*/" "" ) "$@"'
   pr-merge-base: '!git merge-base ${1-HEAD} origin/$(gh pr view $2 --json baseRefName -q .baseRefName)'
-  pr-merge-commit: pr view $1 --json mergeCommit -q .mergeCommit.oid
+  pr-merge-commit: pr view $1 --json mergeCommit,potentialMergeCommit -q '(.mergeCommit//.potentialMergeCommit).oid'
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"

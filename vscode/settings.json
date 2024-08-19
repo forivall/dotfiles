@@ -1345,6 +1345,8 @@
         "N": { "text": "Select previous search match",     "command": "dance.search.previous" },
         "o[": { "text": "Unfold", "command": "editor.unfold"},
         "i]": { "text": "Fold", "command": "editor.fold"},
+        "O": { "text": "Unfold All", "command": "editor.unfoldAll"},
+        "I": { "text": "Fold All", "command": "editor.foldAll"},
       },
     },
     "window-hx": {
@@ -1463,9 +1465,29 @@
         "D": { "text": "Open workspace diagnostic picker",              "command": "???"                                                                      },
         "a": { "text": "Perform code action",                           "command": "editor.action.quickFix"                                                   },
         "'": { "text": "Open last picker",                              "command": "???"                                                                      },
-        "g": { "text": "Debug",                                         "command": "dance.openMenu", "args": [{ "menu": "debug-hx", "locked": true }]         },
+        "G": { "text": "Debug",                                         "command": "dance.openMenu", "args": [{ "menu": "debug-hx", "locked": true }]         },
         "t": { "text": "Test",                                          "command": "dance.openMenu", "args": [{ "menu": "test-hx" }]},
         "w": { "text": "Window",                                        "command": "dance.openMenu", "args": [{ "menu": "window-hx" }]                        },
+        "x": { "text": "Install Extension",                                    "command": "dance.run", "args": [{
+          "code": [
+            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'ext install ')",
+          ]}
+        ]},
+        "m": { "text": "Run Task",                                    "command": "dance.run", "args": [{
+          "code": [
+            "await vscodoe.commands.executeCommand('workbench.action.quickOpen', 'task ')",
+          ]}
+        ]},
+        "`": { "text": "Terminal",                                    "command": "dance.run", "args": [{
+          "code": [
+            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'term ')",
+          ]}
+        ]},
+        "u": { "text": "Focus Panel View",                                    "command": "dance.run", "args": [{
+          "code": [
+            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'view ')",
+          ]}
+        ]},
         "y": { "text": "Join and yank selections to clipboard",         "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "Y": { "text": "Yank main selection to clipboard",              "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "p": { "text": "Paste clipboard after selections",              "command": "dance.edit.insert", "args": [{ "handleNewLine": true, "where": "end"   }] },
@@ -1481,7 +1503,17 @@
     "debug-hx": {
       "title": "Debug",
       "items": {
-        "l": { "text": "Launch debug target",        "command": "workbench.action.debug.start"         },
+        "l": { "text": "Launch debug target",                                    "command": "dance.run", "args": [{
+          "code": [
+            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'debug ')",
+          ]}
+        ]},
+        "L": { "text": "Launch current debug target",        "command": "workbench.action.debug.start"         },
+        "f": { "text": "Open debug console",                                    "command": "dance.run", "args": [{
+          "code": [
+            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'debug consoles ')",
+          ]}
+        ]},
         "b": { "text": "Toggle breakpoint",          "command": "editor.debug.action.toggleBreakpoint" },
         "c": { "text": "Continue program execution", "command": "workbench.action.debug.continue"      },
         "h": { "text": "Pause program execution",    "command": "workbench.action.debug.pause"         },
@@ -3071,7 +3103,8 @@
     "NVM_CD_FLAGS": null,
     "NVM_DIR": null,
     "UNTRACKED_FILES_STORAGE": null,
-    "VISUAL": null
+    "VISUAL": null,
+    "CW_NEW_SESSION": "1"
   },
   "terminal.integrated.gpuAcceleration": "auto",
   "testExplorer.codeLens": false,

@@ -33,8 +33,6 @@
                                     "when": "breakpointWidgetVisible && textInputFocus" },
   { "key": "shift+escape",          "command": "editor.action.cancelSelectionAnchor",
                                     "when": "editorTextFocus && selectionAnchorSet" },
-  { "key": "shift+escape",          "command": "editor.action.escapeFocusHover",
-                                    "when": "editorHoverFocused" },
   { "key": "shift+escape",          "command": "editor.action.hideColorPicker",
                                     "when": "standaloneColorPickerVisible" },
   { "key": "shift+escape",          "command": "editor.action.inlineSuggest.hide",

@@ -329,7 +329,9 @@ if [[ "$VSCODE_CLI" == 1 ]] ; then
   VSCODE_WINDOW_ID=
 fi
 
-if [[ "$TERM_PROGRAM" != "vscode" ]] ; then
+if [[ "$TERM_PROGRAM" == "vscode" ]] ; then
+  VSCODE_SUGGEST=1
+else
   unset VSCODE_CWD
 fi
 

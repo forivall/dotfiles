@@ -175,6 +175,7 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .open-editors .monaco-list .monaco-list-row>.editor-group + .monaco-action-bar .action-item { margin-right: 4px }
 .monaco-workbench .part.basepanel>.composite.title>.panel-switcher-container>.monaco-action-bar { height: 26px }
 .monaco-workbench .part>.title>.title-actions { height: 24px; padding-left: 2px }
+.no-custom-title-bar-visibility div.monaco-workbench .has-composite-bar { padding-left: var(--traffic-X, 4px) }
 .monaco-workbench .part>.composite.title>.title-actions { padding-left: 2px }
 .monaco-workbench .part>.title>.title-actions .action-label { height: 24px; line-height: 24px }
 .monaco-workbench .part>.title>.title-actions .start-debug-action-item { margin-top: 0px }
