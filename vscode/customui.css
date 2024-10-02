@@ -238,6 +238,9 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .part.panel.bottom .search-view .query-details .ibwrapper>.input { max-width: calc(100% - 14px) }
 .part.panel.bottom .search-view .search-widgets-container { padding-bottom: 2px }
 .part.panel.bottom .search-view .message { padding-bottom: 2px }
+.search-editor .search-results .monaco-editor .ced-1-TextEditorDecorationType2-1 { font-weight: normal }
+.search-editor .search-results .monaco-editor .line-numbers { opacity: 0.8; }
+.search-editor .search-results .monaco-editor .relative-current-line-number { opacity: 0; }
 .markers-panel-container .monaco-action-bar.markers-panel-filter-container { margin-top:6px; margin-bottom: 4px }
 .monaco-workbench .tree-explorer-viewlet-tree-view .message { padding-bottom: 2px; padding-left: 16px }
 .codicon-search-hide-replace + .search-container .monaco-inputbox>.ibwrapper>.input { width:calc(100% + 4px) }

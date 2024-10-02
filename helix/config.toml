@@ -3,8 +3,14 @@ theme = "thursday"
 # theme = "sonokai"
 # theme = "tokyonight"
 
+[editor]
+line-number = "relative"
+# cursorline = true
+color-modes = true
+
 [editor.cursor-shape]
 insert = "bar"
 
 [keys.normal]
 S-3 = ":reflow"
+

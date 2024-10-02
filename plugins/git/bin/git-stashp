@@ -24,17 +24,19 @@ m,message=     specify stash description
 no-keep-index  all changes already added to the index are undone
 p,patch        interactively select hunks from diff between HEAD and working tree to stash
 " | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
-
   local opts
   local args
   opts=()
   args=()
   ispatch=false
+  keepindex=
   isopts=true
   for arg in $@; do
     case "$arg" in
       --) isopts=false; ;;
-      --patch) ispatch=true ;&
+      --patch) ispatch=true; opts+=("$arg") ;;
+      --keep-index) keepindex=true; opts+=("$arg") ;;
+      --no-keep-index) keepindex=false; opts+=("$arg") ;;
       *) if $isopts; then opts+=("$arg"); else args+=("$arg"); fi ;;
     esac
   done
@@ -59,25 +61,35 @@ p,patch        interactively select hunks from diff between HEAD and working tre
       --no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items}" \
       "${items[@]}"
   )"; then
+    set -euo pipefail
+
     selections=()
     additions=()
     for i in ${(s/,/)menuoutput}; do
       item="${items[i]}"
-      if ! git ls-files --error-unmatch $item 2>/dev/null >/dev/null; then
+      if ! git ls-files --error-unmatch "$cdup$item" 2>/dev/null >/dev/null; then
         additions+=($item)
       fi
       selections+=($item)
     done
-    if (( ${#additions} > 0 && $ispatch )); then
-      echo '>' git add "${additions[@]}"
-      git add "${additions[@]}"
+    tmpcommit=
+    if [[ -z "$keepindex" ]] && ! git diff-index --quiet --cached HEAD -- $cdup${^selections}; then
+      git commit -m tmp
+      tmpcommit=$(git rev-parse HEAD)
+    fi
+    if (( ${#additions} > 0 )) && $ispatch; then
+      echo '>' git add $cdup${(q)^additions}
+      git add $cdup${^additions}
     fi
     if $ispatch; then
-      echo '>' git stash push "${opts[@]}" "${selections[@]}"
-      git stash push "${opts[@]}" "${selections[@]}"
+      echo '>' git stash push "${(qq)opts[@]}" $cdup${(q)^selections}
+      git stash push "${opts[@]}" $cdup${^selections}
     else
-      echo '>' git stash push --include-untracked "${opts[@]}" "${selections[@]}"
-      git stash push --include-untracked "${opts[@]}" "${selections[@]}"
+      echo '>' git stash push --include-untracked "${(qq)opts[@]}" $cdup${(q)^selections}
+      git stash push --include-untracked "${opts[@]}" $cdup${^selections}
+    fi
+    if [[ -n "$tmpcommit" ]]; then
+      git reset --soft "$tmpcommit^"
     fi
   fi
   exit

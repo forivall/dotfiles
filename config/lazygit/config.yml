@@ -1,0 +1,4 @@
+git:
+  paging:
+    colorArg: always
+    pager: deltaw --paging=never --file-decoration-style= --hunk-header-decoration-style=ol 

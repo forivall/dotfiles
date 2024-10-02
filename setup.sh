@@ -75,6 +75,9 @@ o ln -fs "$(realpath cargo)" ~/.cargo
 o mkdir -p ~/.config/helix
 o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
 o ln -fs "$(realpath helix/themes)" ~/.config/helix/themes
+o mkdir -p ~/.config/lazygit
+o ln -fs "$(realpath config/lazygit/config.yml)" ~/.config/lazygit/config.yml
+(( ${+commands[lazygit]} )) && o ln -fs "$(realpath config/lazygit/config.yml)" "$(lazygit -cd)/config.yml"
 o ln -fs "$(realpath ctop)" ~/.ctop
 o ln -fs "$(realpath config/watchman.json)" ~/.config/watchman.json
 

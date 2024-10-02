@@ -22,7 +22,7 @@ navigate=${$(git config delta.navigate):-false}
 
 while (( $# > 0 )); do
 case "$1" in
-  -h)
+  -h|--help)
     git log -h | sd 'usage: git log' 'usage: git logp' | sd '\[<revision-range>\]' '[stash|<revision-range>]' | rg -v 'or: git show'
     echo '    --all-files           filter commits on files, but show all files'
     echo
@@ -69,6 +69,7 @@ fi
 if $reflog; then
   refspecs="$(git reflog --pretty=format:%gd "${maxcountargs[@]}" "${args[@]}")"
 else
+  echo '>' git log --pretty=%h "${maxcountargs[@]}" "${args[@]}"
   refspecs="$(git log --pretty=%h "${maxcountargs[@]}" "${args[@]}")"
 fi
 
@@ -76,7 +77,6 @@ dashdash=''
 if $follow; then
   local followfiles=($(git log --name-only --relative --format= --follow "${args[@]}"| huniq))
   dashdash="$followfiles "
-  echo $dashdash
 elif ! $allfiles; then
   $allfiles || dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
 fi
@@ -125,6 +125,10 @@ if $dry; then
     echo -en " ${${c#<\(}/\)/\\n}"
   done) | sd '^ ' ''
 else
+  if (( ! ${#output} )); then
+    echo "No commits found."
+    exit
+  fi
   export COLUMNS
   if $navigate; then
     # replicate delta's navigate feture

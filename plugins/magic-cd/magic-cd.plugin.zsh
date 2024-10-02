@@ -1,4 +1,4 @@
-
+__zsh_forivall_magiccd_plugin_location=$0:A:h
 
 alias ds='pushd'
 alias dp='popd'
@@ -136,15 +136,61 @@ alias ..5="cd ......"
 
 # change worktree
 function cwt() {
-  local maintree gittoplevel
+  local maintree gittoplevel root
   gittoplevel=$(_call_program toplevel git rev-parse --show-toplevel 2>/dev/null)
-  if maintree=$(git worktree list --porcelain | head -n1 | sd '^worktree ' '') ; then
-    if (( $# == 0 )) && [[ "$gittoplevel" != "$maintree" ]]; then
-      cd $maintree
-      return
-    fi
+  local -a records=( ${(ps.\n\n.)"$(_call_program directories git worktree list --porcelain)"} )
+  for i in $records; do
+    maintree=${${i%%$'\n'*}#worktree }
+    break
+  done
+  if [[ -z $maintree ]]; then
+    echo 'not in git dir'
+    return 1
+  elif (( $# == 0 )) && [[ "$gittoplevel" != "$maintree" ]]; then
+    root=$maintree
+  else
     local name=${1:-pr}
-    local root=${maintree:h}/$name-worktrees/${maintree:t}
+    if [[ $name == i ]] || [[ $name == -i ]]; then
+      term_menu_options+=(
+        --no-preview-border
+        --preview-size 0.6
+        --preview "$__zsh_forivall_magiccd_plugin_location/../git/__git-checkoutb-preview --describe {}"
+      )
+
+      local gittoplevelbasename maintreebasename maintreedirname tmp i directory hash branch
+      gittoplevelbasename=${gittoplevel:t}
+      local -a names entries
+      maintreebasename=${maintree:t}
+      maintreedirname=${maintree:h}
+      for i in $records; do
+        directory=${${i%%$'\n'*}#worktree }
+        if [[ $directory == $gittoplevel ]]; then continue; fi
+        if [[ $directory == $maintree ]]; then
+          name="<main>"
+        else
+          tmp=${directory#$maintreedirname/}
+          tmp=${tmp%/$maintreebasename}
+          name=${tmp%-worktrees}
+        fi
+        names+=( $name )
+        hash=${${${"${(f)i}"[2]}#HEAD }[1,9]}
+        branch=${${"${(f)i}"[3]}#branch refs/heads/}
+        if [[ $branch == detached ]]; then
+          branch="(detached HEAD)"
+        else
+          branch="[$branch]"
+        fi
+        entries+=( "$(printf '%-8s ' $name)$hash"$'  '$branch'|'$directory )
+      done
+      simple-term-menu $term_menu_options "${entries[@]}" && i=0 || i=$?
+      if (( $i == 0 )) ; then return; fi
+      name=${names[$i]}
+    fi
+    if [[ $name == '<main>' || $name == '-' ]]; then
+      root=$maintree
+    else
+      root=${maintree:h}/$name-worktrees/${maintree:t}
+    fi
     if [[ ! -d $root ]] ; then
       local branch
       if (( $#>=2 )); then
@@ -159,16 +205,13 @@ function cwt() {
         git worktree add $root $branch
       fi
     fi
-    local prefix="$(git rev-parse --show-prefix)"
-    while ! cd "$root/$prefix"; do prefix=${prefix:h}; [[ -z "$prefix" ]] && break; done;
-  else
-    echo 'not in git dir'
   fi
-
+  local prefix="$(git rev-parse --show-prefix)"
+  while ! cd "$root/$prefix"; do prefix=${prefix:h}; [[ -z "$prefix" ]] && break; done;
 }
 
 function _cwt() {
-  local gittoplevel gittoplevelbasename maintree maintreebasename maintreedirname tmp ismain
+  local gittoplevel gittoplevelbasename maintree maintreebasename maintreedirname name tmp ismain directory
 
   gittoplevel=$(_call_program toplevel git rev-parse --show-toplevel 2>/dev/null)
   gittoplevelbasename=${gittoplevel:t}
@@ -178,17 +221,22 @@ function _cwt() {
   local i hash branch
   ismain=true
   for i in $records; do
-    tmp=${${i%%$'\n'*}#worktree }
+    directory=${${i%%$'\n'*}#worktree }
     if $ismain; then
       ismain=false
-      maintree=$tmp
+      maintree=$directory
       maintreebasename=${maintree:t}
       maintreedirname=${maintree:h}
     fi
-    if [[ $tmp == $gittoplevel ]]; then continue; fi
-    tmp=${tmp#$maintreedirname/}
-    tmp=${tmp%/$maintreebasename}
-    directories+=( ${tmp%-worktrees} )
+    if [[ $directory == $gittoplevel ]]; then continue; fi
+    if [[ $directory == $maintree ]]; then
+      name="-"
+    else
+      tmp=${directory#$maintreedirname/}
+      tmp=${tmp%/$maintreebasename}
+      name=${tmp%-worktrees}
+    fi
+    directories+=( $name )
     hash=${${${"${(f)i}"[2]}#HEAD }[1,9]}
     branch=${${"${(f)i}"[3]}#branch refs/heads/}
 
