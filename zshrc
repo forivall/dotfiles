@@ -8,6 +8,11 @@
 
 unset CI
 
+if [[ "$TERM_PROGRAM" == "vscode" ]] ; then
+  VSCODE_INJECTION=0
+  source "$(code --locate-shell-integration-path zsh)"
+fi
+
 # shellcheck disable=2298
 __zshrc_filename=${${(%):-%N}:A}
 __zshrc_dirname=${__zshrc_filename:h}
@@ -280,7 +285,7 @@ if ! zgen saved; then
   zgen load gentslava/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
   zgen load g-plane/pnpm-shell-completion
-  whence direnv > /dev/null && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
+  (( ${+commands[direnv]} )) && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
   # zgen load dim-an/cod
   # zgen load forivall/cod / feat/zsh-local-build

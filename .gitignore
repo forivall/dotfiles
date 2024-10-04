@@ -11,3 +11,4 @@ npm-debug.log
 __pycache__
 
 scripts/*.workflow/Contents/QuickLook/Thumbnail.png
+config/zed/.tmp*
