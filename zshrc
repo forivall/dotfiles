@@ -8,11 +8,6 @@
 
 unset CI
 
-if [[ "$TERM_PROGRAM" == "vscode" ]] ; then
-  VSCODE_INJECTION=0
-  source "$(code --locate-shell-integration-path zsh)"
-fi
-
 # shellcheck disable=2298
 __zshrc_filename=${${(%):-%N}:A}
 __zshrc_dirname=${__zshrc_filename:h}
@@ -335,7 +330,9 @@ if [[ "$VSCODE_CLI" == 1 ]] ; then
 fi
 
 if [[ "$TERM_PROGRAM" == "vscode" ]] ; then
+  VSCODE_INJECTION=0
   VSCODE_SUGGEST=1
+  source "$(code --locate-shell-integration-path zsh)"
 else
   unset VSCODE_CWD
 fi
