@@ -67,6 +67,7 @@ if (( maxcount > 0 )); then
 fi
 
 if $reflog; then
+  echo '>' git reflog --pretty=format:%gd "${maxcountargs[@]}" "${args[@]}"
   refspecs="$(git reflog --pretty=format:%gd "${maxcountargs[@]}" "${args[@]}")"
 else
   echo '>' git log --pretty=%h "${maxcountargs[@]}" "${args[@]}"
@@ -90,42 +91,40 @@ if $namestatus && ! $haspretty; then
   pretty+=(--pretty=medium)
 fi
 
-output=()
-for commit in ${(f)refspecs}; do
-  if $reflog; then
-    local reflog_command="git reflog show --color -n1 ${(q+@)pretty[@]} ${(q+@)commit};"
-    if $stash; then
-      local commitbase="$commit^"
-      if $showdiff || $forcediff; then
-        reflog_command+="git diff --color --pretty= ${(q+@)commitbase} ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
-      elif $namestatus; then
-        reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
-      else
-        reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
-      fi
+local lessopen_command
+if $reflog; then
+  local reflog_command="git reflog show --color -n1 ${(q+@)pretty[@]} \$1;"
+  if $stash; then
+    local commitbase="$commit^"
+    if $showdiff || $forcediff; then
+      reflog_command+="git diff --color --pretty= \$1^ \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+    elif $namestatus; then
+      reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
     else
-      if $showdiff || $forcediff; then
-        reflog_command+="git show --color --pretty= ${(q+@)commit} -- $dashdash | command delta "${deltaOpts[@]}""
-      elif $namestatus; then
-        reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
-      else
-        reflog_command+="echo; git show --color ${(q+@)pretty[@]} --pretty= ${(q+@)commit} -- $dashdash"
-      fi
+      reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
     fi
-    output+=("<($reflog_command)")
-  elif $namestatus; then
-    output+=("<(git last --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash)")
   else
-    output+=("<(git show --color ${(q+@)pretty[@]} ${(q+@)commit} -- $dashdash| command delta "${deltaOpts[@]}")")
+    if $showdiff || $forcediff; then
+      reflog_command+="git show --color --pretty= \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+    elif $namestatus; then
+      reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
+    else
+      reflog_command+="echo; git show --color ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
+    fi
   fi
-done
+  lessopen_command="() { $reflog_command } %s"
+elif $namestatus; then
+  lessopen_command="git last --color ${(q+@)pretty[@]} %s -- $dashdash"
+else
+  lessopen_command="git show --color ${(q+@)pretty[@]} %s -- $dashdash| command delta "${deltaOpts[@]}""
+fi
 
 if $dry; then
-  (for c in "${output[@]}"; do
-    echo -en " ${${c#<\(}/\)/\\n}"
-  done) | sd '^ ' ''
+  for c in "${(f)refspecs[@]}"; do
+    echo "${lessopen_command/\%s/$c}"
+  done
 else
-  if (( ! ${#output} )); then
+  if (( ! "${(f)#refspecs[@]}" )); then
     echo "No commits found."
     exit
   fi
@@ -152,7 +151,8 @@ else
     LESSHISTFILE=$DELTA_HIST_FILE
     export LESSHISTFILE
   fi
-  eval less -f +X -x2 -R --lesskey-src="${__plugin_dirname}/share/git-logp.lesskey" "${output[@]}"
+  LESSOPEN="| zsh -c ${(q)lessopen_command}" \
+   less -f +X -x2 -R --prompt='?f%f .?n?m(%i of %m) ..?lt%lt-%lb?L/%L. ?x- Next\: %x.:?pB%pB\%..%t' --lesskey-src="${__plugin_dirname}/share/git-logp.lesskey" --file-size "${(f)refspecs[@]}"
 
   wait
   rm "$DELTA_HIST_FILE"
