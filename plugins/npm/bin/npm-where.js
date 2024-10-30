@@ -8,15 +8,14 @@ const {
 } = require('table/dist/src/calculateMaximumColumnWidths')
 const { relative, resolve } = require('path')
 const Npm = require(`${prefix}/lib/node_modules/npm/lib/npm`)
+/** @type {new (npm: Npm) => {npm: Npm, workspaceNames: string[], usageError(): Error}} */
 const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arborist-cmd`)
 
 /** @type {typeof import('@npmcli/arborist')} */
 const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
+const npmlog = require(`${prefix}/lib/node_modules/npm/node_modules/proc-log`)
 /** @type {typeof import('proc-log')} */
-let log = require(`${prefix}/lib/node_modules/npm/node_modules/proc-log`)
-if (!log.silly && log.log) {
-  log = log.log
-}
+const log = !npmlog.silly && npmlog.log ? npmlog.log : npmlog
 const validName = require(`${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`)
 /** @type {typeof import('pacote')} */
 const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
@@ -33,6 +32,7 @@ async function main() {
   }
   const command = new Where(npm)
   await command.exec(npm.argv)
+  await npm.unload?.()
 }
 
 class Where extends ArboristWorkspaceCmd {
@@ -119,9 +119,9 @@ class Where extends ArboristWorkspaceCmd {
     }
 
     if (this.npm.flatOptions.json) {
-      await this.npm.output(JSON.stringify(expls))
+      await this.rawOutput(JSON.stringify(expls))
     } else {
-      this.output(expls)
+      await this.output(expls)
     }
   }
 
@@ -273,7 +273,7 @@ class Where extends ArboristWorkspaceCmd {
       Math.max(20, Math.max(80, process.stdout.columns) - space)
     )
 
-    this.npm.output(
+    return this.rawOutput(
       table.table(data, {
         columns,
         border: table.getBorderCharacters('void'),
@@ -281,6 +281,14 @@ class Where extends ArboristWorkspaceCmd {
         drawHorizontalLine: () => false,
       })
     )
+  }
+
+  rawOutput(message) {
+    if (npmlog.output) {
+      return npmlog.output.standard(message)
+    } else {
+      return this.npm.output(message)
+    }
   }
 
   /**
