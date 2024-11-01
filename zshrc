@@ -67,7 +67,6 @@ HISTSIZE=50000; SAVEHIST=10000
 HISTFILE=~/.zsh_history
 tabs -2
 
-
 zmodload -i zsh/complist
 
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
@@ -87,6 +86,7 @@ DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
+ZSH_USE_COMPINIT_CACHE=true
 # ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
 
@@ -166,25 +166,6 @@ unset sourceIfExists
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
 ENABLE_AUTOCOMPLETE=false
-
-DO_COMPDUMP=false
-if ! $ENABLE_AUTOCOMPLETE; then
-  autoload -Uz bashcompinit && bashcompinit
-  autoload -Uz compinit && compinit -i
-  # https://gist.github.com/ctechols/ca1035271ad134841284
-  # shellcheck disable=SC1036,SC1088
-  () {
-    setopt extendedglob local_options
-
-    if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-      compinit
-      DO_COMPDUMP=true
-    else
-      # echo nocache
-      compinit -C
-    fi
-  }
-fi
 
 source "$__zshrc_dirname/zgen/zgenom.zsh"
 alias zgen=zgenom
@@ -339,18 +320,16 @@ fi
 
 clean-env
 
-if $DO_COMPDUMP; then
-  compdump
-fi
-unset DO_COMPDUMP
-
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
-# zprof
 
 # dont override my variables, ya arse.
 FIG_DOTFILES_SOURCED=1
 
+whence _omz_compdump > /dev/null && _omz_compdump
+
 # CodeWhisperer post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
+
+# zprof
 
 true
