@@ -1,0 +1,88 @@
+#compdef corepack
+
+_corepack() {
+  _arguments -C \
+    '--help[show help]' \
+    ': :->command' \
+    '*:: :->option-or-argument' && ret=0
+
+  case $state in
+    command)
+      local -a commands
+      commands=(
+        'cache:Manage the Corepack cache'
+        'enable:Add the Corepack shims'
+        'disable:Remove the Corepack shims'
+        'install:Download and install the selected package manager'
+        'pack:Download the package manager and store in a tarball'
+        'up:Upgrade the currently selected package manager'
+        'use:Define the package manager for the current project'
+        'prepare:Prepare a package manager (deprecated)'
+        'hydrate:Hydrate a package manager (deprecated)'
+      )
+
+      _describe -t commands 'corepack commands' commands
+      ;;
+    option-or-argument)
+      curcontext=${curcontext%:*}-$line[1]:
+
+      case $line[1] in
+        cache)
+          local -a commands
+          commands=(
+            'clean:Remove Corepack cache directory'
+          )
+          _describe -t commands 'corepack cache commands' commands
+          ;;
+        install)
+          _arguments \
+            '--global[Install on the system]' \
+            '--cache-only[Do not set as defaults]' \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+        use)
+          _arguments \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+        up)
+          _arguments \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+        pack)
+          _arguments \
+            '--json[Print path to generated tarball]' \
+            '--output[Specify the output file]:output:_files' \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+        enable)
+          _arguments \
+            '--install-directory[Add the specified directory to the PATH]:directory:_files -/' \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+        disable)
+          _arguments \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+        prepare)
+          _arguments \
+            '--activate[Make this version current for the package manager]' \
+            '--json[Print the installation manifest as a JSON document]' \
+            '(-o --output)'{-o,--output}'[Store package manager in tarball]:output:_files' \
+            '*:package manager version:_corepack_package_managers'
+          ;;
+      esac
+    ;;
+  esac
+}
+
+_corepack_package_managers() {
+    local -a package_managers
+    package_managers=(
+        'yarn:Yarn package manager'
+        'pnpm:PNPM package manager'
+        'npm:NPM package manager'
+    )
+    _describe 'package managers' package_managers
+}
+
+_corepack "$@"
