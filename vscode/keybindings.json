@@ -749,6 +749,7 @@
     ] }
   },
   { "key": "alt+o",       "command": "editor.action.smartSelect.expand", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
+  // { "key": "alt+o",       "command": "dance.seek.askObject", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
   { "key": "ctrl+alt+i",  "command": "dance.run", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": {
     "code": [
       "for (; repetitions>0; repetitions--) { await vscode.commands.executeCommand('editor.action.smartSelect.shrink'); }"
@@ -876,6 +877,7 @@
 
   { "key": "shift+3", "command": "rewrap.rewrapComment", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
+  // { "key": "ctrl+/", "command": "editor.action.showHover", "when": "editorTextFocus" },
   //
   // Select
   //
@@ -1069,6 +1071,11 @@
   {
     "key": "cmd+\\",
     "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.hideComment",
+    "when": "commentEditorFocused"
   },
   // End.
 

@@ -99,6 +99,8 @@
     "[Boxy Yesterday]": {
       "editor.foldBackground": "#6035780c",
       "editor.stackFrameHighlightBackground": "#dbff8c73",
+      "editor.stackFrameHighlightBackground": "#c8ff2449",
+      "editorCommentsWidget.rangeActiveBackground": "#cb5ae91a",
       "activityBarBadge.background": "#007acca0",
       "activityBar.background": "#cabaaa",
       "activityBar.foreground": "#1c2a2e",
@@ -414,7 +416,24 @@
     "javascript.inlayHints.propertyDeclarationTypes.enabled",
     "javascript.updateImportsOnFileMove.enabled",
     "jest.autoRun",
-    "jest.coverageColors"
+    "jest.coverageColors",
+    "gitlens.advanced.blame.customArguments",
+    "gitlens.advanced.messages",
+    "gitlens.advanced.quickPick.closeOnFocusOut",
+    "gitlens.autolinks",
+    "gitlens.blame.format",
+    "gitlens.codeLens.enabled",
+    "gitlens.currentLine.enabled",
+    "gitlens.defaultDateFormat",
+    "gitlens.historyExplorer.enabled",
+    "gitlens.hovers.currentLine.enabled",
+    "gitlens.hovers.currentLine.over",
+    "gitlens.keymap",
+    "gitlens.menus",
+    "gitlens.plusFeatures.enabled",
+    "gitlens.rebaseEditor.ordering",
+    "gitlens.views.repositories.compact",
+    "gitlens.views.scm.grouped.views"
   ],
   "workbench.startupEditor": "newUntitledFile",
   "debug.console.lineHeight": 18,
@@ -791,6 +810,9 @@
         },
         { "scope": "text.jwt string.signature",
           "settings": { "foreground": "#4271ae" }
+        },
+        { "scope": "text.searchResult meta.resultLinePrefix",
+          "settings": { "foreground": "#657b83" }
         }
       ]
     },
@@ -933,6 +955,12 @@
         },
         { "scope": "text.jwt string.signature",
           "settings": { "foreground": "#81a2be" }
+        },
+        { "scope": "text.searchResult meta.resultLinePrefix, text.searchResult meta.resultLinePrefix.matchLinePrefix.search punctuation",
+          "settings": { "foreground": "#ccccccb0", "fontStyle": "" }
+        },
+        { "scope": "text.searchResult meta.path.search",
+          "settings": { "foreground": "#ccccccf8" }
         }
       ]
     },
@@ -1074,7 +1102,6 @@
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "search.searchEditor.reusePriorSearchConfiguration": true,
   "search.seedOnFocus": true,
-  "search.showLineNumbers": true,
   "search.smartCase": true,
   "search.useGlobalIgnoreFiles": true,
   "search.useIgnoreFiles": true,
@@ -1110,7 +1137,7 @@
   "terminal.integrated.tabs.separator": " ",
   "terminal.integrated.tabs.showActions": "always",
   "terminal.integrated.tabs.showActiveTerminal": "always",
-  "update.mode": "default",
+  "update.mode": "manual",
   "activitusbar.priority": 200000,
   "activitusbar.searchViewInPanel": true,
   "activitusbar.views": [
@@ -1208,17 +1235,20 @@
             "if (shift === 'jump') { await vscode.commands.executeCommand('dance.select.left.jump') }",
           ]}
         ]},
-        "s": { "text": "first non-blank in line",         "command": "dance.select.lineStart", "args": [{ "skipBlank": true }]       },
-        "d": { "text": "definition",                      "command": "editor.action.revealDefinition"                                },
-        "y": { "text": "type definition",                 "command": "editor.action.goToTypeDefinition"                              },
-        "r": { "text": "references",                      "command": "editor.action.goToReferences"                                  },
-        "i": { "text": "implementation",                  "command": "editor.action.goToImplementation"                              },
-        "t": { "text": "window top",                      "command": "dance.select.firstVisibleLine"                                 },
-        "c": { "text": "window center",                   "command": "dance.select.middleVisibleLine"                                },
-        "b": { "text": "window bottom",                   "command": "dance.select.lastVisibleLine"                                  },
-        "a": { "text": "last accessed file",              "command": "workbench.action.previousEditorInGroup"                        },
-        "m": { "text": "last modified file",              "command": "???"                                                           },
-        "p": { "text": "previous buffer",                 "command": "workbench.action.previousEditor"                               },
+        "s": { "text": "first non-blank in line",         "command": "dance.select.lineStart", "args": [{ "skipBlank": true }] },
+        "d": { "text": "definition",                      "command": "editor.action.revealDefinition"                          },
+        "y": { "text": "type definition",                 "command": "editor.action.goToTypeDefinition"                        },
+        "r": { "text": "references",                      "command": "editor.action.goToReferences"                            },
+        "i": { "text": "implementation",                  "command": "editor.action.goToImplementation"                        },
+        "t": { "text": "window top",                      "command": "dance.select.firstVisibleLine"                           },
+        "c": { "text": "window center",                   "command": "dance.select.middleVisibleLine"                          },
+        "b": { "text": "window bottom",                   "command": "dance.select.lastVisibleLine"                            },
+        "a": { "text": "last accessed file",              "command": "workbench.action.previousEditorInGroup"                  },
+        "m": { "text": "last modified file",              "command": "???"                                                     },
+        "n": { "text": "next buffer",                     "command": "workbench.action.nextEditor"                             },
+        "p": { "text": "previous buffer",                 "command": "workbench.action.previousEditor"                         },
+        "N": { "text": "next window tab",                 "command": "workbench.action.showNextWindowTab"                      },
+        "P": { "text": "previous window tab",             "command": "workbench.action.showPreviousWindowTab"                  },
       }
     },
     "match-hx": {
@@ -1323,7 +1353,9 @@
     "view-hx": {
       "title": "View",
       "items": {
+        "w": { "text": "Close current editor", "command": "workbench.action.closeActiveEditor" },
         "z": { "text": "Align view center", "command": "dance.view.line", "args": [{ "at": "center" }]                                },
+        "s": { "text": "Split view",         "command": "workbench.action.toggleSplitEditorInGroup"                      },
         "t":  { "text": "Align view top",    "command": "dance.view.line", "args": [{ "at": "top"    }]                                },
         "b":  { "text": "Align view bottom", "command": "dance.view.line", "args": [{ "at": "bottom" }]                                },
         "m":  { "text": "Align view middle", "command": "center-editor-window.center"                                                                          },
@@ -1354,11 +1386,13 @@
       "items": {
         "w": { "text": "Goto next window",                              "command": "workbench.action.focusNextGroup"                       },
         "s": { "text": "Horizontal bottom split",                       "command": "workbench.action.splitEditorDown"                      },
+        "S": { "text": "Split view",                                    "command": "workbench.action.toggleSplitEditorInGroup"                      },
         "v": { "text": "Vertical right split",                          "command": "workbench.action.splitEditorRight"                     },
         "t": { "text": "Transpose splits",                              "command": "workbench.action.toggleEditorGroupLayout"              },
         "f": { "text": "Goto files in selection (hsplit)",              "command": "???"                                                   },
         "F": { "text": "Goto files in selection (vsplit)",              "command": "???"                                                   },
-        "q": { "text": "Close window",                                  "command": "workbench.action.closeEditorsAndGroup"                 },
+        "Q": { "text": "Close window",                                  "command": "workbench.action.closeEditorsAndGroup"                 },
+        "q": { "text": "Close current tab",                             "command": "workbench.action.closeEditor"                 },
         "o": { "text": "Close all other windows (Current window only)", "command": "dance.run", "args": [{ "commands": ["workbench.action.focusActiveEditorGroup", "workbench.action.closeEditorsInOtherGroups"] }] },
         "h": { "text": "Jump to the split on the left",                 "command": "workbench.action.focusLeftGroup"                       },
         "j": { "text": "Jump to the split below",                       "command": "workbench.action.focusBelowGroup"                      },
@@ -1404,6 +1438,7 @@
       "items": {
         "d": { "text": "Goto previous diagnostic",      "command": "editor.action.marker.prev"              },
         "D": { "text": "Goto previous diagnostic (all)","command": "editor.action.marker.prevInFiles"       },
+        "s": { "text": "Goto previous project search result", "command": "search.action.focusPreviousSearchResult" },
         "g": { "text": "Goto previous change",          "command": "workbench.action.editor.previousChange" },
         "G": { "text": "Goto first change",             "command": "???"                                    },
         "f": { "text": "Goto previous function",        "command": "dance.run", "args": [{
@@ -1421,6 +1456,7 @@
         "c": { "text": "Goto previous comment",         "command": "???"                                    },
         "T": { "text": "Goto previous test",            "command": "???"                                    },
         "p": { "text": "Goto previous paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
+        "b": { "text": "Goto previous bookmark",       "command": "bookmarks.jumpToPrevious" },
         " ": { "text": "Add newline above",             "command": "dance.edit.newLine.above"               },
       },
     },
@@ -1429,6 +1465,7 @@
       "items": {
         "d": { "text": "Goto next diagnostic",      "command": "editor.action.marker.next"              },
         "D": { "text": "Goto next diagnostic (all)","command": "editor.action.marker.nextInFiles"       },
+        "s": { "text": "Goto next project search result", "command": "search.action.focusNextSearchResult" },
         "g": { "text": "Goto next change",          "command": "workbench.action.editor.nextChange" },
         "G": { "text": "Goto last change",          "command": "???"                                },
         "f": { "text": "Goto next function",        "command": "dance.run", "args": [{
@@ -1446,6 +1483,7 @@
         "c": { "text": "Goto next comment",         "command": "???"                                },
         "T": { "text": "Goto next test",            "command": "???"                                },
         "p": { "text": "Goto next paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
+        "b": { "text": "Goto next bookmark",        "command": "bookmarks.jumpToNext" },
         " ": { "text": "Add newline below",         "command": "dance.edit.newLine.below"           },
       },
     },
@@ -1454,7 +1492,9 @@
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
         "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
-        "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                  },
+        "c": { "text": "Open PR comment at current line", "command": "workbench.action.addComment" },
+        // "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                  },
+        "e": { "text": "Focus file explorer",                           "command": "workbench.explorer.fileView.focus"                                        },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
         "j": { "text": "Open jumplist picker",                          "command": "bookmarks.list"                                                           },
         "J": { "text": "Open jumplist picker (all files)",              "command": "bookmarks.listFromAllFiles"                                               },
@@ -1592,6 +1632,11 @@
       "cursorStyle": "underline-thin"
     },
     "insert": {
+      "decorations": {
+        "applyTo": "main",
+        "backgroundColor": "$editor.stackFrameHighlightBackground",
+        "isWholeLine": true
+      },
       "hiddenSelectionsIndicatorsDecoration": {},
       "selectionBehavior": "caret",
     },
@@ -1610,7 +1655,9 @@
       "inheritFrom": "normal",
       "decorations": {
         "applyTo": "main",
-        "backgroundColor": "$editor.stackFrameHighlightBackground",
+        // "backgroundColor": "$editor.stackFrameHighlightBackground",
+        // "backgroundColor": "$editorInlayHint.typeBackground",
+        "backgroundColor": "$editorCommentsWidget.rangeActiveBackground",
         "isWholeLine": true
       },
       "onLeaveMode": [
@@ -1724,6 +1771,11 @@
         {
           "key": ",", "command": "workbench.action.openSettingsJson",
           "name": "Open User Settings (JSON)",
+          "type": "command"
+        },
+        {
+          "key": "<", "command": "workbench.action.openWorkspaceSettingsFile",
+          "name": "Open Workspace Settings (JSON)",
           "type": "command"
         },
         {
@@ -1851,7 +1903,8 @@
       "type": "command",
       "when": "textCompareEditorVisible"
     },
-    { "keys": "g.L", "command": "settings.cycle.githdBlameViewToggle",
+    { "keys": "g.L", "command": "gitlens.toggleFileBlame",
+      // "command": "settings.cycle.githdBlameViewToggle",
       "name": "Toggle git history display blame view",
       "type": "command"
     },
@@ -2051,6 +2104,10 @@
       "name": "Toggle main panel visibility",
       "type": "command"
     },
+    { "keys": "t.P", "command": "workbench.action.toggleMaximizedPanel",
+      "name": "Toggle Maximized Panel",
+      "type": "command"
+    },
     { "keys": "w.a", "command": "workbench.action.focusAuxiliaryBar",
       "name": "Focus auxiliary panel",
       "type": "command"
@@ -2132,6 +2189,81 @@
       "partially-covered": "rgba(235, 198, 52, 0.2)",
       "uncovered": "rgba(121, 31, 10, 0.2)"
     }
+  },
+  "gitlens.advanced.blame.customArguments": ["-w", "-M"],
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressCreatePullRequestPrompt": true,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false
+  },
+  "gitlens.advanced.quickPick.closeOnFocusOut": true,
+  "gitlens.autolinks": [
+    {
+      "prefix": "#",
+      "url": "https://github.com/tenthousandcoffees/api-server/issues/"
+    }
+  ],
+  "gitlens.blame.format": "${message|24?} ${agoOrDate|8-}",
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.defaultDateFormat": "YYYY-MMM-DD h:mma",
+  "gitlens.historyExplorer.enabled": true,
+  "gitlens.hovers.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.keymap": "chorded",
+  "gitlens.menus": {
+    "editor": {
+      "blame": false,
+      "clipboard": true,
+      "compare": true,
+      "details": false,
+      "history": false,
+      "remote": false
+    },
+    "editorGroup": {
+      "blame": true,
+      "compare": false
+    },
+    "editorTab": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "explorer": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "scmGroup": {
+      "compare": true,
+      "openClose": true,
+      "stash": true,
+      "stashInline": true
+    },
+    "scmItem": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true,
+      "stash": true
+    }
+  },
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.rebaseEditor.ordering": "asc",
+  "gitlens.views.repositories.compact": true,
+  "gitlens.views.scm.grouped.views": {
+    "commits": false,
+    "stashes": false,
+    "tags": false,
+    "branches": false,
+    "remotes": false,
+    "contributors": false
   },
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
@@ -2258,6 +2390,10 @@
   },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[search-result]": {
+    "editor.lineNumbers": "off",
+    "editor.semanticHighlighting.enabled": false,
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format",
@@ -2400,7 +2536,32 @@
   "debug.javascript.autoAttachFilter": "onlyWithFlag",
   "debug.javascript.debugByLinkOptions": {
     "runtimeExecutable": "/Applications/Chromium.app/Contents/MacOS/Chromium",
-    "showAsyncStacks": true
+    "showAsyncStacks": true,
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**"
+    ],
+    "outFiles": [
+      "${workspaceFolder}/**/*.(m|c|)js",
+    ]
+  },
+  "debug.javascript.terminalOptions": {
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**"
+    ],
+    "outFiles": [
+      "${workspaceFolder}/**/*.(m|c|)js",
+    ]
+  },
+  "debug.javascript.pickAndAttachOptions": {
+    "sourceMaps": true,
+    "sourceMapRenames": true,
+    "showAsyncStacks": true,
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**"
+    ],
+    "outFiles": [
+      "${workspaceFolder}/**/*.(m|c|)js",
+    ]
   },
   "debug.javascript.unmapMissingSources": true,
   "debug.onTaskErrors": "debugAnyway",
@@ -2459,16 +2620,13 @@
     "*.def": "dotjs",
     "*.flow": "javascript",
     "*.html": "html",
-    "*.json__template__": "ejs",
     "*.json.suggested": "json",
     "*.jst": "dotjs",
-    "*.mongodb.js": "mongodb",
     "*.psql": "sql",
     "*.sublime-keymap": "jsonc",
     "*.sublime-menu": "jsonc",
     "*.sublime-settings": "jsonc",
     "*.tmac": "troff",
-    "*.ts__template__": "ejs",
     "*.tsbuildinfo": "json",
     "*.yq": "jq",
     "*.yy": "yylex",
@@ -2624,74 +2782,6 @@
   "gitlab.enableExperimentalFeatures": true,
   "gitlab.showIssueLinkOnStatusBar": false,
   "gitlab.showMrStatusOnStatusBar": false,
-  "gitlens.advanced.blame.customArguments": [
-    "-w",
-    "-M"
-  ],
-  "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": false,
-    "suppressCommitNotFoundWarning": false,
-    "suppressCreatePullRequestPrompt": true,
-    "suppressFileNotUnderSourceControlWarning": false,
-    "suppressGitVersionWarning": false,
-    "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false
-  },
-  "gitlens.advanced.quickPick.closeOnFocusOut": true,
-  "gitlens.autolinks": [
-    {
-      "prefix": "#",
-      "url": "https://github.com/tenthousandcoffees/api-server/issues/"
-    }
-  ],
-  "gitlens.blame.format": "${message|24?} ${agoOrDate|8-}",
-  "gitlens.codeLens.enabled": false,
-  "gitlens.currentLine.enabled": false,
-  "gitlens.defaultDateFormat": "YYYY-MMM-DD h:mma",
-  "gitlens.historyExplorer.enabled": true,
-  "gitlens.hovers.currentLine.enabled": false,
-  "gitlens.hovers.currentLine.over": "line",
-  "gitlens.keymap": "chorded",
-  "gitlens.menus": {
-    "editor": {
-      "blame": false,
-      "clipboard": true,
-      "compare": true,
-      "details": false,
-      "history": false,
-      "remote": false
-    },
-    "editorGroup": {
-      "blame": true,
-      "compare": false
-    },
-    "editorTab": {
-      "clipboard": true,
-      "compare": true,
-      "history": true,
-      "remote": true
-    },
-    "explorer": {
-      "clipboard": true,
-      "compare": true,
-      "history": true,
-      "remote": true
-    },
-    "scmGroup": {
-      "compare": true,
-      "openClose": true,
-      "stash": true,
-      "stashInline": true
-    },
-    "scmItem": {
-      "clipboard": true,
-      "compare": true,
-      "history": true,
-      "remote": true,
-      "stash": true
-    }
-  },
-  "gitlens.rebaseEditor.ordering": "asc",
   "gitTreeCompare.diffMode": "full",
   "intellicodeApiExamples.python.enabled": false,
   "intellicodeApiExamples.typescript.enabled": false,
@@ -3314,7 +3404,7 @@
   "betterFolding.excludedLanguages": [
     "javascript", "typescript"
   ],
-  "accessibility.voice.autoSynthesize": true,
+  "accessibility.voice.autoSynthesize": "on",
   "accessibility.signals.terminalBell": {
     "sound": "on"
   },
@@ -3329,4 +3419,20 @@
   "interactiveWindow.executeWithShiftEnter": true,
   "debugpy.debugJustMyCode": false,
   "application.shellEnvironmentResolutionTimeout": 30,
+  "vscode-graphql.cacheSchemaFileForLookup": true,
+  "vscode-graphql.schemaCacheTTL": 120000,
+  "vscode-graphql.debug": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "diffEditor.experimental.useTrueInlineView": true,
+  "diffEditor.experimental.showEmptyDecorations": true,
+  "editor.experimentalInlineEdit.backgroundColoring": true,
+  "editor.experimentalInlineEdit.showToolbar": "always",
+  "notebook.experimental.variablesView": true,
+  "extensions.experimental.deferredStartupFinishedActivation": true,
+  "terminal.integrated.suggest.enabled": true,
+  "debug.showVariableTypes": true,
+  "search.showLineNumbers": true,
+  "markdown.extension.toc.updateOnSave": false,
+  "workbench.layoutControl.enabled": false,
+  "playwright.reuseBrowser": true,
 }
