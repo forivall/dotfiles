@@ -188,7 +188,11 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item.has-background-color>:first-child { padding-left: 5px; padding-right: 5px }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item.right.last-visible-item { padding-right: 0 }
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item[id="status.notifications"].right.last-visible-item>:first-child { margin-right: 0 }
+.monaco-workbench .pane-composite-part>.header-or-footer.footer {
+  margin-top: 17px;
+}
 .monaco-workbench .part.panel>.composite.title>.panel-switcher-container>.monaco-action-bar,
+.monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar,
 .monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar {
   height: 24px;
   line-height: 20px;
