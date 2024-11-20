@@ -1,4 +1,3 @@
-.mac, .windows, .linux { letter-spacing: -0.02rem }
 /* .windows.windows{font-family:Segoe WPC,Segoe UI,sans-serif} */
 /* .linux.linux{font-family:system-ui,Ubuntu,Droid Sans,sans-serif} */
 .mac.mac {font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif}
@@ -16,6 +15,7 @@
 .keybindings-editor>.keybindings-header {
   padding-left: 10px;
 }
+.monaco-list { letter-spacing: -0.02rem }
 .custom-list-row .monaco-workbench .monaco-list-row .codicon[class*=codicon-] {
   font-size: 16px;
 }
