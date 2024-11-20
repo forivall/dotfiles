@@ -18,8 +18,9 @@
 .monaco-list,
 .monaco-workbench .part.statusbar>.items-container>.statusbar-item,
 .monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label a,
-.monaco-workbench .part.editor>.content .editor-group-container>.title .title-label a{
-  letter-spacing: -0.02rem
+.monaco-workbench .part.editor>.content .editor-group-container>.title .title-label a,
+.monaco-workbench .part.editor>.content .editor-group-container>.title .breadcrumbs-below-tabs .breadcrumbs-control .monaco-icon-label{
+  letter-spacing: -0.024em
 }
 .custom-list-row .monaco-workbench .monaco-list-row .codicon[class*=codicon-] {
   font-size: 16px;
