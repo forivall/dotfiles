@@ -86,7 +86,7 @@ DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
 DISABLE_AUTO_TITLE=false
-ZSH_USE_COMPINIT_CACHE=true
+ZSH_COMPINIT_CACHE=true
 # ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
 
@@ -290,6 +290,9 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey '^[[5C' forward-word
+bindkey '^[[5D' backward-word
 
 # TODO: move to a vscode plugin
 if [[ "$VSCODE_CLI" == 1 ]] ; then
