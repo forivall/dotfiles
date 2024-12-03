@@ -14,3 +14,9 @@ insert = "bar"
 [keys.normal]
 S-3 = ":reflow"
 
+[editor.file-picker]
+hidden = false
+# git-ignore = false
+# git-global = false
+git-exclude = false
+

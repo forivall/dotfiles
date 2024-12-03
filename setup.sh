@@ -56,6 +56,7 @@ o ln -fs "$(realpath zsh_history_interactive)" ~/.zsh_history_interactive
 o mkdir -p ~/.config
 
 o ./vim/setup.sh
+ln -fs "$(realpath intellij/ideavimrc)" ~/.ideavimrc
 
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
@@ -74,7 +75,9 @@ o ln -fs "$(realpath gh/config.yml)" ~/.config/gh/config.yml
 o ln -fs "$(realpath cargo)" ~/.cargo
 o mkdir -p ~/.config/helix
 o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
+o ln -fs "$(realpath helix/languages.toml)" ~/.config/helix/languages.toml
 o ln -fs "$(realpath helix/themes)" ~/.config/helix/themes
+o ln -fs "$(realpath config/broot)" ~/.config/broot
 o mkdir -p ~/.config/lazygit
 o ln -fs "$(realpath config/lazygit/config.yml)" ~/.config/lazygit/config.yml
 (( ${+commands[lazygit]} )) && o ln -fs "$(realpath config/lazygit/config.yml)" "$(lazygit -cd)/config.yml"
