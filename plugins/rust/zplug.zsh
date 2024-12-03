@@ -11,3 +11,6 @@ function generate_completions() {
 generate_completions rustup completions zsh
 
 [[ -f "${ZGEN_INIT}" ]] && echo 'You should run `zgen reset` to ensure that zcompdump get rebuilt'
+
+broot --set-install-state installed
+broot --print-shell-function zsh > $__dirname/broot.source.zsh
