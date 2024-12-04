@@ -133,7 +133,7 @@ brew install --cask biscuit
 # brew install --cask notion
 brew install --cask mongodb-compass robo-3t studio-3t nosqlbooster-for-mongodb
 brew install --cask github # (github desktop)
-brew install --cask cheatsheet cacher
+brew install --cask keyclu cacher
 brew install --cask gitup rowanj-gitx fork
 # brew install --cask postman
 brew install --cask firecamp
