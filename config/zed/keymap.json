@@ -2,7 +2,8 @@
   {
     "bindings": {
       "cmd-k cmd-p": "workspace::ActivatePreviousPane",
-      "cmd-k cmd-n": "workspace::ActivateNextPane"
+      "cmd-k cmd-n": "workspace::ActivateNextPane",
+      "cmd-'": "editor::ToggleCodeActions"
     }
   },
   {
@@ -141,6 +142,8 @@
         "space a": "editor::ToggleCodeActions",
         "space h": "editor::SelectAllMatches",
         "space c": "editor::ToggleComments",
+        "space y": "editor::Copy",
+        "space p": "editor::Paste",
         // Match mode
         "m m": "vim::Matching",
         "m i w": ["workspace::SendKeystrokes", "v i w"],
@@ -149,9 +152,9 @@
         "ctrl-j": "editor::MoveLineDown",
         "ctrl-v": "editor::Paste",
         "shift-u": "editor::Redo",
-        "d": "vim::DeleteRight",
         "%": "editor::SelectAll",
-        "ctrl-c": "editor::ToggleComments"
+        "ctrl-c": "editor::ToggleComments",
+        "d": "vim::VisualDelete"
       }
     },
     {
@@ -164,20 +167,37 @@
       "context": "Editor && VimControl && vim_mode == normal && !VimWaiting && !menu",
       "bindings": {
         // put key-bindings here if you want them to work only in normal mode
+        "d": "vim::DeleteRight",
         "b": ["workspace::SendKeystrokes", "v ctrl-shift-alt-b"],
         "w": ["workspace::SendKeystrokes", "v ctrl-shift-alt-w"],
         "e": ["workspace::SendKeystrokes", "v ctrl-shift-alt-e"],
-        "x": "vim::ToggleVisualLine"
+        "x": "vim::ToggleVisualLine",
+        "C": ["workspace::SendKeystrokes", "ctrl-q j"]
+      }
+    },
+    {
+      "context": "Editor && VimControl && vim_mode == Visual && !VimWaiting && !menu",
+      "bindings": {
+        // put key-bindings here if you want them to work only in normal mode
       }
     },
     {
       "context": "Editor && VimControl && vim_mode == visual && !VimWaiting && !menu",
       "bindings": {
+        "A": "vim::InsertAfter",
+        "i": "vim::InsertBefore",
+        "a": "vim::InsertAtPrevious",
         // visual, visual line & visual block modes
         "b": ["workspace::SendKeystrokes", "v v ctrl-shift-alt-b"],
         "w": ["workspace::SendKeystrokes", "v v ctrl-shift-alt-w"],
         "e": ["workspace::SendKeystrokes", "v v ctrl-shift-alt-e"],
-        "x": ["workspace::SendKeystrokes", "j"]
+        // "w": "editor::SelectToNextWordEnd",
+        // "b": "editor::SelectToPreviousWordStart",
+        // "e": "editor::SelectToNextSubwordEnd",
+        ";": ["vim::SwitchMode", "Normal"],
+        "": "editor::SplitSelectionIntoLines",
+        "x": ["workspace::SendKeystrokes", "j g l"],
+        "C": ["workspace::SendKeystrokes", "j"]
       }
     },
     {
