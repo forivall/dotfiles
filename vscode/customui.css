@@ -147,6 +147,10 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .monaco-editor .inline-folded:after { content: '   '; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%224%22%20width%3D%2214%22%3E%3Cg%20fill%3D%22rgba(238%2C%20238%2C%20238%2C%200.5)%22%3E%3Ccircle%20cx%3D%222%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%227%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%222%22%20r%3D%221.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") no-repeat center left }
 .editor-scrollable .decorationsOverviewRuler { opacity: 0.75 }
 .zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .margin-view-overlays .line-numbers { padding-right: 6px; padding-left: 6px; }
+.zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .view-lines.monaco-mouse-cursor-text[style*="font-size: 12px;"] {
+  font-size: 13px !important;
+}
+
 /* .review-widget .body .comment-form .monaco-editor, .review-widget .body .edit-container .monaco-editor { padding-left: 0; } */
 .monaco-dialog-modal-block { align-items: flex-start; padding-top: 24px }
 .explorer-viewlet .monaco-icon-label:before { /* height: calc(var(--row-height) - 2px); */ padding-right: 2px;opacity: 0.9 }
