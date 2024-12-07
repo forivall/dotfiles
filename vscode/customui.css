@@ -149,7 +149,8 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .margin-view-overlays .line-numbers { padding-right: 6px; padding-left: 6px; }
 .zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .view-lines[style*="font-size: 12px;"],
 .zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .view-overlays[style*="font-size: 12px;"],
-.zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .inputarea[style*="font-size: 12px;"] {
+.zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .inputarea[style*="font-size: 12px;"],
+.zone-widget-container.review-widget > .body > .comment-form.expand > .monaco-editor .cursors-layer .cursor[style*="font-size: 12px;"] {
   font-size: 13px !important;
 }
 
