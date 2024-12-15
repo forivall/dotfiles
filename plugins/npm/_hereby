@@ -1,0 +1,22 @@
+#compdef hereby
+# mode: Shell-Script
+# code: language=shellscript
+# vim:set filetype=sh:
+# Completion script for hereby v1.10.0. (https://npm.im/hereby)
+
+_hereby() {
+  local spec=(
+    '(-h --help)'{-h,--help}"[Display this usage guide.]"
+    --herebyfile"[A path to a Herebyfile. Optional.]":string:'_files'
+    '(-T --tasks)'{-T,--tasks}"[Print a listing of the available tasks.]"
+    --version"[Print the current hereby version.]"
+    '*:: :_hereby_tasks'
+  )
+  _arguments $spec && return 0
+}
+
+_hereby_tasks () {
+  _values tasks $(_call_program tasks hereby --tasks-simple)
+}
+
+_hereby "$@"

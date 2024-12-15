@@ -1,0 +1,7 @@
+#compdef jest-toplevel
+
+_jest-toplevel() {
+  _jest "$@"
+}
+
+_jest "$@"

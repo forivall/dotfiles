@@ -8,7 +8,9 @@ const npmExecPath =
     })
     .trim()
 
-process.argv.splice(2, 0, 'lockfile-doctor')
+const COMMAND_NAME = 'lockfile-doctor'
+
+process.argv.splice(2, 0, COMMAND_NAME)
 
 const Module = require('module')
 const path = require('path')
@@ -16,8 +18,9 @@ const npmRequire = Module.createRequire(npmExecPath)
 const Npm = npmRequire('../lib/npm')
 const ArboristWorkspaceCmd = npmRequire('../lib/arborist-cmd')
 
-/** @type {typeof import('npmlog')} */
-const log = npmRequire('npmlog')
+const npmlog = npmRequire('proc-log')
+/** @type {typeof import('proc-log')} */
+const log = !npmlog.silly && npmlog.log ? npmlog.log : npmlog
 /** @type {typeof import('@npmcli/arborist')} */
 const Arborist = npmRequire('@npmcli/arborist')
 /** @type {typeof import('pacote')} */
@@ -26,9 +29,12 @@ const pacote = npmRequire('pacote')
 async function main() {
   const npm = new Npm()
   await npm.load()
-  npm.argv.shift()
+  if (npm.argv[0] === COMMAND_NAME) {
+    npm.argv.shift()
+  }
   const command = new LockfileDoctor(npm)
-  await command.cmdExec(npm.argv)
+  await command.exec(npm.argv)
+  await npm.unload?.()
 }
 
 /**
@@ -80,6 +86,9 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
 
   static ignoreImplicitWorkspace = false
 
+  /**
+   * @param {string[]} args
+   */
   async exec(args) {
     const opts = {
       path: this.npm.prefix,
@@ -89,29 +98,7 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
     let arb = new Arborist(opts)
     let tree = await arb.buildIdealTree()
 
-    const invalidLinks = []
-    ;(function removeInvalidLinks(node) {
-      for (const fsChild of node.fsChildren) {
-        for (const link of /** @type {Set<import('@npmcli/arborist').Link>} */ (
-          fsChild.linksIn
-        )) {
-          if (!some(link.edgesIn, (edge) => edge.valid)) {
-            invalidLinks.push(link.location)
-            link.parent = null
-          } else {
-            for (const edge of link.edgesIn) {
-              if (!edge.valid) {
-                log.warn(
-                  'invalid link',
-                  `from ${relPath(edge.from.path)} to ${relPath(edge.to.path)}`
-                )
-              }
-            }
-          }
-        }
-        removeInvalidLinks(fsChild)
-      }
-    })(tree)
+    const invalidLinks = this.fixInvalidLinks(tree)
 
     if (
       this.npm.flatOptions.force &&
@@ -136,7 +123,10 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
       }
     })(tree)
 
-    for (const packageName of tree.inventory.query('name')) {
+    const packagesToHoist = args.length
+      ? args
+      : /** @type {string[]} */ (tree.inventory.query('name'))
+    for (const packageName of packagesToHoist) {
       const deduped = dedupeOrHoistPackage(tree, packageName, opts)
       pruned.push(...deduped)
     }
@@ -182,7 +172,7 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
       }
       const nodePackage = node.package
       if (node.resolved) {
-        delete nodePackage.license
+        // delete nodePackage.license
       }
     }
     arb.finishTracker('fixintegrity')
@@ -192,27 +182,65 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
     }
 
     if (this.npm.flatOptions.json) {
-      await this.npm.output(JSON.stringify({ invalidLinks, pruned, fixed }))
+      await this.rawOutput(JSON.stringify({ invalidLinks, pruned, fixed }))
     } else {
       if (invalidLinks.length > 0) {
-        this.npm.output(
+        this.rawOutput(
           `removed ${invalidLinks.length} invalid links:\n  ` +
             invalidLinks.join('\n  ')
         )
         if (!this.npm.flatOptions.force) {
-          this.npm.output('Run lockfile-doctor again to apply additional fixes')
+          this.rawOutput('Run lockfile-doctor again to apply additional fixes')
         }
       }
       if (pruned.length > 0) {
-        this.npm.output(
+        this.rawOutput(
           `pruned ${pruned.length} entries:\n  ` + pruned.join('\n  ')
         )
       }
       if (fixed.length > 0) {
-        this.npm.output(
+        this.rawOutput(
           `fixed ${fixed.length} entries:\n  ` + fixed.join('\n  ')
         )
       }
+    }
+  }
+
+  /**
+   * @param {import('@npmcli/arborist').Node} tree
+   */
+  fixInvalidLinks(tree) {
+    const invalidLinks = []
+    ;(function removeInvalidLinks(node) {
+      for (const fsChild of node.fsChildren) {
+        for (const link of /** @type {Set<import('@npmcli/arborist').Link>} */ (
+          fsChild.linksIn
+        )) {
+          if (!some(link.edgesIn, (edge) => edge.valid)) {
+            invalidLinks.push(link.location)
+            link.parent = null
+          } else {
+            for (const edge of link.edgesIn) {
+              if (!edge.valid) {
+                log.warn(
+                  'invalid link',
+                  `from ${relPath(edge.from.path)} to ${relPath(edge.to.path)}`
+                )
+              }
+            }
+          }
+        }
+        removeInvalidLinks(fsChild)
+      }
+    })(tree)
+    return invalidLinks
+  }
+
+  rawOutput(message) {
+    if (npmlog.output) {
+      return npmlog.output.standard(message)
+    } else {
+      return this.npm.output(message)
     }
   }
 }

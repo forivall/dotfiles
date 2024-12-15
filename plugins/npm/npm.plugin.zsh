@@ -1,5 +1,7 @@
 __zsh_npm_plugin_location=${0:A:h}
 
+export COREPACK_ENABLE_AUTO_PIN=0
+
 path+=("${__zsh_npm_plugin_location}/bin")
 alias nr="npm run"
 alias nrw="npm run --workspaces --if-present"

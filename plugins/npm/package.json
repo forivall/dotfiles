@@ -7,7 +7,11 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@types/command-line-usage": "^5.0.4",
     "eslint": "^8.57.0",
+    "global-directory": "^4.0.1",
+    "hereby": "^1.10.0",
+    "prettier": "^3.3.3",
     "table": "^6.8.1"
   }
 }

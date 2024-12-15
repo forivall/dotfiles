@@ -1,8 +1,9 @@
-const Module = require('module');
-const eslint = require('eslint');
-const eslintOptionsFn = Module.createRequire(require.resolve('eslint'))('./options')
+const Module = require('module')
+const eslint = require('eslint')
+const eslintOptionsFn = Module.createRequire(require.resolve('eslint'))(
+  './options'
+)
 const { isMap } = require('util/types')
-
 
 const getEslintOptions = new Function(
   'optionator',
@@ -10,8 +11,14 @@ const getEslintOptions = new Function(
     Module.createRequire(require.resolve('eslint'))('./options').toString()
 )((options) => options)
 
-const baseOptions = getEslintOptions(false).options.filter((opt) => !opt.heading);
-const flatConfigOptions = getEslintOptions(true).options.filter((opt) => !opt.heading && !baseOptions.some(baseOpt => baseOpt.option === opt.option))
+const baseOptions = getEslintOptions(false).options.filter(
+  (opt) => !opt.heading
+)
+const flatConfigOptions = getEslintOptions(true).options.filter(
+  (opt) =>
+    !opt.heading &&
+    !baseOptions.some((baseOpt) => baseOpt.option === opt.option)
+)
 
 /**
  * @typedef OptionatorOption
@@ -23,10 +30,7 @@ const flatConfigOptions = getEslintOptions(true).options.filter((opt) => !opt.he
  */
 
 /** @type {OptionatorOption[]} */
-const allOptions = [
-  ...baseOptions,
-  ...flatConfigOptions,
-]
+const allOptions = [...baseOptions, ...flatConfigOptions]
 
 console.log('#compdef eslint')
 console.log('# mode: Shell-Script')
@@ -41,7 +45,9 @@ console.log(
  */
 function prefix(option) {
   if (option.alias) {
-    return `'(-${option.alias.length > 1 ? '-' : ''}${option.alias} --${option.option})'{-${option.alias},--${option.option}}`
+    return `'(-${option.alias.length > 1 ? '-' : ''}${option.alias} --${
+      option.option
+    })'{-${option.alias},--${option.option}}`
   }
   return `--${option.option}`
 }
@@ -49,7 +55,7 @@ function prefix(option) {
 const camelCase = (/** @type {string} */ s) =>
   s.toLowerCase().replace(/ (\s)/g, (_, c) => c.toUpperCase())
 const snakeCase = (/** @type {string} */ s) =>
-  s.toLowerCase().replace(/[[\] ]/g, '_')
+  s.toLowerCase().replace(/[[\:\] ]/g, '_')
 
 console.log('local spec=(')
 
@@ -66,10 +72,7 @@ for (const option of allOptions) {
   let subcompletion = ''
   let comment = ''
   if (option.type && option.type !== 'Boolean') {
-    const subcompleter = [
-      'path::String',
-      '[path::String]',
-    ].includes(option.type)
+    const subcompleter = /^path::String$|\[path::String\]/i.test(option.type)
       ? '_files' + (option.type === 'DIRECTORY' ? ' -/' : '')
       : option.enum
       ? `_values ${snakeCase(option.type)} ${option.enum.join(' ')}`

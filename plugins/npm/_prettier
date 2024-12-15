@@ -1,0 +1,99 @@
+#compdef prettier
+# mode: Shell-Script
+# code: language=shellscript
+# vim:set filetype=sh:
+# Completion script for eslint v3.3.3. (https://prettier.io)
+local spec=(
+# Config
+  --config"[Path to a Prettier configuration file (.prettierrc, package.json, prettier.config.js).]":path:'_default'
+  --config-precedence"[Define in which order config files and CLI options should be evaluated.]":choice:'_values choice cli-override file-override prefer-file'
+  --editorconfig"[Take .editorconfig into account when parsing configuration.]"
+  --find-config-path"[Find and print the path to a configuration file for the given input file.]":path:'_default'
+  --ignore-path"[Path to a file with patterns describing files to ignore.\nMultiple values are accepted.]":path:'_default'
+  --with-node-modules"[Process files inside \'node_modules\' directory.]"
+  --plugin"[Add a plugin. Multiple plugins can be passed as separate \`--plugin\`s.]":path:'_default'
+# Editor
+  --cursor-offset"[Print (to stderr) where a cursor at the given position would move to after formatting.]":int:'_numbers'
+  --range-end"[Format code ending at a given character offset (exclusive).\nThe range will extend forwards to the end of the selected statement.]":int:'_numbers'
+  --range-start"[Format code starting at a given character offset.\nThe range will extend backwards to the start of the first line containing the selected statement.]":int:'_numbers'
+# Format
+  --single-quote"[Use single quotes instead of double quotes.]"
+  --bracket-spacing"[Print spaces between brackets.]"
+  --bracket-same-line"[Put > of opening tags on the last line instead of on a new line.]"
+  --html-whitespace-sensitivity"[How to handle whitespaces in HTML.]":choice:'_values choice css strict ignore'
+  --single-attribute-per-line"[Enforce single attribute per line in HTML, Vue and JSX.]"
+  --vue-indent-script-and-style"[Indent script and style tags in Vue files.]"
+  --arrow-parens"[Include parentheses around a sole arrow function parameter.]":choice:'_values choice always avoid'
+  --jsx-bracket-same-line"[undefined]"
+  --semi"[Print semicolons.]"
+  --experimental-ternaries"[Use curious ternaries, with the question mark after the condition.]"
+  --jsx-single-quote"[Use single quotes in JSX.]"
+  --quote-props"[Change when properties in objects are quoted.]":choice:'_values choice as-needed consistent preserve'
+  --trailing-comma"[Print trailing commas wherever possible when multi-line.]":choice:'_values choice all es5 none'
+  --prose-wrap"[How to wrap prose.]":choice:'_values choice always never preserve'
+  --end-of-line"[Which end of line characters to apply.]":choice:'_values choice lf crlf cr auto'
+  --parser"[Which parser to use.]":choice:'_values choice flow babel babel-flow babel-ts typescript acorn espree meriyah css less scss json json5 jsonc json-stringify graphql markdown mdx vue yaml glimmer html angular lwc'
+  --print-width"[The line length where Prettier will try wrap.]":int:'_numbers'
+  --tab-width"[Number of spaces per indentation level.]":int:'_numbers'
+  --use-tabs"[Indent with tabs instead of spaces.]"
+  --embedded-language-formatting"[Control how Prettier formats quoted code embedded in the file.]":choice:'_values choice auto off'
+# Other
+  --cache"[Only format changed files. Cannot use with --stdin-filepath.]"
+  --cache-location"[Path to the cache file.]":path:'_default'
+  --cache-strategy"[Strategy for the cache to use for detecting changed files.]":choice:'_values choice metadata content'
+  --color"[Colorize error messages.]"
+  --debug-benchmark"[undefined]"
+  --debug-check"[undefined]"
+  --debug-print-ast"[undefined]"
+  --debug-print-comments"[undefined]"
+  --debug-print-doc"[undefined]"
+  --debug-repeat"[undefined]":int:'_numbers'
+  --error-on-unmatched-pattern"[undefined]"
+  --file-info"[Extract the following info (as JSON) for a given file path. Reported fields:\n* ignored (boolean) - true if file path is filtered by --ignore-path\n* inferredParser (string | null) - name of parser inferred from file path]":path:'_default'
+  '(-h --help)'{-h,--help}"[Show CLI usage, or details about the given flag.\nExample: --help write]":flag:'_default'
+  '(-u --ignore-unknown)'{-u,--ignore-unknown}"[Ignore unknown files.]"
+  --log-level"[What level of logs to report.]":choice:'_values choice silent error warn log debug'
+  --support-info"[Print support information as JSON.]"
+  '(-v --version)'{-v,--version}"[Print Prettier version.]"
+  --stdin-filepath"[Path to the file to pretend that stdin comes from.]":path:'_default'
+  --insert-pragma"[Insert @format pragma into file\'s first docblock comment.]"
+  --require-pragma"[Require either \'@prettier\' or \'@format\' to be present in the file\'s first docblock comment\nin order for it to be formatted.]"
+# Output
+  '(-c --check)'{-c,--check}"[Check if the given files are formatted, print a human-friendly summary\nmessage and paths to unformatted files (see also --list-different).]"
+  '(-l --list-different)'{-l,--list-different}"[Print the names of files that are different from Prettier\'s formatting (see also --check).]"
+  '(-w --write)'{-w,--write}"[Edit files in-place. (Beware!)]"
+# Global
+  --endOfLine"[Which end of line characters to apply.]":choice:'_values choice lf crlf cr auto'
+  --parser"[Which parser to use.]":choice:'_values choice flow babel babel-flow babel-ts typescript acorn espree meriyah css less scss json json5 jsonc json-stringify graphql markdown mdx vue yaml glimmer html angular lwc'
+  --plugins"[Add a plugin. Multiple plugins can be passed as separate \`--plugin\`s.]":path:'_default'
+  --printWidth"[The line length where Prettier will try wrap.]":int:'_numbers'
+  --tabWidth"[Number of spaces per indentation level.]":int:'_numbers'
+  --useTabs"[Indent with tabs instead of spaces.]"
+  --embeddedLanguageFormatting"[Control how Prettier formats quoted code embedded in the file.]":choice:'_values choice auto off'
+# Special
+  --cursorOffset"[Print (to stderr) where a cursor at the given position would move to after formatting.]":int:'_numbers'
+  --filepath"[Specify the input filepath. This will be used to do parser inference.]":path:'_default'
+  --insertPragma"[Insert @format pragma into file\'s first docblock comment.]"
+  --rangeEnd"[Format code ending at a given character offset (exclusive).\nThe range will extend forwards to the end of the selected statement.]":int:'_numbers'
+  --rangeStart"[Format code starting at a given character offset.\nThe range will extend backwards to the start of the first line containing the selected statement.]":int:'_numbers'
+  --requirePragma"[Require either \'@prettier\' or \'@format\' to be present in the file\'s first docblock comment\nin order for it to be formatted.]"
+# Common
+  --singleQuote"[Use single quotes instead of double quotes.]"
+  --bracketSpacing"[Print spaces between brackets.]"
+  --bracketSameLine"[Put > of opening tags on the last line instead of on a new line.]"
+  --singleAttributePerLine"[Enforce single attribute per line in HTML, Vue and JSX.]"
+  --proseWrap"[How to wrap prose.]":choice:'_values choice always never preserve'
+# HTML
+  --htmlWhitespaceSensitivity"[How to handle whitespaces in HTML.]":choice:'_values choice css strict ignore'
+  --vueIndentScriptAndStyle"[Indent script and style tags in Vue files.]"
+# JavaScript
+  --arrowParens"[Include parentheses around a sole arrow function parameter.]":choice:'_values choice always avoid'
+  --jsxBracketSameLine"[Put > on the last line instead of at a new line.]"
+  --semi"[Print semicolons.]"
+  --experimentalTernaries"[Use curious ternaries, with the question mark after the condition.]"
+  --jsxSingleQuote"[Use single quotes in JSX.]"
+  --quoteProps"[Change when properties in objects are quoted.]":choice:'_values choice as-needed consistent preserve'
+  --trailingComma"[Print trailing commas wherever possible when multi-line.]":choice:'_values choice all es5 none'
+  '*:: :_files'
+)
+_arguments $spec && return 0

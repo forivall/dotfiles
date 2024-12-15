@@ -4,3 +4,4 @@
 /_appservices
 /_tsc
 /_eslint
+/prettier_internal_cli.mjs

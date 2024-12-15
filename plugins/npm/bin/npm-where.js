@@ -143,7 +143,7 @@ class Where extends ArboristWorkspaceCmd {
     /**
      * @typedef {object} Expl
      * @property {string} version
-     * @property {{type: string; name: string; spec: string; latest?: import('pacote').AbbreviatedManifest; from: { name: string, version: string; location: string; isWorkspace: boolean, linksIn: { link?: boolean }[]}}[]} dependents
+     * @property {{type: string; name: string; spec: string; latest?: import('pacote').AbbreviatedManifest; from: { name: string, version: string; location?: string; isWorkspace: boolean, linksIn: { link?: boolean }[]}}[]} dependents
      * @property {string} [location]
      * @property {boolean} [extraneous]
      * @property {boolean} [dev]
@@ -208,8 +208,8 @@ class Where extends ArboristWorkspaceCmd {
           .map((dependent) => ({ version, flags, dependent, location }))
           .sort(
             (a, b) =>
-              ~~a.dependent.location.startsWith('node_modules') -
-              ~~b.dependent.location.startsWith('node_modules')
+              ~~a.dependent.location?.startsWith('node_modules') -
+              ~~b.dependent.location?.startsWith('node_modules')
           )
       }
     )
@@ -245,7 +245,9 @@ class Where extends ArboristWorkspaceCmd {
       g[0].location,
       g
         .map((it) => it.dependent.location)
-        .map((l) => (l.startsWith('node_modules') ? l : this.npm.chalk.bold(l)))
+        .map((l) =>
+          (l ?? '').startsWith('node_modules') ? l : this.npm.chalk.bold(l)
+        )
         .join(' '),
     ])
     const data = [header, ...rows]
@@ -266,7 +268,7 @@ class Where extends ArboristWorkspaceCmd {
       .map(({ width }) => width)
       .slice(0, -1)
       .reduce((a, b) => a + Math.min(80, b), 0)
-    const space = otherColumnWidth + header.length
+    const space = otherColumnWidth + header.length + 1
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(
       columns[lastColumn].width,
