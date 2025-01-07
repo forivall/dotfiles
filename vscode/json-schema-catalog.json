@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/schema-catalog.json",
+  "version": 1,
+  "schemas": [
+    {
+      "name": "jj/config.toml",
+      "description": "jj (jujutsu) SCM configuration file",
+      "fileMatch": ["jj/config.toml"],
+      "url": "https://raw.githubusercontent.com/jj-vcs/jj/refs/heads/main/cli/src/config-schema.json"
+    }
+  ]
+}
