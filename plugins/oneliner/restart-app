@@ -1,0 +1,5 @@
+osascript -e "tell application \"$1\"
+  quit
+end tell"
+sleep ${2-0.5}
+open -a $1

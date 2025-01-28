@@ -9,19 +9,27 @@ const {
 const { relative, resolve } = require('path')
 const Npm = require(`${prefix}/lib/node_modules/npm/lib/npm`)
 /** @type {new (npm: Npm) => {npm: Npm, workspaceNames: string[], usageError(): Error}} */
-const ArboristWorkspaceCmd = require(`${prefix}/lib/node_modules/npm/lib/arborist-cmd`)
+const ArboristWorkspaceCmd = require(
+  `${prefix}/lib/node_modules/npm/lib/arborist-cmd`,
+)
 
 /** @type {typeof import('@npmcli/arborist')} */
-const Arborist = require(`${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`)
+const Arborist = require(
+  `${prefix}/lib/node_modules/npm/node_modules/@npmcli/arborist`,
+)
 const npmlog = require(`${prefix}/lib/node_modules/npm/node_modules/proc-log`)
 /** @type {typeof import('proc-log')} */
 const log = !npmlog.silly && npmlog.log ? npmlog.log : npmlog
-const validName = require(`${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`)
+const validName = require(
+  `${prefix}/lib/node_modules/npm/node_modules/validate-npm-package-name`,
+)
 /** @type {typeof import('pacote')} */
 const pacote = require(`${prefix}/lib/node_modules/npm/node_modules/pacote`)
 
 /** @type {typeof import('npm-package-arg')} */
-const npa = require(`${prefix}/lib/node_modules/npm/node_modules/npm-package-arg`)
+const npa = require(
+  `${prefix}/lib/node_modules/npm/node_modules/npm-package-arg`,
+)
 const semver = require(`${prefix}/lib/node_modules/npm/node_modules/semver`)
 
 async function main() {
@@ -56,7 +64,6 @@ class Where extends ArboristWorkspaceCmd {
       path: this.npm.prefix,
       ...this.npm.flatOptions,
     })
-    log.silly('flatOptions', this.npm.flatOptions.omit)
     log.silly('arb.loadActual')
     const tree = await arb.loadActual()
     if (
@@ -91,14 +98,22 @@ class Where extends ArboristWorkspaceCmd {
       let expl = this.explain(node)
       let dependents = expl.dependents
       if (this.npm.flatOptions.omit.includes('dev')) {
-        dependents = expl.dependents.filter((dep) => dep.type !== 'dev')
+        dependents = dependents.filter((dep) => dep.type !== 'dev')
+      }
+      if (this.npm.flatOptions.depth) {
+        const depth = this.npm.flatOptions.depth
+        dependents = dependents.filter(
+          (dep) =>
+            !dep.from.location ||
+            dep.from.location.split(/(^|\/)node_modules/).length - 1 <= depth,
+        )
       }
       expl.dependents = await Promise.all(
         dependents.map(async (dep) => {
           if (dep.spec.startsWith('file:')) {
             const normspec = path.relative(
               process.cwd(),
-              path.resolve(dep.from.location, dep.spec.slice(5))
+              path.resolve(dep.from.location, dep.spec.slice(5)),
             )
             return { ...dep, spec: 'file:' + normspec }
           }
@@ -113,7 +128,7 @@ class Where extends ArboristWorkspaceCmd {
             log.silly('explain', dep.name, 'NOT FOUND')
           }
           return dep
-        })
+        }),
       )
       expls.push(expl)
     }
@@ -189,12 +204,12 @@ class Where extends ArboristWorkspaceCmd {
         const flags = peer
           ? 'peer'
           : devOptional
-          ? 'devopt'
-          : dev
-          ? 'dev'
-          : optional
-          ? 'opt'
-          : ''
+            ? 'devopt'
+            : dev
+              ? 'dev'
+              : optional
+                ? 'opt'
+                : ''
         return dependents
           .map(({ spec, from, latest }) => ({
             spec,
@@ -209,9 +224,9 @@ class Where extends ArboristWorkspaceCmd {
           .sort(
             (a, b) =>
               ~~a.dependent.location?.startsWith('node_modules') -
-              ~~b.dependent.location?.startsWith('node_modules')
+              ~~b.dependent.location?.startsWith('node_modules'),
           )
-      }
+      },
     )
     /** @type {typeof flattened[]} */
     const groups = Object.values(
@@ -221,11 +236,11 @@ class Where extends ArboristWorkspaceCmd {
           v,
           i,
           a,
-          k = `${v.dependent.spec}\t${v.version}\t${v.flags}\t${v.location}`
+          k = `${v.dependent.spec}\t${v.version}\t${v.flags}\t${v.location}`,
         ) => ((r[k] || (r[k] = [])).push(v), r),
         /** @type { [k: string]: typeof flattened } */
-        {}
-      )
+        {},
+      ),
     )
     const hasFlags = groups.some((g) => g[0].flags)
     const hasUpdate = groups.some((g) => g[0].dependent.update)
@@ -246,7 +261,7 @@ class Where extends ArboristWorkspaceCmd {
       g
         .map((it) => it.dependent.location)
         .map((l) =>
-          (l ?? '').startsWith('node_modules') ? l : this.npm.chalk.bold(l)
+          (l ?? '').startsWith('node_modules') ? l : this.npm.chalk.bold(l),
         )
         .join(' '),
     ])
@@ -272,7 +287,7 @@ class Where extends ArboristWorkspaceCmd {
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(
       columns[lastColumn].width,
-      Math.max(20, Math.max(80, process.stdout.columns) - space)
+      Math.max(20, Math.max(80, process.stdout.columns) - space),
     )
 
     return this.rawOutput(
@@ -281,7 +296,7 @@ class Where extends ArboristWorkspaceCmd {
         border: table.getBorderCharacters('void'),
         columnDefault: { paddingLeft: 0, paddingRight: 1 },
         drawHorizontalLine: () => false,
-      })
+      }),
     )
   }
 

@@ -100,7 +100,7 @@ git stashp [apply|pop|drop|push] [<options>] <args>...
 
 semi-interactive stash. pop by default
 --
-h,help      show the help
+h,help      show the help (unless push)
 index       try to reinstate the changes added to the index as well
 d,date=     use date format [default=short-local]
 relative    use relative date format

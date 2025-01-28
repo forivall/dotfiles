@@ -9,6 +9,21 @@ __fix_sl() {
 
 path=($__zsh_coreutils_plugin_location/bin $path);
 
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+export LESS_TERMCAP_md=$(tput bold; tput setaf 3) # cyan
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 5; tput setab 0) # purple on black
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
+# export GROFF_NO_SGR=1
+
 # ls
 if whence eza > /dev/null ; then
   alias ls="eza --group-directories-first -F --color=auto"
@@ -152,6 +167,7 @@ function diff() {
   local usepager=false
   local usecolor=false
   local unified=true
+  local checksame=true
   if [[ -t 1 ]]; then
     usepager=true
     usecolor=true
@@ -169,9 +185,12 @@ function diff() {
     else
       args+=($arg)
     fi
+    if [[ $arg == /dev/fd/* ]]; then
+      checksame=false
+    fi
   done
   local differ=true
-  if command diff -q "${args[@]}" > /dev/null; then
+  if $checksame && command diff -q "${args[@]}" > /dev/null; then
     differ=false
     echo "Files have the same contents"
   fi
@@ -344,3 +363,7 @@ autoload run-help-svn
 autoload run-help-svk
 unalias run-help 2> /dev/null || true
 alias help=run-help
+
+autoload -Uz _xargs_better_completion
+autoload -Uz _xargs_command_arguments
+compdef _xargs_better_completion xargs

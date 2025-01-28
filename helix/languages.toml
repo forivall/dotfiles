@@ -7,7 +7,7 @@ args = ["--stdio"]
 command = "vscode-eslint-language-server"
 
 [language-server.eslint.config]
-# format = true
+format = { enable = true }
 nodePath = ""
 # onIgnoredFiles = "off"
 # packageManager = "yarn"

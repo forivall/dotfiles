@@ -36,4 +36,4 @@ git status --porcelain "$@" $(default_paths) |
   sd '^\?\? '"$cwd_prefix"'(.+)$' "${fg[magenta]}\$1${reset_color}" |
   sd '^\?\? "'"$cwd_prefix"'(.+)"$' "${fg[magenta]}\"\$1\"${reset_color}" |
   git column --nl='
-   ' --mode=dense --padding=2 --width=$COLUMNS ) | sd '   $' ''
+   ' --mode=dense --padding=3 --width=$COLUMNS) | sd '   $' ''

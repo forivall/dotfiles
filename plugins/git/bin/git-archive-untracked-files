@@ -34,7 +34,11 @@ mkparentdir () {
 OIFS=$IFS
 IFS="
 "
-for line in $(git status --porcelain=2 .) ; do
+statusArgs=("$@")
+if [[ "${#statusArgs[@]}" == 0 ]]; then
+  statusArgs+=(".")
+fi
+for line in $(git status --porcelain=2 "${statusArgs[@]}") ; do
   if [[ "$line" == \?\ * ]] ; then
     f=${line#? }
     echo $f

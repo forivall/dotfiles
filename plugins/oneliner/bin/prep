@@ -31,7 +31,13 @@ if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
 then
   run corepack prepare
-  run ${jsPackageManager%@*} install
+  if [[ $jsPackageManager == pnpm@* ]] &&
+    jq -e -r '.name == "definitely-typed"' package.json > /dev/null;
+  then
+    run pnpm install --filter .
+  else
+    run ${jsPackageManager%@*} install
+  fi
 elif [[ -f yarn.lock ]]; then
   COREPACK_ENABLE_AUTO_PIN=0 run yarn
 elif [[ -f pnpm-lock.yaml ]]; then
@@ -42,13 +48,18 @@ elif [[ -f package-lock.json ]]; then
   run npm install
 elif [[ -f package.json ]]; then
   local q p=$PWD
-  while q=$p; p=${p:h}; [[ $p != '/' && $p != $q ]] && ! ( [[ -f $p/package.json ]] && jq --exit-status .workspaces $p/package.json > /dev/null ); do :; done
+  while
+    q=$p; p=${p:h};
+    [[ $p != '/' && $p != $q ]] &&
+    ! ( [[ -f $p/package.json ]] && jq --exit-status .workspaces $p/package.json > /dev/null ) &&
+    ! [[ -f $p/pnpm-workspace.yaml ]]
+  do :; done
   if [[ $p == '/' ]]; then
     echo '# no lockfile found or packageManager defined, using npm'
     run npm install
   else
     source ${0:A:h:h:h}/jump/loadnameddirs.zsh
-    echo '# `package.json` found in in an npm workspace. Run `npm i` or `prep` in `'$(cd $p; print -P '%~')'` instead'
+    echo '# `package.json` found in an npm workspace. Run `npm i` or `prep` in `'$(cd $p; print -P '%~')'` instead'
   fi
 fi
 

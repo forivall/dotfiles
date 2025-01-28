@@ -1,0 +1,2 @@
+perl -ne 'chomp($_); print quotemeta($_);'
+# alternative: sed 's/[^^]/[&]/g; s/\^/\\^/g'

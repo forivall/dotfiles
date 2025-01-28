@@ -1,0 +1,11 @@
+_xargs_command_arguments() {
+  word="${=words[1]}"
+  comp=${_comps[$word]}
+  if [[ -n "$comp" ]]; then
+    $comp
+  else
+    _normal
+  fi
+}
+
+_xargs_command_arguments "$@"

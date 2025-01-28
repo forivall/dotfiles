@@ -1,0 +1,1 @@
+delta --file-transformation='s/.*//' --file-modified-label='' --file-decoration-style='' --hunk-header-decoration-style='' --hunk-label='XXX' --hunk-header-style='' | ansifilter | grep -v -e '^XXX ' -e '^$'
