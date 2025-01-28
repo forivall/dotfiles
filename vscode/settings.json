@@ -248,6 +248,7 @@
     "*.zip": "default"
   },
   "workbench.list.smoothScrolling": true,
+  "workbench.preferredDarkColorTheme": "Boxy Tomorrow",
   "workbench.preferredHighContrastColorTheme": "Monochrome Dark Amplified (fork by dkamyshov)",
   "workbench.preferredHighContrastLightColorTheme": "Monochrome Light Amplified (fork by dkamyshov)",
   "workbench.preferredLightColorTheme": "Boxy Yesterday",
@@ -297,6 +298,7 @@
     "workbench.editorAssociations",
     "workbench.iconTheme",
     "workbench.list.smoothScrolling",
+    "workbench.preferredDarkColorTheme",
     "workbench.preferredHighContrastColorTheme",
     "workbench.preferredHighContrastLightColorTheme",
     "workbench.preferredLightColorTheme",
@@ -3343,7 +3345,6 @@
   "vscode-json-editor.theme": "dark",
   "vscodeGoogleTranslate.preferredLanguage": "English",
   "vsintellicode.modify.editor.suggestSelection": "choseToUpdateConfiguration",
-  "workbench.preferredDarkColorTheme": "Boxy Tomorrow",
   "xml.server.binary.trustedHashes": [
     "df9d4e4bb37d291396983519e0fc0115e7dfef3ed755e359a2480e3e86b1ed4d"
   ],
