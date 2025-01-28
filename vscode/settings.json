@@ -14,8 +14,10 @@
   // "editor.fontVariations": "'CASL' 0.5, 'MONO' 1",
   "editor.codeLensFontFamily": "Input Sans",
   "debug.console.fontSize": 13.6,
-  "editor.codeLensFontSize": 10,
   "editor.fontFamily": "Fantasque Sans Mono",
+  "editor.minimap.sectionHeaderFontSize": 8,
+  "editor.codeLensFontSize": 10,
+  "editor.fontVariations": false,
   // "editor.hint"
   // "editor.fontFamily": "FantasqueSansM Nerd Font Mono",
   "editor.fontLigatures": false,
@@ -45,12 +47,28 @@
   "workbench.activityBar.iconClickBehavior": "focus",
   // "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
+    "[Abyss]": {
+      // empty
+    },
     "[Boxy Tomorrow]": {
+      "editor.foldBackground": "#d35f0d0c",
       "activityBar.activeBorder": "#ffffffee",
       // "editorCursor.background": "#ff0000",
+      "editorCommentsWidget.rangeActiveBackground": "#de68ff10",
+      "editor.hoverHighlightBackground": "#4da6ff10",
       "editorCursor.foreground": "#e6e9e7bf",
-      "editor.stackFrameHighlightBackground": "#ccfd3c14",
-      "editorStickyScroll.background": "#1d1f2178",
+      "editor.findMatchBackground": "#78c9db40",
+      "editor.findMatchHighlightBackground": "#e19e7130",
+      "editor.wordHighlightStrongBackground": "#ed85ff0d",
+      "editor.wordHighlightStrongBorder": "#ed85ff2d",
+      "editor.wordHighlightBackground": "#ea72ff0d",
+      "editor.wordHighlightBorder": "#ea72ff2d",
+      "editor.selectionBackground": "#523520a0",
+      "editor.selectionHighlightBackground": "#cdb6650d",
+      "editor.selectionHighlightBorder": "#cdb6652d",
+      // "editor.stackFrameHighlightBackground": "#ccfd3c14",
+      "editor.stackFrameHighlightBackground": "#ccfd3c08",
+      "editor.lineHighlightBackground": "#ffffff08",
       "editorInlayHint.background": "#1a3f3c",
       "editorInlayHint.foreground": "#b5d1ce",
       "editorInlayHint.typeBackground": "#392141",
@@ -100,6 +118,7 @@
       "editor.foldBackground": "#6035780c",
       "editor.stackFrameHighlightBackground": "#dbff8c73",
       "editor.stackFrameHighlightBackground": "#c8ff2449",
+      "editor.stackFrameHighlightBackground": "#ceee6f3d",
       "editorCommentsWidget.rangeActiveBackground": "#cb5ae91a",
       "activityBarBadge.background": "#007acca0",
       "activityBar.background": "#cabaaa",
@@ -182,7 +201,6 @@
       "editorBracketHighlight.foreground4": "#7fc9ee",
       "editorBracketHighlight.foreground5": "#b0cdc8",
       "editorBracketHighlight.foreground6": "#63d47b",
-
       "terminal.ansiBlack": "#1d1f21",
       "terminal.ansiBrightBlack": "#787b7a",
       "terminal.ansiRed": "#d77b79",
@@ -229,7 +247,6 @@
     "*.ipynb": "jupyter.notebook.ipynb",
     "*.zip": "default"
   },
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.list.smoothScrolling": true,
   "workbench.preferredHighContrastColorTheme": "Monochrome Dark Amplified (fork by dkamyshov)",
   "workbench.preferredHighContrastLightColorTheme": "Monochrome Light Amplified (fork by dkamyshov)",
@@ -446,7 +463,7 @@
   "editor.cursorBlinking": "phase",
   "editor.cursorSurroundingLines": 2,
   "editor.detectIndentation": true,
-  "editor.foldingImportsByDefault": true,
+  "editor.foldingImportsByDefault": false,
   "editor.formatOnPaste": false,
   "editor.formatOnSaveMode": "modifications",
   "editor.gotoLocation.multipleDeclarations": "gotoAndPeek",
@@ -912,36 +929,31 @@
         },
         // // regex
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
-        {
-          "scope": "string.regexp",
+        { "scope": "string.regexp",
           "settings": {"foreground": "#b5bd68"}
         },
-        {
-          "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
+        { "scope": "string.regexp constant.other.character-class.regexp",
+          "settings": {"foreground": "#f0c674"}
+        },
+        { "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#b294bb"}
         },
-        {
-          "scope": "string.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#8abeb7"}
         },
-        {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#74e0d2"}
         },
-        {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#8cca99"}
         },
-        {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#7fc9ee"}
         },
-        {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#b0cdc8"}
         },
-        {
-          "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
+        { "scope": "string.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#63d47b"}
         },
         { "scope": "text.jwt meta.separator",
@@ -1047,6 +1059,7 @@
         // // regex
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
         {"scope": "string.regexp", "settings": {"foreground": "#b5bd68"}},
+        {"scope": "string.regexp constant.other.character-class.regexp", "settings": {"foreground": "#f0c674"}},
         {
           "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#b294bb"}
@@ -1120,20 +1133,18 @@
   "terminal.explorerKind": "integrated",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.experimentalUseTitleEvent": true,
-  "terminal.integrated.letterSpacing": 1,
   "terminal.integrated.lineHeight": 1.04,
   // "terminal.integrated.cursorStyle": "line",
   // "terminal.integrated.cursorWidth": 6,
   // "terminal.integrated.rendererType": "dom",
   "terminal.integrated.minimumContrastRatio": 3,
   "terminal.integrated.persistentSessionReviveProcess": "onExit",
-  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.scrollback": 5000,
   "terminal.integrated.splitCwd": "inherited",
   "terminal.integrated.stickyScroll.enabled": true,
   "terminal.integrated.enableImages": true,
   "terminal.integrated.enableFileLinks": "notRemote",
   "terminal.integrated.shellIntegration.suggestEnabled": true,
-  "terminal.integrated.tabs.location": "left",
   "terminal.integrated.tabs.separator": " ",
   "terminal.integrated.tabs.showActions": "always",
   "terminal.integrated.tabs.showActiveTerminal": "always",
@@ -1210,6 +1221,7 @@
     "explorer.newFile": "touch",
     "explorer.newFolder": "mkdir",
     "extension.multicommand.saveAndClose": "wq",
+    "workbench.action.files.save": "w",
     "workbench.action.closeAllEditors": "qall",
     "workbench.action.files.saveAll": "wall"
   },
@@ -1392,7 +1404,7 @@
         "f": { "text": "Goto files in selection (hsplit)",              "command": "???"                                                   },
         "F": { "text": "Goto files in selection (vsplit)",              "command": "???"                                                   },
         "Q": { "text": "Close window",                                  "command": "workbench.action.closeEditorsAndGroup"                 },
-        "q": { "text": "Close current tab",                             "command": "workbench.action.closeEditor"                 },
+        "q": { "text": "Close current tab",                             "command": "workbench.action.closeActiveEditor"                    },
         "o": { "text": "Close all other windows (Current window only)", "command": "dance.run", "args": [{ "commands": ["workbench.action.focusActiveEditorGroup", "workbench.action.closeEditorsInOtherGroups"] }] },
         "h": { "text": "Jump to the split on the left",                 "command": "workbench.action.focusLeftGroup"                       },
         "j": { "text": "Jump to the split below",                       "command": "workbench.action.focusBelowGroup"                      },
@@ -2342,6 +2354,14 @@
     "editor.wrappingIndent": "indent",
     "editor.wrappingStrategy": "simple"
   },
+  "[magit]": {
+    "editor.lineNumbers": "off",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.folding": true,
+    "editor.foldingStrategy": "auto",
+    "editor.showFoldingControls": "always",
+  },
   "[mermaid]": {},
   "[mjml]": {
     "editor.defaultFormatter": "DanielKnights.vscode-mjml",
@@ -2366,9 +2386,9 @@
     "editor.formatOnType": true,
     "editor.showFoldingControls": "always",
     "explicitFolding.rules": [
-      {
-        "indentation": true
-      },
+      // {
+      //   "indentation": true
+      // },
       {
         "beginRegex": "\"\"\"",
         "endRegex": "\"\"\"",
@@ -2559,11 +2579,15 @@
     "resolveSourceMapLocations": [
       "${workspaceFolder}/**"
     ],
+    "sourceMapPathOverrides": {
+      "webpack://?:*/*": "${workspaceFolder}/*",
+      "webpack:///./~/*": "${workspaceFolder}/node_modules/*",
+      "meteor://💻app/*": "${workspaceFolder}/*"
+    },
     "outFiles": [
       "${workspaceFolder}/**/*.(m|c|)js",
     ]
   },
-  "debug.javascript.unmapMissingSources": true,
   "debug.onTaskErrors": "debugAnyway",
   "diffEditor.codeLens": true,
   "emmet.preferences": {},
@@ -2585,7 +2609,8 @@
     // ".*/pyproject\\.toml": "https://json.schemastore.org/pyproject.json"
   },
   "evenBetterToml.schema.catalogs": [
-    "https://www.schemastore.org/api/json/catalog.json"
+    "https://www.schemastore.org/api/json/catalog.json",
+    "https://raw.githubusercontent.com/forivall/dotfiles/refs/heads/osx/vscode/json-schema-catalog.json"
   ],
   "explicitFolding.notification": "major",
   "explorer.confirmDragAndDrop": false,
@@ -2634,7 +2659,7 @@
     "gitconfig": "gitconfig",
     "oglrc": "hocon",
     "pdm.lock": "toml",
-    "tslint.json": "jsonc"
+    "tslint.json": "jsonc",
   },
   "files.exclude": {
     "**/.DS_Store": true,
@@ -2867,6 +2892,7 @@
   "material-icon-theme.activeIconPack": "react_redux",
   "material-icon-theme.folders.theme": "specific",
   "material-icon-theme.hidesExplorerArrows": true,
+  "catppuccin-icons.hidesExplorerArrows": true,
   "mdb.useDefaultTemplateForPlayground": false,
   "mermaid-editor.generate.height": 800,
   "mermaid-editor.preview.backgroundColor": "grey",
@@ -3196,7 +3222,7 @@
     "VISUAL": null,
     "CW_NEW_SESSION": "1"
   },
-  "terminal.integrated.gpuAcceleration": "auto",
+  "terminal.integrated.gpuAcceleration": "off",
   "testExplorer.codeLens": false,
   "tfvc.location": "/usr/local/bin/tf",
   "thunder-client.showActivityFromCollection": true,
@@ -3377,7 +3403,7 @@
     }
   ],
   "shell-syntax.defaultShell": "zsh",
-  "symlink-follow.autoFollow": true,
+  "symlink-follow.autoFollow": false,
   "symlink-follow.showFileInExplorerAfterSymlinkFollow": true,
   "testFileMaker.testFileName": "{FileName}.spec{FileNameExtention}",
   "testFileMaker.currentFilePathRoot": "./",
@@ -3387,6 +3413,9 @@
   // new items
   "terminal.integrated.persistentSessionScrollback": 1000,
   "terminal.integrated.enableBell": true,
+  "[dart][javascript][mongodb]": {
+    "editor.wordBasedSuggestions": "off"
+  },
   "nxConsole.enableGenerateFromContextMenu": false,
   "editorconfig.contextMenu.enabled": false,
   "javascript.inlayHints.variableTypes.enabled": true,
@@ -3397,12 +3426,12 @@
     "--max-line-length=88"
   ],
   "search.followSymlinks": false,
-  "diffEditor.hideUnchangedRegions.enabled": true,
-  "diffEditor.renderSideBySide": false,
+  "diffEditor.renderSideBySide": true,
   "typescriptFold.autoFold": false,
   "typescriptFold.togglePerFile": true,
   "betterFolding.excludedLanguages": [
-    "javascript", "typescript"
+    "javascript",
+    "typescript"
   ],
   "accessibility.voice.autoSynthesize": "on",
   "accessibility.signals.terminalBell": {
@@ -3413,15 +3442,19 @@
     "https://raw.githubusercontent.com/forivall/dotfiles/osx/vscode/customui.css"
   ],
   "eslint.lintTask.options": ". --report-unused-disable-directives-severity warn",
+  "nxConsole.showNodeVersionOnStartup": false,
+  "diffEditor.maxComputationTime": 0,
   "diffEditor.experimental.showMoves": true,
-  "cloudcode.duetAI.inlineSuggestions.enableAuto": false,
+  "security.promptForLocalFileProtocolHandling": false,
   "eslint.run": "onSave",
   "interactiveWindow.executeWithShiftEnter": true,
   "debugpy.debugJustMyCode": false,
   "application.shellEnvironmentResolutionTimeout": 30,
+  "workbench.editor.closeEmptyGroups": false,
+  "dependi.npm.ignoreLinePattern": "*@ttc/*",
   "vscode-graphql.cacheSchemaFileForLookup": true,
   "vscode-graphql.schemaCacheTTL": 120000,
-  "vscode-graphql.debug": true,
+  "vscode-graphql.debug": false,
   "typescript.inlayHints.variableTypes.enabled": true,
   "diffEditor.experimental.useTrueInlineView": true,
   "diffEditor.experimental.showEmptyDecorations": true,
@@ -3432,7 +3465,37 @@
   "terminal.integrated.suggest.enabled": true,
   "debug.showVariableTypes": true,
   "search.showLineNumbers": true,
+  "jest.shell": {
+    "path": "direnv",
+    "args": ["exec", ".", "zsh"]
+  },
   "markdown.extension.toc.updateOnSave": false,
   "workbench.layoutControl.enabled": false,
   "playwright.reuseBrowser": true,
+  "helium-icon-theme.hidesExplorerArrows": true,
+  "helium-icon-theme.saturation": 0.8,
+  "helium-icon-theme.activeIconPack": "angular_ngrx",
+  "catppuccin-noctis-icons.hidesExplorerArrows": false,
+  "magit.display-buffer-function": "same-column",
+  "magit.forge-enabled": true,
+  "workbench.iconTheme": "catppuccin-mocha",
+  "gitlens.telemetry.enabled": false,
+  "workbench.activityBar.location": "bottom",
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.useInlineViewWhenSpaceIsLimited": false,
+  "gitlens.hovers.autolinks.enabled": false,
+  "window.customTitleBarVisibility": "never",
+  "chat.editor.fontSize": 14,
+  "typescript.experimental.expandableHover": true,
+  "gitlens.views.workspaces.compact": true,
+  "diffEditor.maxFileSize": 10,
+  "geminicodeassist.codeGenerationPaneViewEnabled": true,
+  "geminicodeassist.inlineSuggestions.enableAuto": false,
+  "eslint.runtime": "/Users/emily.klassen/.nvm/versions/node/v22.11.0/bin/node",
+  "testing.showCoverageInExplorer": false,
+  "geminicodeassist.project": "ttc-labs",
+  "extensions.experimental.affinity": {
+    "esbenp.prettier-vscode": 1,
+    "gregoire.dance": 2
+  },
 }

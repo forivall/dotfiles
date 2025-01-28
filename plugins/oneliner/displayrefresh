@@ -1,0 +1,1 @@
+() { current="$(displayplacer list | grep -A2 "Execute the command below to set your screens to the current arrangement" | tail -1)"; eval "${current:s/ hz:120 / hz:60 }"; eval "$current"; }

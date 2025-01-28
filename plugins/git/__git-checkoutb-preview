@@ -7,6 +7,7 @@ if [[ $1 == --*\ * ]]; then
   args=(${1%% *} ${1#--* })
 fi
 
+showarg=${args[1]}
 if [[ $1 == '--show-current' ]] || [[ $1 == '--describe' ]]; then
   cd $2
   print -P '%~'
@@ -25,11 +26,10 @@ if [[ $1 == '--describe' ]]; then
 else
   git -c color.branch=always branch -vvv ${args[@]}
 fi
-showarg=${args[1]}
 if [[ $showarg == --remotes ]]; then
   showarg=${args[2]}
 elif [[ $showarg == --show-current ]] || [[ $showarg == '--describe' ]]; then
   showarg=HEAD
 fi
 
-git show --color=always --no-patch --pretty="format:%C(magenta)♘ %an <%ae>%Creset%n%C(blue)✍ %aD%C(reset) %C(cyan)♔ %cD%Creset%n" $showarg
+git show --color=always --no-patch --pretty="format:%C(magenta)♘ %an <%ae>%Creset%n%C(blue)✍ %aD%C(reset) %C(cyan)♔ %cD%Creset%n" "${showarg[@]}"

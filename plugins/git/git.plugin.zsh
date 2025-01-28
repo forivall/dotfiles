@@ -60,7 +60,7 @@ alias gf='git fetch'
 alias gfo='git fetch origin'
 alias gfa='git fetch --all'
 
-alias gg="git grep-pretty"
+# alias gg="git grep-pretty"
 
 alias gl='git l'
 alias gla='git la'

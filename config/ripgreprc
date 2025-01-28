@@ -9,3 +9,6 @@
 
 --max-columns
 2048
+
+--hyperlink-format
+vscode

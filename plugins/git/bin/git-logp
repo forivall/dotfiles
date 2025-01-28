@@ -79,7 +79,7 @@ if $follow; then
   local followfiles=($(git log --name-only --relative --format= --follow "${args[@]}"| huniq))
   dashdash="$followfiles "
 elif ! $allfiles; then
-  $allfiles || dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
+  $allfiles || dashdash="$(git rev-parse --sq --no-flags --no-revs -- $fileargs) "
 fi
 
 deltaOpts=()
