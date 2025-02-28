@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+local issue=$1
+shift
+git -c core.editor="node -e \"
+var m,r,i=$issue,f=process.argv[1];(()=>{
+m=fs.readFileSync(f,'utf8')
+if(m.includes('#'+i))return
+r='[#'+i+']'
+i=m.indexOf('\\\\n')
+fs.writeFileSync(f,m.slice(0,i)+(i<=(72-1-r.length)?' ':'\\\\n\\\\n')+r+m.slice(i))
+})()\"" revise -i "$@"

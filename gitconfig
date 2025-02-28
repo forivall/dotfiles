@@ -70,7 +70,8 @@
 	last = -c pager.show=off show --oneline --name-status --decorate
 	last2 = last --name-status --pretty=twomore
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
-	lr = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
+	lr = log --pretty=oneline --abbrev-commit --decorate --reverse
+	lm = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
 	lu = logu --pretty=oneline --abbrev-commit --decorate --graph
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
