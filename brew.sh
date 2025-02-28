@@ -39,7 +39,7 @@ brew install python-markdown
 python3 -m pip install pypi-command-line
 # brew install perl cpanminus cpansearch
 
-brew install jq yq httpie http-prompt curlie xh brimdata/tap/zq dasel
+brew install jq yq httpie http-prompt curlie xh brimdata/tap/zq dasel miller
 brew install --cask httpie
 # brew install mitmproxy
 brew install --no-binaries python-yq
@@ -67,6 +67,7 @@ ln -s ~/.config/bat/themes "$(realpath ./bat/themes)"
 bat cache --build
 
 brew install git-delta -s --HEAD --verbose
+brew install difftastic
 # brew install nushell
 
 brew install go
