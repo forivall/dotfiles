@@ -306,3 +306,28 @@
 	ui = auto
 [help]
 	autocorrect = prompt
+[tig]
+	main-view-date = relative-compact
+	# main-view-date = custom
+	# main-view-date-format = "%Y-%b-%d%X"
+	main-view-author-width = 12
+	main-view-id = true
+	# main-view-ref = true
+	mouse = true
+	main-options = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/jj/**
+	line-graphics = utf-8
+[tig "color"]
+	cursor = default default underline
+	status = magenta black bold
+	title-focus = magenta black bold
+	title-blur = magenta black
+	graph-commit = default default
+	id = yellow default
+	author = magenta default
+	main-head = cyan default bold
+	main-remote = red default bold
+	main-tracked = green default
+	main-ref = green default bold
+	main-tag = yellow default bold
+	main-local-tag = magenta default bold
+
