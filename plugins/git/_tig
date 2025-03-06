@@ -1,0 +1,67 @@
+#compdef tig
+#description tui for git
+
+_tig() {
+  _arguments -C -S -s \
+    '-C=[start in path]' \
+    ': :->command' \
+    '*::: := ->option-or-argument'
+
+  case $state in
+    (command)
+
+      local -a commands
+      commands=(
+        blame:'start a blame viewer'
+        grep:'print lines matching a pattern'
+        log:'show commit logs'
+        reflog:'manage reflog information'
+        refs:'display branches, remotes and tags'
+        stash:'manage stash entries'
+        status:'show working-tree status'
+        show:'show various types of objects'
+      )
+
+      _alternative \
+        'commands:: _describe -t commands command commands' \
+        'arguments:: _git-log' && ret=0
+    ;;
+    (option-or-argument)
+      curcontext=${curcontext%:*}-$line[1]:
+      case $line[1] in
+        (-*|--)
+          words=(log "${words[@]:1}")
+          _git-log
+        ;;
+        (blame)
+          _git-blame
+        ;;
+        (grep)
+          _git-grep
+        ;;
+        (log)
+          _git-log
+        ;;
+        (reflog)
+          _git-reflog
+        ;;
+        (refs)
+          _git-branch
+        ;;
+        (stash)
+          _git-stash
+        ;;
+        (status)
+          _git-status
+        ;;
+        (show)
+          _git-show && ret=0
+        ;;
+      esac
+  esac
+  return ret
+}
+
+_git
+
+_tig
