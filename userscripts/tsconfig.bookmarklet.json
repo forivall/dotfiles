@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "module": "None",
+    "moduleDetection": "force",
+    "noEmit": true,
+    "target": "ES2021",
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "types": ["navigation-api-types"]
+  },
+  "exclude": ["*.user.js"],
+  "include": ["*.js"]
+}

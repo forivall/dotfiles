@@ -3,6 +3,7 @@
 'use strict'
 
 const columns = require('cli-columns')
+const terminalLink = require('terminal-link')
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
@@ -20,6 +21,21 @@ async function readAll(stream) {
 }
 
 const makeTrunc = (l) => (s) => s.length >= l ? s.slice(0, l - 1) + '…' : s
+/** @type {import('type-fest').SetParameterType<typeof terminalLink, { 1?: string }>} */
+const maybeTerminalLink = (text, url, options) =>
+  url ? terminalLink(text, url, options) : text
+/**
+ * @template T
+ * @param {Iterable<T>} a
+ * @param {Iterable<T>} b
+ */
+const difference = (a, b) => {
+  const s = new Set(a)
+  for (const item of b) {
+    s.delete(item)
+  }
+  return s
+}
 
 async function main() {
   const stdin = await readAll(process.stdin)
@@ -27,19 +43,20 @@ async function main() {
   const manifest = JSON.parse(stdin)
 
   let packageJson = { scripts: {} }
+  let projectPath, packageJsonPath
   try {
     const nxDevkit = Module.createRequire(process.cwd() + '/dummy.js')(
       '@nx/devkit'
     )
-    const jsonPath = path.join(
-      nxDevkit.workspaceRoot,
-      manifest.root,
-      'package.json'
-    )
+    projectPath = path.join(nxDevkit.workspaceRoot, manifest.root)
+    const jsonPath = path.join(projectPath, 'package.json')
     packageJson = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8' }))
+    packageJsonPath = jsonPath
   } catch {}
 
   const info = {
+    packageJsonPath,
+    projectPath,
     name: chalk.green(manifest.name),
     root: chalk.green(manifest.root),
     targets: manifest.targets || {},
@@ -54,7 +71,16 @@ async function main() {
   }
 
   console.log(
-    `${chalk.underline.bold(info.name)} @ ${chalk.underline.bold(info.root)}` +
+    `${chalk.underline.bold(
+      maybeTerminalLink(
+        info.name,
+        projectPath && 'vscode://file' + path.join(projectPath, 'project.json')
+      )
+    )} @ ${chalk.underline.bold(info.root)}` +
+      ((packageJsonPath || '') &&
+        chalk.dim(
+          terminalLink('/package.json', 'vscode://file' + packageJsonPath)
+        )) +
       ' | ' +
       info.projectType
   )
@@ -72,6 +98,13 @@ async function main() {
   const flatTargets = {}
   const wrapQuotes = (s) => (s.includes(':') ? `"${s}"` : s)
   for (const [target, config] of Object.entries(info.targets)) {
+    if (
+      target === 'nx-release-publish' &&
+      packageJsonPath &&
+      isNxReleaseConfig(config)
+    ) {
+      continue
+    }
     flatTargets[wrapQuotes(target)] = config
     if (!['nx:run-script', 'nx:run-commands'].includes(config.executor)) {
       continue
@@ -149,6 +182,23 @@ async function main() {
     }
   }
 }
+
+/**
+ * @param {import('../types').TargetConfiguration<any>} config
+ */
+const isNxReleaseConfig = (config) =>
+  difference(Object.keys(config), [
+    'configurations',
+    'dependsOn',
+    'executor',
+    'options',
+  ]).size === 0 &&
+  config.executor === '@nx/js:release-publish' &&
+  Array.isArray(config.dependsOn) &&
+  config.dependsOn.length === 1 &&
+  config.dependsOn[0] === '^nx-release-publish' &&
+  Object.keys(config.options.length === 0) &&
+  Object.keys((config.configurations ?? {}).length === 0)
 
 /** @param {import('../types').TargetDependencyConfig | string} dep */
 function prettyDep(dep) {

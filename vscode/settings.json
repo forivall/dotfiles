@@ -57,13 +57,15 @@
       "editorCommentsWidget.rangeActiveBackground": "#de68ff10",
       "editor.hoverHighlightBackground": "#4da6ff10",
       "editorCursor.foreground": "#e6e9e7bf",
-      "editor.findMatchBackground": "#78c9db40",
-      "editor.findMatchHighlightBackground": "#e19e7130",
+      "editor.findMatchBackground": "#79e4fc08",
+      "editor.findMatchBorder": "#79e4fc20",
+      "editor.findMatchHighlightBackground": "#e171cb20",
+      "editor.findMatchHighlightBackground": "#5e3a5960",
       "editor.wordHighlightStrongBackground": "#ed85ff0d",
       "editor.wordHighlightStrongBorder": "#ed85ff2d",
       "editor.wordHighlightBackground": "#ea72ff0d",
       "editor.wordHighlightBorder": "#ea72ff2d",
-      "editor.selectionBackground": "#523520a0",
+      "editor.selectionBackground": "#bd4f0035",
       "editor.selectionHighlightBackground": "#cdb6650d",
       "editor.selectionHighlightBorder": "#cdb6652d",
       // "editor.stackFrameHighlightBackground": "#ccfd3c14",
@@ -118,7 +120,7 @@
       "editor.foldBackground": "#6035780c",
       "editor.stackFrameHighlightBackground": "#dbff8c73",
       "editor.stackFrameHighlightBackground": "#c8ff2449",
-      "editor.stackFrameHighlightBackground": "#ceee6f3d",
+      "editor.stackFrameHighlightBackground": "#d0e59143",
       "editorCommentsWidget.rangeActiveBackground": "#cb5ae91a",
       "activityBarBadge.background": "#007acca0",
       "activityBar.background": "#cabaaa",
@@ -239,7 +241,6 @@
   "workbench.editor.limit.perEditorGroup": true,
   "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
-  "workbench.editor.scrollToSwitchTabs": true,
   "workbench.editor.splitInGroupLayout": "vertical",
   "workbench.editor.splitSizing": "split",
   "workbench.editor.tabSizing": "shrink",
@@ -467,7 +468,7 @@
   "editor.detectIndentation": true,
   "editor.foldingImportsByDefault": false,
   "editor.formatOnPaste": false,
-  "editor.formatOnSaveMode": "modifications",
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.gotoLocation.multipleDeclarations": "gotoAndPeek",
   "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
   "editor.gotoLocation.multipleImplementations": "gotoAndPeek",
@@ -790,7 +791,7 @@
           }
         },
         { "scope": "constant.character.escape",
-          "settings": {"foreground": "#cea463"}
+          "settings": {"foreground": "#b08a00"}
         },
         // // regex
         // { "scope": "meta.metadata.simple", "settings": { "foreground": "#f0c674" } },
@@ -799,6 +800,9 @@
         },
         { "scope": "string.regexp keyword.operator, meta.embedded.block.js_regexp meta.embedded.block.js_regexp keyword.operator, keyword.operator, meta.embedded.block.js_regexp keyword.operator",
           "settings": {"foreground": "#8959a8"}
+        },
+        { "scope": "string.regexp constant, meta.embedded.block.js_regexp constant",
+          "settings": {"foreground": "#b08a00"}
         },
         { "scope": "string.regexp meta.group.regexp punctuation, meta.embedded.block.js_regexp meta.group.regexp punctuation",
           "settings": {"foreground": "#3e999f"}
@@ -1116,7 +1120,6 @@
   "search.searchEditor.defaultNumberOfContextLines": null,
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "search.searchEditor.reusePriorSearchConfiguration": true,
-  "search.seedOnFocus": true,
   "search.smartCase": true,
   "search.useGlobalIgnoreFiles": true,
   "search.useIgnoreFiles": true,
@@ -1241,6 +1244,7 @@
         // "g": { "text": "line number <n> else file start", "command": "dance.select.lineStart", "args": [{ "count": 1          }]     },
         "e": { "text": "last line",                       "command": "dance.select.lineStart", "args": [{ "count": 2147483647 }]     },
         "f": { "text": "files in selection",              "command": "editor.action.openLink"                                        },
+        "F": { "text": "files picker",                    "command": "editor.action.openLink"                                        },
         "h": { "text": "line start",                      "command": "dance.select.lineStart"                                        },
         "l": { "text": "line end",                        "command": "dance.run", "args": [{
           "code": [
@@ -1261,8 +1265,14 @@
         "m": { "text": "last modified file",              "command": "???"                                                     },
         "n": { "text": "next buffer",                     "command": "workbench.action.nextEditor"                             },
         "p": { "text": "previous buffer",                 "command": "workbench.action.previousEditor"                         },
+        ".": { "text": "last modification",               "command": "workbench.action.navigateToLastEditLocation"                         },
         "N": { "text": "next window tab",                 "command": "workbench.action.showNextWindowTab"                      },
         "P": { "text": "previous window tab",             "command": "workbench.action.showPreviousWindowTab"                  },
+        "[": { "text": "parent fold",                     "command": "editor.gotoParentFold" },
+        "R": { "text": "related files",                   "command": "findrelated.show"},
+        "T": { "text": "angular template",                "command": "angular.goToTemplateForComponent"},
+        "C": { "text": "angular component",               "command": "angular.goToComponentWithTemplateFile"},
+        "- 0": { "text": "input line number",             "command": "workbench.action.gotoLine"}
       }
     },
     "match-hx": {
@@ -1348,8 +1358,8 @@
         "w":  { "text": "Word",                               "command": "dance.seek.object", "args": [{ "input": "[\\p{L}_\\d]+(?<after>[^\\S\\n]+)"     }] },
         "W":  { "text": "WORD",                               "command": "dance.seek.object", "args": [{ "input": "[\\S]+(?<after>[^\\S\\n]+)"            }] },
         "p":  { "text": "Paragraph",                          "command": "dance.seek.object", "args": [{ "input": "(?#predefined=paragraph)"              }] },
-        "t":  { "text": "Type definition",                    "command": "dance.seek.object", "args": [{ "input": "???"                                   }] },
-        "f":  { "text": "Function",                           "command": "dance.seek.object", "args": [{ "input": "???"                                   }] },
+        "t":  { "text": "Type definition",                    "command": "semantic-movement.selectContainingSymbol" },
+        "f":  { "text": "Function",                           "command": "semantic-movement.selectContainingFunction" }, //"command": "dance.seek.object", "args": [{ "input": "???" }] },
         "a":  { "text": "Argument/parameter",                 "command": "dance.seek.object", "args": [{ "input": "(?#predefined=argument)"               }] },
         "c":  { "text": "Comment",                            "command": "dance.seek.object", "args": [{ "input": "???"                                   }] },
         "T":  { "text": "Test",                               "command": "dance.seek.object", "args": [{ "input": "???"                                   }] },
@@ -1417,6 +1427,9 @@
         "H": { "text": "Move editor into the left group",               "command": "workbench.action.moveEditorToLeftGroup"            },
         "J": { "text": "Move editor into the below group",              "command": "workbench.action.moveEditorToBelowGroup"            },
         "n": { "text": "New split scratch buffer",                      "command": "dance.openMenu", "args": [{ "menu": "new-window-hx" }] },
+        "1": { "text": "Single column editor layout",                   "command": "workbench.action.editorLayoutSingle"},
+        "2": { "text": "Two column editor layout",                      "command": "workbench.action.editorLayoutTwoColumns"},
+        "3": { "text": "Three column editor layout",                    "command": "workbench.action.editorLayoutThreeColumns"},
       },
     },
     "new-window-hx": {
@@ -1468,9 +1481,11 @@
         "t": { "text": "Goto previous type definition", "command": "???"                                    },
         "a": { "text": "Goto previous parameter",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.argument.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "c": { "text": "Goto previous comment",         "command": "???"                                    },
-        "T": { "text": "Goto previous test",            "command": "???"                                    },
+        "T": { "text": "Goto previous test",            "command": "testing.goToPreviousMessage"                                    },
+        // ""
         "p": { "text": "Goto previous paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "b": { "text": "Goto previous bookmark",       "command": "bookmarks.jumpToPrevious" },
+        "[": { "text": "Goto previous folding range", "command": "editor.gotoPreviousFold" },
         " ": { "text": "Add newline above",             "command": "dance.edit.newLine.above"               },
       },
     },
@@ -1495,9 +1510,10 @@
         "t": { "text": "Goto next type definition", "command": "???"                                },
         "a": { "text": "Goto next parameter",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.argument.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "c": { "text": "Goto next comment",         "command": "???"                                },
-        "T": { "text": "Goto next test",            "command": "???"                                },
+        "T": { "text": "Goto next test",            "command": "testing.goToNextMessage"                                },
         "p": { "text": "Goto next paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "b": { "text": "Goto next bookmark",        "command": "bookmarks.jumpToNext" },
+        "]": { "text": "Goto next folding range", "command": "editor.gotoNextFold" },
         " ": { "text": "Add newline below",         "command": "dance.edit.newLine.below"           },
       },
     },
@@ -1551,6 +1567,8 @@
         "k": { "text": "Show docs for item under cursor",               "command": "dance.run", "args": [{ "commands": ["editor.action.showHover", "editor.action.showHover"]}] },
         "r": { "text": "Rename symbol",                                 "command": "editor.action.rename"                                                     },
         "h": { "text": "Select symbol references",                      "command": "dance.run", "args": [{ "commands": ["editor.action.selectHighlights", ".select.left.extend"] }] },
+        "i": { "text": "Add Selection to Copilot Edits",                "command": "github.copilot.edits.attachSelection"},
+        "I": { "text": "Open Copilot Edits",                            "command": "workbench.action.chat.openEditSession"},
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
       }
     },
@@ -1602,6 +1620,7 @@
         "r": { "text": "Rename",   "command": "renameFile"                                                 },
         "x": { "text": "Cut",      "command": "filesExplorer.cut"                                          },
         "y": { "text": "Yank ...", "command": "dance.openMenu", "args": [{ "menu": "file-explorer-yank" }] },
+        "f": { "text": "Add to focus group", "command": "fileFocusExtension.addGroupResource" },
       },
     },
     "file-explorer-new": {
@@ -1834,6 +1853,30 @@
     { "keys": "o", "name": "Open"},
     { "keys": "b.S", "command": "workbench.action.toggleSplitEditorInGroup",
       "name": "Toggle Split Editor in Group", "type": "command"
+    },
+    { "keys": "d.a", "command": "workbench.debug.action.focusCallStackView",
+      "name": "Focus on Call Stack View",
+      "type": "command"
+    },
+    { "keys": "d.r", "command": "workbench.debug.action.focusVariablesView",
+      "name": "Focus on Variables View",
+      "type": "command"
+    },
+    { "keys": "d.K", "command": "workbench.action.debug.callStackDown",
+      "name": "Navigate Down Call Stack",
+      "type": "command"
+    },
+    { "keys": "d.J", "command": "workbench.action.debug.callStackUp",
+      "name": "Navigate Up Call Stack",
+      "type": "command"
+    },
+    { "keys": "d.H", "command": "workbench.action.debug.callStackTop",
+      "name": "Navigate Down Call Stack",
+      "type": "command"
+    },
+    { "keys": "d.L", "command": "workbench.action.debug.callStackBottom",
+      "name": "Navigate Up Call Stack",
+      "type": "command"
     },
     { "keys": "x.w", "command": "rewrap.rewrapComment",
       "name": "Rewrap Comment / Text",
@@ -2567,9 +2610,6 @@
     ]
   },
   "debug.javascript.terminalOptions": {
-    "resolveSourceMapLocations": [
-      "${workspaceFolder}/**"
-    ],
     "outFiles": [
       "${workspaceFolder}/**/*.(m|c|)js",
     ]
@@ -2688,6 +2728,7 @@
     "c/c++",
     "csharp",
     // "minified",
+    "angular",
     "xaml",
     "js"
   ],
@@ -2776,6 +2817,23 @@
             "$1.integration.test.$2"
           ],
           "pattern": "((?:.+?/)?(?:[^/]+?)).helper\\.([tj]sx?)$"
+        }
+      ]
+    },
+    {
+      "name": "angular",
+      "rules": [
+        {
+          "pattern": "((?:.+?/)?(?:[^/]+?))\\.ts$",
+          "locators": [
+            "$1.html",
+          ]
+        },
+        {
+          "pattern": "((?:.+?/)?(?:[^/]+?))\\.html$",
+          "locators": [
+            "$1.ts",
+          ]
         }
       ]
     }
@@ -3319,6 +3377,20 @@
   "toggle.settingTitle": "typescript.validate.enable",
   "trunk.trunkGrayOutNonBlockingIssues": false,
   "tslint.alwaysShowRuleFailuresAsWarnings": false,
+  "tsEssentialPlugins.enableMethodSnippets": false,
+  "tsEssentialPlugins.removeUselessFunctionProps.enable": false,
+  "tsEssentialPlugins.patchToString.enable": false,
+  "tsEssentialPlugins.suggestions.keywordsInsertText": "none",
+  "tsEssentialPlugins.highlightNonFunctionMethods.enable": false,
+  "tsEssentialPlugins.markTsCodeActions.enable": true,
+  "tsEssentialPlugins.markTsCodeFixes.character": "",
+  "tsEssentialPlugins.removeCodeFixes.enable": false,
+  "tsEssentialPlugins.removeDefinitionFromReferences": false,
+  "tsEssentialPlugins.removeImportsFromReferences": false,
+  "tsEssentialPlugins.miscDefinitionImprovement": false,
+  "tsEssentialPlugins.improveJsxCompletions": false,
+  "tsEssentialPlugins.objectLiteralCompletions.moreVariants": false,
+  "tsEssentialPlugins.codeActions.extractTypeInferName": false,
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.format.enable": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
@@ -3457,6 +3529,9 @@
   "vscode-graphql.schemaCacheTTL": 120000,
   "vscode-graphql.debug": false,
   "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.tsserver.maxTsServerMemory": 7168,
+  "typescriptExplorer.typeTree.readonly.enable": true,
   "diffEditor.experimental.useTrueInlineView": true,
   "diffEditor.experimental.showEmptyDecorations": true,
   "editor.experimentalInlineEdit.backgroundColoring": true,
@@ -3499,4 +3574,13 @@
     "esbenp.prettier-vscode": 1,
     "gregoire.dance": 2
   },
+  "bookmarks.label.suggestion": "useWhenSelected",
+  "chat.commandCenter.enabled": false,
+  "filefocus.sortKey": "path",
+  "git-graph.commitDetailsView.location": "Docked to Bottom",
+  "github.copilot.editor.enableAutoCompletions": false,
+  "github.copilot.editor.enableCodeActions": false,
+  "markdown.editor.drop.enabled": "never",
+  "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
+  "workbench.secondarySideBar.showLabels": false,
 }

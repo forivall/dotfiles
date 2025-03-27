@@ -4,6 +4,9 @@
 
 import asyncio
 import iterm2
+import logging
+import time
+import sys
 
 
 async def changeTheme(theme_parts, connection):
@@ -36,9 +39,15 @@ async def main(connection):
         while True:
             # Block until theme changes
             theme = await mon.async_get()
+            logging.info("Switched to theme {theme}")
             print(f"Switched to theme {theme}")
             parts = theme.split(" ")
             await changeTheme(parts, connection)
 
 
-iterm2.run_forever(main)
+try:
+    iterm2.run_forever(main, retry=True)
+except asyncio.exceptions.TimeoutError as err:
+    print("warn", err, file=sys.stderr)
+    time.sleep(5)
+    iterm2.run_forever(main, retry=True)

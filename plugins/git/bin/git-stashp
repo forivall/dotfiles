@@ -126,7 +126,7 @@ done
 entries=()
 
 _i=0
-for i in {1..99} ; do
+for i in {0..99} ; do
   stashname=$(git rev-parse --symbolic stash@{$i} 2>/dev/null) || break
   if [[ -z "$stashname" ]] ; then continue; fi
   message=$(git --no-pager reflog show ${stashname} --date=${date} -n1 --format='%s @ %cd')

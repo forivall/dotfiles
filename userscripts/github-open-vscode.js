@@ -5,6 +5,27 @@
     DEFAULT_CWD: '',
     PERSONAL_TOKEN: '',
   };
+  /**
+   * @param {string} gqlQuery
+   * @param {{ [varname: string]: string | number | null }} gqlQueryVars
+   */
+  const ghgql = async (gqlQuery, gqlQueryVars) =>
+    await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        accept: 'application/vnd.github.merge-info-preview+json',
+        authorization: `bearer ${PERSONAL_TOKEN}`,
+        'User-Agent': 'github-open-vscode bookmarklet',
+      },
+      body: JSON.stringify({ query: gqlQuery.replace(
+        /\$\w+/g,
+        (
+          (vars) => (/** @type {string} */ n) =>
+            JSON.stringify(vars[n])
+        )(gqlQueryVars),
+      ) }),
+    });
+
   const pathBase = document.location.pathname;
   const [owner, repoName, resource, prNumber] = pathBase
     .replace(/^\//, '')
@@ -37,7 +58,7 @@
   const gqlQuery = /*graphql*/ `{
     repository(name: $name, owner: $owner) {
       pullRequest(number: $pr) {
-        reviewThreads(first: 100) {
+        reviewThreads(first: 100, after: $endCursor) {
           nodes {
             line
             path
@@ -53,7 +74,7 @@
           totalCount
           pageInfo {
             hasNextPage
-            startCursor
+            endCursor
           }
         }
       }
@@ -69,30 +90,14 @@
   /** @type {{anchor: HTMLAnchorElement, loc: string, hash?: string | null, lineNumber?: string }[]} */
   const anchors = [];
   if (!isFilesPage) {
-    const apiQuery =
+    const apiQueryVars =
       PERSONAL_TOKEN &&
       repoName &&
       owner &&
       resource === 'pull' &&
       Number(prNumber) &&
-      gqlQuery.replace(
-        /\$\w+/g,
-        (
-          (vars) => (/** @type {string} */ n) =>
-            JSON.stringify(vars[n])
-        )({ $name: repoName, $owner: owner, $pr: Number(prNumber) }),
-      );
-    const apiResponse =
-      apiQuery &&
-      (await fetch('https://api.github.com/graphql', {
-        method: 'POST',
-        headers: {
-          accept: 'application/vnd.github.merge-info-preview+json',
-          authorization: `bearer ${PERSONAL_TOKEN}`,
-          'User-Agent': 'github-open-vscode bookmarklet',
-        },
-        body: JSON.stringify({ query: apiQuery }),
-      }));
+      { $name: repoName, $owner: owner, $pr: Number(prNumber), $endCursor: null }
+    let apiResponse = apiQueryVars && (await ghgql(gqlQuery, apiQueryVars));
     /** @typedef {0 | '' | false | null | undefined} Falsey */
     /**
      * @typedef ReviewThreadNode
@@ -102,11 +107,18 @@
      * @property {{ nodes: { id: string, url: string }[]}} comments
      * @property {string} subjectType
      */
-    /** @type {Falsey | { data: { repository: { pullRequest: { reviewThreads: { nodes: ReviewThreadNode[] } } } } }} */
-    const apiResponseBody = apiResponse && (await apiResponse.json());
-    const reviewThreads = apiResponseBody
+    /** @type {Falsey | { data: { repository: { pullRequest: { reviewThreads: { nodes: ReviewThreadNode[], pageInfo: { hasNextPage: boolean, endCursor: string } } } } } }} */
+    let apiResponseBody = apiResponse && (await apiResponse.json());
+    let reviewThreads = apiResponseBody
       ? apiResponseBody.data.repository.pullRequest.reviewThreads.nodes
       : [];
+    while (apiResponseBody && apiResponseBody.data.repository.pullRequest.reviewThreads.pageInfo.hasNextPage) {
+      apiResponse = await ghgql(gqlQuery, { ...apiQueryVars, $endCursor: apiResponseBody.data.repository.pullRequest.reviewThreads.pageInfo.endCursor });
+      apiResponseBody = await apiResponse.json();
+      if (apiResponseBody) {
+        reviewThreads = [...reviewThreads, ...apiResponseBody.data.repository.pullRequest.reviewThreads.nodes];
+      }
+    }
     const selector = `.js-comment-container a[href^=${JSON.stringify(
       `${pathBase}/files`,
     )}]`;

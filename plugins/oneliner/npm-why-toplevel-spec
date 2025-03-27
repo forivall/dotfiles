@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+npm why --json "$@" |
+  jq -r "
+    .[] |
+      { dependent: .dependents[], location: .location } |
+      .dependent.spec + \"\\t\" + .location
+" |
+  sort -r |
+  uniq |
+  column -t -s "$(echo -en '\t')"

@@ -15,6 +15,8 @@ export MARKPATH
 : ${MARK_NOCONFIRM:=false}
 : ${MARK_CREATENAMEDDIRS:=true}
 
+unalias md
+
 source ${0:A:h}/loadnameddirs.zsh
 
 jump() {

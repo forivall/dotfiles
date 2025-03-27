@@ -2,19 +2,37 @@
 
 set -euo pipefail
 
+dry=false
+if [[ $1 == --dry ]]; then
+  dry=true
+  shift
+fi
+
 revs=($(git rev-parse --revs-only --symbolic-full-name "$@"))
 if (( ${#revs} > 0 )); then
   ups=()
   for rev in $revs; do
     ups+=(${rev#refs/heads/}@{u})
   done
-  git log HEAD ${ups[@]} "$@"
+  if $dry; then
+    echo ${ups[@]}
+  else
+    git log HEAD ${ups[@]} "$@"
+  fi
 elif git symbolic-ref -q HEAD >/dev/null; then
-  exec git log HEAD @{u} "$@"
+  if $dry; then
+    echo HEAD @{upstream}
+  else
+    exec git log HEAD @{upstream} "$@"
+  fi
 else
   headName=$(< $(git rev-parse --git-dir)/rebase-merge/head-name)
   if [[ $headName = refs/heads/* ]]; then
     branch=${headName#refs/heads/}
-    exec git log $branch $branch@{u} "$@"
+    if $dry; then
+      echo $branch $branch@{upstream}
+    else
+      exec git log $branch $branch@{u} "$@"
+    fi
   fi
 fi

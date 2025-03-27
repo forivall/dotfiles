@@ -4,6 +4,14 @@ inherits = "base16_transparent"
 "ui.cursor.primary" = { modifiers = ["reversed"], underline = { color = "#000000", style = "line"}, fg = "#a0a0a0" }
 "ui.cursor.secondary" = { modifiers = ["reversed"], underline = { color = "#000000", style = "dotted"} }
 "ui.virtual.ruler" = { bg = "light-gray" }
+"ui.popup" = { bg = "#182530" }
+"ui.menu" = { bg = "#192625" }
 "markup.heading" = { fg = "cyan" }
 "markup.normal" = { fg = "black" }
+"markup.normal.completion" = { bg = "black" }
+"markup.normal.hover" = { bg = "black" }
+"markup.heading.completion" = { bg = "black" }
+"markup.heading.hover" = { bg = "black" }
+"markup.raw.completion" = { bg = "black" }
+"markup.raw.hover" = { bg = "black" }
 "comment" = { fg = "white", modifiers = ["italic"] }

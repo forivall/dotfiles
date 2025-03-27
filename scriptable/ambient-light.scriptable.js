@@ -1,6 +1,9 @@
 const PORT = 45967;
 const INTERVAL = 3000;
 
+/**
+ * @param {number} [wait]
+ */
 async function getBrightness(wait) {
   let url = `http://localhost:${PORT}/currentBrightness`;
   if (wait) url += `?wait=${wait}`;
@@ -9,6 +12,7 @@ async function getBrightness(wait) {
   return json;
 }
 
+/** @param {{ currentBrightness: number, darknessThreshold?: number }} json */
 function createWidget(json) {
   let widget = new ListWidget();
   // const bg = new LinearGradient()
@@ -27,6 +31,11 @@ function createWidget(json) {
   u.textOpacity = 0.5;
   u.font = Font.lightSystemFont(28);
   widget.addSpacer();
+  if (json.darknessThreshold) {
+    let d = widget.addText(`${json.darknessThreshold.toFixed(1)}`);
+    d.textOpacity = 0.3;
+    d.font = Font.italicSystemFont(18);
+  }
   widget.refreshAfterDate = new Date(Date.now() + INTERVAL);
   return { widget, text: t };
 }
@@ -40,7 +49,9 @@ let doUpdate = async () => {
   json = await getBrightness();
   text.text = `${json.currentBrightness}`;
   if (wv) {
-    wv.evaluateJavaScript(`document.getElementById('value').innerText = '${json.currentBrightness}'`);
+    wv.evaluateJavaScript(
+      `document.getElementById('value').innerText = '${json.currentBrightness}'`,
+    );
   }
 };
 const t = new Timer();
@@ -53,7 +64,7 @@ const html = /*html*/ `<!DOCTYPE html>
   <style type="text/css">
     html, body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      background: ${config.runsInApp ? '#CCC' : 'transparent'};
+      background: #CCC;
       min-height: 80svh;
     }
     body {
@@ -74,34 +85,84 @@ const html = /*html*/ `<!DOCTYPE html>
       font-weight: 200;
       opacity: 0.5;
     }
+    #threshold {
+      font-size: 32pt;
+      font-weight: 300;
+      font-style: italic;
+      opacity: 0.3;
+      text-decoration: overline;
+    }
     @media (prefers-color-scheme: dark) {
       html, body {
-        background: ${config.runsInApp ? '#333' : 'transparent'};
+        background: #333;
         color: white;
       }
+    }
+    button {
+      float: right;
     }
   </style>
 </head>
 <body>
-<main id="content"><span id="value">${json.currentBrightness}</span><span id="unit"> lux</span></main>
-<script>(function() {
-let valueEl = document.getElementById('value');
-async function getBrightness() {
-  let url = 'http://localhost:${PORT}/currentBrightness';
-  let res = await fetch(url);
+<main id="content">
+  <div>
+    <span id="value">${json.currentBrightness}</span><span id="unit"> lux</span>
+  </div>
+  <button>&nbsp;&nbsp;&nbsp;</button>
+  <div>
+    <span id="threshold">${
+      json.darknessThreshold ? json.darknessThreshold.toFixed(1) : ''
+    }</span>
+  </div>
+</main>
+<script src="./ambient-light.web.js"></script>
+</body>
+<script>(function () {
+  const PORT = ${PORT};
+  const INTERVAL = ${INTERVAL};
 
-  let json = await res.json();
-  return json;
-}
-;(async function update() {
-  const json = await getBrightness();
-  valueEl.innerText = '' + json.currentBrightness;
-  setTimeout(update, ${INTERVAL});
-})();
+  let valueEl = document.getElementById('value');
+  let thresholdEl = document.getElementById('threshold');
+  let buttonEl = document.querySelector('button');
 
+  buttonEl.onclick = () => {
+    fetch('/darkMode', {
+      method: 'POST',
+      body: JSON.stringify({ setting: 'toggle' }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  /** @param {{ currentBrightness: number, darknessThreshold?: number }} json */
+  function updateDisplay(json) {
+    valueEl.innerText = '' + json.currentBrightness;
+    if (json.darknessThreshold) {
+      thresholdEl.innerText = '' + json.darknessThreshold.toFixed(1);
+    }
+  }
+  const ws = new WebSocket('ws://localhost:' + PORT + '/');
+  ws.onmessage = (ev) => {
+    const json = JSON.parse(ev.data);
+    updateDisplay(json);
+  };
+  ws.onerror = () => {
+    ws.close();
+    update();
+  };
+  async function getBrightness() {
+    const url = 'http://localhost:45967/currentBrightness';
+    const res = await fetch(url);
+
+    return await res.json();
+  }
+  async function update() {
+    const json = await getBrightness();
+    updateDisplay(json);
+    setTimeout(update, INTERVAL);
+  }
 })();</script>
 </body>
-`
+`;
 
 if (!config.runsInWidget) {
   const url = `http://localhost:${PORT}/currentBrightness.html`;

@@ -1,0 +1,40 @@
+scale = 2.2
+
+[dark-theme]
+# Regular text color
+text-color = 0xc5c8c6
+# Background canvas color
+background-color = 0x1d1f21
+# Inline code text color
+code-color = 0xcfd2d0
+# Quote block background color
+quote-block-color = 0x1d2025
+# Hyperlink text color
+link-color = 0x92b1c9
+# Text selection color
+select-color = 0x2d5798
+# Checkbox ticked background color
+checkbox-color = 0x0a5301
+# Syntax highlighting theme. All of `syntect`s default themes are supported
+# Possible values: [
+#     "base16-eighties-dark", "base16-mocha-dark", "base16-ocean-dark",
+#     "base16-ocean-light",   "coldark-cold",      "coldark-dark",
+#     "dark-neon",            "dracula",           "github",
+#     "gruvbox-dark",         "gruvbox-light",     "leet",
+#     "monokai-extended",     "monokai-extended-light",
+#     "nord",                 "one-half-dark",     "one-half-light",
+#     "solarized-dark",       "solarized-light",   "sublime-snazzy",
+#     "two-dark",             "visual-studio-dark-plus",
+#     "zenburn"
+# ]
+# You can also pass a path to a `.tmTheme` file for a custom theme instead
+# Example:
+# code-highlighter.path = "/path/to/custom.tmTheme"
+code-highlighter = { path = "/Users/emily.klassen/code/personal/dotfiles/bat/themes/Tomorrow-Night.tmTheme" }
+# code-highlighter = "one-half-dark"
+
+[font-options]
+# monospace-font = "Fantasque Sans Mono"
+monospace-font = "FantasqueSansM Nerd Font"
+regular-font = "SF Pro Display"
+

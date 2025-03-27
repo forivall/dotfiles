@@ -7,7 +7,8 @@ args=()
 pretty=()
 fileargs=()
 haspretty=false
-dashdash=false
+hasdashdash=false
+dashdash=''
 allfiles=false
 reflog=false
 stash=false
@@ -21,6 +22,12 @@ dry=false
 navigate=${$(git config delta.navigate):-false}
 
 while (( $# > 0 )); do
+if $hasdashdash; then
+  args+=("$1")
+  fileargs+=("$1")
+  shift
+  continue
+fi
 case "$1" in
   -h|--help)
     git log -h | sd 'usage: git log' 'usage: git logp' | sd '\[<revision-range>\]' '[stash|<revision-range>]' | rg -v 'or: git show'
@@ -33,8 +40,7 @@ case "$1" in
   --walk-reflogs|-g) reflog=true; shift; continue; ;;
   --patch|-p) forcediff=true; ;&
   --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary)
-      showdiff=false; pretty+=("$1"); shift;
-    ;;
+      showdiff=false; pretty+=("$1"); shift; continue; ;;
   --name-status) showdiff=false; namestatus=true; shift; continue; ;;
   --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines|--show-signature)
       pretty+=($1); shift; continue;
@@ -45,11 +51,12 @@ case "$1" in
   --no-navigate) navigate=false; shift; continue; ;;
   --all-files) allfiles=true; shift; continue; ;;
   --dry) dry=true; shift; continue; ;;
-  --) dashdash=true; args+=("$1"); shift; continue; ;;
+  --) hasdashdash=true; args+=("$1"); fileargs=(); shift; continue; ;;
   --grep) args+=("$1" "$2"); shift; shift; continue; ;;
   --max-count) maxcount="$2"; shift; shift; continue; ;;
   --max-count=*) maxcount="${1#--max-count=}"; shift; continue; ;;
   --no-max-count) maxcount=0; shift; continue; ;;
+  -S*) args+=("$1"); shift; continue; ;;
   --follow) follow=true ;&
   *)
     args+=("$1")
@@ -60,6 +67,10 @@ case "$1" in
 esac
 break;
 done
+
+if (( $# > 0 )); then
+  echo 'warn: unprocessed arguments' "${(qq)@}"
+fi
 
 maxcountargs=()
 if (( maxcount > 0 )); then
@@ -74,12 +85,13 @@ else
   refspecs="$(git log --pretty=%h "${maxcountargs[@]}" "${args[@]}")"
 fi
 
-dashdash=''
-if $follow; then
+if $hasdashdash; then
+  dashdash="$fileargs "
+elif $follow; then
   local followfiles=($(git log --name-only --relative --format= --follow "${args[@]}"| huniq))
   dashdash="$followfiles "
 elif ! $allfiles; then
-  $allfiles || dashdash="$(git rev-parse --sq --no-flags --no-revs -- $fileargs) "
+  dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
 fi
 
 deltaOpts=()
@@ -97,11 +109,14 @@ if $reflog; then
   if $stash; then
     local commitbase="$commit^"
     if $showdiff || $forcediff; then
-      reflog_command+="git diff --color --pretty= \$1^ \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+      # reflog_command+="git diff --color --pretty= \$1^ \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+      reflog_command+="git stash show --patch --color --include-untracked ${(q+@)pretty[@]} \$1 -- $dashdash | command delta "${deltaOpts[@]}""
     elif $namestatus; then
-      reflog_command+="echo; git last --color ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
+      reflog_command+="echo; git diff-file-status --color ${(q+@)pretty[@]} \$1^ \$1 -- $dashdash"
+      reflog_command+="; git last --color ${(q+@)pretty[@]} --pretty= \$1^3 -- $dashdash"
     else
-      reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
+      # reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
+      reflog_command+="git stash show --color --include-untracked ${(q+@)pretty[@]} \$1 -- $dashdash | command delta "${deltaOpts[@]}""
     fi
   else
     if $showdiff || $forcediff; then

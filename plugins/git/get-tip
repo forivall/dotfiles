@@ -1,3 +1,3 @@
 #!/bin/sh
-curl https://github.com/jonas/tig/raw/b5f6193d968faedb85c193da126d29b59b26cd67/contrib/tig-pick > ./bin/tip
+curl -L https://github.com/jonas/tig/raw/b5f6193d968faedb85c193da126d29b59b26cd67/contrib/tig-pick > ./bin/tip
 chmod +x ./bin/tip

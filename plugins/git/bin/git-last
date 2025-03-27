@@ -21,33 +21,36 @@ if ! $haspretty; then
   pretty+=(--oneline)
 fi
 
-output=$(git -c pager.show=false show ${pretty[@]} --name-status --color "${args[@]}")
+output="$(git -c pager.show=false show ${pretty[@]} --name-status --color "${args[@]}")"
 first=1
-if [[ $pretty == *short* ]] || [[ $pretty == *twoline* ]] || [[ $pretty == *twomore* ]]; then
+if [[ ${pretty[-1]} == '--pretty=' ]]; then
+  first=0
+elif [[ ${pretty[-1]} == *short* ]] || [[ ${pretty[-1]} == *twoline* ]] || [[ ${pretty[-1]} == *twomore* ]]; then
   first=2
-elif [[ $pretty == *medium* ]] || [[ $pretty == *concise* ]]; then
+elif [[ ${pretty[-1]} == *medium* ]] || [[ ${pretty[-1]} == *concise* ]]; then
   first=3
-elif [[ $pretty == *fuller* ]]; then
+elif [[ ${pretty[-1]} == *fuller* ]]; then
   first=5
-elif [[ $pretty == *full* ]]; then
+elif [[ ${pretty[-1]} == *full* ]]; then
   first=3
-elif [[ $pretty == *%n* ]]; then
+elif [[ ${pretty[-1]} == *%n* ]]; then
   parts=("${(s:%n:)pretty}")
   first="${#parts}"
   (( first -= 1 ))
 fi
 
-
-for line in ${(f)output}; do
+for line in "${(f@)output}"; do
   if (( first > 0 )); then
     echo $line
     (( first -= 1 ))
     continue
   fi
+
   case ${line} in
     A*) echo ${line:s/A/${fg[green]}A${reset_color}} ;;
     M*) echo ${line:s/M/${fg[blue]}M${reset_color}} ;;
     D*) echo ${line:s/D/${fg[red]}D${reset_color}} ;;
+    U*) echo ${line:s/U/${fg[red]}U${reset_color}} ;;
     R*|C*)
       a=("${(s:	:)line}")
       parts_old=("${(s:/:)${a[2]}}")

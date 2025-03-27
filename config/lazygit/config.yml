@@ -2,3 +2,11 @@ git:
   paging:
     colorArg: always
     pager: deltaw --paging=never --file-decoration-style= --hunk-header-decoration-style=ol 
+gui:
+  branchColorPatterns:
+    '^feature/.+$': green
+    '^release/.+$': red
+    '^hotfix/.+$': yellow
+    '^master$': magenta
+    '^dev$': blue
+  nerdFontsVersion: "3"

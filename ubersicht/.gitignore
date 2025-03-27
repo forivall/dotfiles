@@ -1,4 +1,6 @@
-/widgets/wttr.widget
+/widgets/wttr.widget/*.sh
+/widgets/wttr.widget/terminal-to-html*
 /widgets/particles.widget/
 
+node_modules
 package-lock.json

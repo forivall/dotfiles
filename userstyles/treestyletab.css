@@ -1,0 +1,43 @@
+/* Show title of unread tabs with red and italic font */
+/*
+:root.sidebar tab-item.unread .label-content {
+  color: red !important;
+  font-style: italic !important;
+}
+*/
+:root.active tab-item.active,
+:root:not(.active) tab-item.active {
+  --tab-surface: transparent;
+}
+:root {
+  --tab-size: 24px;
+  /* --tab-text-regular: ButtonText; */
+  /* --tab-surface: var(--tab-surface-regular);
+  --tab-text: var(--tab-text-regular); */
+  /* --tab-text-shadow: none; */
+}
+
+/* Add private browsing indicator per tab */
+/*
+:root.sidebar tab-item.private-browsing tab-label:before {
+  content: "🕶";
+}
+*/
+.tab.discarded .favicon-image {
+  filter: saturate(30%) brightness(95%) contrast(80%);
+}
+.tab.active:not(:hover):is([class^="coloredTabs"], [class*=" coloredTabs"]) tab-item-substance .favicon-image {
+  filter:  brightness(70%) saturate(87%);
+  background-color: rgba(0,0,0,0.2);
+  outline: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+.tab.active.pinned tab-item-substance .background::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: rgba(255, 255, 255, 0.4) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.4) 0px 0px 0px calc(var(--tab-size) / 12);
+  border-radius: calc(var(--tab-size) / 6);
+  
+}

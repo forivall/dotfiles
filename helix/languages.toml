@@ -1,5 +1,6 @@
 [language-server.typescript-language-server]
 config.tsserver.path = "node_modules/typescript/lib"
+config.preferences.quotePreference = "single"
 
 # see https://github.com/helix-editor/helix/discussions/8452
 [language-server.eslint]
@@ -7,7 +8,7 @@ args = ["--stdio"]
 command = "vscode-eslint-language-server"
 
 [language-server.eslint.config]
-format = { enable = true }
+# format = { enable = true }
 nodePath = ""
 # onIgnoredFiles = "off"
 # packageManager = "yarn"
@@ -21,3 +22,13 @@ codeAction = { disableRuleComment = { enable = true, location = "separateLine" }
 experimental = {}
 problems = { shortenToSingleLine = false }
 # workingDirectory = { mode = "auto" }
+
+[language-server.vscode-json-language-server.config]
+provideFormatter = false
+
+[[language]]
+name = "json"
+auto-format = false
+# config = { "provideFormatter" = false, "json" = { "keepLines" = { "enable" = true } } }
+# config = { "json" = { "validate" = { "enable" = true } } }
+formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }

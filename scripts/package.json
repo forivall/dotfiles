@@ -1,0 +1,19 @@
+{
+  "name": "forivall-dotfiles-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "forivall",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "which": "^5.0.0",
+    "user-startup": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/which": "^3.0.4"
+  }
+}

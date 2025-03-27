@@ -23,12 +23,12 @@ gitify_node_module() {
   owd=$PWD
   cd ~pubrepos/$repo
   mv $owd $owd.tmp
-  git worktree add $owd -b ${owd:t} $rev
+  git worktree add --no-checkout $owd -b ${owd:t} $rev
   mv $owd/.git $owd.tmp
-  command rm -r $owd
+  command rmdir $owd
   mv $owd.tmp $owd
   cd -
-  git checkout -- "${(@f)$(git diff --name-only --diff-filter=D)}"
+  echo git checkout -- "${(@f)$(git diff --name-only --diff-filter=D)}"
 }
 
 # gitify_all() {

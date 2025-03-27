@@ -2,6 +2,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"Package Control",
 		"TypeScript",
 	],
 	"installed_packages":
@@ -11,7 +12,7 @@
 		"LSP-typescript",
 		"Open Finder",
 		"Package Control",
-		"SCSS",
+		"Sass",
 		"termX",
 		"Tomorrow Color Schemes",
 		"TypeScript",

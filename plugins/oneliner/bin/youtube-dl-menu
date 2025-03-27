@@ -1,0 +1,62 @@
+#!/opt/homebrew/Cellar/youtube-dl/2021.12.17/libexec/bin/python
+
+# dirname $(realpath $(whence youtube-dl))/python
+
+# cd $(dirname $(realpath $(whence youtube-dl)))
+# cd ../lib/python3.*/site-packages
+# pip3 download simple-term-menu
+# tar xvf simple_term_menu-*-py3-none-any.whl
+
+import youtube_dl.YoutubeDL
+from simple_term_menu import TerminalMenu
+
+
+class YoutubeDLMenu(youtube_dl.YoutubeDL):
+    def process_video_result(self, *args, **kwargs):
+        self.params['listformats'] = True
+        super().process_video_result(*args, **kwargs)
+        if self.params.get('format') is not None:
+            self.params['listformats'] = False
+            super().process_video_result(*args, **kwargs)
+
+    def list_formats(self, info_dict):
+        formats = info_dict.get('formats', [info_dict])
+
+        header_line = ['extension', 'resolution', 'note']
+        table = [
+            [f['ext'], self.format_resolution(f), self._format_note(f)]
+            for f in formats
+            if f.get('preference') is None or f['preference'] >= -1000
+        ]
+        max_lens = [
+            max(len(str(v)) for v in col) for col in zip(header_line, *table)
+        ]
+        format_str = ' '.join(
+            '%-' + str(ml + 1) + 's' for ml in max_lens[:-1]
+        ) + '%s'
+
+        terminal_menu = TerminalMenu(
+            [format_str % tuple(row) for row in table],
+            accept_keys=('enter', 'alt-d', 'ctrl-i'),
+        )
+
+        menu_entry_index = terminal_menu.show()
+
+        if menu_entry_index is not None:
+            format = formats[menu_entry_index]
+            self.params['format'] = format['format_id']
+            self.to_screen(
+                '[menu] Selected format {}: {}'.format(
+                    format['format_id'], ' '.join(table[menu_entry_index])
+                )
+            )
+
+
+youtube_dl.YoutubeDL = YoutubeDLMenu
+
+import re  # noqa: E402
+import sys  # noqa: E402
+from youtube_dl import main  # noqa: E402
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

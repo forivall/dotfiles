@@ -22,4 +22,13 @@
 			" */",
 		],
 	},
+	"jsdoc options arg": {
+		"prefix": "@opt",
+		"body": [
+			" * @param {object} options",
+			" * @param {$2} options.$1",
+			" * @param {$4} options.$3",
+			" * @param {$6} options.$5",
+		],
+	},
 }

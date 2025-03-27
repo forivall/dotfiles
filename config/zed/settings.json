@@ -7,6 +7,24 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "assistant": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.0-flash-lite-preview"
+    },
+    "version": "2"
+  },
+  "base_keymap": "Atom",
+  "journal": {
+    "hour_format": "hour12",
+    "path": "/Users/emily.klassen/Library/CloudStorage/GoogleDrive-emily.klassen@tenthousandcoffees.com/My Drive/10KC_notes"
+  },
+  "project_panel": {
+    "dock": "left",
+    "indent_size": 10,
+    "auto_fold_dirs": true
+  },
+  "current_line_highlight": "gutter",
   "vim_mode": true,
   "ui_font_size": 13.8,
   "unstable.ui_density": "compact",
@@ -20,10 +38,19 @@
     "line_height": "standard",
     "shell": "system"
   },
+  "message_editor": {
+    "auto_replace_emoji_shortcode": true
+  },
   "vim": {
-    "use_smartcase_find": true
+    "custom_digraphs": {},
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": true,
+    "use_system_clipboard": "never"
   },
   "outline_panel": {
+    "scrollbar": {
+      "show": "auto"
+    },
     "dock": "right",
     "default_width": 220,
     "indent_size": 16
@@ -36,44 +63,32 @@
     "line_width": 1,
     "active_line_width": 1
   },
-  // "theme": "Base16 standardized-light",
-  // "experimental.theme_overrides": {
-  //   "accents": [
-  //     "#3e999f",
-  //     "#1eb0bb",
-  //     "#569f74",
-  //     "#2177d8",
-  //     "#7bb2b5",
-  //     "#26c567"
-  //   ],
-  //   "editor.indent_guide": "#3e999f60",
-  //   "editor.indent_guide_active": "#3e999fA0",
-  //   "border": "#1d1f2140",
-  //   "hint": "#4b797550",
-  //   "scrollbar.track.border": "#1d1f2140",
-  //   "editor.foreground": "#242423",
-  //   "terminal.ansi.black": "#1d1f21",
-  //   "terminal.ansi.bright_black": "#8e908c",
-  //   "terminal.ansi.red": "#ac312b",
-  //   "terminal.ansi.bright_red": "#d43d35",
-  //   "terminal.ansi.green": "#5a7000",
-  //   "terminal.ansi.bright_green": "#718c00",
-  //   "terminal.ansi.yellow": "#957500",
-  //   "terminal.ansi.bright_yellow": "#b08a00",
-  //   "terminal.ansi.magenta": "#755489",
-  //   "terminal.ansi.bright_magenta": "#9b70b6",
-  //   "terminal.ansi.blue": "#3d638d",
-  //   "terminal.ansi.bright_blue": "#5285bc",
-  //   "terminal.ansi.cyan": "#2a6d68",
-  //   "terminal.ansi.bright_cyan": "#32807a",
-  //   "terminal.ansi.white": "#fefefe",
-  //   "terminal.ansi.bright_white": "#fefefe"
-  //   // "terminal.border": "#80808059",
-  //   // "terminal.background": "#26292c",
-  //   // "terminal.foreground": "#cfd2d0",
-  //   // "terminal.selectionBackground": "#de935f40"
-  // }
-  "theme": "Base16 Tomorrow Night",
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python.analysis": {
+          "diagnosticMode": "workspace",
+          "typeCheckingMode": "strict",
+          "extraPaths": [
+            "~/code/10kc/python-worktrees/api-server/python/generate-match-pairings/.venv/lib/python3.9/site-packages"
+          ]
+        },
+        "python.analysis.diagnosticSeverityOverrides": {
+          "reportGeneralTypeIssues": "warning",
+          "reportOptionalSubscript": "warning"
+        },
+        "python": {
+          "pythonPath": ".venv/bin/python"
+        }
+      }
+    }
+  },
+  "theme": {
+    "mode": "system",
+    "dark": "Base16 Tomorrow Night",
+    "light": "Base16 standardized-light"
+  },
+  // dark
   "experimental.theme_overrides": {
     "accents": [
       "#8abeb7",
@@ -149,8 +164,50 @@
     "terminal.border": "#80808059",
     "terminal.background": "#26292c",
     "terminal.foreground": "#cfd2d0",
-    "terminal.selectionBackground": "#de935f40"
-  }
+    "terminal.selectionBackground": "#de935f40",
+    "scrollbarSlider.activeBackground": "#bfbfbf66",
+    "scrollbarSlider.background": "#79797966",
+    "scrollbarSlider.hoverBackground": "#646464b3",
+    "scrollbar.thumb.background": "#79797966",
+    "scrollbar.thumb.hover_background": "#bfbfbf66"
+  },
+  // light
+  // "experimental.theme_overrides": {
+  //   "accents": [
+  //     "#3e999f",
+  //     "#1eb0bb",
+  //     "#569f74",
+  //     "#2177d8",
+  //     "#7bb2b5",
+  //     "#26c567"
+  //   ],
+  //   "editor.indent_guide": "#3e999f60",
+  //   "editor.indent_guide_active": "#3e999fA0",
+  //   "border": "#1d1f2140",
+  //   "hint": "#4b797550",
+  //   "scrollbar.track.border": "#1d1f2140",
+  //   "editor.foreground": "#242423",
+  //   "terminal.ansi.black": "#1d1f21",
+  //   "terminal.ansi.bright_black": "#8e908c",
+  //   "terminal.ansi.red": "#ac312b",
+  //   "terminal.ansi.bright_red": "#d43d35",
+  //   "terminal.ansi.green": "#5a7000",
+  //   "terminal.ansi.bright_green": "#718c00",
+  //   "terminal.ansi.yellow": "#957500",
+  //   "terminal.ansi.bright_yellow": "#b08a00",
+  //   "terminal.ansi.magenta": "#755489",
+  //   "terminal.ansi.bright_magenta": "#9b70b6",
+  //   "terminal.ansi.blue": "#3d638d",
+  //   "terminal.ansi.bright_blue": "#5285bc",
+  //   "terminal.ansi.cyan": "#2a6d68",
+  //   "terminal.ansi.bright_cyan": "#32807a",
+  //   "terminal.ansi.white": "#fefefe",
+  //   "terminal.ansi.bright_white": "#fefefe"
+  //   // "terminal.border": "#80808059",
+  //   // "terminal.background": "#26292c",
+  //   // "terminal.foreground": "#cfd2d0",
+  //   // "terminal.selectionBackground": "#de935f40"
+  // }
   //   //"actionBar.toggledBackground": "#007fd466",
   //   //"activityBar.background": "#333333",
   //   //"activityBar.dropBorder": "#ffffff",

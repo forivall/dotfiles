@@ -54,7 +54,7 @@
   {
     "context": "Pane",
     "bindings": {
-      "alt-cmd-/": "search::ActivateRegexMode",
+      "alt-cmd-/": "search::ToggleRegex",
       "ctrl-0": "project_panel::ToggleFocus",
       "cmd-1": ["pane::ActivateItem", 0],
       "cmd-2": ["pane::ActivateItem", 1],
@@ -87,7 +87,7 @@
   },
   {
     "context": "vim_mode == helix_normal && !menu",
-    "use_layout_keys": true,
+    // "use_layout_keys": true,
     "bindings": {
       "space": "vim::Space",
       "$": "vim::EndOfLine",

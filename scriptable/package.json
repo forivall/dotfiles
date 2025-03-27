@@ -13,9 +13,11 @@
   "devDependencies": {
     "@types/node": "^18.15.11",
     "@types/scriptable-ios": "^1.7.0",
+    "@types/ws": "^8.5.8",
     "prettier": "^2.8.7"
   },
   "dependencies": {
-    "user-startup": "^0.2.2"
+    "user-startup": "^0.2.2",
+    "ws": "^8.14.2"
   }
 }

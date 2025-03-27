@@ -17,7 +17,7 @@ rm -rf /tmp/mp4_to_gif
 mkdir -p /tmp/mp4_to_gif/png
 
 # Final filename
-filename=${fname//.mp4/.gif}
+filename=${fname%.mp4}.gif
 
 printf 'Dimensions: '
 ffprobe -v 0 -of csv=s=x:p=0 -select_streams v:0 -show_entries stream=width,height $fname

@@ -274,17 +274,17 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
 [difftool "vscode"]
-	cmd = code --wait \"$LOCAL\" \"$REMOTE\" --diff
+	cmd = "code --wait \"$LOCAL\" \"$REMOTE\" --diff"
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = "/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\""
 	trustExitCode = true
 [merge "npm-merge-driver"]
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
 [mergetool "vscode"]
-	cmd = code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\"
+	cmd = "code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\""
 [mergetool "smerge"]
-	cmd = smerge mergetool \"$REMOTE\" \"$LOCAL\" \"$BASE\" -o \"$MERGED\"
+	cmd = "smerge mergetool \"$REMOTE\" \"$LOCAL\" \"$BASE\" -o \"$MERGED\""
 [commit]
 	# template = /Users/emilyklassen/.stCommitMsg
 [pull]
@@ -308,6 +308,7 @@
 	autocorrect = prompt
 [tig]
 	main-view-date = relative-compact
+	stash-view-date = relative-compact
 	# main-view-date = custom
 	# main-view-date-format = "%Y-%b-%d%X"
 	main-view-author-width = 12
@@ -317,7 +318,7 @@
 	main-options = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/jj/**
 	line-graphics = utf-8
 [tig "color"]
-	cursor = default default underline
+	cursor = default default underline 
 	status = magenta black bold
 	title-focus = magenta black bold
 	title-blur = magenta black

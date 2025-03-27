@@ -1,5 +1,6 @@
 [
-  { "key": "escape", "command": "whichkey.show", "when": "dance.mode != 'insert' && dance.mode != 'input' && dance.mode != 'select' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && resourceScheme != 'vscode-interactive'" },
+  { "key": "escape", "command": "-codeFlea.changeToCommandModeDefault", "when": "textInputFocus && !actionWidgetVisible && !cancellableOperation && !editorHasMultipleSelections && !inlineSuggestionVisible && !messageVisible && !notificationToastsVisible && !parameterHintsVisible && codeFlea.mode == 'INSERT'" },
+  { "key": "escape", "command": "whichkey.show", "when": "dance.mode != 'insert' && dance.mode != 'input' && dance.mode != 'select' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && !terminalFocus && resourceScheme != 'vscode-interactive' && !terminalChatFocus && !terminalChatVisible && !inlineChatHasEditsAgent && !inlineChatVisible && inlineChatHasSession != 'empty'" },
   // put escape keybinds after the whichkey escape binding.
   { "key": "escape", "command": "runCommands", "args": {"commands": ["search.action.clearSearchResults", "workbench.view.search"]},
     "when": "searchInputBoxFocus && viewHasSearchPattern"},
@@ -94,7 +95,7 @@
   { "key": "shift+escape",          "command": "problems.action.clearFilterText",
                                     "when": "problemsFilterFocus" },
   { "key": "shift+escape",          "command": "search.action.cancel",
-                                    "when": "listFocus && searchViewletVisible && !inputFocus && searchState != '0'" },
+                                    "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'" },
   { "key": "shift+escape",          "command": "settings.action.focusLevelUp",
                                     "when": "inSettingsEditor && !inSettingsJSONEditor && !inSettingsSearch" },
   { "key": "shift+escape",          "command": "workbench.action.closeQuickOpen",
@@ -764,6 +765,21 @@
     ] }
   },
   { "key": "alt+i",       "command": "editor.action.smartSelect.shrink", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"  },
+  {
+    "key": "alt+p",
+    "command": "dance.seek.syntax.previous.experimental",
+    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"
+  },
+  {
+    "key": "alt+n",
+    "command": "dance.seek.syntax.next.experimental",
+    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"
+  },
+  {
+    "key": "alt+b",
+    "command": "dance.seek.syntax.parent.experimental",
+    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"
+  },
   { "key": "ctrl+alt+o", "command": "-extension.gist.open" },
   { "key": "ctrl+alt+o", "command": "-js.notebook.url" },
   { "key": "ctrl+alt+i", "command": "-js.notebook.view" },
@@ -811,6 +827,9 @@
     "args": {"commands": [".select.right.extend", [".selections.saveText", { "register": "*" }], ".select.left.extend"] } },
   { "key": "p",       "command": "dance.run",                                              "when": "editorTextFocus && dance.mode == 'normal' && !editorHasSelection",
     "args": {"commands": [".select.right.jump", [".edit.paste.after", { "register": "*" }], ".select.left.jump"] } },
+  { "key": "alt+p", "command": "-dance.edit.pasteAll.after.select", "when": "editorTextFocus && dance.mode == 'normal'" },
+  { "key": "ctrl+alt+p", "command": "dance.edit.pasteAll.after.select", "when": "editorTextFocus && dance.mode == 'normal'" },
+  { "key": "ctrl+shift+alt+p", "command": "dance.edit.pasteAll.before.select", "when": "editorTextFocus && dance.mode == 'normal'" },
 
   { "key": "q",       "command": "dance.history.recording.play",  "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+q", "command": "dance.history.recording.start", "when": "editorTextFocus && dance.mode == 'normal' && !dance.isRecording || editorTextFocus && dance.mode == 'select' && !dance.isRecording" },
@@ -848,9 +867,9 @@
 
   { "key": "ctrl+c", "command": "editor.action.commentLine", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
-  { "key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+i", "command": "workbench.action.navigateForwardInNavigationLocations", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "tab",    "command": "workbench.action.navigateForward", "when": "editorTextFocus && dance.mode == 'normal' && editorLangId != 'magit' || editorTextFocus && dance.mode == 'select' && editorLangId != 'magit'" },
-  { "key": "ctrl+o", "command": "workbench.action.navigateBack",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+o", "command": "workbench.action.navigateBackInNavigationLocations",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+s", "command": "dance.selections.save",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+s", "command":  "dance.run",                       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": {
     "commands": ["dance.selections.save", "bookmarks.toggle"],
@@ -976,7 +995,8 @@
     "code": [
       "await vscode.commands.executeCommand('dance.openMenu', { menu: 'goto-hx', pass: [{ shift: 'extend', count }] })"
     ]
-   }, "when": "editorTextFocus && dance.mode == 'select'" },
+  }, "when": "editorTextFocus && dance.mode == 'select'" },
+
   { "key": "m",       "command": "dance.openMenu", "args": { "menu": "match-hx"                                                          }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "z",       "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }]                 }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+z", "command": "dance.openMenu", "args": { "menu": "view-hx",          "pass": [{ "shift": "extend" }], "locked": true }, "when": "editorTextFocus && dance.mode == 'select'" },

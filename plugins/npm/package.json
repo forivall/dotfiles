@@ -4,14 +4,18 @@
     "@types/node": "^18.15.11",
     "@types/npmcli__arborist": "^5.6.1",
     "@types/semver": "^7.5.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "type-fest": "^4.35.0"
   },
   "dependencies": {
     "@types/command-line-usage": "^5.0.4",
+    "cli-columns": "^4.0.0",
     "eslint": "^8.57.0",
     "global-directory": "^4.0.1",
     "hereby": "^1.10.0",
+    "mns": "^0.2.0",
     "prettier": "^3.3.3",
-    "table": "^6.8.1"
+    "table": "^6.8.1",
+    "terminal-link": "^2.1.1"
   }
 }

@@ -7,12 +7,16 @@ theme = "thursday"
 line-number = "relative"
 # cursorline = true
 color-modes = true
+insert-final-newline = true
 
 [editor.cursor-shape]
 insert = "bar"
 
 [keys.normal]
-S-3 = ":reflow"
+"#" = ":reflow"
+
+[keys.insert]
+"C-space" = "completion"
 
 [editor.file-picker]
 hidden = false
