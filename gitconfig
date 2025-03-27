@@ -72,6 +72,7 @@
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
 	lr = log --pretty=oneline --abbrev-commit --decorate --reverse
 	lm = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
+	lp = !git log --pretty=oneline --abbrev-commit --decorate --graph HEAD $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name)*\")
 	lu = logu --pretty=oneline --abbrev-commit --decorate --graph
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}

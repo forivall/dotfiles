@@ -1,3 +1,7 @@
 [[language]]
 name = "git-ignore"
 file-types = ["gitignore"]
+
+[[language]]
+name = "git-config"
+file-types = [{ glob = "gitconfig" }, { glob = ".gitmodules" }, { glob = ".gitconfig" }, { glob = ".git/config" }, { glob = ".config/git/config" }]

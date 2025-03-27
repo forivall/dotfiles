@@ -32,3 +32,7 @@ auto-format = false
 # config = { "provideFormatter" = false, "json" = { "keepLines" = { "enable" = true } } }
 # config = { "json" = { "validate" = { "enable" = true } } }
 formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
+
+[[language]]
+name = "git-commit"
+file-types = [{ glob = "COMMIT_EDITMSG" }, { glob = "MERGE_MSG" }, { glob = "COMMIT_EDITMSG-*.txt" }]
