@@ -904,6 +904,7 @@
   { "key": "shift+v", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+m", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
+  { "key": "shift+2", "command": "dance.openMenu", "args": { "menu": "sort" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+3", "command": "rewrap.rewrapComment", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   // { "key": "ctrl+/", "command": "editor.action.showHover", "when": "editorTextFocus" },

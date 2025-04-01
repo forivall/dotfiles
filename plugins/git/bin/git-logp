@@ -42,6 +42,7 @@ case "$1" in
   --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary)
       showdiff=false; pretty+=("$1"); shift; continue; ;;
   --name-status) showdiff=false; namestatus=true; shift; continue; ;;
+  --with-name-status) namestatus=true; shift; continue; ;;
   --ignore-cr-at-eol|--ignore-space-at-eol|-b|--ignore-space-change|-w|--ignore-all-space|--ignore-blank-lines|--show-signature)
       pretty+=($1); shift; continue;
     ;;
@@ -52,11 +53,11 @@ case "$1" in
   --all-files) allfiles=true; shift; continue; ;;
   --dry) dry=true; shift; continue; ;;
   --) hasdashdash=true; args+=("$1"); fileargs=(); shift; continue; ;;
-  --grep) args+=("$1" "$2"); shift; shift; continue; ;;
+  --reverse|-S*) args+=("$1"); shift; continue; ;;
+  --grep|--author) args+=("$1" "$2"); shift; shift; continue; ;;
   --max-count) maxcount="$2"; shift; shift; continue; ;;
   --max-count=*) maxcount="${1#--max-count=}"; shift; continue; ;;
   --no-max-count) maxcount=0; shift; continue; ;;
-  -S*) args+=("$1"); shift; continue; ;;
   --follow) follow=true ;&
   *)
     args+=("$1")
@@ -129,7 +130,11 @@ if $reflog; then
   fi
   lessopen_command="() { $reflog_command } %s"
 elif $namestatus; then
-  lessopen_command="git last --color ${(q+@)pretty[@]} %s -- $dashdash"
+  if $showdiff || $forcediff; then
+    lessopen_command="() { git last --color ${(q+@)pretty[@]} \$1 -- $dashdash; git show --color ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash| command delta "${deltaOpts[@]}" } %s"
+  else
+    lessopen_command="git last --color ${(q+@)pretty[@]} %s -- $dashdash"
+  fi
 else
   lessopen_command="git show --color ${(q+@)pretty[@]} %s -- $dashdash| command delta "${deltaOpts[@]}""
 fi

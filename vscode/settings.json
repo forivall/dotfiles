@@ -1641,6 +1641,26 @@
         "r": { "text": "Relative file path", "command": "copyRelativeFilePath" },
       },
     },
+    "sort": {
+      "items": {
+        "j": { "text": "Ascending", "command": "dance.run", "args": [{
+          "commands": [
+            ["dance.selections.sort", { "expression": "$" }],
+            ["dance.selections.saveText", { "register": "&" }],
+            "dance.selections.orderDescending",
+            ["dance.edit.delete", { "register": "&" }]
+          ]}]
+        },
+        "k": { "text": "Descending", "command": "dance.run", "args": [{
+          "commands": [
+            ["dance.selections.sort", { "expression": "$" }],
+            ["dance.selections.saveText", { "register": "&" }],
+            "dance.selections.orderAscending",
+            ["dance.edit.delete", { "register": "&" }]
+          ]}]
+        }
+      }
+    }
   },
   "dance.modes": {
     "": {

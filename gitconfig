@@ -7,7 +7,7 @@
 	# pager = delta --dark --theme base16
 	# pager = less +X -x2 -R
 	# pager = most
-	pager = moar --no-linenumbers
+	pager = moar --no-linenumbers --colors 16 --style igor
 	excludesfile = ~/.gitignore
 	trustctime = false
 	editor = hx
@@ -77,14 +77,14 @@
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
 	li = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}  # <kbd>i</kbd> is much easier to hit than <kbd>u</kbd>
-	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/jj/** --all
-	las = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/jj/** --all --simplify-by-decoration
+	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all
+	las = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all --simplify-by-decoration
 	laa = log --pretty=oneline --abbrev-commit --decorate --graph --all
 	lo = log --pretty=oneline --abbrev-commit --decorate --graph --remotes=origin --branches
 	l2 = log --pretty=onemore --decorate --graph --no-notes
 	l3 = log --pretty=twoline --decorate --graph --date=local
 	lg = log --name-status --pretty=oneline --abbrev-commit --decorate --graph
-	lga = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/jj/** --all
+	lga = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all
 	lgaa = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --all
 	lg2 = log --name-status --pretty=onemore --graph --no-notes
 	lg3 = log --name-status --pretty=twoline --graph --date=local
@@ -316,8 +316,9 @@
 	main-view-id = true
 	# main-view-ref = true
 	mouse = true
-	main-options = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/jj/**
+	main-options = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/**
 	line-graphics = utf-8
+	reference-format = hide:other
 [tig "color"]
 	cursor = default default underline 
 	status = magenta black bold

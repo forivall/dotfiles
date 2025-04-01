@@ -4,6 +4,10 @@ path=($path ~/.cargo/bin)
 
 alias cm="cargo make"
 alias cr="cargo run"
+alias inlyne="command inlyne --config ~dotfiles/config/inlyne.toml"
+function md() {
+  ( command inlyne --config ~dotfiles/config/inlyne.toml "$@" 2>/dev/null & )
+}
 
 [[ -f "${__zsh_rust_plugin_location}/broot.source.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/broot.source.zsh"
