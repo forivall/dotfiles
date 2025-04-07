@@ -173,6 +173,9 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item { padding-left: 0; height: var(--row-height); line-height: var(--row-height) }
 .customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item .monaco-icon-label::before, .customview-tree .monaco-list .monaco-list-row .custom-view-tree-node-item>.custom-view-tree-node-item-icon { height: var(--row-height) }
 .search-view .monaco-list .monaco-list-row .monaco-icon-label::before { height: var(--row-height) }
+.search-view .monaco-list .monaco-list-row .actionBarContainer > .monaco-toolbar {
+  text-align: right;
+}
 .search-view .filematch, .search-view .foldermatch { line-height: var(--row-height) }
 [aria-label='Focused Folder Section'] + .pane-body .tree-explorer-viewlet-tree-view .customview-tree .monaco-tl-twistie:not(.force-twistie) { background-image: none!important; width: 0!important; padding-right: 0!important; visibility: hidden; }
 [aria-label='Focused Folder Section'] + .pane-body .tree-explorer-viewlet-tree-view .customview-tree .monaco-tl-indent { margin-left: -4px; }
