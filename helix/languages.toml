@@ -36,3 +36,15 @@ formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
 [[language]]
 name = "git-commit"
 file-types = [{ glob = "COMMIT_EDITMSG" }, { glob = "MERGE_MSG" }, { glob = "COMMIT_EDITMSG-*.txt" }]
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+
+[[language]]
+name = "html"
+formatter = { command = 'prettier', args = ["--parser", "angular"] }
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }

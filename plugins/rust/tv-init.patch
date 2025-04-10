@@ -1,0 +1,9 @@
+--- /dev/fd/11	2025-04-10 16:28:56
++++ tv-init.zsh	2025-04-10 16:28:00
+@@ -51,6 +51,5 @@
+ 
+ 
+ bindkey '^T' tv-smart-autocomplete
+-bindkey '^R' tv-shell-history
+ 
+ 

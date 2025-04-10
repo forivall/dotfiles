@@ -108,15 +108,21 @@ local lessopen_command
 if $reflog; then
   local reflog_command="git reflog show --color -n1 ${(q+@)pretty[@]} \$1;"
   if $stash; then
-    local commitbase="$commit^"
     if $showdiff || $forcediff; then
-      # reflog_command+="git diff --color --pretty= \$1^ \$1 -- $dashdash | command delta "${deltaOpts[@]}""
-      reflog_command+="git stash show --patch --color --include-untracked ${(q+@)pretty[@]} \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+      if $hasdashdash && ! $allfiles; then
+        # reflog_command+="git stash show --no-patch --color --include-untracked ${(q+@)pretty[@]} \$1 --"
+        # reflog_command+="git diff --color --pretty= \$1^ \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+        reflog_command+="echo; git diff --color ${(q+@)pretty[@]} --pretty= \$1^ \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+      elif $allfiles; then
+        reflog_command+="git stash show --patch --color --include-untracked ${(q+@)pretty[@]} \$1 -- | command delta "${deltaOpts[@]}""
+      else
+        reflog_command+="git stash show --patch --color --include-untracked ${(q+@)pretty[@]} \$1 -- $dashdash | command delta "${deltaOpts[@]}""
+      fi
     elif $namestatus; then
       reflog_command+="echo; git diff-file-status --color ${(q+@)pretty[@]} \$1^ \$1 -- $dashdash"
       reflog_command+="; git last --color ${(q+@)pretty[@]} --pretty= \$1^3 -- $dashdash"
     else
-      # reflog_command+="echo; git diff --color ${(q+@)commitbase} ${(q+@)pretty[@]} --pretty= \$1 -- $dashdash"
+    echo ${#dashdash}
       reflog_command+="git stash show --color --include-untracked ${(q+@)pretty[@]} \$1 -- $dashdash | command delta "${deltaOpts[@]}""
     fi
   else
