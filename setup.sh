@@ -16,10 +16,7 @@ if _is_xdg ; then is_xdg=true ; else is_xdg=false ; fi
 
 if [[ "$(uname)" == "Darwin" ]] ; then IS_OSX=true; else IS_OSX=false; fi
 
-o() {
-  echo "$@"
-  "$@"
-}
+o() { echo "$@"; "$@"; }
 
 if $is_xdg ; then
   : ${XDG_CONFIG_HOME:=$HOME/.config}
@@ -77,6 +74,8 @@ o mkdir -p ~/.config/helix
 o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
 o ln -fs "$(realpath helix/languages.toml)" ~/.config/helix/languages.toml
 o ln -fs "$(realpath helix/themes)" ~/.config/helix/themes
+o mkdir -p ~/.config/television
+for f in config/television/*; do o ln -fs "$(realpath $f)" ~/.$f; done
 o ln -fs "$(realpath config/broot)" ~/.config/broot
 o mkdir -p ~/.config/lazygit
 o ln -fs "$(realpath config/lazygit/config.yml)" ~/.config/lazygit/config.yml

@@ -2,7 +2,7 @@
 [[cable_channel]]
 name = "git-diff"
 source_command = "git diff --name-only"
-preview_command = "git diff --color=always {0}"
+preview_command = "git diff --color=always {0} | delta --file-style omit --hunk-header-decoration-style ' ' --keep-plus-minus-markers"
 
 [[cable_channel]]
 name = "git-reflog"

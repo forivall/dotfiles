@@ -102,6 +102,7 @@ export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
 __FZF_BASE_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --exclude \$(realpath --relative-to=. $HOME/Library)"
 export FZF_DEFAULT_COMMAND="$__FZF_BASE_COMMAND --type f"
 export FZF_ALT_C_COMMAND="$__FZF_BASE_COMMAND --type d"
+export FZF_CTRL_T_COMMAND=""
 
 # zsh-nvm settings
 export NVM_COMPLETION=true

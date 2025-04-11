@@ -22,7 +22,7 @@ tick_rate = 50
 # Whether to use nerd font icons in the UI
 # This option requires a font patched with Nerd Font in order to properly
 # display glyphs (see https://www.nerdfonts.com/ for more information)
-use_nerd_font_icons = false
+use_nerd_font_icons = true
 # How much space to allocate for the UI (in percentage of the screen)
 # ┌───────────────────────────────────────┐
 # │                                       │
@@ -65,7 +65,7 @@ theme = "default"
 # Bulitin syntax highlighting uses the same syntax highlighting engine as bat.
 # To get a list of your currently available themes, run `bat --list-themes`
 # Note that setting the BAT_THEME environment variable will override this setting.
-theme = "TwoDark"
+theme = "base16-tomorrow-night"
 
 # Keybindings
 # ----------------------------------------------------------------------------
