@@ -7,6 +7,27 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "languages": {
+    "Markdown": {
+      "formatter": [
+        { "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}", "--prose-wrap=always"]
+        }}
+      ],
+      "prettier": {
+        "allowed": true,
+        "parser": "markdown"
+      }
+    }
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "edit_predictions": {
+    "mode": "subtle",
+    "enabled_in_assistant": false
+  },
   "assistant": {
     "default_model": {
       "provider": "google",
@@ -28,7 +49,7 @@
   "vim_mode": true,
   "ui_font_size": 13.8,
   "unstable.ui_density": "compact",
-  "buffer_font_size": 13.4,
+  "buffer_font_size": 13.3,
   "buffer_font_family": "FantasqueSansM Nerd Font Mono",
   "ui_font_family": "SF Pro Display",
   "format_on_save": "off",

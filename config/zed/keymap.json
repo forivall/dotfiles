@@ -305,6 +305,22 @@
       "g t": "vim::WindowTop",
       "g c": "vim::WindowMiddle",
       "g b": "vim::WindowBottom",
+      // Match mode
+      "m m": "vim::Matching",
+      "m i w": ["workspace::SendKeystrokes", "v i w"],
+      // Misc
+      "ctrl-k": "editor::MoveLineUp",
+      "ctrl-j": "editor::MoveLineDown",
+      // "ctrl-v": "editor::Paste",
+      "shift-u": "editor::Redo",
+      "ctrl-c": "editor::ToggleComments",
+      "d": ["workspace::SendKeystrokes", "delete"],
+      "c": ["workspace::SendKeystrokes", "delete i"]
+    }
+  },
+  {
+    "context": "EmptyPane && !menu || vim_mode == helix_normal && !menu",
+    "bindings": {
       // Window mode
       "space w h": "workspace::ActivatePaneLeft",
       "space w l": "workspace::ActivatePaneRight",
@@ -328,20 +344,9 @@
       "space c": "editor::ToggleComments",
       "space y": "editor::Copy",
       "space p": "editor::Paste",
-      // Match mode
-      "m m": "vim::Matching",
-      "m i w": ["workspace::SendKeystrokes", "v i w"],
-      // Misc
-      "ctrl-k": "editor::MoveLineUp",
-      "ctrl-j": "editor::MoveLineDown",
-      // "ctrl-v": "editor::Paste",
-      "shift-u": "editor::Redo",
-      "ctrl-c": "editor::ToggleComments",
-      "d": ["workspace::SendKeystrokes", "delete"],
-      "c": ["workspace::SendKeystrokes", "delete i"]
+      "space z": "journal::NewJournalEntry"
     }
   },
-
   {
     "context": "Editor && vim_mode == visual || vim_mode == helix_normal && !VimWaiting && !VimObject",
     "bindings": {

@@ -48,3 +48,7 @@ formatter = { command = 'prettier', args = ["--parser", "angular"] }
 [[language]]
 name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+
+[[language]]
+name = "ruby"
+auto-format = false
