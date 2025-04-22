@@ -217,8 +217,10 @@ if ! zgen saved; then
 
   ! $IS_WINDOWS && zgen load forivall/zsh-nvm
   zgen load "$__zshrc_dirname/plugins/nvm"
-  # zgen load forivall/zsh-yarn-autocompletions / main
   $IS_OSX && zgen load nilsonholger/osx-zsh-completions
+  zgen load gentslava/zsh-better-npm-completion
+  zgen load g-plane/zsh-yarn-autocompletions
+  zgen load g-plane/pnpm-shell-completion
   # zgen load jocelynmallon/zshimarks
 
   zgen load "$__zshrc_dirname/plugins/functional"
@@ -259,10 +261,6 @@ if ! zgen saved; then
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
-  $IS_OSX && zgen load nilsonholger/osx-zsh-completions
-  zgen load gentslava/zsh-better-npm-completion
-  zgen load g-plane/zsh-yarn-autocompletions
-  zgen load g-plane/pnpm-shell-completion
   (( ${+commands[direnv]} )) && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
   # zgen load dim-an/cod

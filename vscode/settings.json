@@ -1522,12 +1522,13 @@
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
         "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
-        "c": { "text": "Open PR comment at current line", "command": "workbench.action.addComment" },
+        "c": { "text": "Open PR comment at current line",               "command": "workbench.action.addComment" },
         // "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                  },
         "e": { "text": "Focus file explorer",                           "command": "workbench.explorer.fileView.focus"                                        },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
         "j": { "text": "Open jumplist picker",                          "command": "bookmarks.list"                                                           },
         "J": { "text": "Open jumplist picker (all files)",              "command": "bookmarks.listFromAllFiles"                                               },
+        "O": { "text": "Focus jumplist",                                "command": "bookmarksExplorer.focus"                                               },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
         "S": { "text": "Open workspace symbol picker",                  "command": "workbench.action.showAllSymbols"                                          },
         "o": { "text": "Focus outline",                                 "command": "outline.focus"},
@@ -1567,8 +1568,10 @@
         "k": { "text": "Show docs for item under cursor",               "command": "dance.run", "args": [{ "commands": ["editor.action.showHover", "editor.action.showHover"]}] },
         "r": { "text": "Rename symbol",                                 "command": "editor.action.rename"                                                     },
         "h": { "text": "Select symbol references",                      "command": "dance.run", "args": [{ "commands": ["editor.action.selectHighlights", ".select.left.extend"] }] },
-        "i": { "text": "Add Selection to Copilot Edits",                "command": "github.copilot.edits.attachSelection"},
+        "i": { "text": "Inline chat",                                   "command": "inlineChat.start" },
+        "U": { "text": "Add Selection to Copilot Edits",                "command": "workbench.action.chat.attachSelection"},
         "I": { "text": "Open Copilot Edits",                            "command": "workbench.action.chat.openEditSession"},
+        "v": { "text": "Open television picker",                        "command": "television.ToggleFileFinder"                                            },
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
       }
     },
@@ -3603,4 +3606,11 @@
   "markdown.editor.drop.enabled": "never",
   "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
   "workbench.secondarySideBar.showLabels": false,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use conventional commit message format."
+    }
+  ],
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "geminicodeassist.enable": false,
 }

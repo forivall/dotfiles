@@ -146,7 +146,7 @@ brew install --cask gimp
 brew install --cask marta
 brew install --cask gpg-suite-no-mail
 brew install --cask kap
-brew install --cask menumeters eul && brew install osx-cpu-temp
+brew install --cask stats && brew install osx-cpu-temp
 brew install --cask monitorcontrol
 # brew install --cask postico dbschema
 # brew install --cask fontgoggles inkscape

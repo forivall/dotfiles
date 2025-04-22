@@ -4,7 +4,8 @@ set -eo pipefail
 
 __plugin_dirname=${0:a:h:h}
 
-ref=$(git describe --exact-match --all)
+excluded=($(git config --get-all log.excludeDecoration))
+ref=$(git describe --exact-match --all --exclude=${^excluded})
 ref=${ref#heads/}
 ref=${ref#remotes/*/}
 echo '>' git checkout ${ref}

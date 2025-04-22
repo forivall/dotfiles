@@ -1,0 +1,3 @@
+git log --color=always --oneline $@ |
+  fzf --height 50% --ansi --preview-window right:65% \
+  --preview 'git delta show --color --television --color=always --date=short --format=concise $(sed "s/ .*//" <<< {})' | sd ' .*' ''

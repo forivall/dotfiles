@@ -17,8 +17,22 @@ git-delta() {
     exit
   fi
 
+  if [[ $1 = --color ]]; then shift; fi
+
   local pager=$(git config core.pager || echo -n "less")
   [[ -v deltaOpts ]] || local deltaOpts=()
+  if [[ $1 = --color-only ]]; then shift; deltaOpts+=(--color-only); fi
+  if [[ $1 = --television ]]; then shift; deltaOpts+=(
+      --keep-plus-minus-markers
+      --commit-style ''
+      --file-decoration-style ''
+      --file-style omit
+      --hunk-header-decoration-style ''
+      --hunk-header-file-style ''
+      --hunk-header-line-number-style ''
+      --hunk-label ''
+    )
+  fi
   if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
     deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
   fi

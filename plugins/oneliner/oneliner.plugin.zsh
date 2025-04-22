@@ -70,6 +70,7 @@ oneliner-list() {
   done
 }
 
+alias yr=yare
 [[ -n ${_comps[rg]} ]] && compdef rgp=rg
 [[ -n ${_comps[sd]} ]] && compdef rgsd=sd
 [[ -n ${_comps[curl]} ]] && compdef curl-timing=curl

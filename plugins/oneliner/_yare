@@ -1,0 +1,14 @@
+#compdef yare
+#description run scripts for the current project with the appropriate tool
+
+_yare_yarn_autocompletions() {
+  compls=$($YARN_AUTO_COMP_PATH scripts)
+  completions=(${=compls})
+  compadd -- $completions
+}
+
+_yare() {
+  _yare_yarn_autocompletions
+}
+
+_yare
