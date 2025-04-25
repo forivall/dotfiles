@@ -6,6 +6,7 @@ xcode-select --install
 brew install zsh zsh-completions
 brew install oil # alternative unix shell for scripting, not interactive
 brew install mackup # mac settings sync
+brew install macchina
 brew install node fnm
 # brew install emscripten binaryen wapm wasm-pack wasmer
 # brew install mujs
@@ -39,7 +40,7 @@ brew install python-markdown
 python3 -m pip install pypi-command-line
 # brew install perl cpanminus cpansearch
 
-brew install jq yq httpie http-prompt curlie xh brimdata/tap/zq dasel miller
+brew install jq jnv yq httpie http-prompt curlie xh brimdata/tap/zq dasel miller
 brew install --cask httpie
 # brew install mitmproxy
 brew install --no-binaries python-yq

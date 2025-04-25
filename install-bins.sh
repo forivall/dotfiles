@@ -30,6 +30,8 @@ cmds=(
 
   'pipx install simple-term-menu'
   'pipx install termdown'
+  'pipx install visidata'
+  'pipx install humble-explorer'
 
   'go install github.com/ChausseBenjamin/termpicker@latest'
 )
