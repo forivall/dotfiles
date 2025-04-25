@@ -31,4 +31,4 @@ elif [[ -f package.json ]]; then
   run npm run "$@"
 fi
 
-if $wasrun; then exit fi
+if $wasrun; then exit; fi

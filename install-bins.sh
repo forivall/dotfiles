@@ -28,8 +28,10 @@ cmds=(
   'cargo install toml-cli'
   'cargo install viu'
 
-  'pip install simple-term-menu'
-  'pip install termdown'
+  'pipx install simple-term-menu'
+  'pipx install termdown'
+
+  'go install github.com/ChausseBenjamin/termpicker@latest'
 )
 
 alias pip='python3 -m pip'

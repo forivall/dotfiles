@@ -28,7 +28,7 @@ condalias() {
   fi
 }
 
-condalias markdown_py="%s -x def_list -x abbr" "/usr/bin/markdown_py"
+condalias markdown_py="%s -x def_list -x abbr" "markdown_py"
 
 alias scat="source-highlight -fesc -o STDOUT -i"
 function scat2() { source-highlight -fesc "$@" -o STDOUT; }

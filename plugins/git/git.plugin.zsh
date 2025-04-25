@@ -8,6 +8,8 @@ if $IS_OSX ; then
   PATH="$PATH:${__zsh_forivall_git_plugin_location}/bin-osx"
 fi
 
+alias approxidate="$__zsh_forivall_git_plugin_location/venv/bin/python3 -c \"import sys; import approxidate; print(int(approxidate.approx(' '.join(sys.argv[1:]))))\""
+
 # GIT_CONTRIB_ROOT="/usr/share/doc/git/contrib"
 GIT_CONTRIB_ROOT="/usr/share/git"
 if $IS_OSX ; then
@@ -28,19 +30,19 @@ alias gitview="/usr/share/git/gitview/gitview"
 
 alias g=git
 
-alias ga='git add'
+# alias ga='git add'
 alias gap='git add -p'
 alias gam='git amend'
 
-alias gcb='git checkout -b'
+# alias gcb='git checkout -b'
 alias gcm='git commit'
-alias gco='git checkout'
+# alias gco='git checkout'
 alias gcop='git checkoutp'
 alias gcob='git checkout-branch'
 alias gcobp='git checkout-branch --prefix'
 alias gcor='git checkout-recent'
 alias gsco='git stashed checkout'
-alias gcp='git cherry-pick'
+# alias gcp='git cherry-pick'
 alias gcpc='git cherry-pick --continue'
 alias gcps='git cherry-pick --skip'
 alias gsi='git switch'
@@ -51,7 +53,7 @@ alias gre='git restore'
 alias grp='git restorep'
 alias gres='git restore --source'
 
-alias gd='git diff'
+# alias gd='git diff'
 alias gds='git diff --staged'
 alias gdd='git delta diff'
 alias gdds='git delta diff --staged'

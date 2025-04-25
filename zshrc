@@ -103,6 +103,36 @@ __FZF_BASE_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_module
 export FZF_DEFAULT_COMMAND="$__FZF_BASE_COMMAND --type f"
 export FZF_ALT_C_COMMAND="$__FZF_BASE_COMMAND --type d"
 export FZF_CTRL_T_COMMAND=""
+export FZF_DEFAULT_OPTS="
+--layout=reverse
+--info=inline
+--height=80%
+--multi
+--preview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2>/dev/null | head -n 200'
+--preview-window=':hidden'
+--preview-border=none
+--input-border=none
+--color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+--prompt='∼ '
+--pointer='▶'
+--marker='✓'
+--bind '?:toggle-preview'
+--bind 'ctrl-a:select-all'
+--bind 'ctrl-e:execute(hx {+} >/dev/tty)'
+--bind 'ctrl-v:execute(code {+})'
+--bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+"
+
+export FORGIT_FZF_DEFAULT_OPTS="
+--preview-window='right,nohidden'
+"
+export FORGIT_SHOW_PAGER="deltaw \
+  --file-decoration-style '' \
+  --hunk-header-decoration-style '' "
+export FORGIT_DIFF_PAGER="deltaw \
+  --file-style omit \
+  --file-decoration-style '' \
+  --hunk-header-decoration-style '' "
 
 # zsh-nvm settings
 export NVM_COMPLETION=true
@@ -228,6 +258,7 @@ if ! zgen saved; then
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-sudo"
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/iterm2"
 
+  zgen load 'wfxr/forgit'
 
   zgen load "$__zshrc_dirname/plugins/oneliner"
   zgen load "$__zshrc_dirname/plugins/external-tools"

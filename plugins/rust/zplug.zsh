@@ -9,6 +9,7 @@ function generate_completions() {
   $@ > $compfile
 }
 generate_completions rustup completions zsh
+generate_completions srgn --completions zsh
 tv init zsh > ${__dirname}/tv-init.zsh
 patch -f -i tv-init.patch
 

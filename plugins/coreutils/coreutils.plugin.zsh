@@ -127,6 +127,13 @@ elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ;
   }
 fi
 compdef gman=man
+man() {
+  if (( COLUMNS > 120 )); then
+    MANPAGER="moar --no-linenumbers" MANWIDTH=120 command man "$@"
+  else
+    MANPAGER="moar --no-linenumbers" command man "$@"
+  fi
+}
 
 # touch
 function touche() {

@@ -11,11 +11,12 @@ bindkey '^[[B' down-line-or-beginning-search
 
 if (( ${+commands[atuin]} )); then
   bindkey '^P' atuin-up-search
-  bindkey '^[[1;5A' atuin-up-search
+  # bindkey '^[[1;5A' atuin-up-search
 else
-  bindkey '^[[1;5A' up-line-or-search
+  # bindkey '^[[1;5A' up-line-or-search
 fi
 
+bindkey '^[[1;5A' up-line-or-search
 bindkey '^[[1;5B' down-line-or-search
 
 bindkey '^[[1;2A' history-substring-search-up

@@ -11,3 +11,6 @@ function md() {
 
 [[ -f "${__zsh_rust_plugin_location}/broot.source.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/broot.source.zsh"
+
+[[ -f "${__zsh_rust_plugin_location}/tv-init.zsh" ]] &&
+  source "${__zsh_rust_plugin_location}/tv-init.zsh"
