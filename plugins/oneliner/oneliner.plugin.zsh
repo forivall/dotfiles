@@ -19,7 +19,7 @@ function oneliner() {
 }
 alias oneliner="nocorrect noglob oneliner"
 
-oneliner-create() {
+function oneliner-create() {
   local name="${1}"
   if [[ -z "${name}" ]]; then
     echo "usage: oneliner create <name> <command>"

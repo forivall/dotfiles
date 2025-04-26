@@ -15,9 +15,9 @@ appsupport="Library/Application Support"
 #                repo_dir          config_dir                                     file_or_glob  ...flags
 vscode=(         ./vscode          ~/$appsupport/Code/User                        "*.json")
 vscode_snippets=(./vscode/snippets ~/$appsupport/Code/User/snippets               "*.json")
-smerge_settings=(./subl/merge      "$mu/$appsupport/Sublime Merge/Packages/User"  "*.sublime-settings")
-smerge_keymap=(  ./subl/merge      "$mu/$appsupport/Sublime Merge/Packages/User"  "Default*.sublime-keymap")
-subl_settings=(  ./subl/text       "$mu/$appsupport/Sublime Text 3/Packages/User" "*.sublime-settings")
+smerge_settings=(./subl/merge      "~/$appsupport/Sublime Merge/Packages/User"  "*.sublime-settings")
+smerge_keymap=(  ./subl/merge      "~/$appsupport/Sublime Merge/Packages/User"  "Default*.sublime-keymap")
+subl_settings=(  ./subl/text       "~/$appsupport/Sublime Text 3/Packages/User" "*.sublime-settings")
 bat_themes=(     ./bat/themes      ~/.config/bat/themes                           "*")
 bat_config=(     ./bat             ~/.config/bat                                  config)
 lapce_config=(   ./config/lapce    ~/$appsupport/dev.lapce.Lapce-Stable           "*.toml")
@@ -35,6 +35,8 @@ entries=(
   lapce_config
   zed_config
 )
+
+(( ${+commands[gcp]} )) && alias cp="command gcp"
 
 for entry in $entries; do
   repo_dir=${(@)${(P)entry}[1]}

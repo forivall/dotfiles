@@ -194,3 +194,4 @@ brew install yt-dlp
 # toilet: imlib2 libxi libcaca
 brew install dos2unix
 brew install nnn
+brew install luarocks
