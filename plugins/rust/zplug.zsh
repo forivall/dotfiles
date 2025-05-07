@@ -11,7 +11,7 @@ function generate_completions() {
 generate_completions rustup completions zsh
 generate_completions srgn --completions zsh
 tv init zsh > ${__dirname}/tv-init.zsh
-patch -f -i tv-init.patch
+patch -p3 -f -i tv-init.patch
 
 [[ -f "${ZGEN_INIT}" ]] && echo 'You should run `zgen reset` to ensure that zcompdump get rebuilt'
 

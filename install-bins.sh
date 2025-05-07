@@ -19,6 +19,7 @@ cmds=(
   'cargo install consoletimer'
   'cargo install ddh'
   'cargo install dtg'
+  'cargo install drft'
   'cargo install huniq'
   'cargo install hx'
   'cargo install pueue'
@@ -34,6 +35,7 @@ cmds=(
   'pipx install humble-explorer'
 
   'go install github.com/ChausseBenjamin/termpicker@latest'
+  'go install github.com/dlvhdr/diffnav@latest'
 )
 
 alias pip='python3 -m pip'

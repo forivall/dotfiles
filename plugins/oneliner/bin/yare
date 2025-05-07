@@ -32,3 +32,6 @@ elif [[ -f package.json ]]; then
 fi
 
 if $wasrun; then exit; fi
+
+echo "no task runner configuration was found"
+exit 1

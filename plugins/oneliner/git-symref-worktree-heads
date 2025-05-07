@@ -1,0 +1,9 @@
+mkdir -p .git/refs/worktrees
+ln -fs ../../HEAD .git/refs/worktrees/main
+for w in .git/worktrees/*; do
+  gd=$(< $w/gitdir);
+  d=${gd%/.git};
+  if [[ $d = $PWD ]]; then name=main; else name=${${d%-worktrees/*}##*/}; fi;
+  echo $name;
+  ln -fs ../../${w#.git/}/HEAD .git/refs/worktrees/$name;
+done;

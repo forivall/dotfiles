@@ -13,6 +13,11 @@ function _next_cd_reset() { _next_cd_false=0 ; }
 function _next_cd_test() { return ${_next_cd_false} ; }
 _next_cd_false=1
 
+[[ -n "${commands[(I)tere]}" ]] && tere() {
+  local result=$(command tere "$@")
+  [ -n "$result" ] && cd -- "$result"
+}
+
 if [[ -n "$ZSH_VERSION" ]] ; then
     function _multidot_cd() {
         # allow cd ... and such

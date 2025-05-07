@@ -1,9 +1,11 @@
---- /dev/fd/11	2025-04-10 16:28:56
-+++ tv-init.zsh	2025-04-10 16:28:00
-@@ -51,6 +51,5 @@
+diff --git a/plugins/rust/tv-init.zsh b/plugins/rust/tv-init.zsh
+index 8bf02a0..c370265 100644
+--- a/plugins/rust/tv-init.zsh
++++ b/plugins/rust/tv-init.zsh
+@@ -54,5 +54,5 @@ zle -N tv-shell-history _tv_shell_history
  
  
  bindkey '^T' tv-smart-autocomplete
 -bindkey '^R' tv-shell-history
- 
++# bindkey '^R' tv-shell-history
  
