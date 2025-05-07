@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+# code: language=shellscript
+
+escape-regex () {
+	perl -ne 'chomp($_); print quotemeta($_);'
+}
+
+prompt_to_update() {
+  echo -n "Update $1 from $2 to $3? (y/N/p) "
+  read -k 1 yn
+  echo
+  [[ $yn == y ]] && git update-ref refs/$1 $3
+  [[ $yn == p ]] && git last $2 && git last $3 && prompt_to_update $@
+}
+
+from_head=$1
+shift
+to_head=$1
+shift
+
+if [[ -z $from_head || -z $to_head ]]; then
+  echo 'usage: git update-branch-restack <from_ref> <to_ref> [options]'
+  echo 'for example, after a `git revise`, use `git update-branch-restack HEAD@{1} HEAD --reverse`'
+  return 1 || exit 1
+fi
+
+exclude=$(git merge-base $from_head $to_head)
+
+for rev in $(git rev-list $from_head ^$exclude $@); do
+  ref=$(git describe --exact-match --exclude 'branchless/*' --all $rev 2>/dev/null) || continue
+  rev_list_output=(${(f)"$(git rev-list -n1 --pretty=%s $rev)"})
+  if new_rev=$(git rev-list -n1 --fixed-strings --grep ${rev_list_output[2]} $to_head ^$exclude $@) && [[ -n "$new_rev" ]]; then
+    if [[ $new_rev == $rev ]]; then
+      echo "Nothing to do for $ref"
+      continue;
+    fi
+    prompt_to_update $ref $rev $new_rev
+  else
+    echo "no match for $ref in commit range"
+    echo git rev-list -n1 --fixed-strings --grep ${(qq)rev_list_output[2]} $@
+  fi
+done
