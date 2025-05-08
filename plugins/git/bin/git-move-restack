@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+# code: language=shellscript
+
+src=${2:-HEAD}
+msg="$(git show --no-patch --pretty=%s $1)"
+rev="$(git rev-list --reverse $src ^"$(git rev-list -n1 --fixed-strings --grep "$msg" $src)" | head -n1)"
+if [[ -z $rev ]]; then
+  echo 'no base commit found matching' "$msg"
+  return 1 || exit 1
+fi
+echo '>' git branchless move -s $rev -d $1
+git branchless move -s $rev -d $1
