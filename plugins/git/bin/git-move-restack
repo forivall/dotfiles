@@ -9,4 +9,8 @@ if [[ -z $rev ]]; then
   return 1 || exit 1
 fi
 echo '>' git branchless move -s $rev -d $1
-git branchless move -s $rev -d $1
+if git branchless move -s $rev -d $1; then
+  newrev="$(git rev-list --reverse $src ^"$(git rev-list -n1 --fixed-strings --grep "$msg" $src)" | head -n1)"
+  echo '>' git revise --no-index $newrev
+  git revise --no-index $newrev
+fi

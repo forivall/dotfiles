@@ -20,7 +20,7 @@ git-delta() {
   if [[ $1 = --color ]]; then shift; fi
 
   local pager=$(git config core.pager || echo -n "less")
-  [[ -v deltaOpts ]] || local deltaOpts=()
+  [[ -v deltaOpts ]] || local deltaOpts=(--tabs 2)
   if [[ $1 = --color-only ]]; then shift; deltaOpts+=(--color-only); fi
   if [[ $1 = --television ]]; then shift; deltaOpts+=(
       --keep-plus-minus-markers

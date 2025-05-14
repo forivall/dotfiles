@@ -14,9 +14,20 @@ echo ---
 
 if (( $# > 0 )) || git ls-files $@ --error-unmatch $file 2>/dev/null >/dev/null; then
   difflines=("${(f)$(git diff -w --raw --numstat --follow $@ -- $file)}")
-  rawstat=($(echo ${difflines[1]}))
-  diffstat="${rawstat[5]}"
-  numstat=($(echo ${difflines[2]}))
+  if [[ ${difflines[2]} = :* ]]; then
+    numstat=(${=difflines[1]})
+    rawstat=(${=difflines[2]})
+  else
+    rawstat=(${=difflines[1]})
+    numstat=(${=difflines[2]})
+  fi
+  if [[ ${rawstat[1]} = ::* ]]; then
+    diffstat="${rawstat[7]}"
+    fromfile="${rawstat[8]}"
+  else
+    diffstat="${rawstat[5]}"
+    fromfile="${rawstat[6]}"
+  fi
   added=${numstat[1]}
   removed=${numstat[2]}
 elif [[ -f $file ]]; then
@@ -28,23 +39,27 @@ fi
 if [[ -v diffstat ]]; then
   suffix=""
   if (( $# > 0 )) && [[ $1 != --cached ]] || (( $# > 1 )); then
-    case "$diffstat" in C*) suffix+=ied;; A) suffix+=e;& *) suffix+=d esac
+    case "$diffstat" in C*) suffix+=ied;; A*) suffix+=e;& *) suffix+=d esac
   else
     case "$diffstat" in C*) suffix+=y;; esac
   fi
-  if [[ "$diffstat" = C* ]]; then
-    intro="${fg[cyan]}Cop$suffix${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
+  if [[ "$diffstat" = CA ]]; then
+    intro="${fg[cyan]}Cop$suffix${reset_color} from ${fg[yellow]}??${reset_color}"
+  elif [[ "$diffstat" = RA ]]; then
+    intro="${fg[cyan]}Rename$suffix${reset_color} from ${fg[yellow]}??${reset_color}"
+  elif [[ "$diffstat" = C* ]]; then
+    intro="${fg[cyan]}Cop$suffix${reset_color} from ${fg[yellow]}${fromfile}${reset_color}"
   elif [[ "$diffstat" = R* ]]; then
-    intro="${fg[cyan]}Rename$suffix${reset_color} from ${fg[yellow]}${rawstat[6]}${reset_color} ${summary[5]}"
-  elif [[ "$diffstat" = D ]]; then
+    intro="${fg[cyan]}Rename$suffix${reset_color} from ${fg[yellow]}${fromfile}${reset_color}"
+  elif [[ "$diffstat" = D* ]]; then
     intro="${fg[cyan]}Delete$suffix${reset_color}"
-  elif [[ "$diffstat" = A ]]; then
+  elif [[ "$diffstat" = A* ]]; then
     intro="${fg[cyan]}Add$suffix${reset_color} new"
   else
     intro="${fg[cyan]}Change$suffix${reset_color}"
   fi
 
-  [[ "$diffstat" != A ]] && (( removed == 0 && added == 0 )) && wsonly=true || wsonly=false
+  [[ "$diffstat" != A* ]] && (( removed == 0 && added == 0 )) && wsonly=true || wsonly=false
   if $wsonly; then
     numstat=($(git diff --numstat --follow $@ -- $file))
     added=${numstat[1]}

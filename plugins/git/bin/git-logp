@@ -95,7 +95,7 @@ elif ! $allfiles; then
   dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
 fi
 
-deltaOpts=()
+deltaOpts=(--tabs 2)
 if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
   deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
 fi

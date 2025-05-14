@@ -11,9 +11,14 @@ function git-on-this-day {
   if (( $# > 0 )); then
     shift;
   else
-    local sinceParsed=$(python3 -c "import approxidate; print(int(approxidate.approx(\"$since_\")))")
+    if [[ ! -d $__zsh_forivall_git_plugin_location/venv ]]; then
+      python3 -m venv $__zsh_forivall_git_plugin_location/venv &&
+      $__zsh_forivall_git_plugin_location/venv/bin/pip3 install approxidate
+    fi
+    local sinceParsed
+    sinceParsed=$($__zsh_forivall_git_plugin_location/venv/bin/python3 -c "import sys; import approxidate; print(int(approxidate.approx(sys.argv[1])))" "$since_")
     # local sinceParsed=$($__zsh_forivall_git_plugin_location/parse_date/parse_date $since_)
-    until_="$(( $sinceParsed + 86400 ))"
+    until_="$(( $sinceParsed + 24 * 60 * 60 ))"
   fi
   local dirname
   local cmd
