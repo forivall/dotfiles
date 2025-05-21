@@ -1,51 +1,51 @@
 [[cable_channel]]
 name = "files"
 source_command = "fd -H -t f"
-preview_command = ":files:"
+preview.command = "bat --color always {}"
 
 [[cable_channel]]
 name = "all-files"
 source_command = "fd -I -t f"
-preview_command = ":files:"
+preview.command = "bat --color always {}"
 
 # GIT
 [[cable_channel]]
 name = "git-diff"
 source_command = "git diff --name-only"
-preview_command = "git diff --color=always {0} | delta --file-style omit --hunk-header-decoration-style ' ' --keep-plus-minus-markers"
+preview.command = "git diff --color=always {0} | delta --file-style omit --hunk-header-decoration-style ' '"
 
 [[cable_channel]]
 name = "git-reflog"
 source_command = 'git reflog'
-preview_command = 'git show -p --stat --pretty=fuller --color=always {0}'
+preview.command = 'git show -p --stat --pretty=fuller --color=always {0}'
 
 [[cable_channel]]
 name = "git-log"
 source_command = "git log --oneline --date=short --pretty=\"format:%h %s %an %cd\" \"$@\""
-preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
+preview.command = "git show -p --stat --pretty=concise --color=always {0} | delta --file-style omit --hunk-header-decoration-style ' '"
 
 [[cable_channel]]
 name = "git-branch"
 source_command = "git --no-pager branch --all --format=\"%(refname:short)\""
-preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
+preview.command = "git l2 --color=always --max-count=100 {0}"
 
 # Docker
 [[cable_channel]]
 name = "docker-images"
 source_command = "docker image list --format \"{{.ID}}\""
-preview_command = "docker image inspect {0} | jq -C"
+preview.command = "docker image inspect {0} | jq -C"
 
 # S3
 [[cable_channel]]
 name = "s3-buckets"
 source_command = "aws s3 ls | cut -d \" \" -f 3"
-preview_command = "aws s3 ls s3://{0}"
+preview.command = "aws s3 ls s3://{0}"
 
 # Dotfiles
 [[cable_channel]]
 name = "my-dotfiles"
 source_command = "fd -t f . $HOME/.config"
-preview_command = ":files:"
+preview.command = "bat --color always {}"
 
 # Shell history
 [[cable_channel]]
