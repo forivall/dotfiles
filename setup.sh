@@ -130,3 +130,7 @@ if $is_xdg ; then
   o ln -fs "$(realpath autostart/redshift.desktop)" "${XDG_AUTOSTART_DIR}/autostart/redshift.desktop"
   o ln -fs "$(realpath autostart/synclient.desktop)" "${XDG_AUTOSTART_DIR}/autostart/synclient.desktop"
 fi
+
+[[ ! -d ~/.local/opt/sunwait ]] && o git clone hub:risacher/sunwait ~/.local/opt/sunwait
+o make -C ~/.local/opt/sunwait
+o ln -s ~/.local/opt/sunwait/sunwait ~/.local/bin/sunwait

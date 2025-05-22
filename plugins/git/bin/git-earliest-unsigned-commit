@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+# code: language=shellscript
+
+git rev-list --pretty='%G?' "${1:-HEAD}" | {
+  line=()
+  rev=
+  while read -A line; do
+    read gpgstatus
+    if [[ $gpgstatus != N ]]; then echo "$rev"; break || return || exit; fi
+    rev="${line[2]}"
+  done
+}
+  
