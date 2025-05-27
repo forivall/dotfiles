@@ -299,15 +299,12 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
   height: 100%;
   content: "";
   background:
-    linear-gradient(rgba(158,110,96,0.5),rgba(160,121,102,0.5),rgba(179,141,120,0.5),rgba(166,130,105,0.5),rgba(175,140,122,0.5),rgba(122,107,117,0.5)),
-    linear-gradient(90deg, #7c5f5a 18%, #967872 34%, #a08583 45%, #c7a382 81%);
-}
-.trongthanh-theme-boxythemekit-themes-Boxy-Tomorrow-json
-.monaco-split-view2 > .monaco-scrollable-element > .split-view-container > .split-view-view .terminal-editor > .terminal-wrapper > div > .xterm > .xterm-scrollable-element::before {
-  background:
-    radial-gradient(60% 20% at top left, rgb(29, 31, 33), transparent),
+    radial-gradient(200px 50px at top left, var(--vscode-editor-background), transparent),
     linear-gradient(rgba(158, 110, 96, 0.5), rgba(160, 121, 102, 0.5), rgba(179, 141, 120, 0.5), rgba(166, 130, 105, 0.5), rgba(175, 140, 122, 0.5), rgba(122, 107, 117, 0.5)),
     linear-gradient(90deg, #7c5f5a 18%, #967872 34%, #a08583 45%, #c7a382 81%);
+}
+.monaco-split-view2>.monaco-scrollable-element>.split-view-container>.split-view-view .terminal-editor .xterm-scrollable-element>.xterm-screen{
+  background: linear-gradient(to bottom, #06071610 0%, #12306310 31%, #f48bb010 73%, #ffbb0010 100%);
 }
 .monaco-workbench.mac .debug-hover-widget .monaco-list-row .expression,
 .monaco-workbench.mac .debug-pane .monaco-list-row .expression {

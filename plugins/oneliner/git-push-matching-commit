@@ -1,0 +1,8 @@
+UPSTREAM=$(git rev-parse --symbolic-full-name @{push}) &&
+REMOTE=${UPSTREAM#refs/remotes/} && REMOTE=${REMOTE%%/*}
+PUSHREF=$(git rev-list -n1 --fixed-strings --grep "$(git show --no-patch --pretty=%s @{u})" HEAD):${UPSTREAM#refs/remotes/*/} &&
+  echo '>' git push "$REMOTE" "$PUSHREF" --force-with-lease &&
+  echo -n 'execute? (yn) ' &&
+  read -rk1 yn && echo &&
+  [[ $yn = y ]] &&
+  git push "$REMOTE" "$PUSHREF" --force-with-lease
