@@ -468,7 +468,7 @@
   "editor.cursorBlinking": "phase",
   "editor.cursorSurroundingLines": 2,
   "editor.detectIndentation": true,
-  "editor.foldingImportsByDefault": false,
+  "editor.foldingImportsByDefault": true,
   "editor.formatOnPaste": false,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.gotoLocation.multipleDeclarations": "gotoAndPeek",
@@ -479,7 +479,7 @@
   "editor.guides.bracketPairs": true,
   "editor.guides.indentation": true,
   "editor.hover.sticky": true,
-  "editor.inlayHints.enabled": "onUnlessPressed",
+  "editor.inlayHints.enabled": "offUnlessPressed",
   // normal / with compact
   "editor.lineHeight": 18,
   "editor.linkedEditing": true,
@@ -1135,7 +1135,8 @@
     "projectManager.git.baseFolders",
     "workbench.colorTheme",
     "cloudcode.duetAI.enable",
-    "cloudcode.duetAI.project"
+    "cloudcode.duetAI.project",
+    "typescript.tsserver.nodePath"
   ],
   "terminal.explorerKind": "integrated",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
@@ -2057,6 +2058,8 @@
       "hide": false,
       "when": "activeEditor == 'multiDiffEditor'"
     },
+    { "keys": "g.z", "command": "workbench.view.scm", "type": "command" },
+    { "keys": "g.Z", "command": "workbench.view.extension.github-pull-requests", "type": "command" },
     { "keys": ["g", "."], "command": "whichkey.showTransient",
       "args": {
         "bindings": [
@@ -2184,6 +2187,41 @@
         "title": "Pull Request Review"
       },
       "name": "Code Review transient",
+      "type": "command"
+    },
+    { "keys": ["g", ">"], "command": "whichkey.showTransient",
+      "args": {
+        "bindings": [
+          { "command": "merge.goToNextUnhandledConflict",     "key": "j", "when": "isMergeEditor", "name": "Next Conflict", "hide": false },
+          { "command": "merge.goToPreviousUnhandledConflict", "key": "k", "when": "isMergeEditor", "name": "Previous Conflict", "hide": false },
+          { "command": "merge.toggleActiveConflictInput1",    "key": "l", "when": "isMergeEditor", "name": "Accept Input 1 (right side)", "hide": false },
+          { "command": "merge.toggleActiveConflictInput2",    "key": "h", "when": "isMergeEditor", "name": "Accept Input 2 (left side)", "hide": false },
+          { "command": "mergeEditor.toggleBetweenInputs",     "key": "n", "when": "isMergeEditor", "name": "Toggle between merge editor inputs", "hide": false },
+          { "command": "mergeEditor.acceptMerge",             "key": "x", "when": "isMergeEditor", "name": "Accept Merge", "hide": false },
+          {
+            "command": "extension.multiCommand.scrollAndMoveCursorDown",
+            "display": "hidden",
+            "key": " ",
+            "name": "Scroll down",
+            "hide": false,
+            "args": [
+              {
+                "to": "down",
+                "by": "halfPage"
+              }
+            ]
+          },
+          {
+            "command": "whichkey.toggleZenMode",
+            "display": "hidden",
+            "key": "z",
+            "name": "Toggle zen mode",
+            "hide": false
+          }
+        ],
+        "title": "Pull Request Review"
+      },
+      "name": "Conflict Resolution transient",
       "type": "command"
     },
     { "keys": "s.g", "command": "editor.action.selectHighlights",
@@ -3584,7 +3622,8 @@
     "--max-line-length=88"
   ],
   "search.followSymlinks": false,
-  "diffEditor.renderSideBySide": true,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.renderSideBySide": false,
   "typescriptFold.autoFold": false,
   "typescriptFold.togglePerFile": true,
   "betterFolding.excludedLanguages": [
@@ -3644,7 +3683,6 @@
   "icontheme.lightIconTheme": "catppuccin-latte",
   "gitlens.telemetry.enabled": false,
   "workbench.activityBar.location": "bottom",
-  "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.useInlineViewWhenSpaceIsLimited": false,
   "gitlens.hovers.autolinks.enabled": false,
   "window.customTitleBarVisibility": "never",
@@ -3659,7 +3697,8 @@
   "geminicodeassist.project": "ttc-labs",
   "extensions.experimental.affinity": {
     "esbenp.prettier-vscode": 1,
-    "gregoire.dance": 2
+    "gregoire.dance": 2,
+    "Angular.ng-template": 3,
   },
   "bookmarks.label.suggestion": "useWhenSelected",
   "chat.commandCenter.enabled": false,
