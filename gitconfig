@@ -96,7 +96,7 @@
 	showd2 = showd --pretty=concise
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
 	branches = branch --list
-	branches-with-upstreams = "!git rev-parse --symbolic --branches | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done"
+	branches-with-upstreams = "!zsh -c 'if (( $# > 0 )); then opt=(\"--branches=\"${^@}); else opt=(--branches); fi; git rev-parse --symbolic ${opt[@]} | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done' -"
 	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
 	llus = "!git log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration  $(git branches-with-upstreams)"
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graph

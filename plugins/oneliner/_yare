@@ -7,8 +7,151 @@ _yare_yarn_autocompletions() {
   compadd -- $completions
 }
 
+# adapted from _make
+_yare_make-expandVars() {
+  local open close var val front='' rest=$1
+
+  while [[ $rest == (#b)[^$]#($)* ]]; do
+    front=$front${rest[1,$mbegin[1]-1]}
+    rest=${rest[$mbegin[1],-1]}
+
+    case $rest[2] in
+      ($)           # '$$'. may not appear in target and variable's value
+      front=$front\$\$
+      rest=${rest[3,-1]}
+      continue
+      ;;
+      (\()           # Variable of the form $(foobar)
+      open='('
+      close=')'
+      ;;
+      ({)           # ${foobar}
+      open='{'
+      close='}'
+      ;;
+      ([[:alpha:]]) # $foobar. This is exactly $(f)oobar.
+      open=''
+      close=''
+      var=$rest[2]
+      ;;
+      (*)           # bad parameter name
+        print -- $front$rest
+        return 1
+      ;;
+    esac
+
+    if [[ -n $open ]]; then
+      if [[ $rest == \$$open(#b)([[:alnum:]_]##)(#B)$close* ]]; then
+      var=$match
+      else  # unmatched () or {}, or bad parameter name
+      print -- $front$rest
+      return 1
+      fi
+    fi
+
+    val=''
+    if [[ -n ${VAR_ARGS[(i)$var]} ]]; then
+      val=${VAR_ARGS[$var]}
+    else
+      if [[ -n $opt_args[(I)(-e|--environment-overrides)] ]]; then
+        if [[ $parameters[$var] == scalar-export* ]]; then
+          val=${(P)var}
+        elif [[ -n ${VARIABLES[(i)$var]} ]]; then
+          val=${VARIABLES[$var]}
+        fi
+      else
+        if [[ -n ${VARIABLES[(i)$var]} ]]; then
+          val=${VARIABLES[$var]}
+        elif [[ $parameters[$var] == scalar-export* ]]; then
+          val=${(P)var}
+        fi
+      fi
+    fi
+    rest=${rest//\$$open$var$close/$val}
+  done
+
+  print -- ${front}${rest}
+}
+_yare_make-parseMakefile () {
+  local input var val target dep TAB=$'\t' tmp IFS=
+
+  while read input; do
+    case "$input " in
+      # VARIABLE = value OR VARIABLE ?= value
+      ([[:alnum:]][[:alnum:]_]#[" "$TAB]#(\?|)=*)
+      var=${input%%[ $TAB]#(\?|)=*}
+      val=${input#*=}
+      val=${val##[ $TAB]#}
+      VARIABLES[$var]=$val
+      ;;
+
+      # VARIABLE := value OR VARIABLE ::= value
+      # Evaluated immediately
+      ([[:alnum:]][[:alnum:]_]#[" "$TAB]#:(:|)=*)
+      var=${input%%[ $TAB]#:(:|)=*}
+      val=${input#*=}
+      val=${val##[ $TAB]#}
+      val=$(_yare_make-expandVars $val)
+      VARIABLES[$var]=$val
+      ;;
+
+      # TARGET: dependencies
+      # TARGET1 TARGET2 TARGET3: dependencies
+      ([[*?[:alnum:]$][^$TAB:=%]#:[^=]*)
+      target=$(_yare_make-expandVars ${input%%:*})
+      TARGETS+=( ${(z)target} )
+      ;;
+
+      # Include another makefile
+      (${~incl}" "*)
+      local f=${input##${~incl} ##}
+      if [[ $incl == '.include' ]]
+      then
+        f=${f#[\"<]}
+        f=${f%[\">]}
+      fi
+      f=$(_yare_make-expandVars $f)
+
+      if [[ -r $f ]]
+      then
+        _yare_make-parseMakefile < $f
+      fi
+      ;;
+    esac
+  done
+}
+_yare_make_targets() {
+  local basedir=.
+  local is_gnu
+  _pick_variant -r is_gnu gnu=GNU unix -v -f
+  local file
+  if [[ $is_gnu == gnu && -r $basedir/GNUmakefile ]]; then
+    file=$basedir/GNUmakefile
+  elif [[ -r $basedir/makefile ]]; then
+    file=$basedir/makefile
+  elif [[ -r $basedir/Makefile ]]; then
+    file=$basedir/Makefile
+  else
+    file=''
+  fi
+  if [[ -n "$file" ]]; then
+    if [[ $is_gnu == gnu ]]; then
+      if zstyle -t ":completion:${curcontext}:targets" call-command; then
+        _yare_make-parseMakefile < <(_call_program targets "make" -nsp --no-print-directory -f "$file" --always-make 2> /dev/null)
+      else
+        _yare_make-parseMakefile < $file
+      fi
+    else
+      _yare_make-parseMakefile < $file
+    fi
+  fi
+  compadd -Q -a TARGETS
+}
+
 _yare() {
-  _yare_yarn_autocompletions
+  _alternative \
+    'make:command:_yare_make_targets' \
+    'node:command:_yare_yarn_autocompletions'
 }
 
 _yare

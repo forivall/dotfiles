@@ -1987,6 +1987,9 @@
     { "keys": "g.g", "name": "magit status", "type": "command",
       "command": "magit.status"
     },
+    { "keys": "g.z", "name": "magit status", "type": "command",
+      "command": "magit.status"
+    },
     { "keys": "g.F", "name": "magit file popup", "type": "command",
       "command": "magit.file-popup"
     },

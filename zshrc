@@ -207,25 +207,25 @@ if ! zgen saved; then
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
 
   zgen ohmyzsh
-  zgen ohmyzsh plugins/web-search
-  # zgen ohmyzsh plugins/command-not-found # very slow
-  $IS_OSX && zgen ohmyzsh plugins/brew
-  zgen ohmyzsh plugins/colorize
-  zgen ohmyzsh plugins/cp
-  zgen ohmyzsh plugins/git-extras
-  # zgen ohmyzsh plugins/docker
-  zgen ohmyzsh plugins/docker-compose
-  # zgen ohmyzsh plugins/npm
-  [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
-  zgen ohmyzsh plugins/rbenv
+  # zgen ohmyzsh plugins/web-search
+  # # zgen ohmyzsh plugins/command-not-found # very slow
+  # $IS_OSX && zgen ohmyzsh plugins/brew
+  # zgen ohmyzsh plugins/colorize
+  # zgen ohmyzsh plugins/cp
+  # zgen ohmyzsh plugins/git-extras
+  # # zgen ohmyzsh plugins/docker
+  # zgen ohmyzsh plugins/docker-compose
+  # # zgen ohmyzsh plugins/npm
+  # [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
+  # zgen ohmyzsh plugins/rbenv
   zgen load "$__zshrc_dirname/plugins/python"
-  zgen ohmyzsh plugins/python
-  # zgen ohmyzsh plugins/pyenv
-  whence kubectl > /dev/null && zgen ohmyzsh plugins/kubectl
-  # zgen ohmyzsh plugins/jump
-  # zgen ohmyzsh encode64
+  # zgen ohmyzsh plugins/python
+  # # zgen ohmyzsh plugins/pyenv
+  # whence kubectl > /dev/null && zgen ohmyzsh plugins/kubectl
+  # # zgen ohmyzsh plugins/jump
+  # # zgen ohmyzsh encode64
 
-  zgenom load unixorn/fzf-zsh-plugin
+  # zgenom load unixorn/fzf-zsh-plugin
   zgen load atuinsh/atuin
   zgen load zsh-users/zsh-autosuggestions
   if $ENABLE_AUTOCOMPLETE; then
@@ -235,15 +235,15 @@ if ! zgen saved; then
     zgen load "$__zshrc_dirname/plugins/simple-history-search"
   fi
 
-  zgen load srijanshetty/zsh-pandoc-completion /
+  # zgen load srijanshetty/zsh-pandoc-completion /
 
   zgen load "$__zshrc_dirname/plugins/jump"
   ! $IS_WINDOWS && zgen load mafredri/zsh-async / main
-  # ! $IS_WINDOWS && zgen load sindresorhus/pure
+  # # ! $IS_WINDOWS && zgen load sindresorhus/pure
   ! $IS_WINDOWS && zgen load forivall/pure / underline-repo-name
   $IS_WINDOWS && zgen load forivall/pure / underline-repo-name-no-async
   zgen load zsh-users/zsh-completions src
-  # zgen load deliciousinsights/git-stree
+  # # zgen load deliciousinsights/git-stree
 
   ! $IS_WINDOWS && zgen load forivall/zsh-nvm
   zgen load "$__zshrc_dirname/plugins/nvm"
@@ -251,7 +251,7 @@ if ! zgen saved; then
   zgen load gentslava/zsh-better-npm-completion
   zgen load g-plane/zsh-yarn-autocompletions
   zgen load g-plane/pnpm-shell-completion
-  # zgen load jocelynmallon/zshimarks
+  # # zgen load jocelynmallon/zshimarks
 
   zgen load "$__zshrc_dirname/plugins/functional"
   $IS_WINDOWS && zgen load "$__zshrc_dirname/plugins/cygwin-functions"
@@ -292,7 +292,7 @@ if ! zgen saved; then
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
-  (( ${+commands[direnv]} )) && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
+  [[ -n "${commands[direnv]}" ]] && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
   # zgen load dim-an/cod
   # zgen load forivall/cod / feat/zsh-local-build

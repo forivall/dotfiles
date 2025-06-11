@@ -10,6 +10,7 @@ OPTS_SPEC="\
 git checkout-recent [<options>] <args>...
 --
 h,help      show the help
+dry         print the branch instead of checking it out
 n,count=    show this many commits [default=10]
 d,date=     use date format [default=short-local]
 relative    use relative date format
@@ -32,11 +33,13 @@ sort=creatordate
 sort2=
 pattern=refs/heads/
 date=short-local
+dry=false
 
 index=0
 for arg in $@; do
   index=$((index+1))
   case "$arg" in
+    --dry) dry=true ;;
     --count=*) NUM="${arg#--count=}" ;;
     --author) sort=authordate ;&
     --commit) by_commit=true ;;
@@ -106,5 +109,9 @@ simple-term-menu $term_menu_options "${entries[@]}" && i=0 || i=$?
 if (( $i == 0 )) ; then exit; fi
 
 branch=${entries[i]#*|}
+if $dry ; then
+  echo $branch
+  return || exit
+fi
 echo '>' git checkout $branch
 git checkout $branch

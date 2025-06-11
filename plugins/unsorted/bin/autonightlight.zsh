@@ -2,6 +2,4 @@
 
 set -euo pipefail
 
-TZ="$(date +%Z)"
-resp="$(curl -s "https://api.sunrisesunset.io/json?lat=49.2827&lng=-123.1207&timezone=$TZ&date=today")"
-/opt/homebrew/bin/nightlight schedule "$(echo $resp | /opt/homebrew/bin/jq -r '.results.sunset | sub(":\\d\\d "; "")')" "$(echo $resp | /opt/homebrew/bin/jq -r '.results.sunrise | sub(":\\d\\d "; "")')"
+/opt/homebrew/bin/nightlight schedule "$(~/.local/opt/sunwait/sunwait list set 49.28N 123.12W)" "$(~/.local/opt/sunwait/sunwait list rise 49.28N 123.12W)"

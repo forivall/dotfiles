@@ -38,7 +38,12 @@ __git-patch-filepicker() {
     else
       # $ python3 -m pip install simple-term-menu
 
-      simple-term-menu -i $(( i - 1 )) $term_menu_options "${items[@]}" && i=0 || i=$?
+      if (( ${#items} > 255 )); then
+        i=$(simple-term-menu --stdout -i $(( i - 1 )) $term_menu_options "${items[@]}") || true
+        [[ -z $i ]] && i=0
+      else
+        simple-term-menu -i $(( i - 1 )) $term_menu_options "${items[@]}" && i=0 || i=$?
+      fi
       if (( $i == 0 )) ; then return 1; fi
     fi
     file=${items[i]}
