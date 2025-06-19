@@ -1652,6 +1652,8 @@
             "await vscode.commands.executeCommand('workbench.action.quickOpen', 'debug consoles ')",
           ]}
         ]},
+        "g": { "text": "Navigate to top of call stack", "command": "workbench.action.debug.callStackTop" },
+        "G": { "text": "Focus on call stack",        "command": "workbench.debug.action.focusCallStackView" },
         "b": { "text": "Toggle breakpoint",          "command": "editor.debug.action.toggleBreakpoint" },
         "c": { "text": "Continue program execution", "command": "workbench.action.debug.continue"      },
         "h": { "text": "Pause program execution",    "command": "workbench.action.debug.pause"         },
@@ -1985,9 +1987,6 @@
       "type": "command"
     },
     { "keys": "g.g", "name": "magit status", "type": "command",
-      "command": "magit.status"
-    },
-    { "keys": "g.z", "name": "magit status", "type": "command",
       "command": "magit.status"
     },
     { "keys": "g.F", "name": "magit file popup", "type": "command",
@@ -2766,12 +2765,17 @@
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.nodeEnv": "editor",
+  "eslint.problems.shortenToSingleLine": true,
   "eslint.rules.customizations": [
     {
       "rule": "redos/redos",
       "severity": "off"
     }
   ],
+  "eslint.timeBudget.onValidation": {
+    "warn": 8000,
+    "error": 16000
+  },
   "evenBetterToml.schema.associations": {
     // ".*/pyproject\\.toml": "https://raw.githubusercontent.com/abravalheri/validate-pyproject/main/src/validate_pyproject/pyproject_toml.schema.json"
     // ".*/pyproject\\.toml": "https://json.schemastore.org/pyproject.json"
@@ -3719,4 +3723,10 @@
   ],
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "geminicodeassist.enable": false,
+  "svg.preview.mode": "svg",
+  "template-string-converter.autoRemoveTemplateString": true,
+  "arena.codePrivacySettings": "Private",
+  "arena.enableTabAutocomplete": false,
+  "editor.minimap.showSlider": "always",
+  "github.copilot.nextEditSuggestions.enabled": false,
 }

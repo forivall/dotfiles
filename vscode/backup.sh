@@ -19,7 +19,9 @@ esac
 
 VSCODE_USER_DATADIR=$DATADIR/Code/User
 
-cp "$VSCODE_USER_DATADIR/settings.json" .
-cp "$VSCODE_USER_DATADIR/keybindings.json" .
-cp -r "$VSCODE_USER_DATADIR/snippets" .
+DOTFILES_DIR=${0:a:h}
+
+cp "$VSCODE_USER_DATADIR/settings.json" $DOTFILES_DIR
+cp "$VSCODE_USER_DATADIR/keybindings.json" $DOTFILES_DIR
+cp -r --dereference "$VSCODE_USER_DATADIR/snippets" $DOTFILES_DIR
 code --list-extensions > extensions.txt

@@ -31,4 +31,12 @@
 			" * @param {$6} options.$5",
 		],
 	},
+	"mongoose ObjectId": {
+		"prefix": "oid",
+		"body": "import('mongoose').Types.ObjectId"
+	},
+	"mongoose PipelineStage": {
+		"prefix": "mgps",
+		"body": "import('mongoose').PipelineStage"
+	},
 }
