@@ -1,5 +1,5 @@
 [
-  { "key": "escape", "command": "whichkey.show", "when": "dance.mode != 'insert' && dance.mode != 'input' && dance.mode != 'select' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && resourceScheme != 'vscode-interactive'" },
+  { "key": "escape", "command": "whichkey.show", "when": "dance.mode != 'insert' && dance.mode != 'input' && dance.mode != 'select' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && resourceScheme != 'vscode-interactive' && !inlineChatVisible && !terminalChatFocus" },
   // put escape keybinds after the whichkey escape binding.
   { "key": "escape", "command": "runCommands", "args": {"commands": ["search.action.clearSearchResults", "workbench.view.search"]},
     "when": "searchInputBoxFocus && viewHasSearchPattern"},
@@ -606,6 +606,9 @@
     "code": [
       "if (repetitions > 1) {",
       "  await vscode.commands.executeCommand('dance.select.down.jump', { count: repetitions })",
+      "  if (Context.current.shouldRecord()) {",
+      "    context.extension.recorder.recordCommand('dance.select.down.jump', { count: repetitions });",
+      "  }",
       "} else {",
       "  vscode.commands.executeCommand('cursorDown')",
       "}"
@@ -614,6 +617,9 @@
     "code": [
       "if (repetitions > 1) {",
       "  await vscode.commands.executeCommand('dance.select.up.jump', { count: repetitions })",
+      "  if (Context.current.shouldRecord()) {",
+      "    context.extension.recorder.recordCommand('dance.select.up.jump', { count: repetitions });",
+      "  }",
       "} else {",
       "  vscode.commands.executeCommand('cursorUp')",
       "}"
@@ -630,7 +636,7 @@
       "Selections.updateWithFallbackByIndex((_i, selection) => {",
       "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.start).line);",
       "  let endSeek = Selections.seekFrom(selection, Direction.Forward, selection.end);",
-      "  let end = endSeek.character > 0 ? Positions.lineBreak(endSeek.line) : endSeek;",
+      "  let end = endSeek.character >= 0 ? Positions.lineBreak(endSeek.line) : endSeek;",
       "  let sel1 = Selections.fromStartEnd(start, end);",
       "  let pos = Positions.lineStart(Lines.clamp(end.line + repetitions))",
       "  let sel2 = Selections.fromStartEnd(pos, pos);",
@@ -645,7 +651,7 @@
       "Selections.updateWithFallbackByIndex((_i, selection) => {",
       "  let start = Positions.lineStart(Selections.seekFrom(selection, Direction.Backward, selection.start).line);",
       "  let endSeek = Selections.seekFrom(selection, Direction.Forward, selection.end);",
-      "  let end = endSeek.character > 0 ? Positions.lineBreak(endSeek.line) : endSeek;",
+      "  let end = endSeek.character >= 0 ? Positions.lineBreak(endSeek.line) : endSeek;",
       "  let sel1 = Selections.fromStartEnd(start, end);",
       "  let pos = Positions.lineStart(Lines.clamp(start.line - repetitions))",
       "  let sel2 = Selections.fromStartEnd(pos, pos);",
@@ -879,7 +885,9 @@
   { "key": "alt+shift+0", "command": "dance.selections.rotate.both.reverse",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "alt+shift+;", "command": "dance.selections.faceForward", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": ". .",           "command": "dance.history.repeat.edit",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+
+  { "key": ".",           "command": "-dance.history.repeat.edit", "when": "editorTextFocus && dance.mode == 'normal'" },
+  { "key": ".",           "command": "dance.history.repeat.edit",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "escape",   "command": "dance.modes.set.normal",                                                                  "when": "editorTextFocus && dance.mode != 'normal' && dance.mode != 'insert'" },
   { "key": "ctrl+b",   "command": "dance.select.vertically", "args": { "direction": -1, "by": "page",     "shift": "jump" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -1107,11 +1115,6 @@
     "command": "foldit.fold"
   },
   {
-    "key": ".",
-    "command": "-dance.history.repeat.edit",
-    "when": "editorTextFocus && dance.mode == 'normal'"
-  },
-  {
     "key": "cmd+o",
     "command": "file-browser-fixed.open",
     "when": "!remoteFileDialogVisible && !inFileBrowser"
@@ -1335,6 +1338,16 @@
     "command": "magit.bisect",
     "key": "shift+b",
     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "ctrl+alt+right",
+    "command": "editor.action.inlineSuggest.acceptNextWord",
+    "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly"
+  },
+  {
+    "key": "cmd+right",
+    "command": "-editor.action.inlineSuggest.acceptNextWord",
+    "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly"
   },
 
   // End.

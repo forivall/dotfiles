@@ -57,6 +57,7 @@ ln -fs "$(realpath intellij/ideavimrc)" ~/.ideavimrc
 
 o ln -fs "$(realpath jshintrc)" ~/.jshintrc
 o ln -fs "$(realpath gitconfig)" ~/.gitconfig
+o ln -fs "$(realpath gitattributes)" ~/.gitattributes_global
 o ln -fs "$(realpath gitignore)" ~/.gitignore
 o ln -fs "$(realpath oglrc)" ~/.ogl
 o ln -fs "$(realpath hgrc)" ~/.hgrc

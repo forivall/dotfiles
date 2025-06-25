@@ -1,6 +1,23 @@
 [language-server.typescript-language-server]
 config.tsserver.path = "node_modules/typescript/lib"
 config.preferences.quotePreference = "single"
+config.diagnostics.ignoredCodes = [
+  80001, # File is a CommonJS module; it may be converted to an ES module
+]
+
+[language-server.typescript-language-server.config.typescript]
+implementationsCodeLens.enabled = true
+referencesCodeLens.enabled = true
+referencesCodeLens.showOnAllFunctions = true
+
+[language-server.typescript-language-server.config.typescript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
 
 # see https://github.com/helix-editor/helix/discussions/8452
 [language-server.eslint]
@@ -8,6 +25,7 @@ args = ["--stdio"]
 command = "vscode-eslint-language-server"
 
 [language-server.eslint.config]
+validate = "on"
 # format = { enable = true }
 nodePath = ""
 # onIgnoredFiles = "off"
@@ -16,12 +34,22 @@ quiet = false
 rulesCustomizations = []
 run = "onType"
 # useESLintClass = false
-validate = "on"
-codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation = { enable = true } }
 # codeActionsOnSave = { mode = "all" }
-experimental = {}
+experimental = { useFlatConfig = false }
 problems = { shortenToSingleLine = false }
 # workingDirectory = { mode = "auto" }
+
+[language-server.eslint.config.codeAction]
+[language-server.eslint.config.codeAction.disableRuleComment]
+enable = true
+location = "separateLine"
+
+[language-server.eslint.config.codeAction.showDocumentation]
+enable = true
+
+[language-server.eslint.config.codeActionOnSave]
+enable = false
+mode = "fixAll"
 
 [language-server.vscode-json-language-server.config]
 provideFormatter = false
@@ -39,7 +67,7 @@ file-types = [{ glob = "COMMIT_EDITMSG" }, { glob = "MERGE_MSG" }, { glob = "COM
 
 [[language]]
 name = "javascript"
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+formatter = { command = 'prettier', args = ["--parser", "javascript"] }
 
 [[language]]
 name = "html"
@@ -48,7 +76,15 @@ formatter = { command = 'prettier', args = ["--parser", "angular"] }
 [[language]]
 name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+language-servers = [ "typescript-language-server", "eslint" ]
 
 [[language]]
 name = "ruby"
 auto-format = false
+
+# [[language]]
+# name = "angular"
+# scope = "source.angular"
+# roots = ["angular.json", "nx.json"]
+# language-server = { command = "ngserver", args = ["--stdio", "--tsProbeLocations", "$(npm -g root)", "--ngProbeLocations", "$(npm -g root)"] }
+# file-types = ["ts", "html"]

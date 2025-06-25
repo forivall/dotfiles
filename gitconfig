@@ -12,6 +12,8 @@
 	trustctime = false
 	editor = hx
 	# trustctime = false
+	attributesfile = ~/.gitattributes_global
+
 [diff]
 	renames = copies
 	tool = vscode
@@ -70,6 +72,7 @@
 	last = -c pager.show=off show --oneline --name-status --decorate
 	last2 = last --name-status --pretty=twomore
 	l = log --pretty=oneline --abbrev-commit --decorate --graph
+	lc = "!f() { git log --pretty=oneline --abbrev-commit --decorate --graph ${1:-HEAD} $(git branch --format=\"%(objectname:short)\" --all --contains ${1:-HEAD}) ${@:2}; }; f"
 	lr = log --pretty=oneline --abbrev-commit --decorate --reverse
 	lm = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
 	lp = !git log --pretty=oneline --abbrev-commit --decorate --graph HEAD $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name)*\")
@@ -144,7 +147,8 @@
 	unstage = reset HEAD --
 	dc = diff --cached
 	amend = commit --amend --no-edit
-	reword = commit --amend
+	reword = revise --no-index --edit HEAD
+	reword = "!f() { git revise --no-index --edit ${@:-HEAD}; }; f"
 	cob = checkout-branch
 	checkout-branch = checkout
 	unresolve = checkout --conflict=merge
@@ -216,6 +220,9 @@
 	# tool = meld
 	# tool = meld_merged
 	# conflictstyle = diff3
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [rerere]
 	enabled = 1
 [mergetool "diffuse_custom"]

@@ -1,0 +1,30 @@
+#compdef git-move
+#description convert a branch to an archive
+
+_git-move () {
+  # (( $+functions[__git_remotes] )) || _git
+
+  _arguments -S \
+    '-b[branch]' \
+    '-s[src]' \
+    '-d[dest]' \
+    '*:: :->branches' \
+    && ret=0
+
+  # _arguments -S \
+  # '(-s --search)'{-s,--search}'[use search mode]' \
+  # '(-a --all)'{-a,--all}'[show all branches]' \
+  # '(-r --remote)'{-r,--remote=}'[show remote branches]::remote:__git_remotes' \
+  # '(-d --detach)'{-d,--detach}'[detach the HEAD at named commit]' \
+  # '(-f --force)'{-f,--force}'[force branch switch/ignore unmerged entries]' \
+  # && ret=0
+  case $state in
+    (branches)
+      __git_recent_branches
+      ;;
+  esac
+
+  return ret
+}
+
+_git-move

@@ -1,0 +1,14 @@
+--hidden
+--smart-case
+
+--glob
+!**/.git/**
+
+--glob
+!package-lock.json
+
+--max-columns
+2048
+
+--hyperlink-format
+vscode://file/{path}:{line}:{column}

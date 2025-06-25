@@ -158,3 +158,26 @@ function sleep_until {
 isvg() {
   rsvg-convert "$@" | imgcat
 }
+
+if [[ $IS_OSX && "$TERM_PROGRAM" == "vscode" ]]; then
+  code() {
+    if [[ "$1" == "--goto" ]]; then
+      local file_path="$2"
+      local suffix=""
+      if [[ $file_path == *:[0-9]## ]]; then
+        suffix="${file_path#**:}"
+        file_path="${file_path%:*}"
+        if [[ $file_path == *:[0-9]## ]]; then
+          suffix="${file_path#**:}$suffix"
+          file_path="${file_path%:*}"
+        fi
+      fi
+      open "vscode://file/$(realpath "$file_path")$suffix"
+      return
+    elif [[ "$#" -eq 1 && "$1" != -* ]]; then
+      open "vscode://file/$(realpath "$1")"
+      return
+    fi
+    command code "$@"
+  }
+fi

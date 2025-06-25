@@ -19,7 +19,8 @@ brew install coreutils findutils dateutils moreutils util-linux telnet \
 brew install less lesspipe # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
-brew install moar most colordiff trash htop tree ripgrep fd sd exa chafa broot choose vim ranger cfonts ruplacer
+brew install moar most colordiff trash htop tree ripgrep fd sd eza chafa broot choose vim ranger cfonts ruplacer
+brew install mergiraf
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager
 brew install git-interactive-rebase-tool git-revise git-bit git-open git-recent
@@ -73,6 +74,8 @@ brew install difftastic
 
 brew install go
 brew install duf # df alternative
+brew install jbreckmckye/formulae/daylight
+brew install jftuga/tap/dtmate
 # brew install ncdu
 brew tap dart-lang/dart
 brew install dart sass

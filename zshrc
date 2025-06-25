@@ -98,6 +98,9 @@ export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow
 export MOAR="--statusbar=bold --no-linenumbers"
 export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+  export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/vscode/ripgreprc"
+fi
 
 __FZF_BASE_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --exclude \$(realpath --relative-to=. $HOME/Library)"
 export FZF_DEFAULT_COMMAND="$__FZF_BASE_COMMAND --type f"
@@ -216,7 +219,7 @@ if ! zgen saved; then
   # # zgen ohmyzsh plugins/docker
   # zgen ohmyzsh plugins/docker-compose
   # # zgen ohmyzsh plugins/npm
-  # [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
+  [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
   # zgen ohmyzsh plugins/rbenv
   zgen load "$__zshrc_dirname/plugins/python"
   # zgen ohmyzsh plugins/python

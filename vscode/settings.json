@@ -2725,6 +2725,7 @@
   "currentPath.useAbsolutePath": true,
   "debug.javascript.autoAttachFilter": "onlyWithFlag",
   "debug.javascript.debugByLinkOptions": {
+    // "smartStep": false,
     "runtimeExecutable": "/Applications/Chromium.app/Contents/MacOS/Chromium",
     "showAsyncStacks": true,
     "resolveSourceMapLocations": [
@@ -2735,11 +2736,13 @@
     ]
   },
   "debug.javascript.terminalOptions": {
+    // "smartStep": false,
     "outFiles": [
       "${workspaceFolder}/**/*.(m|c|)js",
     ]
   },
   "debug.javascript.pickAndAttachOptions": {
+    // "smartStep": false,
     "sourceMaps": true,
     "sourceMapRenames": true,
     "showAsyncStacks": true,
@@ -3006,6 +3009,7 @@
     "enabled": true
   },
   "jestrunner.debugOptions": {
+    // "smartStep": false,
     "args": [
       "--testTimeout=3600000"
     ]
@@ -3729,4 +3733,10 @@
   "arena.enableTabAutocomplete": false,
   "editor.minimap.showSlider": "always",
   "github.copilot.nextEditSuggestions.enabled": false,
+  "launch": {
+    "configurations": [{
+      // "smartStep": false
+    }],
+    "compounds": []
+  },
 }
