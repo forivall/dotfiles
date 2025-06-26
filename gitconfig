@@ -219,12 +219,18 @@
 	tool = smerge
 	# tool = meld
 	# tool = meld_merged
-	# conflictstyle = diff3
+	conflictstyle = diff3
+	default = mergiraf
 [merge "mergiraf"]
     name = mergiraf
     driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [rerere]
 	enabled = 1
+[mergetool]
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false
 [mergetool "diffuse_custom"]
 	cmd = /usr/bin/env diffuse \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 	#"
@@ -240,8 +246,23 @@
 [mergetool "diffuse_cygwindows"]
 		cmd = \"/cygdrive/c/Program Files (x86)/Diffuse/diffusew.exe\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 		#"
-[mergetool "meld_windows"]
-		cmd = \"C:\\Program Files (x86)\\Meld\\meld\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+# [mergetool "meld_windows"]
+# 		cmd = \"C:\\Program Files (x86)\\Meld\\meld\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[difftool "vscode"]
+	cmd = "code --wait \"$LOCAL\" \"$REMOTE\" --diff"
+[mergetool "sourcetree"]
+	cmd = "/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\""
+	trustExitCode = true
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
+[mergetool "vscode"]
+	cmd = "code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\""
+[mergetool "smerge"]
+	cmd = "smerge mergetool \"$REMOTE\" \"$LOCAL\" \"$BASE\" -o \"$MERGED\""
 [github]
 	user = forivall
 # [push]
@@ -268,31 +289,6 @@
 [credential]
 	helper = cache
 	helper = /usr/local/bin/git-credential-manager
-[mergetool]
-	keeptemporaries = false
-	keepbackups = false
-	prompt = false
-	trustexitcode = false
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[difftool "vscode"]
-	cmd = "code --wait \"$LOCAL\" \"$REMOTE\" --diff"
-[mergetool "sourcetree"]
-	cmd = "/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\""
-	trustExitCode = true
-[merge "npm-merge-driver"]
-	name = automatically merge npm lockfiles
-	driver = npx npm-merge-driver merge %A %O %B %P
-[mergetool "vscode"]
-	cmd = "code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\""
-[mergetool "smerge"]
-	cmd = "smerge mergetool \"$REMOTE\" \"$LOCAL\" \"$BASE\" -o \"$MERGED\""
 [commit]
 	# template = /Users/emilyklassen/.stCommitMsg
 [pull]
