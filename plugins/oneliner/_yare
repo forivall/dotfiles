@@ -148,10 +148,24 @@ _yare_make_targets() {
   compadd -Q -a TARGETS
 }
 
+_yare_cargo_cmds() {
+  local -a commands
+  if [[ ! -f Cargo.toml ]]; then
+    commands=()
+    describe -t commands 'command' commands
+    return 0
+  fi
+  setopt extendedglob
+  commands=( ${${${(M)"${(f)$(_call_program commands cargo --list)}":#    *}/ ##/}/ ##/:} )
+  commands=( ${commands:#(add|cache|fetch|info|login|logout|new|search|tree|yank):*} )
+  _describe -t commands 'command' commands
+}
+
 _yare() {
   _alternative \
     'make:command:_yare_make_targets' \
-    'node:command:_yare_yarn_autocompletions'
+    'node:command:_yare_yarn_autocompletions' \
+    'cargo:command:_yare_cargo_cmds'
 }
 
 _yare

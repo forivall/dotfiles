@@ -11,4 +11,4 @@
 2048
 
 --hyperlink-format
-vscode
+zed://file/{path}:{line}:{column}

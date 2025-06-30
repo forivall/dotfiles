@@ -29,6 +29,8 @@ elif [[ -f package-lock.json ]]; then
 elif [[ -f package.json ]]; then
   echo '# no lockfile found or packageManager defined, using npm'
   run npm run "$@"
+elif [[ -f Cargo.toml ]]; then
+  run cargo "$@"
 elif [[ -f Makefile ]] || [[ -f makefile ]]; then
   run make "$@"
 fi

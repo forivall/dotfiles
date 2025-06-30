@@ -21,7 +21,7 @@ subl_settings=(  ./subl/text       "~/$appsupport/Sublime Text 3/Packages/User" 
 bat_themes=(     ./bat/themes      ~/.config/bat/themes                           "*")
 bat_config=(     ./bat             ~/.config/bat                                  config)
 lapce_config=(   ./config/lapce    ~/$appsupport/dev.lapce.Lapce-Stable           "*.toml")
-zed_config=(     ./config/zed      ~/.config/zed                                  "*.json")
+zed_config=(     ./config/zed      ~/.config/zed                                  "*.json(.)")
 zed_themes=(     ./config/zed/themes ~/.config/zed/themes                         "*.json")
 
 entries=(
@@ -46,7 +46,7 @@ for entry in $entries; do
 
   if [[ $1 == 'to-local' ]]; then
     cp "${flags[@]}" $repo_dir/${~file_or_glob} --target-directory=$config_dir
-  else
+  elif [[ -d $config_dir ]]; then
     cp "${flags[@]}" $config_dir/${~file_or_glob} --target-directory=$repo_dir
   fi
 done
