@@ -54,6 +54,10 @@ mode = "fixAll"
 [language-server.vscode-json-language-server.config]
 provideFormatter = false
 
+[language-server.commit-lsp]
+command = "commit-lsp"
+args = ["run"]
+
 [[language]]
 name = "json"
 auto-format = false
@@ -64,6 +68,7 @@ formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
 [[language]]
 name = "git-commit"
 file-types = [{ glob = "COMMIT_EDITMSG" }, { glob = "MERGE_MSG" }, { glob = "COMMIT_EDITMSG-*.txt" }]
+language-servers = [ "commit-lsp" ]
 
 [[language]]
 name = "javascript"

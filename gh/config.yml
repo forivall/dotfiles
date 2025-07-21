@@ -27,7 +27,7 @@ aliases:
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: '!gh run watch $(gh run list --workflow=$1 -L1 --json databaseId --jq .[0].databaseId) "${@:1}"'
-  wfrw: '!gh wfr "$@" && gh run list --workflow=$1 && gh wr "$@"'
+  wfrw: '!gh wfr "$@" && sleep 3 && gh run list --workflow=$1 --limit=3 && sleep 3 && gh wr "$1"'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

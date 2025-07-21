@@ -8,6 +8,12 @@ alias inlyne="command inlyne --config ~dotfiles/config/inlyne.toml"
 function md() {
   ( command inlyne --config ~dotfiles/config/inlyne.toml "$@" 2>/dev/null & )
 }
+function cargo-repo() {
+  cargo info $@ | sed -n s/repository:\ //p
+}
+function cargo-clone() {
+  git clone $(cargo-repo $@)
+}
 
 [[ -f "${__zsh_rust_plugin_location}/broot.source.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/broot.source.zsh"

@@ -14,6 +14,11 @@ run() {
   $@
 }
 
+make-has-target() {
+  make -q $@ 2> /dev/null
+  [[ $? -ne 2 ]]
+}
+
 if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
 then
@@ -29,10 +34,10 @@ elif [[ -f package-lock.json ]]; then
 elif [[ -f package.json ]]; then
   echo '# no lockfile found or packageManager defined, using npm'
   run npm run "$@"
+elif [[ -f Makefile ]] || [[ -f makefile ]] && make-has-target "$@"; then
+  run make "$@"
 elif [[ -f Cargo.toml ]]; then
   run cargo "$@"
-elif [[ -f Makefile ]] || [[ -f makefile ]]; then
-  run make "$@"
 fi
 
 if $wasrun; then exit; fi

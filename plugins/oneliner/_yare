@@ -121,10 +121,12 @@ _yare_make-parseMakefile () {
   done
 }
 _yare_make_targets() {
-  local basedir=.
-  local is_gnu
-  _pick_variant -r is_gnu gnu=GNU unix -v -f
+  local basedir=$PWD
+  local is_gnu incl match
+  _pick_variant -c make -r is_gnu gnu=GNU unix -v -f
   local file
+  local -A VARIABLES VAR_ARGS opt_args
+  local -aU TARGETS
   if [[ $is_gnu == gnu && -r $basedir/GNUmakefile ]]; then
     file=$basedir/GNUmakefile
   elif [[ -r $basedir/makefile ]]; then
@@ -152,7 +154,7 @@ _yare_cargo_cmds() {
   local -a commands
   if [[ ! -f Cargo.toml ]]; then
     commands=()
-    describe -t commands 'command' commands
+    _describe -t commands 'command' commands
     return 0
   fi
   setopt extendedglob
