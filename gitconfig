@@ -95,6 +95,8 @@
 	logd = -c core.pager=deltaw log --pretty=concise
 	log2 = log --pretty=concise
 	logp2 = logp --pretty=concise
+	logpa = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all
+	logpa2 = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all  --pretty=concise
 	show2 = show --pretty=concise
 	showd2 = showd --pretty=concise
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*

@@ -46,6 +46,7 @@
   "terminal.integrated.fontWeightBold": 600,
   "workbench.activityBar.iconClickBehavior": "focus",
   // "workbench.activityBar.location": "top",
+  "workbench.activityBar.location": "bottom",
   "workbench.colorCustomizations": {
     "[Abyss]": {
       // empty
@@ -455,7 +456,8 @@
     "gitlens.plusFeatures.enabled",
     "gitlens.rebaseEditor.ordering",
     "gitlens.views.repositories.compact",
-    "gitlens.views.scm.grouped.views"
+    "gitlens.views.scm.grouped.views",
+    "terminal.integrated.smoothScrolling"
   ],
   "workbench.startupEditor": "newUntitledFile",
   "debug.console.lineHeight": 18,
@@ -1226,6 +1228,7 @@
   "backAndForwardButtons.backText": "❮",
   "backAndForwardButtons.forwardText": "❯",
   "command aliases": {
+    "editor.action.formatDocument": "fmt",
     "explorer.newFile": "touch",
     "explorer.newFolder": "mkdir",
     "extension.multicommand.saveAndClose": "wq",
@@ -1275,6 +1278,7 @@
         "R": { "text": "related files",                   "command": "findrelated.show"},
         "T": { "text": "angular template",                "command": "angular.goToTemplateForComponent"},
         "C": { "text": "angular component",               "command": "angular.goToComponentWithTemplateFile"},
+        "S": { "text": "source map navigate",             "command": "smnavigator.navigate"},
         "- 0": { "text": "input line number",             "command": "workbench.action.gotoLine"}
       }
     },
@@ -1530,6 +1534,7 @@
         "s": { "text": "Goto previous project search result", "command": "search.action.focusPreviousSearchResult" },
         "g": { "text": "Goto previous change",          "command": "workbench.action.editor.previousChange" },
         "G": { "text": "Goto first change",             "command": "???"                                    },
+        "e": { "text": "Goto previous edit",          "command": "navigateEditHistory.moveCursorToPreviousEdit" },
         "f": { "text": "Goto previous function",        "command": "dance.run", "args": [{
           "code": [
             "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
@@ -1547,6 +1552,9 @@
         // ""
         "p": { "text": "Goto previous paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "b": { "text": "Goto previous bookmark",       "command": "bookmarks.jumpToPrevious" },
+        // "r": { "text": "Goto previous reference",        "command": "goToPreviousReference" },
+        "r": { "text": "Goto previous reference",        "command": "references-view.prev" },
+        "u": { "text": "Goto previous chat edit", "command": "chatEditor.action.navigatePrevious" },
         "[": { "text": "Goto previous folding range", "command": "editor.gotoPreviousFold" },
         " ": { "text": "Add newline above",             "command": "dance.edit.newLine.above"               },
       },
@@ -1559,6 +1567,7 @@
         "s": { "text": "Goto next project search result", "command": "search.action.focusNextSearchResult" },
         "g": { "text": "Goto next change",          "command": "workbench.action.editor.nextChange" },
         "G": { "text": "Goto last change",          "command": "???"                                },
+        "e": { "text": "Goto next edit",          "command": "navigateEditHistory.moveCursorToNextEdit" },
         "f": { "text": "Goto next function",        "command": "dance.run", "args": [{
           "code": [
             "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
@@ -1575,6 +1584,9 @@
         "T": { "text": "Goto next test",            "command": "testing.goToNextMessage"                                },
         "p": { "text": "Goto next paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
         "b": { "text": "Goto next bookmark",        "command": "bookmarks.jumpToNext" },
+        // "r": { "text": "Goto next reference",        "command": "goToNextReference" },
+        "r": { "text": "Goto next reference",        "command": "references-view.next" },
+        "u": { "text": "Goto next chat edit", "command": "chatEditor.action.navigateNext" },
         "]": { "text": "Goto next folding range", "command": "editor.gotoNextFold" },
         " ": { "text": "Add newline below",         "command": "dance.edit.newLine.below"           },
       },
@@ -1583,13 +1595,15 @@
       "title": "Space",
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
-        "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
+        // "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
+        "F": { "text": "Open file picker at current working directory", "command": "file-browser-fixed.open",                                                       },
         "c": { "text": "Open PR comment at current line",               "command": "workbench.action.addComment" },
         // "e": { "text": "Focus file explorer",                           "command": "workbench.action.focusActiveEditorGroup"                                  },
         "e": { "text": "Focus file explorer",                           "command": "workbench.explorer.fileView.focus"                                        },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
-        "j": { "text": "Open jumplist picker",                          "command": "bookmarks.list"                                                           },
-        "J": { "text": "Open jumplist picker (all files)",              "command": "bookmarks.listFromAllFiles"                                               },
+        "j": { "text": "Open jumplist picker",                          "command": "navigateEditHistory.list"                                                           },
+        "J": { "text": "Open bookmark picker",                          "command": "bookmarks.list"                                                           },
+        "K": { "text": "Open bookmark picker (all files)",              "command": "bookmarks.listFromAllFiles"                                               },
         "O": { "text": "Focus jumplist",                                "command": "bookmarksExplorer.focus"                                               },
         "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
         "S": { "text": "Open workspace symbol picker",                  "command": "workbench.action.showAllSymbols"                                          },
@@ -1632,8 +1646,10 @@
         "h": { "text": "Select symbol references",                      "command": "dance.run", "args": [{ "commands": ["editor.action.selectHighlights", ".select.left.extend"] }] },
         "i": { "text": "Inline chat",                                   "command": "inlineChat.start" },
         "M": { "text": "Toggle copilot completion",                     "command": "github.copilot.completions.toggle" },
-        "U": { "text": "Add Selection to Copilot Edits",                "command": "workbench.action.chat.attachSelection"},
-        "I": { "text": "Open Copilot Edits",                            "command": "workbench.action.chat.openEditSession"},
+        "U": { "text": "Add Selection to Copilot Context",                "command": "workbench.action.chat.attachSelection"},
+        "I": { "text": "Open Copilot Chat",                            "command": "workbench.action.chat.openInSidebar"},
+        // "U": { "text": "Add Selection to Cline",                        "command": "cline.addToChat"},
+        // "I": { "text": "Focus Cline",                                   "command": "cline.focusChatInput"},
         "v": { "text": "Open television picker",                        "command": "television.ToggleFileFinder"                                            },
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
       }
@@ -1660,7 +1676,7 @@
         "i": { "text": "Step in",                    "command": "workbench.action.debug.stepInto"      },
         "o": { "text": "Step out",                   "command": "workbench.action.debug.stepOut"       },
         "n": { "text": "Step to next",               "command": "workbench.action.debug.stepOver"      },
-        "v": { "text": "List variables",             "command": "???"                                  },
+        "v": { "text": "Focus on variables view",    "command": "workbench.debug.action.focusVariablesView"                                  },
         "t": { "text": "End debug session",          "command": "workbench.action.debug.stop"          },
         /*
         "C-c": { "text": "Edit breakpoint condition on current line",   "command": "???" },
@@ -1727,6 +1743,17 @@
             ["dance.edit.delete", { "register": "&" }]
           ]}]
         }
+      }
+    },
+    "ai-chat": {
+      "items": {
+        "c": { "text": "Ask (⌘․ to cycle)", "command": "workbench.action.chat.openAsk" },
+        "g": { "text": "Agent", "command": "workbench.action.chat.openAgent" },
+        "e": { "text": "Edit", "command": "workbench.action.chat.openEdit" },
+        "q": { "text": "Exit", "command": "runCommands", "args": [{ "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.focusActiveEditorGroup", "workbench.action.focusActiveEditorGroup", "workbench.action.focusActiveEditorGroup"] }] },
+        "N": { "text": "New", "command": "workbench.action.chat.newChat" },
+        "r": { "text": "Redo Edits", "command": "workbench.action.chat.redoEdit" },
+        "R": { "text": "Reject Edits", "command": "chatEditor.action.cancel" },
       }
     }
   },
@@ -2198,8 +2225,8 @@
           { "command": "merge.goToPreviousUnhandledConflict", "key": "k", "when": "isMergeEditor", "name": "Previous Conflict", "hide": false },
           { "command": "merge.toggleActiveConflictInput1",    "key": "l", "when": "isMergeEditor", "name": "Accept Input 1 (right side)", "hide": false },
           { "command": "merge.toggleActiveConflictInput2",    "key": "h", "when": "isMergeEditor", "name": "Accept Input 2 (left side)", "hide": false },
-          { "command": "mergeEditor.toggleBetweenInputs",     "key": "n", "when": "isMergeEditor", "name": "Toggle between merge editor inputs", "hide": false },
-          { "command": "mergeEditor.acceptMerge",             "key": "x", "when": "isMergeEditor", "name": "Accept Merge", "hide": false },
+          { "command": "mergeEditor.toggleBetweenInputs",    "key": "n", "when": "isMergeEditor", "name": "Toggle between merge editor inputs", "hide": false },
+          { "command": "mergeEditor.acceptMerge",    "key": "n", "when": "isMergeEditor", "name": "Toggle between merge editor inputs", "hide": false },
           {
             "command": "extension.multiCommand.scrollAndMoveCursorDown",
             "display": "hidden",
@@ -2224,6 +2251,10 @@
         "title": "Pull Request Review"
       },
       "name": "Conflict Resolution transient",
+      "type": "command"
+    },
+    { "keys": "p.g", "command": "git-worktree.list",
+      "name": "Switch Worktree",
       "type": "command"
     },
     { "keys": "s.g", "command": "editor.action.selectHighlights",
@@ -2381,6 +2412,7 @@
     "suppressGitVersionWarning": false,
     "suppressLineUncommittedWarning": false,
     "suppressNoRepositoryWarning": false
+    "suppressIntegrationRequestTimedOutWarning": true
   },
   "gitlens.advanced.quickPick.closeOnFocusOut": true,
   "gitlens.autolinks": [
@@ -2523,6 +2555,14 @@
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
     "editor.wrappingStrategy": "simple"
+  },
+  "[instructions]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
+    "editor.wrappingStrategy": "simple",
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false
   },
   "[magit]": {
     "editor.lineNumbers": "off",
@@ -2737,6 +2777,9 @@
   },
   "debug.javascript.terminalOptions": {
     // "smartStep": false,
+    // "resolveSourceMapLocations": [
+    //   "${workspaceFolder}/**"
+    // ],
     "outFiles": [
       "${workspaceFolder}/**/*.(m|c|)js",
     ]
@@ -3005,9 +3048,6 @@
   "intellicodeApiExamples.typescript.enabled": false,
   "jest.jestCommandLine": "node_modules/.bin/jest",
   "jest.monitorLongRun": "off",
-  "jest.testExplorer": {
-    "enabled": true
-  },
   "jestrunner.debugOptions": {
     // "smartStep": false,
     "args": [
@@ -3395,7 +3435,11 @@
   "team.showWelcomeMessage": false,
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.commandsToSkipShell": [
-    "whichkey.show"
+    "whichkey.show",
+    "workbench.action.terminal.focusTabs",
+    "workbench.action.toggleMaximizedPanel",
+    "workbench.action.focusActiveEditorGroup",
+    "workbench.action.terminal.clear"
   ],
   "terminal.integrated.defaultProfile.osx": "zsh",
   // "terminal.integrated.defaultLocation": "editor",
@@ -3707,9 +3751,9 @@
   "testing.showCoverageInExplorer": false,
   "geminicodeassist.project": "ttc-labs",
   "extensions.experimental.affinity": {
-    "esbenp.prettier-vscode": 1,
-    "gregoire.dance": 2,
-    "Angular.ng-template": 3,
+    "gregoire.dance": 1,
+    // "esbenp.prettier-vscode": 2,
+    // "Angular.ng-template": 3,
   },
   "bookmarks.label.suggestion": "useWhenSelected",
   "chat.commandCenter.enabled": false,
@@ -3739,4 +3783,9 @@
     }],
     "compounds": []
   },
+  "spacebox-ui.commandCenterBlur": true,
+  "inlineChat.enableV2": true,
+  "inlineChat.hideOnRequest": true,
+  "inlineChat.finishOnType": true,
+  "terminal.integrated.smoothScrolling": true,
 }

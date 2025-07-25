@@ -28,16 +28,17 @@ command = "vscode-eslint-language-server"
 validate = "on"
 # format = { enable = true }
 nodePath = ""
+execArgv = [ "--optimize-for-size", "--max-old-space-size=8192" ]
 # onIgnoredFiles = "off"
 # packageManager = "yarn"
 quiet = false
 rulesCustomizations = []
-run = "onType"
+run = "onSave"
 # useESLintClass = false
 # codeActionsOnSave = { mode = "all" }
 experimental = { useFlatConfig = false }
 problems = { shortenToSingleLine = false }
-# workingDirectory = { mode = "auto" }
+workingDirectory = { mode = "auto" }
 
 [language-server.eslint.config.codeAction]
 [language-server.eslint.config.codeAction.disableRuleComment]
@@ -81,7 +82,10 @@ formatter = { command = 'prettier', args = ["--parser", "angular"] }
 [[language]]
 name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
-language-servers = [ "typescript-language-server", "eslint" ]
+language-servers = [
+  { name = "typescript-language-server", except-features = [ "format" ] },
+  "eslint",
+]
 
 [[language]]
 name = "ruby"

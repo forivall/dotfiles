@@ -5,5 +5,11 @@ for w in .git/worktrees/*; do
   d=${gd%/.git};
   if [[ $d = $PWD ]]; then name=main; else name=${${d%-worktrees/*}##*/}; fi;
   echo $name;
+  rev=$(git --git-dir $gd rev-parse HEAD)
+  currev=
+  if currev=$(git rev-parse refs/worktrees/$name) && [[ $currev != $rev ]]; then
+    echo deleting probably packed ref refs/worktrees/$name '=>' $currev
+    git update-ref -d refs/worktrees/$name
+  fi
   ln -fs ../../${w#.git/}/HEAD .git/refs/worktrees/$name;
 done;

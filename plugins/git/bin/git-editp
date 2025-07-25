@@ -14,14 +14,20 @@ fi
 if [[ $1 = --editor=* ]]; then
   GIT_EDITOR=${1#--editor=}
   shift
+elif [[ $TERM_PROGRAM = vscode ]]; then
+  GIT_EDITOR=code
 else
   GIT_EDITOR=$(git config --get core.guieditor || git config --get core.editor)
 fi
 
 run_editor() {
   if [[ $GIT_EDITOR = code ]]; then
-    echo code --goto "$1$2"
-    code --goto "$1$2"
+    if [[ $TERM_PROGRAM = vscode ]]; then
+      open "vscode://file/$PWD/$1$2"
+    else
+      echo code --goto "$1$2"
+      code --goto "$1$2"
+    fi
   elif [[ $GIT_EDITOR = hx || $GIT_EDITOR = helix ]]; then
     echo $GIT_EDITOR "$1$2"
     $GIT_EDITOR "$1$2"

@@ -1,11 +1,12 @@
 [
-  { "key": "escape", "command": "whichkey.show", "when": "dance.mode != 'insert' && dance.mode != 'input' && dance.mode != 'select' && !dance.isRecording && vim.mode != 'Insert' && vim.mode != 'Visual' && vim.mode != 'Command' && vim.mode != 'Replace' && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dirtyDiffVisible && !editorHoverVisible && !editorHoverFocused && !exceptionWidgetVisible && !findWidgetVisible && !inlineSuggestionVisible && !LinkedEditingInputVisible && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible && !typeHierarchyVisible && !cancellableOperation && !editorHasSelection && !explorerResourceCut && !gitlens:key:escape && !inReferenceSearchEditor && !inQuickOpen && !inSnippetMode && !isComposing && !isInEmbeddedEditor && !notificationFocus && !listHasSelectionOrFocus && !replaceInputBoxFocus && !selectionAnchorSet && !terminalAltBufferActive && resourceScheme != 'vscode-interactive' && !inlineChatVisible && !terminalChatFocus" },
+  { "key": "escape", "command": "whichkey.show", "when": "!terminalFocus && !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dance.isRecording && !dirtyDiffVisible && !editorHasSelection && !editorHoverFocused && !editorHoverVisible && !exceptionWidgetVisible && !explorerResourceCut && !findWidgetVisible && !gitlens:key:escape && !inQuickOpen && !inReferenceSearchEditor && !inSnippetMode && !inlineChatVisible && !inlineSuggestionVisible && !isComposing && !isInEmbeddedEditor && !listHasSelectionOrFocus && !markersNavigationVisible && !notificationFocus && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !replaceInputBoxFocus && !selectionAnchorSet && !suggestWidgetVisible && !termainlFocus && !terminalAltBufferActive && !terminalChatFocus && !terminalFocus && !typeHierarchyVisible && dance.mode != 'input' && dance.mode != 'insert' && dance.mode != 'select' && resourceScheme != 'vscode-interactive' && vim.mode != 'Command' && vim.mode != 'Insert' && vim.mode != 'Replace' && vim.mode != 'Visual'" },
   // put escape keybinds after the whichkey escape binding.
   { "key": "escape", "command": "runCommands", "args": {"commands": ["search.action.clearSearchResults", "workbench.view.search"]},
     "when": "searchInputBoxFocus && viewHasSearchPattern"},
 
   { "key": "escape",                "command": "cancelSelection",
                                     "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && editorHasSelection && textInputFocus" },
+  { "key": "escape", "command": "editor.action.hideHover", "when": "editorHoverFocused && dance.mode != 'insert' && dance.mode != 'select' && dance.mode != 'input'" },
   { "key": "escape",                "command": "editor.action.cancelSelectionAnchor",
                                     "when": "dance.mode != 'input' && !dance.isRecording && editorTextFocus && selectionAnchorSet" },
   { "key": "escape",                "command": "closeFindWidget",
@@ -21,8 +22,11 @@
   { "key": "escape",                "command": "runCommands", "args": { "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.closeAuxiliaryBar"] },
                                     "when": "dance.mode != 'input' && !dance.isRecording && inChatInput && !inlineChatVisible && !findWidgetVisible && !isInEmbeddedEditor && !quickFixWidgetVisible && !renameInputVisible && !suggestWidgetVisible" },
   { "key": "escape",                "command": "workbench.action.focusActiveEditorGroup",
-                                    "when": "auxiliaryBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || auxiliaryBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || panelFocus && !listFocus && !inputFocus && !inputBoxFocus || panelFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus" },
+                                    "when": "auxiliaryBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || auxiliaryBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || panelFocus && !listFocus && !inputFocus && !inputBoxFocus || panelFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus && !terminalFocus" },
+  { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "ai-chat", "pass": [{ "shift": "jump" }] },
+    "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },
 
+  { "key": "shift+escape", "command": "editor.action.hideHover", "when": "editorHoverFocused" },
   { "key": "shift+escape",          "command": "closeReferenceSearch",
                                      "when": "inReferenceSearchEditor && !config.editor.stablePeek" },
   { "key": "shift+escape",          "command": "editor.closeTestPeek",
@@ -335,9 +339,15 @@
   { "command":  "workbench.action.nextAuxiliaryBarView",                   "key": "shift+cmd+]",                   "when": "auxiliaryBarFocus" },
   { "command":  "workbench.action.nextEditor",                             "key": "shift+cmd+]",                   "when": "!panelFocus && !sideBarFocus && !auxiliaryBarFocus" },
   { "command":  "workbench.action.nextPanelView",                          "key": "shift+cmd+]",                   "when": "panelFocus || focusedView == 'git-history.history' || focusedView == 'git-history.changes'" },
+  { "command":  "workbench.action.terminal.focusNext",                     "key": "shift+cmd+]",                   "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus" },
+  { "command": "workbench.action.terminal.focusTabs",                      "key": "ctrl+tab",                      "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
+  { "command": "workbench.action.focusActiveEditorGroup",                  "key": "ctrl+tab",                      "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported && terminalCount == 0" },
+  { "command": "workbench.action.terminal.focus",                          "key": "ctrl+tab",                      "when": "terminalTabsFocus && terminalHasBeenCreated || terminalTabsFocus && terminalProcessSupported || terminalHasBeenCreated && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
+  { "command": "workbench.action.terminal.focus",                          "key": "space",                         "when": "terminalTabsFocus && terminalHasBeenCreated || terminalTabsFocus && terminalProcessSupported || terminalHasBeenCreated && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
   { "command":  "workbench.action.nextSideBarView",                        "key": "shift+cmd+]",                   "when": "sideBarFocus" },
   // { "command":  "workbench.action.previousEditor",                         "key": "shift+cmd+[",                   "when": "!panelFocus && !sideBarFocus && !auxiliaryBarFocus" },
   { "command":  "workbench.action.previousPanelView",                      "key": "shift+cmd+[",                   "when": "panelFocus || focusedView == 'git-history.history' || focusedView == 'git-history.changes'" },
+  { "command":  "workbench.action.terminal.focusPrevious",                 "key": "shift+cmd+[",                   "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus" },
   { "command":  "workbench.action.previousSideBarView",                    "key": "shift+cmd+[",                   "when": "sideBarFocus" },
   { "command": "workbench.action.showAllEditorsByMostRecentlyUsed",        "key": "shift+cmd+]",                   "when": "!activeEditorGroupEmpty && !auxiliaryBarFocus && !panelFocus && !sideBarFocus" },
   // { "command": "runCommands",        "key": "shift+cmd+]",                   "when": "!activeEditorGroupEmpty && !auxiliaryBarFocus && !panelFocus && !sideBarFocus",
@@ -369,12 +379,23 @@
     "args": "edt mru " },
   { "command":  "workbench.action.quickOpenSelectNext",                    "key": "ctrl+j",              "when": "inQuickOpen" },
   { "command":  "workbench.action.quickOpenSelectPrevious",                "key": "ctrl+k",              "when": "inQuickOpen" },
+  { "command": "editor.action.inlineSuggest.acceptNextWord",        "key": "ctrl+alt+right",      "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly" },
+  { "command": "-editor.action.inlineSuggest.acceptNextWord",       "key": "cmd+right",           "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly" },
+  { "command": "editor.action.inlineSuggest.acceptNextLine",        "key": "ctrl+alt+down",       "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly && !editorHasSelection" },
+  { "command": "markdown-checkbox.markCheckbox",                    "key": "alt+tab",             "when": "editorTextFocus && resourceLangId == 'markdown'" },
+  { "command": "-markdown-checkbox.markCheckbox",                   "key": "shift+cmd+enter",     "when": "editorTextFocus && resourceLangId == 'markdown'" },
+  { "command": "search.action.replaceAllInFile",                    "key": "shift+cmd+enter",     "when": "fileMatchFocus && isEditableItem && replaceActive && searchViewletVisible" },
+  { "command": "search.action.replaceAllInFolder",                  "key": "shift+cmd+enter",     "when": "folderMatchFocus && isEditableItem && replaceActive && searchViewletVisible" },
+  { "command": "-workbench.action.chat.sendToNewChat",              "key": "shift+cmd+enter",     "when": "chatInputHasText && chatRequestIsPaused && inChatInput || chatInputHasText && inChatInput && !chatSessionRequestInProgress || chatPromptFileAttached && chatRequestIsPaused && inChatInput || chatPromptFileAttached && inChatInput && !chatSessionRequestInProgress" },
+  { "command": "-list.toggleSelection",                             "key": "shift+cmd+enter",     "when": "listFocus && !inputFocus && !treestickyScrollFocused" },
+  { "command": "notebook.cell.insertCodeCellAbove",                 "key": "alt+cmd+enter",       "when": "notebookCellListFocused && !inputFocus" },
+  { "command": "notebook.cell.insertCodeCellAbove",                 "key": "shift+cmd+enter",     "when": "notebookCellListFocused && !inputFocus" },
+  { "command": "workbench.action.toggleMaximizeEditorGroup",        "key": "shift+cmd+enter",     "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
+  { "command": "workbench.action.toggleMaximizeEditorGroup",        "key": "cmd+k cmd+m",         "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
+  { "command": "workbench.action.toggleMaximizedPanel",             "key": "shift+cmd+enter",     "when": "panelFocus" },
+  { "command": "workbench.action.maximizeEditorHideSidebar",        "key": "shift+alt+cmd+enter", "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
 
-  {
-    "key": "ctrl+r",
-    "command": "workbench.action.openRecentNavigateToFiles",
-    "when": "inQuickOpen && inRecentFilesPicker"
-  },
+  { "command": "workbench.action.openRecentNavigateToFiles",        "key": "ctrl+r",              "when": "inQuickOpen && inRecentFilesPicker" },
   { "command":  "workbench.action.replaceInFiles",                         "key": "shift+cmd+h",         "when": "!editorFocus" },
   { "command":  "workbench.action.showAllSymbols",                         "key": "shift+cmd+r" },
   { "command":  "workbench.action.showNextWindowTab",                      "key": "ctrl+cmd+]" },
@@ -382,6 +403,9 @@
   { "command":  "workbench.action.splitEditorDown",                        "key": "cmd+shift+d",         "when": "dance.mode == 'normal'" },
   { "command":  "workbench.action.splitEditorRight",                       "key": "cmd+d",               "when": "dance.mode == 'normal' && !editorHasSelection" },
   { "command":  "workbench.action.createTerminalEditor",                   "key": "cmd+t" },
+  { "command":  "workbench.action.terminal.new",                           "key": "cmd+t", "when": "terminalFocus", },
+  { "command":  "workbench.action.terminal.unsplit",                       "key": "cmd+n", "when": "terminalFocus || terminalSplitTerminal", },
+  { "command":  "workbench.action.terminal.moveToTerminalPanel",           "key": "cmd+n", "when": "terminal.canMove && terminalEditorFocus", },
   { "command":  "workbench.action.createTerminalEditorSide",               "key": "cmd+d",               "when": "terminalEditorFocus" },
   { "command":  "workbench.action.splitEditorDown",                        "key": "cmd+k cmd+down" },
   { "command":  "workbench.action.splitEditorLeft",                        "key": "cmd+k cmd+left" },
@@ -401,7 +425,11 @@
   { "command":  "workbench.action.toggleSidebarVisibility",                "key": "cmd+k b", },
   { "command":  "workbench.action.toggleSplitEditorInGroup",               "key": "ctrl+shift+cmd+d", },
   { "command":  "workbench.action.toggleAuxiliaryBar",                     "key": "shift+cmd+f10", },
-  { "command":  "workbench.action.navigateBack",                           "key": "ctrl+-", },
+  {
+    "command": "workbench.action.navigateBack",
+    "key": "ctrl+-",
+    "when": "canNavigateBack",
+  },
   { "command": "runCommands",                                              "key": "shift+cmd+g",         "when": "searchViewletFocus && !replaceActive",
     "args": {"commands": ["workbench.action.replaceInFiles", "search.focus.nextInputBox"]} },
   { "command":  "runCommands",                                             "key": "shift+cmd+h",         "when": "searchViewletFocus && !replaceActive",
@@ -751,7 +779,7 @@
     ]
    }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   // { "key": "g",       "command": "dance.openMenu", "args": { "menu": "goto-hx", "pass": [{ "shift": "jump" }] }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "shift+;", "command": "workbench.action.showCommands",                                                        "when": "activeEditorGroupEmpty || editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+;", "command": "workbench.action.showCommands",                                                        "when": "activeEditorGroupEmpty && !terminalFocus && !inputFocus || editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "i",       "command": "dance.modes.insert.before",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "a",       "command": "dance.modes.insert.after",        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -899,9 +927,15 @@
 
   { "key": "ctrl+c", "command": "editor.action.commentLine", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
-  { "key": "ctrl+i", "command": "workbench.action.navigateForwardInNavigationLocations", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "tab",    "command": "workbench.action.navigateForward", "when": "editorTextFocus && dance.mode == 'normal' && editorLangId != 'magit' || editorTextFocus && dance.mode == 'select' && editorLangId != 'magit'" },
-  { "key": "ctrl+o", "command": "workbench.action.navigateBackInNavigationLocations",    "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+shift+i", "command": "workbench.action.navigateForwardInNavigationLocations", "when": "canNavigateForwardInNavigationLocations && editorTextFocus && dance.mode == 'normal' || canNavigateForwardInNavigationLocations && editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "canNavigateForward && editorTextFocus && dance.mode == 'normal' || canNavigateForward && editorTextFocus && dance.mode == 'select'" },
+  { "key": "tab",    "command": "workbench.action.navigateForward", "when": "canNavigateForward && editorTextFocus && dance.mode == 'normal' && editorLangId != 'magit' || canNavigateForward && editorTextFocus && dance.mode == 'select' && editorLangId != 'magit'" },
+  { "key": "tab",    "command": "chatEditor.action.acceptHunk",     "when": "editorTextFocus && dance.mode == 'normal' && chatEdits.hasEditorModifications && !chatEdits.isRequestInProgress"},
+  { "key": "ctrl+n", "command": "chatEditor.action.undoHunk",       "when": "editorTextFocus && dance.mode == 'normal' && chatEdits.hasEditorModifications && !chatEdits.isRequestInProgress" },
+
+  { "key": "ctrl+shift+o", "command": "workbench.action.navigateBackInNavigationLocations",    "when": "canNavigateBackInNavigationLocations && editorTextFocus && dance.mode == 'normal' || canNavigateBackInNavigationLocations && editorTextFocus && dance.mode == 'select'" },
+  { "key": "ctrl+o", "command": "workbench.action.navigateBack", "when": "canNavigateBack && editorTextFocus && dance.mode == 'normal' || canNavigateBack && editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+tab",    "command": "workbench.action.navigateForward", "when": "canNavigateBack && editorTextFocus && dance.mode == 'normal' && editorLangId != 'magit' || canNavigateBack && editorTextFocus && dance.mode == 'select' && editorLangId != 'magit'" },
   { "key": "ctrl+s", "command": "dance.selections.save",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+s", "command":  "dance.run",                       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'", "args": {
     "commands": ["dance.selections.save", "bookmarks.toggle"],
@@ -932,7 +966,8 @@
   { "key": "shift+y", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+[", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+]", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "shift+d", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  // TODO: copy this to my helix config
+  { "key": "shift+d", "command": "editor.action.duplicateSelection", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+v", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+m", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
@@ -1136,6 +1171,11 @@
     "command": "-workbench.action.hideComment",
     "when": "commentEditorFocused"
   },
+  {
+    "key": "cmd+k",
+    "command": "workbench.action.terminal.clear",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
 
   // edmagit
 
@@ -1338,16 +1378,6 @@
     "command": "magit.bisect",
     "key": "shift+b",
     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
-  },
-  {
-    "key": "ctrl+alt+right",
-    "command": "editor.action.inlineSuggest.acceptNextWord",
-    "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly"
-  },
-  {
-    "key": "cmd+right",
-    "command": "-editor.action.inlineSuggest.acceptNextWord",
-    "when": "inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly"
   },
 
   // End.
