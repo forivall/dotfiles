@@ -23,10 +23,10 @@ if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
 then
   run ${jsPackageManager%@*} run  "$@"
+elif [[ -f pnpm-lock.yaml ]] || [[ -f pnpm-workspace.yaml ]]; then
+  run pnpm run "$@"
 elif [[ -f yarn.lock ]]; then
   run yarn run "$@"
-elif [[ -f pnpm-lock.yaml ]]; then
-  run pnpm run "$@"
 elif [[ -f bun.lockb ]]; then
   run bun run "$@"
 elif [[ -f package-lock.json ]]; then

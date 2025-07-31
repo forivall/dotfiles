@@ -1,0 +1,1 @@
+local pids=($(pgrep "$@")); echo ${(F)pids}; local allpids=($pids); while [[ ${#pids[@]} -gt 0 ]]; do pids=($(pgrep -P "${(j:,:)pids}" .)); echo ${(F)pids}; done

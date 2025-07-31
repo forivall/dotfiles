@@ -39,7 +39,7 @@ if [[ -z $rawoid ]] || (( ${#files} < 2 )); then
 fi
 
 if oid=$(git rev-parse --verify --quiet ${rawoid}); then :
-elif oid=$(gh pr view ${rawoid} --json mergeCommit,potentialMergeCommit --jq '(.mergeCommit//.potentialMergeCommit).oid'); then :
+elif echo gh pr view ${rawoid} --json mergeCommit,potentialMergeCommit --jq '(.mergeCommit//.potentialMergeCommit).oid' && oid=$(gh pr view ${rawoid} --json mergeCommit,potentialMergeCommit --jq '(.mergeCommit//.potentialMergeCommit).oid'); then :
   rawoid=$oid
 else
   echo 'Invalid oid or github pr number'

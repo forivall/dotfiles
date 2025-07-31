@@ -14,6 +14,8 @@ insert = "bar"
 
 [keys.normal]
 "#" = ":reflow"
+# macos new terminal tab
+"C-t" = ":sh it2api send-text $(it2api create-tab | sed -E -n 's/^.*\\bid=([0-9A-F-]+).*$/\\1/p') 'cd \"'\"$PWD\"'/%{buffer_name}\"\n'"
 
 [keys.insert]
 "C-space" = "completion"

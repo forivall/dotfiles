@@ -5,3 +5,7 @@ file-types = ["gitignore"]
 [[language]]
 name = "git-config"
 file-types = [{ glob = "gitconfig" }, { glob = ".gitmodules" }, { glob = ".gitconfig" }, { glob = ".git/config" }, { glob = ".config/git/config" }]
+
+[language-server.pylsp]
+command = "$HOME/Library/Python/3.9/bin/pylsp"
+arguments = ["-vv", "--log-file", "/Users/emily.klassen/.cache/helix/pylsp.log"]

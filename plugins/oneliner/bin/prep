@@ -19,14 +19,6 @@ if (( $# > 0 )) && [[ $1 == build || $1 == b ]]; then
   BUILD=true
 fi
 
-if [[ -f WORKSPACE ]] && run bazel info workspace ; then
-  if $BUILD; then
-    run bazel build //...
-  elif ${PREP_BAZEL_FETCH:-false}; then
-    run bazel fetch //...
-  fi
-fi
-
 if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
 then
@@ -38,10 +30,10 @@ then
   else
     run ${jsPackageManager%@*} install
   fi
+elif [[ -f pnpm-lock.yaml ]] || [[ -f pnpm-workspace.yaml ]]; then
+  COREPACK_ENABLE_AUTO_PIN=0 run pnpm install --frozen-lockfile --filter .
 elif [[ -f yarn.lock ]]; then
-  COREPACK_ENABLE_AUTO_PIN=0 run yarn
-elif [[ -f pnpm-lock.yaml ]]; then
-  run pnpm install --filter .
+  COREPACK_ENABLE_AUTO_PIN=0 run yarn --frozen-lockfile
 elif [[ -f bun.lockb ]]; then
   run bun install
 elif [[ -f package-lock.json ]]; then
@@ -60,6 +52,20 @@ elif [[ -f package.json ]]; then
   else
     source ${0:A:h:h:h}/jump/loadnameddirs.zsh
     echo '# `package.json` found in an npm workspace. Run `npm i` or `prep` in `'$(cd $p; print -P '%~')'` instead'
+  fi
+fi
+
+if [[ -f WORKSPACE ]]; then
+  local bazel_cmd=bazel
+  if [[ -x node_modules/.bin/bazelisk ]]; then
+    bazel_cmd=node_modules/.bin/bazelisk
+  fi
+  if run $bazel_cmd info workspace ; then
+    if $BUILD; then
+      run $bazel_cmd build //...
+    elif ${PREP_BAZEL_FETCH:-false}; then
+      run $bazel_cmd fetch //...
+    fi
   fi
 fi
 

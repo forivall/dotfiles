@@ -7,7 +7,7 @@ __plugin_dirname=${0:a:h:h}
 autoload colors && colors
 
 git() {
-  if [[ $1 != rev-parse && ! ( $1 == branch && $2 == --show-current ) ]]; then
+  if [[ $1 != rev-parse && $1 != ls-remote && ! ( $1 == branch && $2 == --show-current ) ]]; then
     echo '>' git $@
     echo -n "Continue? (y/N) "
     read -k 1 yn
@@ -33,5 +33,9 @@ fi
 git branch --delete $(git rev-parse --no-revs $@) $branch_name ||
   git branch --delete $(git rev-parse --no-revs $@) $branch_name --force
 if $has_remote; then
-  git push $remote_name :$remote_branch
+  if git ls-remote $remote_name $remote_branch > /dev/null; then
+    git push $remote_name :$remote_branch
+  else
+    git branch -d -r $remote_name/$remote_branch
+  fi
 fi
