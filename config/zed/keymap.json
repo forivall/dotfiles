@@ -310,7 +310,7 @@
       // "ctrl-v": "editor::Paste",
       // "shift-u": "editor::Redo",
       "alt+d": ["workspace::SendKeystrokes", "delete"],
-      "d": "vim::DeleteRight",
+      // "d": "vim::DeleteRight",
       // "c": ["workspace::SendKeystrokes", "delete i"]
     }
   },

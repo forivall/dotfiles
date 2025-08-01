@@ -1664,6 +1664,7 @@
             "await vscode.commands.executeCommand('workbench.action.quickOpen', 'debug ')",
           ]}
         ]},
+        "a": { "text": "Attach to Node process", "command": "extension.pwa-node-debug.attachNodeProcess" },
         "L": { "text": "Launch current debug target",        "command": "workbench.action.debug.start"         },
         "f": { "text": "Open debug console",                                    "command": "dance.run", "args": [{
           "code": [
@@ -3006,6 +3007,7 @@
     "oglrc": "hocon",
     "pdm.lock": "toml",
     "tslint.json": "jsonc",
+    "*.prompt": "markdown"
   },
   "files.exclude": {
     "**/.DS_Store": true,
@@ -3827,6 +3829,7 @@
   "nxConsole.showNodeVersionOnStartup": false,
   "diffEditor.maxComputationTime": 0,
   "diffEditor.experimental.showMoves": true,
+  "cloudcode.duetAI.inlineSuggestions.enableAuto": false,
   "security.promptForLocalFileProtocolHandling": false,
   "eslint.run": "onSave",
   "interactiveWindow.executeWithShiftEnter": true,
@@ -3916,5 +3919,8 @@
   "inlineChat.enableV2": true,
   "inlineChat.hideOnRequest": true,
   "inlineChat.finishOnType": true,
+  "python.analysis.includeAliasesFromUserFiles": true,
   "terminal.integrated.smoothScrolling": true,
+  "editor.inlineSuggest.edits.showCollapsed": true,
+  "workbench.panel.showLabels": false,
 }

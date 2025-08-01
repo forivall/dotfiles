@@ -63,6 +63,7 @@
 	deltas = -c core.pager=deltaw show
 	diffc = diff --cached
 	diffd = -c core.pager=deltaw diff
+	difft = -c diff.external=difft diff
 	dd = -c core.pager=deltaw diff
 	dp = diffp
 

@@ -59,7 +59,6 @@
     "auto_fold_dirs": true
   },
   "current_line_highlight": "gutter",
-  "vim_mode": true,
   "ui_font_size": 14.2,
   "unstable.ui_density": "compact",
   "buffer_font_size": 13.3,
@@ -80,7 +79,9 @@
   "message_editor": {
     "auto_replace_emoji_shortcode": true
   },
+  "helix_mode": true,
   "vim": {
+    "cursor_shape": {"normal": "hollow"},
     "default_mode": "helix_normal",
     "custom_digraphs": {},
     "toggle_relative_line_numbers": true,

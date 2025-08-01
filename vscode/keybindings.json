@@ -568,7 +568,6 @@
   { "command":  "dance.selections.toggleIndices",   "key": "enter",             "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "command":  "dance.selections.toggleIndices",   "key": "shift+enter",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "command":  "dance.edit.case.swap",             "key": "ctrl+alt+`",        "when": "editorTextFocus && dance.mode == 'normal'" },
-  { "command":  "dance.history.undo.selections",    "key": "ctrl+u",            "when": "editorTextFocus && dance.mode == 'normal'" },
   { "command":  "dance.modes.set.insert",           "key": "o",                 "when": "editorTextFocus && dance.mode == 'normal' && editorHasSelection || editorTextFocus && dance.mode == 'select' && editorHasSelection" },
   { "command":  "dance.selections.select.orLeap",   "key": "s",                 "when": "editorTextFocus && dance.mode == 'normal'" },
   { "command":  "dance.search.previous",            "key": "ctrl+n",            "when": "editorTextFocus && dance.mode == 'normal'" },

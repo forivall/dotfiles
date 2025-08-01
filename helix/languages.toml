@@ -122,6 +122,8 @@ name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
+  # { name = "efm", "only-features" = [ "diagnostics", "format",  ] },
+  # { name = "efm-lsp-eslint" },
   "eslint",
 ]
 

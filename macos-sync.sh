@@ -23,6 +23,7 @@ bat_config=(     ./bat             ~/.config/bat                                
 lapce_config=(   ./config/lapce    ~/$appsupport/dev.lapce.Lapce-Stable           "*.toml")
 zed_config=(     ./config/zed      ~/.config/zed                                  "*.json(.)")
 zed_themes=(     ./config/zed/themes ~/.config/zed/themes                         "*.json")
+hammerspoon=(    ./hammerspoon     ~/.hammerspoon                                 "*.lua")
 
 entries=(
   vscode
@@ -34,6 +35,7 @@ entries=(
   bat_config
   lapce_config
   zed_config
+  hammerspoon
 )
 
 (( ${+commands[gcp]} )) && alias cp="command gcp"

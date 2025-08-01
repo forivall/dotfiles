@@ -18,7 +18,10 @@ except ModuleNotFoundError:
 GB = 1 << 30
 uid = os.getuid()
 
-APPS = ("Mos",)
+APPS = (
+    # "Mos",
+    "Stats",
+)
 
 
 def get_processes():
@@ -30,7 +33,9 @@ def get_processes():
             name = proc.name()
             if proc.status() != psutil.STATUS_RUNNING:
                 continue
-        except (psutil.ZombieProcess, psutil.NoSuchProcess, psutil.AccessDenied):
+        except (
+            psutil.ZombieProcess, psutil.NoSuchProcess, psutil.AccessDenied
+        ):
             continue
 
         if name in APPS:
@@ -38,8 +43,9 @@ def get_processes():
 
 
 class ReviveError(Exception):
-    def __init__(*args, apps: dict[str, psutil.Process], **kwargs):
-        super(*args, missing=tuple(set(APPS).difference(apps.keys())), **kwargs)
+    def __init__(self, *args, apps: dict[str, psutil.Process], **kwargs):
+        super().__init__(*args, **kwargs)
+        self.missing = tuple(set(APPS).difference(apps.keys()))
 
 
 def do_revive(restart=False, strict=False) -> dict[str, psutil.Process]:
