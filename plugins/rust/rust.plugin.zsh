@@ -5,6 +5,7 @@ path=($path ~/.cargo/bin)
 alias cm="cargo make"
 alias cr="cargo run"
 alias inlyne="command inlyne --config ~dotfiles/config/inlyne.toml"
+alias yz="yazi"
 function md() {
   ( command inlyne --config ~dotfiles/config/inlyne.toml "$@" 2>/dev/null & )
 }

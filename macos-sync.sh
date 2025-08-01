@@ -2,11 +2,22 @@
 
 set -e
 
+DRY=false
+if [[ $1 == --dry-run ]]; then
+    DRY=true
+    shift
+fi
+
 cd "$(dirname "$0")" || exit
 
+CP_COMMAND=cp
+(( ${+commands[gcp]} )) && CP_COMMAND=gcp
+
 cp() {
-  echo '>' cp --verbose ${(q)@}
-  command cp --verbose "$@"
+  echo '>' $CP_COMMAND --verbose ${(q)@}
+  if ! $DRY; then
+    command $CP_COMMAND --verbose "$@"
+  fi
 }
 
 mu=~/.config/mackup
@@ -25,20 +36,24 @@ zed_config=(     ./config/zed      ~/.config/zed                                
 zed_themes=(     ./config/zed/themes ~/.config/zed/themes                         "*.json")
 hammerspoon=(    ./hammerspoon     ~/.hammerspoon                                 "*.lua")
 
-entries=(
-  vscode
-  vscode_snippets
-  smerge_settings
-  smerge_keymap
-  subl_settings
-  bat_themes
-  bat_config
-  lapce_config
-  zed_config
-  hammerspoon
-)
+if (( $# < 2 )); then
+    entries=(
+      vscode
+      vscode_snippets
+      smerge_settings
+      smerge_keymap
+      subl_settings
+      bat_themes
+      bat_config
+      lapce_config
+      zed_config
+      hammerspoon
+    )
+else
+    entries=(${@:2})
+fi
 
-(( ${+commands[gcp]} )) && alias cp="command gcp"
+echo '#' $1 ${(N)entries[@]}
 
 for entry in $entries; do
   repo_dir=${(@)${(P)entry}[1]}
@@ -46,7 +61,7 @@ for entry in $entries; do
   file_or_glob=${(@)${(P)entry}[3]}
   flags=(${(@)${(P)entry}[4,-1]})
 
-  if [[ $1 == 'to-local' ]]; then
+  if [[ $1 = 'to-local' ]] || [[ $1 = 'push' ]]; then
     cp "${flags[@]}" $repo_dir/${~file_or_glob} --target-directory=$config_dir
   elif [[ -d $config_dir ]]; then
     cp "${flags[@]}" $config_dir/${~file_or_glob} --target-directory=$repo_dir
