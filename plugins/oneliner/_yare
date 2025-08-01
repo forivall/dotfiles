@@ -159,7 +159,7 @@ _yare_cargo_cmds() {
   fi
   setopt extendedglob
   commands=( ${${${(M)"${(f)$(_call_program commands cargo --list)}":#    *}/ ##/}/ ##/:} )
-  commands=( ${commands:#(add|cache|fetch|info|login|logout|new|search|tree|yank):*} )
+  commands=( ${commands:#(add|binstall|cache|config|fetch|generate-lockfile|git-checkout|info|install|init|help|locate-project|login|logout|owner|pkgid|publish|metadata|new|read-manifest|remove|rm|search|tree|uninstall|update|vendor|verify-project|version|yank):*} )
   _describe -t commands 'command' commands
 }
 

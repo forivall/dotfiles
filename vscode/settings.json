@@ -347,6 +347,7 @@
     "editor.rulers",
     "editor.semanticHighlighting.enabled",
     "editor.semanticTokenColorCustomizations",
+    "editor.showFoldingControls",
     "editor.smoothScrolling",
     "editor.snippetSuggestions",
     "editor.stickyScroll.defaultModel",
@@ -471,6 +472,7 @@
   "editor.cursorSurroundingLines": 2,
   "editor.detectIndentation": true,
   "editor.foldingImportsByDefault": true,
+  "editor.showFoldingControls": "always",
   "editor.formatOnPaste": false,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.gotoLocation.multipleDeclarations": "gotoAndPeek",
@@ -1745,7 +1747,7 @@
         }
       }
     },
-    "ai-chat": {
+    "vscode-ai": {
       "items": {
         "c": { "text": "Ask (⌘․ to cycle)", "command": "workbench.action.chat.openAsk" },
         "g": { "text": "Agent", "command": "workbench.action.chat.openAgent" },
@@ -1754,6 +1756,132 @@
         "N": { "text": "New", "command": "workbench.action.chat.newChat" },
         "r": { "text": "Redo Edits", "command": "workbench.action.chat.redoEdit" },
         "R": { "text": "Reject Edits", "command": "chatEditor.action.cancel" },
+      }
+    },
+    "gemini-ai": {
+      "items": {
+        "G":{
+          "command": "geminicodeassist.generateCode",
+          "text": "Generate code"
+        },
+        // {
+        // 	"command": "geminicodeassist.addFileToContext",
+        // 	"text": "Add file to Gemini context"
+        // },
+        "a": {
+          "command": "geminicodeassist.addFilesToContext",
+          "text": "Add files to Gemini context"
+        },
+        "A": {
+          "command": "geminicodeassist.addFolderToContext",
+          "text": "Add folder to Gemini context"
+        },
+        "F": {
+          "command": "geminicodeassist.addFoldersToContext",
+          "text": "Add folders to Gemini context"
+        },
+        "S": {
+          "command": "geminicodeassist.addSnippetToContext",
+          "text": "Add Snippet to Gemini Context"
+        },
+        "R": {
+          "command": "geminicodeassist.rejectCompletion",
+          "text": "Reject Suggestion"
+        },
+        // {
+        // 	"command": "geminicodeassist.codelens.accept",
+        // 	"text": "Accept"
+        // },
+        // {
+        // 	"command": "_cloudcode.duetAI.codelens.acceptNav",
+        // 	"text": " Accept "
+        // },
+        // {
+        // 	"command": "_cloudcode.duetAI.diffView.prevSuggestion",
+        // 	"text": " Previous Suggestion "
+        // },
+        // {
+        // 	"command": "_cloudcode.duetAI.diffView.nextSuggestion",
+        // 	"text": " Next Suggestion "
+        // },
+        // {
+        // 	"command": "_cloudcode.duetAI.codelens.rejectNav",
+        // 	"text": " Decline "
+        // },
+        // {
+        // 	"command": "geminicodeassist.codelens.reject",
+        // 	"text": "Decline"
+        // },
+        "m": {
+          "command": "cloudcode.duetAI.actionsMenu",
+          "category": "Cloud Code",
+          "text": "Gemini Code Assist: Smart Actions",
+          "icon": {
+            "light": "images/light/spark.svg",
+            "dark": "images/dark/spark.svg"
+          },
+          "enablement": "!subscriptionRequired"
+        },
+        "k": {
+          "command": "geminicodeassist.viewCodeDocumentation",
+          "category": "Gemini Code Assist",
+          "text": "Code Documentation",
+          "icon": "$(library)",
+          "when": "false"
+        },
+        // {
+        // 	"command": "cloudcode.duetAI.rightClick.chatGenerateTests",
+        // 	"category": "Gemini Code Assist",
+        // 	"text": "Generate Unit Tests",
+        // 	"icon": "images/chat_spark.svg"
+        // },
+        // {
+        // 	"command": "cloudcode.gemini.chatView.focus",
+        // 	"category": "Gemini Code Assist",
+        // 	"text": "Open Chat"
+        // },
+        // {
+        // 	"command": "geminicodeassist.chat.resume",
+        // 	"category": "Gemini Code Assist (Chat)",
+        // 	"text": "Resume Previous Chat...",
+        // 	"icon": "$(history)",
+        // 	"enablement": "geminicodeassist.chat.userHasPreviousThreads && !geminicodeassist.chat.isConversationRequestInProgress && !geminicodeassist.chat.isToolApprovalPending"
+        // },
+        // {
+        // 	"command": "geminicodeassist.chat.new",
+        // 	"category": "Gemini Code Assist (Chat)",
+        // 	"text": "New Chat",
+        // 	"icon": "$(plus)",
+        // 	"enablement": "geminicodeassist.chat.isThreadActive && !geminicodeassist.chat.isConversationRequestInProgress && !geminicodeassist.chat.isToolApprovalPending"
+        // },
+        // {
+        // 	"command": "geminicodeassist.chat.fork",
+        // 	"text": "Fork Chat"
+        // },
+        // {
+        // 	"command": "geminicodeassist.softwareLicensesPrivacyPolicy",
+        // 	"text": "Show Software Licenses and Privacy",
+        // 	"category": "Gemini Code Assist"
+        // },
+        // {
+        // 	"command": "gemini.inlineSuggestion.acceptAll",
+        // 	"text": "Accept file",
+        // 	"category": "Gemini Code Assist"
+        // },
+        // {
+        // 	"command": "gemini.inlineSuggestion.rejectAll",
+        // 	"text": "Reject file",
+        // 	"category": "Gemini Code Assist"
+        // },
+        // {
+        // 	"command": "gemini.inlineSuggestion.diffView",
+        // 	"text": "Diff view",
+        // 	"category": "Gemini Code Assist"
+        // },
+        // {
+        // 	"command": "geminicodeassist.intentAwareCompletion.jumpAndAccept",
+        // 	"text": "Jump and accept intent-aware completions"
+        // }
       }
     }
   },
@@ -2411,7 +2539,7 @@
     "suppressFileNotUnderSourceControlWarning": false,
     "suppressGitVersionWarning": false,
     "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false
+    "suppressNoRepositoryWarning": false,
     "suppressIntegrationRequestTimedOutWarning": true
   },
   "gitlens.advanced.quickPick.closeOnFocusOut": true,

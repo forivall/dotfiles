@@ -1,3 +1,41 @@
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config]
+python.analysis.venvPath = "."
+python.analysis.venv = ".venv"
+python.analysis.lint = true
+python.analysis.inlayHint.enable = true
+python.analysis.autoSearchPaths = true
+python.analysis.diagnosticMode = "workspace"
+python.analysis.useLibraryCodeForType = true
+python.analysis.logLevel = "Error"
+python.analysis.typeCheckingMode = "off"
+python.analysis.autoImoprtCompletion = true
+python.analysis.reportOptionalSubscript = false
+python.analysis.reportOptionalMemberAccess = false
+
+[language-server.efm]
+command = "efm-langserver"
+
+[language-server.efm-lsp-eslint]
+command = "efm-langserver"
+
+[language-server.efm-lsp-eslint.config]
+documentFormatting = true
+
+[[language-server.efm-lsp-eslint.config.languages.typescript]]
+# formatCommand ="eslint --stdin-filename ${INPUT}"
+# formatStdin = true
+lintCommand = "npx eslint -f visualstudio --stdin --stdin-filename ${INPUT}"
+lintIgnoreExitCode = true
+lintStdin = true
+lintFormats = [
+  "%f(%l,%c): %tarning %m",
+  "%f(%l,%c): %rror %m",
+]
+
 [language-server.typescript-language-server]
 config.tsserver.path = "node_modules/typescript/lib"
 config.preferences.quotePreference = "single"
