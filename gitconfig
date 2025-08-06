@@ -340,3 +340,5 @@
 	main-tag = yellow default bold
 	main-local-tag = magenta default bold
 
+[stash]
+	showIncludeUntracked = true

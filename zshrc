@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# Amazon Q pre block. Keep at the top of this file.
-# [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-
 # zmodload zsh/zprof
 # setopt xtrace
 # shellcheck disable=SC2168,2296
@@ -364,8 +361,5 @@ FIG_DOTFILES_SOURCED=1
 
 whence _omz_compdump > /dev/null && _omz_compdump
 # zprof
-
-# Amazon Q post block. Keep at the bottom of this file.
-# [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
 true
