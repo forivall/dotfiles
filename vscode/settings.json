@@ -3922,5 +3922,6 @@
   "python.analysis.includeAliasesFromUserFiles": true,
   "terminal.integrated.smoothScrolling": true,
   "editor.inlineSuggest.edits.showCollapsed": true,
+  "chat.commandCenter.enabled": false,
   "workbench.panel.showLabels": false,
 }

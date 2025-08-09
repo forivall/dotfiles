@@ -25,8 +25,8 @@
                                     "when": "auxiliaryBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || auxiliaryBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || panelFocus && !listFocus && !inputFocus && !inputBoxFocus || panelFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus && !terminalFocus" },
   { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "vscode-ai" },
     "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },
-  { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "gemini-ai" },
-    "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },
+  // { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "gemini-ai" },
+  //   "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },
 
   { "key": "shift+escape", "command": "editor.action.hideHover", "when": "editorHoverFocused" },
   { "key": "shift+escape",          "command": "closeReferenceSearch",
