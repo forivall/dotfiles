@@ -16,7 +16,7 @@ __git-addp-getitems_vars() {
   local OIFS=$IFS
   IFS=$'\n'
   items=(
-    $(git diff --name-only $@)
+    $(git diff --name-only $@ | huniq)
     $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
   )
   IFS="$OIFS"
@@ -24,7 +24,17 @@ __git-addp-getitems_vars() {
 }
 __git-addp-dointeractive() {
   if git ls-files --error-unmatch $1 2>/dev/null >/dev/null; then
-    git "${configArgs[@]}" add -p $1
+    if unmatched="${(N)$(git ls-files -u --error-unmatch $1 2>/dev/null)}"; then
+      if grep -qE '^(>>>>>>>|=======|<<<<<<<)' $1; then
+        git "${configArgs[@]}" mergetool $1
+      else
+        echo "No merge conflicts in $1. Resetting..."
+        git "${configArgs[@]}" reset $1
+        git "${configArgs[@]}" add -p $1
+      fi
+    else
+      git "${configArgs[@]}" add -p $1
+    fi
   else
     git "${configArgs[@]}" add $1
     local display_cmd=(git "${configArgs[@]}" diff --cached $1)

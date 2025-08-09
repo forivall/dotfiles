@@ -15,8 +15,17 @@ echo ---
 if (( $# > 0 )) || git ls-files $@ --error-unmatch $file 2>/dev/null >/dev/null; then
   difflines=("${(f)$(git diff -w --raw --numstat --follow $@ -- $file)}")
   if [[ ${difflines[2]} = :* ]]; then
-    numstat=(${=difflines[1]})
-    rawstat=(${=difflines[2]})
+    if [[ ${difflines[1]} = :* ]]; then
+      rawstat=(${=difflines[1]})
+      if [[ "${difflines[3]}" = 0$'\t'* ]]; then
+        numstat=(${=difflines[4]})
+      else
+        numstat=(${=difflines[3]})
+      fi
+    else
+      numstat=(${=difflines[1]})
+      rawstat=(${=difflines[2]})
+    fi
   else
     rawstat=(${=difflines[1]})
     numstat=(${=difflines[2]})
@@ -55,11 +64,13 @@ if [[ -v diffstat ]]; then
     intro="${fg[cyan]}Delete$suffix${reset_color}"
   elif [[ "$diffstat" = A* ]]; then
     intro="${fg[cyan]}Add$suffix${reset_color} new"
+  elif [[ "$diffstat" = U* ]]; then
+    intro="${fg[cyan]}Merge Conflict$suffix${reset_color}"
   else
     intro="${fg[cyan]}Change$suffix${reset_color}"
   fi
 
-  [[ "$diffstat" != A* ]] && (( removed == 0 && added == 0 )) && wsonly=true || wsonly=false
+  [[ "$diffstat" != A* && "$diffstat" != U* ]] && (( removed == 0 && added == 0 )) && wsonly=true || wsonly=false
   if $wsonly; then
     numstat=($(git diff --numstat --follow $@ -- $file))
     added=${numstat[1]}
@@ -82,22 +93,79 @@ if [[ -v diffstat ]]; then
     elif (( removed > 1 || added > 1 )); then
       lineinfo+="s"
     fi
+    if [[ "$diffstat" = U* ]]; then
+      lineinfo+=" vs ours"
+    fi
   elif [[ "$diffstat" = A ]]; then
     lineinfo+=" empty file"
+  fi
+  if [[ "$diffstat" = U* ]]; then
+    numstatlines=("${(f)$(git diff -w --numstat --follow --theirs $@ -- $file)}")
+    if [[ "${numstatlines[1]}" = 0$'\t'* ]]; then
+      numstat=(${=numstatlines[2]})
+    else
+      numstat=(${=numstatlines[1]})
+    fi
+    addedtheirs=${numstat[1]}
+    removedtheirs=${numstat[2]}
+    if (( removedtheirs > 0 || addedtheirs > 0 )); then
+      if (( removedtheirs > 0 || added > 0 )); then
+        lineinfo+=","
+      fi
+      if (( addedtheirs > 0 )); then
+        lineinfo+=" $addedtheirs new"
+        if (( removedtheirs > 0 )); then
+          lineinfo+=","
+        fi
+      fi
+      if (( removedtheirs > 0 )); then
+        lineinfo+=" $removedtheirs removed"
+      fi
+      lineinfo+=" line"
+      if (( removedtheirs == 1 && addedtheirs > 1 )); then
+        lineinfo+="(s)"
+      elif (( removedtheirs > 1 || addedtheirs > 1 )); then
+        lineinfo+="s"
+      fi
+      lineinfo+=" vs theirs"
+    fi
   fi
   if $wsonly; then
     lineinfo+=" (whitespace only)"
   fi
-  echo "$intro$lineinfo"
+  echo -n "$intro$lineinfo"
 
-  total=$(( added + removed ))
-  totallen=${#total}
-  STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
-  if (( total > STAT_COLUMNS )); then
-    added=$(( STAT_COLUMNS * added / total ))
-    removed=$(( STAT_COLUMNS * added / total ))
+  if (( removed > 0 || added > 0 || removedtheirs > 0 || addedtheirs > 0 )); then
+    echo
+    total=$(( added + removed ))
+    totallen=${#total}
+    STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
+    if (( total > STAT_COLUMNS )); then
+      added=$(( STAT_COLUMNS * added / total ))
+      removed=$(( STAT_COLUMNS * added / total ))
+    fi
+    echo -n $total ${fg[green]}${(l:${added}::+:)}${fg[red]}${(l:${removed}::-:)}${reset_color}
+    if [[ -v addedtheirs && -v removedtheirs ]]; then
+      total=$(( addedtheirs + removedtheirs ))
+      totallen=${#total}
+      STAT_COLUMNS=$(( COLUMNS - totallen - 1 ))
+      if (( total > STAT_COLUMNS )); then
+        addedtheirs=$(( STAT_COLUMNS * addedtheirs / total ))
+        removedtheirs=$(( STAT_COLUMNS * addedtheirs / total ))
+      fi
+      echo
+      echo -n $total ${fg[green]}${(l:${addedtheirs}::+:)}${fg[red]}${(l:${removedtheirs}::-:)}${reset_color}
+    fi
+  elif [[
+    $diffstat = U &&
+    ${rawstat[3]} == 0000000000* &&
+    ${rawstat[4]} == 0000000000* &&
+    "$(git diff -w --raw --follow --theirs $@ -- $file)" = ":000000 100644 0000000000 0000000000 "*
+  ]]; then
+    echo ' - Deleted in ours'
+  else
+    echo
   fi
-  echo -n $total ${fg[green]}${(l:${added}::+:)}${fg[red]}${(l:${removed}::-:)}${reset_color}
   DIFF_LINES=$(( LINES - items ))
   if (( 8 < DIFF_LINES )); then
     if [[ "$diffstat" = A ]]; then
