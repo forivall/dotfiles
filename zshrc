@@ -90,10 +90,11 @@ ZSH_COMPINIT_CACHE=true
 
 # export BAT_PAGER="less +X -x2 -FR"
 export LESS='-SRiF'  # --mouse --wheel-lines=1  # scroll wheel used to freeze iterm2
-export BAT_PAGER="moar --no-linenumbers"
+export BAT_PAGER="moor --no-linenumbers"
 export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow
 export MOAR="--statusbar=bold --no-linenumbers"
+export MOOR="--statusbar=bold --no-linenumbers"
 export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/vscode/ripgreprc"

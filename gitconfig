@@ -7,7 +7,7 @@
 	# pager = delta --dark --theme base16
 	# pager = less +X -x2 -R
 	# pager = most
-	pager = moar --no-linenumbers --colors 16 --style igor
+	pager = moor --no-linenumbers --colors 16 --style igor
 	excludesfile = ~/.gitignore
 	trustctime = false
 	editor = hx

@@ -19,7 +19,7 @@ brew install coreutils findutils dateutils moreutils util-linux telnet \
 brew install less lesspipe # macos built in less uses posix regex; brew less uses pcre2
 brew install curl-openssl
 # https://github.com/ibraheemdev/modern-unix
-brew install moar most colordiff trash htop tree ripgrep fd sd eza chafa broot choose vim ranger cfonts ruplacer
+brew install moor most colordiff trash htop tree ripgrep fd sd eza chafa broot choose vim ranger cfonts ruplacer
 brew install mergiraf
 brew install libtool autoconf automake m4 cmake gcc gdb xcodegen
 brew install git hub gh glab git-extras git-lfs git-credential-manager

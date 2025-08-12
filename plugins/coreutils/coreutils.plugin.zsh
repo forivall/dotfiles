@@ -129,9 +129,9 @@ fi
 compdef gman=man
 man() {
   if (( COLUMNS > 120 )); then
-    MANPAGER="moar --no-linenumbers" MANWIDTH=120 command man "$@"
+    MANPAGER="moor --no-linenumbers" MANWIDTH=120 command man "$@"
   else
-    MANPAGER="moar --no-linenumbers" command man "$@"
+    MANPAGER="moor --no-linenumbers" command man "$@"
   fi
 }
 
