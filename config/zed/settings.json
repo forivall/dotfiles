@@ -13,6 +13,9 @@
   },
   "tab_size": 2,
   "icon_theme": "Catppuccin Mocha",
+  "search": {
+    "button": true
+  },
   "languages": {
     "Markdown": {
       "formatter": [

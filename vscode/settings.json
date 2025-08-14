@@ -3890,7 +3890,6 @@
   "chat.commandCenter.enabled": false,
   "filefocus.sortKey": "path",
   "git-graph.commitDetailsView.location": "Docked to Bottom",
-  "github.copilot.editor.enableAutoCompletions": false,
   "github.copilot.editor.enableCodeActions": false,
   "markdown.editor.drop.enabled": "never",
   "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
@@ -3905,9 +3904,11 @@
   "notebook.inlineValues": "auto",
   "svg.preview.mode": "svg",
   "template-string-converter.autoRemoveTemplateString": true,
+  "versionlens.suggestions.showOnStartup": true,
   "arena.codePrivacySettings": "Private",
   "arena.enableTabAutocomplete": false,
   "editor.minimap.showSlider": "always",
+  "diffEditor.hideUnchangedRegions.enabled": true,
   "github.copilot.nextEditSuggestions.enabled": false,
   "launch": {
     "configurations": [{

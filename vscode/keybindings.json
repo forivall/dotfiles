@@ -2,7 +2,7 @@
   { "key": "escape", "command": "whichkey.show", "when": "!terminalFocus && !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !callHierarchyVisible && !cancellableOperation && !codeActionMenuVisible && !dance.isRecording && !dirtyDiffVisible && !editorHasSelection && !editorHoverFocused && !editorHoverVisible && !exceptionWidgetVisible && !explorerResourceCut && !findWidgetVisible && !gitlens:key:escape && !inQuickOpen && !inReferenceSearchEditor && !inSnippetMode && !inlineChatVisible && !inlineSuggestionVisible && !isComposing && !isInEmbeddedEditor && !listHasSelectionOrFocus && !markersNavigationVisible && !notificationFocus && !notificationToastsVisible && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !replaceInputBoxFocus && !selectionAnchorSet && !suggestWidgetVisible && !termainlFocus && !terminalAltBufferActive && !terminalChatFocus && !terminalFocus && !typeHierarchyVisible && dance.mode != 'input' && dance.mode != 'insert' && dance.mode != 'select' && resourceScheme != 'vscode-interactive' && vim.mode != 'Command' && vim.mode != 'Insert' && vim.mode != 'Replace' && vim.mode != 'Visual'" },
   // put escape keybinds after the whichkey escape binding.
   { "key": "escape", "command": "runCommands", "args": {"commands": ["search.action.clearSearchResults", "workbench.view.search"]},
-    "when": "searchInputBoxFocus && viewHasSearchPattern"},
+    "when": "searchInputBoxFocus && viewHasSearchPattern && !inSearchEditor"},
 
   { "key": "escape",                "command": "cancelSelection",
                                     "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && editorHasSelection && textInputFocus" },
@@ -794,11 +794,13 @@
   // { "key": "o",       "command": "dance.run", "args": { "commands": [".selections.reduce", ".edit.newLine.below.insert"] },   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "d",     "command": "dance.edit.yank-delete",        "args": { "register": "*" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "alt+d", "command": "dance.edit.delete",             "args": { "register": "*" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "alt+d", "command": "dance.edit.delete",             "args": { "register": "_" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "c",     "command": "dance.edit.yank-delete-insert", "args": { "register": "*" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
-  { "key": "alt+c", "command": "dance.edit.delete-insert",      "args": { "register": "*" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "alt+c", "command": "dance.edit.delete-insert",      "args": { "register": "_" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "d",     "command": "dance.run",
     "args": { "commands": [".select.right.extend", ".edit.delete"] }, "when": "editorTextFocus && dance.mode == 'normal' && !editorHasSelection" },
+  { "key": "alt+d",     "command": "dance.run",
+    "args": { "commands": [".select.right.extend", [".edit.delete", { "register": "_" }]] }, "when": "editorTextFocus && dance.mode == 'normal' && !editorHasSelection" },
   { "key": "c",     "command": "dance.run",
     "args": { "commands": [".select.right.extend", ".edit.yank-delete-insert"] }, "when": "editorTextFocus && dance.mode == 'normal' && !editorHasSelection" },
 
