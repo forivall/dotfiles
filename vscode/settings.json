@@ -3795,7 +3795,6 @@
   "testFileMaker.testFilePath": "{FilePathFromRoot}",
   // new items
   "terminal.integrated.persistentSessionScrollback": 1000,
-  "terminal.integrated.enableBell": true,
   "[dart][javascript][mongodb]": {
     "editor.wordBasedSuggestions": "off"
   },
@@ -3908,7 +3907,6 @@
   "arena.codePrivacySettings": "Private",
   "arena.enableTabAutocomplete": false,
   "editor.minimap.showSlider": "always",
-  "diffEditor.hideUnchangedRegions.enabled": true,
   "github.copilot.nextEditSuggestions.enabled": false,
   "launch": {
     "configurations": [{
@@ -3923,6 +3921,5 @@
   "python.analysis.includeAliasesFromUserFiles": true,
   "terminal.integrated.smoothScrolling": true,
   "editor.inlineSuggest.edits.showCollapsed": true,
-  "chat.commandCenter.enabled": false,
   "workbench.panel.showLabels": false,
 }
