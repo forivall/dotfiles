@@ -31,7 +31,7 @@ alias gitview="/usr/share/git/gitview/gitview"
 alias g=git
 
 # alias ga='git add'
-alias gap='git add -p'
+alias gap='git addp'
 alias gam='git amend'
 
 # alias gcb='git checkout -b'
@@ -57,6 +57,7 @@ alias gres='git restore --source'
 alias gds='git diff --staged'
 alias gdd='git delta diff'
 alias gdds='git delta diff --staged'
+(( ${+functions[forgit::diff]} )) && alias gdc="forgit::diff --cached"
 
 alias gf='git fetch'
 alias gfo='git fetch origin'
