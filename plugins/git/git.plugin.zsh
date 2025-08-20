@@ -67,8 +67,12 @@ alias gfa='git fetch --all'
 
 alias gl='git l'
 alias gla='git la'
-alias glf='git ls-files'
-alias glfg='git ls-files | grep'
+if (( ${+functions[forgit::log]} )); then # []
+    alias glf="forgit::log"
+    alias glfa="forgit::log --all $(git config get log.allExcludes)"
+    alias glfaa="forgit::log --all"
+fi
+alias glsf='git ls-files'
 alias glg="git l3"
 alias glga="git l3 --all"
 alias glgs="git l3 --stat"

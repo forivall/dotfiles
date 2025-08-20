@@ -61,6 +61,14 @@ includeInlayVariableTypeHints = true
 [language-server.eslint]
 args = ["--stdio"]
 command = "vscode-eslint-language-server"
+# command = "node"
+# args = [
+#   "--optimize-for-size",
+#   "--max-old-space-size=8192",
+#   "$HOME/code/public/vscode-langservers-extracted/lib/eslint-language-server/eslintServer.js",
+#   # "/opt/homebrew/lib/node_modules/vscode-langservers-extracted/lib/eslint-language-server/eslintServer.js",
+#   "--stdio",
+# ]
 
 [language-server.eslint.config]
 validate = "on"
@@ -96,6 +104,10 @@ provideFormatter = false
 [language-server.commit-lsp]
 command = "commit-lsp"
 args = ["run"]
+
+[language-server.cci-yaml]
+command = "$HOME/Library/Application Support/CircleCI-language-server/circleci-yaml-language-server"
+args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
 
 [[language]]
 name = "json"
@@ -137,3 +149,6 @@ auto-format = false
 # roots = ["angular.json", "nx.json"]
 # language-server = { command = "ngserver", args = ["--stdio", "--tsProbeLocations", "$(npm -g root)", "--ngProbeLocations", "$(npm -g root)"] }
 # file-types = ["ts", "html"]
+[[language]]
+name = "yaml"
+language-servers = [ "yaml-language-server", "ansible-language-server", "cci-yaml" ]

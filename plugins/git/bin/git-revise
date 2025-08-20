@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+__dirname=${0:A:h}
+path[$path[(i)$__dirname]]=()
+
+if [[ -n "$(git config get branchless.core.mainBranch)" ]]; then
+    exec git branchless wrap revise "$@"
+else
+    exec git revise "$@"
+fi

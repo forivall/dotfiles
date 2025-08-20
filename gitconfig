@@ -24,6 +24,7 @@
 	diffFilter = delta --color-only
 [log]
   excludeDecoration = refs/jj/**
+  allExcludes = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/**
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	minus-style = syntax auto
@@ -151,7 +152,7 @@
 	dc = diff --cached
 	amend = commit --amend --no-edit
 	reword = revise --no-index --edit HEAD
-	reword = "!f() { git revise --no-index --edit ${@:-HEAD}; }; f"
+	reword = "!f() { git branchless wrap revise --no-index --edit ${@:-HEAD}; }; f"
 	cob = checkout-branch
 	checkout-branch = checkout
 	unresolve = checkout --conflict=merge
@@ -256,6 +257,8 @@
 	path =
 [difftool "vscode"]
 	cmd = "code --wait \"$LOCAL\" \"$REMOTE\" --diff"
+[difftool "difftastic"]
+    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
 [mergetool "sourcetree"]
 	cmd = "/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\""
 	trustExitCode = true
@@ -326,7 +329,7 @@
 	line-graphics = utf-8
 	reference-format = hide:other
 [tig "color"]
-	cursor = default default underline 
+	cursor = default default underline
 	status = magenta black bold
 	title-focus = magenta black bold
 	title-blur = magenta black
