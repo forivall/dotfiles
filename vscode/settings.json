@@ -1471,6 +1471,28 @@
         "i]": { "text": "Fold", "command": "editor.fold"},
         "O": { "text": "Unfold All", "command": "editor.unfoldAll"},
         "I": { "text": "Fold All", "command": "editor.foldAll"},
+        "f": { "text": "Fold menu", "command": "dance.openMenu", "args": [{ "menu": "fold-hx" }] },
+      },
+    },
+    "fold-hx": {
+      "title": "Fold",
+      "items": {
+        "a": { "text": "Fold all",               "command": "editor.foldAll"           },
+        "A": { "text": "Unfold all",             "command": "editor.unfoldAll"         },
+        "c": { "text": "Fold current block",     "command": "editor.fold"              },
+        "C": { "text": "Unfold current block",   "command": "editor.unfold"            },
+        "t": { "text": "Fold spec methods",      "command": "foldit.fold"              },
+        "f": { "text": "Fold all except current", "command": "editor.foldAllExcept"    },
+        "M": { "text": "Unfold current marker",  "command": "editor.unfoldByMarker"    },
+        "[": { "text": "Fold parent block",      "command": "editor.foldRecursively"   },
+        "]": { "text": "Unfold parent block",    "command": "editor.unfoldRecursively" },
+        "1": { "text": "Fold level 1",           "command": "editor.foldLevel1",       },
+        "2": { "text": "Fold level 2",           "command": "editor.foldLevel2"        },
+        "3": { "text": "Fold level 3",           "command": "editor.foldLevel3"        },
+        "4": { "text": "Fold level 4",           "command": "editor.foldLevel4"        },
+        "5": { "text": "Fold level 5",           "command": "editor.foldLevel5"        },
+        "6": { "text": "Fold level 6",           "command": "editor.foldLevel6"        },
+        "7": { "text": "Fold level 7",           "command": "editor.foldLevel7"        },
       },
     },
     "window-hx": {
@@ -1524,6 +1546,9 @@
         "c": { "text": "Run at cursor",               "command": "testing.runAtCursor" },
         "f": { "text": "Run current file",            "command": "testing.runCurrentFile" },
         "o": { "text": "Show most recent output",     "command": "testing.showMostRecentOutput" },
+        "V": { "text": "Run tests at cursor with coverage",       "command": "testing.coverageAtCursor" },
+        "G": { "text": "Run tests in current file with coverage", "command": "testing.coverageCurrentFile" },
+        "O": { "text": "Show coverage toolbar",                   "command": "testing.coverageToggleToolbar" },
         "I": { "text": "Toggle inline coverage",      "command": "testing.toggleInlineCoverage" },
         "i": { "text": "Toggle inline test output",   "command": "testing.toggleInlineTestOutput" },
       },
@@ -1753,6 +1778,12 @@
         "c": { "text": "Ask (⌘․ to cycle)", "command": "workbench.action.chat.openAsk" },
         "g": { "text": "Agent", "command": "workbench.action.chat.openAgent" },
         "e": { "text": "Edit", "command": "workbench.action.chat.openEdit" },
+        "m": { "text": "Switch to next model", "command": "runCommands", "args": [{
+          "commands": [
+            "workbench.action.chat.switchToNextModel",
+            { "command": "dance.openMenu", "args": [{ "menu": "vscode-ai" }] },
+          ]}]
+        },
         "q": { "text": "Exit", "command": "runCommands", "args": [{ "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.focusActiveEditorGroup", "workbench.action.focusActiveEditorGroup", "workbench.action.focusActiveEditorGroup"] }] },
         "N": { "text": "New", "command": "workbench.action.chat.newChat" },
         "r": { "text": "Redo Edits", "command": "workbench.action.chat.redoEdit" },
@@ -3922,4 +3953,6 @@
   "terminal.integrated.smoothScrolling": true,
   "editor.inlineSuggest.edits.showCollapsed": true,
   "workbench.panel.showLabels": false,
+  "testing.coverageToolbarEnabled": true,
+  "workbench.secondarySideBar.showLabels": false,
 }

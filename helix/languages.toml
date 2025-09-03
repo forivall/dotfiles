@@ -123,7 +123,7 @@ language-servers = [ "commit-lsp" ]
 
 [[language]]
 name = "javascript"
-formatter = { command = 'prettier', args = ["--parser", "javascript"] }
+formatter = { command = 'prettier', args = ["--parser", "babel"] }
 
 [[language]]
 name = "html"
