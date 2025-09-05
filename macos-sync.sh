@@ -22,6 +22,7 @@ cp() {
 
 mu=~/.config/mackup
 appsupport="Library/Application Support"
+appprefs="Library/Preferences"
 
 #                repo_dir          config_dir                                     file_or_glob  ...flags
 vscode=(         ./vscode          ~/$appsupport/Code/User                        "*.json")
@@ -31,6 +32,7 @@ smerge_keymap=(  ./subl/merge      "~/$appsupport/Sublime Merge/Packages/User"  
 subl_settings=(  ./subl/text       "~/$appsupport/Sublime Text 3/Packages/User" "*.sublime-settings")
 bat_themes=(     ./bat/themes      ~/.config/bat/themes                           "*")
 bat_config=(     ./bat             ~/.config/bat                                  config)
+procs_config=(   ./config/procs    ~/$appprefs/com.github.dalance.procs           "*.toml")
 lapce_config=(   ./config/lapce    ~/$appsupport/dev.lapce.Lapce-Stable           "*.toml")
 zed_config=(     ./config/zed      ~/.config/zed                                  "*.json(.)")
 zed_themes=(     ./config/zed/themes ~/.config/zed/themes                         "*.json")
@@ -45,6 +47,7 @@ if (( $# < 2 )); then
       subl_settings
       bat_themes
       bat_config
+      procs_config
       lapce_config
       zed_config
       hammerspoon

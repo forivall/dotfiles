@@ -14,17 +14,16 @@ cmds=(
   'npm install -g serve'
   'npm install -g git-file-history'
 
-
   'cargo install bingrep'
   'cargo install consoletimer'
   'cargo install ddh'
   'cargo install dtg'
   'cargo install drft'
   'cargo install huniq'
-  'cargo install hx'
+  # 'cargo install hx' # hex editor, conflicts with helix
   'cargo install pueue'
   'cargo install runiq'
-  'cargo install sd'
+  'cargo install hx-lsp'
   # 'cargo install sl_cli'
   'cargo install toml-cli'
   'cargo install viu'
@@ -37,6 +36,12 @@ cmds=(
   'go install github.com/ChausseBenjamin/termpicker@latest'
   'go install github.com/dlvhdr/diffnav@latest'
 )
+
+if [[ "$(uname)" != "Darwin" ]]; then cmds+=(
+  # already installed with brew
+  'cargo install bkmr'
+  'cargo install sd'
+); fi
 
 alias pip='python3 -m pip'
 

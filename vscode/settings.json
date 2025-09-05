@@ -3600,6 +3600,7 @@
     "workbench.action.terminal.focusTabs",
     "workbench.action.toggleMaximizedPanel",
     "workbench.action.focusActiveEditorGroup",
+    "workbench.action.toggleMaximizeEditorGroup",
     "workbench.action.terminal.clear",
     "workbench.action.nextPanelView",
     "workbench.action.previousPanelView",

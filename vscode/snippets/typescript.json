@@ -12,7 +12,7 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	{
+	"import mongoose types": {
 		"prefix": "impmt",
 		"body": "import { Types as MongooseTypes } from 'mongoose';",
 		"description": "import mongoose types"

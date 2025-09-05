@@ -63,6 +63,7 @@ brew install rust rustup-init
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog fend srgn
 brew install helix yazi
+brew install bkmr
 brew install eth-p/software/bat-extras
 mkdir -p ~/.config/bat
 ln -s ~/.config/bat/themes "$(realpath ./bat/themes)"
