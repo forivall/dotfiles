@@ -1,3 +1,6 @@
+[language-server.hx-lsp]
+command = "hx-lsp"
+
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
@@ -152,3 +155,7 @@ auto-format = false
 [[language]]
 name = "yaml"
 language-servers = [ "yaml-language-server", "ansible-language-server", "cci-yaml" ]
+
+[[language]]
+name = "markdown"
+language-servers = [ "marksman", "markdown-oxide", "hx-lsp" ]
