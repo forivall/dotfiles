@@ -113,6 +113,21 @@ command = "$HOME/Library/Application Support/CircleCI-language-server/circleci-y
 args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
 
 [[language]]
+name = "angular"
+scope = "source.angular"
+injection-regex = "html"
+file-types = ["component.html"]
+block-comment-tokens = { start = "<!--", end = "-->" }
+language-servers = [ "angular" ]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = 'npx', args = ["prettier", "--parser", "angular"] }
+
+[[grammar]]
+name = "angular"
+source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "d1f24a8890462cb740909ff62a3a079cded288bc" }
+
+[[language]]
 name = "json"
 auto-format = false
 # config = { "provideFormatter" = false, "json" = { "keepLines" = { "enable" = true } } }

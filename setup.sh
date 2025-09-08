@@ -75,6 +75,8 @@ o mkdir -p ~/.config/helix
 o ln -fs "$(realpath helix/config.toml)" ~/.config/helix/config.toml
 o ln -fs "$(realpath helix/languages.toml)" ~/.config/helix/languages.toml
 o ln -fs "$(realpath helix/themes)" ~/.config/helix/themes
+o mkdir -p ~/.config/helix/runtime
+o ln -fs "$(realpath helix/runtime/queries)" ~/.config/helix/runtime/queries
 o mkdir -p ~/.config/television
 for f in config/television/*; do o ln -fs "$(realpath $f)" ~/.$f; done
 o ln -fs "$(realpath config/broot)" ~/.config/broot
