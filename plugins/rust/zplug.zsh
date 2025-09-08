@@ -17,3 +17,5 @@ patch -p3 -f -i tv-init.patch
 
 broot --set-install-state installed
 broot --print-shell-function zsh > $__dirname/broot.source.zsh
+
+(( ${+commands[procs]} )) && (cd  $__dirname && procs --gen-completion zsh)
