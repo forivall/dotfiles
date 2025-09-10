@@ -8,9 +8,31 @@ line-number = "relative"
 # cursorline = true
 color-modes = true
 insert-final-newline = true
+# indent-style = 2
 
 [editor.cursor-shape]
 insert = "bar"
+
+[editor.file-picker]
+hidden = false
+# git-ignore = false
+# git-global = false
+git-exclude = false
+
+[editor.statusline]
+right = [
+  # default
+  "diagnostics",
+  # added
+  "file-type",
+  "file-indent-style",
+  # default
+  "selections",
+  "register",
+  "position",
+  "file-encoding",
+]
+
 
 [keys.normal]
 "#" = ":reflow"
@@ -23,10 +45,4 @@ insert = "bar"
 
 [keys.insert]
 "C-space" = "completion"
-
-[editor.file-picker]
-hidden = false
-# git-ignore = false
-# git-global = false
-git-exclude = false
 

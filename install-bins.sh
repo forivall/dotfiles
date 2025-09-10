@@ -36,6 +36,8 @@ cmds=(
 
   'go install github.com/ChausseBenjamin/termpicker@latest'
   'go install github.com/dlvhdr/diffnav@latest'
+
+  'uv tool install tombi'
 )
 
 if [[ "$(uname)" != "Darwin" ]]; then cmds+=(

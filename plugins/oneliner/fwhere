@@ -1,1 +1,1 @@
-for d in "${fpath[@]}"; [[ -e $d/$1 ]] && exa -d $d/$1
+for d in "${fpath[@]}"; [[ -e $d/$1 ]] && echo $d/$1
