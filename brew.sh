@@ -38,6 +38,7 @@ brew install p7zip unar
 # brew install git-tf tee-clc # requires java
 brew install python@3.10 pyenv pyenv-virtualenv bpython numpy
 brew install python-markdown
+brew install mandown
 python3 -m pip install pypi-command-line
 # brew install perl cpanminus cpansearch
 

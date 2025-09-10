@@ -152,3 +152,5 @@
     "||"
     "%"
   ] @operator)
+
+(tag_name) @tag

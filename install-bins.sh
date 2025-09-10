@@ -25,6 +25,7 @@ cmds=(
   'cargo install runiq'
   'cargo install hx-lsp'
   # 'cargo install sl_cli'
+  'cargo install --git https://github.com/estin/simple-completion-language-server.git'
   'cargo install toml-cli'
   'cargo install viu'
 

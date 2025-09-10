@@ -27,6 +27,7 @@ appprefs="Library/Preferences"
 #                repo_dir          config_dir                                     file_or_glob  ...flags
 vscode=(         ./vscode          ~/$appsupport/Code/User                        "*.json")
 vscode_snippets=(./vscode/snippets ~/$appsupport/Code/User/snippets               "*.json")
+cursor=(         ./config/cursor   ~/$appsupport/Cursor/User                      "*.json")
 smerge_settings=(./subl/merge      "~/$appsupport/Sublime Merge/Packages/User"  "*.sublime-settings")
 smerge_keymap=(  ./subl/merge      "~/$appsupport/Sublime Merge/Packages/User"  "Default*.sublime-keymap")
 subl_settings=(  ./subl/text       "~/$appsupport/Sublime Text 3/Packages/User" "*.sublime-settings")
@@ -41,7 +42,8 @@ hammerspoon=(    ./hammerspoon     ~/.hammerspoon                               
 if (( $# < 2 )); then
     entries=(
       vscode
-      vscode_snippets
+      # vscode_snippets
+      cursor
       smerge_settings
       smerge_keymap
       subl_settings
@@ -67,6 +69,9 @@ for entry in $entries; do
   if [[ $1 = 'to-local' ]] || [[ $1 = 'push' ]]; then
     cp "${flags[@]}" $repo_dir/${~file_or_glob} --target-directory=$config_dir
   elif [[ -d $config_dir ]]; then
+    if [[ $entry == code || $entry == cursor ]]; then
+      $entry --list-extensions > ${repo_dir}/extensions.txt
+    fi
     cp "${flags[@]}" $config_dir/${~file_or_glob} --target-directory=$repo_dir
   fi
 done

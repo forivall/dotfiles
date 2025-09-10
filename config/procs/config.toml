@@ -6,6 +6,14 @@ nonnumeric_search = false
 align = "Left"
 
 # [[columns]]
+# kind = "Ppid"
+# header = "PPID"
+# style = "BrightYellow|Yellow"
+# numeric_search = true
+# nonnumeric_search = false
+# align = "Left"
+
+# [[columns]]
 # kind = "User"
 # style = "BrightGreen|Green"
 # numeric_search = false
@@ -130,7 +138,8 @@ show_parent_in_tree = true
 show_children_in_tree = true
 show_header = true
 show_footer = false
-cut_to_terminal = false
+# cut_to_terminal = false
+cut_to_terminal = true
 cut_to_pager = false
 cut_to_pipe = false
 color_mode = "Auto"
