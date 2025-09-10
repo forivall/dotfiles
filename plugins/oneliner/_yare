@@ -163,11 +163,37 @@ _yare_cargo_cmds() {
   _describe -t commands 'command' commands
 }
 
+_yare_go_cmds() {
+  local -a commands
+  if [[ ! -f go.mod ]]; then
+    commands=()
+    _describe -t commands 'command' commands
+    return 0
+  fi
+
+  commands=(
+    'build:compile packages and dependencies'
+    'clean:remove object files and cached files'
+    'env:print Go environment information'
+    'fix:update packages to use new APIs'
+    'fmt:gofmt (reformat) package sources'
+    'generate:generate Go files by processing source'
+    'run:compile and run Go program'
+    'test:test packages'
+    'tool:run specified go tool'
+    'vet:report likely mistakes in packages'
+    'help:get more information about a command'
+  )
+
+  _describe -t commands 'command' commands
+}
+
 _yare() {
   _alternative \
     'make:command:_yare_make_targets' \
     'node:command:_yare_yarn_autocompletions' \
-    'cargo:command:_yare_cargo_cmds'
+    'cargo:command:_yare_cargo_cmds' \
+    'go:command:_yare_go_cmds'
 }
 
 _yare

@@ -38,6 +38,8 @@ elif [[ -f Makefile ]] || [[ -f makefile ]] && make-has-target "$@"; then
   run make "$@"
 elif [[ -f Cargo.toml ]]; then
   run cargo "$@"
+elif [[ -f go.mod ]]; then
+  run go "$@"
 fi
 
 if $wasrun; then exit; fi
