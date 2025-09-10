@@ -1,5 +1,6 @@
 alefragnani.bookmarks
 alexpusch.foldit
+alfredbirk.go-to-next-change
 angular.ng-template
 anysphere.cursorpyright
 be5invis.vscode-custom-css

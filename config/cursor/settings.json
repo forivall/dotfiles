@@ -9,6 +9,8 @@
   "window.titleSeparator": " ⠿ ",
   "apc.font.family": "SF Pro Display",
   "workbench.fontAliasing": "auto",
+  "workbench.panel.showLabels": true, // broken in cursor
+  "workbench.secondarySideBar.showLabels": true, // broken in cursor
   // "editor.codeLensFontFamily": "Iosevka Comfy Wide",
   // "editor.codeLensFontFamily": "Recursive",
   // "editor.fontVariations": "'CASL' 0.5, 'MONO' 1",
@@ -1637,30 +1639,16 @@
         "D": { "text": "Open workspace diagnostic picker",              "command": "???"                                                                      },
         "a": { "text": "Perform code action",                           "command": "editor.action.quickFix"                                                   },
         "'": { "text": "Open last picker",                              "command": "???"                                                                      },
+        "C": { "text": "Open changed files list (PR)",                  "command": "prStatus:github.focus",          },
+        "g": { "text": "Open changed files list",                       "command": "workbench.scm.focus",          },
         "G": { "text": "Debug",                                         "command": "dance.openMenu", "args": [{ "menu": "debug-hx", "locked": true }]         },
         "t": { "text": "Test",                                          "command": "dance.openMenu", "args": [{ "menu": "test-hx" }]},
         "w": { "text": "Window",                                        "command": "dance.openMenu", "args": [{ "menu": "window-hx" }]                        },
-        "x": { "text": "Install Extension",                                    "command": "dance.run", "args": [{
-          "code": [
-            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'ext install ')",
-          ]}
-        ]},
-        "X": { "text": "Focus Extensions",                            "command": "workbench.view.extensions" },
-        "m": { "text": "Run Task",                                    "command": "dance.run", "args": [{
-          "code": [
-            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'task ')",
-          ]}
-        ]},
-        "`": { "text": "Terminal",                                    "command": "dance.run", "args": [{
-          "code": [
-            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'term ')",
-          ]}
-        ]},
-        "u": { "text": "Focus Panel View",                                    "command": "dance.run", "args": [{
-          "code": [
-            "await vscode.commands.executeCommand('workbench.action.quickOpen', 'view ')",
-          ]}
-        ]},
+        "x": { "text": "Install Extension",                             "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "ext install "}]}] },
+        "X": { "text": "Focus Extensions",                              "command": "workbench.view.extensions" },
+        "m": { "text": "Run Task",                                      "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "task " }] }] },
+        "`": { "text": "Terminal",                                      "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "term " }] }] },
+        "u": { "text": "Focus Panel View",                              "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "view " }] }] },
         "y": { "text": "Join and yank selections to clipboard",         "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "Y": { "text": "Yank main selection to clipboard",              "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "p": { "text": "Paste clipboard after selections",              "command": "dance.edit.insert", "args": [{ "handleNewLine": true, "where": "end"   }] },
@@ -1672,8 +1660,9 @@
         "h": { "text": "Select symbol references",                      "command": "dance.run", "args": [{ "commands": ["editor.action.selectHighlights", ".select.left.extend"] }] },
         "i": { "text": "Inline chat",                                   "command": "aipopup.action.modal.generate" },
         "M": { "text": "Toggle copilot completion",                     "command": "github.copilot.completions.toggle" },
-        "U": { "text": "Add Selection to Copilot Context",                "command": "workbench.action.chat.attachSelection"},
-        "I": { "text": "Open Copilot Chat",                            "command": "composer.startComposerPrompt"},
+        "U": { "text": "Add Selection to Copilot Context",              "command": "workbench.action.chat.attachSelection"},
+        "I": { "text": "Open Copilot Chat",                             "command": "composer.startComposerPrompt"},
+        "A": { "text": "View All Agents",                               "command": "workbench.action.openAgentsView"},
         // "U": { "text": "Add Selection to Cline",                        "command": "cline.addToChat"},
         // "I": { "text": "Focus Cline",                                   "command": "cline.focusChatInput"},
         "v": { "text": "Open television picker",                        "command": "television.ToggleFileFinder"                                            },
@@ -3923,7 +3912,6 @@
   "github.copilot.editor.enableCodeActions": false,
   "markdown.editor.drop.enabled": "never",
   "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
-  "workbench.secondarySideBar.showLabels": false,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Use conventional commit message format."
@@ -3952,8 +3940,6 @@
   "python.analysis.includeAliasesFromUserFiles": true,
   "terminal.integrated.smoothScrolling": true,
   "editor.inlineSuggest.edits.showCollapsed": true,
-  "workbench.panel.showLabels": false,
   "testing.coverageToolbarEnabled": true,
-  "workbench.secondarySideBar.showLabels": false,
   "editor.minimap.enabled": true,
 }
