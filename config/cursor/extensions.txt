@@ -32,6 +32,8 @@ ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.atom-keybindings
 nicoespeon.abracadabra
+nicollasr.vscode-streamdeck
+orta.vscode-jest
 pkief.markdown-checkbox
 telesoho.vscode-markdown-paste-image
 trixnz.go-to-method

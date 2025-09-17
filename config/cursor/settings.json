@@ -1266,6 +1266,7 @@
         "y": { "text": "type definition",                 "command": "editor.action.goToTypeDefinition"                        },
         "r": { "text": "references",                      "command": "editor.action.goToReferences"                            },
         "i": { "text": "implementation",                  "command": "editor.action.goToImplementation"                        },
+        "o": { "text": "open link",                       "command": "editor.action.openLink"                                  },
         "t": { "text": "window top",                      "command": "dance.select.firstVisibleLine"                           },
         "c": { "text": "window center",                   "command": "dance.select.middleVisibleLine"                          },
         "b": { "text": "window bottom",                   "command": "dance.select.lastVisibleLine"                            },
@@ -1469,6 +1470,8 @@
         "N": { "text": "Select previous search match",     "command": "dance.search.previous" },
         "o[": { "text": "Unfold", "command": "editor.unfold"},
         "i]": { "text": "Fold", "command": "editor.fold"},
+        "{": { "text": "Unfold Recursively", "command": "editor.unfoldRecursively"},
+        "}": { "text": "Fold Recursively", "command": "editor.foldRecursively"},
         "O": { "text": "Unfold All", "command": "editor.unfoldAll"},
         "I": { "text": "Fold All", "command": "editor.foldAll"},
         "f": { "text": "Fold menu", "command": "dance.openMenu", "args": [{ "menu": "fold-hx" }] },
@@ -1486,6 +1489,8 @@
         "M": { "text": "Unfold current marker",  "command": "editor.unfoldByMarker"    },
         "[": { "text": "Fold parent block",      "command": "editor.foldRecursively"   },
         "]": { "text": "Unfold parent block",    "command": "editor.unfoldRecursively" },
+        "{": { "text": "Fold recursively",       "command": "editor.foldRecursively"   },
+        "}": { "text": "Unfold recursively",     "command": "editor.unfoldRecursively" },
         "1": { "text": "Fold level 1",           "command": "editor.foldLevel1",       },
         "2": { "text": "Fold level 2",           "command": "editor.foldLevel2"        },
         "3": { "text": "Fold level 3",           "command": "editor.foldLevel3"        },
@@ -1581,7 +1586,8 @@
         "b": { "text": "Goto previous bookmark",       "command": "bookmarks.jumpToPrevious" },
         // "r": { "text": "Goto previous reference",        "command": "goToPreviousReference" },
         "r": { "text": "Goto previous reference",        "command": "references-view.prev" },
-        "u": { "text": "Goto previous chat edit", "command": "chatEditor.action.navigatePrevious" },
+        "u": { "text": "Goto previous inline diff file", "command": "editor.action.inlineDiffs.previousDiffFile" },
+        "i": { "text": "Goto previous inline change", "command": "editor.action.inlineDiffs.previousChange" },
         "[": { "text": "Goto previous folding range", "command": "editor.gotoPreviousFold" },
         " ": { "text": "Add newline above",             "command": "dance.edit.newLine.above"               },
       },
@@ -1613,7 +1619,8 @@
         "b": { "text": "Goto next bookmark",        "command": "bookmarks.jumpToNext" },
         // "r": { "text": "Goto next reference",        "command": "goToNextReference" },
         "r": { "text": "Goto next reference",        "command": "references-view.next" },
-        "u": { "text": "Goto next chat edit", "command": "chatEditor.action.navigateNext" },
+        "i": { "text": "Goto next inline change", "command": "editor.action.inlineDiffs.nextChange" },
+        "u": { "text": "Goto next inline diff file", "command": "editor.action.inlineDiffs.nextDiffFile" },
         "]": { "text": "Goto next folding range", "command": "editor.gotoNextFold" },
         " ": { "text": "Add newline below",         "command": "dance.edit.newLine.below"           },
       },
@@ -1622,8 +1629,8 @@
       "title": "Space",
       "items": {
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
-        // "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
-        "F": { "text": "Open file picker at current working directory", "command": "file-browser-fixed.open",                                                       },
+        "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
+        // "F": { "text": "Open file picker at current working directory", "command": "file-browser-fixed.open",                                                       },
         "e": { "text": "Focus file explorer",                           "command": "workbench.explorer.fileView.focus"                                        },
         "E": { "text": "Open file explorer at current buffer's directory", "command": "file-browser.open"},
         "c": { "text": "Open PR comment at current line",               "command": "workbench.action.addComment" },
@@ -2225,6 +2232,10 @@
     { "keys": "g.L", "command": "gitlens.toggleFileBlame",
       // "command": "settings.cycle.githdBlameViewToggle",
       "name": "Toggle git history display blame view",
+      "type": "command"
+    },
+    { "keys": "g.y", "command": "issue.copyGithubPermalink",
+      "name": "Copy github permalink",
       "type": "command"
     },
     {
@@ -3216,10 +3227,6 @@
       "url": "https://gist.githubusercontent.com/jeremiegirault/5afa4d52e4f8ef6ea63b01caf27d9f24/raw/ead717bcf97d9a6907c8c57e42e8844007ef9b33/jtd.schema.json"
     }
   ],
-  "launcher.terminal": {
-    "executable": "open",
-    "parameters": "-a iTerm \"%item_path%\""
-  },
   "livePreview.notifyOnOpenLooseFile": false,
   "makefile.configureOnOpen": false,
   "markdown-checkbox.checkmark": "x",
@@ -3936,9 +3943,14 @@
   "inlineChat.enableV2": true,
   "inlineChat.hideOnRequest": true,
   "inlineChat.finishOnType": true,
+  "inlineChat.lineEmptyHint": false,
   "python.analysis.includeAliasesFromUserFiles": true,
   "terminal.integrated.smoothScrolling": true,
   "editor.inlineSuggest.edits.showCollapsed": true,
   "testing.coverageToolbarEnabled": true,
   "editor.minimap.enabled": true,
+  "git.blame.editorDecoration.enabled": false,
+  "cursor.cpp.enablePartialAccepts": true,
+  "cursor.diffs.useCharacterLevelDiffs": true,
+  "cursor.chat.terminalShowHoverHint": false,
 }

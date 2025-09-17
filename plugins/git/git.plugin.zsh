@@ -56,6 +56,7 @@ alias gres='git restore --source'
 # alias gd='git diff'
 alias gds='git diff --staged'
 alias gdd='git delta diff'
+alias gdp='git diffp'
 alias gdds='git delta diff --staged'
 (( ${+functions[forgit::diff]} )) && alias gdc="forgit::diff --cached"
 
@@ -116,12 +117,19 @@ function zlegitypo() {
   LBUFFER=${LBUFFER#(#m)gi t}
   if [[ -n "$MATCH" ]]; then
     LBUFFER="git $LBUFFER"
-    return
+  else
+    LBUFFER=${LBUFFER#(#m)gti }
+    if [[ -n "$MATCH" ]]; then
+      LBUFFER="git $LBUFFER"
+    fi
   fi
 
-  LBUFFER=${LBUFFER#(#m)gti }
-  if [[ -n "$MATCH" ]]; then
-    LBUFFER="git $LBUFFER"
+  if [[ $LBUFFER = "git "* ]]; then
+    LBUFFER=${LBUFFER#(#m)git * stahs}
+
+    if [[ -n "$MATCH" ]]; then
+      LBUFFER="${MATCH%stahs}stash$LBUFFER"
+    fi
   fi
 }
 autoload -U add-zle-hook-widget

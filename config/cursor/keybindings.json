@@ -486,7 +486,7 @@
   { "command": "-indentation-level-movement.moveRight",     "key": "alt+right",                          "when": "editorTextFocus" },
   { "command": "-java.projectConfiguration.update",         "key": "shift+alt+u" },
   { "command": "-java.workspace.compile",                   "key": "shift+alt+b" },
-  { "command":  "launcher.terminalInWorkspace", "key": "shift+alt+cmd+t" },
+  { "command":  "workbench.action.terminal.openNativeConsole", "key": "shift+alt+cmd+t" },
   { "command": "-launcher.terminalInWorkspace",             "key": "ctrl+shift+alt+t" },
   // { "command":  "macros.zenMode",                          "key": "ctrl+shift+cmd+f" },
   { "command": "-markJump.jumpToProjectMarks",              "key": "ctrl+cmd+p" },
@@ -525,11 +525,7 @@
 
   { "command":  "runCommands", "key": "cmd+down",
     "args": {"commands": ["search.action.focusSearchList", "search.focus.previousInputBox"]}, "when": "activeViewlet == 'workbench.view.explorer' && panelFocus && !inputFocus" },
-  // {
-  //   "key": "ctrl+shift+t",
-  //   "command":  "workbench.action.terminal.openNativeConsole",
-  // },
-  { "command":  "launcher.terminal", "key": "ctrl+shift+t", },
+  { "command":  "workbench.action.terminal.openNativeConsole", "key": "ctrl+shift+t", "args": { "cwd": "${fileDirname}"} },
   { "command":  "openInTerminal", "key": "ctrl+shift+cmd+t", },
   { "command":  "mdb.runSelectedPlaygroundBlocks", "key": "cmd+enter", "when": "editorHasSelection && editorLangId == 'mongodb'" },
   { "command":  "mdb.runAllPlaygroundBlocks", "key": "cmd+enter", "when": "editorLangId == 'mongodb'" },
@@ -1122,6 +1118,11 @@
   { "key": "9",       "command": "dance.updateCount", "args": { "addDigits": 9 }, "when": "editorTextFocus && dance.mode == 'select'" },
   { "key": "NumPad9", "command": "dance.updateCount", "args": { "addDigits": 9 }, "when": "editorTextFocus && dance.mode == 'select'" },
 
+  {
+    "key": "tab",
+    "command": "editor.action.acceptCursorTabSuggestion",
+    "when": "dance.mode == 'normal' && cpp.shouldAcceptTab && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
+  },
   //
   // Insert mode
   //
@@ -1129,6 +1130,8 @@
 
   // { "key": "ctrl+s", "command": "???",             "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "ctrl+x", "command": "editor.action.triggerSuggest",  "when": "editorTextFocus && dance.mode == 'insert'" },
+  { "key": "ctrl+x", "command": "hideSuggestWidget",  "when": "editorTextFocus && dance.mode == 'insert' && suggestWidgetVisible" },
+  { "key": "tab", "command": "editor.action.acceptCursorTabSuggestion", "when": "cpp.shouldAcceptTab && textInputFocus" },
   { "key": "tab", "command": "acceptSelectedSuggestion", "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus" },
   { "key": "ctrl+w", "command": "deleteWordLeft",  "when": "editorTextFocus && dance.mode == 'insert'" },
   { "key": "alt+d",  "command": "deleteWordRight", "when": "editorTextFocus && dance.mode == 'insert'" },

@@ -38,11 +38,18 @@ right = [
 "#" = ":reflow"
 # macos new terminal tab
 "C-t" = ":sh it2api send-text $(it2api create-tab | sed -E -n 's/^.*\\bid=([0-9A-F-]+).*$/\\1/p') 'cd \"'\"$PWD\"'\" && cd %{buffer_name}\n'"
+"C-A-o" = ":sh open '%{selection}'"
 "C-y" = ":sh printf '%%s' '%{buffer_name}' | pbcopy"
 # "A-[" = "move_prev_sub_word_end"
 # "A-]" = "move_next_sub_word_start"
 "C-left" = "move_prev_sub_word_start"
 "C-right" = "move_next_sub_word_end"
+
+[keys.normal."C-w"]
+"c" = ":buffer-close"
+
+[keys.normal.space.w]
+"c" = ":buffer-close"
 
 [keys.insert]
 "C-space" = "completion"

@@ -1,2 +1,8 @@
 #!/bin/sh
+if pgrep -f '^/Applications/Visual Studio Code\.app/Contents/MacOS/Electron($| )'; then
+  exec code --wait "$@"
+fi
+if pgrep -f '^/Applications/Cursor\.app/Contents/MacOS/Cursor($| )'; then
+  exec cursor --wait "$@"
+fi
 exec code --wait "$@"
