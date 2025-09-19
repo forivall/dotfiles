@@ -318,7 +318,7 @@ zstyle ':autocomplete:*' min-input 3
 zstyle ':autocomplete:*' delay 0.1
 zstyle ':autocomplete:tab:*' widget-style menu-select
 
-source <(carapace _carapace)
+source "${__zshrc_dirname}/plugins/unsorted/_carapace"
 
 # from ohmyzsh web-search. github is from github desktop.
 [[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
