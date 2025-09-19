@@ -38,6 +38,14 @@ cmds=(
   'go install github.com/dlvhdr/diffnav@latest'
 
   'uv tool install tombi'
+
+  'gh extension install yusukebe/gh-markdown-preview'
+  'gh extension install dlvhdr/gh-dash'
+  'gh extension install gennaro-tedesco/gh-s'
+  'gh extension install gennaro-tedesco/gh-f'
+  'gh extension install heaths/gh-label'
+  'gh extension install sgoedecke/gh-standup'
+  'gh extension install redraw/gh-install'
 )
 
 if [[ "$(uname)" != "Darwin" ]]; then cmds+=(
