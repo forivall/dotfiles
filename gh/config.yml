@@ -9,6 +9,7 @@ pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
   b: browse
+  bf: '!open "$(gh browse --no-browser --commit=$(git rev-parse HEAD) $1)#$2"'
   co: pr checkout
   mrb: pr view --web
   prb: pr view --web

@@ -53,7 +53,7 @@ right = [
 
 [keys.normal.space]
 "C-o" = ":sh open '%{selection}'"
-"C-g" = ":sh gh browse '%{buffer_name}' # 'L%{selection_line_start}-L%{selection_line_end}'"
+"C-g" = ":sh gh bf '%{buffer_name}' 'L%{selection_line_start}-L%{selection_line_end}'"
 
 [keys.insert]
 "C-space" = "completion"
