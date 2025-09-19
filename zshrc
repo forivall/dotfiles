@@ -154,26 +154,6 @@ setopt bareglobqual
 zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-# fuzzy completion
-
-if $ENABLE_AUTOCOMPLETE; then
-  zstyle ':completion:*' completer _prefix _complete _correct _approximate
-else
-  zstyle ':completion:*' completer _prefix _expand_alias _complete _correct _approximate
-fi
-zstyle ':completion:*:correct:::' max-errors 2 not-numeric
-zstyle ':completion:*' matcher-list 'r:|?=**'
-zstyle ':completion:*:approximate:::' max-errors 2 numeric
-zstyle ':completion:*:complete:*:*:*' matcher-list '' 'm:{a-z}={A-Z}'
-zstyle ':completion:*' accept-exact-dirs true
-zstyle ':completion:*' list-suffixes true
-# zstyle ':autocomplete:list-choices:*' max-lines 40%
-zstyle ':autocomplete:list-choices:*' max-lines 18
-zstyle ':autocomplete:history-search-backward:*' list-lines 2000
-zstyle ':autocomplete:tab:*' completion select
-zstyle ':autocomplete:*' min-input 3
-zstyle ':autocomplete:*' delay 0.1
-zstyle ':autocomplete:tab:*' widget-style menu-select
 
 # pure prompt settings
 PURE_HIGHLIGHT_REPO=1
@@ -196,7 +176,6 @@ path=(
 
 unset sourceIfExists
 
-zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 
 ENABLE_AUTOCOMPLETE=false
 
@@ -314,6 +293,33 @@ if ! zgen saved; then
 fi
 [[ $(whence -w 9 2>/dev/null) == '9: alias' ]] && unalias 9
 unsetopt nomatch
+
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
+zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m'
+# fuzzy completion
+
+if $ENABLE_AUTOCOMPLETE; then
+  zstyle ':completion:*' completer _prefix _complete _correct _approximate
+else
+  zstyle ':completion:*' completer _prefix _expand_alias _complete _correct _approximate
+fi
+zstyle ':completion:*:correct:::' max-errors 2 not-numeric
+zstyle ':completion:*' matcher-list 'r:|?=**'
+zstyle ':completion:*:approximate:::' max-errors 2 numeric
+zstyle ':completion:*:complete:*:*:*' matcher-list '' 'm:{a-z}={A-Z}'
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*' list-suffixes true
+# zstyle ':autocomplete:list-choices:*' max-lines 40%
+zstyle ':autocomplete:list-choices:*' max-lines 18
+zstyle ':autocomplete:history-search-backward:*' list-lines 2000
+zstyle ':autocomplete:tab:*' completion select
+zstyle ':autocomplete:*' min-input 3
+zstyle ':autocomplete:*' delay 0.1
+zstyle ':autocomplete:tab:*' widget-style menu-select
+
+source <(carapace _carapace)
+
 # from ohmyzsh web-search. github is from github desktop.
 [[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
 

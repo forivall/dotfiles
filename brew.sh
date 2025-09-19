@@ -3,7 +3,7 @@
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install zsh zsh-completions
+brew install zsh zsh-completions carapace
 brew install oil # alternative unix shell for scripting, not interactive
 brew install mackup # mac settings sync
 brew install macchina
@@ -63,7 +63,7 @@ brew install ruby rbenv rbenv-bundler # ruby-build
 brew install rust rustup-init
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog fend srgn
-brew install helix yazi taplo
+brew install helix yazi taplo gitu
 brew install bkmr
 brew install eth-p/software/bat-extras
 mkdir -p ~/.config/bat
