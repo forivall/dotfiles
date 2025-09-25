@@ -296,7 +296,7 @@ unsetopt nomatch
 
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
-zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m'
+zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m\e[22m%f'
 # fuzzy completion
 
 if $ENABLE_AUTOCOMPLETE; then
