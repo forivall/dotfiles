@@ -10,6 +10,7 @@ function generate_completions() {
 }
 generate_completions rustup completions zsh
 generate_completions srgn --completions zsh
+generate_completions dua completions zsh
 tv init zsh > ${__dirname}/tv-init.zsh
 patch -p3 -f -i tv-init.patch
 

@@ -94,7 +94,7 @@ export BAT_PAGER="moor --no-linenumbers"
 export BAT_LIGHT_THEME=base16-tomorrow
 export DELTA_LIGHT_THEME=base16-tomorrow
 export MOAR="--statusbar=bold --no-linenumbers"
-export MOOR="--statusbar=bold --no-linenumbers"
+export MOOR="--statusbar=bold --no-linenumbers --terminal-fg --style perldoc --colors 16"
 export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/config/ripgreprc"
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   export RIPGREP_CONFIG_PATH="${__zshrc_dirname}/vscode/ripgreprc"

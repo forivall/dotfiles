@@ -1,6 +1,10 @@
 [language-server.hx-lsp]
 command = "hx-lsp"
 
+[language-server.nxls]
+command = "nxls"
+args = ["--stdio"]
+
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
@@ -138,6 +142,17 @@ language-servers = [ "angular" ]
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = 'npx', args = ["prettier", "--parser", "angular"] }
+
+[[language]]
+name = "nxjson"
+scope = "source.json"
+file-types = [
+  { "glob" = "nx.json" },
+  { "glob" = "project.json" },
+]
+language-servers = [ "vscode-json-language-server", "nxls" ]
+grammar = "json"
+indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name = "json"

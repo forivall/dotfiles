@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+autoload colors && colors
+
 wasrun=false
 run() {
   wasrun=true
@@ -12,6 +14,15 @@ run() {
   echo $@
   printf '\e]133;C\a'
   $@
+}
+log() {
+  if (( $# > 0 )) && [[ $1 != '-' ]]; then
+    printf '\e[2m%s '"${fg[yellow]}"'%s %s'"${reset_color}"'\e[22m\n' 'prep' '#' "$@"
+  else
+    while read line; do
+      printf '\e[2m%s '"${fg[yellow]}"'%s %s'"${reset_color}"'\e[22m\n' 'prep' '#' "$line"
+    done
+  fi
 }
 
 BUILD=false
@@ -37,7 +48,13 @@ elif [[ -f yarn.lock ]]; then
 elif [[ -f bun.lockb ]]; then
   run bun install
 elif [[ -f package-lock.json ]]; then
-  run npm install
+  run npm install --ignore-scripts
+  jq -r '. as $pkg|["postinstall","preinstall","install"]|map(if $pkg.scripts[.] then .+": "+$pkg.scripts[.] else empty end)|if length then ("Skipped the following install script(s):",.[]) else empty end' package.json | log
+  if jq -e '.scripts.prepare' package.json > /dev/null; then
+    run npm run prepare
+  fi
+  log 'run `npm install --no-ignore-scripts` directly to run dependency install scripts'
+  log 'check install scripts with `npx can-i-ignore-scripts@0.1.9`'
 elif [[ -f package.json ]]; then
   local q p=$PWD
   while

@@ -28,6 +28,8 @@ cmds=(
   'cargo install --git https://github.com/estin/simple-completion-language-server.git'
   'cargo install toml-cli'
   'cargo install viu'
+  'cargo install gh-xplr'
+  'cargo install tree-grepper'
 
   'pipx install simple-term-menu'
   'pipx install termdown'
@@ -46,6 +48,7 @@ cmds=(
   'gh extension install heaths/gh-label'
   'gh extension install sgoedecke/gh-standup'
   'gh extension install redraw/gh-install'
+  'gh extension install sayanarijit/gh-xplr'
 )
 
 if [[ "$(uname)" != "Darwin" ]]; then cmds+=(

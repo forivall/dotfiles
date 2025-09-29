@@ -18,9 +18,12 @@ fs.writeFileSync(process.argv[2],
   source $outvars
 else
   repo="$(
-    npm info --json "$1"|jq -r '(.repository.url // .repository)' |
+    npm info --json "$1"|jq -r '(if .repository | type == "string" then .repository else .repository.url // .repository end)' |
     sed 's/^git+http/http/'
   )"
+  if [[ repo != *:* ]]; then
+    repo="hub:${repo}"
+  fi
 fi
 
 dest=$1
