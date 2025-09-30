@@ -25,6 +25,17 @@ aliases:
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"
+  pr-unread-files: '!
+    gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($endCursor: String, $owner: String!, $repo: String!) {
+      repository(owner: $owner, name: $repo) {
+        pullRequest(number: ''"${1-$(gh pr view --json number -q .number))}"'' {
+          files(first: 100, after: $endCursor) {
+            nodes { path viewerViewedState }
+            pageInfo { hasNextPage endCursor }
+          }
+        }
+      }
+    }''|jq -r ''.data.repository.pullRequest.files.nodes|.[]|select(.viewerViewedState!="VIEWED")|.path'''
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
