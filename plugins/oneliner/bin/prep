@@ -29,6 +29,10 @@ BUILD=false
 if (( $# > 0 )) && [[ $1 == build || $1 == b ]]; then
   BUILD=true
 fi
+: ${PREP_SAFE:=false}
+if (( $# > 0 )) && [[ $1 == --safe ]]; then
+  PREP_SAFE=true
+fi
 
 if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
@@ -48,13 +52,17 @@ elif [[ -f yarn.lock ]]; then
 elif [[ -f bun.lockb ]]; then
   run bun install
 elif [[ -f package-lock.json ]]; then
-  run npm install --ignore-scripts
-  jq -r '. as $pkg|["postinstall","preinstall","install"]|map(if $pkg.scripts[.] then .+": "+$pkg.scripts[.] else empty end)|if length then ("Skipped the following install script(s):",.[]) else empty end' package.json | log
-  if jq -e '.scripts.prepare' package.json > /dev/null; then
-    run npm run prepare
+  if $PREP_SAFE; then
+    run npm install --ignore-scripts
+    jq -r '. as $pkg|["postinstall","preinstall","install"]|map(if $pkg.scripts[.] then .+": "+$pkg.scripts[.] else empty end)|if length then ("Skipped the following install script(s):",.[]) else empty end' package.json | log
+    if jq -e '.scripts.prepare' package.json > /dev/null; then
+      run npm run prepare
+    fi
+    log 'run `npm install --no-ignore-scripts` directly to run dependency install scripts'
+    log 'check install scripts with `npx can-i-ignore-scripts@0.1.9`'
+  else
+    run npm install
   fi
-  log 'run `npm install --no-ignore-scripts` directly to run dependency install scripts'
-  log 'check install scripts with `npx can-i-ignore-scripts@0.1.9`'
 elif [[ -f package.json ]]; then
   local q p=$PWD
   while

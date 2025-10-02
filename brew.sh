@@ -63,7 +63,7 @@ brew install ruby rbenv rbenv-bundler # ruby-build
 brew install rust rustup-init
 
 brew install bat tokei bandwhich hyperfine ripgrep-all rm-improved kondo mpdecimal dog fend srgn
-brew install helix yazi taplo gitu
+brew install helix yazi taplo gitu xplr
 brew install bkmr
 brew install eth-p/software/bat-extras
 mkdir -p ~/.config/bat

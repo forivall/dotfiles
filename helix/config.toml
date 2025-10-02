@@ -54,6 +54,8 @@ right = [
 [keys.normal.space]
 "C-o" = ":sh open '%{selection}'"
 "C-g" = ":sh gh bf '%{buffer_name}' 'L%{selection_line_start}-L%{selection_line_end}'"
+"x" = ":sh gh pr-file-viewed-gql '%{buffer_name}'"
+"X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 
 [keys.insert]
 "C-space" = "completion"

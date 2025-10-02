@@ -13,6 +13,7 @@ cmds=(
   'npm install -g nx'
   'npm install -g serve'
   'npm install -g git-file-history'
+  'npm install -g graphql-language-service-cli'
 
   'cargo install bingrep'
   'cargo install consoletimer'

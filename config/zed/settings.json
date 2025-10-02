@@ -67,6 +67,7 @@
   "buffer_font_size": 13.3,
   "buffer_font_family": "FantasqueSansM Nerd Font Mono",
   "ui_font_family": "SF Pro Display",
+  "agent_font_size": 16.2,
   "format_on_save": "off",
   "remove_trailing_whitespace_on_save": true,
   "buffer_line_height": "standard",

@@ -25,17 +25,33 @@ aliases:
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"
-  pr-unread-files: '!
+  pr-files-json: pr view --json files --jq .files
+  pr-files-json-rest: '!gh api repos/tenthousandcoffees/api-server/pulls/$(gh pr view --json number -q .number)/files'
+  pr-files-json-gql: '!
     gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($endCursor: String, $owner: String!, $repo: String!) {
       repository(owner: $owner, name: $repo) {
         pullRequest(number: ''"${1-$(gh pr view --json number -q .number))}"'' {
           files(first: 100, after: $endCursor) {
-            nodes { path viewerViewedState }
+            nodes { additions changeType deletions path viewerViewedState }
             pageInfo { hasNextPage endCursor }
           }
         }
       }
-    }''|jq -r ''.data.repository.pullRequest.files.nodes|.[]|select(.viewerViewedState!="VIEWED")|.path'''
+    }''|jq -r ''.data.repository.pullRequest.files.nodes'''
+  pr-file-viewed-gql: '!
+    gh api graphql -F pr=$(gh pr view --json id --jq .id) -F path=$1 -f query=''mutation($pr: ID!, $path: String!) {
+      markFileAsViewed(input: { pullRequestId: $pr, path: $path }) {
+        pullRequest { number files { totalCount } }
+      }
+    }'''
+  pr-file-unviewed-gql: '!
+    gh api graphql -F pr=$(gh pr view --json id --jq .id) path=$1 -f query=''mutation($pr: ID!, $path: String!) {
+      markFileAsUnviewed(input: { pullRequestId: $pr, path: $path }) {
+        pullRequest { number files { totalCount } }
+      }
+    }'''
+  pr-unread-files: '!gh pr-files-json-gql | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
+  pr-files: '!gh pr-files-json | jq -r ''.[].path'''
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
