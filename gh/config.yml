@@ -19,12 +19,14 @@ aliases:
   brb:
     '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u}
     | sd "^[^/]*/" "" ) "$@"'
-  project-items-with-status: "!gh project item-list --owner $(gh repo view --json owner --jq .owner.login) $1 --format json --jq '.items[] | select(.status == \"'\"$2\"'\") | .content.number'" 
+  project-items-with-status: "!gh project item-list --owner $(gh repo view --json owner --jq .owner.login) $1 --format json --jq '.items[] | select(.status == \"'\"$2\"'\") | .content.number'"
   pr-merge-base: '!git merge-base ${1-HEAD} origin/$(gh pr view $2 --json baseRefName -q .baseRefName)'
   pr-merge-commit: pr view $1 --json mergeCommit,potentialMergeCommit -q '(.mergeCommit//.potentialMergeCommit).oid'
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"
+  pr-file-url: '!if [[ $# -gt 1 ]]; then n=$1; shift; fi; echo "$(gh pr view --json url --jq .url $n)/files#diff-$(printf %s $1 | shasum -a 256 | cut -d'' '' -f1)"'
+  pr-file-browse: '!open $(gh pr-file-url $@)'
   pr-files-json: pr view --json files --jq .files
   pr-files-json-rest: '!gh api repos/tenthousandcoffees/api-server/pulls/$(gh pr view --json number -q .number)/files'
   pr-files-json-gql: '!
@@ -51,7 +53,24 @@ aliases:
       }
     }'''
   pr-unread-files: '!gh pr-files-json-gql | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
-  pr-files: '!gh pr-files-json | jq -r ''.[].path'''
+  pr-files: 'pr diff --name-only'
+  pr-id-gql: '!
+    gh api graphql -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($owner: String!, $repo: String!) {
+      repository(owner: $owner, name: $repo) {
+        pullRequest(number: ''"${1-$(gh pr view --json number -q .number))}"'' {
+          id
+        }
+      }
+    }''|jq -r ''.data.repository.pullRequest.id'''
+  pr-review-submit: '!
+    if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json id --jq .id) fi;
+    gh api graphql -F pr=$n -F action=$1 -f query=''mutation($pr: ID!, $action: PullRequestReviewEvent!) {
+      submitPullRequestReview(input: { pullRequestId: $pr, event: $action }) {
+        pullRequestReview { id comments { totalCount } }
+      }
+    }'''
+  my-review-requests: 'pr list --search "user-review-requested:@me"'
+  my-latest-review-request: 'pr list --search "user-review-requested:@me" --limit 1 --json number --jq .[].number'
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
