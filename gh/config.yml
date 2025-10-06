@@ -69,8 +69,8 @@ aliases:
         pullRequestReview { id comments { totalCount } }
       }
     }'''
-  my-review-requests: 'pr list --search "user-review-requested:@me"'
-  my-latest-review-request: 'pr list --search "user-review-requested:@me" --limit 1 --json number --jq .[].number'
+  my-review-requests: 'pr list --search "sort:updated-desc user-review-requested:@me"'
+  my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me" --limit 1 --json number --jq .[].number'
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
