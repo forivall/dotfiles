@@ -145,13 +145,13 @@ formatter = { command = 'npx', args = ["prettier", "--parser", "angular"] }
 
 [[language]]
 name = "nxjson"
+grammar = "json"
 scope = "source.json"
 file-types = [
   { "glob" = "nx.json" },
   { "glob" = "project.json" },
 ]
 language-servers = [ "vscode-json-language-server", "nxls" ]
-grammar = "json"
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
@@ -181,6 +181,7 @@ language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
   # { name = "efm", "only-features" = [ "diagnostics", "format",  ] },
   # { name = "efm-lsp-eslint" },
+  { name = "graphql-language-service", except-features = [ "format" ] },
   "eslint",
 ]
 
@@ -203,7 +204,20 @@ auto-format = false
 # file-types = ["ts", "html"]
 [[language]]
 name = "yaml"
-language-servers = [ "yaml-language-server", "ansible-language-server", "cci-yaml" ]
+language-servers = [ "yaml-language-server", "ansible-language-server" ]
+
+[[language]]
+name = "yaml-cci"
+grammar = "yaml"
+scope = "source.yaml"
+file-types = [
+  { glob = ".circleci/config.yml" },
+]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = [ "yaml-language-server", "cci-yaml" ]
+formatter = { command = "yamlfmt", args = ['-'] }
+auto-format = true
 
 [[language]]
 name = "markdown"

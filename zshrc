@@ -51,7 +51,7 @@ if $IS_LINUXY ; then
   export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
 
-# core shell settings
+## core shell settings
 # export SHELL=$(whence $(ps wwwe -p $$ -o comm=))  # broken on m1 mac
 # export SHELL=zsh
 export EDITOR=hx
@@ -70,16 +70,16 @@ zmodload -i zsh/complist
 $IS_INTERACTIVE && export HISTFILE=$HOME/.zsh_history_interactive
 APPEND_HISTORY=true; setopt appendhistory; setopt histfcntllock; setopt nohistsavebycopy
 
-# Bun
+## Bun
 if [[ -x ~/.bun/bin/bun ]]; then
   export BUN_INSTALL=~/.bun
   path=("$BUN_INSTALL/bin" $path)
 fi
 
-# zgen settings
+## zgen settings
 ZGEN_AUTOLOAD_COMPINIT=0
 
-# omz settings
+## omz settings
 DISABLE_AUTO_UPDATE=true
 HYPHEN_INSENSITIVE=true
 # COMPLETION_WAITING_DOTS=true
@@ -87,6 +87,13 @@ DISABLE_AUTO_TITLE=false
 ZSH_COMPINIT_CACHE=true
 # ZSH_PYENV_QUIET=true
 # ENABLE_CORRECTION=true
+
+## intelli-shell settings
+# export INTELLI_SEARCH_HOTKEY='^@'
+export INTELLI_VARIABLE_HOTKEY='^v'
+# export INTELLI_BOOKMARK_HOTKEY='^b'
+# export INTELLI_FIX_HOTKEY='^x'
+# export INTELLI_SKIP_ESC_BIND=0
 
 # export BAT_PAGER="less +X -x2 -FR"
 export LESS='-SRiF'  # --mouse --wheel-lines=1  # scroll wheel used to freeze iterm2
@@ -135,7 +142,7 @@ export FORGIT_DIFF_PAGER="deltaw \
   --file-decoration-style '' \
   --hunk-header-decoration-style '' "
 
-# zsh-nvm settings
+## zsh-nvm settings
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
@@ -146,16 +153,16 @@ export DIRENV_WARN_TIMEOUT=1m
 export TSC_NONPOLLING_WATCHER=true
 export WATCHMAN_CONFIG_FILE="${__zshrc_dirname}/config/watchman.json"
 
-# zsh settings
+## zsh settings
 setopt no_extended_glob # breaks `git show HEAD^`
 setopt bareglobqual
 
-# zsh highlighting settings
+## zsh highlighting settings
 zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 
-# pure prompt settings
+## pure prompt settings
 PURE_HIGHLIGHT_REPO=1
 PURE_PROMPT_SYMBOL="%B»%b"
 PURE_GIT_UNTRACKED_DIRTY=0
@@ -163,9 +170,6 @@ zstyle :prompt:pure:git:stash show yes
 # $prompt_pure_git_stash
 
 zstyle ':completion:*' rehash true
-
-# local git plugin settings
-export UNTRACKED_FILES_STORAGE="$HOME/code/.old-untracked-files"
 
 path=(
   ~/.local/bin
@@ -297,7 +301,7 @@ unsetopt nomatch
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m\e[22m%f'
-# fuzzy completion
+## fuzzy completion
 
 if $ENABLE_AUTOCOMPLETE; then
   zstyle ':completion:*' completer _prefix _complete _correct _approximate
@@ -320,7 +324,7 @@ zstyle ':autocomplete:tab:*' widget-style menu-select
 
 source "${__zshrc_dirname}/plugins/unsorted/_carapace"
 
-# from ohmyzsh web-search. github is from github desktop.
+## from ohmyzsh web-search. github is from github desktop.
 [[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
 
 # bindkey -M emacs "^\`" _complete_help
@@ -362,9 +366,6 @@ fi
 clean-env
 
 # zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
-
-# dont override my variables, ya arse.
-FIG_DOTFILES_SOURCED=1
 
 whence _omz_compdump > /dev/null && _omz_compdump
 # zprof

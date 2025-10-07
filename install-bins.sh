@@ -30,7 +30,8 @@ cmds=(
   'cargo install toml-cli'
   'cargo install viu'
   'cargo install gh-xplr'
-  'cargo install tree-grepper'
+  # 'cargo install tree-grepper'
+  'LIBSQLITE3_FLAGS="-DSQLITE_ENABLE_MATH_FUNCTIONS" cargo install intelli-shell --locked'
 
   'pipx install simple-term-menu'
   'pipx install termdown'
@@ -61,7 +62,14 @@ if [[ "$(uname)" != "Darwin" ]]; then cmds+=(
 alias pip='python3 -m pip'
 
 for c in $cmds; do
-  cmd_installer="${${(@s/ /)c}[1]}"
+  cmd=(${=c})
+  cmd_installer=
+  for a in $cmd; do
+    if [[ $a != *'='* ]]; then
+      cmd_installer="$a"
+      break
+    fi
+  done
   if [[ -n "$installer" && "$cmd_installer" != "$installer" ]]; then continue; fi
   echo $c
   eval $c

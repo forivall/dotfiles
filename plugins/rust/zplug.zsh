@@ -12,6 +12,7 @@ generate_completions rustup completions zsh
 generate_completions srgn --completions zsh
 generate_completions dua completions zsh
 tv init zsh > ${__dirname}/tv-init.zsh
+intelli-shell init zsh > ${__dirname}/intelli-shell-init.zsh
 patch -p3 -f -i tv-init.patch
 
 [[ -f "${ZGEN_INIT}" ]] && echo 'You should run `zgen reset` to ensure that zcompdump get rebuilt'
