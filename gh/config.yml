@@ -53,6 +53,33 @@ aliases:
       }
     }'''
   pr-unread-files: '!gh pr-files-json-gql | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
+  pr-unresolved-comments: '!
+    if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
+    gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -F "pr=$n" "$@" -f query=''
+      query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
+        repository(owner: $owner, name: $repo) {
+          pullRequest(number: $pr) {
+            reviewThreads(first: 100, after: $endCursor) {
+              edges { cursor node {
+                isResolved
+                line
+                path
+                comments(first: 100) {
+                  nodes {
+                    author { login ... on User { name } }
+                    body
+                    createdAt
+                    isMinimized
+                    url
+                  }
+                }
+              }
+            }}
+          }
+        }
+      }'' | jq ''[.data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false)))]''
+    '
+  pr-unresolved-comment:
   pr-files: 'pr diff --name-only'
   pr-id-gql: '!
     gh api graphql -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($owner: String!, $repo: String!) {
@@ -63,7 +90,7 @@ aliases:
       }
     }''|jq -r ''.data.repository.pullRequest.id'''
   pr-review-submit: '!
-    if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json id --jq .id) fi;
+    if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json id --jq .id); fi;
     gh api graphql -F pr=$n -F action=$1 -f query=''mutation($pr: ID!, $action: PullRequestReviewEvent!) {
       submitPullRequestReview(input: { pullRequestId: $pr, event: $action }) {
         pullRequestReview { id comments { totalCount } }
