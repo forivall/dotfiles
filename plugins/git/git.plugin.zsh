@@ -124,6 +124,7 @@ function zlegitypo() {
     fi
   fi
 
+  MATCH=
   if [[ $LBUFFER = "git "* ]]; then
     LBUFFER=${LBUFFER#(#m)git * stahs}
 
