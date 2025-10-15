@@ -54,9 +54,10 @@ right = [
 [keys.normal.space]
 "C-o" = ":sh open '%{selection}'"
 "C-g" = ":sh gh bf '%{buffer_name}' 'L%{selection_line_start}-L%{selection_line_end}'"
+"C-G" = ":sh git diffd ${HELIX_GIT_HEAD:-HEAD} -- '%{buffer_name}'"
 "x" = ":sh gh pr-file-viewed-gql '%{buffer_name}'"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
-"u" = ":sh gh pr-file-browse '%{buffer_name}'"
+"u" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
 
 [keys.insert]
 "C-space" = "completion"

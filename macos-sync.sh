@@ -41,6 +41,7 @@ hammerspoon=(    ./hammerspoon     ~/.hammerspoon                               
 
 if (( $# < 2 )); then
     entries=(
+      intelli_shell
       vscode
       # vscode_snippets
       cursor
@@ -61,6 +62,10 @@ fi
 echo '#' $1 ${(N)entries[@]}
 
 for entry in $entries; do
+  if [[ $entry == 'intelli_shell' ]]; then
+    intelli-shell export gist
+    continue
+  fi
   repo_dir=${(@)${(P)entry}[1]}
   config_dir=${(@)${(P)entry}[2]}
   file_or_glob=${(@)${(P)entry}[3]}

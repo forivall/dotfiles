@@ -22,6 +22,9 @@ function cargo-clone() {
 [[ -f "${__zsh_rust_plugin_location}/tv-init.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/tv-init.zsh"
 
+[[ -f "${__zsh_rust_plugin_location}/intelli-shell-init.zsh" ]] &&
+  source "${__zsh_rust_plugin_location}/intelli-shell-init.zsh"
+
 if (( ${+commands[yazi]} )) ; then
   function y() {
     local tmp cwd

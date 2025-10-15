@@ -25,6 +25,7 @@ aliases:
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"
+  pfh: "!open $(gh pr-file-url $1)\"$2\""
   pr-file-url: '!if [[ $# -gt 1 ]]; then n=$1; shift; fi; echo "$(gh pr view --json url --jq .url $n)/files#diff-$(printf %s $1 | shasum -a 256 | cut -d'' '' -f1)"'
   pr-file-browse: '!open $(gh pr-file-url $@)'
   pr-files-json: pr view --json files --jq .files
@@ -53,7 +54,9 @@ aliases:
       }
     }'''
   pr-unread-files: '!gh pr-files-json-gql | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
-  pr-unresolved-comments: '!
+  pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | jq ''[to_entries|.[]|({i:.key}+.value)|{i:.i,line:.line,path:.path,author:.comments[0].author.login,body:"\n\n"+.comments[0].body+"\n"}]'' | mlr --ijson --opprint cat'
+  pr-unresolved-comments-first: '!gh pr-unresolved-comments-gql "$@" | jq -r ''nth(0) | .path + " +" + (.line|tostring)'''
+  pr-unresolved-comments-gql: '!
     if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
     gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -F "pr=$n" "$@" -f query=''
       query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
