@@ -1,6 +1,40 @@
 #!/usr/bin/env zsh
 
+run-in-terminal-split() {
+  python3 -c '
+import iterm2
+import shlex
+import sys
+
+async def run_in_split_pane(c: "iterm2.Connection"):
+    a = await iterm2.async_get_app(c)
+    n = await get_jest_session(a)
+    if n is None:
+        w = a.current_terminal_window
+        t = a.get_tab_by_id(w.selected_tab_id)
+        s = a.get_session_by_id(t.active_session_id)
+        n = await s.async_split_pane(vertical=True, before=False, profile=None)
+        await n.async_set_variable("user.jest-toplevel-split-pane", True)
+    await n.async_send_text(" ".join(shlex.quote(r) for r in sys.argv[1:]) + "\n")
+
+async def get_jest_session(a: "iterm2.App"):
+    for w in a.terminal_windows:
+        for t in w.tabs:
+            for s in t.sessions:
+                is_jest_session = await s.async_get_variable("user.jest-toplevel-split-pane")
+                if is_jest_session:
+                    return s
+
+iterm2.run_until_complete(run_in_split_pane)
+' $@
+}
+
 jest-toplevel() {
+  if [[ $1 == --in-terminal-split ]]; then
+    shift
+    run-in-terminal-split jest-toplevel "$@"
+    return
+  fi
   local gitPrefix="$(git rev-parse --show-prefix)"
   local noTestPatterns=true
   local dashArg=false
@@ -25,7 +59,6 @@ jest-toplevel() {
         $arg != (--(no-|)(logHeapUsage|noStackTrace|notify|onlyChanged|onlyFailures|passWithNoTests|resetMocks|resetModules|restoreMocks)) &&
         $arg != (--(no-|)(runInBand|showConfig|silent|skipFilter|testLocationInResults|updateSnapshot|useStderr|verbose|watch|watchAll|watchman))
       ]]; then
-        echo dasharg: $arg
         dashArg=true
       fi
     fi
@@ -64,5 +97,5 @@ resolve_path() {
 }
 
 if [[ $ZSH_EVAL_CONTEXT == toplevel ]]; then
-  jest-toplevel "$@"
+  ${0:t} "$@"
 fi

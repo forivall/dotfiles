@@ -18,15 +18,22 @@ if [[ -f ~/.iterm2/imgcat ]] ; then
 else
   echo -n Downloading iterm2 utilities...
   pushd "${__dirname}/utilities"
-  # https://github.com/gnachman/iterm2-website/tree/master/source/utilities
-  for f in $(
-    curl -s https://api.github.com/repos/gnachman/iTerm2-shell-integration/contents/utilities |
-    jq -r ".[].download_url"
-  ) ; do
-    echo -n . >&2
-    curl -sOL $f
-    chmod +x $f
+
+  UTILITIES=(imgcat imgls it2api it2attention it2check it2copy it2dl it2getvar it2git it2setcolor it2setkeylabel it2tip it2ul it2universion it2profile it2cat)
+  for U in "${UTILITIES[@]}"; do
+    # echo "Downloading $U..."
+    echo -n .
+    curl -SsOL "https://iterm2.com/utilities/$U" && chmod +x "$U"
   done
+  # # https://github.com/gnachman/iterm2-website/tree/master/source/utilities
+  # for f in $(
+  #   curl -s https://api.github.com/repos/gnachman/iTerm2-shell-integration/contents/utilities |
+  #   jq -r ".[].download_url"
+  # ) ; do
+  #   echo -n . >&2
+  #   curl -sOL $f
+  #   chmod +x $f
+  # done
   echo ' Done.' >&2
   popd
 fi
