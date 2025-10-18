@@ -25,6 +25,8 @@ graphql.vscode-graphql
 graphql.vscode-graphql-syntax
 gregoire.dance
 gruntfuggly.activitusbar
+jq-syntax-highlighting.jq-syntax-highlighting
+mareksapota.mrutabs
 mongodb.mongodb-vscode
 ms-python.debugpy
 ms-python.mypy-type-checker

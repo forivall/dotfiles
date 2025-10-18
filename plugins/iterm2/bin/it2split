@@ -3,30 +3,35 @@
 import iterm2
 import shlex
 import sys
+import os
 
 command_arg = sys.argv[1]
+origin_cwd = os.getcwd()
 
 
 async def run_in_split_pane(c: "iterm2.Connection"):
-    a = await iterm2.async_get_app(c)
+    a: "iterm2.App" = await iterm2.async_get_app(c)
     n = await get_jest_session(a)
     if n is None:
-        w = a.current_terminal_window
-        t = a.get_tab_by_id(w.selected_tab_id)
-        s = a.get_session_by_id(t.active_session_id)
+        w: "iterm2.Window" = a.current_terminal_window
+        t: "iterm2.Tab" = a.get_tab_by_id(w.selected_tab_id)
+        s: "iterm2.Session" = a.get_session_by_id(t.active_session_id)
         n = await s.async_split_pane(vertical=True, before=False, profile=None)
         await n.async_set_variable("user.it2split", sys.argv[1])
+        await n.async_set_variable("user.it2split_cwd", origin_cwd)
     cmd_text = " ".join(shlex.quote(r) for r in sys.argv[1:]) + "\n"
     await n.async_send_text(cmd_text)
 
 
-async def get_jest_session(a: "iterm2.App"):
+async def get_jest_session(a: "iterm2.App") -> "iterm2.Session | None":
     for w in a.terminal_windows:
         for t in w.tabs:
             for s in t.sessions:
                 split_command = await s.async_get_variable("user.it2split")
-                if split_command == command_arg:
+                split_cwd = await s.async_get_variable("user.it2split_cwd")
+                if split_command == command_arg and split_cwd == origin_cwd:
                     return s
+    return None
 
 
 iterm2.run_until_complete(run_in_split_pane)

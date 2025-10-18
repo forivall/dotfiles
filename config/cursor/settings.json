@@ -3744,7 +3744,7 @@
   "typescript.tsserver.useSyntaxServer": "auto",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.validate.enable": true,
-  "typescript.workspaceSymbols.scope": "allOpenProjects",
+  "typescript.workspaceSymbols.scope": "currentProject",
   // "typescript.workspaceSymbols.scope": "currentProject",
   // "typescript.implementationsCodeLens.enabled": true,
   "typescriptHero.imports.disableImportsSorting": true,
@@ -3956,4 +3956,7 @@
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.chat.terminalShowHoverHint": false,
+  "workbench.editor.wrapTabs": true,
+  "bookmarks.sideBar.countBadge": "off",
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
 }
