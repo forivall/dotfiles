@@ -167,7 +167,8 @@ args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/sche
 
 [[grammar]]
 name = "angular"
-source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "d1f24a8890462cb740909ff62a3a079cded288bc" }
+# source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "d1f24a8890462cb740909ff62a3a079cded288bc" }
+source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "df5d783d9afb45566afa03db129190253b46771b" }
 
 [[grammar]]
 name = "zsh"
@@ -214,6 +215,16 @@ formatter = { command = 'prettier', args = ["--parser", "babel"] }
 [[language]]
 name = "html"
 formatter = { command = 'prettier', args = ["--parser", "angular"] }
+
+[[language]]
+name = "javascript"
+language-servers = [
+  # { name = "typescript-language-server", except-features = [ "format" ] },
+  { name = "vtsls", except-features = ["format"] },
+  # { name = "tsgo", except-features = ["format"] },
+  # { name = "graphql-language-service", except-features = [ "format" ] },
+  "eslint",
+]
 
 [[language]]
 name = "typescript"
