@@ -14,6 +14,8 @@ codeandstuff.vscode-navigate-edit-history
 cyrilletuzi.angular-schematics
 dbaeumer.vscode-eslint
 dnut.rewrap-revived
+dummy.vscode-jq
+ecmel.vscode-html-css
 editorconfig.editorconfig
 emilast.logfilehighlighter
 esbenp.prettier-vscode
@@ -41,6 +43,7 @@ nicollasr.vscode-streamdeck
 nrwl.angular-console
 orta.vscode-jest
 pkief.markdown-checkbox
+pranaygp.vscode-css-peek
 rioj7.html-related-links
 ryuta46.multi-command
 telesoho.vscode-markdown-paste-image
@@ -51,3 +54,5 @@ unifiedjs.vscode-mdx
 uyiosa-enabulele.reopenclosedtab
 vlkoti.vscode-sourcemaps-navigator
 vspacecode.whichkey
+vunguyentuan.vscode-css-variables
+zardoy.ts-essential-plugins

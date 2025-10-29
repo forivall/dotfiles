@@ -26,9 +26,9 @@
   { "key": "escape",                "command": "workbench.action.focusActiveEditorGroup",
                                     "when": "auxiliaryBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || auxiliaryBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listFocus && !inputFocus && !inputBoxFocus || sideBarFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus || panelFocus && !listFocus && !inputFocus && !inputBoxFocus || panelFocus && !listHasSelectionOrFocus && !inputFocus && !inputBoxFocus && !terminalFocus" },
   { "key": "escape",                "command": "runCommands", "args": { "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.focusActiveEditorGroup"] },
-                                    "when": "composerFocused && !editorTextFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/" },
+                                    "when": "composerFocused && !editorTextFocus && auxiliaryBarFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/ && auxiliaryBarFocus" },
   { "key": "cmd+w",                "command": "runCommands", "args": { "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.focusActiveEditorGroup"] },
-                                    "when": "composerFocused && !editorTextFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/" },
+                                    "when": "composerFocused && !editorTextFocus && auxiliaryBarFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/ && auxiliaryBarFocus" },
   { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "vscode-ai" },
     "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },
   // { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "gemini-ai" },
@@ -937,7 +937,7 @@
 
   { "key": "ctrl+shift+i", "command": "workbench.action.navigateForwardInNavigationLocations", "when": "canNavigateForwardInNavigationLocations && editorTextFocus && dance.mode == 'normal' || canNavigateForwardInNavigationLocations && editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "canNavigateForward && editorTextFocus && dance.mode == 'normal' || canNavigateForward && editorTextFocus && dance.mode == 'select'" },
-  { "key": "tab",    "command": "workbench.action.navigateForward", "when": "canNavigateForward && editorTextFocus && dance.mode == 'normal' && editorLangId != 'magit' || canNavigateForward && editorTextFocus && dance.mode == 'select' && editorLangId != 'magit'" },
+  // { "key": "tab",    "command": "workbench.action.navigateForward", "when": "canNavigateForward && editorTextFocus && dance.mode == 'normal' && editorLangId != 'magit' || canNavigateForward && editorTextFocus && dance.mode == 'select' && editorLangId != 'magit'" },
   { "key": "tab",    "command": "chatEditor.action.acceptHunk",     "when": "editorTextFocus && dance.mode == 'normal' && chatEdits.hasEditorModifications && !chatEdits.isRequestInProgress"},
   { "key": "ctrl+n", "command": "chatEditor.action.undoHunk",       "when": "editorTextFocus && dance.mode == 'normal' && chatEdits.hasEditorModifications && !chatEdits.isRequestInProgress" },
 
@@ -975,7 +975,7 @@
   { "key": "shift+[", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+]", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   // TODO: copy this to my helix config
-  { "key": "shift+d", "command": "editor.action.duplicateSelection", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+d", "command": "editor.action.duplicateSelection", "when": "!inputFocus && editorTextFocus && !inQuickInput && !inQuickOpen && dance.mode == 'normal' || !inputFocus &&  editorTextFocus && !inQuickInput && !inQuickOpen && dance.mode == 'select'" },
   { "key": "shift+v", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+m", "command": "dance.ignore", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 

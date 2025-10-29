@@ -19,10 +19,16 @@
   "languages": {
     "Markdown": {
       "formatter": [
-        { "external": {
-          "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}", "--prose-wrap=always"]
-        }}
+        {
+          "external": {
+            "command": "prettier",
+            "arguments": [
+              "--stdin-filepath",
+              "{buffer_path}",
+              "--prose-wrap=always"
+            ]
+          }
+        }
       ],
       "prettier": {
         "allowed": true,
@@ -42,11 +48,11 @@
     "disabled_globs": ["*.md"]
   },
   "agent": {
+    "default_profile": "ask",
     "default_model": {
-      "provider": "google",
-      "model": "gemini-2.0-flash-lite-preview"
-    },
-    "version": "2"
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
+    }
   },
   "base_keymap": "Atom",
   "journal": {
@@ -67,7 +73,7 @@
   "buffer_font_size": 13.3,
   "buffer_font_family": "FantasqueSansM Nerd Font Mono",
   "ui_font_family": "SF Pro Display",
-  "agent_font_size": 16.2,
+  "agent_ui_font_size": 16.2,
   "format_on_save": "off",
   "remove_trailing_whitespace_on_save": true,
   "buffer_line_height": "standard",
@@ -79,14 +85,14 @@
     "shell": {
       "program": "/opt/homebrew/bin/zsh"
     }
- },
+  },
   "message_editor": {
     "auto_replace_emoji_shortcode": true
   },
   "helix_mode": true,
   "vim": {
-    "cursor_shape": {"normal": "hollow"},
-    "default_mode": "helix_normal",
+    "cursor_shape": { "normal": "hollow" },
+    "default_mode": "normal",
     "custom_digraphs": {},
     "toggle_relative_line_numbers": true,
     "use_smartcase_find": true,
@@ -215,7 +221,7 @@
     "scrollbarSlider.hoverBackground": "#646464b3",
     "scrollbar.thumb.background": "#79797966",
     "scrollbar.thumb.hover_background": "#bfbfbf66"
-  },
+  }
   // // // // light
   // "experimental.theme_overrides": {
   //   "accents": [

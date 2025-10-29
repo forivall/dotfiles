@@ -65,6 +65,8 @@
 	diffc = diff --cached
 	diffd = -c core.pager=deltaw diff
 	difft = -c diff.external=difft diff
+	diffc-fnames = -c pager.diff=false diff --cached --name-only --diff-filter
+	diff-fnames = -c pager.diff=false diff --name-only --diff-filter
 	dd = -c core.pager=deltaw diff
 	dp = diffp
 
@@ -206,6 +208,7 @@
 	ll = true
 	ls-files = false
 [pretty]
+	concise-reflog = "format:%C(auto)%gd: %gs (%s)%n%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae> %C(dim)♖ %cn <%ce>%Creset%n%C(blue)✍ %aD %C(dim)♔ %cD%Creset%n%n%-s%n%Creset%n%-b"
 	concise = "format:%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae> %C(dim)♖ %cn <%ce>%Creset%n%C(blue)✍ %aD %C(dim)♔ %cD%Creset%n%n%-s%n%Creset%n%-b"
 	onemore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset %s"
 	twomore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset%n%-s"

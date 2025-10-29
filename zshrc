@@ -40,6 +40,7 @@ if $IS_OSX ; then
     fpath[${fpath[(i)$HOMEBREW_PREFIX/share/zsh/site-functions]}]=()
     fpath=($fpath $HOMEBREW_PREFIX/share/zsh/site-functions)
   fi
+  unset MallocStackLogging
 fi
 
 if ! type realpath >/dev/null ; then

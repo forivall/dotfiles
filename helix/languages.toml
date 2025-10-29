@@ -89,7 +89,32 @@ command = "vtsls"
 args = ["--stdio"]
 config.hostInfo = "helix"
 
+[language-server.vtsls.config.vstls]
+autoUseWorkspaceTsdk = true
+experimental.completion.enableServerSideFuzzyMatch = true
+
 [language-server.vtsls.config.typescript]
+preferences.quotePreference = "single"
+diagnostics.ignoredCodes = [
+  80001, # File is a CommonJS module; it may be converted to an ES module
+]
+inlayHints.parameterNames.enabled = "all"
+inlayHints.parameterTypes.enabled = true
+inlayHints.variableTypes.enabled = true
+inlayHints.propertyDeclarationTypes.enabled = true
+inlayHints.functionLikeReturnTypes = true
+inlayHints.enumMemberValues.enabled = true
+suggest.completeFunctionCalls = true
+# tsserver.path = "node_modules/typescript/lib"
+tsserver.nodePath = "node"
+tsserver.maxTsServerMemory = 5120  # 0x1400
+# tsserver.enableTracing = true
+updateImportsOnFileMove = { enabled = "always" }
+
+[language-server.vtsls.config."js/ts"]
+implicitProjectConfig.module = "NodeNext"
+
+[language-server.vtsls.config.javascript]
 preferences.quotePreference = "single"
 diagnostics.ignoredCodes = [
   80001, # File is a CommonJS module; it may be converted to an ES module

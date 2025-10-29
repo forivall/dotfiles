@@ -4,10 +4,12 @@
 alias gitify_vscode_plugin=gitify_node_module
 
 gitify_node_module() {
-  if [[ $1 != --force ]] && git rev-parse --show-toplevel 2> /dev/null; then
-    local ecode=$?
-    echo already a git repo!
-    return $ecode
+  if [[ $1 != --force || ! ( $1 = --in-node-modules && $PWD = */node_modules/* ) ]]; then
+    if ! git rev-parse --show-toplevel 2> /dev/null; then
+      local ecode=$?
+      echo already a git repo!
+      return $ecode
+    fi
   fi
   local remote repo owd
   remote="$(jq -r '(.repository.url? // .repository)' package.json | sd '^(remote-)?git\+http' http)"

@@ -72,6 +72,10 @@
       // "editor.stackFrameHighlightBackground": "#ccfd3c14",
       "editor.stackFrameHighlightBackground": "#ccfd3c08",
       "editor.lineHighlightBackground": "#ffffff08",
+      "peekViewResult.background": "#252526",
+      "peekViewEditor.background": "#212025",
+      "peekViewEditor.matchHighlightBackground": "#cdb6650d",
+      "peekViewEditor.matchHighlightBorder": "#cdb6652d",
       "editorInlayHint.background": "#1a3f3c",
       "editorInlayHint.foreground": "#b5d1ce",
       "editorInlayHint.typeBackground": "#392141",
@@ -97,6 +101,7 @@
       "diffEditor.removedTextBackground": "#ff000010",
       "diffEditorGutter.removedLineBackground": "#ff000020",
       "diffEditorOverview.removedForeground": "#ff000048",
+      "git.blame.editorDecorationForeground": "#b5d1ce40",
       "terminal.ansiBlack": "#1d1f21",
       "terminal.ansiBrightBlack": "#787b7a",
       "terminal.ansiRed": "#d77b79",
@@ -3956,7 +3961,108 @@
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.chat.terminalShowHoverHint": false,
+  "swapf.patterns": [
+    {
+      "pattern": "^(?<path>.*?)\\.component\\.(?<ext>ts|tsx|js|jsx|css|sass|scss|less|html|htm|stories.ts|spec.ts|spec.js|test.js|test.ts)$",
+      "alternatives": [
+        "**/<path>.component.{ts,tsx,js,jsx}",
+        "**/<path>.component.{html,htm}",
+        "**/<path>.component.{css,sass,scss,less}",
+        "**/<path>.component.{spec.js,spec.ts,test.js,test.ts}",
+        "**/<path>.component.{stories.js,stories.ts}"
+      ],
+      "createFiles": {
+        "<path>components<componentspath>.ts": true,
+        "<path>components<componentspath>.scss": true,
+        "<path>components<componentspath>.spec.ts": true,
+        "<path>components<componentspath>.html": false,
+        "<path>components<componentspath>.stories.ts": false
+      }
+    },    {
+      "pattern": "^(?<path>.*?)components(?<componentspath>.*?)\\.(?<ext>ts|tsx|js|jsx|css|sass|scss|less|html|htm|stories.ts|spec.ts|spec.js|test.js|test.ts)$",
+      "alternatives": [
+        "**/<path>components<componentspath>.{ts,tsx,js,jsx}",
+        "**/<path>components<componentspath>.{html,htm}",
+        "**/<path>components<componentspath>.{css,sass,scss,less}",
+        "**/<path>components<componentspath>.{spec.js,spec.ts,test.js,test.ts}",
+        "**/<path>components<componentspath>.{stories.js,stories.ts}"
+      ],
+      "createFiles": {
+        "<path>components<componentspath>.ts": true,
+        "<path>components<componentspath>.scss": true,
+        "<path>components<componentspath>.spec.ts": true,
+        "<path>components<componentspath>.html": false,
+        "<path>components<componentspath>.stories.ts": false
+      }
+    },
+    {
+      "pattern": "^(?<path>.*?)\\.(ts|tsx|js|jsx|css|sass|scss|less|html|htm|spec.ts|spec.js|test.js|test.ts)$",
+      "alternatives": [
+        "**/<path>.{ts,tsx,js,jsx}",
+        "**/<path>.{html,htm}",
+        "**/<path>.{css,sass,scss,less}",
+        "**/<path>.{spec.js,spec.ts,test.js,test.ts}"
+      ],
+      "createFiles": {
+        "<path>.ts": true,
+        "<path>.spec.ts": true
+      }
+    },
+    {
+      "pattern": "^(?<path>.*?)(\\.go|_test\\.go)$",
+      "alternatives": [
+        "**/<path>.go",
+        "**/<path>_test.go"
+      ],
+      "createFiles": {
+        "<path>.go": true,
+        "<path>_test.go": true
+      }
+    },
+    {
+      "pattern": "^(?<rootPath>.*?)(main|test)(?<path>.*?)(Test)?.(?<ext>java|kt)$",
+      "alternatives": [
+        "**/<rootPath>{main,test}<path>.{java,kt}",
+        "**/<rootPath>{main,test}<path>Test.{java,kt}"
+      ],
+      "createFiles": {
+        "<rootPath>main<path>.<ext>": true,
+        "<rootPath>test<path>Test.<ext>": true
+      }
+    },
+    {
+      "pattern": "^(?<path>.*?)(cpp|c|cc|cxx|m|mm|h|hpp|hh|hxx)$",
+      "alternatives": [
+        "**/<path>{cpp,c,cc,cxx,m,mm,h,hpp,hh,hxx}"
+      ]
+    },
+    {
+      "pattern": "^(?<path>.*?)(cs)$",
+      "alternatives": [
+        "**/<path>cs",
+        "**/<path>*.cs"
+      ]
+    },
+    {
+      "pattern": "^.*?(?<file>[^/]*)$",
+      "alternatives": [
+        "**/<file>"
+      ]
+    }
+  ],
   "workbench.editor.wrapTabs": true,
   "bookmarks.sideBar.countBadge": "off",
   "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cssVariables.blacklistFolders": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/node_modules",
+    "**/bower_components",
+    "**/tmp",
+    "**/dist",
+    "**/tests"
+  ],
 }
