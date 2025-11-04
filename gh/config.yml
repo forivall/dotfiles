@@ -8,6 +8,24 @@ prompt: enabled
 pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
+  auth-current: auth status --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
+  auth-setup-gcm-local: '!
+    set -x;
+    remotename=${1:-origin};
+    remoteurl=$(git config get --local "remote.$remotename.url");
+    if [[ $remoteurl == *@* ]]; then
+      exit 0;
+    fi;
+    ghuser=$(gh auth-current);
+    while
+      if gh repo view --json viewerPermission; then
+        git config set --local "remote.$remotename.url" ${remoteurl%%//*}//$ghuser@${remoteurl#*//};
+        break;
+      fi;
+      gh auth switch;
+      [[ "$ghuser" != "$(gh auth-current)" ]];
+    do :; done
+    '
   b: browse
   bf: '!open "$(gh browse --no-browser --commit=$(git rev-parse HEAD) $1)#$2"'
   co: pr checkout
