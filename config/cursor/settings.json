@@ -1509,6 +1509,7 @@
     "window-hx": {
       "title": "Window",
       "items": {
+        "a": { "text": "Toggle Cursor Agent mode",                      "command": "cursor.toggleAgentWindowIDEUnification"},
         "w": { "text": "Goto next window",                              "command": "workbench.action.focusNextGroup"                       },
         "s": { "text": "Horizontal bottom split",                       "command": "workbench.action.splitEditorDown"                      },
         "S": { "text": "Split view",                                    "command": "workbench.action.toggleSplitEditorInGroup"                      },

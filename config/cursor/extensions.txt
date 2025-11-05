@@ -38,6 +38,8 @@ ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.atom-keybindings
+mtxr.sqltools
+mtxr.sqltools-driver-pg
 nicoespeon.abracadabra
 nicollasr.vscode-streamdeck
 nrwl.angular-console

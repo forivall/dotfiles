@@ -1,0 +1,6 @@
+[core.option]
+graph_width = "auto"
+
+[core.user_command]
+commands_1 = { name = "git diffd", commands = ["git", "delta", "diff", "--color", "--minimal", "{{first_parent_hash}}", "{{target_hash}}"]}
+tab_width = 2

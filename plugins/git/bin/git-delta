@@ -11,7 +11,7 @@ git-delta() {
     shift
   fi
 
-  if [[ $1 != --color ]] && ! [[ -t 1 ]]; then
+  if [[ $1 != --color ]] && [[ $1 != --color=always ]] && ! [[ -t 1 ]]; then
     git -c color.diff=never ${gitcommand[@]} "$@" | command delta | sd '\x1b\[[0-9;]*[mK]' ''
     return
     exit
@@ -22,6 +22,14 @@ git-delta() {
   local pager=$(git config core.pager || echo -n "less")
   [[ -v deltaOpts ]] || local deltaOpts=(--tabs 2)
   if [[ $1 = --color-only ]]; then shift; deltaOpts+=(--color-only); fi
+  if [[ $1 = --minimal ]]; then shift; deltaOpts+=(
+      --commit-style ''
+      --file-decoration-style ''
+      --hunk-header-decoration-style ''
+      --hunk-header-file-style ''
+      --hunk-label ''
+    )
+  fi
   if [[ $1 = --television ]]; then shift; deltaOpts+=(
       --keep-plus-minus-markers
       --commit-style ''

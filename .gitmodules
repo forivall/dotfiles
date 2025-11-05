@@ -24,3 +24,6 @@
 [submodule "scripts/Youtube2Webpage"]
 	path = scripts/Youtube2Webpage
 	url = https://github.com/obra/Youtube2Webpage.git
+[submodule "scripts/git-forest"]
+	path = scripts/git-forest
+	url = https://github.com/TamaMcGlinn/git-forest
