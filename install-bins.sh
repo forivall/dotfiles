@@ -37,9 +37,11 @@ cmds=(
   'pipx install termdown'
   'pipx install visidata'
   'pipx install humble-explorer'
+  'pipx install jrnl'
 
   'go install github.com/ChausseBenjamin/termpicker@latest'
   'go install github.com/dlvhdr/diffnav@latest'
+  'go install github.com/unkn0wn-root/resterm/cmd/resterm@latest'
 
   'uv tool install tombi'
 

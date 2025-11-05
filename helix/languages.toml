@@ -1,6 +1,9 @@
 [language-server.hx-lsp]
 command = "hx-lsp"
 
+[language-server.graphql-language-service.config]
+graphql-config.load.legacy = true
+
 [language-server.nxls]
 command = "nxls"
 args = ["--stdio"]

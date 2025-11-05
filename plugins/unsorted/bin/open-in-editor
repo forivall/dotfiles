@@ -1,9 +1,10 @@
 #!/bin/sh
+filepath=$(cd $1 && realpath $2)
 if pgrep -f '^/Applications/Visual Studio Code\.app/Contents/MacOS/Electron($| )'; then
-  exec open "vscode://file/$2:$3"
+  exec open "vscode://file/$filepath:$3"
 fi
 if pgrep -f '^/Applications/Cursor\.app/Contents/MacOS/Cursor($| )'; then
-  exec open "cursor://file/$2:$3"
+  exec open "cursor://file/$filepath:$3"
 fi
 if pgrep -f '^/Applications/iTerm.app/Contents/MacOS/iTerm2($| )'; then
   exec it2api create-tab --command "cd $1; hx $2:$3"
