@@ -5,7 +5,7 @@ config.bold_brightens_ansi_colors = false
 
 config.colors = {
   foreground = '#D0D2D1',
-  background = '#27292C',
+  background = '#27292b',
 
   cursor_bg = '#D0D2D1',
   cursor_fg = '#27292C',
@@ -45,5 +45,22 @@ config.line_height=1.1
 -- config.font_antialias="Subpixel"
 config.color_scheme = "Tomorrow Night"
 config.scrollback_lines = 200000
+config.window_background_opacity = 1.0
+config.window_background_gradient = {
+  colors = { '#27292b', '#27292b' },
+  -- Specifies a Linear gradient starting in the top left corner.
+  -- orientation = { Linear = { angle = -45.0 } },
+}
+config.background = {
+  {
+    source = {
+      File = '<gdrive>/Pictures/Wallpapers/Japan daylight savings_tiler_blur.jpg',
+    },
+    width = 1920,
+    height = 2160,
+    opacity = 0.08,
+    -- hsb = { brightness = 0.08 }
+  }
+}
 
 return config
