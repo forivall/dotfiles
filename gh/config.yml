@@ -18,7 +18,7 @@ aliases:
     fi;
     ghuser=$(gh auth-current);
     while
-      if gh repo view --json viewerPermission; then
+      if permission=$(gh repo view $remoteurl --json viewerPermission --jq .viewerPermission) && [[ $permission = ADMIN ]]; then
         git config set --local "remote.$remotename.url" ${remoteurl%%//*}//$ghuser@${remoteurl#*//};
         break;
       fi;
