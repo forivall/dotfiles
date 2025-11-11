@@ -60,11 +60,15 @@ aliases:
       }
     }''|jq -r ''.data.repository.pullRequest.files.nodes'''
   pr-file-viewed-gql: '!
-    gh api graphql -F pr=$(gh pr view --json id --jq .id) -F path=$1 -f query=''mutation($pr: ID!, $path: String!) {
+    FILEPATH="$1";
+    shift;
+    gh api graphql -F pr=$(gh pr view --json id --jq .id) -F path=$FILEPATH -f query=''mutation($pr: ID!, $path: String!) {
       markFileAsViewed(input: { pullRequestId: $pr, path: $path }) {
-        pullRequest { number files { totalCount } }
+        pullRequest { number files(first: 100) { totalCount nodes { viewerViewedState } } }
       }
-    }'''
+    }'' "$@"'
+  pr-file-viewed: '!
+    gh pr-file-viewed-gql "$1" --jq ''.data.markFileAsViewed.pullRequest | ("#" + (.number | tostring) + " " + (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" + (.files.totalCount | tostring))'''
   pr-file-unviewed-gql: '!
     gh api graphql -F pr=$(gh pr view --json id --jq .id) path=$1 -f query=''mutation($pr: ID!, $path: String!) {
       markFileAsUnviewed(input: { pullRequestId: $pr, path: $path }) {

@@ -357,6 +357,13 @@ xmv() {
   printf '' > $CLIPBOARD_FILE
 }
 
+prunedir() {
+  local d=$1
+  while [[ -n "$d" ]] && rmdir $d; do
+    d=${d%/*}
+  done
+}
+
 # ps
 pcmd() {
   ps -o command $@ | tail +2

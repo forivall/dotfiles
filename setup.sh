@@ -85,6 +85,10 @@ o ln -fs "$(realpath config/lazygit/config.yml)" ~/.config/lazygit/config.yml
 (( ${+commands[lazygit]} )) && o ln -fs "$(realpath config/lazygit/config.yml)" "$(lazygit -cd)/config.yml"
 o ln -fs "$(realpath ctop)" ~/.ctop
 o ln -fs "$(realpath config/watchman.json)" ~/.config/watchman.json
+o ln -fs "$(realpath config/kitty)" ~/.config/kitty
+o ln -fs "$(realpath config/serie)" ~/.config/serie
+o ln -fs "$(realpath config/yazi)" ~/.config/yazi
+o ln -fs "$(realpath config/wezterm)" ~/.config/wezterm
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion
