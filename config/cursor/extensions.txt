@@ -46,6 +46,7 @@ nrwl.angular-console
 orta.vscode-jest
 pkief.markdown-checkbox
 pranaygp.vscode-css-peek
+prisma.prisma
 rioj7.html-related-links
 ryuta46.multi-command
 telesoho.vscode-markdown-paste-image
@@ -54,6 +55,7 @@ trongthanh.theme-boxythemekit
 typescriptteam.native-preview
 unifiedjs.vscode-mdx
 uyiosa-enabulele.reopenclosedtab
+vitest.explorer
 vlkoti.vscode-sourcemaps-navigator
 vspacecode.whichkey
 vunguyentuan.vscode-css-variables

@@ -29,6 +29,9 @@
                                     "when": "composerFocused && !editorTextFocus && auxiliaryBarFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/ && auxiliaryBarFocus" },
   { "key": "cmd+w",                "command": "runCommands", "args": { "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.focusActiveEditorGroup"] },
                                     "when": "composerFocused && !editorTextFocus && auxiliaryBarFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/ && auxiliaryBarFocus" },
+  { "key": "escape",          "command": "search.action.focusQueryEditorWidget",
+                                    "when": "inSearchEditor && editorTextFocus" },
+  { "key": "enter", "command": "search.focus.previousInputBox", "when": "inSearchEditor && !editorTextFocus && inputFocus"},
   { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "vscode-ai" },
     "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },
   // { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "gemini-ai" },
@@ -875,6 +878,8 @@
   { "key": "shift+n",     "command": "dance.search.previous",        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+8",     "command": "dance.search.selection.smart", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "alt+shift+8", "command": "dance.search.selection",       "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "n",           "command": "search.action.focusNextSearchResult",            "when": "inSearchEditor && editorTextFocus && dance.mode == 'normal' || inSearchEditor && editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+n",     "command": "search.action.focusPreviousSearchResult",        "when": "inSearchEditor && editorTextFocus && dance.mode == 'normal' || inSearchEditor && editorTextFocus && dance.mode == 'select'" },
 
   { "key": "u",           "command": "dance.history.undo",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+u",     "command": "dance.history.redo",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
