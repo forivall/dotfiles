@@ -1,0 +1,200 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: nest
+description: NestJS CLI
+flags:
+  -v, --version: Output the current version
+  -h, --help: Output usage information
+commands:
+  - name: new
+    aliases: [n]
+    description: Generate Nest application
+    flags:
+      --directory?: Specify the destination directory
+      -d, --dry-run: Report actions that would be performed without writing out results
+      -g, --skip-git: Skip git repository initialization
+      -s, --skip-install: Skip package installation
+      -p, --package-manager?: Specify package manager
+      -l, --language?: Programming language to be used (TypeScript or JavaScript)
+      -c, --collection?: Schematics collection to use
+      --strict: Enables strict mode in TypeScript
+      -h, --help: Output usage information
+    completion:
+      flag:
+        package-manager: ["npm", "yarn", "pnpm"]
+        language: ["TypeScript", "JavaScript"]
+      positionalany: ["$directories"]
+  - name: build
+    description: Build Nest application
+    flags:
+      -c, --config?: Path to nest-cli configuration file
+      -p, --path?: Path to tsconfig file
+      -w, --watch: Run in watch mode (live-reload)
+      -b, --builder?: Builder to be used (tsc, webpack, swc)
+      --watchAssets: Watch non-ts (e.g., .graphql) files mode
+      --webpack: Use webpack for compilation (deprecated option, use --builder instead)
+      --type-check: Enable type checking (when SWC is used)
+      --webpackPath?: Path to webpack configuration
+      --tsc: Use typescript compiler for compilation
+      --preserveWatchOutput: Use "preserveWatchOutput" option when using tsc watch mode
+      --all: Build all projects in a monorepo
+      -h, --help: Output usage information
+    completion:
+      flag:
+        builder: ["tsc", "webpack", "swc"]
+        config: ["$files"]
+        path: ["$files"]
+        webpackPath: ["$files"]
+      positionalany: ["$directories"]
+  - name: start
+    description: Run Nest application
+    flags:
+      -c, --config?: Path to nest-cli configuration file
+      -p, --path?: Path to tsconfig file
+      -w, --watch: Run in watch mode (live-reload)
+      -b, --builder?: Builder to be used (tsc, webpack, swc)
+      --watchAssets: Watch non-ts (e.g., .graphql) files mode
+      -d, --debug?: Run in debug mode (with --inspect flag)
+      --webpack: Use webpack for compilation (deprecated option, use --builder instead)
+      --webpackPath?: Path to webpack configuration
+      --type-check: Enable type checking (when SWC is used)
+      --tsc: Use typescript compiler for compilation
+      --sourceRoot?: Points at the root of the source code for the single project in standard mode structures, or the default project in monorepo mode structures
+      --entryFile?: Path to the entry file where this command will work with. Defaults to the one defined at your Nest's CLI config file
+      -e, --exec?: Binary to run
+      --preserveWatchOutput: Use "preserveWatchOutput" option when using tsc watch mode
+      --shell: Spawn child processes within a shell (see node's child_process.spawn() method docs)
+      --no-shell: Do not spawn child processes within a shell
+      --env-file?: Path to an env file (.env) to be loaded into the environment
+      -h, --help: Output usage information
+    completion:
+      flag:
+        builder: ["tsc", "webpack", "swc"]
+        config: ["$files"]
+        path: ["$files"]
+        webpackPath: ["$files"]
+        entryFile: ["$files"]
+        env-file: ["$files"]
+        exec: ["$executables"]
+      positionalany: ["$directories"]
+  - name: info
+    aliases: [i]
+    description: Display Nest project details
+  - name: add
+    description: Adds support for an external library to your project
+    flags:
+      -d, --dry-run: Report actions that would be performed without writing out results
+      -s, --skip-install: Skip package installation
+      -p, --project?: Project in which to generate files
+      -h, --help: Output usage information
+    completion:
+      positionalany: ["$directories"]
+  - name: generate
+    aliases: [g]
+    description: Generate a Nest element
+    parsing: interspersed
+    persistentflags:
+      -d, --dry-run: Report actions that would be taken without writing out results
+      -p, --project?: Project in which to generate files
+      --flat: Enforce flat structure of generated element
+      --no-flat: Enforce that directories are generated
+      --spec: Enforce spec files generation
+      --spec-file-suffix?: Use a custom suffix for spec files
+      --skip-import: Skip importing
+      --no-spec: Disable spec files generation
+      -c, --collection?: Schematics collection to use
+      -h, --help: Output usage information
+    commands:
+      - name: application
+        description: Generate a new application workspace
+        completion:
+          positionalany: ["$directories"]
+      - name: class
+        aliases: [cl]
+        description: Generate a new class
+        completion:
+          positionalany: ["$directories"]
+      - name: configuration
+        aliases: [config]
+        description: Generate a CLI configuration file
+        completion:
+          positionalany: ["$directories"]
+      - name: controller
+        aliases: [co]
+        description: Generate a controller declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: decorator
+        aliases: [d]
+        description: Generate a custom decorator
+        completion:
+          positionalany: ["$directories"]
+      - name: filter
+        aliases: [f]
+        description: Generate a filter declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: gateway
+        aliases: [ga]
+        description: Generate a gateway declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: guard
+        aliases: [gu]
+        description: Generate a guard declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: interceptor
+        aliases: [itc]
+        description: Generate an interceptor declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: interface
+        aliases: [itf]
+        description: Generate an interface
+        completion:
+          positionalany: ["$directories"]
+      - name: library
+        aliases: [lib]
+        description: Generate a new library within a monorepo
+        completion:
+          positionalany: ["$directories"]
+      - name: middleware
+        aliases: [mi]
+        description: Generate a middleware declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: module
+        aliases: [mo]
+        description: Generate a module declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: pipe
+        aliases: [pi]
+        description: Generate a pipe declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: provider
+        aliases: [pr]
+        description: Generate a provider declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: resolver
+        aliases: [r]
+        description: Generate a GraphQL resolver declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: resource
+        aliases: [res]
+        description: Generate a new CRUD resource
+        completion:
+          positionalany: ["$directories"]
+      - name: service
+        aliases: [s]
+        description: Generate a service declaration
+        completion:
+          positionalany: ["$directories"]
+      - name: sub-app
+        aliases: [app]
+        description: Generate a new application within a monorepo
+        completion:
+          positionalany: ["$directories"]

@@ -194,6 +194,11 @@ command = "$HOME/Library/Application Support/CircleCI-language-server/circleci-y
 args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
 
 [[grammar]]
+name = "typescript"
+# source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "75b3874edb2dc714fb1fd77a32013d0f8699989f", subpath = "typescript" }
+source = { git = "https://github.com/forivall/tree-sitter-typescript", rev = "4be8f0ef6db412cc5e6731625939813f8fd4f25f", subpath = "typescript" }
+
+[[grammar]]
 name = "angular"
 # source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "d1f24a8890462cb740909ff62a3a079cded288bc" }
 source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "df5d783d9afb45566afa03db129190253b46771b" }

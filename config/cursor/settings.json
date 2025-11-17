@@ -17,6 +17,7 @@
   "editor.codeLensFontFamily": "Input Sans",
   "debug.console.fontSize": 13.6,
   "editor.fontFamily": "Fantasque Sans Mono",
+  "editor.inlineSuggest.fontFamily": "Fantasque Sans Mono",
   "editor.minimap.sectionHeaderFontSize": 8,
   "editor.codeLensFontSize": 10,
   "editor.fontVariations": false,
@@ -2570,6 +2571,10 @@
       "uncovered": "rgba(121, 31, 10, 0.2)"
     }
   },
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.editorDecoration.template": "${subject}, ${authorName} (${authorDate})",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.blame.ignoreWhitespace": true,
   "gitlens.advanced.blame.customArguments": ["-w", "-M"],
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
@@ -2590,12 +2595,11 @@
   ],
   "gitlens.blame.format": "${message|24?} ${agoOrDate|8-}",
   "gitlens.codeLens.enabled": false,
-  "gitlens.currentLine.enabled": false,
   "gitlens.defaultDateFormat": "YYYY-MMM-DD h:mma",
   "gitlens.historyExplorer.enabled": true,
   "gitlens.hovers.currentLine.enabled": false,
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.keymap": "chorded",
+  "gitlens.keymap": "none",
   "gitlens.menus": {
     "editor": {
       "blame": false,
@@ -2640,12 +2644,23 @@
   "gitlens.views.repositories.compact": true,
   "gitlens.views.scm.grouped.views": {
     "commits": false,
-    "stashes": false,
-    "tags": false,
     "branches": false,
     "remotes": false,
-    "contributors": false
+    "stashes": false,
+    "tags": false,
+    "worktrees": false,
+    "contributors": false,
+    "fileHistory": false,
+    "repositories": true,
+    "searchAndCompare": false,
+    "launchpad": false
   },
+  "gitlens.telemetry.enabled": false,
+  "gitlens.hovers.autolinks.enabled": false,
+  "gitlens.views.workspaces.compact": true,
+  "gitlens.heatmap.locations": [
+    "overview"
+  ],
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
@@ -3255,7 +3270,7 @@
   "markdown.preview.typographer": true,
   "markdown.styles": [
     "https://gistcdn.githack.com/forivall/2b36021f5bf4808e391e0a37bcc2e3af/raw/cb58f590ffcc4776ed374442fcd2434cfbaa53db/bulma-noreset-nogeneric.css",
-    "https://gistcdn.githack.com/forivall/bb0f2bc677a9666fa5c605a27ca74957/raw/a48def3a811d376abdad0672d0f4418fd83580ca/github-markdown-color-mod-vscode.css"
+    "https://gistcdn.githack.com/forivall/bb0f2bc677a9666fa5c605a27ca74957/raw/085763836a262d13c8bbbff44af3f432191789df/github-markdown-color-mod-vscode.css"
   ],
   "markdownlint.config": {
     "first-line-h1": false,
@@ -3425,7 +3440,7 @@
     "/Users/emily.klassen/code/public/typeshed"
   ],
   "python.jediEnabled": false,
-  "python.languageServer": "Pylance",
+  "python.languageServer": "None",
   "python.terminal.activateEnvironment": false,
   "rapidapi.terminalLink.enabled": false,
   "redhat.telemetry.enabled": true,
@@ -3903,12 +3918,9 @@
   "workbench.iconTheme": "catppuccin-mocha",
   "icontheme.darkIconTheme": "catppuccin-mocha",
   "icontheme.lightIconTheme": "catppuccin-latte",
-  "gitlens.telemetry.enabled": false,
   "diffEditor.useInlineViewWhenSpaceIsLimited": false,
-  "gitlens.hovers.autolinks.enabled": false,
   "chat.editor.fontSize": 14,
   "typescript.experimental.expandableHover": true,
-  "gitlens.views.workspaces.compact": true,
   "diffEditor.maxFileSize": 10,
   "geminicodeassist.codeGenerationPaneViewEnabled": true,
   "geminicodeassist.inlineSuggestions.enableAuto": false,
@@ -4051,6 +4063,7 @@
       ]
     }
   ],
+  "angular.ignoreProjectsWithoutAngularCompilerOptions": true,
   "workbench.editor.wrapTabs": true,
   "bookmarks.sideBar.countBadge": "off",
   "cursor.composer.shouldChimeAfterChatFinishes": true,

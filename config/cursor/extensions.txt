@@ -4,8 +4,10 @@ alfredbirk.go-to-next-change
 angular.ng-template
 anweber.swapf
 anysphere.cursorpyright
+arturodent.command-alias
 be5invis.vscode-custom-css
 bierner.markdown-preview-github-styles
+biomejs.biome
 bodil.file-browser
 catppuccin.catppuccin-vsc-icons
 chrislajoie.vscode-modelines
