@@ -1,0 +1,165 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: biome
+description: Biome official CLI. Use it to check the health of your project or run it to check single files.
+flags:
+  -h, --help: Prints help information
+  -V, --version: Prints version information
+persistentflags:
+  --colors=: Set the formatting mode for markup
+  --use-server: Connect to a running instance of the Biome daemon server
+  --verbose: Print additional diagnostics, and some diagnostics show more information
+  --config-path=: Set the file path to the configuration file, or the directory path to find biome.json or biome.jsonc
+  --max-diagnostics=: Cap the amount of diagnostics displayed
+  --skip-parse-errors: Skip over files containing syntax errors instead of emitting an error diagnostic
+  --no-errors-on-unmatched: Silence errors that would be emitted in case no files were processed
+  --error-on-warnings: Tell Biome to exit with an error code if some diagnostics emit warnings
+  --reporter=: Allows to change how diagnostics and summary are reported
+  --log-file=: Optional path to redirect log messages to
+  --log-level=: The level of logging
+  --log-kind=: How the log should look like
+  --diagnostic-level=: The level of diagnostics to show
+completion:
+  flag:
+    colors: ["off", "force"]
+    reporter: ["json", "json-pretty", "github", "junit", "summary", "gitlab", "checkstyle", "rdjson"]
+    log-level: ["none", "debug", "info", "warn", "error"]
+    log-kind: ["pretty", "compact", "json"]
+    diagnostic-level: ["info", "warn", "error"]
+    config-path: ["$files"]
+    log-file: ["$files"]
+    max-diagnostics: ["none"]
+commands:
+  - name: version
+    description: Shows the Biome version information and quit
+  - name: rage
+    description: Prints information for debugging
+    flags:
+      --daemon-logs: Prints the Biome daemon server logs
+      --formatter: Prints the formatter options applied
+      --linter: Prints the linter options applied
+  - name: start
+    description: Starts the Biome daemon server process
+    flags:
+      --log-prefix-name=: Allows to change the prefix applied to the file name of the logs
+      --log-path=: Allows to change the folder where logs are stored
+    completion:
+      flag:
+        log-path: ["$directories"]
+  - name: stop
+    description: Stops the Biome daemon server process
+  - name: check
+    description: Runs formatter, linter and import sorting to the requested files
+    flags:
+      --write: Apply safe fixes, formatting and import sorting
+      --unsafe: Apply unsafe fixes. Should be used with --write or --fix
+      --fix: Alias for --write, writes safe fixes, formatting and import sorting
+      --formatter-enabled=: Allow enabling or disabling the formatter check
+      --linter-enabled=: Allow enabling or disabling the linter check
+      --assist-enabled=: Allow enabling or disabling the assist
+      --enforce-assist=: Allows enforcing assist, and make the CLI fail if some actions aren't applied
+      --format-with-errors=: Whether formatting should be allowed to proceed if a given file has syntax errors
+      --stdin-file-path=: Use this option when you want to format code piped from stdin, and print the output to stdout
+      --staged: When set to true, only the files that have been staged will be linted
+      --changed: When set to true, only the files that have been changed compared to your defaultBranch configuration will be linted
+      --since=: Use this to specify the base branch to compare against when you're using the --changed flag
+    completion:
+      positional:
+        - ["$files"]
+      flag:
+        formatter-enabled: ["true", "false"]
+        linter-enabled: ["true", "false"]
+        assist-enabled: ["true", "false"]
+        enforce-assist: ["true", "false"]
+        format-with-errors: ["true", "false"]
+        stdin-file-path: ["$files"]
+  - name: lint
+    description: Run various checks on a set of files
+    flags:
+      --write: Writes safe fixes
+      --unsafe: Apply unsafe fixes. Should be used with --write or --fix
+      --fix: Alias for --write, writes safe fixes
+      --suppress: Fixes lint rule violations with comment suppressions instead of using a rule code action
+      --reason=: Explanation for suppressing diagnostics with --suppress
+      --only=: Run only the given rule, group of rules or domain
+      --skip=: Skip the given rule, group of rules or domain by setting the severity level of the rules to off
+      --stdin-file-path=: Use this option when you want to format code piped from stdin, and print the output to stdout
+      --staged: When set to true, only the files that have been staged will be linted
+      --changed: When set to true, only the files that have been changed compared to your defaultBranch configuration will be linted
+      --since=: Use this to specify the base branch to compare against when you're using the --changed flag
+    completion:
+      positional:
+        - ["$files"]
+      flag:
+        stdin-file-path: ["$files"]
+  - name: format
+    description: Run the formatter on a set of files
+    flags:
+      --write: Writes formatted files to a file system
+      --fix: Alias of --write, writes formatted files to a file system
+      --stdin-file-path=: Use this option when you want to format code piped from stdin, and print the output to stdout
+      --staged: When set to true, only the files that have been staged will be linted
+      --changed: When set to true, only the files that have been changed compared to your defaultBranch configuration will be linted
+      --since=: Use this to specify the base branch to compare against when you're using the --changed flag
+    completion:
+      positional:
+        - ["$files"]
+      flag:
+        stdin-file-path: ["$files"]
+  - name: ci
+    description: Command to use in CI environments. Runs formatter, linter and import sorting to the requested files
+    flags:
+      --formatter-enabled=: Allow enabling or disabling the formatter check
+      --linter-enabled=: Allow enabling or disable the linter check
+      --assist-enabled=: Allow enabling or disabling the assist
+      --format-with-errors=: Whether formatting should be allowed to proceed if a given file has syntax errors
+      --enforce-assist=: Allows enforcing assist, and make the CLI fail if some actions aren't applied
+      --changed: When set to true, only the files that have been changed compared to your defaultBranch configuration will be linted
+      --since=: Use this to specify the base branch to compare against when you're using the --changed flag
+      --threads=: The number of threads to use
+    completion:
+      positional:
+        - ["$files"]
+      flag:
+        formatter-enabled: ["true", "false"]
+        linter-enabled: ["true", "false"]
+        assist-enabled: ["true", "false"]
+        format-with-errors: ["true", "false"]
+        enforce-assist: ["true", "false"]
+  - name: init
+    description: Bootstraps a new biome project. Creates a configuration file with some defaults
+    flags:
+      --jsonc: Tells Biome to emit a biome.jsonc file
+  - name: lsp-proxy
+    description: Acts as a server for the Language Server Protocol over stdin/stdout
+  - name: migrate
+    description: Updates the configuration when there are breaking changes
+    flags:
+      --write: Writes the new configuration file to disk
+      --fix: Alias of --write, writes the new configuration file to disk
+    commands:
+    - name: prettier
+      description: It attempts to find the files .prettierrc/prettier.json and .prettierignore, and map the Prettier's configuration into Biome's configuration file
+    - name: eslint
+      description: It attempts to find the ESLint configuration file in the working directory, and update the Biome's configuration file as a result
+      flags:
+        --include-inspired: Includes rules inspired from an eslint rule in the migration
+        --include-nursery: Includes nursery rules in the migration
+  - name: search
+    description: 'EXPERIMENTAL: Searches for Grit patterns across a project'
+    flags:
+      -l, --language=: The language to which the pattern applies
+      --stdin-file-path=: Use this option when you want to search through code piped from stdin, and print the output to stdout
+    completion:
+      positional:
+        - []
+        - ["$files"]
+      flag:
+        language: ["javascript", "typescript", "json", "css", "html", "graphql", "grit"]
+        stdin-file-path: ["$files"]
+  - name: explain
+    description: Shows documentation of various aspects of the CLI
+    completion:
+      positional:
+        - []
+  - name: clean
+    description: Cleans the logs emitted by the daemon
