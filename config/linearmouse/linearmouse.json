@@ -1,0 +1,205 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.2",
+  "schemes" : [
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x5b2f",
+          "productName" : "Wireless-Receiver",
+          "vendorID" : "0x248a"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 1,
+        "disableAcceleration" : false,
+        "speed" : 0.1
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1.06
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "reverse" : {
+          "vertical" : false
+        },
+        "speed" : {
+          "vertical" : 6.99
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc548",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 0.6,
+        "disableAcceleration" : false,
+        "speed" : 0.09
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 5
+        },
+        "reverse" : {
+          "vertical" : false
+        },
+        "speed" : {
+          "vertical" : 0
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x27da",
+          "productName" : "Karabiner DriverKit VirtualHIDPointing 1.7.0",
+          "serialNumber" : "pqrs.org:Karabiner-DriverKit-VirtualHIDPointing",
+          "vendorID" : "0x16c0"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 18,
+        "disableAcceleration" : false,
+        "speed" : 0.007
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "speed" : {
+          "vertical" : 0
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc404",
+          "productName" : "Trackball",
+          "vendorID" : "0x46d"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 20,
+        "disableAcceleration" : false,
+        "speed" : 0.133
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x27da",
+          "productName" : "Karabiner DriverKit VirtualHIDPointing 1.8.0",
+          "serialNumber" : "pqrs.org:Karabiner-DriverKit-VirtualHIDPointing",
+          "vendorID" : "0x16c0"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 20,
+        "speed" : 0.033
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : false
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x37a",
+          "productName" : "CTL-472",
+          "serialNumber" : "2DA00L1061278",
+          "vendorID" : "0x56a"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : false
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "trackpad",
+          "productID" : "0x265",
+          "productName" : "Emily’s Magic Trackpad",
+          "serialNumber" : "C0:95:6D:02:61:6F",
+          "vendorID" : "0x4c"
+        }
+      },
+      "pointer" : {
+        "acceleration" : 2,
+        "disableAcceleration" : false,
+        "speed" : 0.0689655172413792768
+      },
+      "scrolling" : {
+        "reverse" : {
+          "horizontal" : true,
+          "vertical" : false
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "trackpad",
+          "productID" : "0x343",
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "vendorID" : "0x5ac"
+        }
+      },
+      "scrolling" : {
+        "reverse" : false
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x63c3",
+          "productName" : "Ploopy Knob",
+          "serialNumber" : "E6634CA6C31EA5380000000000000000",
+          "vendorID" : "0x5043"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 0.3
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "modifiers" : {
+          "vertical" : {
+            "shift" : {
+              "type" : "alterOrientation"
+            }
+          }
+        },
+        "reverse" : {
+          "vertical" : false
+        },
+        "speed" : {
+          "vertical" : 10
+        }
+      }
+    }
+  ]
+}
