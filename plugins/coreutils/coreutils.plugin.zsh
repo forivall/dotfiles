@@ -224,13 +224,6 @@ function delta() {
   fi
   command delta "${deltaOpts[@]}" $@
 }
-function bat() {
-  local batOpts=()
-  if [[ $1 != cache ]] && (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-    batOpts+=(--theme "${DELTA_LIGHT_THEME:-GitHub}")
-  fi
-  command bat "${batOpts[@]}" "$@"
-}
 
 # # find
 # cleanup() { find -name __tmp; }

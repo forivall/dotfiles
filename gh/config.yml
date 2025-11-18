@@ -76,10 +76,53 @@ aliases:
       }
     }'''
   pr-unread-files: '!gh pr-files-json-gql | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
-  pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | jq ''[to_entries|.[]|({i:.key}+.value)|{i:.i,line:.line,path:.path,author:.comments[0].author.login,body:"\n\n"+.comments[0].body+"\n"}]'' | mlr --ijson --opprint cat'
+  pr-unresolved-comments: |
+    !
+    if [[ $# -gt 0 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
+    gh pr-unresolved-comments-gql "$n" | jq -r '.[] | @base64' | while read -r thread; do
+      path=$(echo "$thread" | base64 -d | jq -r '.path');
+      startLine=$(echo "$thread" | base64 -d | jq -r '.startLine');
+      line=$(echo "$thread" | base64 -d | jq -r '.line');
+      subjectType=$(echo "$thread" | base64 -d | jq -r '.subjectType');
+      if [[ -f "$path" ]] ; then
+        echo "";
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+        if [[ $subjectType = "FILE" ]]; then
+          echo "$path (file)";
+        elif [[ -n "$line" ]] && [[ "$line" != "null" ]]; then
+          echo "$path:$line";
+        else
+          echo "$path (outdated)";
+        fi;
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+        if [[ $subjectType != "FILE" ]] && [[ -n "$line" ]] && [[ "$line" != "null" ]]; then
+          highlightLine="$line"
+          if [[ -n "$startLine" ]] && [[ "$startLine" != "null" ]]; then
+            highlightLine="$startLine:$line"
+          fi
+          start=$((startLine - 5));
+          if [[ start -lt 1 ]]; then start=1; fi;
+          end=$((line + 5));
+          bat --no-pager --style=numbers --color=always --highlight-line="$highlightLine" --line-range="$start:$end" "$path" 2>/dev/null;
+        fi;
+      else
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+      fi;
+      echo "$thread" | base64 -d | jq -r '.comments[] | @base64' | while read -r comment; do
+        author=$(echo "$comment" | base64 -d | jq -r '.author.login');
+        body=$(echo "$comment" | base64 -d | jq -r '.body');
+        utc_date=$(echo "$comment" | base64 -d | jq -r '.publishedAt');
+        url=$(echo "$comment" | base64 -d | jq -r '.url');
+        local_date=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || date -d "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || echo "$utc_date");
+        echo "";
+        printf "  @%s (\e]8;;%s\e\\%s\e]8;;\e\\):\n" "$author" "$url" "$local_date";
+        echo "$body" | sed 's/^/  /';
+      done;
+      echo "";
+    done
   pr-unresolved-comments-first: '!gh pr-unresolved-comments-gql "$@" | jq -r ''nth(0) | .path + " +" + (.line|tostring)'''
   pr-unresolved-comments-gql: '!
-    if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
+    if [[ $# -gt 0 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
     gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -F "pr=$n" "$@" -f query=''
       query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
         repository(owner: $owner, name: $repo) {
@@ -88,13 +131,18 @@ aliases:
               edges { cursor node {
                 isResolved
                 line
+                startLine
+                originalLine
+                originalStartLine
                 path
+                subjectType
                 comments(first: 100) {
                   nodes {
                     author { login ... on User { name } }
                     body
                     createdAt
                     isMinimized
+                    publishedAt
                     url
                   }
                 }
@@ -104,7 +152,6 @@ aliases:
         }
       }'' | jq ''[.data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false)))]''
     '
-  pr-unresolved-comment:
   pr-files: 'pr diff --name-only'
   pr-id-gql: '!
     gh api graphql -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($owner: String!, $repo: String!) {
