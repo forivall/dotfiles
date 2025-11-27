@@ -115,7 +115,7 @@ aliases:
         url=$(echo "$comment" | base64 -d | jq -r '.url');
         local_date=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || date -d "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || echo "$utc_date");
         echo "";
-        printf "  @%s (\e]8;;%s\e\\%s\e]8;;\e\\):\n" "$author" "$url" "$local_date";
+        printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\):\n" "$author" "$url" "$local_date";
         echo "$body" | sed 's/^/  /';
       done;
       echo "";

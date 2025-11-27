@@ -31,6 +31,11 @@ if $is_xdg ; then
   fi
 fi
 
+UserConfigDir=$XDG_CONFIG_HOME
+if $IS_OSX; then
+  UserConfigDir=~/Library/Application\ Support
+fi
+
 # TODO: use gnu stow
 # http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two
 
@@ -89,6 +94,7 @@ o ln -fs "$(realpath config/kitty)" ~/.config/kitty
 o ln -fs "$(realpath config/serie)" ~/.config/serie
 o ln -fs "$(realpath config/yazi)" ~/.config/yazi
 o ln -fs "$(realpath config/wezterm)" ~/.config/wezterm
+o ln -fs "$(realpath config/carapace)" $UserConfigDir/carapace
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion

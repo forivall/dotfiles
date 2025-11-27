@@ -19,6 +19,7 @@ GB = 1 << 30
 uid = os.getuid()
 
 APPS = (
+    "Dato",
     # "Mos",
     "Stats",
 )

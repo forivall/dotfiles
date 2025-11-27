@@ -25,7 +25,17 @@ function cargo-clone() {
 [[ -f "${__zsh_rust_plugin_location}/intelli-shell-init.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/intelli-shell-init.zsh"
 
-if (( ${+commands[yazi]} )) ; then
+if (( ${+commands[lf]} )) ; then
+  function y() {
+    local tmp cwd
+    tmp=$(mktemp -t "yazi-cwd.XXXXXX")
+
+    lf "$@" --last-dir-path="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+  }
+elif (( ${+commands[yazi]} )) ; then
   function y() {
     local tmp cwd
     tmp=$(mktemp -t "yazi-cwd.XXXXXX")

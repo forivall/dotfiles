@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: para
+description: Paragon CLI
+flags:
+  -v, --version: Output the current version
+  -h, --help: Output usage information
+commands:
+  - name: auth
+    description: Authentication related commands
+    flags:
+      -h, --help: Output usage information
+    commands:
+      - name: login
+        description: Login to Paragon
+        flags:
+          --host=: 'Host for paragon instance (default: "dashboard.useparagon.com")'
+          -h, --help: Output usage information
+      - name: logout
+        description: Logout current user
+        flags:
+          -h, --help: Output usage information
+      - name: me
+        description: Check logged in user
+        flags:
+          -h, --help: Output usage information
+      - name: help
+        description: Display help for command
+        completion:
+          positional:
+            - ["login", "logout", "me", "help"]
+  - name: build
+    description: Build project
+    flags:
+      --skip-type-errors: "Skip type errors in project (default: false)"
+      --include-drafts: "Skip draft workflow deletion on project sync (default: false)"
+      -h, --help: Output usage information
+  - name: init
+    description: Initialize paragon project
+    flags:
+      --create-from-existing: "Create from existing project (default: false)"
+      -a, --auto-detect-project: "Attempt to determine the project based on local configuration (default: false)"
+      -h, --help: Output usage information
+  - name: install
+    description: Install project dependencies
+    flags:
+      --sync-versions: "Sync project's dependencies with cli (default: false)"
+      -h, --help: Output usage information
+  - name: new
+    description: Create new workflow/integration/trigger/resource
+    flags:
+      -h, --help: Output usage information
+    commands:
+      - name: integration
+        description: Create new integration
+        flags:
+          -h, --help: Output usage information
+      - name: workflow
+        description: Create new workflow
+        flags:
+          --integration=: Integration under which workflow will be created
+          -h, --help: Output usage information
+      - name: trigger
+        description: Create new trigger
+        flags:
+          --integration=: Integration under which new trigger will be created
+          -h, --help: Output usage information
+      - name: resource
+        description: Create new resource
+        flags:
+          -h, --help: Output usage information
+      - name: help
+        description: Display help for command
+        completion:
+          positional:
+            - ["integration", "workflow", "trigger", "resource", "help"]
+  - name: pull
+    description: Pull changes from cloud
+    flags:
+      -h, --help: Output usage information
+  - name: push
+    description: Push changes to cloud
+    flags:
+      -y: "Skip showing change logs before para pull (default: false)"
+      -h, --help: Output usage information
+  - name: help
+    description: Display help for command
+    completion:
+      positional:
+        - ["auth", "build", "init", "install", "new", "pull", "push", "help"]

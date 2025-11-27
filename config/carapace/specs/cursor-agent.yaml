@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: cursor-agent
+description: Start the Cursor Agent
+flags:
+  -v, --version: Output the version number
+  --api-key=: API key for authentication (can also use CURSOR_API_KEY env var)
+  -p, --print: Print responses to console (for scripts or non-interactive use). Has access to all tools, including write and bash
+  --output-format=: 'Output format (only works with --print): text | json | stream-json'
+  --stream-partial-output: Stream partial output as individual text deltas (only works with --print and stream-json format)
+  -b, --background: Start in background mode (open composer picker on launch)
+  --resume?: Resume a chat session
+  --model=: Model to use (e.g., gpt-5, sonnet-4, sonnet-4-thinking)
+  -f, --force: Force allow commands unless explicitly denied
+  --approve-mcps: Automatically approve all MCP servers (only works with --print/headless mode)
+  --browser: Enable browser automation support
+  -h, --help: Display help for command
+completion:
+  flag:
+    output-format: ["text", "json", "stream-json"]
+commands:
+  - name: install-shell-integration
+    description: Install shell integration to ~/.zshrc
+  - name: uninstall-shell-integration
+    description: Remove shell integration from ~/.zshrc
+  - name: login
+    description: Authenticate with Cursor. Set NO_OPEN_BROWSER to disable browser opening.
+  - name: logout
+    description: Sign out and clear stored authentication
+  - name: mcp
+    description: Manage MCP servers
+  - name: status
+    aliases: [whoami]
+    description: View authentication status
+  - name: update
+    aliases: [upgrade]
+    description: Update Cursor Agent to the latest version
+  - name: create-chat
+    description: Create a new empty chat and return its ID
+  - name: agent
+    description: Start the Cursor Agent
+    completion:
+      positionalany: ["$files"]
+  - name: ls
+    description: Resume a chat session
+  - name: resume
+    description: Resume the latest chat session
+  - name: help
+    description: Display help for command
+    completion:
+      positional:
+        - ["install-shell-integration", "uninstall-shell-integration", "login", "logout", "mcp", "status", "whoami", "update", "upgrade", "create-chat", "agent", "ls", "resume", "help"]

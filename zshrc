@@ -117,7 +117,9 @@ export FZF_DEFAULT_OPTS="
 --info=inline
 --height=80%
 --multi
---preview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2>/dev/null | head -n 200'
+--preview='\
+if [[ -d {} ]]; then (tree -C {} || echo {} 2>/dev/null) | head -n 200;\
+elif [[ -f {} ]]; then if [[ \$(file --brief --dereference --mime -- {}) =~ image/ ]]; then chafa -s \$FZF_PREVIEW_COLUMNSx\$FZF_PREVIEW_LINES {}; else (bat --style=numbers --color=always {} || cat {}); fi; fi'
 --preview-window=':hidden'
 --preview-border=none
 --input-border=none
@@ -126,6 +128,7 @@ export FZF_DEFAULT_OPTS="
 --pointer='▶'
 --marker='✓'
 --bind '?:toggle-preview'
+--bind 'ctrl-t:toggle-preview'
 --bind 'ctrl-a:select-all'
 --bind 'ctrl-e:execute(hx {+} >/dev/tty)'
 --bind 'ctrl-v:execute(code {+})'
