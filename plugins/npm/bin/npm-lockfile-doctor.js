@@ -14,6 +14,7 @@ process.argv.splice(2, 0, COMMAND_NAME)
 
 const Module = require('module')
 const path = require('path')
+const { once } = require('events')
 const npmRequire = Module.createRequire(npmExecPath)
 const Npm = npmRequire('../lib/npm')
 const ArboristWorkspaceCmd = npmRequire('../lib/arborist-cmd')
@@ -127,7 +128,7 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
       ? args
       : /** @type {string[]} */ (tree.inventory.query('name'))
     for (const packageName of packagesToHoist) {
-      const deduped = dedupeOrHoistPackage(tree, packageName, opts)
+      const deduped = await this.dedupeOrHoistPackage(tree, packageName, opts)
       pruned.push(...deduped)
     }
 
@@ -243,74 +244,98 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
       return this.npm.output(message)
     }
   }
-}
 
-/**
- *
- * @param {import('@npmcli/arborist').Node} tree
- * @param {string} packageName
- * @param {import('@npmcli/arborist').Options} options
- * @returns
- */
-function dedupeOrHoistPackage(tree, packageName, options) {
-  /** @type {Set<import('@npmcli/arborist').Node>} */
-  const nodeSet = tree.inventory.query('name', packageName)
-  if (1 >= nodeSet.size) {
-    const iterResult = nodeSet.values().next()
-    if (iterResult.done) {
+  async prompt(query) {
+    const process = require('process')
+    if (!process.stdin.isTTY) {
+      return false;
+    }
+    this.rawOutput(`${query} (y/N): `)
+    process.stdin.setRawMode(true)
+    process.stdin.resume()
+    const [data] = await once(process.stdin, 'data')
+    if (data[0] === 0x03) {
+      process.kill(process.pid, 'SIGINT');
+    }
+    process.stdin.setRawMode(false)
+    process.stdin.pause()
+    return /(^|\b)y(es)?/i.test(data.toString())
+  }
+
+
+  /**
+   * @param {import('@npmcli/arborist').Node} tree
+   * @param {string} packageName
+   * @param {import('@npmcli/arborist').Options} options
+   * @returns
+   */
+  async dedupeOrHoistPackage(tree, packageName, options) {
+    /** @type {Set<import('@npmcli/arborist').Node>} */
+    const nodeSet = tree.inventory.query('name', packageName)
+    if (1 >= nodeSet.size) {
+      const iterResult = nodeSet.values().next()
+      if (iterResult.done) {
+        return []
+      }
+      const node = iterResult.value
+      if (!node.resolveParent || !node.resolveParent.resolveParent) {
+        return []
+      }
+      log.warn(
+        'hoist',
+        `${options.force ? 'hoisting' : 'could hoist'} ${
+          node.pkgid
+        } for ${packageName}`
+      )
+      if (options.force) {
+        node.parent = tree
+      }
       return []
     }
-    const node = iterResult.value
-    if (!node.resolveParent || !node.resolveParent.resolveParent) {
-      return []
-    }
-    log.warn(
-      'hoist',
-      `${options.force ? 'hoisting' : 'could hoist'} ${
-        node.pkgid
-      } for ${packageName}`
-    )
-    if (options.force) {
-      node.parent = tree
-    }
-    return []
-  }
-  let rootDepNode
-  for (const node of nodeSet) {
-    if (!node.resolveParent || !node.resolveParent.resolveParent) {
-      rootDepNode = node
-      break
-    }
-  }
-  if (!rootDepNode) {
+    let rootDepNode
     for (const node of nodeSet) {
-      if (!rootDepNode) {
+      if (!node.resolveParent || !node.resolveParent.resolveParent) {
         rootDepNode = node
-      } else if (node.pkgid !== rootDepNode.pkgid) {
-        rootDepNode = undefined
         break
       }
     }
-    if (rootDepNode) {
-      log.warn('hoist', `hoisting ${rootDepNode.pkgid} for ${packageName}`)
-      rootDepNode.parent = tree
-    }
-  }
-  const pruned = []
-  if (rootDepNode) {
-    for (const node of nodeSet) {
-      if (node.canDedupe(options.preferDedupe)) {
-        for (const depNode of gatherDeps(
-          node,
-          (edge) => edge.to !== node && edge.valid
-        )) {
-          pruned.push(depNode.location)
-          depNode.parent = null
+    if (!rootDepNode) {
+      for (const node of nodeSet) {
+        if (!rootDepNode) {
+          rootDepNode = node
+        } else if (node.pkgid !== rootDepNode.pkgid) {
+          rootDepNode = undefined
+          break
+        }
+      }
+      if (rootDepNode) {
+        const doHoist = (options.force ||
+          await this.prompt(`hoist ${rootDepNode.pkgid} for ${packageName}?`))
+        log.warn(
+          'hoist',
+          `${doHoist ? 'hoisting' : 'could hoist'} ${rootDepNode.pkgid} for ${packageName}`
+        )
+        if (doHoist) {
+          rootDepNode.parent = tree
         }
       }
     }
+    const pruned = []
+    if (rootDepNode) {
+      for (const node of nodeSet) {
+        if (node.canDedupe(options.preferDedupe)) {
+          for (const depNode of gatherDeps(
+            node,
+            (edge) => edge.to !== node && edge.valid
+          )) {
+            pruned.push(depNode.location)
+            depNode.parent = null
+          }
+        }
+      }
+    }
+    return pruned
   }
-  return pruned
 }
 
 /**
