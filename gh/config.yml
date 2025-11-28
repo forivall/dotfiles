@@ -99,8 +99,10 @@ aliases:
           highlightLine="$line"
           if [[ -n "$startLine" ]] && [[ "$startLine" != "null" ]]; then
             highlightLine="$startLine:$line"
+            start=$((startLine - 5));
+          else
+            start=$((line - 5));
           fi
-          start=$((startLine - 5));
           if [[ start -lt 1 ]]; then start=1; fi;
           end=$((line + 5));
           bat --no-pager --style=numbers --color=always --highlight-line="$highlightLine" --line-range="$start:$end" "$path" 2>/dev/null;
