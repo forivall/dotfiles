@@ -27,10 +27,10 @@ APPS = (
 
 def get_processes():
     for proc in psutil.process_iter():
-        if uid not in proc.uids():
-            continue
-
         try:
+            if uid not in proc.uids():
+                continue
+
             name = proc.name()
             if proc.status() != psutil.STATUS_RUNNING:
                 continue

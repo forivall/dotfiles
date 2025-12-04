@@ -220,12 +220,14 @@ formatter = { command = 'npx', args = ["prettier", "--parser", "angular"] }
 
 [[language]]
 name = "nxjson"
-grammar = "json"
-scope = "source.json"
 file-types = [
   { "glob" = "nx.json" },
   { "glob" = "project.json" },
 ]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+grammar = "json"
+scope = "source.json"
 language-servers = [ "vscode-json-language-server", "nxls" ]
 indent = { tab-width = 2, unit = "  " }
 
