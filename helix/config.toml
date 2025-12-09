@@ -37,7 +37,7 @@ right = [
 [keys.normal]
 "#" = ":reflow"
 # macos new terminal tab
-"C-t" = ":sh it2api send-text $(it2api create-tab | sed -E -n 's/^.*\\bid=([0-9A-F-]+).*$/\\1/p') 'cd \"'\"$PWD\"'\" && cd %{buffer_name}\n'"
+"C-t" = ":sh it2split cd \"%{buffer_name}\""
 "C-A-o" = ":sh open '%{selection}'"
 "C-y" = ":sh printf '%%s' '%{buffer_name}' | pbcopy"
 # "A-[" = "move_prev_sub_word_end"

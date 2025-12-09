@@ -55,6 +55,8 @@ async def run_in_split_pane(c: "iterm2.Connection"):
 
 
 async def get_target_session(a: "iterm2.App") -> "iterm2.Session | None":
+    if command_arg == 'cd':
+        return None
     for w in a.terminal_windows:
         for t in w.tabs:
             for s in t.sessions:

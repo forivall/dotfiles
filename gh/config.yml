@@ -44,14 +44,14 @@ aliases:
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"
   pfh: "!open $(gh pr-file-url $1)\"$2\""
-  pr-file-url: '!if [[ $# -gt 1 ]]; then n=$1; shift; fi; echo "$(gh pr view --json url --jq .url $n)/files#diff-$(printf %s $1 | shasum -a 256 | cut -d'' '' -f1)"'
+  pr-file-url: '!if [[ $# -gt 1 ]]; then n=$1; shift; fi; echo "$(gh pr view --json url --jq .url ${n-$GH_PR})/files#diff-$(printf %s $1 | shasum -a 256 | cut -d'' '' -f1)"'
   pr-file-browse: '!open $(gh pr-file-url $@)'
   pr-files-json: pr view --json files --jq .files
   pr-files-json-rest: '!gh api repos/tenthousandcoffees/api-server/pulls/$(gh pr view --json number -q .number)/files'
   pr-files-json-gql: '!
     gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($endCursor: String, $owner: String!, $repo: String!) {
       repository(owner: $owner, name: $repo) {
-        pullRequest(number: ''"${1-$(gh pr view --json number -q .number))}"'' {
+        pullRequest(number: ''"${1-${GH_PR-$(gh pr view --json number -q .number)}}"'') {
           files(first: 100, after: $endCursor) {
             nodes { additions changeType deletions path viewerViewedState }
             pageInfo { hasNextPage endCursor }
@@ -62,7 +62,7 @@ aliases:
   pr-file-viewed-gql: '!
     FILEPATH="$1";
     shift;
-    gh api graphql -F pr=$(gh pr view --json id --jq .id) -F path=$FILEPATH -f query=''mutation($pr: ID!, $path: String!) {
+    gh api graphql -F pr=$(gh pr view $GH_PR --json id --jq .id) -F path=$FILEPATH -f query=''mutation($pr: ID!, $path: String!) {
       markFileAsViewed(input: { pullRequestId: $pr, path: $path }) {
         pullRequest { number files(first: 100) { totalCount nodes { viewerViewedState } } }
       }
@@ -70,15 +70,15 @@ aliases:
   pr-file-viewed: '!
     gh pr-file-viewed-gql "$1" --jq ''.data.markFileAsViewed.pullRequest | ("#" + (.number | tostring) + " " + (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" + (.files.totalCount | tostring))'''
   pr-file-unviewed-gql: '!
-    gh api graphql -F pr=$(gh pr view --json id --jq .id) path=$1 -f query=''mutation($pr: ID!, $path: String!) {
+    gh api graphql -F pr=$(gh pr view $GH_PR --json id --jq .id) path=$1 -f query=''mutation($pr: ID!, $path: String!) {
       markFileAsUnviewed(input: { pullRequestId: $pr, path: $path }) {
         pullRequest { number files { totalCount } }
       }
     }'''
-  pr-unread-files: '!gh pr-files-json-gql | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
+  pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
   pr-unresolved-comments: |
     !
-    if [[ $# -gt 0 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
+    if [[ $# -gt 0 ]]; then n=$1; shift; else n=${GH_PR-$(gh pr view --json number --jq .number)}; fi;
     gh pr-unresolved-comments-gql "$n" | jq -r '.[] | @base64' | while read -r thread; do
       path=$(echo "$thread" | base64 -d | jq -r '.path');
       startLine=$(echo "$thread" | base64 -d | jq -r '.startLine');
