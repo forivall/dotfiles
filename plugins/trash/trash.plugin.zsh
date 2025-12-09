@@ -27,5 +27,5 @@ else
   alias rmsu=trashsu
 fi
 
-alias rmd=/bin/rm
-alias rmdsu="sudo /usr/bin/rm"
+alias rmd="command rm"
+alias rmdsu="sudo rm"

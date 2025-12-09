@@ -1,8 +1,8 @@
 #compdef git-diff-file-status
-#description alias for git-show --oneline --decorate --name-status --color
+#description alias for git-diff --name-status --color
 
 _git-diff-file-status () {
-  words=(show --oneline --name-status --color "${words[@]:1}")
+  words=(diff --name-status --color "${words[@]:1}")
   (( CURRENT += 3 ))
   _git-diff
 }

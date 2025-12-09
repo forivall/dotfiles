@@ -16,6 +16,9 @@ export const city = 'Vancouver'
 // export const city = '49.25,-123.17'
 
 export const refreshFrequency = 1000 * 60 * 30 // 30min
+const retries = 5
+/** @param {number} n */
+const retryDelay = (n) => 0|((n ** Math.log2(3)) * 30000)
 
 export const className = /*styl*/`
   // position on screen
@@ -98,15 +101,28 @@ export const className = /*styl*/`
   }
 `
 
+let prevOutput;
 /** @type {import('uebersicht').CommandFunction} */
-export const command = (dispatch) => {
+export const command = (dispatch, n = 1) => {
   fetchWttr()
-    .then((output) => dispatch({ output }))
-    .catch((error) => dispatch({ error }))
+    .then((output) => {
+      prevOutput = output
+      dispatch({ output })
+    })
+    .catch((error) => {
+      dispatch({ error, output: prevOutput })
+      if (n <= retries) {
+        setTimeout(command, retryDelay(n), dispatch, n + 1);
+      }
+    })
 }
 
 async function fetchWttr() {
-  const resp = await fetch(`https://${lang}.wttr.in/${city}\?2nq`);
+  const resp = await fetch(`https://wttr.in/${city}\?2nq`, {
+    headers: {
+      'Accept-Language': lang
+    }
+  });
   const html = await resp.text();
   const tmpl = document.createElement('template');
   tmpl.innerHTML = html;
@@ -115,10 +131,8 @@ async function fetchWttr() {
 
 /** @type {React.FC<import('uebersicht').DefaultProps>} */
 export const render = (props) =>
-  props.error ? (
-    <div>{util.inspect(props.error)}</div>
-  ) : (
-    <>
+  <>
+    {props.output && <>
       <div className="background"></div>
       <div
         className="container"
@@ -126,8 +140,11 @@ export const render = (props) =>
           __html: props.output ?? '',
         }}
       />
-    </>
-  )
+    </>}
+    {props.error &&
+      <pre>{util.inspect({...props.error})}</pre>
+    }
+  </>
 
 
 // export const command = `

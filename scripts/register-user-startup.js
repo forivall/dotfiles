@@ -29,17 +29,18 @@ userStartup.add(
   logFile,
 );
 
-child.execFileSync('sleep', ['1'], { stdio: 'inherit' });
-child.execFileSync('launchctl', ['load', serviceFile], {
-  stdio: 'inherit',
-});
-child.execFileSync('sleep', ['1'], { stdio: 'inherit' });
+/** @type {string[]} args */
+const exec = (command, ...args) => {
+  console.log('>', command, ...args);
+  child.execFileSync(command, args, { stdio: 'inherit' });
+}
 
-child.execFileSync(
-  'launchctl',
-  ['kickstart', `gui/${process.getuid()}/${serviceName}`],
-  { stdio: 'inherit' },
-);
+const serviceTarget = `gui/${process.getuid()}`;
+exec('sleep', '1');
+// exec('launchctl', 'load', serviceFile);
+exec('launchctl', 'bootstrap', serviceTarget, serviceFile);
+exec('sleep', '1');
+exec('launchctl', 'kickstart', '-p', `${serviceTarget}/${serviceName}`);
 
 spawnDetached('tail', ['-f', logFile]);
 
