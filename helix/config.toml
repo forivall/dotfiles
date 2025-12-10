@@ -44,6 +44,7 @@ right = [
 # "A-]" = "move_next_sub_word_start"
 "C-left" = "move_prev_sub_word_start"
 "C-right" = "move_next_sub_word_end"
+"A-F4" = ":buffer-close"
 
 [keys.normal."C-w"]
 "c" = ":buffer-close"

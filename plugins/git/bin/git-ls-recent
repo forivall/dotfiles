@@ -26,7 +26,7 @@ relative    use relative date format
 human       use human-local date format
 access      sort by recently checked out [default]
 c,commit    sort by commit date
-u,author    sort by commit author date
+u,author?   sort by commit author date
 e,creation  sort by branch creation date
 sort=       sort specific field
 reverse     reverse sort order
@@ -54,6 +54,7 @@ for arg in $@; do
   index=$((index+1))
   case "$arg" in
     --count=*) NUM="${arg#--count=}" ;;
+    --author=*) filter='test -n "$(git rev-list -1 $ref ^${ref}^ '"$arg"')"' ;&
     --author) sort=authordate ;&
     --commit) by_commit=true ;;
     --creation) by_creation=true ;;
