@@ -114,6 +114,7 @@ brew install iconsur
 # iconsur set /Applications/GitX.app/ -l
 # iconsur set /Applications/MiddleClick.app/ -l
 
+brew install --cask swiftdefaultappsprefpane
 brew install --cask docker
 # brew install --cask google-cloud-sdk
 # brew install minikube kubectl skaffold

@@ -21,8 +21,10 @@ else
     npm info --json "$1"|jq -r '(if .repository | type == "string" then .repository else .repository.url // .repository end)' |
     sed 's/^git+http/http/'
   )"
-  if [[ repo != *:* ]]; then
+  if [[ $repo != *:* ]]; then
     repo="hub:${repo}"
+  elif [[ $repo = git://github.com/* ]]; then
+    repo="hub:${repo#git://github.com/}"
   fi
 fi
 
