@@ -18,7 +18,7 @@ if (__configDir !== process.cwd()) {
 console.log('Starting mongo memory server and connecting. please wait.');
 var { MongoMemoryServer } = require('mongodb-memory-server');
 var mongoose = require('mongoose');
-var {ObjectId,UUID,Decimal128}=mongoose;
+var {ObjectId,UUID,Decimal128}=mongoose.Types;
 var mongod;
 var db;
 MongoMemoryServer.create().then(async (it) => {
