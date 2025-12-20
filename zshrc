@@ -16,6 +16,7 @@ source "${__zshrc_dirname}/scripts/detect-platform.zsh"
 
 # shellcheck disable=SC1090
 sourceIfExists() { [[ -e "$1" ]] && source "$1"; }
+sourceIfExists $__zshrc_dirname/plugins/unsorted/cursor-shell-integration.source.zsh
 $IS_LINUXY && sourceIfExists /etc/profile.d/vte.sh
 
 if $IS_OSX ; then

@@ -16,3 +16,23 @@ function generate_completions() {
   $@ > $compfile
 }
 generate_completions carapace _carapace zsh
+
+echo "Generating cursor shell integration"
+CURSOR_INTEGRATION=$__dirname/cursor-shell-integration.source.zsh
+cursor-agent shell-integration zsh > $CURSOR_INTEGRATION
+echo "Patching cursor shell integration for performance"
+sd 'exec (~/.local/bin/)?cursor-agent record' '# $0' $CURSOR_INTEGRATION
+sd --fixed-strings '$(cursor --locate-shell-integration-path zsh)' "${(qq)$(cursor --locate-shell-integration-path zsh)}" $CURSOR_INTEGRATION
+sd --fixed-strings '
+# Create a new chat session at the start of each shell session
+if [[ -z "$CURSOR_AGENT_CHAT_ID" ]]; then
+  export CURSOR_AGENT_CHAT_ID=$(cursor-agent create-chat)
+fi' '
+_ensure_cursor_agent() {
+  # Create a new chat session when needed
+  if [[ -z "$CURSOR_AGENT_CHAT_ID" ]]; then
+    export CURSOR_AGENT_CHAT_ID=$(cursor-agent create-chat)
+  fi
+}' $CURSOR_INTEGRATION
+sd '^( *).*--resume \$CURSOR_AGENT_CHAT_ID' '${1}_ensure_cursor_agent\n$0' $CURSOR_INTEGRATION
+
