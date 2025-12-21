@@ -16,6 +16,7 @@ source "${__zshrc_dirname}/scripts/detect-platform.zsh"
 
 # shellcheck disable=SC1090
 sourceIfExists() { [[ -e "$1" ]] && source "$1"; }
+sourceIfExists $__zshrc_dirname/plugins/unsorted/activate_mise.source.zsh
 sourceIfExists $__zshrc_dirname/plugins/unsorted/cursor-shell-integration.source.zsh
 $IS_LINUXY && sourceIfExists /etc/profile.d/vte.sh
 
@@ -301,6 +302,7 @@ if ! zgen saved; then
   zgen save
   zgen-zplug-after-save
 fi
+# if [[ -d $ZGENOM_SOURCE_BIN ]]; then path+=( $ZGENOM_SOURCE_BIN ); fi
 [[ $(whence -w 9 2>/dev/null) == '9: alias' ]] && unalias 9
 unsetopt nomatch
 
