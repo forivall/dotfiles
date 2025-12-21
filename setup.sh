@@ -147,3 +147,5 @@ fi
 [[ ! -d ~/.local/opt/sunwait ]] && o git clone hub:risacher/sunwait ~/.local/opt/sunwait
 o make -C ~/.local/opt/sunwait
 o ln -s ~/.local/opt/sunwait/sunwait ~/.local/bin/sunwait
+
+o mise settings paranoid=1

@@ -213,6 +213,7 @@ if ! zgen saved; then
   # whence kubectl > /dev/null && zgen ohmyzsh plugins/kubectl
   # # zgen ohmyzsh plugins/jump
   # # zgen ohmyzsh encode64
+  zgenom bin junegunn/everything.fzf
 
   # zgenom load unixorn/fzf-zsh-plugin
   zgen load atuinsh/atuin

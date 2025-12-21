@@ -1677,6 +1677,8 @@
         "u": { "text": "Focus Panel View",                              "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "view " }] }] },
         "i": { "text": "Inline chat",                                   "command": "aipopup.action.modal.generate" },
         "I": { "text": "Open AI Chat",                                  "command": "composer.startComposerPrompt"},
+        "l": { "text": "Send to New Chat context",                      "command": "aichat.newchataction"},
+        "L": { "text": "Send to Agent",                                 "command": "composer.sendToAgent"},
         // "U": { "text": "Add Selection to Copilot Context",              "command": "workbench.action.chat.attachSelection"},
         "A": { "text": "View All Agents",                               "command": "workbench.action.openAgentsView"},
         "Z": { "text": "Toggle Inline Suggestions Show Collapsed",      "command": "editor.action.inlineSuggest.toggleShowCollapsed" },
@@ -3761,6 +3763,7 @@
   "typescript.preferences.useAliasesForRenames": false,
   "typescript.reportStyleChecksAsWarnings": false,
   "typescript.tsserver.log": "off",
+  "angular.log": "terse",
   // "typescript.tsserver.useSyntaxServer": "always",
   "typescript.tsserver.useSyntaxServer": "auto",
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -3891,7 +3894,7 @@
   "vscode-graphql.debug": false,
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.preferences.preferTypeOnlyAutoImports": true,
-  "typescript.tsserver.maxTsServerMemory": 7168,
+  "typescript.tsserver.maxTsServerMemory": 10752,
   "typescriptExplorer.typeTree.readonly.enable": true,
   "diffEditor.experimental.useTrueInlineView": true,
   "diffEditor.experimental.showEmptyDecorations": true,
@@ -3967,13 +3970,18 @@
   "inlineChat.lineEmptyHint": false,
   "python.analysis.includeAliasesFromUserFiles": true,
   "terminal.integrated.smoothScrolling": true,
-  "editor.inlineSuggest.edits.showCollapsed": true,
   "testing.coverageToolbarEnabled": true,
   "editor.minimap.enabled": true,
-  "git.blame.editorDecoration.enabled": false,
+  "editor.foldingImportsByDefault": true,
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.chat.terminalShowHoverHint": false,
+  "typescript.experimental.useTsgo": false,
+  "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
+  "cursorpyright.analysis.inlayHints.variableTypes": true,
+  "cursorpyright.analysis.typeshedPaths": [
+    "/Users/emily.klassen/code/public/typeshed"
+  ],
   "swapf.patterns": [
     {
       "pattern": "^(?<path>.*?)\\.component\\.(?<ext>ts|tsx|js|jsx|css|sass|scss|less|html|htm|stories.ts|spec.ts|spec.js|test.js|test.ts)$",
@@ -4078,5 +4086,20 @@
     "**/tmp",
     "**/dist",
     "**/tests"
+  ],
+  "cssVariables.languages": [
+    "astro",
+    "svelte",
+    "vue",
+    "vue-html",
+    "vue-postcss",
+    "scss",
+    "postcss",
+    "less",
+    "css",
+    "html",
+    "javascriptreact",
+    "typescriptreact",
+    "source.css.styled"
   ],
 }

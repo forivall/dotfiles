@@ -183,3 +183,4 @@ if [[ $IS_OSX && "$TERM_PROGRAM" == "vscode" ]]; then
 fi
 
 (( ${+commands[cursor]} )) && alias csr=cursor
+(( ${+commands[cursor]} )) && alias cur=cursor

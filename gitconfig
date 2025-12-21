@@ -24,7 +24,7 @@
 	diffFilter = delta --color-only
 [log]
   excludeDecoration = refs/jj/**
-  allExcludes = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/**
+  allExcludes = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	minus-style = syntax auto
@@ -84,14 +84,14 @@
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
 	li = log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u}  # <kbd>i</kbd> is much easier to hit than <kbd>u</kbd>
-	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all
-	las = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all --simplify-by-decoration
+	la = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
+	las = log --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all --simplify-by-decoration
 	laa = log --pretty=oneline --abbrev-commit --decorate --graph --all
 	lo = log --pretty=oneline --abbrev-commit --decorate --graph --remotes=origin --branches
 	l2 = log --pretty=onemore --decorate --graph --no-notes
 	l3 = log --pretty=twoline --decorate --graph --date=local
 	lg = log --name-status --pretty=oneline --abbrev-commit --decorate --graph
-	lga = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all
+	lga = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
 	lgaa = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --all
 	lg2 = log --name-status --pretty=onemore --graph --no-notes
 	lg3 = log --name-status --pretty=twoline --graph --date=local
@@ -99,8 +99,8 @@
 	logd = -c core.pager=deltaw log --pretty=concise
 	log2 = log --pretty=concise
 	logp2 = logp --pretty=concise
-	logpa = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all
-	logpa2 = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --all  --pretty=concise
+	logpa = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
+	logpa2 = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all  --pretty=concise
 	show2 = show --pretty=concise
 	showd2 = showd --pretty=concise
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
@@ -328,8 +328,8 @@
 	main-view-id = true
 	# main-view-ref = true
 	mouse = true
-	main-options = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/**
-	line-graphics = utf-8
+	main-options = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages
+ 	line-graphics = utf-8
 	reference-format = hide:other
 [tig "color"]
 	cursor = default default underline

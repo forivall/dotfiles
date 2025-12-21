@@ -1,3 +1,15 @@
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
+config = { provideFormatter = true }
+
+[language-server.prettier-lsp]
+command = "prettier-lsp"
+args = ["--stdio"]
+
+[language-server.prettier-lsp.config.prettierLsp]
+localOnly = true
+
 [language-server.hx-lsp]
 command = "hx-lsp"
 
@@ -69,7 +81,7 @@ includeInlayVariableTypeHints = true
 
 [language-server.tsgo]
 command = "tsgo"
-args = ["lsp", "--stdio"]
+args = ["--lsp", "--stdio"]
 
 [language-server.tsgo.config.typescript]
 preferences.quotePreference = "single"
@@ -91,12 +103,15 @@ updateImportsOnFileMove = { enabled = "always" }
 command = "vtsls"
 args = ["--stdio"]
 config.hostInfo = "helix"
+config.provideFormatter = false
 
 [language-server.vtsls.config.vstls]
+provideFormatter = false
 autoUseWorkspaceTsdk = true
 experimental.completion.enableServerSideFuzzyMatch = true
 
 [language-server.vtsls.config.typescript]
+provideFormatter = false
 preferences.quotePreference = "single"
 diagnostics.ignoredCodes = [
   80001, # File is a CommonJS module; it may be converted to an ES module
@@ -193,10 +208,11 @@ args = ["run"]
 command = "$HOME/Library/Application Support/CircleCI-language-server/circleci-yaml-language-server"
 args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
 
-[[grammar]]
-name = "typescript"
-# source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "75b3874edb2dc714fb1fd77a32013d0f8699989f", subpath = "typescript" }
-source = { git = "https://github.com/forivall/tree-sitter-typescript", rev = "4be8f0ef6db412cc5e6731625939813f8fd4f25f", subpath = "typescript" }
+# [[grammar]]
+# name = "typescript"
+# # source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "75b3874edb2dc714fb1fd77a32013d0f8699989f", subpath = "typescript" }
+# # source = { git = "https://github.com/forivall/tree-sitter-typescript", rev = "4be8f0ef6db412cc5e6731625939813f8fd4f25f", subpath = "typescript" }
+# source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "b1bf4825d9eaa0f3bdeb1e52f099533328acfbdf", subpath = "typescript" }
 
 [[grammar]]
 name = "angular"
@@ -244,34 +260,35 @@ file-types = [{ glob = "COMMIT_EDITMSG" }, { glob = "MERGE_MSG" }, { glob = "COM
 language-servers = [ "commit-lsp" ]
 
 [[language]]
-name = "javascript"
-formatter = { command = 'prettier', args = ["--parser", "babel"] }
-
-[[language]]
 name = "html"
 formatter = { command = 'prettier', args = ["--parser", "angular"] }
 
 [[language]]
 name = "javascript"
+# formatter = { command = 'biome', args = ["format"] }
+# formatter = { command = 'prettier', args = ["--parser", "babel"] }
 language-servers = [
   # { name = "typescript-language-server", except-features = [ "format" ] },
+  { name = "biome" },
   { name = "vtsls", except-features = ["format"] },
   # { name = "tsgo", except-features = ["format"] },
   # { name = "graphql-language-service", except-features = [ "format" ] },
-  "eslint",
+  # "eslint",
 ]
 
 [[language]]
 name = "typescript"
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+# formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+# formatter = { command = 'biome', args = ["format"] }
 language-servers = [
   # { name = "typescript-language-server", except-features = [ "format" ] },
   { name = "vtsls", except-features = ["format"] },
+  { name = "biome" },
   # { name = "tsgo", except-features = ["format"] },
   # { name = "efm", "only-features" = [ "diagnostics", "format",  ] },
   # { name = "efm-lsp-eslint" },
   { name = "graphql-language-service", except-features = [ "format" ] },
-  "eslint",
+  # "eslint",
 ]
 
 [[language]]

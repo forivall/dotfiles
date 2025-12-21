@@ -43,6 +43,7 @@ aliases:
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
   pr-range: "pr view --json baseRefName,headRefName -q '\"origin/\"+.baseRefName+\"...origin/\"+.headRefName'"
+  pr-number: "!REF=$1; shift; BRANCH=$(git rev-parse --symbolic-full-name $REF); gh pr list --limit 1 --head ${BRANCH#refs/heads/} --json number --jq '.[].number' \"$@\""
   pfh: "!open $(gh pr-file-url $1)\"$2\""
   pr-file-url: '!if [[ $# -gt 1 ]]; then n=$1; shift; fi; echo "$(gh pr view --json url --jq .url ${n-$GH_PR})/files#diff-$(printf %s $1 | shasum -a 256 | cut -d'' '' -f1)"'
   pr-file-browse: '!open $(gh pr-file-url $@)'

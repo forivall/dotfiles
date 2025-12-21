@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name" : "Emily M Klassen",
+    "url" : "https://github.com/forivall"
+  },
+  "credits" : {
+    "name" : "Dejal Time Out",
+    "url" : "https://dejal.com/timeout/"
+  },
+  "comments": "Shows some tips for ergonomics.",
+  "rootDocument": "index.html",
+  "created": "2023-09-04",
+  "identifier": "Ergo",
+  "version": 1,
+  "modified": "2023-09-04",
+  "name": "Ergo"
+}

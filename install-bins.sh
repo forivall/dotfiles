@@ -44,6 +44,8 @@ cmds=(
   'go install github.com/unkn0wn-root/resterm/cmd/resterm@latest'
 
   'uv tool install tombi'
+  'eget biomejs/gritql --asset=grit'
+  'eget grouzen/framework-tool-tui'
 
   'gh extension install yusukebe/gh-markdown-preview'
   'gh extension install dlvhdr/gh-dash'

@@ -17,6 +17,9 @@ function generate_completions() {
 }
 generate_completions carapace _carapace zsh
 
+echo "Generating mise-en-place shell integration"
+mise activate zsh > $__dirname/activate_mise.source.zsh
+
 echo "Generating cursor shell integration"
 CURSOR_INTEGRATION=$__dirname/cursor-shell-integration.source.zsh
 cursor-agent shell-integration zsh > $CURSOR_INTEGRATION

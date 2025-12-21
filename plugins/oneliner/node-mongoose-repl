@@ -28,7 +28,10 @@ var mongod;
 var db;
 MongoMemoryServer.create().then(async (it) => {
   mongod = it;
-  const connected = await mongoose.connect(mongod.getUri());
+  const connected = await mongoose.connect(mongod.getUri(), {
+    dbName: 'admin',
+    maxPoolSize: 1,
+  });
   db = connected.connection;
   console.log('Connected to', mongod.getUri());
   console.log('Loaded variables: mongoose, mongod, db');

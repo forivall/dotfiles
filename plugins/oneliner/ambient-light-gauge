@@ -4,13 +4,7 @@ local npm_prefix=$(npm -g prefix)
 
 # require('gradient-string').pastel('■'.repeat(256)).split(/\b(?<=39m)/)
 ambient-light -w | node -e "
-var nvm_dir = process.env.NVM_DIR || require('os').homedir() + '/.nvm';
-var G = require(nvm_dir + '/versions/node/v20.13.1/lib/node_modules/npm/node_modules/gauge')
-var T = require(nvm_dir + '/versions/node/v20.13.1/lib/node_modules/npm/node_modules/gauge/lib/themes')
-var t = T.newTheme(T({hasUnicode: true, hasColor: true}), {
-  preProgressbar: '',
-  postProgressbar: '',
-  activityIndicatorTheme: [
+var activityIndicator = [
     '\x1B[38;2;116;235;213m■\x1B[39m',
     '\x1B[38;2;116;235;216m■\x1B[39m',
     '\x1B[38;2;116;235;219m■\x1B[39m',
@@ -267,23 +261,52 @@ var t = T.newTheme(T({hasUnicode: true, hasColor: true}), {
     '\x1B[38;2;116;236;207m■\x1B[39m',
     '\x1B[38;2;116;236;210m■\x1B[39m',
     '\x1B[38;2;116;236;213m■\x1B[39m'
-  ]
-})
-var g = new G({theme: t});
-var n, max=250;
+];
+var n, max=250, i=0, l=activityIndicator.length;
 function easeOutQuad (t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t + b;
     return -c / 2 * ((--t) * (t - 2) - 1) + b;
 }
+var x='█'
+var e=' ▏▎▍▌▋▊▉'
+var siz=48
+process.stdout.write('\x1B[?25l')
 process.stdin.on('data', (d) => {
-  g.pulse();
   var s = d.toString('utf-8').trim();
   if (s) n = Number(s);
   if (n > max) max = n;
-  g.show('brightness: ' + n.toFixed(1) + ' lux', easeOutQuad(n / max, 0, 1, 1))
+  i=(i+1)%l;
+  w=0|((n / max)*(siz<<3));
+  a=w>>3;
+  b=siz-a;
+  k=e[w&7];
+  process.stdout.write('\x1B[2K\x1B[G'+activityIndicator[i]+' '+x.repeat(a)+k+' '.repeat(b)+' '+n.toFixed(1) + ' lux');
+  // g.show('brightness: ' + n.toFixed(1) + ' lux', easeOutQuad(n / max, 0, 1, 1))
 });
+var signals = []
+signals.push('SIGHUP', 'SIGINT', 'SIGTERM')
+if (process.platform !== 'win32') { signals.push('SIGALRM', 'SIGABRT', 'SIGVTALRM', 'SIGXCPU', 'SIGXFSZ', 'SIGUSR2', 'SIGTRAP', 'SIGSYS', 'SIGQUIT', 'SIGIOT') }
+if (process.platform === 'linux') { signals.push('SIGIO', 'SIGPOLL', 'SIGPWR', 'SIGSTKFLT') }
+function onSignal(sig) {
+  process.stdout.write('\x1B[?25h');
+  for (var s of signals) { process.removeListener(sig, onSignal) }
+  process.kill(process.pid, sig);
+}
+for (var sig of signals) {
+  process.on(sig, onSignal);
+}
 process.stdin.on('end', () => {
-  g.hide();
+  process.stdout.write('\x1B[?25h\x1B[2K\x1B[G');
   console.log(n.toFixed(1))
+});
+process.on('SIGTSTP', (sig) => {
+  process.stdout.write('\x1B[?25h');
+  process.exit(0); // too hard to get right
+  // process.kill(process.pid, 'SIGSTOP');
+});
+process.on('SIGCONT', (sig) => {
+  process.stdin.setRawMode?.(false);
+  process.stdout.write('\x1B[?25l');
+  // process.kill(process.pid, sig);
 })
 "
