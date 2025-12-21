@@ -1,0 +1,13 @@
+diff --git a/config/cursor/keybindings.json b/config/cursor/keybindings.json
+index 7847f89..cbb3d6a 100644
+--- a/config/cursor/keybindings.json
++++ b/config/cursor/keybindings.json
+@@ -906,6 +906,8 @@
+   { "key": "shift+,",     "command": "dance.edit.deindent.withIncomplete",     "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+   { "key": "shift+.",     "command": "dance.edit.indent",                      "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+   { "key": "=",           "command": "editor.action.formatSelection",          "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
++  // { "key": "=",           "command": "editor.action.formatSelection",          "when": "editorTextFocus && dance.mode == 'normal' && editorLangId == 'typescript' || editorTextFocus && dance.mode == 'select'  && editorLangId == 'typescript'",
++  //                         "args": "use prettier" },
+   { "key": "shift+j",     "command": "dance.edit.join",                        "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+   { "key": "alt+shift+j", "command": "dance.edit.join.select",                 "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+   { "key": "shift+k",     "command": "dance.selections.filter.regexp",         "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },

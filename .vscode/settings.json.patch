@@ -1,0 +1,10 @@
+diff --git a/.vscode/settings.json b/.vscode/settings.json
+index d993230..22541fe 100644
+--- a/.vscode/settings.json
++++ b/.vscode/settings.json
+@@ -1,3 +1,4 @@
+ {
+-  "typescript.disableAutomaticTypeAcquisition": false
++  "typescript.disableAutomaticTypeAcquisition": false,
++  "python.formatting.provider": "black"
+ }

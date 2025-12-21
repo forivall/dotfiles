@@ -1,0 +1,28 @@
+diff --git a/vscode/snippets/javascript.json b/vscode/snippets/javascript.json
+index fc84dff..7a0e086 100644
+--- a/vscode/snippets/javascript.json
++++ b/vscode/snippets/javascript.json
+@@ -22,6 +22,14 @@
+ 			" */",
+ 		],
+ 	},
++	"ttc schema type import alias": {
++		"prefix": "//i",
++		"body": "/** @typedef {import('@ttc/tenthousandcoffees-schema/types$2').$1} $1 */",
++	},
++	"ttc tenantconfig import alias": {
++		"prefix": "//tc",
++		"body": "/** @typedef {ReturnType<import('@ttc/ttc-tenant-config-helper').getTenantConfig>} TenantConfig */",
++	},
+ 	"jsdoc options arg": {
+ 		"prefix": "@opt",
+ 		"body": [
+@@ -39,4 +47,8 @@
+ 		"prefix": "mgps",
+ 		"body": "import('mongoose').PipelineStage"
+ 	},
++	"ttc schema type": {
++		"prefix": "impttc",
++		"body": "import('@ttc/tenthousandcoffees-schema/types').$1",
++	},
+ }

@@ -1,0 +1,12 @@
+diff --git a/config/ripgreprc b/config/ripgreprc
+index 20fae98..54e3552 100644
+--- a/config/ripgreprc
++++ b/config/ripgreprc
+@@ -10,5 +10,5 @@
+ --max-columns
+ 2048
+ 
+---hyperlink-format
+-zed://file/{path}:{line}:{column}
++# --hyperlink-format
++# zed://file/{path}:{line}:{column}

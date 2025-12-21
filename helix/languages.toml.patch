@@ -1,0 +1,42 @@
+diff --git a/helix/languages.toml b/helix/languages.toml
+index 56d31db..e3780f7 100644
+--- a/helix/languages.toml
++++ b/helix/languages.toml
+@@ -59,16 +59,16 @@ includeInlayVariableTypeHints = true
+ 
+ # see https://github.com/helix-editor/helix/discussions/8452
+ [language-server.eslint]
+-args = ["--stdio"]
+-command = "vscode-eslint-language-server"
+-# command = "node"
+-# args = [
+-#   "--optimize-for-size",
+-#   "--max-old-space-size=8192",
+-#   "$HOME/code/public/vscode-langservers-extracted/lib/eslint-language-server/eslintServer.js",
+-#   # "/opt/homebrew/lib/node_modules/vscode-langservers-extracted/lib/eslint-language-server/eslintServer.js",
+-#   "--stdio",
+-# ]
++args = [
++  "--optimize-for-size",
++  "--max-old-space-size=8192",
++  "/Users/emily.klassen/code/public/vscode-langservers-extracted/lib/eslint-language-server/eslintServer.js",
++  # "/opt/homebrew/lib/node_modules/vscode-langservers-extracted/lib/eslint-language-server/eslintServer.js",
++  "--stdio",
++]
++
++command = "node"
++# command = "vscode-eslint-language-server"
+ 
+ [language-server.eslint.config]
+ validate = "on"
+@@ -106,8 +106,8 @@ command = "commit-lsp"
+ args = ["run"]
+ 
+ [language-server.cci-yaml]
+-command = "$HOME/Library/Application Support/CircleCI-language-server/circleci-yaml-language-server"
+-args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
++command = "/Users/emily.klassen/Library/Application Support/CircleCI-language-server/circleci-yaml-language-server"
++args = ["-schema=/Users/emily.klassen/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
+ 
+ [[language]]
+ name = "json"

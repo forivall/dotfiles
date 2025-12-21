@@ -1,0 +1,56 @@
+diff --git a/vscode/settings.json b/vscode/settings.json
+index 0d9b775..8ba20c8 100644
+--- a/vscode/settings.json
++++ b/vscode/settings.json
+@@ -3809,7 +3809,7 @@
+   ],
+   "search.followSymlinks": false,
+   "diffEditor.hideUnchangedRegions.enabled": true,
+-  "diffEditor.renderSideBySide": false,
++  "diffEditor.renderSideBySide": true,
+   "typescriptFold.autoFold": false,
+   "typescriptFold.togglePerFile": true,
+   "betterFolding.excludedLanguages": [
+@@ -3841,6 +3841,7 @@
+   "vscode-graphql.debug": false,
+   "typescript.inlayHints.variableTypes.enabled": true,
+   "typescript.preferences.preferTypeOnlyAutoImports": true,
++  "typescript.tsserver.nodePath": "/Users/emily.klassen/.nvm/versions/node/v22.13.1/bin/node",
+   "typescript.tsserver.maxTsServerMemory": 7168,
+   "typescriptExplorer.typeTree.readonly.enable": true,
+   "diffEditor.experimental.useTrueInlineView": true,
+@@ -3890,6 +3891,7 @@
+   "filefocus.sortKey": "path",
+   "git-graph.commitDetailsView.location": "Docked to Bottom",
+   "github.copilot.editor.enableCodeActions": false,
++  "github.copilot.selectedCompletionModel": "",
+   "markdown.editor.drop.enabled": "never",
+   "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
+   "workbench.secondarySideBar.showLabels": false,
+@@ -3899,6 +3901,7 @@
+     }
+   ],
+   "github.copilot.chat.editor.temporalContext.enabled": true,
++  // "angular.log": "verbose",
+   "geminicodeassist.enable": false,
+   "notebook.inlineValues": "auto",
+   "svg.preview.mode": "svg",
+@@ -3918,8 +3921,18 @@
+   "inlineChat.enableV2": true,
+   "inlineChat.hideOnRequest": true,
+   "inlineChat.finishOnType": true,
++  "gitlens.ai.model": "vscode",
++  "gitlens.ai.vscode.model": "copilot:gemini-2.0-flash",
+   "python.analysis.includeAliasesFromUserFiles": true,
+   "terminal.integrated.smoothScrolling": true,
+   "editor.inlineSuggest.edits.showCollapsed": true,
++  "github.copilot.enable": {
++    "*": true,
++    "plaintext": false,
++    "markdown": false,
++    "scminput": false,
++    "shellscript": false
++  },
+   "workbench.panel.showLabels": false,
++  "editor.inlineSuggest.showToolbar": "always",
+ }

@@ -1,0 +1,32 @@
+diff --git a/config/procs/config.toml b/config/procs/config.toml
+index cda516b..7eff4ee 100644
+--- a/config/procs/config.toml
++++ b/config/procs/config.toml
+@@ -13,12 +13,12 @@ align = "Left"
+ # nonnumeric_search = false
+ # align = "Left"
+ 
+-# [[columns]]
+-# kind = "User"
+-# style = "BrightGreen|Green"
+-# numeric_search = false
+-# nonnumeric_search = true
+-# align = "Left"
++[[columns]]
++kind = "User"
++style = "BrightGreen|Green"
++numeric_search = false
++nonnumeric_search = true
++align = "Left"
+ 
+ [[columns]]
+ kind = "Separator"
+@@ -156,7 +156,7 @@ show_kthreads = true
+ [sort]
+ # column = 0
+ # order = "Ascending"
+-column = 5
++column = 6
+ order = "Descending"
+ 
+ [docker]

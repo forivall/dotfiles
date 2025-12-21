@@ -1,0 +1,13 @@
+diff --git a/config/wezterm/wezterm.lua b/config/wezterm/wezterm.lua
+index e69e7be..28de5b8 100644
+--- a/config/wezterm/wezterm.lua
++++ b/config/wezterm/wezterm.lua
+@@ -54,7 +54,7 @@ config.window_background_gradient = {
+ config.background = {
+   {
+     source = {
+-      File = '<gdrive>/Pictures/Wallpapers/Japan daylight savings_tiler_blur.jpg',
++      File = '/Users/emily.klassen/Pictures/Wallpapers/Japan daylight savings_tiler_blur.jpg',
+     },
+     width = 1920,
+     height = 2160,

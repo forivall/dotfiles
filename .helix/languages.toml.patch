@@ -1,0 +1,11 @@
+diff --git a/.helix/languages.toml b/.helix/languages.toml
+index 9dbd96a..14be931 100644
+--- a/.helix/languages.toml
++++ b/.helix/languages.toml
+@@ -7,5 +7,5 @@ name = "git-config"
+ file-types = [{ glob = "gitconfig" }, { glob = ".gitmodules" }, { glob = ".gitconfig" }, { glob = ".git/config" }, { glob = ".config/git/config" }]
+ 
+ [language-server.pylsp]
+-command = "$HOME/Library/Python/3.9/bin/pylsp"
++command = "/Users/emily.klassen/Library/Python/3.9/bin/pylsp"
+ arguments = ["-vv", "--log-file", "/Users/emily.klassen/.cache/helix/pylsp.log"]

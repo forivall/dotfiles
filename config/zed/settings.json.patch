@@ -1,0 +1,17 @@
+diff --git a/config/zed/settings.json b/config/zed/settings.json
+index a0e9dd7..341f29a 100644
+--- a/config/zed/settings.json
++++ b/config/zed/settings.json
+@@ -40,10 +40,9 @@
+   },
+   "agent": {
+     "default_model": {
+-      "provider": "google",
+-      "model": "gemini-2.0-flash-lite-preview"
++      "provider": "zed.dev",
++      "model": "claude-sonnet-4"
+     },
+-    "version": "2"
+   },
+   "base_keymap": "Atom",
+   "journal": {
