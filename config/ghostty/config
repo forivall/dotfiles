@@ -14,6 +14,7 @@ font-thicken = true
 font-thicken-strength = 0
 theme = "Tomorrow Night"
 background-image = /Users/emily.klassen/Pictures/Wallpapers/Japan daylight savings_tiler_blur.jpg
+background-image-repeat = true
 background-image-opacity = 0.08
 background-image-fit = none
 # background-blur = 40
@@ -26,4 +27,8 @@ macos-icon = holographic
 
 # shell-integration = none
 shell-integration-features = no-cursor
-# window-padding-x = 2
+window-padding-x = 2
+
+quick-terminal-position = right
+quick-terminal-size = 580px,720px
+keybind = global:cmd+backquote=toggle_quick_terminal
