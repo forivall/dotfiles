@@ -1,0 +1,9 @@
+{
+  "Local dependency": {
+    "prefix": "@ttc",
+    "body": [
+      "@ttc/${1:ttc-}\": \"file:../${2:custom-modules/ttc-}$1",
+    ],
+    "description": "Add a local dependency"
+  }
+}

@@ -211,7 +211,6 @@ args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/sche
 # [[grammar]]
 # name = "typescript"
 # # source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "75b3874edb2dc714fb1fd77a32013d0f8699989f", subpath = "typescript" }
-# # source = { git = "https://github.com/forivall/tree-sitter-typescript", rev = "4be8f0ef6db412cc5e6731625939813f8fd4f25f", subpath = "typescript" }
 # source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "b1bf4825d9eaa0f3bdeb1e52f099533328acfbdf", subpath = "typescript" }
 
 [[grammar]]

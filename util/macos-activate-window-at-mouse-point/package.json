@@ -1,0 +1,15 @@
+{
+  "name": "macos-activate-window-at-mouse-point",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "emily",
+  "license": "ISC",
+  "dependencies": {
+    "objc": "^0.23.0"
+  }
+}

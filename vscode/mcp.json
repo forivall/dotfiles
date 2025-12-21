@@ -1,0 +1,45 @@
+{
+	"servers": {
+		"github": {
+			"gallery": true,
+			"url": "https://api.githubcopilot.com/mcp/",
+			"type": "http"
+		},
+		"notion": {
+			"gallery": true,
+			"command": "npx",
+			"args": [
+				"-y",
+				"@notionhq/notion-mcp-server"
+			],
+			"env": {
+				"OPENAPI_MCP_HEADERS": {
+					"Authorization": "Bearer ${input:NOTION_TOKEN}",
+					"Notion-Version": "2022-06-28"
+				}
+			},
+			"type": "stdio"
+		},
+		"mongodb": {
+			"gallery": true,
+			"command": "npx",
+			"args": [
+				"-y",
+				"mongodb-mcp-server"
+			],
+			"type": "stdio"
+		},
+		"angular20-mcp": {
+			"command": "angular20-mcp",
+			"type": "stdio"
+		}
+	},
+	"inputs": [
+		{
+			"id": "NOTION_TOKEN",
+			"type": "promptString",
+			"description": "Notion API Token (https://www.notion.so/profile/integrations)",
+			"password": true
+		}
+	]
+}

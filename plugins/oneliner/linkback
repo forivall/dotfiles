@@ -1,2 +1,3 @@
 #!/usr/bin/env zsh
+# use to repair broken symlinks in an nvm or other version managed language runtime
 for l in $1/bin/*(@); do p=$(readlink $l); ln -s $1/${p#../} ${l##*/}; done

@@ -15,8 +15,6 @@ if (__configDir !== process.cwd()) {
   process.env.NODE_CONFIG_DIR = path.join(__configDir, 'config');
   console.log('NODE_CONFIG_DIR=' + process.env.NODE_CONFIG_DIR);
 }
-console.log('Starting mongo memory server and connecting. please wait.');
-var { MongoMemoryServer } = require('mongodb-memory-server');
 var mongoose = require('mongoose');
 function ObjectId(...args) { return new mongoose.Types.ObjectId(...args)}
 ObjectId.prototype = mongoose.Types.ObjectId.prototype;
@@ -26,15 +24,54 @@ function Decimal128(...args) { return new mongoose.Types.Decimal128(...args)}
 ObjectId.prototype = mongoose.Types.Decimal128.prototype;
 var mongod;
 var db;
-MongoMemoryServer.create().then(async (it) => {
+var tenantName = $CONNECT_REMOTE;
+var tenantDb;
+var tenant;
+var ttc;
+var fixtures = require(__configDir + '/jest/test_modules/ttc-generic-test-fixtures');
+if (tenantName) {
+  console.log(\`\rConnecting to tenant \${tenantName}...\`);
+  var { getTenantConfigDb } = require('@ttc/ttc-tenant-config-helper');
+  var { getDbByName } = require('@ttc/ttc-tenant-db-helper');
+  const { initMongoConnections } = require('@ttc/ttc-db-connection');
+  initMongoConnections().then(async (baseConnection) => {
+    console.log('Connected to', baseConnection.getClient().s.url);
+    tenantDb = getTenantConfigDb(baseConnection);
+    tenant = await tenantDb.models.Tenant.findOne({ name: tenantName });
+    if (!tenant) {
+      console.error('Tenant not found');
+      process.exit(1);
+    }
+    db = getDbByName(baseConnection, tenant.db_name);
+    ttc = require('@ttc/tenthousandcoffees-schema');
+    console.log('Loaded variables: mongoose, mongod, db, tenantDb, ttc');
+    process.stdout.write('> ');
+  });
+} else {
+tenantName = 'repl';
+console.log('\rStarting mongo memory server and connecting...');
+var { MongoMemoryServer } = require('mongodb-memory-server');
+var { mongodbMemoryServerOptions } = require(__configDir + '/jest-mongodb-config');
+MongoMemoryServer.create({
+  ...mongodbMemoryServerOptions,
+  instance: {
+    ...mongodbMemoryServerOptions.instance,
+    port: $port || mongodbMemoryServerOptions.instance.port
+  }
+}).then(async (it) => {
   mongod = it;
   const connected = await mongoose.connect(mongod.getUri(), {
     dbName: 'admin',
     maxPoolSize: 1,
   });
-  db = connected.connection;
+  // const DbTestHarness = require('@ttc/ttc-db-test-harness')
+  const DbTestHarness = require(__configDir + '/jest/test_modules/ttc-db-test-harness');
+  db = (await DbTestHarness.createTenantDb('repl')).db;
+  tenantDb = require('@ttc/ttc-tenant-config-helper').getTenantConfigDb(db);
   console.log('Connected to', mongod.getUri());
-  console.log('Loaded variables: mongoose, mongod, db');
+  ttc = require('@ttc/tenthousandcoffees-schema');
+  console.log('Loaded variables: mongoose, mongod, db, tenantDb, ttc');
   process.stdout.write('> ');
 });
+}
 "

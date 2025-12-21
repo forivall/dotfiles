@@ -10,7 +10,6 @@
   "apc.font.family": "SF Pro Display",
   "workbench.fontAliasing": "auto",
   "workbench.panel.showLabels": true, // broken in cursor
-  "workbench.secondarySideBar.showLabels": true, // broken in cursor
   // "editor.codeLensFontFamily": "Iosevka Comfy Wide",
   // "editor.codeLensFontFamily": "Recursive",
   // "editor.fontVariations": "'CASL' 0.5, 'MONO' 1",
@@ -476,7 +475,6 @@
   "editor.cursorBlinking": "phase",
   "editor.cursorSurroundingLines": 2,
   "editor.detectIndentation": true,
-  "editor.foldingImportsByDefault": true,
   "editor.showFoldingControls": "always",
   "editor.formatOnPaste": false,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
@@ -1235,7 +1233,7 @@
   "backAndForwardButtons.backText": "❮",
   "backAndForwardButtons.forwardText": "❯",
   "command aliases": {
-    "editor.action.formatDocument": "fmt",
+      "editor.action.formatDocument": "fmt",
     "explorer.newFile": "touch",
     "explorer.newFolder": "mkdir",
     "extension.multicommand.saveAndClose": "wq",
@@ -3764,7 +3762,7 @@
   "typescript.tsserver.log": "off",
   "angular.log": "terse",
   // "typescript.tsserver.useSyntaxServer": "always",
-  "typescript.tsserver.useSyntaxServer": "auto",
+  // "typescript.tsserver.useSyntaxServer": "auto",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.validate.enable": true,
   "typescript.workspaceSymbols.scope": "currentProject",
@@ -3918,6 +3916,9 @@
   "magit.display-buffer-function": "same-column",
   "magit.forge-enabled": true,
   "workbench.iconTheme": "catppuccin-mocha",
+  "css.enabledLanguages": [
+    "html"
+  ],    
   "icontheme.darkIconTheme": "catppuccin-mocha",
   "icontheme.lightIconTheme": "catppuccin-latte",
   "diffEditor.useInlineViewWhenSpaceIsLimited": false,
@@ -4086,6 +4087,9 @@
     "**/dist",
     "**/tests"
   ],
+  "cursor.composer.shouldAllowCustomModes": true,
+  "cursor.composer.queueMessageDefaultBehavior": "queue",
+  "cursor.enable_git_worktrees_setting": true,
   "cssVariables.languages": [
     "astro",
     "svelte",

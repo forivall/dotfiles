@@ -1,5 +1,15 @@
 local wezterm = require 'wezterm'
+
 local config = wezterm.config_builder()
+
+-- local modal = wezterm.plugin.require 'https://github.com/MLFlexer/modal.wezterm'
+-- modal.enable_defaults("https://github.com/MLFlexer/modal.wezterm")
+-- modal.apply_to_config(config)
+
+local toggle_terminal = wezterm.plugin.require("https://github.com/zsh-sage/toggle_terminal.wez")
+toggle_terminal.apply_to_config(config, {
+  
+})
 
 config.bold_brightens_ansi_colors = false
 

@@ -3874,6 +3874,7 @@
   "vscode-graphql.debug": false,
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.tsserver.nodePath": "/Users/emily.klassen/.nvm/versions/node/v22.19.0/bin/node-with-optimize-for-size",
   "typescript.tsserver.maxTsServerMemory": 7168,
   "typescriptExplorer.typeTree.readonly.enable": true,
   "diffEditor.experimental.useTrueInlineView": true,
@@ -3898,7 +3899,6 @@
   "catppuccin-noctis-icons.hidesExplorerArrows": false,
   "magit.display-buffer-function": "same-column",
   "magit.forge-enabled": true,
-  "workbench.iconTheme": "catppuccin-mocha",
   "icontheme.darkIconTheme": "catppuccin-mocha",
   "icontheme.lightIconTheme": "catppuccin-latte",
   "gitlens.telemetry.enabled": false,
@@ -3925,7 +3925,6 @@
   "github.copilot.editor.enableCodeActions": false,
   "markdown.editor.drop.enabled": "never",
   "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
-  "workbench.secondarySideBar.showLabels": false,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Use conventional commit message format."
@@ -3955,6 +3954,9 @@
   "terminal.integrated.smoothScrolling": true,
   "editor.inlineSuggest.edits.showCollapsed": true,
   "workbench.panel.showLabels": false,
+  "gitWorktree.worktree.loggingLevel": "Warn",
   "testing.coverageToolbarEnabled": true,
   "workbench.secondarySideBar.showLabels": false,
+  "mdb.mcp.server": "prompt",
+  "workbench.iconTheme": "catppuccin-mocha",
 }
