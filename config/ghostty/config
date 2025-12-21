@@ -1,0 +1,29 @@
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+# command = "direct:/opt/homebrew/bin/zsh"
+cursor-style = block
+cursor-style-blink = false
+macos-option-as-alt = true
+font-family = "FantasqueSansM Nerd Font"
+font-feature = -calt
+font-thicken = true
+font-thicken-strength = 0
+theme = "Tomorrow Night"
+background-image = /Users/emily.klassen/Pictures/Wallpapers/Japan daylight savings_tiler_blur.jpg
+background-image-opacity = 0.08
+background-image-fit = none
+# background-blur = 40
+# background-opacity = 0.92
+macos-icon = holographic
+# macos-icon = custom-style
+# macos-icon-frame = beige
+# macos-icon-ghost-color = #000000
+# macos-icon-screen-color = #000000
+
+# shell-integration = none
+shell-integration-features = no-cursor
+# window-padding-x = 2

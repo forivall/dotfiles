@@ -6,6 +6,8 @@
 
 unset CI
 
+[[ -o login ]] && [[ "$OSTYPE" == "darwin"* ]] && [[ $- == *i* ]] && printf '\33c\e[3J'
+
 # shellcheck disable=2298
 __zshrc_filename=${${(%):-%N}:A}
 __zshrc_dirname=${__zshrc_filename:h}

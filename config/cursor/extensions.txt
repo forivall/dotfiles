@@ -14,6 +14,7 @@ chrislajoie.vscode-modelines
 circleci.circleci
 codeandstuff.vscode-navigate-edit-history
 cyrilletuzi.angular-schematics
+cytostatic-vscode.mjml-editor
 dbaeumer.vscode-eslint
 dnut.rewrap-revived
 dummy.vscode-jq
@@ -29,8 +30,10 @@ graphql.vscode-graphql
 graphql.vscode-graphql-syntax
 gregoire.dance
 gruntfuggly.activitusbar
+iliazeus.vscode-ansi
 jq-syntax-highlighting.jq-syntax-highlighting
 mareksapota.mrutabs
+mjmlio.vscode-mjml
 mongodb.mongodb-vscode
 ms-python.debugpy
 ms-python.mypy-type-checker

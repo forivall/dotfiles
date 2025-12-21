@@ -260,7 +260,6 @@
   "workbench.preferredHighContrastColorTheme": "Monochrome Dark Amplified (fork by dkamyshov)",
   "workbench.preferredHighContrastLightColorTheme": "Monochrome Light Amplified (fork by dkamyshov)",
   "workbench.preferredLightColorTheme": "Boxy Yesterday",
-  "workbench.quickOpen.closeOnFocusLost": true,
   "workbench.sash.size": 4,
   "workbench.settings.applyToAllProfiles": [
     "window.autoDetectColorScheme",
@@ -1680,7 +1679,7 @@
         "l": { "text": "Send to New Chat context",                      "command": "aichat.newchataction"},
         "L": { "text": "Send to Agent",                                 "command": "composer.sendToAgent"},
         // "U": { "text": "Add Selection to Copilot Context",              "command": "workbench.action.chat.attachSelection"},
-        "A": { "text": "View All Agents",                               "command": "workbench.action.openAgentsView"},
+        "A": { "text": "Toggle Agent View",                               "command": "cursor.toggleAgentWindowIDEUnification"},
         "Z": { "text": "Toggle Inline Suggestions Show Collapsed",      "command": "editor.action.inlineSuggest.toggleShowCollapsed" },
         "v": { "text": "Open television picker",                        "command": "television.ToggleFileFinder"                                            },
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },

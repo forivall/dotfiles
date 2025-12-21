@@ -47,6 +47,12 @@
     "enabled_in_text_threads": false,
     "disabled_globs": ["*.md"]
   },
+  "agent_servers": {
+    "Cursor": {
+      "type": "custom",
+      "command": "cursor-agent-acp"
+    }
+  },
   "agent": {
     "default_profile": "ask",
     "default_model": {

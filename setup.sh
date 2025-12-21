@@ -95,6 +95,8 @@ o ln -fs "$(realpath config/serie)" ~/.config/serie
 o ln -fs "$(realpath config/yazi)" ~/.config/yazi
 o ln -fs "$(realpath config/wezterm)" ~/.config/wezterm
 o ln -fs "$(realpath config/carapace)" $UserConfigDir/carapace
+GHOSTTY_CONFIG_DIR=ghostty; $IS_OSX && GHOSTTY_CONFIG_DIR=com.mitchellh.ghostty
+o ln -fs "$(realpath config/ghostty)" $UserConfigDir/$GHOSTTY_CONFIG_DIR
 
 o ln -fs "$(realpath colordiffrc)" ~/.colordiffrc
 o ln -fs "$(realpath bash/bash_completion)" ~/.bash_completion
