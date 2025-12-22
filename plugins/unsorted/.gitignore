@@ -1,3 +1,4 @@
 /bin/256test.sh
 /_carapace
 cursor-shell-integration.source.zsh
+activate_mise.source.zsh
