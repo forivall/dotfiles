@@ -15,23 +15,26 @@ cmds=(
   'npm install -g git-file-history'
   'npm install -g graphql-language-service-cli'
 
-  'cargo install bingrep'
-  'cargo install consoletimer'
-  'cargo install ddh'
-  'cargo install dtg'
-  'cargo install drft'
-  'cargo install huniq'
+  # 'brew install cargo-binstall'
+  'cargo binstall cargo-update'
+  'cargo binstall bingrep'
+  'cargo binstall consoletimer'
+  'cargo binstall ddh'
+  'cargo binstall dtg'
+  'cargo binstall drft'
+  'cargo binstall huniq'
   # 'cargo install hx' # hex editor, conflicts with helix
-  'cargo install pueue'
-  'cargo install runiq'
-  'cargo install hx-lsp'
+  'cargo binstall pueue'
+  'cargo binstall runiq'
+  'cargo binstall hx-lsp'
   # 'cargo install sl_cli'
   'cargo install --git https://github.com/estin/simple-completion-language-server.git'
-  'cargo install toml-cli'
-  'cargo install viu'
-  'cargo install gh-xplr'
+  'cargo binstall toml-cli'
+  'cargo binstall viu'
+  'cargo binstall gh-xplr'
   # 'cargo install tree-grepper'
   'LIBSQLITE3_FLAGS="-DSQLITE_ENABLE_MATH_FUNCTIONS" cargo install intelli-shell --locked'
+  'cargo install-update --all'
 
   'pipx install simple-term-menu'
   'pipx install termdown'
@@ -59,12 +62,13 @@ cmds=(
 
 if [[ "$(uname)" != "Darwin" ]]; then cmds+=(
   # already installed with brew
-  'cargo install bkmr'
-  'cargo install sd'
+  'cargo binstall bkmr'
+  'cargo binstall sd'
 ); fi
 
 alias pip='python3 -m pip'
 
+needs_binstall=true
 for c in $cmds; do
   cmd=(${=c})
   cmd_installer=
@@ -75,6 +79,10 @@ for c in $cmds; do
     fi
   done
   if [[ -n "$installer" && "$cmd_installer" != "$installer" ]]; then continue; fi
+  if [[ "$installer" == cargo ]] && $needs_binstall; then
+    whence cargo-binstall || brew install cargo-binstall
+    needs_binstall=false
+  fi
   echo $c
   eval $c
 done
