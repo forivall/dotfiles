@@ -29,6 +29,52 @@ aliases:
   b: browse
   bf: '!open "$(gh browse --no-browser --commit=$(git rev-parse HEAD) $1)#$2"'
   co: pr checkout
+  copilot-generate-commit-message: |
+    !
+    GH_AUTH_TOKEN_ARGS=()
+    if [[ -n "$GH_COPILOT_USER" ]]; then
+      GH_AUTH_TOKEN_ARGS+=(--user $GH_COPILOT_USER)
+    fi
+
+    (
+      for f in $(git diff-index --cached --name-only HEAD); do
+        printf '%s\0%s\n' "${f}" "$(git diff-index --cached --patch --no-prefix HEAD "$f" | base64 -w0)"
+      done
+    ) | jq --raw-input --slurp --compact-output '{
+      messages: [{
+        role: "user",
+        content: "",
+        copilot_references:(
+          . | rtrimstr("\n") | split("\n") | map(
+            split("\u0000") |
+            {type:"github.diff-hunk",data:{type:"diff-hunk","changeReference":"",headerContext:"",fileName: .[0],diff:.[1]|@base64d}}
+          )
+        ),
+      }],
+      temperature: 0.3,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          description: "The schema to abide by when generating commit message output",
+          name: "commit_message_response",
+          strict: true,
+          schema: {
+            type: "object",
+            properties: {
+              title: { type: "string", description: "The commit message title/summary" },
+              description: { type: "string", description: "The commit message description/body" }
+            },
+            required: ["title", "description"],
+            additionalProperties: false
+          }
+        }
+      }
+    }' |
+    gh api "$@" -H "Authorization:$(gh auth token "${GH_AUTH_TOKEN_ARGS[@]}")" -H 'copilot-integration-id:commit-msg-gen' \
+      https://api.individual.githubcopilot.com/agents/github-commit-message-generation --input - |
+    rg '^data: *' --replace '' |
+    rg -v --fixed-strings '[DONE]' |
+    jq -r '.choices[0].message.content | fromjson | .title + (if .description == "" then "" else "\n\n" + .description end)'
   mrb: pr view --web
   prb: pr view --web
   prc: pr create --web
