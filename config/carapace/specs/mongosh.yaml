@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: mongosh
+description: MongoDB Shell
+flags:
+  -h, --help: Show this usage information
+  -f, --file=: Load the specified mongosh script
+  --host=: Server to connect to
+  --port=: Port to connect to
+  --build-info: Show build information
+  --version: Show version information
+  --quiet: Silence output from the shell during the connection process
+  --shell: Run the shell after executing files
+  --nodb: Don't connect to mongod on startup - no 'db address' [arg] expected
+  --norc: Will not run the '.mongoshrc.js' file on start up
+  --eval=: Evaluate javascript
+  --json=: Print result of --eval as Extended JSON, including errors
+  --retryWrites=: 'Automatically retry write operations upon transient network errors (Default: true)'
+  -u, --username=: Username for authentication
+  -p, --password=: Password for authentication
+  --authenticationDatabase=: User source (defaults to dbname)
+  --authenticationMechanism=: Authentication mechanism
+  --awsIamSessionToken=: AWS IAM Temporary Session Token ID
+  --gssapiServiceName=: Service name to use when authenticating using GSSAPI/Kerberos
+  --sspiHostnameCanonicalization=: Specify the SSPI hostname canonicalization (none or forward, available on Windows)
+  --sspiRealmOverride=: Specify the SSPI server realm (available on Windows)
+  --tls: Use TLS for all connections
+  --tlsCertificateKeyFile=: PEM certificate/key file for TLS
+  --tlsCertificateKeyFilePassword=: Password for key in PEM file for TLS
+  --tlsCAFile=: Certificate Authority file for TLS
+  --tlsAllowInvalidHostnames: Allow connections to servers with non-matching hostnames
+  --tlsAllowInvalidCertificates: Allow connections to servers with invalid certificates
+  --tlsCertificateSelector=: TLS Certificate in system store (Windows and macOS only)
+  --tlsCRLFile=: Specifies the .pem file that contains the Certificate Revocation List
+  --tlsDisabledProtocols=: Comma separated list of TLS protocols to disable [TLS1_0,TLS1_1,TLS1_2]
+  --tlsFIPSMode: Enable the system TLS library's FIPS mode
+  --apiVersion=: Specifies the API version to connect with
+  --apiStrict: Use strict API version mode
+  --apiDeprecationErrors: Fail deprecated commands for the specified API version
+  --awsAccessKeyId=: AWS Access Key for FLE Amazon KMS
+  --awsSecretAccessKey=: AWS Secret Key for FLE Amazon KMS
+  --awsSessionToken=: Optional AWS Session Token ID
+  --keyVaultNamespace=: database.collection to store encrypted FLE parameters
+  --kmsURL=: Test parameter to override the URL of the KMS endpoint
+  --oidcFlows=: Supported OIDC auth flows
+  --oidcRedirectUri=: Local auth code flow redirect URL [http://localhost:27097/redirect]
+  --oidcTrustedEndpoint: Treat the cluster/database mongosh as a trusted endpoint
+  --oidcIdTokenAsAccessToken: Use ID tokens in place of access tokens for auth
+  --oidcDumpTokens=: Debug OIDC by printing tokens to mongosh's output [redacted|include-secrets]
+  --oidcNoNonce: Don't send a nonce argument in the OIDC auth request
+completion:
+  flag:
+    json: ["canonical", "relaxed"]
+    retryWrites: ["true", "false"]
+    authenticationMechanism: ["SCRAM-SHA-1", "SCRAM-SHA-256", "MONGODB-X509", "GSSAPI", "PLAIN", "MONGODB-AWS", "MONGODB-OIDC"]
+    sspiHostnameCanonicalization: ["none", "forward"]
+    tlsDisabledProtocols: ["TLS1_0", "TLS1_1", "TLS1_2"]
+    oidcFlows: ["auth-code", "device-auth"]
+    oidcDumpTokens: ["redacted", "include-secrets"]
+    file: ["$files"]
+    tlsCertificateKeyFile: ["$files"]
+    tlsCAFile: ["$files"]
+    tlsCRLFile: ["$files"]
+    kmsURL: ["$urls"]
+  positional:
+    - ["$directories"]
+    - ["$files{.js,.mongodb}"]
