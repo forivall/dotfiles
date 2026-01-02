@@ -44,9 +44,10 @@ def get_processes():
 
 
 class ReviveError(Exception):
-    def __init__(self, *args, apps: dict[str, psutil.Process], **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, apps: dict[str, psutil.Process], restart=False):
+        super().__init__(*args)
         self.missing = tuple(set(APPS).difference(apps.keys()))
+        self.restart = restart
 
 
 def do_revive(restart=False, strict=False) -> dict[str, psutil.Process]:
