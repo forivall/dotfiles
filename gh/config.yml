@@ -31,21 +31,45 @@ aliases:
   co: pr checkout
   copilot-generate-commit-message: |
     !
+    set -eo pipefail
+    OPTS_SPEC="\
+    gh copilot-generate-commit-message [<options>] <args>...
+    --
+    h,help      show the help
+    c,commit=    generate commit message for given commit
+    "
+    eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
+    DIFF_COMMAND=(diff-index --cached HEAD)
+    index=0
+    for arg in $@; do
+      index=$((index+1))
+      case "$arg" in
+        --commit=*) COMMIT="${arg#--commit=}"; DIFF_COMMAND=(diff-tree -r $COMMIT^ $COMMIT) ;;
+        --) break; ;;
+      esac
+    done
+    shift $index
+
+    CHANGED_FILES=($(git "${DIFF_COMMAND[@]}" --name-only))
+    if [[ ${#CHANGED_FILES} -eq 0 ]]; then
+      echo "no files staged / changed" >&2
+      exit 1
+    fi
     GH_AUTH_TOKEN_ARGS=()
     if [[ -n "$GH_COPILOT_USER" ]]; then
       GH_AUTH_TOKEN_ARGS+=(--user $GH_COPILOT_USER)
     fi
-
+    GH_AUTH_TOKEN="$(gh auth token "${GH_AUTH_TOKEN_ARGS[@]}")"
     (
-      for f in $(git diff-index --cached --name-only HEAD); do
-        printf '%s\0%s\n' "${f}" "$(git diff-index --cached --patch --no-prefix HEAD "$f" | base64 -w0)"
+      for f in "${CHANGED_FILES[@]}"; do
+        printf '%s\0%s\n' "${f}" "$(git "${DIFF_COMMAND[@]}" --patch --no-prefix "$f" | base64 -w0)"
       done
-    ) | jq --raw-input --slurp --compact-output '{
+    ) | jq --raw-input --slurp --compact-output '. | rtrimstr("\n") | if . == "" then halt_error(1) else {
       messages: [{
         role: "user",
         content: "",
         copilot_references:(
-          . | rtrimstr("\n") | split("\n") | map(
+          . | split("\n") | map(
             split("\u0000") |
             {type:"github.diff-hunk",data:{type:"diff-hunk","changeReference":"",headerContext:"",fileName: .[0],diff:.[1]|@base64d}}
           )
@@ -69,8 +93,8 @@ aliases:
           }
         }
       }
-    }' |
-    gh api "$@" -H "Authorization:$(gh auth token "${GH_AUTH_TOKEN_ARGS[@]}")" -H 'copilot-integration-id:commit-msg-gen' \
+    } end' |
+    gh api "$@" -H "Authorization:$GH_AUTH_TOKEN" -H 'copilot-integration-id:commit-msg-gen' \
       https://api.individual.githubcopilot.com/agents/github-commit-message-generation --input - |
     rg '^data: *' --replace '' |
     rg -v --fixed-strings '[DONE]' |
