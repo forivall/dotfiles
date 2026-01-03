@@ -61,7 +61,7 @@ typeset -a command
 
 if $by_commit; then
   #for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r
-  command=(git for-each-ref --sort=-$sort --format="%(${sort}:${date}) %(refname:short)|%(refname:short)" --count=$NUM $pattern)
+  command=(git for-each-ref --sort=-$sort --format="%(${sort}:${date}) %(refname:short)|%(refname:short)" --count=$NUM $(git config --get log.allExcludes) $pattern)
   "${command[@]}" |
   while read line; do entries+=($line); done
 elif $by_creation; then
