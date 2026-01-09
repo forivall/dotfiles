@@ -149,6 +149,7 @@ export FORGIT_DIFF_PAGER="deltaw \
   --file-style omit \
   --file-decoration-style '' \
   --hunk-header-decoration-style '' "
+export FORGIT_STATUS_COMMAND="git st"
 
 ## zsh-nvm settings
 export NVM_COMPLETION=true
@@ -156,6 +157,7 @@ export NVM_LAZY_LOAD=true
 sourceIfExists "${__zshrc_dirname}/plugins/nvm/cache"
 
 export DIRENV_WARN_TIMEOUT=1m
+export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
 
 # TODO: use https://github.com/Schniz/fnm instead?
 export TSC_NONPOLLING_WATCHER=true

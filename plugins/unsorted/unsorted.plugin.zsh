@@ -159,6 +159,61 @@ isvg() {
   rsvg-convert "$@" | imgcat
 }
 
+async_run_job_sync() {
+  local callback=$1
+  local jobname=$2
+  shift 1
+	float -F duration=$EPOCHREALTIME
+
+	local has_xtrace=0
+	[[ -o xtrace ]] && {
+		has_xtrace=1
+		unsetopt xtrace
+	}
+
+  out="$(
+    local stdout stderr ret tok
+    {
+      stdout=$(eval "$@")
+      ret=$?
+      duration=$(( EPOCHREALTIME - duration ))  # Calculate duration.
+
+      print -r -n - ${(q)jobname} $ret ${(q)stdout} $duration
+    } 2> >(stderr=$(command -p cat) && print -r -n - " "${(q)stderr})
+  )"
+
+	# Return output (<job_name> <return_code> <stdout> <duration> <stderr>).
+	items=("${(@Q)${(z)out}}")
+	(( has_xtrace )) && setopt xtrace
+	$callback "${items[@]}"
+}
+
+prompt_pure_sync_refresh() {
+	prompt_pure_check_cmd_exec_time
+	unset prompt_pure_cmd_timestamp
+	prompt_pure_set_title 'expand-prompt' '%~'
+	prompt_pure_set_colors
+	async_run_job_sync prompt_pure_async_callback prompt_pure_async_vcs_info
+	async_run_job_sync prompt_pure_async_callback prompt_pure_async_git_arrows
+	async_run_job_sync prompt_pure_async_callback prompt_pure_async_git_dirty ${PURE_GIT_UNTRACKED_DIRTY:-1}
+	prompt_pure_preprompt_render
+}
+
+prompt_pure_run_cmd() {
+  prompt_pure_sync_refresh
+  print
+  if [[ $1 == '-p' ]]; then
+    shift 1
+    print -Pn $PROMPT
+    echo "$*"
+  else
+    print -P ${PROMPT%$'\n'*}
+  fi
+	typeset -g prompt_pure_cmd_timestamp=$EPOCHSECONDS
+	prompt_pure_set_title 'ignore-escape' "$PWD:t: $*"
+  "$@"
+}
+
 if [[ $IS_OSX && "$TERM_PROGRAM" == "vscode" ]]; then
   code() {
     if [[ "$1" == "--goto" ]]; then
