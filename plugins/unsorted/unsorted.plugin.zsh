@@ -188,6 +188,10 @@ async_run_job_sync() {
 	$callback "${items[@]}"
 }
 
+prompt_pure_reset_time() {
+  typeset -g prompt_pure_cmd_timestamp=$EPOCHSECONDS
+}
+
 prompt_pure_sync_refresh() {
 	prompt_pure_check_cmd_exec_time
 	unset prompt_pure_cmd_timestamp
@@ -209,8 +213,8 @@ prompt_pure_run_cmd() {
   else
     print -P ${PROMPT%$'\n'*}
   fi
-	typeset -g prompt_pure_cmd_timestamp=$EPOCHSECONDS
 	prompt_pure_set_title 'ignore-escape' "$PWD:t: $*"
+  prompt_pure_reset_time
   "$@"
 }
 
