@@ -195,7 +195,7 @@ aliases:
     done
   pr-unresolved-comments-first: '!gh pr-unresolved-comments-gql "$@" | jq -r ''nth(0) | .path + " +" + (.line|tostring)'''
   pr-unresolved-comments-gql: '!
-    if [[ $# -gt 0 ]]; then n=$1; shift; else n=$(gh pr view --json number --jq .number); fi;
+    if [[ $# -gt 0 ]]; then n=$1; shift; else n=${GH_PR-$(gh pr view --json number --jq .number)}; fi;
     gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -F "pr=$n" "$@" -f query=''
       query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
         repository(owner: $owner, name: $repo) {
