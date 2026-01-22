@@ -8,11 +8,36 @@ __dirname=${0:h}
 autoload colors && colors
 
 prompt_and_delete() {
-  echo -n "Delete merged branch $1? (y/N) "
+  local branch_name="$1"
+  local has_remote=false
+  local remote_rev remote_name remote_branch
+  if remote_rev=$(git rev-parse --symbolic-full-name ${branch_name}@{u}) ||
+     remote_rev=$(git rev-parse --symbolic-full-name origin/$branch_name);
+  then
+    has_remote=true
+    remote_rev=${remote_rev#refs/remotes/}
+    remote_name=${remote_rev%%/*}
+    remote_branch=${remote_rev#*/}
+  fi
+  if $has_remote; then
+    echo -n "Delete remote for branch $branch_name? (y/N) "
+    read -k 1 yn
+    echo
+    if [[ $yn == y ]] ; then
+      if git ls-remote --exit-code $remote_name $remote_branch > /dev/null; then
+        git push $remote_name :$remote_branch
+      else
+        git branch -d -r $remote_name/$remote_branch
+      fi
+    fi
+  fi
+  echo -n "Delete merged branch $branch_name? (y/N) "
   read -k 1 yn
   echo
   if [[ $yn == y ]] ; then
-    git branch -d $1
+    git branch -d $branch_name
+  else
+    return 0
   fi
 }
 

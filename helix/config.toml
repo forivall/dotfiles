@@ -59,6 +59,7 @@ right = [
 "x" = ":sh gh pr-file-viewed '%{buffer_name}'"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 "L" = ":sh it2split --no-focus git logd -w -L'%{selection_line_start},%{selection_line_end}:%{buffer_name}'"
+"C-l" = ":sh it2split --no-focus git diffd -w $HELIX_GIT_HEAD -- '%{buffer_name}'"
 "u" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
 "C-u" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"

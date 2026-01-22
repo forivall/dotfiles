@@ -146,6 +146,7 @@ aliases:
         pullRequest { number files { totalCount } }
       }
     }'''
+  pr-file-unviewed: gh pr-file-unviewed-gql "$1" --jq ''.data.markFileAsViewed.pullRequest | ("#" + (.number | tostring) + " " + (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" + (.files.totalCount | tostring))'''
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
   pr-unresolved-comments: |
     !
