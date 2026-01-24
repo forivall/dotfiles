@@ -3,13 +3,15 @@
 __dirname=${0:A:h}
 
 if $IS_OSX; then
-  path+=(~/Library/Python/3.10/bin)
+  path+=(~/Library/Python/3.14/bin)
 fi
 
-poetry completions zsh > $__dirname/_poetry
-pdm completion > $__dirname/_pdm
+poetry completions zsh > "$__dirname/_poetry"
+pdm completion > "$__dirname/_pdm"
 
-curl -L https://raw.githubusercontent.com/mkoskar/pyenv/nicer-zsh-completion/completions/pyenv.zsh > $__dirname/_pyenv
-echo _pyenv >> $__dirname/_pyenv
+curl -L https://raw.githubusercontent.com/mkoskar/pyenv/nicer-zsh-completion/completions/pyenv.zsh > "$__dirname/_pyenv"
+echo _pyenv >> "$__dirname/_pyenv"
 
-pyenv init - > $__dirname/pyenv-init.sh
+pyenv init - > "$__dirname/pyenv-init.sh"
+sd 'command pyenv rehash' '# $1' "$__dirname/pyenv-init.sh"
+
