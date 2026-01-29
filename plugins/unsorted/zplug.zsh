@@ -23,8 +23,12 @@ mise activate zsh > $__dirname/activate_mise.source.zsh
 echo "Generating cursor shell integration"
 CURSOR_INTEGRATION=$__dirname/cursor-shell-integration.source.zsh
 cursor-agent shell-integration zsh > $CURSOR_INTEGRATION
-echo "Patching cursor shell integration for performance"
-sd 'exec (~/.local/bin/)?(cursor-?)agent record' '# $0' $CURSOR_INTEGRATION
+echo "Patching cursor shell integration for performance and bug fixes"
+sd --fixed-strings '
+if [[ -z "$CURSOR_RECORD_SESSION" ]]; then' '
+# Only enable session recording if we'\''re in a TTY
+if [[ -t 0 && -z "$CURSOR_RECORD_SESSION" ]]; then' $CURSOR_INTEGRATION
+# sd 'exec (~/.local/bin/)?(cursor-)?agent record' '# $0' $CURSOR_INTEGRATION
 sd --fixed-strings '$(cursor --locate-shell-integration-path zsh)' "${(qq)$(cursor --locate-shell-integration-path zsh)}" $CURSOR_INTEGRATION
 sd --fixed-strings '
 # Create a new chat session at the start of each shell session
