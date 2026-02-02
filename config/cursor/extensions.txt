@@ -33,6 +33,7 @@ gruntfuggly.activitusbar
 iliazeus.vscode-ansi
 jq-syntax-highlighting.jq-syntax-highlighting
 mareksapota.mrutabs
+mechatroner.rainbow-csv
 mjmlio.vscode-mjml
 mongodb.mongodb-vscode
 ms-python.debugpy

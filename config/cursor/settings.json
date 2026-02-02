@@ -1394,7 +1394,7 @@
           "p = pairs.find((p) => p.includes(c));",
           "await x('dance.edit.delete');",
           "await x('dance.selections.restore', { register: 'surround' });",
-          "await x('dance.select.right.extend');",
+          // "await x('dance.select.right.extend');",
           "await x('editor.action.insertSnippet', { snippet: (p?.at(0) || c) + '${TM_SELECTED_TEXT}' + (p?.at(1) || c) });",
           "await x('dance.selections.restore');",
           "Selections.updateWithFallbackByIndex((i, sel) => o[i]);",
@@ -4100,5 +4100,10 @@
     "javascriptreact",
     "typescriptreact",
     "source.css.styled"
+  ],
+  "mdb.mcp.disabledTools": [
+    "update",
+    "delete",
+    "create"
   ],
 }
