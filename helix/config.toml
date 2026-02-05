@@ -62,6 +62,7 @@ right = [
 "C-l" = ":sh it2split --no-focus git diffd -w $HELIX_GIT_HEAD -- '%{buffer_name}'"
 "u" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
 "C-u" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
+"C-v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
 
 [keys.insert]

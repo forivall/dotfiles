@@ -173,6 +173,7 @@
 	push-feature-deploy = !git-push-feature-deploy
 	resolve-conflicts = !git-resolve-conflicts
 	addu = add -u
+	addg = !git-addg
 
 [color]
 	# diff = always

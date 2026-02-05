@@ -63,4 +63,4 @@ completion:
     kmsURL: ["$urls"]
   positional:
     - ["$directories"]
-    - ["$files{.js,.mongodb}"]
+    - ["$files([.js,.mongodb])"]

@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 run-in-terminal-split() {
-  python3 -c '
+  python3.12 -c '
 import iterm2
 import shlex
 import sys
@@ -73,8 +73,13 @@ jest-toplevel() {
       break
     fi
   done
-  echo npx --prefix=$PWD jest --config "$toplevelConfig" "${jestArgs[@]}"
-  npx --prefix=$PWD jest --config "$toplevelConfig" "${jestArgs[@]}"
+  if [[ -z $cdup ]]; then
+    echo node node_modules/.bin/jest "${jestArgs[@]}";
+    node node_modules/.bin/jest "${jestArgs[@]}";
+  else
+    echo npx --prefix=$PWD jest --config "$toplevelConfig" "${jestArgs[@]}"
+    npx --prefix=$PWD jest --config "$toplevelConfig" "${jestArgs[@]}"
+  fi
 }
 
 resolve_path() {

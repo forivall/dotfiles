@@ -17,6 +17,7 @@ if $IS_OSX ; then
   GIT_CONTRIB_ROOT="${GIT_REALPATH%/bin/git}/share/git-core/contrib"
 fi
 
+compdef git-addg=rg
 # for alias in g ga gap gam gcb gcm gco gcp gcs gcsb gd gds gdd gdds ge gf gfo gitify gg gl gla glf glfg glg glga glgs glgas gp gpr gprs gps gst gti gts gtv gtl gwip gunwip ; do
 #   whence $alias && echo "warning: $alias already set"
 # done
