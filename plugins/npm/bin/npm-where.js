@@ -204,12 +204,12 @@ class Where extends ArboristWorkspaceCmd {
         const flags = peer
           ? 'peer'
           : devOptional
-            ? 'devopt'
-            : dev
-              ? 'dev'
-              : optional
-                ? 'opt'
-                : ''
+          ? 'devopt'
+          : dev
+          ? 'dev'
+          : optional
+          ? 'opt'
+          : ''
         return dependents
           .map(({ spec, from, latest }) => ({
             spec,
@@ -287,7 +287,13 @@ class Where extends ArboristWorkspaceCmd {
     columns[lastColumn].wrapWord = true
     columns[lastColumn].width = Math.min(
       columns[lastColumn].width,
-      Math.max(20, Math.max(80, process.stdout.columns) - space),
+      Math.max(
+        20,
+        Math.max(
+          80,
+          process.stdout.columns || parseInt(process.env.COLUMNS, 10) || 0
+        ) - space
+      )
     )
 
     return this.rawOutput(

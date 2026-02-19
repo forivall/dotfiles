@@ -55,6 +55,7 @@ pranaygp.vscode-css-peek
 prisma.prisma
 rioj7.html-related-links
 ryuta46.multi-command
+sleistner.vscode-fileutils
 telesoho.vscode-markdown-paste-image
 trixnz.go-to-method
 trongthanh.theme-boxythemekit

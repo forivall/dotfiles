@@ -3273,6 +3273,9 @@
     "https://gistcdn.githack.com/forivall/2b36021f5bf4808e391e0a37bcc2e3af/raw/cb58f590ffcc4776ed374442fcd2434cfbaa53db/bulma-noreset-nogeneric.css",
     "https://gistcdn.githack.com/forivall/bb0f2bc677a9666fa5c605a27ca74957/raw/085763836a262d13c8bbbff44af3f432191789df/github-markdown-color-mod-vscode.css"
   ],
+  "markdown.editor.drop.enabled": "never",
+  "markdown.links.openLocation": "beside",
+  "markdown.extension.toc.updateOnSave": false,
   "markdownlint.config": {
     "first-line-h1": false,
     "header-increment": false,
@@ -3908,7 +3911,6 @@
     "path": "direnv",
     "args": ["exec", ".", "zsh"]
   },
-  "markdown.extension.toc.updateOnSave": false,
   "workbench.layoutControl.enabled": false,
   "playwright.reuseBrowser": true,
   "helium-icon-theme.hidesExplorerArrows": true,
@@ -3939,7 +3941,6 @@
   "filefocus.sortKey": "path",
   "git-graph.commitDetailsView.location": "Docked to Bottom",
   "github.copilot.editor.enableCodeActions": false,
-  "markdown.editor.drop.enabled": "never",
   "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {

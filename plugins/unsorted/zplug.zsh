@@ -28,7 +28,7 @@ sd --fixed-strings '
 if [[ -z "$CURSOR_RECORD_SESSION" ]]; then' '
 # Only enable session recording if we'\''re in a TTY
 if [[ -t 0 && -z "$CURSOR_RECORD_SESSION" ]]; then' $CURSOR_INTEGRATION
-# sd 'exec (~/.local/bin/)?(cursor-)?agent record' '# $0' $CURSOR_INTEGRATION
+sd 'exec (~/.local/bin/)?(cursor-)?agent record' '# $0' $CURSOR_INTEGRATION
 sd --fixed-strings '$(cursor --locate-shell-integration-path zsh)' "${(qq)$(cursor --locate-shell-integration-path zsh)}" $CURSOR_INTEGRATION
 sd --fixed-strings '
 # Create a new chat session at the start of each shell session
