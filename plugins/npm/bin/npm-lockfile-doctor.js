@@ -323,6 +323,10 @@ class LockfileDoctor extends ArboristWorkspaceCmd {
     const pruned = []
     if (rootDepNode) {
       for (const node of nodeSet) {
+        const other = (node.resolveParent.resolveParent?.resolve(node.name));
+        if (other === rootDepNode && !node.overrides) {
+          node.overrides = other.overrides;
+        }
         if (node.canDedupe(options.preferDedupe)) {
           for (const depNode of gatherDeps(
             node,

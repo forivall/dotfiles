@@ -217,7 +217,8 @@ args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/sche
 [[grammar]]
 name = "angular"
 # source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "d1f24a8890462cb740909ff62a3a079cded288bc" }
-source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "df5d783d9afb45566afa03db129190253b46771b" }
+# source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "df5d783d9afb45566afa03db129190253b46771b" }
+source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "afaf0dc8930486a2159d35af5d0aff4e95dfc887" }
 
 [[grammar]]
 name = "zsh"
@@ -250,9 +251,16 @@ indent = { tab-width = 2, unit = "  " }
 [[language]]
 name = "json"
 auto-format = false
-# config = { "provideFormatter" = false, "json" = { "keepLines" = { "enable" = true } } }
-# config = { "json" = { "validate" = { "enable" = true } } }
-formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
+# formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
+language-servers = [ "prettier-lsp", "vscode-json-language-server" ]
+
+[[language]]
+name = "jsonc"
+language-servers = [
+  "prettier-lsp",
+  "vscode-json-language-server",  
+  { name = "vtsls", except-features = ["format"] },
+]
 
 [[language]]
 name = "git-commit"

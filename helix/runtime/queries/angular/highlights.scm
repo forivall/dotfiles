@@ -2,12 +2,12 @@
 
 (identifier) @variable
 
+
+(style_unit) @variable
+
 (pipe_operator) @operator
 
-[
-  (string)
-  (static_member_expression)
-] @string
+(string) @string
 
 (number) @number
 
@@ -28,6 +28,12 @@
 
 (binding_name
   (identifier) @keyword)
+
+(class_binding
+  [
+    (identifier)
+    (class_name)
+  ] @keyword)
 
 (event_binding
   (binding_name

@@ -64,6 +64,7 @@ right = [
 "C-u" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
 "C-v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
+"C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
 
 [keys.insert]
 "C-space" = "completion"
