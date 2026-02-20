@@ -4,13 +4,19 @@ __filename=${0:A}
 __dirname=${__filename:h}
 
 function generate_completions() {
-  local compfile="${__dirname}/_$1"
-  echo "Generating completion for $1..." >&2
-  $@ > $compfile
+  if (( ${+commands[$1]} )); then
+    local compfile="${__dirname}/_$1"
+    echo "Generating completion for $1..." >&2
+    $@ > $compfile
+  else
+    echo "Command $1 not found. Completions not generated" >&2
+  fi
 }
 generate_completions rustup completions zsh
 generate_completions srgn --completions zsh
 generate_completions dua completions zsh
+generate_completions mcat --generate zsh
+COMPLETE=zsh generate_completions treemd
 tv init zsh > ${__dirname}/tv-init.zsh
 intelli-shell init zsh > ${__dirname}/intelli-shell-init.zsh
 patch -p3 -f -i tv-init.patch
