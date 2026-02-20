@@ -1412,6 +1412,10 @@
     "command": "-editor.action.inlineSuggest.acceptNextWord",
     "when": "cppSuggestion && !editorReadonly || inlineSuggestionVisible && !editorReadonly"
   },
+  {
+    "key": "shift+cmd+a",
+    "command": "ast-grep.search.input.focus"
+  },
 
   // End.
 

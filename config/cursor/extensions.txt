@@ -5,6 +5,7 @@ angular.ng-template
 anweber.swapf
 anysphere.cursorpyright
 arturodent.command-alias
+ast-grep.ast-grep-vscode
 be5invis.vscode-custom-css
 bierner.markdown-preview-github-styles
 biomejs.biome
