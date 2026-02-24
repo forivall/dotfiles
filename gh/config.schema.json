@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cli.github.com/manual/gh_config",
+  "title": "GitHub CLI (gh) configuration",
+  "description": "Configuration settings for gh. See https://cli.github.com/manual/gh_config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "spinner": {
+      "type": "string",
+      "enum": ["enabled", "disabled"],
+      "default": "enabled",
+      "description": "Whether to use an animated spinner as a progress indicator."
+    },
+    "accessible_prompter": {
+      "type": "string",
+      "enum": ["enabled", "disabled"],
+      "default": "disabled",
+      "description": "Whether an accessible prompter should be used."
+    },
+    "accessible_colors": {
+      "type": "string",
+      "enum": ["enabled", "disabled"],
+      "default": "disabled",
+      "description": "Whether customizable, 4-bit accessible colors should be used."
+    },
+    "color_labels": {
+      "type": "string",
+      "enum": ["enabled", "disabled"],
+      "default": "disabled",
+      "description": "Whether to display labels using their RGB hex color codes in terminals that support truecolor."
+    },
+    "browser": {
+      "$anyOf": [{"type": "string"}, { "type": "object", "properties": {}, "additionalProperties": false }],
+      "description": "The web browser to use for opening URLs. If blank, will refer to environment."
+    },
+    "http_unix_socket": {
+      "$anyOf": [{"type": "string"}, { "type": "object", "properties": {}, "additionalProperties": false }],
+      "description": "The path to a Unix socket through which to make an HTTP connection. If blank, HTTP traffic will be handled by net/http.DefaultTransport."
+    },
+    "pager": {
+      "type": "string",
+      "description": "The terminal pager program to send standard output to (e.g. 'less'). Set to 'cat' to disable the pager."
+    },
+    "prefer_editor_prompt": {
+      "type": "string",
+      "enum": ["enabled", "disabled"],
+      "default": "disabled",
+      "description": "Toggle preference for editor-based interactive prompting in the terminal."
+    },
+    "prompt": {
+      "type": "string",
+      "enum": ["enabled", "disabled"],
+      "default": "enabled",
+      "description": "Toggle interactive prompting in the terminal. This is a global config that cannot be overridden by hostname."
+    },
+    "editor": {
+      "type": "string",
+      "description": "The text editor program to use for authoring text (e.g. when creating issues, pull requests). If blank, will refer to environment."
+    },
+    "git_protocol": {
+      "type": "string",
+      "enum": ["https", "ssh"],
+      "default": "https",
+      "description": "The protocol to use for git clone and push operations."
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Aliases allow you to create nicknames for gh commands. Keys are alias names, values are command expansions (may be a simple command string or a shell command prefixed with '!').",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "Configuration schema version."
+    }
+  }
+}

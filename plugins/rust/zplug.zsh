@@ -17,6 +17,13 @@ generate_completions srgn --completions zsh
 generate_completions dua completions zsh
 generate_completions mcat --generate zsh
 COMPLETE=zsh generate_completions treemd
+[[ -f _treemd ]] && sd --fixed-strings 'compdef _clap_dynamic_completer_treemd treemd
+' 'if [ "$funcstack[1]" = "_treemd" ]; then
+    _clap_dynamic_completer_treemd "$@"
+else
+    compdef _clap_dynamic_completer_treemd treemd
+fi' _treemd
+
 tv init zsh > ${__dirname}/tv-init.zsh
 intelli-shell init zsh > ${__dirname}/intelli-shell-init.zsh
 patch -p3 -f -i tv-init.patch

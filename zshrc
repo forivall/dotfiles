@@ -94,11 +94,25 @@ ZSH_COMPINIT_CACHE=true
 # ENABLE_CORRECTION=true
 
 ## intelli-shell settings
+export INTELLI_SHELL_ENABLE=false
 # export INTELLI_SEARCH_HOTKEY='^@'
 export INTELLI_VARIABLE_HOTKEY='^v'
 # export INTELLI_BOOKMARK_HOTKEY='^b'
 # export INTELLI_FIX_HOTKEY='^x'
-# export INTELLI_SKIP_ESC_BIND=0
+export INTELLI_SKIP_ESC_BIND=1
+
+## zsh-helix-mode settings
+ZHM_ENABLED=false
+export ZHM_CURSOR_NORMAL='\e[0m\e[2 q\e]12;blue\a'
+export ZHM_CURSOR_SELECT='\e[0m\e[2 q\e]12;magenta\a'
+# export ZHM_CURSOR_INSERT='\e[0m\e[5 q\e]12;white\a'
+export ZHM_CURSOR_INSERT='\e[0m\e[3 q'
+export ZHM_STYLE_CURSOR_SELECT=fg=black,bg=magenta
+export ZHM_STYLE_CURSOR_INSERT=fg=black,bg=blue
+export ZHM_STYLE_OTHER_CURSOR_NORMAL=fg=black,bg=#878ec0
+export ZHM_STYLE_OTHER_CURSOR_SELECT=fg=black,bg=#c0a7c7
+export ZHM_STYLE_OTHER_CURSOR_INSERT=fg=black,bg=#7ea87f
+export ZHM_STYLE_SELECTION=fg=white,bg=black
 
 # export BAT_PAGER="less +X -x2 -FR"
 export LESS='-SRiF'  # --mouse --wheel-lines=1  # scroll wheel used to freeze iterm2
@@ -196,8 +210,6 @@ ENABLE_AUTOCOMPLETE=false
 source "$__zshrc_dirname/zgen/zgenom.zsh"
 alias zgen=zgenom
 if ! zgen saved; then
-  zgen load zsh-users/zsh-syntax-highlighting
-
   $IS_OSX && zgen load "$__zshrc_dirname/plugins/brew"
 
   zgen ohmyzsh
@@ -213,6 +225,7 @@ if ! zgen saved; then
   [[ -d $CLOUDSDK_HOME ]] && zgen ohmyzsh plugins/gcloud
   # zgen ohmyzsh plugins/rbenv
   zgen load "$__zshrc_dirname/plugins/python"
+
   # zgen ohmyzsh plugins/python
   # # zgen ohmyzsh plugins/pyenv
   # whence kubectl > /dev/null && zgen ohmyzsh plugins/kubectl
@@ -225,11 +238,7 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-autosuggestions
   if $ENABLE_AUTOCOMPLETE; then
     zgen load marlonrichert/zsh-autocomplete
-  else
-    zgen load zsh-users/zsh-history-substring-search
-    zgen load "$__zshrc_dirname/plugins/simple-history-search"
   fi
-
   # zgen load srijanshetty/zsh-pandoc-completion /
 
   zgen load "$__zshrc_dirname/plugins/jump"
@@ -284,14 +293,23 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/unsorted"
   zgen load "$__zshrc_dirname/plugins/zgen-zplug"
   # zgen load "$__zshrc_dirname/plugins/zgen-autoupdate" # TODO: figure out why this is slooooow!
+  # zgen load dim-an/cod
+  # zgen load forivall/cod / feat/zsh-local-build
+  zgen load "$__zshrc_dirname/plugins/local"
 
   [[ -d "$HOME/.opam" ]] && zgen load "$HOME/.opam/opam-init"
 
   [[ -n "${commands[direnv]}" ]] && zgen ohmyzsh plugins/direnv && zgen load "$__zshrc_dirname/plugins/direnv"
 
-  # zgen load dim-an/cod
-  # zgen load forivall/cod / feat/zsh-local-build
-  zgen load "$__zshrc_dirname/plugins/local"
+  # also consider https://github.com/john-h-k/helix-zsh
+  if $ZHM_ENABLED; then
+    zgen load multirious/zsh-helix-mode
+  fi
+  zgen load zsh-users/zsh-syntax-highlighting
+  if ! $ENABLE_AUTOCOMPLETE; then
+    zgen load zsh-users/zsh-history-substring-search
+    zgen load "$__zshrc_dirname/plugins/simple-history-search"
+  fi
 
   # Build completions files
   local ofpath=(${fpath})
@@ -306,6 +324,25 @@ if ! zgen saved; then
   zgen save
   zgen-zplug-after-save
 fi
+if $ZHM_ENABLED; then
+  zhm-add-update-region-highlight-hook
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+    zhm_history_prev
+    zhm_history_next
+    zhm_prompt_accept
+    zhm_accept
+    zhm_accept_or_insert_newline
+  )
+  ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
+    zhm_move_right
+    zhm_clear_selection_move_right
+  )
+  ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
+    zhm_move_next_word_start
+    zhm_move_next_word_end
+  )
+fi
+
 # if [[ -d $ZGENOM_SOURCE_BIN ]]; then path+=( $ZGENOM_SOURCE_BIN ); fi
 [[ $(whence -w 9 2>/dev/null) == '9: alias' ]] && unalias 9
 unsetopt nomatch

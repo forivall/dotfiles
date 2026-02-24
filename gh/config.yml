@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=config.schema.json
 # What protocol to use when performing git operations. Supported values: ssh, https
 git_protocol: https
 # What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
@@ -9,8 +10,8 @@ pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
   auth-current: auth status --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
-  auth-setup-gcm-local: '!
-    set -x;
+  auth-setup-gcm-local: |
+    ! set -x
     remotename=${1:-origin};
     remoteurl=$(git config get --local "remote.$remotename.url");
     if [[ $remoteurl == *@* ]]; then
@@ -25,7 +26,6 @@ aliases:
       gh auth switch;
       [[ "$ghuser" != "$(gh auth-current)" ]];
     do :; done
-    '
   b: browse
   bf: '!open "$(gh browse --no-browser --commit=$(git rev-parse HEAD) $1)#$2"'
   co: pr checkout
@@ -104,9 +104,7 @@ aliases:
   prc: pr create --web
   ib: issue view --web
   issue-url: issue view --json url --jq .url
-  brb:
-    '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u}
-    | sd "^[^/]*/" "" ) "$@"'
+  brb: '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "" ) "$@"'
   project-items-with-status: "!gh project item-list --owner $(gh repo view --json owner --jq .owner.login) $1 --format json --jq '.items[] | select(.status == \"'\"$2\"'\") | .content.number'"
   pr-merge-base: '!git merge-base ${1-HEAD} origin/$(gh pr view $2 --json baseRefName -q .baseRefName)'
   pr-merge-commit: pr view $1 --json mergeCommit,potentialMergeCommit -q '(.mergeCommit//.potentialMergeCommit).oid'
@@ -119,45 +117,63 @@ aliases:
   pr-file-browse: '!open $(gh pr-file-url $@)'
   pr-files-json: pr view --json files --jq .files
   pr-files-json-rest: '!gh api repos/tenthousandcoffees/api-server/pulls/$(gh pr view --json number -q .number)/files'
-  pr-files-json-gql: '!
-    gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($endCursor: String, $owner: String!, $repo: String!) {
+  pr-files-json-gql-raw: |
+    !
+    PR="${1-${GH_PR-$(gh pr view --json number -q .number)}}"
+    gh api graphql --paginate -F 'owner={owner}' -F 'repo={repo}' -F "pr=$PR" -f query='
+    query($endCursor: String, $owner: String!, $repo: String!, $pr: String!) {
       repository(owner: $owner, name: $repo) {
-        pullRequest(number: ''"${1-${GH_PR-$(gh pr view --json number -q .number)}}"'') {
-          files(first: 100, after: $endCursor) {
+        pullRequest(number: $pr) {
+          number files(first: 100, after: $endCursor) {
             nodes { additions changeType deletions path viewerViewedState }
             pageInfo { hasNextPage endCursor }
           }
         }
       }
-    }''|jq -r ''.data.repository.pullRequest.files.nodes'''
-  pr-file-viewed-gql: '!
-    FILEPATH="$1";
-    shift;
-    gh api graphql -F pr=$(gh pr view $GH_PR --json id --jq .id) -F path=$FILEPATH -f query=''mutation($pr: ID!, $path: String!) {
-      markFileAsViewed(input: { pullRequestId: $pr, path: $path }) {
-        pullRequest { number files(first: 100) { totalCount nodes { viewerViewedState } } }
-      }
-    }'' "$@"'
-  pr-file-viewed: '!
-    gh pr-file-viewed-gql "$1" --jq ''.data.markFileAsViewed.pullRequest | ("#" + (.number | tostring) + " " + (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" + (.files.totalCount | tostring))'''
-  pr-file-unviewed-gql: '!
-    FILEPATH="$1";
-    shift;
-    gh api graphql -F pr=$(gh pr view $GH_PR --json id --jq .id) -F path=$FILEPATH -f query=''mutation($pr: ID!, $path: String!) {
-      markFileAsUnviewed(input: { pullRequestId: $pr, path: $path }) {
-        pullRequest { number files(first: 100) { totalCount nodes { viewerViewedState } } }
-      }
-    }'' "$@"'
-  pr-file-unviewed-gql: '!
-    gh api graphql -F pr=$(gh pr view $GH_PR --json id --jq .id) path=$1 -f query=''mutation($pr: ID!, $path: String!) {
-      markFileAsUnviewed(input: { pullRequestId: $pr, path: $path }) {
-        pullRequest { number files { totalCount } }
-      }
-    }'''
-  pr-file-unviewed-gql: gh pr-file-unviewed-gql "$1" --jq ''.data.markFileAsViewed.pullRequest | ("#" + (.number | tostring) + " " + (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" + (.files.totalCount | tostring))'''
+    }'
+  pr-files-json-gql: '! gh pr-files-json-gql-raw $@ | jq -r .data.repository.pullRequest.files.nodes'
+  pr-file-viewed-gql: |
+    !
+    [[ $# -gt 1 ]] && GH_PR=$1 && shift
+    PR_ID=$(gh pr view ${1-$GH_PR} --json id --jq .id) || exit $?
+    FILEPATH="$1"; shift;
+    gh api graphql -F pr=$PR_ID -F path=$FILEPATH -f query='
+      mutation($pr: ID!, $path: String!) {
+        markFileAsViewed(input: { pullRequestId: $pr, path: $path }) {
+          pullRequest { number files(first: 100) { totalCount nodes { path viewerViewedState } } }
+        }
+      }' "$@"
+  pr-file-viewed: |
+    ! gh pr-file-viewed-gql "$1" --jq '
+        .data.markFileAsViewed.pullRequest |
+        ("#" + (.number | tostring) + " " +
+          (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" +
+          (.files.totalCount | tostring)
+        )
+      '
+  pr-file-unviewed-gql: |
+    !
+    [[ $# -gt 1 ]] && GH_PR=$1 && shift
+    PR_ID=$(gh pr view ${1-$GH_PR} --json id --jq .id) || exit $?
+    FILEPATH="$1"; shift;
+    gh api graphql -F pr=$PR_ID -F path=$FILEPATH -f query='
+      mutation($pr: ID!, $path: String!) {
+        unmarkFileAsViewed(input: { pullRequestId: $pr, path: $path }) {
+          pullRequest { number files(first: 100) { totalCount nodes { path viewerViewedState } } }
+        }
+      }' "$@"
+  pr-file-unviewed: |
+    ! gh pr-file-unviewed-gql "$1" --jq '
+        .data.unmarkFileAsViewed.pullRequest |
+        ("#" + (.number | tostring) + " " +
+          (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" +
+          (.files.totalCount | tostring)
+        )
+      '
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql | jq ''[.[]|select(.path=="''"$1"''")]'' | gh pr-review-comments-format'
+  pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql | jq -r ''.[]|.path'''
   pr-review-comments-format: |
     !
     jq -r '.[] | @base64' | while read -r thread; do
@@ -199,72 +215,61 @@ aliases:
         local_date=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || date -d "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || echo "$utc_date");
         echo "";
         printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\):\n" "$author" "$url" "$local_date";
-        echo "$body" | sed 's/^/  /';
+        echo "$body" | mcat --no-linenumbers;
       done;
       echo "";
     done
   pr-unresolved-comments-first: '!gh pr-unresolved-comments-gql "$@" | jq -r ''nth(0) | .path + " +" + (.line|tostring)'''
-  pr-review-comments-gql-raw: '!
-    if [[ $# -gt 0 ]]; then n=$1; shift; else n=${GH_PR-$(gh pr view --json number --jq .number)}; fi;
-    gh api graphql --paginate -F ''owner={owner}'' -F ''repo={repo}'' -F "pr=$n" "$@" -f query=''
+  pr-review-comments-gql-raw: |
+    ! [[ $# -gt 0 ]] && GH_PR=$1 && shift
+    [[ -n "$GH_PR" ]] || GH_PR=$(gh pr view --json number --jq .number) || exit $?
+    gh api graphql --paginate -F 'owner={owner}' -F 'repo={repo}' -F "pr=$GH_PR" "$@" -f query='
       query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
         repository(owner: $owner, name: $repo) {
           pullRequest(number: $pr) {
             reviewThreads(first: 100, after: $endCursor) {
               edges { cursor node {
-                isResolved
-                line
-                startLine
-                originalLine
-                originalStartLine
-                path
-                subjectType
-                comments(first: 100) {
-                  nodes {
-                    author { login ... on User { name } }
-                    body
-                    createdAt
-                    isMinimized
-                    publishedAt
-                    url
-                  }
-                }
+                isResolved line startLine originalLine originalStartLine path subjectType
+                comments(first: 100) { nodes {
+                  author { login ... on User { name } }
+                  body createdAt isMinimized publishedAt url
+                }}
               }
             }}
           }
         }
-      }''
-    '
-  pr-review-comments-gql: '! gh pr-review-comments-gql-raw |
-    jq ''[
-      .data.repository.pullRequest.reviewThreads.edges[] |
-        (. + .node) |
-        del(.node)
-      ]'''
-  pr-unresolved-comments-gql: '! gh pr-review-comments-gql-raw |
-    jq ''[
-      .data.repository.pullRequest.reviewThreads.edges[] |
-        (. + .node) |
-        del(.node) |
-        select(.isResolved | not) |
-        .comments = (.comments.nodes | map(select(.isMinimized == false)))
-      ]'''
+      }'
+  pr-review-comments-gql: |
+    ! gh pr-review-comments-gql-raw |
+      jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) ]'
+  pr-unresolved-comments-gql: |
+    ! gh pr-review-comments-gql-raw |
+      jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false))) ]''
   pr-files: 'pr diff --name-only'
-  pr-id-gql: '!
-    gh api graphql -F ''owner={owner}'' -F ''repo={repo}'' -f query=''query($owner: String!, $repo: String!) {
-      repository(owner: $owner, name: $repo) {
-        pullRequest(number: ''"${1-$(gh pr view --json number -q .number))}"'' {
-          id
-        }
-      }
-    }''|jq -r ''.data.repository.pullRequest.id'''
-  pr-review-submit: '!
-    if [[ $# -gt 1 ]]; then n=$1; shift; else n=$(gh pr view --json id --jq .id); fi;
-    gh api graphql -F pr=$n -F action=$1 -f query=''mutation($pr: ID!, $action: PullRequestReviewEvent!) {
+  pr-id-gql: |
+    ! [[ $# -gt 0 ]] && GH_PR=$1 && shift
+      [[ -n "$GH_PR" ]] || GH_PR=$(gh pr view --json number --jq .number) || exit $?
+      gh api graphql -F 'owner={owner}' -F 'repo={repo}' -F "pr=$GH_PR"  -f query='
+      query($owner: String!, $repo: String!, $pr: Int!) {
+        repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { id } }
+      }' | jq -r '.data.repository.pullRequest.id'
+  pr-review-submit: |
+    ! [[ $# -gt 1 ]] && GH_PR=$1 && shift
+      PR_ID=$(gh pr view ${1-$GH_PR} --json id --jq .id) || exit $?
+    gh api graphql -F pr=$PR_ID -F action=$1 -f query='mutation($pr: ID!, $action: PullRequestReviewEvent!) {
       submitPullRequestReview(input: { pullRequestId: $pr, event: $action }) {
         pullRequestReview { id comments { totalCount } }
       }
-    }'''
+    }'
+  pr-commit-range: "pr view --json mergeCommit --jq '.mergeCommit.oid + \"^...\" + .mergeCommit.oid + \"^2\"'"
+  cherry-pick-pr: |
+    !
+    if [[ $# -lt 1 ]]; then echo "Specify the PR number"; exit 1; fi;
+    MERGE_COMMIT=$(gh pr view --json mergeCommit --jq .mergeCommit.oid $1) &&
+      RANGE=$MERGE_COMMIT^...$MERGE_COMMIT^2 &&
+      git log --graph --oneline $RANGE &&
+      zsh -c "read -q '?> MERGE_COMMIT=\$(gh pr view --json mergeCommit --jq .mergeCommit.oid $1) && git cherry-pick \$MERGE_COMMIT^...\$MERGE_COMMIT^2'$'\\n''Continue? (y/n) '" &&
+      git cherry-pick $RANGE
   my-review-requests: 'pr list --search "sort:updated-desc user-review-requested:@me"'
   my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me" --limit 1 --json number --jq .[].number'
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'

@@ -22,7 +22,7 @@ function cargo-clone() {
 [[ -f "${__zsh_rust_plugin_location}/tv-init.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/tv-init.zsh"
 
-[[ -f "${__zsh_rust_plugin_location}/intelli-shell-init.zsh" ]] &&
+${INTELLI_SHELL_ENABLE:-true} && [[ -f "${__zsh_rust_plugin_location}/intelli-shell-init.zsh" ]] &&
   source "${__zsh_rust_plugin_location}/intelli-shell-init.zsh"
 
 if (( ${+commands[lf]} )) ; then

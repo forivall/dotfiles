@@ -11,11 +11,16 @@ chmod +x bin/256test.sh
 sed -i 's|#!/usr/bin/env bash|#!/usr/bin/env zsh|' bin/256test.sh
 
 function generate_completions() {
-  local compfile="${__dirname}/_$1"
-  echo "Generating completion for $1..." >&2
-  $@ > $compfile
+  if (( ${+commands[$1]} )); then
+    local compfile="${__dirname}/_$1"
+    echo "Generating completion for $1..." >&2
+    $@ > $compfile
+  else
+    echo "Command $1 not found. Completions not generated" >&2
+  fi
 }
 generate_completions carapace _carapace zsh
+generate_completions tree-sitter complete --shell zsh
 
 echo "Generating mise-en-place shell integration"
 mise activate zsh > $__dirname/activate_mise.source.zsh

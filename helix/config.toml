@@ -15,9 +15,10 @@ insert = "bar"
 
 [editor.file-picker]
 hidden = false
-# git-ignore = false
-# git-global = false
-git-exclude = false
+ignore = true
+git-ignore = true
+git-global = true
+git-exclude = true
 
 [editor.statusline]
 right = [
@@ -33,6 +34,9 @@ right = [
   "file-encoding",
 ]
 
+[editor.lsp]
+display-messages = true
+
 
 [keys.normal]
 "#" = ":reflow"
@@ -45,6 +49,15 @@ right = [
 "C-left" = "move_prev_sub_word_start"
 "C-right" = "move_next_sub_word_end"
 "A-F4" = ":buffer-close"
+"A-k" = ":tree-sitter-subtree"
+"A-z" = ":toggle-option soft-wrap.enable"
+"esc" = [":redraw"]
+
+"H" = ["ensure_selections_forward", "collapse_selection", "select_mode", "goto_line_start", "exit_select_mode"]
+"L" = ["ensure_selections_forward", "flip_selections", "collapse_selection", "select_mode", "goto_line_end", "exit_select_mode"]
+
+"F2" = "rename_symbol"
+"F3" = ":format"
 
 [keys.normal."C-w"]
 "c" = ":buffer-close"
@@ -65,6 +78,21 @@ right = [
 "C-v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
+
+[keys.normal.z]
+"x" = [
+  ":toggle-option file-explorer.git-global",
+  ":toggle-option file-explorer.git-exclude",
+  ":toggle-option file-explorer.git-ignore",
+  ":toggle-option file-explorer.ignore",
+  # ":toggle-option file-picker.git-ignore",
+  # ":toggle-option file-picker.ignore",
+]
+"." = [
+  ":toggle-option file-explorer.hidden",
+  ":toggle-option file-picker.hidden"
+]
+"w" = ":toggle-option soft-wrap.enable"
 
 [keys.insert]
 "C-space" = "completion"

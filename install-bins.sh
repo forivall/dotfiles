@@ -14,6 +14,7 @@ cmds=(
   'npm install -g serve'
   'npm install -g git-file-history'
   'npm install -g graphql-language-service-cli'
+  'npm install -g yaml-language-server'
 
   # 'brew install cargo-binstall'
   'cargo binstall cargo-update'
@@ -45,6 +46,7 @@ cmds=(
   'go install github.com/ChausseBenjamin/termpicker@latest'
   'go install github.com/dlvhdr/diffnav@latest'
   'go install github.com/unkn0wn-root/resterm/cmd/resterm@latest'
+  'go install github.com/google/yamlfmt/cmd/yamlfmt@latest'
 
   'uv tool install tombi'
   'eget biomejs/gritql --asset=grit'

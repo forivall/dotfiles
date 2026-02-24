@@ -1,0 +1,446 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for notion-cli (@coastal-programs/notion-cli).
+# Generated from `notion-cli --help` and subcommand help output.
+name: notion-cli
+description: Unofficial Notion CLI optimized for automation and AI agents. Non-interactive interface for Notion API with intelligent caching, retry logic, and structured error handling.
+
+persistentflags:
+  -h, --help: Display help for notion-cli
+
+commands:
+  # Topics (namespace commands)
+  - name: batch
+    description: Batch retrieve multiple pages, blocks, or data sources
+    commands:
+      - name: retrieve
+        description: Batch retrieve multiple pages, blocks, or data sources
+        flags:
+          -r, --raw: Output raw json (recommended for AI assistants)
+          -j, --json: Output as JSON (recommended for automation)
+          -m, --markdown: Output as markdown table (GitHub-flavored)
+          -c, --compact-json: Output as compact JSON (single-line)
+          -P, --pretty: Output as pretty table with borders
+          -v, --verbose: Enable verbose logging to stderr
+          --ids=: Comma-separated list of IDs to retrieve
+          --type=: Resource type to retrieve (page, block, database)
+          --columns=: Only show provided columns (comma-separated)
+          --sort=: Property to sort by (prepend with - for descending)
+          --filter=: Filter property by substring match
+          --csv: Output in CSV format
+          --no-truncate: Do not truncate output to fit screen
+          --no-header: Hide table header from output
+          --page-size=: Items per page (1-100)
+          --retry: Auto-retry on rate limit
+          --timeout=: Request timeout in milliseconds
+          --no-cache: Bypass cache and force fresh API calls
+          --minimal: Strip unnecessary metadata
+        completion:
+          flag:
+            type: ["page", "block", "database"]
+          positional:
+            - []  # [IDS] - comma-separated or use --ids
+
+  - name: block
+    description: Append block children
+    commands:
+      - name: append
+        description: Append block children
+        flags:
+          -b, --block_id=: (required) Parent block ID or URL
+          -a, --after=: Block ID or URL to append after (optional)
+          -c, --children=: Block children (JSON array) - for complex cases
+          --text=: Paragraph text
+          --heading-1=: H1 heading text
+          --heading-2=: H2 heading text
+          --heading-3=: H3 heading text
+          --bullet=: Bulleted list item text
+          --numbered=: Numbered list item text
+          --todo=: To-do item text
+          --toggle=: Toggle block text
+          --code=: Code block content
+          --language=: Code block language (used with --code)
+          --quote=: Quote block text
+          --callout=: Callout block text
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          flag:
+            language: ["plain text", "javascript", "typescript", "python", "json", "markdown", "bash", "sql", "html", "css", "yaml"]
+      - name: delete
+        description: Delete a block
+        flags:
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          positional:
+            - []  # BLOCK_ID
+      - name: retrieve
+        description: Retrieve a block
+        flags:
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        commands:
+          - name: children
+            description: Retrieve block children (supports database discovery via --show-databases)
+        completion:
+          positional:
+            - []  # BLOCK_ID
+      - name: update
+        description: Update a block
+        flags:
+          -a, --archived: Archive the block
+          -c, --content=: Updated block content (JSON object)
+          --text=: Update paragraph text
+          --heading-1=: Update H1 heading text
+          --heading-2=: Update H2 heading text
+          --heading-3=: Update H3 heading text
+          --bullet=: Update bulleted list item text
+          --numbered=: Update numbered list item text
+          --todo=: Update to-do item text
+          --toggle=: Update toggle block text
+          --code=: Update code block content
+          --language=: Update code block language
+          --quote=: Update quote block text
+          --callout=: Update callout block text
+          --color=: Block color (for supported block types)
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          flag:
+            color: ["default", "gray", "brown", "orange", "yellow", "green", "blue", "purple", "pink", "red"]
+          positional:
+            - []  # BLOCK_ID
+
+  - name: cache
+    description: Show cache statistics and configuration
+    commands:
+      - name: info
+        description: Show cache statistics and configuration
+        flags:
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+      - name: stats
+        description: Show cache statistics and configuration
+      - name: status
+        description: Show cache statistics and configuration
+
+  - name: config
+    description: Set NOTION_TOKEN in your shell configuration file
+    commands:
+      - name: set-token
+        description: Set NOTION_TOKEN in your shell configuration file
+        flags:
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          positional:
+            - []  # [TOKEN] - Notion integration token (starts with secret_)
+      - name: token
+        description: Set NOTION_TOKEN in your shell configuration file
+
+  - name: db
+    description: Create a database with an initial data source (table)
+    commands:
+      - name: create
+        description: Create a database with an initial data source (table)
+        flags:
+          -t, --title=: (required) Title for the database (and initial data source)
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          positional:
+            - []  # PAGE_ID - Parent page ID or URL
+      - name: list
+        description: List all cached databases from your workspace
+        flags:
+          -j, --json: Output as JSON
+          -m, --markdown: Output as markdown table
+          -c, --compact-json: Output as compact JSON
+          -P, --pretty: Output as pretty table with borders
+          -x, --extended: Show extra columns
+          --columns=: Only show provided columns (comma-separated)
+          --sort=: Property to sort by
+          --filter=: Filter property by substring match
+          --csv: Output in CSV format
+          --no-truncate: Do not truncate output
+          --no-header: Hide table header
+          --page-size=: Items per page (1-100)
+          --retry: Auto-retry on rate limit
+          --timeout=: Request timeout in milliseconds
+          --no-cache: Bypass cache
+          -v, --verbose: Enable verbose logging
+          --minimal: Strip unnecessary metadata
+      - name: query
+        description: Query a database
+        flags:
+          -A, --page-all: Get all pages (bypass pagination)
+          -f, --filter=: Filter as JSON object (Notion filter API format)
+          -s, --search=: Simple text search (searches across title and common text properties)
+          -F, --file-filter=: Load filter from JSON file
+          --sort-property=: The property to sort results by
+          --sort-direction=: The direction to sort results (asc, desc)
+          --select=: Select specific properties to return (comma-separated)
+          -r, --raw: Output raw JSON (recommended for AI assistants)
+          -j, --json: Output as JSON
+          -m, --markdown: Output as markdown table
+          -c, --compact-json: Output as compact JSON
+          -P, --pretty: Output as pretty table
+          -x, --extended: Show extra columns
+          --columns=: Only show provided columns (comma-separated)
+          --sort=: Property to sort by
+          --csv: Output in CSV format
+          --no-truncate: Do not truncate output
+          --no-header: Hide table header
+          --page-size=: Items per page (1-100)
+          --retry: Auto-retry on rate limit
+          --timeout=: Request timeout in milliseconds
+          --no-cache: Bypass cache
+          -v, --verbose: Enable verbose logging
+          --minimal: Strip unnecessary metadata
+        completion:
+          flag:
+            sort-direction: ["asc", "desc"]
+          positional:
+            - []  # DATABASE_ID
+      - name: retrieve
+        description: Retrieve a data source (table) schema and properties
+        flags:
+          -r, --raw: Output raw json (recommended for AI assistants)
+          -j, --json: Output as JSON
+          -m, --markdown: Output as markdown table
+          -c, --compact-json: Output as compact JSON
+          -P, --pretty: Output as pretty table
+          -x, --extended: Show extra columns
+          -v, --verbose: Enable verbose logging
+        completion:
+          positional:
+            - []  # DATABASE_ID
+      - name: schema
+        description: Extract clean, AI-parseable schema from a Notion data source (table)
+        flags:
+          -o, --output=: Output format (json, yaml, table)
+          -p, --properties=: Comma-separated list of properties to include (default all)
+          -m, --markdown: Output as markdown documentation
+          -j, --json: Output as JSON (shorthand for --output json)
+          -e, --with-examples: Include property payload examples for create/update operations
+        completion:
+          flag:
+            output: ["json", "yaml", "table"]
+          positional:
+            - []  # DATA_SOURCE_ID
+      - name: sync
+        description: Sync workspace databases to local cache for fast lookups
+        flags:
+          -f, --force: Force resync even if cache is fresh
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+          --minimal: Strip unnecessary metadata
+          --no-cache: Bypass cache and force fresh API calls
+          --page-size=: Items per page (1-100)
+          --retry: Auto-retry on rate limit
+          --timeout=: Request timeout in milliseconds
+      - name: update
+        description: Update a data source (table) title and properties
+        flags:
+          -t, --title=: (required) New database title
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          positional:
+            - []  # DATABASE_ID
+
+  - name: page
+    description: Create a page
+    commands:
+      - name: create
+        description: Create a page
+        flags:
+          -p, --parent_page_id=: Parent page ID or URL (to create a sub-page)
+          -d, --parent_data_source_id=: Parent data source ID or URL (to create a page in a table)
+          -f, --file_path=: Path to a source markdown file
+          -t, --title_property=: Name of the title property (defaults to Name)
+          --properties=: Page properties as JSON string
+          -S, --simple-properties: Use simplified property format (flat key-value pairs, recommended for AI agents)
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          flag:
+            file_path: ["$files"]
+      - name: retrieve
+        description: Retrieve a page
+        flags:
+          -r, --raw: Output raw json (recommended for AI assistants - returns all fields)
+          --map: Fast structure discovery (returns minimal info - titles, types, IDs)
+          -R, --recursive: Recursively fetch all blocks and nested pages
+          --max-depth=: Maximum recursion depth for --recursive (default 3)
+          -m, --markdown: Output as markdown table
+          -c, --compact-json: Output as compact JSON
+          -P, --pretty: Output as pretty table with borders
+          -j, --json: Output as JSON
+          -x, --extended: Show extra columns
+          -v, --verbose: Enable verbose logging
+        commands:
+          - name: property_item
+            description: Retrieve a page property item
+        completion:
+          positional:
+            - []  # PAGE_ID
+      - name: update
+        description: Update a page
+        flags:
+          -a, --archived: Archive the page
+          -u, --unarchive: Unarchive the page
+          --properties=: Page properties to update as JSON string
+          -S, --simple-properties: Use simplified property format (recommended for AI agents)
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+        completion:
+          positional:
+            - []  # PAGE_ID
+
+  - name: user
+    description: List all users
+    commands:
+      - name: list
+        description: List all users
+        flags:
+          -r, --raw: Output raw json
+          -j, --json: Output as JSON
+          -v, --verbose: Enable verbose logging
+          --columns=: Only show provided columns (comma-separated)
+          --sort=: Property to sort by
+          --filter=: Filter property by substring match
+          --csv: Output in CSV format
+          --no-truncate: Do not truncate output
+          --no-header: Hide table header
+          --page-size=: Items per page (1-100)
+          --retry: Auto-retry on rate limit
+          --timeout=: Request timeout in milliseconds
+          --no-cache: Bypass cache
+          --minimal: Strip unnecessary metadata
+      - name: retrieve
+        description: Retrieve a user
+
+  # Top-level commands
+  - name: connectivity
+    description: Verify API connectivity and show workspace context
+    flags:
+      -j, --json: Output as JSON
+      -v, --verbose: Enable verbose logging
+      --minimal: Strip unnecessary metadata
+      --no-cache: Bypass cache and force fresh API calls
+      --page-size=: Items per page (1-100)
+      --retry: Auto-retry on rate limit
+      --timeout=: Request timeout in milliseconds
+
+  - name: diagnose
+    description: Run health checks and diagnostics for Notion CLI
+  - name: doctor
+    description: Run health checks and diagnostics for Notion CLI
+  - name: health
+    description: Verify API connectivity and show workspace context
+  - name: healthcheck
+    description: Run health checks and diagnostics for Notion CLI
+
+  - name: help
+    description: Display help for notion-cli
+    completion:
+      positional:
+        - ["batch", "block", "cache", "config", "db", "page", "user", "connectivity", "diagnose", "doctor", "health", "healthcheck", "init", "list", "ls", "search", "sync", "test", "whoami", "help"]
+
+  - name: init
+    description: Interactive first-time setup wizard for Notion CLI
+    flags:
+      -j, --json: Output as JSON
+      -v, --verbose: Enable verbose logging
+      --minimal: Strip unnecessary metadata
+      --no-cache: Bypass cache and force fresh API calls
+      --page-size=: Items per page (1-100)
+      --retry: Auto-retry on rate limit
+      --timeout=: Request timeout in milliseconds
+
+  - name: list
+    description: List all cached databases from your workspace
+    flags:
+      -j, --json: Output as JSON
+      -m, --markdown: Output as markdown table
+      -c, --compact-json: Output as compact JSON
+      -P, --pretty: Output as pretty table with borders
+      -x, --extended: Show extra columns
+      --columns=: Only show provided columns (comma-separated)
+      --sort=: Property to sort by
+      --filter=: Filter property by substring match
+      --csv: Output in CSV format
+      --no-truncate: Do not truncate output
+      --no-header: Hide table header
+      --page-size=: Items per page (1-100)
+      --retry: Auto-retry on rate limit
+      --timeout=: Request timeout in milliseconds
+      --no-cache: Bypass cache
+      -v, --verbose: Enable verbose logging
+      --minimal: Strip unnecessary metadata
+
+  - name: ls
+    description: List all cached databases from your workspace
+
+  - name: search
+    description: Search by title
+    flags:
+      -q, --query=: The text that the API compares page and database titles against
+      -d, --sort_direction=: The direction to sort results (asc, desc). Only supported timestamp value is last_edited_time
+      -p, --property=: Property type (data_source, page)
+      -s, --page_size=: The number of results to return (1-100, default 5)
+      --start_cursor=: Start cursor for pagination
+      --database=: Limit search to pages within a specific database (data source ID)
+      --created-after=: Filter results created after this date (ISO 8601 YYYY-MM-DD)
+      --created-before=: Filter results created before this date (ISO 8601 YYYY-MM-DD)
+      --edited-after=: Filter results edited after this date (ISO 8601 YYYY-MM-DD)
+      --edited-before=: Filter results edited before this date (ISO 8601 YYYY-MM-DD)
+      --limit=: Maximum number of results to return (applied after filters)
+      -r, --raw: Output raw json (recommended for AI assistants - returns all search results)
+      --columns=: Only show provided columns (comma-separated)
+      -x, --extended: Show extra columns
+      --sort=: Property to sort by (prepend with - for descending)
+      --filter=: Filter property by substring match
+      --csv: Output in CSV format
+      --no-truncate: Do not truncate output to fit screen
+      --no-header: Hide table header from output
+      -m, --markdown: Output as markdown table (GitHub-flavored)
+      -c, --compact-json: Output as compact JSON (single-line)
+      -P, --pretty: Output as pretty table with borders
+      -j, --json: Output as JSON (recommended for automation)
+      --page-size=: Items per page (1-100)
+      --retry: Auto-retry on rate limit
+      --timeout=: Request timeout in milliseconds
+      --no-cache: Bypass cache and force fresh API calls
+      -v, --verbose: Enable verbose logging to stderr
+      --minimal: Strip unnecessary metadata
+    completion:
+      flag:
+        sort_direction: ["asc", "desc"]
+        property: ["data_source", "page"]
+
+  - name: sync
+    description: Sync workspace databases to local cache for fast lookups
+    flags:
+      -f, --force: Force resync even if cache is fresh
+      -j, --json: Output as JSON
+      -v, --verbose: Enable verbose logging
+      --minimal: Strip unnecessary metadata
+      --no-cache: Bypass cache and force fresh API calls
+      --page-size=: Items per page (1-100)
+      --retry: Auto-retry on rate limit
+      --timeout=: Request timeout in milliseconds
+
+  - name: test
+    description: Verify API connectivity and show workspace context
+  - name: whoami
+    description: Verify API connectivity and show workspace context

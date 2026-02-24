@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for lunar (Lunar CLI - display brightness/contrast manager for macOS).
+# Generated from https://carapace-sh.github.io/carapace-spec/ and `lunar --help` / subcommand help.
+name: lunar
+description: Lunar CLI - display brightness and contrast manager for macOS.
+
+persistentflags:
+  --remote: Send the command to an already running instance of Lunar
+  --new-instance: Spawn a new command-line only instance even if the Lunar app is already running
+  --host=: Hostname or IP of the device where to send the command (default localhost)
+  --key=: API key of the device where to send the command (run `lunar key` on that device)
+  -h, --help: Show help information
+
+completion:
+  flag:
+    host: ["localhost", "$hostname"]
+
+commands:
+  - name: displays
+    description: Control displays or get data about the current state of the displays
+    flags:
+      -j, --json: Format output as JSON
+      -a, --all: Include both connected and disconnected displays
+      --no-virtual: Don't include virtual displays (e.g. DisplayLink)
+      --airplay: Include Airplay displays (e.g. iPad Sidecar, AirPlay)
+      --projector: Include displays marked as projectors
+      --dummy: Include displays marked as dummy (e.g. BetterDummy/BetterDisplay)
+      -e, --edid: Include EDID in the output
+      --system-info: Include system info in the output
+      --panel-data: Include panel data in the output
+      --panel-data-all-resolutions: Include all resolutions for panel data
+      -q, --quiet: Exit with status code 1 if no displays found, 0 if any match
+      -r, --read: 'Actively read property instead of cache (caution: may cause kernel panic if DDC is slow)'
+      --network: Use network control
+      --apple-native: Use Apple native control
+      --ddc: Use DDC control
+      --gamma: Use gamma control
+      --ddcctl: Use ddcctl utility control
+      -h, --help: Show help information
+    completion:
+      positional:
+        - ["first", "main", "cursor", "external", "builtin", "all", "non-main", "without-cursor", "sync-source", "sync-targets", "best-guess"]
+        - ["brightness", "contrast", "volume", "mute", "power", "input", "rotation", "xdrBrightness", "subzeroDimming", "facelight", "blackout", "main", "id", "name", "serial", "adaptive", "nits", "lux", "connection", "normalizedBrightness", "normalizedContrast"]
+        - []
+
+  - name: get
+    description: Gets a property from the first active display
+    flags:
+      -r, --read: Actively read property instead of cache
+      --network: Use network control
+      --apple-native: Use Apple native control
+      --ddc: Use DDC control
+      --gamma: Use gamma control
+      --ddcctl: Use ddcctl control
+      -h, --help: Show help information
+    completion:
+      positional:
+        - ["brightness", "contrast", "volume", "mute", "power", "input", "rotation", "xdrBrightness", "subzeroDimming", "facelight", "blackout", "main", "id", "name", "serial", "adaptive", "nits", "lux", "connection", "normalizedBrightness", "normalizedContrast"]
+
+  - name: set
+    description: Sets a property to a specific value for the first active display
+    flags:
+      -r, --read: Actively read property instead of cache
+      --network: Use network control
+      --apple-native: Use Apple native control
+      --ddc: Use DDC control
+      --gamma: Use gamma control
+      --ddcctl: Use ddcctl control
+      -w, --waitms=: Milliseconds to wait for network controls to be ready (default 1000)
+      -h, --help: Show help information
+    completion:
+      positional:
+        - ["brightness", "contrast", "volume", "mute", "power", "input", "rotation", "xdrBrightness", "subzeroDimming", "facelight", "blackout", "main"]
+        - []
+
+  - name: preset
+    description: Applies Lunar presets
+    flags:
+      -h, --help: Show help information
+    completion:
+      positional:
+        - ["0", "25", "50", "75", "100"]
+
+  - name: mode
+    description: Configures Lunar mode
+    flags:
+      -p, --print-mapping: Print the learnt mapping of the adaptive mode
+      -h, --help: Show help information
+    completion:
+      positional:
+        - ["manual", "clock", "location", "sync", "sensor", "auto", "1", "-1", "0", "2", "3", "99"]
+
+  - name: blackout
+    description: Turns monitors off without cutting power or closing the lid
+  - name: facelight
+    description: Turns monitors into bright light panels
+  - name: ddc
+    description: Send raw DDC commands to connected monitors
+  - name: ddcctl
+    description: Control monitors using the ddcctl utility
+  - name: lid
+    description: Prints if lid is closed or opened
+  - name: lux
+    description: Prints ambient light in lux (or -1 if the sensor can't be read)
+  - name: signature
+    description: Prints code signature of the app
+  - name: key
+    description: Prints API Key for controlling Lunar remotely using lunar --remote
+  - name: launch
+    description: Launch Lunar app
+  - name: gamma
+    description: Sets gamma values (values can only be persisted while the program is running)
+  - name: core-display
+    description: Use CoreDisplay methods on monitors
+  - name: display-services
+    description: Use DisplayServices methods on monitors
+  - name: hotkeys
+    description: Prints information about Lunar hotkeys
+  - name: display-uuid
+    description: Generates UUID for a display ID
+  - name: refresh-displays
+    description: Refreshes display list from the system and restarts DDC detection
+  - name: edid
+    description: Reads and decodes EDID data structure from monitors
+  - name: listen
+    description: Listen to changes in brightness/contrast/volume of specific displays
+  - name: cleaning-mode
+    description: Blackout screens and disable keyboard to allow cleaning
+  - name: night-mode
+    description: Lower white point and increase contrast to reduce eye strain at night
+  - name: disconnect
+    description: Disconnects screens without cutting power or closing the lid
+  - name: connect
+    description: Reconnects screens that were previously disconnected using Lunar
+  - name: toggle-connection
+    description: Disconnects or reconnects screens that were previously disconnected using Lunar
+  - name: nits
+    description: Prints luminance mapping data for Sync Mode when nits readings are available
+
+  - name: help
+    description: Show help for lunar or a subcommand
+    completion:
+      positional:
+        - ["displays", "get", "set", "preset", "mode", "blackout", "facelight", "ddc", "ddcctl", "lid", "lux", "signature", "key", "launch", "gamma", "core-display", "display-services", "hotkeys", "display-uuid", "refresh-displays", "edid", "listen", "cleaning-mode", "night-mode", "disconnect", "connect", "toggle-connection", "nits"]
