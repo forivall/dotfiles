@@ -5,4 +5,5 @@ if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]
 then
 	deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub} --features map-styles-light)
 fi
-BAT_PAGER=${BAT_PAGER:-"less +X -x2 -FR"} exec delta "${deltaOpts[@]}" "$@"
+BAT_PAGER=${BAT_PAGER:-"less +X -x2 -FR"}
+BAT_PAGER=$BAT_PAGER exec delta "${deltaOpts[@]}" --pager="$BAT_PAGER" "$@"
