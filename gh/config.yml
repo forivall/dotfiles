@@ -121,7 +121,7 @@ aliases:
     !
     PR="${1-${GH_PR-$(gh pr view --json number -q .number)}}"
     gh api graphql --paginate -F 'owner={owner}' -F 'repo={repo}' -F "pr=$PR" -f query='
-    query($endCursor: String, $owner: String!, $repo: String!, $pr: String!) {
+    query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
       repository(owner: $owner, name: $repo) {
         pullRequest(number: $pr) {
           number files(first: 100, after: $endCursor) {
