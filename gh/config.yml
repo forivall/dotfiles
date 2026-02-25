@@ -134,8 +134,8 @@ aliases:
   pr-files-json-gql: '! gh pr-files-json-gql-raw $@ | jq -r .data.repository.pullRequest.files.nodes'
   pr-file-viewed-gql: |
     !
-    [[ $# -gt 1 ]] && GH_PR=$1 && shift
-    PR_ID=$(gh pr view ${1-$GH_PR} --json id --jq .id) || exit $?
+    [[ $# -gt 1 && $2 != -* ]] && GH_PR=$1 && shift
+    PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
     FILEPATH="$1"; shift;
     gh api graphql -F pr=$PR_ID -F path=$FILEPATH -f query='
       mutation($pr: ID!, $path: String!) {
@@ -153,8 +153,8 @@ aliases:
       '
   pr-file-unviewed-gql: |
     !
-    [[ $# -gt 1 ]] && GH_PR=$1 && shift
-    PR_ID=$(gh pr view ${1-$GH_PR} --json id --jq .id) || exit $?
+    [[ $# -gt 1 && $2 != -* ]] && GH_PR=$1 && shift
+    PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
     FILEPATH="$1"; shift;
     gh api graphql -F pr=$PR_ID -F path=$FILEPATH -f query='
       mutation($pr: ID!, $path: String!) {
