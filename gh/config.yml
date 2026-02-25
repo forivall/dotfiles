@@ -244,7 +244,7 @@ aliases:
       jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) ]'
   pr-unresolved-comments-gql: |
     ! gh pr-review-comments-gql-raw |
-      jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false))) ]''
+      jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false))) ]'
   pr-files: 'pr diff --name-only'
   pr-id-gql: |
     ! [[ $# -gt 0 ]] && GH_PR=$1 && shift
