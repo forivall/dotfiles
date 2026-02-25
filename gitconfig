@@ -96,7 +96,7 @@
 	lg2 = log --name-status --pretty=onemore --graph --no-notes
 	lg3 = log --name-status --pretty=twoline --graph --date=local
 	lgp = log -p --pretty=onemore --graph
-	logd = -c core.pager=deltaw log --pretty=concise
+	logd = -c core.pager='deltaw --commit-regex="^❖ "' log --pretty=concise
 	log2 = log --pretty=concise
 	logp2 = logp --pretty=concise
 	logpa = logp --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
@@ -104,6 +104,8 @@
 	show2 = show --pretty=concise
 	showd2 = showd --pretty=concise
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
+  branch-name-ref = !git symbolic-ref HEAD 2> /dev/null || cat $GIT_DIR/rebase-merge/head-name
+  branch-name = !git branch-name-ref | sed 's|^refs/heads/||'
 	branches = branch --list
 	branches-with-upstreams = "!zsh -c 'if (( $# > 0 )); then opt=(\"--branches=\"${^@}); else opt=(--branches); fi; git rev-parse --symbolic ${opt[@]} | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done' -"
 	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
@@ -210,7 +212,7 @@
 	ls-files = false
 [pretty]
 	concise-reflog = "format:%C(auto)%gd: %gs (%s)%n%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae> %C(dim)♖ %cn <%ce>%Creset%n%C(blue)✍ %aD %C(dim)♔ %cD%Creset%n%n%-s%n%Creset%n%-b"
-	concise = "format:%C(yellow)• %H%C(auto)%d%n%C(magenta)♘ %an <%ae> %C(dim)♖ %cn <%ce>%Creset%n%C(blue)✍ %aD %C(dim)♔ %cD%Creset%n%n%-s%n%Creset%n%-b"
+	concise = "format:%C(yellow)❖ %H%C(auto)%d%n%C(magenta)♘ %an <%ae> %C(dim)♖ %cn <%ce>%Creset%n%C(blue)✍ %aD %C(dim)♔ %cD%Creset%n%n%-s%n%Creset%n%-b"
 	onemore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset %s"
 	twomore = "format:%C(yellow)%h%C(auto)%d%C(magenta) %an %Creset%C(blue)%ar%Creset%n%-s"
 	twoline = "format:%C(yellow)%h%C(auto)%d%C(magenta) %aE %Creset%C(blue)%ad%C(green)%gn%Creset %n%s"
