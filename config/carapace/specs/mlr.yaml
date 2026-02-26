@@ -1,0 +1,499 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for mlr (Miller - streaming data processor).
+# Generated from https://carapace-sh.github.io/carapace-spec/ and `mlr --help` / `mlr help list-verbs` / `mlr help flags`.
+name: mlr
+description: "Miller is a streaming data processor. Usage: mlr [flags] {verb} [verb-dependent options ...] {zero or more file names}"
+
+persistentflags:
+  -c, --csv: Use CSV format for input and output data
+  -t, --tsv: Use TSV format for input and output data
+  -j, --json: Use JSON format for input and output data
+  --jsonl: Use JSON Lines format for input and output data
+  --dkvp: Use DKVP format for input and output data
+  --pprint: Use PPRINT format for input and output data
+  --nidx: Use NIDX format for input and output data
+  --xtab: Use XTAB format for input and output data
+  --icsv: Use CSV format for input data
+  --ocsv: Use CSV format for output data
+  --itsv: Use TSV format for input data
+  --otsv: Use TSV format for output data
+  --ijson: Use JSON format for input data
+  --ojson: Use JSON format for output data
+  --ijsonl: Use JSON Lines format for input data
+  --ojsonl: Use JSON Lines format for output data
+  -i=: "Use format name for input data (e.g. -i csv)"
+  -o=: "Use format name for output data (e.g. -o csv)"
+  --io=: "Use format name for input and output data (e.g. --io csv)"
+  # Format-conversion keystroke-savers (in/out: c=CSV t=TSV j=JSON l=JSONL d=DKVP n=NIDX x=XTAB p=PPRINT m=markdown)
+  --c2c: CSV to CSV
+  --c2t: CSV to TSV
+  --c2j: CSV to JSON
+  --c2l: CSV to JSONL
+  --c2d: CSV to DKVP
+  --c2n: CSV to NIDX
+  --c2x: CSV to XTAB
+  --c2p: CSV to PPRINT
+  --c2m: CSV to markdown
+  --t2c: TSV to CSV
+  --t2t: TSV to TSV
+  --t2j: TSV to JSON
+  --t2l: TSV to JSONL
+  --t2d: TSV to DKVP
+  --t2n: TSV to NIDX
+  --t2x: TSV to XTAB
+  --t2p: TSV to PPRINT
+  --t2m: TSV to markdown
+  --j2c: JSON to CSV
+  --j2t: JSON to TSV
+  --j2j: JSON to JSON
+  --j2l: JSON to JSONL
+  --j2d: JSON to DKVP
+  --j2n: JSON to NIDX
+  --j2x: JSON to XTAB
+  --j2p: JSON to PPRINT
+  --j2m: JSON to markdown
+  --l2c: JSONL to CSV
+  --l2t: JSONL to TSV
+  --l2j: JSONL to JSON
+  --l2l: JSONL to JSONL
+  --l2d: JSONL to DKVP
+  --l2n: JSONL to NIDX
+  --l2x: JSONL to XTAB
+  --l2p: JSONL to PPRINT
+  --l2m: JSONL to markdown
+  --d2c: DKVP to CSV
+  --d2t: DKVP to TSV
+  --d2j: DKVP to JSON
+  --d2l: DKVP to JSONL
+  --d2d: DKVP to DKVP
+  --d2n: DKVP to NIDX
+  --d2x: DKVP to XTAB
+  --d2p: DKVP to PPRINT
+  --d2m: DKVP to markdown
+  --n2c: NIDX to CSV
+  --n2t: NIDX to TSV
+  --n2j: NIDX to JSON
+  --n2l: NIDX to JSONL
+  --n2d: NIDX to DKVP
+  --n2n: NIDX to NIDX
+  --n2x: NIDX to XTAB
+  --n2p: NIDX to PPRINT
+  --n2m: NIDX to markdown
+  --x2c: XTAB to CSV
+  --x2t: XTAB to TSV
+  --x2j: XTAB to JSON
+  --x2l: XTAB to JSONL
+  --x2d: XTAB to DKVP
+  --x2n: XTAB to NIDX
+  --x2x: XTAB to XTAB
+  --x2p: XTAB to PPRINT
+  --x2m: XTAB to markdown
+  --p2c: PPRINT to CSV
+  --p2t: PPRINT to TSV
+  --p2j: PPRINT to JSON
+  --p2l: PPRINT to JSONL
+  --p2d: PPRINT to DKVP
+  --p2n: PPRINT to NIDX
+  --p2x: PPRINT to XTAB
+  --p2p: PPRINT to PPRINT
+  --p2m: PPRINT to markdown
+  --m2c: Markdown to CSV
+  --m2t: Markdown to TSV
+  --m2j: Markdown to JSON
+  --m2l: Markdown to JSONL
+  --m2d: Markdown to DKVP
+  --m2n: Markdown to NIDX
+  --m2x: Markdown to XTAB
+  --m2p: Markdown to PPRINT
+  -N: "Keystroke-saver for --implicit-csv-header --headerless-csv-output"
+  -p: "Keystroke-saver for --nidx --fs space --repifs"
+  -T: "Keystroke-saver for --nidx --fs tab"
+  --gzin: Uncompress gzip within the Miller process
+  --bz2in: Uncompress bzip2 within the Miller process
+  --zin: Uncompress zlib within the Miller process
+  --zstdin: Uncompress zstd within the Miller process
+  --prepipe=: Decompression command to run on each input file
+  --prepipex=: "Like --prepipe but invoked with {command} {filename}"
+  --pass-comments: Immediately print commented lines within the input
+  --pass-comments-with=: "Immediately print commented lines with specified prefix"
+  --skip-comments: Ignore commented lines within the input
+  --skip-comments-with=: "Ignore commented lines with specified prefix"
+  --fs=: Specify FS for input and output
+  --ifs=: Specify FS for input
+  --ofs=: Specify FS for output
+  --irs=: Specify RS for input
+  --ors=: Specify RS for output
+  -M, --no-color: Do not colorize output
+  -C, --always-color: Colorize output even when not a TTY
+  -h, --help: Show help
+  -l: "mlr help list-verbs"
+  -L: "mlr help usage-verbs"
+  -g: "mlr help flags"
+  -f: "mlr help list-functions"
+  -F: "mlr help usage-functions"
+  -k: "mlr help list-keywords"
+  -K: "mlr help usage-keywords"
+
+completion:
+  flag:
+    i: ["csv", "csvlite", "dkvp", "json", "jsonl", "nidx", "pprint", "tsv", "tsvlite", "xtab", "asv", "usv", "md", "markdown"]
+    o: ["csv", "csvlite", "dkvp", "json", "jsonl", "nidx", "pprint", "tsv", "tsvlite", "xtab", "asv", "usv", "md", "markdown"]
+    io: ["csv", "csvlite", "dkvp", "json", "jsonl", "nidx", "pprint", "tsv", "tsvlite", "xtab", "asv", "usv", "md", "markdown"]
+
+commands:
+  - name: altkv
+    description: "Given fields with values of the form a,b,c,d,e,f emits a=b,c=d,e=f pairs"
+    completion:
+      positional:
+        - ["$files"]
+  - name: bar
+    description: Replaces a numeric field with a number of asterisks for bar plots
+    completion:
+      positional:
+        - ["$files"]
+  - name: bootstrap
+    description: Emits an n-sample with replacement of the input records
+    completion:
+      positional:
+        - ["$files"]
+  - name: case
+    description: Uppercases strings in record keys and/or values
+    completion:
+      positional:
+        - ["$files"]
+  - name: cat
+    description: Passes input records directly to output (format conversion)
+    completion:
+      positional:
+        - ["$files"]
+  - name: check
+    description: Consumes records without printing output; checks data are parseable
+    completion:
+      positional:
+        - ["$files"]
+  - name: clean-whitespace
+    description: Whitespace-cleans the keys and/or values in each field
+    completion:
+      positional:
+        - ["$files"]
+  - name: count-distinct
+    description: Count distinct values for specified field names
+    completion:
+      positional:
+        - ["$files"]
+  - name: count
+    description: Count number of records
+    completion:
+      positional:
+        - ["$files"]
+  - name: count-similar
+    description: Count records with same values in specified fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: cut
+    description: Keeps only specified fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: decimate
+    description: Pass through one of every n records
+    completion:
+      positional:
+        - ["$files"]
+  - name: fill-down
+    description: Fill down empty fields from previous records
+    completion:
+      positional:
+        - ["$files"]
+  - name: fill-empty
+    description: Fill empty values with specified fill-string
+    completion:
+      positional:
+        - ["$files"]
+  - name: filter
+    description: Keep records matching expression
+    completion:
+      positional:
+        - ["$files"]
+  - name: flatten
+    description: Flatten nested maps to dot-separated keys
+    completion:
+      positional:
+        - ["$files"]
+  - name: format-values
+    description: Apply format strings to specified fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: fraction
+    description: For each record, compute fraction of sum of specified fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: gap
+    description: Print a blank line when field values change
+    completion:
+      positional:
+        - ["$files"]
+  - name: grep
+    description: Keep records matching pattern
+    completion:
+      positional:
+        - ["$files"]
+  - name: group-by
+    description: Group records by specified field names
+    completion:
+      positional:
+        - ["$files"]
+  - name: group-like
+    description: Group records with same field names
+    completion:
+      positional:
+        - ["$files"]
+  - name: gsub
+    description: Global string substitution with regex
+    completion:
+      positional:
+        - ["$files"]
+  - name: having-fields
+    description: Keep records that have specified fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: head
+    description: Pass through first n records
+    completion:
+      positional:
+        - ["$files"]
+  - name: histogram
+    description: Emit histogram of values in specified field
+    completion:
+      positional:
+        - ["$files"]
+  - name: json-parse
+    description: Parse string field values as JSON
+    completion:
+      positional:
+        - ["$files"]
+  - name: json-stringify
+    description: Convert field values to JSON strings
+    completion:
+      positional:
+        - ["$files"]
+  - name: join
+    description: Join records from multiple streams
+    completion:
+      positional:
+        - ["$files"]
+  - name: label
+    description: Replace field names with specified labels
+    completion:
+      positional:
+        - ["$files"]
+  - name: latin1-to-utf8
+    description: Convert Latin-1 to UTF-8
+    completion:
+      positional:
+        - ["$files"]
+  - name: least-frequent
+    description: Print the least frequently occurring values
+    completion:
+      positional:
+        - ["$files"]
+  - name: merge-fields
+    description: Merge specified fields into one
+    completion:
+      positional:
+        - ["$files"]
+  - name: most-frequent
+    description: Print the most frequently occurring values
+    completion:
+      positional:
+        - ["$files"]
+  - name: nest
+    description: Nest specified fields into a map
+    completion:
+      positional:
+        - ["$files"]
+  - name: nothing
+    description: Consume all records and produce no output
+    completion:
+      positional:
+        - ["$files"]
+  - name: put
+    description: Evaluate DSL expression and set field values
+    completion:
+      positional:
+        - ["$files"]
+  - name: regularize
+    description: Output records in canonical form
+    completion:
+      positional:
+        - ["$files"]
+  - name: remove-empty-columns
+    description: Remove columns that are empty in every record
+    completion:
+      positional:
+        - ["$files"]
+  - name: rename
+    description: Rename specified fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: reorder
+    description: Reorder fields in specified order
+    completion:
+      positional:
+        - ["$files"]
+  - name: repeat
+    description: Emit each record n times
+    completion:
+      positional:
+        - ["$files"]
+  - name: reshape
+    description: Reshape records (wide to long or long to wide)
+    completion:
+      positional:
+        - ["$files"]
+  - name: sample
+    description: Randomly sample records
+    completion:
+      positional:
+        - ["$files"]
+  - name: sec2gmtdate
+    description: Convert epoch seconds to GMT date
+    completion:
+      positional:
+        - ["$files"]
+  - name: sec2gmt
+    description: Convert epoch seconds to GMT timestamp
+    completion:
+      positional:
+        - ["$files"]
+  - name: seqgen
+    description: Generate sequence of records
+    completion:
+      positional:
+        - ["$files"]
+  - name: shuffle
+    description: Randomly shuffle records
+    completion:
+      positional:
+        - ["$files"]
+  - name: skip-trivial-records
+    description: Skip records with empty keys or values
+    completion:
+      positional:
+        - ["$files"]
+  - name: sort
+    description: Sort records by specified field names
+    completion:
+      positional:
+        - ["$files"]
+  - name: sort-within-records
+    description: Sort key-value pairs within each record
+    completion:
+      positional:
+        - ["$files"]
+  - name: sparsify
+    description: Print records with empty values as absent
+    completion:
+      positional:
+        - ["$files"]
+  - name: split
+    description: Split field values on delimiter into new fields
+    completion:
+      positional:
+        - ["$files"]
+  - name: ssub
+    description: String substitution with regex (first match only)
+    completion:
+      positional:
+        - ["$files"]
+  - name: stats1
+    description: Compute univariate statistics
+    completion:
+      positional:
+        - ["$files"]
+  - name: stats2
+    description: Compute bivariate statistics
+    completion:
+      positional:
+        - ["$files"]
+  - name: step
+    description: Filter records by position (every nth, etc.)
+    completion:
+      positional:
+        - ["$files"]
+  - name: sub
+    description: String substitution with regex (all matches)
+    completion:
+      positional:
+        - ["$files"]
+  - name: summary
+    description: Show summary statistics
+    completion:
+      positional:
+        - ["$files"]
+  - name: surv
+    description: Survival analysis
+    completion:
+      positional:
+        - ["$files"]
+  - name: tac
+    description: Reverse order of records (tail then head)
+    completion:
+      positional:
+        - ["$files"]
+  - name: tail
+    description: Pass through last n records
+    completion:
+      positional:
+        - ["$files"]
+  - name: tee
+    description: Copy input to file and pass through to output
+    completion:
+      positional:
+        - ["$files"]
+  - name: template
+    description: Use record values to fill in a template string
+    completion:
+      positional:
+        - ["$files"]
+  - name: top
+    description: Print top N records by specified field
+    completion:
+      positional:
+        - ["$files"]
+  - name: utf8-to-latin1
+    description: Convert UTF-8 to Latin-1
+    completion:
+      positional:
+        - ["$files"]
+  - name: unflatten
+    description: Unflatten dot-separated keys to nested maps
+    completion:
+      positional:
+        - ["$files"]
+  - name: uniq
+    description: Deduplicate consecutive records
+    completion:
+      positional:
+        - ["$files"]
+  - name: unspace
+    description: Replace whitespace with single space
+    completion:
+      positional:
+        - ["$files"]
+  - name: unsparsify
+    description: Print records with absent values as empty
+    completion:
+      positional:
+        - ["$files"]
+  - name: help
+    description: Show help for mlr or a topic
+    completion:
+      positional:
+        - ["topics", "basic-examples", "file-formats", "flags", "list-verbs", "usage-verbs", "list-functions", "usage-functions", "list-keywords", "usage-keywords", "verb", "function", "keyword", "find"]
+        - ["$files"]
