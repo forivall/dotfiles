@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for npm-check-updates (ncu).
+# Generated from https://carapace-sh.github.io/carapace-spec/ and `npx npm-check-updates --help`.
+name: npm-check-updates
+description: "Upgrade package.json dependencies to latest versions. Usage: npm-check-updates [options] [filter]. [filter] is a list or regex of package names to check."
+
+persistentflags:
+  --cache: "Cache versions to a local cache file. Default --cacheFile is ~/.ncu-cache.json and default --cacheExpiration is 10 minutes."
+  --cacheClear: "Clear the default cache, or the cache file specified by --cacheFile."
+  --cacheExpiration=: "Cache expiration in minutes. Only works with --cache. (default: 10)"
+  --cacheFile=: "Filepath for the cache file. Only works with --cache. (default: \"~/.ncu-cache.json\")"
+  --color: "Force color in terminal."
+  --concurrency=: "Max number of concurrent HTTP requests to registry. (default: 8)"
+  --configFileName=: "Config file name. (default: .ncurc.{json,yml,js,cjs})"
+  --configFilePath=: "Directory of .ncurc config file. (default: directory of packageFile)"
+  -c, --cooldown=: "Sets a minimum age for package versions to be considered for upgrade. Accepts a number (days) or a string with a unit (e.g. \"7d\", \"12h\", \"30m\")."
+  --cwd=: "Working directory in which npm will be executed."
+  --deep: "Run recursively in current working directory. Alias of (--packageFile '**/package.json')."
+  --dep=: "Check one or more sections of dependencies only (comma-delimited). (default: prod, dev, optional, packageManager)"
+  --deprecated: "Include deprecated packages. Use --no-deprecated to exclude. (default: true)"
+  -d, --doctor: "Iteratively installs upgrades and runs tests to identify breaking upgrades. Requires -u to execute."
+  --doctorInstall=: "Specifies the install script to use in doctor mode. (default: npm install or equivalent for your package manager)"
+  --doctorTest=: "Specifies the test script to use in doctor mode. (default: npm test)"
+  --enginesNode: "Include only packages that satisfy engines.node as specified in the package file."
+  -e, --errorLevel=: "Set the error level. 1: exits with error code 0 if no errors occur. 2: exits with error code 0 if no packages need updating. (default: 1)"
+  -f, --filter=: "Include only package names matching the given string, wildcard, glob, comma-or-space-delimited list, /regex/, or predicate function. Run \"ncu --help filter\" or \"ncu --help filterResults\" for details."
+  --filterVersion=: "Filter on package version using comma-or-space-delimited list, /regex/, or predicate function."
+  --format=: "Modify the output formatting or show additional information. Comma-delimited values. For --format group, run \"ncu --help groupFunction\" for details. (default: [])"
+  -g, --global: "Check global packages instead of in the current project."
+  --install=: "Control the auto-install behavior. (default: \"prompt\")"
+  -i, --interactive: "Enable interactive prompts for each dependency; implies -u unless one of the json options are set."
+  -j, --jsonAll: "Output new package file instead of human-readable message."
+  --jsonDeps: "Like jsonAll but only lists dependencies, devDependencies, optionalDependencies, etc of the new package data."
+  --jsonUpgraded: "Output upgraded dependencies in json."
+  -l, --loglevel=: "Amount to log. (default: \"warn\")"
+  --mergeConfig: "Merges nested configs with the root config file for --deep or --packageFile options. (default: false)"
+  -m, --minimal: "Do not upgrade newer versions that are already satisfied by the version range according to semver."
+  --packageData=: "Package file data (you can also use stdin)."
+  --packageFile=: "Package file(s) location. (default: ./package.json)"
+  -p, --packageManager=: "Package manager. (default: npm)"
+  --peer: "Check peer dependencies of installed packages and filter updates to compatible versions."
+  --pre=: "Include prerelease versions (e.g. -alpha.0, -beta.5). Automatically set to 1 when --target is newest or greatest. (default: 0)"
+  --prefix=: "Current working directory of npm."
+  -r, --registry=: "Specify the registry to use when looking up package versions."
+  --registryType=: "Specify whether --registry refers to a full npm registry or a simple JSON file or url. (default: npm)"
+  -x, --reject=: "Exclude packages matching the given string, wildcard, glob, comma-or-space-delimited list, /regex/, or predicate function."
+  --rejectVersion=: "Exclude package.json versions using comma-or-space-delimited list, /regex/, or predicate function."
+  --removeRange: "Remove version ranges from the final package version."
+  --retry=: "Number of times to retry failed requests for package info. (default: 3)"
+  --root: "Runs updates on the root project in addition to specified workspaces. Only allowed with --workspace or --workspaces. (default: true)"
+  -s, --silent: "Don't output anything. Alias for --loglevel silent."
+  --stdin: Read package.json from stdin.
+  -t, --target=: "Determines the version to upgrade to. (default: latest)"
+  --timeout=: "Global timeout in milliseconds. (default: no global timeout and 30 seconds per npm-registry-fetch)"
+  -u, --upgrade: "Overwrite package file with upgraded versions instead of just outputting to console."
+  --verbose: "Log additional information for debugging. Alias for --loglevel verbose."
+  --workspace=: "Run on one or more specified workspaces. Add --no-root to exclude the root project. (default: [])"
+  -w, --workspaces: "Run on all workspaces. Add --no-root to exclude the root project."
+  -V, --version: "Output the version number of npm-check-updates."
+  -h, --help: "Show help. Run \"ncu --help <option>\" for a specific option."
+
+completion:
+  flag:
+    dep: ["dev", "optional", "peer", "prod", "packageManager"]
+    format: ["dep", "group", "ownerChanged", "repo", "time", "lines", "installedVersion"]
+    install: ["always", "never", "prompt"]
+    loglevel: ["silent", "error", "minimal", "warn", "info", "verbose", "silly"]
+    packageManager: ["npm", "yarn", "pnpm", "deno", "bun", "staticRegistry"]
+    registryType: ["npm", "json"]
+    target: ["latest", "newest", "greatest", "minor", "patch", "semver"]
+    errorLevel: ["1", "2"]
+    packageFile: ["$files"]
+    cacheFile: ["$files"]
+    configFilePath: ["$directories"]
+    cwd: ["$directories"]
