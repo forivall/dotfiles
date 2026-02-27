@@ -64,11 +64,15 @@
 	deltas = -c core.pager=deltaw show
 	diffc = diff --cached
 	diffd = -c core.pager=deltaw diff
+	diffd-2way = -c core.pager=deltaw diff-2way
+	diffdh = "!(printf \"❖ diff %s\n\" \"$*\" && git diff \"$@\") | deltaw --commit-regex=\"^❖ \" --commit-style=yellow && :"
 	difft = -c diff.external=difft diff
 	diffc-fnames = -c pager.diff=false diff --cached --name-only --diff-filter
 	diff-fnames = -c pager.diff=false diff --name-only --diff-filter
+	diff-file-status = !git-diff-file-status
 	dd = -c core.pager=deltaw diff
 	dp = diffp
+	dc = diff --cached
 
 	diffcd = -c core.pager=deltaw diff --cached
 	showd = -c core.pager=deltaw show
@@ -104,8 +108,8 @@
 	show2 = show --pretty=concise
 	showd2 = showd --pretty=concise
 	ll = log --pretty=oneline --abbrev-commit --decorate --graph --branches=*
-  branch-name-ref = !git symbolic-ref HEAD 2> /dev/null || cat $GIT_DIR/rebase-merge/head-name
-  branch-name = !git branch-name-ref | sed 's|^refs/heads/||'
+	branch-name-ref = !git symbolic-ref HEAD 2> /dev/null || cat $GIT_DIR/rebase-merge/head-name
+	branch-name = !git branch-name-ref | sed 's|^refs/heads/||'
 	branches = branch --list
 	branches-with-upstreams = "!zsh -c 'if (( $# > 0 )); then opt=(\"--branches=\"${^@}); else opt=(--branches); fi; git rev-parse --symbolic ${opt[@]} | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done' -"
 	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"
@@ -153,7 +157,6 @@
 	sm = subl-modified
 	sp = subl-projects
 	unstage = reset HEAD --
-	dc = diff --cached
 	amend = commit --amend --no-edit
 	reword = revise --no-index --edit HEAD
 	reword = "!f() { git branchless wrap revise --no-index --edit ${@:-HEAD}; }; f"

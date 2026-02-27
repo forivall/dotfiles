@@ -46,7 +46,13 @@ else
   return 1
 fi
 
-git show --no-patch --format='' $rawoid || git fetch origin $rawoid
+git --no-pager show --no-patch --format='' $rawoid || git fetch origin $rawoid
 oid=$(git rev-parse --verify --short $rawoid)
-echo git diff $oid^1:${files[1]} $oid^2:${files[2]}
-git diff $oid^1:${files[1]} $oid^2:${files[2]}
+echodiff=diff
+if [[ $GIT_CONFIG_PARAMETERS="'core.pager'='deltaw'" ]]; then
+  echodiff=diffd
+elif [[ -n $GIT_CONFIG_PARAMETERS ]]; then
+  echodiff="-c $GIT_CONFIG_PARAMETERS diff"
+fi
+echo git $echodiff ${(q)pretty[@]} $oid^1:${files[1]} $oid^2:${files[2]}
+git diff ${pretty[@]} $oid^1:${files[1]} $oid^2:${files[2]}

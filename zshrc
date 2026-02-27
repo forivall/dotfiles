@@ -94,7 +94,7 @@ ZSH_COMPINIT_CACHE=true
 # ENABLE_CORRECTION=true
 
 ## intelli-shell settings
-export INTELLI_SHELL_ENABLE=false
+export INTELLI_SHELL_ENABLE=true
 # export INTELLI_SEARCH_HOTKEY='^@'
 export INTELLI_VARIABLE_HOTKEY='^v'
 # export INTELLI_BOOKMARK_HOTKEY='^b'

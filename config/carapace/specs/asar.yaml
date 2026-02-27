@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for asar (manipulate asar archive files).
+# Generated from https://carapace-sh.github.io/carapace-spec/ and `asar --help`.
+name: asar
+description: Manipulate asar archive files
+
+persistentflags:
+  -V, --version: output the version number
+  -h, --help: display help for command
+
+commands:
+  - name: pack
+    aliases: [p]
+    description: create asar archive
+    flags:
+      --ordering=: path to a text file for ordering contents
+      --unpack=: do not pack files matching glob expression
+      --unpack-dir=: do not pack dirs matching glob expression or starting with literal expression
+      --exclude-hidden: exclude hidden files
+      -h, --help: display help for command
+    completion:
+      flag:
+        ordering: ["$files"]
+      positional:
+        - ["$directories"]
+        - ["$files"]
+
+  - name: list
+    aliases: [l]
+    description: list files of asar archive
+    flags:
+      -i, --is-pack: each file in the asar is pack or unpack
+      -h, --help: display help for command
+    completion:
+      positional:
+        - ["$files"]
+
+  - name: extract-file
+    aliases: [ef]
+    description: extract one file from archive
+    completion:
+      positional:
+        - ["$files"]
+        - []
+
+  - name: extract
+    aliases: [e]
+    description: extract archive
+    completion:
+      positional:
+        - ["$files"]
+        - ["$directories"]
+
+  - name: help
+    description: display help for command
+    completion:
+      positional:
+        - ["pack", "p", "list", "l", "extract-file", "ef", "extract", "e", "help"]

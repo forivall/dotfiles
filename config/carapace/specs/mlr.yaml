@@ -144,353 +144,283 @@ commands:
   - name: altkv
     description: "Given fields with values of the form a,b,c,d,e,f emits a=b,c=d,e=f pairs"
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: bar
     description: Replaces a numeric field with a number of asterisks for bar plots
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: bootstrap
     description: Emits an n-sample with replacement of the input records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: case
     description: Uppercases strings in record keys and/or values
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: cat
     description: Passes input records directly to output (format conversion)
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: check
     description: Consumes records without printing output; checks data are parseable
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: clean-whitespace
     description: Whitespace-cleans the keys and/or values in each field
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: count-distinct
     description: Count distinct values for specified field names
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: count
     description: Count number of records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: count-similar
     description: Count records with same values in specified fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: cut
     description: Keeps only specified fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: decimate
     description: Pass through one of every n records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: fill-down
     description: Fill down empty fields from previous records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: fill-empty
     description: Fill empty values with specified fill-string
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: filter
     description: Keep records matching expression
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: flatten
     description: Flatten nested maps to dot-separated keys
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: format-values
     description: Apply format strings to specified fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: fraction
     description: For each record, compute fraction of sum of specified fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: gap
     description: Print a blank line when field values change
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: grep
     description: Keep records matching pattern
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: group-by
     description: Group records by specified field names
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: group-like
     description: Group records with same field names
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: gsub
     description: Global string substitution with regex
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: having-fields
     description: Keep records that have specified fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: head
     description: Pass through first n records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: histogram
     description: Emit histogram of values in specified field
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: json-parse
     description: Parse string field values as JSON
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: json-stringify
     description: Convert field values to JSON strings
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: join
     description: Join records from multiple streams
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: label
     description: Replace field names with specified labels
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: latin1-to-utf8
     description: Convert Latin-1 to UTF-8
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: least-frequent
     description: Print the least frequently occurring values
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: merge-fields
     description: Merge specified fields into one
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: most-frequent
     description: Print the most frequently occurring values
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: nest
     description: Nest specified fields into a map
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: nothing
     description: Consume all records and produce no output
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: put
     description: Evaluate DSL expression and set field values
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: regularize
     description: Output records in canonical form
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: remove-empty-columns
     description: Remove columns that are empty in every record
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: rename
     description: Rename specified fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: reorder
     description: Reorder fields in specified order
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: repeat
     description: Emit each record n times
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: reshape
     description: Reshape records (wide to long or long to wide)
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sample
     description: Randomly sample records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sec2gmtdate
     description: Convert epoch seconds to GMT date
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sec2gmt
     description: Convert epoch seconds to GMT timestamp
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: seqgen
     description: Generate sequence of records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: shuffle
     description: Randomly shuffle records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: skip-trivial-records
     description: Skip records with empty keys or values
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sort
     description: Sort records by specified field names
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sort-within-records
     description: Sort key-value pairs within each record
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sparsify
     description: Print records with empty values as absent
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: split
     description: Split field values on delimiter into new fields
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: ssub
     description: String substitution with regex (first match only)
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: stats1
     description: Compute univariate statistics
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: stats2
     description: Compute bivariate statistics
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: step
     description: Filter records by position (every nth, etc.)
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: sub
     description: String substitution with regex (all matches)
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: summary
     description: Show summary statistics
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: surv
     description: Survival analysis
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: tac
     description: Reverse order of records (tail then head)
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: tail
     description: Pass through last n records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: tee
     description: Copy input to file and pass through to output
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: template
     description: Use record values to fill in a template string
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: top
     description: Print top N records by specified field
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: utf8-to-latin1
     description: Convert UTF-8 to Latin-1
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: unflatten
     description: Unflatten dot-separated keys to nested maps
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: uniq
     description: Deduplicate consecutive records
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: unspace
     description: Replace whitespace with single space
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: unsparsify
     description: Print records with absent values as empty
     completion:
-      positional:
-        - ["$files"]
+      positionalany: ["$files"]
   - name: help
     description: Show help for mlr or a topic
     completion:

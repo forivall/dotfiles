@@ -6,4 +6,16 @@ then
 	deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub} --features map-styles-light)
 fi
 BAT_PAGER=${BAT_PAGER:-"less +X -x2 -FR"}
+if [[ $BAT_PAGER == moor* ]]; then
+  if [[ -n $XDG_DATA_HOME ]]; then
+    XDGBASE=$XDG_DATA_HOME;
+  elif [[ $OSTYPE == darwin* ]]; then
+    XDGBASE=~/"Library/Application Support"
+  else
+    XDGBASE=~/.local/share
+  fi
+  # --no-navigate) navigate=false; shift; continue; ;;
+  MOORHISTFILE=$XDGBASE/moor/search_history
+  printf '^(commit|❖%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> "$MOORHISTFILE"
+fi
 BAT_PAGER=$BAT_PAGER exec delta "${deltaOpts[@]}" --pager="$BAT_PAGER" "$@"

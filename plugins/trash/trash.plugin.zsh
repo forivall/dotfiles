@@ -29,3 +29,6 @@ fi
 
 alias rmd="command rm"
 alias rmdsu="sudo rm"
+
+alias mv="mv -b"
+alias cp="cp -b"

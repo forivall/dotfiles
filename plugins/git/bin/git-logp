@@ -176,7 +176,7 @@ else
       echo ".less-history-file:" > "$DELTA_HIST_FILE"
     fi
     echo ".search" >> "$DELTA_HIST_FILE"
-    printf '"^(commit%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> "$DELTA_HIST_FILE"
+    printf '"^(commit|❖%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> "$DELTA_HIST_FILE"
     LESSHISTFILE=$DELTA_HIST_FILE
     export LESSHISTFILE
   fi
