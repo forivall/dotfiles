@@ -1,0 +1,521 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for pdfcpu (PDF manipulation tool). From pdfcpu.io docs and grammar.
+# Page selection (-pages): comma-separated expressions: even, odd, #, #-#, #-, -#, l, nl, !#, !#-#, etc.
+name: pdfcpu
+description: "A PDF processor written in Go (API and CLI)."
+persistentflags:
+  -v, --verbose: Turn on logging
+  -vv: Verbose logging
+  -q, --quiet: Disable output
+  -o, --offline: Disable http traffic
+  -c, --conf=: "Set or disable config dir (path or disable)"
+  -opw=: Owner password
+  -upw=: User password
+  -u, --unit=: "Display unit (po=points, in=inches, cm=centimetres, mm=millimetres)"
+completion:
+  flag:
+    conf: ["$path", "disable"]
+    unit: ["po", "in", "cm", "mm"]
+commands:
+  - name: annotations
+    description: List or remove page annotations (annotations list|remove)
+    flags:
+      -p, --pages=: "Page selection: even, odd, #, #-#, #-, -#, l, nl, !#, !#-#"
+    completion:
+      flag:
+        pages: ["even", "odd", "l", "nl", "1", "1-", "-1", "1-3", "1-5"]
+      positional:
+        - ["list", "remove"]
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+        - []
+  - name: attachments
+    description: List, add, remove, extract embedded file attachments
+    completion:
+      positional:
+        - ["list", "add", "remove", "extract"]
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+      dashany: ["$files"]
+  - name: booklet
+    description: "Arrange pages onto larger sheets for booklet/zine"
+    flags:
+      -p, --pages=: Page selection
+    completion:
+      flag:
+        pages: ["even", "odd", "l", "nl", "1", "1-", "1-3"]
+      positional:
+        - ["$list(,)", "form:A4", "form:A4L", "form:Letter", "form:Tabloid", "form:TabloidL", "btype:booklet", "btype:bookletadvanced", "btype:perfectbound", "binding:long", "binding:short", "multifolio:on", "multifolio:off", "guides:on", "guides:off", "border:on", "border:off", "ma:0", "ma:10", "bgcol:"]
+        - ["$files"]
+        - ["2", "4", "6", "8"]
+        - ["$files"]
+      positionalany: ["$files"]
+      dash:
+        - ["$list(,)", "form:A4", "form:A4L", "form:Letter", "form:Tabloid", "form:TabloidL", "btype:booklet", "btype:bookletadvanced", "btype:perfectbound", "binding:long", "binding:short", "multifolio:on", "multifolio:off", "guides:on", "guides:off", "border:on", "border:off", "ma:0", "ma:10", "bgcol:"]
+        - ["$files"]
+        - ["2", "4", "6", "8"]
+        - ["$files"]
+      dashany: ["$files"]
+  - name: bookmarks
+    description: List, import, export, remove bookmarks
+    completion:
+      positional:
+        - ["list", "import", "export", "remove"]
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: boxes
+    description: List, add, remove page boundaries for selected pages
+    flags:
+      -p, --pages=: Page selection
+    completion:
+      flag:
+        pages: ["even", "odd", "l", "nl", "1", "1-", "1-3"]
+      positional:
+        - ["list", "add", "remove"]
+        - ["media", "crop", "trim", "bleed", "art", "m", "c", "t", "b", "a", "$files"]
+        - ["$files"]
+        - []
+      dash:
+        - ["media", "crop", "trim", "bleed", "art", "m", "c", "t", "b", "a", "$files"]
+        - ["$files"]
+        - ["$files"]
+        - []
+  - name: certificates
+    description: List, inspect, import, reset certificates
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: changeopw
+    description: Change owner password
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+        - []
+  - name: changeupw
+    description: Change user password
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+        - []
+  - name: collect
+    description: Create custom sequence of selected pages
+    completion:
+      flag:
+        pages: ["even", "odd", "l", "nl", "1", "1-", "1-3", "1-5"]
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+  - name: config
+    description: List, reset configuration
+    flags:
+      -m, --mode=: Config subcommand (list, reset)
+    completion:
+      flag:
+        mode: ["list", "reset"]
+      positional:
+        - []
+  - name: create
+    description: Create PDF content including forms via JSON
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+        - ["$files"]
+  - name: crop
+    description: Set cropbox for selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+        - []
+  - name: cut
+    description: Custom cut pages horizontally or vertically
+    completion:
+      positional:
+        - ["$files"]
+        - ["$directories"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$directories"]
+        - []
+  - name: decrypt
+    description: Remove password protection
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+  - name: encrypt
+    description: Set password protection
+    flags:
+      -m, --mode=: Algorithm (rc4, aes)
+      -key=: Key length in bits (40, 128, 256)
+      -perm=: User access permissions (none, print, all)
+      -upw=: User password
+      -opw=: Owner password (required)
+    completion:
+      flag:
+        mode: ["rc4", "aes"]
+        key: ["40", "128", "256"]
+        perm: ["none", "print", "all"]
+      positional:
+        - ["$files"]
+        - ["$files"]
+      dash:
+        - ["$files"]
+        - ["$files"]
+  - name: extract
+    description: Extract images, fonts, content, pages or metadata
+    flags:
+      -m, --mode=: "Extraction mode (image, font, content, page, meta)"
+      -p, --pages=: Selected pages (see pdfcpu selectedpages)
+    completion:
+      flag:
+        mode: ["image", "font", "content", "page", "meta"]
+      positional:
+        - ["$files"]
+        - ["$directories"]
+      dash:
+        - ["$files"]
+        - ["$directories"]
+  - name: fonts
+    description: Install, list supported fonts, create cheat sheets
+    completion:
+      positional:
+        - []
+  - name: form
+    description: List, remove fields, lock, unlock, reset, export, fill form via JSON or CSV
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: grid
+    description: Rearrange pages or images for enhanced browsing experience
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+      dashany: ["$files"]
+  - name: images
+    description: List, extract, update images
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: import
+    description: Import or convert images to PDF
+    completion:
+      positional:
+        - ["$files"]
+        - ["$files"]
+      dash:
+        - ["$files"]
+        - ["$files"]
+      dashany: ["$files"]
+  - name: info
+    description: Print file info
+    flags:
+      -p, --pages=: Selected pages (see pdfcpu selectedpages)
+      --fonts: Include font info
+      -j, --json: Output JSON
+    completion:
+      positional:
+        - ["$files"]
+      dash:
+        - ["$files"]
+  - name: keywords
+    description: List, add, remove keywords
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+      dashany: ["$files"]
+  - name: merge
+    description: Concatenate PDFs
+    flags:
+      -m, --mode=: "Merge mode (create, append, zip)"
+      -s, --sort: Sort inFiles by file name
+      -b, --bookmarks=: Create bookmarks (true, false)
+      -d, --divider: Insert blank page between merged documents
+      -opt, --optimize=: Optimize before writing (true, false)
+    completion:
+      flag:
+        mode: ["create", "append", "zip"]
+        bookmarks: ["true", "false"]
+        optimize: ["true", "false"]
+      positional:
+        - ["$files"]
+        - ["$files"]
+      dash:
+        - ["$files"]
+      dashany: ["$files"]
+  - name: ndown
+    description: Cut selected pages into n pages symmetrically
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: nup
+    description: "Rearrange pages or images into page grids (usage: [description] outFile n inFile|imageFiles...). Description is optional comma-separated config."
+    flags:
+      -p, --pages=: Selected pages (see pdfcpu selectedpages)
+    completion:
+      flag:
+        pages: []
+      positional:
+        # Optional [description]: comma-separated specifier string (form, or, enforce, bo, ma, etc.)
+        - ["$list(,)", "form:A4", "form:A4L", "form:A4P", "form:Letter", "form:LetterL", "form:Legal", "form:Tabloid", "form:TabloidL", "form:TabloidP", "or:rd", "or:dr", "or:ld", "or:dl", "enforce:on", "enforce:off", "enforce:true", "enforce:false", "enforce:t", "enforce:f", "bo:on", "bo:off", "bo:true", "bo:false", "ma:0", "ma:3", "di:"]
+        - ["$files"]
+        - ["2", "3", "4", "8", "9", "12", "16"]
+      positionalany: ["$files"]
+      dash:
+        - ["$list(,)", "form:A4", "form:A4L", "form:A4P", "form:Letter", "form:LetterL", "form:Legal", "form:Tabloid", "form:TabloidL", "form:TabloidP", "or:rd", "or:dr", "or:ld", "or:dl", "enforce:on", "enforce:off", "enforce:true", "enforce:false", "enforce:t", "enforce:f", "bo:on", "bo:off", "bo:true", "bo:false", "ma:0", "ma:3", "di:"]
+        - ["$files"]
+        - ["2", "3", "4", "8", "9", "12", "16"]
+        - ["$files"]
+      dashany: ["$files"]
+  - name: optimize
+    description: Optimize PDF by getting rid of redundant page resources
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+  - name: pagelayout
+    description: List, set, reset page layout for opened document
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: pagemode
+    description: List, set, reset page mode for opened document
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: pages
+    description: Insert, remove selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: paper
+    description: Print list of supported paper sizes
+    completion:
+      positional:
+        - []
+  - name: permissions
+    description: List, set user access permissions
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: portfolio
+    description: List, add, remove, extract portfolio entries with optional description
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+      dashany: ["$files"]
+  - name: poster
+    description: Cut selected pages into poster by paper size or dimensions
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$directories"]
+        - []
+  - name: properties
+    description: List, add, remove document properties
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+      dashany: ["$files"]
+  - name: resize
+    description: Scale selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+        - []
+  - name: rotate
+    description: Rotate selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["90", "180", "270"]
+        - ["$files"]
+  - name: selectedpages
+    description: Print definition of the -pages flag
+    completion:
+      positional:
+        - []
+  - name: signatures
+    description: Validate signatures
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: split
+    description: Split up a PDF by span or bookmark
+    flags:
+      -m, --mode=: "Split mode (span, bookmark, page)"
+    completion:
+      flag:
+        mode: ["span", "bookmark", "page"]
+      positional:
+        - ["$files"]
+        - ["$directories"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$directories"]
+        - []
+      dashany: ["$files"]
+  - name: stamp
+    description: Add, remove, update Unicode text, image or PDF stamps for selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: trim
+    description: Create trimmed version of selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+  - name: validate
+    description: "Validate PDF against PDF 32000-1:2008 (PDF 1.7) and basic PDF 2.0 validation"
+    flags:
+      -m, --mode=: "Validation mode (strict, relaxed)"
+      -l, --links: Check for broken links
+      -opt, --optimize=: Optimize resources (true, false)
+    completion:
+      flag:
+        mode: ["strict", "relaxed"]
+        optimize: ["true", "false"]
+      positional:
+        - ["$files"]
+      dash:
+        - ["$files"]
+  - name: version
+    description: Print version
+    completion:
+      positional:
+        - []
+  - name: viewerpref
+    description: List, set, reset viewer preferences for opened document
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: watermark
+    description: Add, remove, update Unicode text, image or PDF watermarks for selected pages
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - []
+  - name: zoom
+    description: Zoom in or out of selected pages by magnification factor or corresponding margin
+    completion:
+      positional:
+        - ["$files"]
+        - []
+      dash:
+        - ["$files"]
+        - ["$files"]
+        - []
+  - name: help
+    description: Show help for pdfcpu or a subcommand
+    completion:
+      positional:
+        - ["annotations", "attachments", "booklet", "bookmarks", "boxes", "certificates", "changeopw", "changeupw", "collect", "config", "create", "crop", "cut", "decrypt", "encrypt", "extract", "fonts", "form", "grid", "images", "import", "info", "keywords", "merge", "ndown", "nup", "optimize", "pagelayout", "pagemode", "pages", "paper", "permissions", "portfolio", "poster", "properties", "resize", "rotate", "selectedpages", "signatures", "split", "stamp", "trim", "validate", "version", "viewerpref", "watermark", "zoom"]
