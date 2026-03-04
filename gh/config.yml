@@ -28,6 +28,7 @@ aliases:
     do :; done
   b: browse
   bf: '!open "$(gh browse --no-browser --commit=$(git rev-parse HEAD) $1)#$2"'
+  br: branch
   co: pr checkout
   copilot-generate-commit-message: |
     !
@@ -215,7 +216,7 @@ aliases:
         local_date=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || date -d "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || echo "$utc_date");
         echo "";
         printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\):\n" "$author" "$url" "$local_date";
-        echo "$body" | mcat --no-linenumbers;
+        echo "$body" | mcat --no-linenumbers --paging=never;
       done;
       echo "";
     done
@@ -247,7 +248,7 @@ aliases:
       jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false))) ]'
   pr-files: 'pr diff --name-only'
   pr-id-gql: |
-    ! [[ $# -gt 0 ]] && GH_PR=$1 && shift
+    ! [[ $# -gt 0 && $1 != -*  ]] && GH_PR=$1 && shift
       [[ -n "$GH_PR" ]] || GH_PR=$(gh pr view --json number --jq .number) || exit $?
       gh api graphql -F 'owner={owner}' -F 'repo={repo}' -F "pr=$GH_PR"  -f query='
       query($owner: String!, $repo: String!, $pr: Int!) {
@@ -261,6 +262,40 @@ aliases:
         pullRequestReview { id comments { totalCount } }
       }
     }'
+  pr-add-review-thread-at: '! gh pr-add-review-thread-gql -F path="$1" -F startLine=$2 -F line=$3 -F body="$4"'
+  pr-add-review-thread-suggestion: |
+    ! gh pr-add-review-thread-gql -F path="$1" -F startLine=$2 -F line=$3 -F body="\`\`\`suggestion
+    $4
+    \`\`\`"
+  pr-add-review-thread-gql: |
+    !
+    PR_ID=$(gh pr view ${GH_PR} --json id --jq .id) || exit $?
+    gh api graphql -F pullRequestId=$PR_ID -f query='
+    mutation($body: String!,
+      $pullRequestReviewId: ID,
+      $pullRequestId: ID,
+      $path: String,
+      $line: Int,
+      $startLine: Int,
+      $side: DiffSide = RIGHT,
+      $startSide: DiffSide = RIGHT,
+      $subjectType: PullRequestReviewThreadSubjectType = FILE
+    ) {
+      addPullRequestReviewThread(input: {
+        body: $body,
+        pullRequestReviewId: $pullRequestReviewId,
+        pullRequestId: $pullRequestId,
+        path: $path,
+        line: $line,
+        startLine: $startLine,
+        side: $side,
+        startSide: $startSide,
+        subjectType: $subjectType
+      }) {
+        thread { id }
+        clientMutationId
+      }
+    }' "$@"
   pr-commit-range: "pr view --json mergeCommit --jq '.mergeCommit.oid + \"^...\" + .mergeCommit.oid + \"^2\"'"
   cherry-pick-pr: |
     !
