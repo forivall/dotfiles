@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+LINE=$1
+shift
+
+git diff "$@" | while read line; do
+  if [[ $line != @@* ]]; then
+    if ${PRINTING:-false} && [[ $line == -* ]]; then
+      echo ${line:1};
+    fi
+    continue
+  fi
+  if ${PRINTING:-false}; then break; fi
+  added=${line#*+}
+  added=${added% @@*}
+  start=${added%,*}
+  length=${added#*,}
+  if (( LINE >= start && LINE < start + length )); then
+    PRINTING=true
+  fi
+done
