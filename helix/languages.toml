@@ -221,6 +221,14 @@ name = "angular"
 source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "afaf0dc8930486a2159d35af5d0aff4e95dfc887" }
 
 [[grammar]]
+name = "git-rebase"
+source = { git = "https://forivall@github.com/forivall/tree-sitter-git-rebase", rev = "0b221744732d89bb646116b59d05909fc9c80fc8" }
+
+[[grammar]]
+name = "yaml-cci"
+source = { git = "https://github.com/ikatyang/tree-sitter-yaml", rev = "0e36bed171768908f331ff7dff9d956bae016efb" }
+
+[[grammar]]
 name = "zsh"
 source = { git = "https://github.com/lincheney/tree-sitter-zsh", rev = "8fb08cf93c40ffd8c97b1b0d491b5f91bf1aab47" }
 

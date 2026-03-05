@@ -77,8 +77,13 @@ display-messages = true
 "C-u" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
 "C-v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
-"-" = ":sh git removed %{cursor_line} -w ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
+"-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
+"U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
+
+[keys.normal.space.g]
+"f" = "changed_file_picker"
+"a" = ":sh git add %{buffer_name}"
 
 [keys.normal.z]
 "x" = [

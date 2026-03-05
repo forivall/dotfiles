@@ -15,7 +15,7 @@ git diff "$@" | while read line; do
   added=${added% @@*}
   start=${added%,*}
   length=${added#*,}
-  if (( LINE >= start && LINE < start + length )); then
+  if (( LINE >= start && LINE < start + (length || 1)) )); then
     PRINTING=true
   fi
 done

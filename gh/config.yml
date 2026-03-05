@@ -30,6 +30,46 @@ aliases:
   bf: '!open "$(gh browse --no-browser --commit=$(git rev-parse HEAD) $1)#$2"'
   br: branch
   co: pr checkout
+  copilot-generate-commit-message-body: |
+    !
+    index=0
+    for arg in $@; do ((index++)); if [[ $arg == -- ]]; then break; fi; done
+    DIFF_COMMAND=(${@:0:$index})
+    shift $index
+    (
+      for f in "$@"; do
+        printf '%s\0%s\n' "${f}" "$(git "${DIFF_COMMAND[@]}" --patch --no-prefix "$f" | base64 -w0)"
+      done
+    ) | jq --raw-input --slurp --compact-output '. | rtrimstr("\n") | if . == "" then halt_error(1) else {
+      messages: [{
+        role: "user",
+        content: "Use conventional commits format",
+        copilot_references:(
+          . | split("\n") | map(
+            split("\u0000") |
+            {type:"github.diff-hunk",data:{type:"diff-hunk","changeReference":"",headerContext:"",fileName: .[0],diff:.[1]|@base64d}}
+          )
+        ),
+      }],
+      temperature: 0.3,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          description: "The schema to abide by when generating commit message output",
+          name: "commit_message_response",
+          strict: true,
+          schema: {
+            type: "object",
+            properties: {
+              title: { type: "string", description: "The commit message title/summary" },
+              description: { type: "string", description: "The commit message description/body" }
+            },
+            required: ["title", "description"],
+            additionalProperties: false
+          }
+        }
+      }
+    } end'
   copilot-generate-commit-message: |
     !
     set -eo pipefail
@@ -56,50 +96,19 @@ aliases:
       echo "no files staged / changed" >&2
       exit 1
     fi
-    GH_AUTH_TOKEN_ARGS=()
-    if [[ -n "$GH_COPILOT_USER" ]]; then
-      GH_AUTH_TOKEN_ARGS+=(--user $GH_COPILOT_USER)
-    fi
-    GH_AUTH_TOKEN="$(gh auth token "${GH_AUTH_TOKEN_ARGS[@]}")"
-    (
-      for f in "${CHANGED_FILES[@]}"; do
-        printf '%s\0%s\n' "${f}" "$(git "${DIFF_COMMAND[@]}" --patch --no-prefix "$f" | base64 -w0)"
-      done
-    ) | jq --raw-input --slurp --compact-output '. | rtrimstr("\n") | if . == "" then halt_error(1) else {
-      messages: [{
-        role: "user",
-        content: "",
-        copilot_references:(
-          . | split("\n") | map(
-            split("\u0000") |
-            {type:"github.diff-hunk",data:{type:"diff-hunk","changeReference":"",headerContext:"",fileName: .[0],diff:.[1]|@base64d}}
-          )
-        ),
-      }],
-      temperature: 0.3,
-      response_format: {
-        type: "json_schema",
-        json_schema: {
-          description: "The schema to abide by when generating commit message output",
-          name: "commit_message_response",
-          strict: true,
-          schema: {
-            type: "object",
-            properties: {
-              title: { type: "string", description: "The commit message title/summary" },
-              description: { type: "string", description: "The commit message description/body" }
-            },
-            required: ["title", "description"],
-            additionalProperties: false
-          }
-        }
-      }
-    } end' |
-    gh api "$@" -H "Authorization:$GH_AUTH_TOKEN" -H 'copilot-integration-id:commit-msg-gen' \
-      https://api.individual.githubcopilot.com/agents/github-commit-message-generation --input - |
-    rg '^data: *' --replace '' |
-    rg -v --fixed-strings '[DONE]' |
-    jq -r '.choices[0].message.content | fromjson | .title + (if .description == "" then "" else "\n\n" + .description end)'
+    # brew install loteoo/formulas/ks
+    # save bearer via `ks -k login add gh-copilot-bearer-token`
+    # TODO: mint tokens with `github.com/github-copilot/chat/token` endpoint. json result: `{ token: string, expiration: string, ssoOrgIds?: string[]}`
+    GH_COPILOT_BEARER_TOKEN=$(ks -k login show gh-copilot-bearer-token)
+    curl -s 'https://api.individual.githubcopilot.com/agents/github-commit-message-generation' \
+        -X POST \
+        -H "Authorization: GitHub-Bearer $GH_COPILOT_BEARER_TOKEN" \
+        -H 'copilot-integration-id: commit-msg-gen' \
+        -H 'Content-Type: text/event-stream' \
+        --data-raw "$(gh copilot-generate-commit-message-body "${DIFF_COMMAND[@]}" -- "${CHANGED_FILES[@]}")" |
+      rg '^data: *' --replace '' |
+      rg -v --fixed-strings '[DONE]' |
+      jq -r '.choices[0].message.content | fromjson | .title + (if .description == "" then "" else "\n\n" + .description end)'
   mrb: pr view --web
   prb: pr view --web
   prc: pr create --web
