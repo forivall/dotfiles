@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# this script isnt particularly intended to be run directly - it's a relic from before brew had brewfiles, and more or less documents some useful tools that i commonly use
+
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
