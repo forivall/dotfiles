@@ -183,24 +183,25 @@ aliases:
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql | jq ''[.[]|select(.path=="''"$1"''")]'' | gh pr-review-comments-format'
-  pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql | jq -r ''.[]|.path'''
+  pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql | jq -r ''.[]|.path'' | uniq'
   pr-review-comments-format: |
     !
     jq -r '.[] | @base64' | while read -r thread; do
-      path=$(echo "$thread" | base64 -d | jq -r '.path');
-      startLine=$(echo "$thread" | base64 -d | jq -r '.startLine');
-      line=$(echo "$thread" | base64 -d | jq -r '.line');
-      subjectType=$(echo "$thread" | base64 -d | jq -r '.subjectType');
+      id=$(         jq -nr --arg input $thread '$input | @base64d | fromjson | .id');
+      path=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .path');
+      startLine=$(  jq -nr --arg input $thread '$input | @base64d | fromjson | .startLine');
+      line=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .line');
+      subjectType=$(jq -nr --arg input $thread '$input | @base64d | fromjson | .subjectType');
       if [[ -f "$path" ]] ; then
         echo "";
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+        header="$path (outdated)"
         if [[ $subjectType = "FILE" ]]; then
-          echo "$path (file)";
+          header="$path (file)";
         elif [[ -n "$line" ]] && [[ "$line" != "null" ]]; then
-          echo "$path:$line";
-        else
-          echo "$path (outdated)";
+          header="$path:$line";
         fi;
+        printf "%s \e[2m%s\e[22m\n" "$header" "$id";
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
         if [[ $subjectType != "FILE" ]] && [[ -n "$line" ]] && [[ "$line" != "null" ]]; then
           highlightLine="$line"
@@ -218,13 +219,14 @@ aliases:
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
       fi;
       echo "$thread" | base64 -d | jq -r '.comments[] | @base64' | while read -r comment; do
-        author=$(echo "$comment" | base64 -d | jq -r '.author.login');
-        body=$(echo "$comment" | base64 -d | jq -r '.body');
-        utc_date=$(echo "$comment" | base64 -d | jq -r '.publishedAt');
-        url=$(echo "$comment" | base64 -d | jq -r '.url');
+        author=$(  jq -nr --arg input $comment '$input | @base64d | fromjson | .author.login');
+        body=$(    jq -nr --arg input $comment '$input | @base64d | fromjson | .body');
+        utc_date=$(jq -nr --arg input $comment '$input | @base64d | fromjson | .publishedAt');
+        url=$(     jq -nr --arg input $comment '$input | @base64d | fromjson | .url');
+        id=$(      jq -nr --arg input $comment '$input | @base64d | fromjson | .id');
         local_date=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || date -d "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || echo "$utc_date");
         echo "";
-        printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\):\n" "$author" "$url" "$local_date";
+        printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\): \e[2m%s\e[22m\n" "$author" "$url" "$local_date" "$id";
         echo "$body" | mcat --no-linenumbers --paging=never;
       done;
       echo "";
@@ -239,8 +241,9 @@ aliases:
           pullRequest(number: $pr) {
             reviewThreads(first: 100, after: $endCursor) {
               edges { cursor node {
-                isResolved line startLine originalLine originalStartLine path subjectType
+                id isResolved line startLine originalLine originalStartLine path subjectType
                 comments(first: 100) { nodes {
+                  id
                   author { login ... on User { name } }
                   body createdAt isMinimized publishedAt url
                 }}
@@ -253,8 +256,14 @@ aliases:
     ! gh pr-review-comments-gql-raw "$@" |
       jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) ]'
   pr-unresolved-comments-gql: |
-    ! gh pr-review-comments-gql-raw "$@" |
-      jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false))) ]'
+    !
+    conditions=""
+    while [[ $1 == --not ]]; do
+      conditions+=" and .id != \"$2\""
+      shift 2
+    done
+    gh pr-review-comments-gql-raw "$@" |
+      jq "[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false $conditions))) ]"
   pr-files: 'pr diff --name-only'
   pr-id-gql: |
     ! [[ $# -gt 0 && $1 != -*  ]] && GH_PR=$1 && shift
@@ -320,6 +329,7 @@ aliases:
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
   wfrw: '!gh wfr "$@" && sleep 3 && gh run list --workflow=$1 --limit=3 && sleep 3 && gh wr "$1"'
+  prism: '!gh-prism "$@"'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

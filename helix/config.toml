@@ -73,9 +73,6 @@ display-messages = true
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 "L" = ":sh it2split --no-focus git logd -w -L'%{selection_line_start},%{selection_line_end}:%{buffer_name}'"
 "C-l" = ":sh it2split --no-focus git diffdh -w $HELIX_GIT_HEAD -- '%{buffer_name}'"
-"u" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
-"C-u" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
-"C-v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
@@ -84,6 +81,10 @@ display-messages = true
 [keys.normal.space.g]
 "f" = "changed_file_picker"
 "a" = ":sh git add %{buffer_name}"
+"v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
+"o" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
+"O" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
+"U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 
 [keys.normal.z]
 "x" = [
@@ -102,6 +103,7 @@ display-messages = true
 
 [keys.normal.g]
 "R" = ":open %sh{findrelated %{buffer_name}}"
+"V" = ":sh wait-code --no-wait -g %{buffer_name}:%{cursor_line}:%{cursor_column}"
 
 [keys.insert]
 "C-space" = "completion"

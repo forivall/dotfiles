@@ -1,0 +1,1 @@
+curl -sL https://gist.github.com/ConnerWill/d4b6c776b509add763e17f9f113fd25b/raw/b6c3ee545c5d1979ee0013da2101def6d4112dff/ANSI-escape-sequences.md | mcat

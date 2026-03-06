@@ -1,8 +1,25 @@
-#!/bin/sh
-if pgrep -f '^/Applications/Visual Studio Code\.app/Contents/MacOS/Electron($| )'; then
-  exec code --wait "$@"
+#!/usr/bin/env zsh
+WAIT=--wait
+if [[ "$1" = --no-wait ]] ; then
+  WAIT=
+  shift
+  if [[ "$1" = -g && "$#" = 2 ]] ; then
+    shift
+  fi
+  if (( $# == 1 )); then
+    if pgrep -f '^/Applications/Visual Studio Code\.app/Contents/MacOS/Electron($| )' > /dev/null; then
+      exec open code://file"${1:A}"
+    fi
+    if pgrep -f '^/Applications/Cursor\.app/Contents/MacOS/Cursor($| )' > /dev/null; then
+      exec open cursor://file"${1:A}"
+    fi
+    exec open code://file"${1:A}"
+  fi
 fi
-if pgrep -f '^/Applications/Cursor\.app/Contents/MacOS/Cursor($| )'; then
-  exec cursor --wait "$@"
+if pgrep -f '^/Applications/Visual Studio Code\.app/Contents/MacOS/Electron($| )' > /dev/null; then
+  exec code $WAIT "$@"
 fi
-exec code --wait "$@"
+if pgrep -f '^/Applications/Cursor\.app/Contents/MacOS/Cursor($| )' > /dev/null; then
+  exec cursor $WAIT "$@"
+fi
+exec code $WAIT "$@"
