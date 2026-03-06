@@ -100,6 +100,9 @@ display-messages = true
 ]
 "w" = ":toggle-option soft-wrap.enable"
 
+[keys.normal.g]
+"R" = ":open %sh{findrelated %{buffer_name}}"
+
 [keys.insert]
 "C-space" = "completion"
 
