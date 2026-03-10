@@ -178,8 +178,8 @@ function cwt() {
           name=${tmp%-worktrees}
         fi
         names+=( $name )
-        hash=${${${"${(f)i}"[2]}#HEAD }[1,9]}
-        branch=${${"${(f)i}"[3]}#branch refs/heads/}
+        hash=${${${"${(f)i}"[2]}#HEAD }[1,9]} #"]
+        branch=${${"${(f)i}"[3]}#branch refs/heads/} #"]
         if [[ $branch == detached ]]; then
           branch="(detached HEAD)"
         else
@@ -242,8 +242,8 @@ function _cwt() {
       name=${tmp%-worktrees}
     fi
     directories+=( $name )
-    hash=${${${"${(f)i}"[2]}#HEAD }[1,9]}
-    branch=${${"${(f)i}"[3]}#branch refs/heads/}
+    hash=${${${"${(f)i}"[2]}#HEAD }[1,9]} #"]
+    branch=${${"${(f)i}"[3]}#branch refs/heads/} #"]
 
     # Simulate the non-porcelain output
     if [[ $branch == detached ]]; then
@@ -259,3 +259,22 @@ function _cwt() {
 }
 
 compdef _cwt cwt
+
+alias c='false'
+function __c_expand() {
+  emulate -L zsh
+  setopt extendedglob
+
+  if [[ "$LBUFFER" = "c" ]]; then
+    local dir
+    dir="$(fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --type d | fzf)"
+    if (( $? == 0 )) && [[ -n "$dir" ]]; then
+      print -Pn ${PROMPT##*\${prompt_newline}}' ';
+      LBUFFER="cd $dir";
+    else
+      print -Pn ${PROMPT##*\${prompt_newline}};
+      printf "c^["
+    fi
+  fi
+}
+add-zle-hook-widget -Uz line-finish __c_expand
