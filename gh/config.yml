@@ -273,10 +273,10 @@ aliases:
         repository(owner: $owner, name: $repo) { pullRequest(number: $pr) { id } }
       }' | jq -r '.data.repository.pullRequest.id'
   pr-review-submit: |
-    ! [[ $# -gt 1 ]] && GH_PR=$1 && shift
+    ! [[ $# -gt 1 && $1 =~ "\d+" ]] && GH_PR=$1 && shift
     PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
-    gh api graphql -F pr=$PR_ID -F action=$1 -f query='mutation($pr: ID!, $action: PullRequestReviewEvent!) {
-      submitPullRequestReview(input: { pullRequestId: $pr, event: $action }) {
+    gh api graphql -F pr=$PR_ID -F action="$1" -F body="$2" -f query='mutation($pr: ID!, $action: PullRequestReviewEvent!, $body: String) {
+      submitPullRequestReview(input: { pullRequestId: $pr, event: $action, body: $body }) {
         pullRequestReview { id comments { totalCount } }
       }
     }'
