@@ -278,3 +278,20 @@ function __c_expand() {
   fi
 }
 add-zle-hook-widget -Uz line-finish __c_expand
+
+function __c_expand() {
+  emulate -L zsh
+  setopt extendedglob
+
+  if [[ "$LBUFFER" = *' ?' ]]; then
+    local dir
+    file="$(fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' | fzf)"
+    if (( $? == 0 )); then
+      print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
+      LBUFFER="${LBUFFER::-2} $file";
+    else
+      print -Pn ${PROMPT##*\${prompt_newline}}' ';
+    fi
+  fi
+}
+add-zle-hook-widget -Uz line-finish __c_expand
