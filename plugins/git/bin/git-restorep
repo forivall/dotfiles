@@ -57,7 +57,7 @@ __git-restorep-hasfiles() {
   (( ${#items} > 0 ))
 }
 __git-restorep-getitems_vars() {
-  term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} $rev")
+  TERM_PICKER_PREVIEW_COMMAND="$__dirname/../__git-addp-preview $cdup{} ${#items} $rev"
 }
 __git-restorep-dointeractive() {
   if [[ -z "$rev" ]]; then

@@ -1,6 +1,23 @@
 #!/usr/bin/env zsh
 # code: language=shellscript
 
+PICKER_BACKEND=simple-term-menu
+
+__simple-term-picker() {
+  # $ python3 -m pip install simple-term-menu
+
+  local term_menu_options=()
+  if [[ -n "$TERM_PICKER_PREVIEW_COMMAND" ]]; then
+    term_menu_options+=(--preview "$TERM_PICKER_PREVIEW_COMMAND")
+  fi
+  if (( ${#items} > 255 )); then
+    i=$(simple-term-menu --stdout -i $(( i - 1 )) --no-preview-border $term_menu_options "${items[@]}") || true
+    [[ -z $i ]] && i=0
+  else
+    simple-term-menu -i $(( i - 1 )) --no-preview-border $term_menu_options "${items[@]}" && i=0 || i=$?
+  fi
+}
+
 __git-patch-filepicker() {
   # if [[ -v configArgs ]]; then
   #   if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
@@ -34,16 +51,8 @@ __git-patch-filepicker() {
     fi
     if $first && (( ${#items} == 1 )); then
       i=1
-
     else
-      # $ python3 -m pip install simple-term-menu
-
-      if (( ${#items} > 255 )); then
-        i=$(simple-term-menu --stdout -i $(( i - 1 )) $term_menu_options "${items[@]}") || true
-        [[ -z $i ]] && i=0
-      else
-        simple-term-menu -i $(( i - 1 )) $term_menu_options "${items[@]}" && i=0 || i=$?
-      fi
+      __simple-term-picker
       if (( $i == 0 )) ; then return 1; fi
     fi
     file=${items[i]}

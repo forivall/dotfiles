@@ -80,7 +80,7 @@ case "$gitcommand" in
         $(git diff "${flags[@]}" --name-only "$@")
       )
       IFS="$OIFS"
-      term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-addp-preview $cdup{} ${#items} ${flags[@]} $revs")
+      TERM_PICKER_PREVIEW_COMMAND="$__plugin_dirname/__git-addp-preview $cdup{} ${#items} ${flags[@]} $revs"
     }
     __git-editp-dointeractive() {
       # TODO: read editor option from git config
@@ -107,13 +107,15 @@ case "$gitcommand" in
     }
     __git-editp-getitems_vars() {
       usecdup=false
-      term_menu_options=(--no-preview-border --preview "git -c color.grep=always grep -h ${(q+@)@} -- {}")
+      TERM_PICKER_PREVIEW_COMMAND="git -c color.grep=always grep -h ${(q+@)@} -- {}"
     }
     __git-editp-dointeractive() {
       # TODO: read editor option from git config
       local loc=""
       set -o extendedglob; local result="$(git grep -m 1 -h -n --column $args -- $1)";
-      [[ $result = (#b)(<0->:<0->)* ]] && loc=":${result[$mbegin[1],$mend[1]]}"
+      if [[ $result = (#b)(<0->:<0->)* ]]; then
+        loc=:${result[$mbegin[1],$mend[1]]};
+      fi
       run_editor "$1" "$loc"
     }
   ;;
@@ -135,14 +137,16 @@ case "$gitcommand" in
     __git-editp-getitems_vars() {
       usecdup=false
 
-      term_menu_options=(--no-preview-border --preview "rg --color=always --no-filename --line-number ${(q+@)args} -- {}")
+      TERM_PICKER_PREVIEW_COMMAND="rg --color=always --no-filename --line-number ${(q+@)args} -- {}"
     }
     __git-editp-dointeractive() {
       # TODO: read editor option from git config
       local loc=""
       set -o extendedglob; local result="$(rg -m 1 -n --column $args -- $1)";
-      [[ $result = (#b)(<0->:<0->)* ]] && loc=":${result[$mbegin[1],$mend[1]]}"
-      run_editor --goto "$1" "$loc"
+      if [[ $result = (#b)(<0->:<0->)* ]]; then
+        loc=:${result[$mbegin[1],$mend[1]]};
+      fi
+      run_editor "$1" "$loc"
     }
   ;;
   show)
@@ -153,7 +157,7 @@ case "$gitcommand" in
       items=(
         $(git show --format='' --name-only "$@")
       )
-      term_menu_options=(--no-preview-border --preview "$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@")
+      TERM_PICKER_PREVIEW_COMMAND="$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@"
     }
     __git-editp-dointeractive() {
       local loc="$(git show -U0 --format='' $revs $1 | get_first_added_line)"

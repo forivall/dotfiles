@@ -27,7 +27,7 @@ __git-resetp-getitems_vars() {
   for item in "${items_status[@]}"; do
     items+=("${item#?$'\x09'}")
   done
-  term_menu_options=(--no-preview-border --preview "$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs")
+  TERM_PICKER_PREVIEW_COMMAND="$__dirname/../__git-addp-preview $cdup{} ${#items} --cached $revs"
 }
 __git-resetp-dointeractive() {
   if [[ "${items_status[$i]}" == U* ]]; then
