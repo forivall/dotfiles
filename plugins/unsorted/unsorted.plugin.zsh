@@ -243,3 +243,28 @@ fi
 
 (( ${+commands[cursor]} )) && alias csr=cursor
 (( ${+commands[cursor]} )) && alias cur=cursor
+
+function keyhint() {
+  local -a keymap_cmd binding_cmd showkey_binding
+  local keymap_name is_mapping is_ranges binding binding_key prefix prefix_keys
+  prefix=${1::-1}
+  prefix_keys=${(V)prefix}
+  for keymap in ${(f)"$(bindkey -Ll)"}; do
+    keymap_cmd=(${(z)keymap})
+    keymap_name=${keymap_cmd[3]}
+    if [[ ${keymap_cmd[2]} == -A ]]; then continue; fi
+    for binding in ${(f)"$(bindkey -M $keymap_name -L)"}; do
+      binding_cmd=(${(z)binding})
+      binding_key=${(Q)binding_cmd[-2]}
+      if [[ $binding_key == "$prefix_keys"* ]]; then
+        echo "$binding"
+      fi
+    done
+  done
+}
+show-multikey-bindings() {
+  zle -M "$(keyhint "$KEYS")"
+}
+zle -N show-multikey-bindings
+bindkey -M main '^X^I' show-multikey-bindings
+bindkey -M main '^[^I' show-multikey-bindings

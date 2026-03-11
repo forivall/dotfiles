@@ -77,6 +77,7 @@ display-messages = true
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
+"backspace" = ":sh it2split --no-focus yare build"
 
 [keys.normal.space.g]
 "f" = "changed_file_picker"

@@ -1,3 +1,9 @@
 #!/usr/bin/zsh
 
-rg --files-with-matches --multiline "$@[1,-2]" | xargs sd "$@"
+RG_OPTIONS=()
+if [[ $1 == --glob=* ]]; then
+  RG_OPTIONS+=($1)
+  shift
+fi
+
+rg $RG_OPTIONS --files-with-matches --multiline "$@[1,-2]" | xargs sd "$@"

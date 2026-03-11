@@ -1,0 +1,309 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for curlie (curl with HTTPie-like syntax). From curlie --help <category> for all categories.
+name: curlie
+description: "curl with HTTPie-like ease. Usage: [options...] [METHOD] URL [REQUEST_ITEM ...]"
+
+persistentflags:
+  -h, --help: Get help for commands
+  -V, --version: Show version number and quit
+  -v, --verbose: Make the operation more talkative
+  -s, --silent: Silent mode
+  -f, --fail: Fail fast with no output on HTTP errors
+  -i, --include: Include response headers in output
+  -I, --head: Show document info only
+  -L, --location: Follow redirects
+  -k, --insecure: Allow insecure server connections
+  -X, --request=: Specify request method to use
+  -H, --header=: Pass custom header(s) to server
+  -d, --data=: HTTP POST data
+  -F, --form=: Specify multipart MIME data
+  --json=: HTTP POST JSON
+  -u, --user=: Server user and password
+  -A, --user-agent=: Send User-Agent to server
+  -b, --cookie=: Send cookies from string or load from file
+  -c, --cookie-jar=: Save cookies to file after operation
+  -o, --output=: Write to file instead of stdout
+  -O, --remote-name: Write output to file named as remote file
+  -m, --max-time=: Maximum time allowed for transfer
+  --connect-timeout=: Maximum time allowed to connect
+  -x, --proxy=: Use this proxy
+  -K, --config=: Read config from a file
+  -E, --cert=: Client certificate file and password
+  --cacert=: CA certificate to verify peer against
+  --capath=: CA directory to verify peer against
+  -4, --ipv4: Resolve names to IPv4 addresses
+  -6, --ipv6: Resolve names to IPv6 addresses
+  -G, --get: Put the post data in the URL and use GET
+  -e, --referer=: Referrer URL
+  -r, --range=: Retrieve only the bytes within RANGE
+  -T, --upload-file=: Transfer local FILE to destination
+  --url=: URL to work with
+  -w, --write-out=: Output FORMAT after completion
+  --compressed: Request compressed response
+  -n, --netrc: Must read .netrc for username and password
+  --basic: HTTP Basic Authentication
+  --digest: HTTP Digest Authentication
+  --ntlm: HTTP NTLM authentication
+  --retry=: Retry request if transient problems occur
+  --anyauth: Pick any authentication method
+  --aws-sigv4=: AWS V4 signature auth
+  --delegation=: GSS-API delegation permission
+  --ftp-account=: Account data string
+  --location-trusted: Like --location but send auth to other hosts
+  --login-options=: Server login options
+  --negotiate: Use HTTP Negotiate (SPNEGO) authentication
+  --ntlm-wb: HTTP NTLM authentication with winbind
+  --oauth2-bearer=: OAuth 2 Bearer Token
+  --pass=: Pass phrase for the private key
+  --proxy-anyauth: Pick any proxy authentication method
+  --proxy-basic: Use Basic authentication on the proxy
+  --proxy-negotiate: HTTP Negotiate (SPNEGO) auth with the proxy
+  --proxy-ntlm: NTLM authentication with the proxy
+  --proxy-pass=: Pass phrase for the private key for HTTPS proxy
+  --proxy-tlsauthtype=: TLS authentication type for HTTPS proxy
+  --proxy-tlspassword=: TLS password for HTTPS proxy
+  --proxy-tlsuser=: TLS username for HTTPS proxy
+  --proxy-tlsv1: TLSv1 for HTTPS proxy
+  -U, --proxy-user=: Proxy user and password
+  --pubkey=: SSH Public key filename
+  --sasl-authzid=: Identity for SASL PLAIN authentication
+  --sasl-ir: Initial response in SASL authentication
+  --socks5-basic: Username/password auth for SOCKS5 proxies
+  --socks5-gssapi: Enable GSS-API auth for SOCKS5 proxies
+  --socks5-gssapi-nec: Compatibility with NEC SOCKS5 server
+  --socks5-gssapi-service=: SOCKS5 proxy service name for GSS-API
+  --tlsauthtype=: TLS authentication type
+  --tlspassword=: TLS password
+  --tlsuser=: TLS username
+  --abstract-unix-socket=: Connect via abstract Unix domain socket
+  --connect-to=: Connect to host
+  -C, --continue-at=: Resumed transfer offset
+  --happy-eyeballs-timeout-ms=: Time for IPv6 before IPv4
+  --interface=: Use network INTERFACE (or address)
+  --keepalive-time=: Interval time for keepalive probes
+  --limit-rate=: Limit transfer speed to RATE
+  --local-port=: Use a local port number within RANGE
+  --max-filesize=: Maximum file size to download
+  --no-keepalive: Disable TCP keepalive on the connection
+  -Z, --parallel: Perform transfers in parallel
+  --parallel-immediate: Do not wait for multiplexing (with --parallel)
+  --parallel-max=: Maximum concurrency for parallel transfers
+  --proto=: Enable/disable PROTOCOLS
+  --proto-default=: Use PROTOCOL for any URL missing a scheme
+  --proto-redir=: Enable/disable PROTOCOLS on redirect
+  --rate=: Request rate for serial transfers
+  --resolve=: Resolve host+port to address
+  -Y, --speed-limit=: Stop transfers slower than this
+  -y, --speed-time=: Trigger speed-limit abort after this time
+  --tcp-fastopen: Use TCP Fast Open
+  --tcp-nodelay: Set TCP_NODELAY
+  --unix-socket=: Connect through this Unix domain socket
+  --create-dirs: Create necessary local directory hierarchy
+  -q, --disable: Disable .curlrc
+  --disallow-username-in-url: Disallow username in URL
+  --fail-early: Fail on first transfer error
+  --ftp-create-dirs: Create the remote dirs if not present
+  -g, --globoff: Disable URL globbing with {} and []
+  --libcurl=: Generate libcurl code for this command line
+  -M, --manual: Display the full manual
+  --netrc-file=: Specify FILE for netrc
+  --netrc-optional: Use either .netrc or URL
+  -:, --next: Make next URL use its separate set of options
+  -N, --no-buffer: Disable buffering of the output stream
+  --no-clobber: Do not overwrite files that already exist
+  --output-dir=: Directory to save files in
+  --path-as-is: Do not squash .. sequences in URL path
+  --remove-on-error: Remove output file on errors
+  --retry-all-errors: Retry all errors (with --retry)
+  --retry-connrefused: Retry on connection refused (with --retry)
+  --retry-delay=: Wait time between retries
+  --retry-max-time=: Retry only within this period
+  -S, --show-error: Show error even when -s is used
+  --variable=: Set variable
+  --dns-interface=: Interface to use for DNS requests
+  --dns-ipv4-addr=: IPv4 address to use for DNS requests
+  --dns-ipv6-addr=: IPv6 address to use for DNS requests
+  --dns-servers=: DNS server addrs to use
+  --doh-cert-status: Verify DoH server cert status OCSP-staple
+  --doh-insecure: Allow insecure DoH server connections
+  --doh-url=: Resolve hostnames over DoH
+  --create-file-mode=: File mode for created files
+  -a, --append: Append to target file when uploading
+  --crlf: Convert LF to CRLF in upload
+  --disable-eprt: Inhibit using EPRT or LPRT
+  --disable-epsv: Inhibit using EPSV
+  -D, --dump-header=: Write the received headers to file
+  --ftp-alternative-to-user=: String to replace USER name
+  --ftp-method=: Control CWD usage
+  --ftp-pasv: Send PASV/EPSV instead of PORT
+  -P, --ftp-port=: Send PORT instead of PASV
+  --ftp-pret: Send PRET before PASV
+  --ftp-skip-pasv-ip: Skip the IP address for PASV
+  --ftp-ssl-ccc: Send CCC after authenticating
+  --ftp-ssl-ccc-mode=: Set CCC mode (active/passive)
+  --ftp-ssl-control: Require TLS for login, clear for transfer
+  --ignore-content-length: Ignore the size of the remote resource
+  --krb=: Enable Kerberos with security level
+  -l, --list-only: List only mode
+  -Q, --quote=: Send command(s) to server before transfer
+  --alt-svc=: Enable alt-svc with this cache file
+  --data-ascii=: HTTP POST ASCII data
+  --data-binary=: HTTP POST binary data
+  --data-raw=: HTTP POST data, @ allowed
+  --data-urlencode=: HTTP POST data URL encoded
+  --etag-compare=: Load ETag from file
+  --etag-save=: Parse incoming ETag and save to file
+  --expect100-timeout=: How long to wait for 100-continue
+  --fail-with-body: Fail on HTTP errors but save the body
+  --form-escape: Escape form fields using backslash
+  --form-string=: Specify multipart MIME data
+  --haproxy-clientip=: Set address in HAProxy PROXY
+  --haproxy-protocol: Send HAProxy PROXY protocol v1 header
+  --hsts=: Enable HSTS with this cache file
+  --http0.9: Allow HTTP 0.9 responses
+  -0, --http1.0: Use HTTP 1.0
+  --http1.1: Use HTTP 1.1
+  --http2: Use HTTP/2
+  --http2-prior-knowledge: Use HTTP 2 without HTTP/1.1 Upgrade
+  --http3: Use HTTP v3
+  --http3-only: Use HTTP v3 only
+  -j, --junk-session-cookies: Ignore session cookies read from file
+  --max-redirs=: Maximum number of redirects allowed
+  --no-alpn: Disable the ALPN TLS extension
+  --no-npn: Disable the NPN TLS extension
+  --post301: Do not switch to GET after a 301 redirect
+  --post302: Do not switch to GET after a 302 redirect
+  --post303: Do not switch to GET after a 303 redirect
+  --raw: Do HTTP raw, no transfer decoding
+  --request-target=: Specify the target for this request
+  -z, --time-cond=: Transfer based on a time condition
+  --tr-encoding: Request compressed transfer encoding
+  --url-query=: Add a URL query part
+  --metalink: Process given URLs as metalink XML file
+  --random-file=: File for reading random data from
+  --service-name=: SPNEGO service name
+  -B, --use-ascii: Use ASCII/text transfer
+  --xattr: Store metadata in extended file attributes
+  -J, --remote-header-name: Use the header-provided filename
+  --remote-name-all: Use the remote filename for all URLs
+  -R, --remote-time: Set remote file time on local output
+  --noproxy=: List of hosts which do not use proxy
+  --preproxy=: Use this proxy first
+  --proxy-ca-native: Load CA certs from the OS to verify proxy
+  --proxy-cacert=: CA certificates to verify proxy against
+  --proxy-capath=: CA directory to verify proxy against
+  --proxy-cert=: Set client certificate for proxy
+  --proxy-cert-type=: Client certificate type for HTTPS proxy
+  --proxy-ciphers=: SSL ciphers to use for proxy
+  --proxy-crlfile=: Set a CRL list for proxy
+  --proxy-digest: Digest auth with the proxy
+  --proxy-header=: Pass custom header(s) to proxy
+  --proxy-http2: Use HTTP/2 with HTTPS proxy
+  --proxy-insecure: Skip HTTPS proxy cert verification
+  --proxy-key=: Private key for HTTPS proxy
+  --proxy-key-type=: Private key file type for proxy
+  --proxy-pinnedpubkey=: Public key to verify proxy with
+  --proxy-service-name=: SPNEGO proxy service name
+  --proxy-ssl-allow-beast: Allow security flaw for interop for HTTPS proxy
+  --proxy-ssl-auto-client-cert: Auto client certificate for proxy
+  --proxy-tls13-ciphers=: TLS 1.3 proxy cipher suites
+  --proxy1.0=: Use HTTP/1.0 proxy on given port
+  -p, --proxytunnel: HTTP proxy tunnel (using CONNECT)
+  --socks4=: SOCKS4 proxy on given host + port
+  --socks4a=: SOCKS4a proxy on given host + port
+  --socks5=: SOCKS5 proxy on given host + port
+  --socks5-hostname=: SOCKS5 proxy, pass hostname to proxy
+  --suppress-connect-headers: Suppress proxy CONNECT response headers
+  --compressed-ssh: Enable SSH compression
+  --hostpubmd5=: Acceptable MD5 hash of host public key
+  --hostpubsha256=: Acceptable SHA256 hash of host public key
+  --mail-auth=: Originator address of the original email
+  --mail-from=: Mail from this address
+  --mail-rcpt=: Mail to this address
+  --mail-rcpt-allowfails: Allow RCPT TO command to fail
+  --key=: Private key filename
+  -t, --telnet-option=: Set telnet option
+  --tftp-blksize=: Set TFTP BLKSIZE option
+  --tftp-no-options: Do not send any TFTP options
+  --ca-native: Load CA certs from the OS
+  --cert-status: Verify server cert status OCSP-staple
+  --cert-type=: Certificate type (DER/PEM/ENG/P12)
+  --ciphers=: SSL ciphers to use
+  --crlfile=: Certificate Revocation list
+  --curves=: (EC) TLS key exchange algorithms to request
+  --egd-file=: EGD socket path for random data
+  --engine=: Crypto engine to use
+  --false-start: Enable TLS False Start
+  --key-type=: Private key file type (DER/PEM/ENG)
+  --no-sessionid: Disable SSL session-ID reusing
+  --pinnedpubkey=: Public key to verify peer against
+  --ssl: Try enabling TLS
+  --ssl-allow-beast: Allow security flaw to improve interop
+  --ssl-auto-client-cert: Use auto client certificate (Schannel)
+  --ssl-no-revoke: Disable cert revocation checks (Schannel)
+  --ssl-reqd: Require SSL/TLS
+  --ssl-revoke-best-effort: Ignore missing cert CRL dist points
+  -2, --sslv2: SSLv2
+  -3, --sslv3: SSLv3
+  --tls-max=: Maximum allowed TLS version
+  --tls13-ciphers=: TLS 1.3 cipher suites to use
+  -1, --tlsv1: TLSv1.0 or greater
+  --tlsv1.0: TLSv1.0 or greater
+  --tlsv1.1: TLSv1.1 or greater
+  --tlsv1.2: TLSv1.2 or greater
+  --tlsv1.3: TLSv1.3 or greater
+  --no-progress-meter: Do not show the progress meter
+  -#, --progress-bar: Display transfer progress as a bar
+  --stderr=: Where to redirect stderr
+  --styled-output: Enable styled output for HTTP headers
+  --trace=: Write a debug trace to FILE
+  --trace-ascii=: Like --trace but without hex output
+  --trace-config=: Details to log in trace/verbose output
+  --trace-ids: Transfer and connection ids in verbose output
+  --trace-time: Add time stamps to trace/verbose output
+
+completion:
+  flag:
+    request: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+    config: ["$files"]
+    output: ["$files"]
+    cookie: ["$files"]
+    "cookie-jar": ["$files"]
+    cert: ["$files"]
+    cacert: ["$files"]
+    capath: ["$directories"]
+    "upload-file": ["$files"]
+    referer: ["$urls"]
+    "user-agent": []
+    url: ["$urls"]
+    "abstract-unix-socket": ["$files"]
+    "unix-socket": ["$files"]
+    "output-dir": ["$directories"]
+    "netrc-file": ["$files"]
+    "dump-header": ["$files"]
+    "libcurl": ["$files"]
+    "etag-compare": ["$files"]
+    "etag-save": ["$files"]
+    "hsts": ["$files"]
+    "random-file": ["$files"]
+    "proxy-key": ["$files"]
+    "proxy-cert": ["$files"]
+    "proxy-cacert": ["$files"]
+    "proxy-capath": ["$directories"]
+    "proxy-crlfile": ["$files"]
+    pubkey: ["$files"]
+    key: ["$files"]
+    "proxy-pinnedpubkey": ["$files"]
+    "pinnedpubkey": ["$files"]
+    stderr: ["$files"]
+    trace: ["$files"]
+    "trace-ascii": ["$files"]
+    "cert-type": ["DER", "PEM", "ENG", "P12"]
+    "key-type": ["DER", "PEM", "ENG"]
+    "proxy-cert-type": ["DER", "PEM", "ENG", "P12"]
+    "proxy-key-type": ["DER", "PEM", "ENG"]
+    "ftp-ssl-ccc-mode": ["active", "passive"]
+  positional:
+    - ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "get", "post", "put", "delete", "patch", "head", "options"]
+    - ["$urls"]
+    - []

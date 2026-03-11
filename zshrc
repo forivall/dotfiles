@@ -98,7 +98,7 @@ export INTELLI_SHELL_ENABLE=true
 # export INTELLI_SEARCH_HOTKEY='^@'
 export INTELLI_VARIABLE_HOTKEY='^v'
 # export INTELLI_BOOKMARK_HOTKEY='^b'
-# export INTELLI_FIX_HOTKEY='^x'
+export INTELLI_FIX_HOTKEY='^xf'
 export INTELLI_SKIP_ESC_BIND=1
 
 ## zsh-helix-mode settings
