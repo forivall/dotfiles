@@ -16,6 +16,9 @@ r,remote? remote
 p,prefix  filter by current '+' prefix
 f,force   use --force when checking out
 d,detach  use --detach when checking out
+t,track?direct|inherit setup upstream when creating a new branch
+no-track  do not setup upstream when creating a new branch
+B         reset branch when initializing a new branch
 "
 eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
 
@@ -25,6 +28,7 @@ remotes=false
 remote_option=
 checkout_options=()
 pattern=
+reset_branch=false
 
 index=0
 for arg in $@; do
@@ -38,12 +42,18 @@ for arg in $@; do
       branch_name=$(git rev-parse --symbolic-full-name HEAD)
       branch_name=${branch_name#refs/heads/}
       pattern="${branch_name%+*}*" ;;
-    --force|--detach) checkout_options+=($arg) ;;
+    -B) reset_branch=true ;;
+    --force|--detach|--no-track|--track|--track=*) checkout_options+=($arg) ;;
     --) break; ;;
   esac
 done
 
 shift $index
+
+if $reset_branch; then
+  git checkout ${checkout_options[@]} -B $@
+  exit
+fi
 
 if (( ( index == ${#checkout_options} + 1 ) && $# > 0 )); then
   if [[ $1 == +* ]]; then

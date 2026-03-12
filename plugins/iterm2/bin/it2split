@@ -11,6 +11,7 @@ parser = OptionParser()
 parser.disable_interspersed_args()
 parser.add_option("--restart", action="store_true", default=False)
 parser.add_option("--no-focus", action="store_false", default=True, dest="focus")
+parser.add_option("--pause", action="store_true", default=False, dest="pause")
 parser.add_option("--cwd", action="store")
 
 options, argv = parser.parse_args(sys.argv[1:])
@@ -33,7 +34,7 @@ async def run_in_split_pane(c: "iterm2.Connection"):
         if options.cwd:
             await n.async_send_text("cd " + shlex.quote(origin_cwd) + "\n")
         if command_arg is not None:
-            await n.async_send_text(cmd_text + "\n")
+            await n.async_send_text(cmd_text + ("" if options.pause else "\n"))
         await n.async_set_variable("user.it2split", command_arg)
         await n.async_set_variable("user.it2split_cwd", origin_cwd)
     elif options.restart:
@@ -41,7 +42,7 @@ async def run_in_split_pane(c: "iterm2.Connection"):
         restarted = await get_target_session(a)
         if restarted:
             n = restarted
-        await n.async_send_text(cmd_text + "\n")
+        await n.async_send_text(cmd_text + ("" if options.pause else "\n"))
     else:
         p = await iterm2.async_get_last_prompt(c, n.session_id)
         if p is None:
@@ -50,7 +51,7 @@ async def run_in_split_pane(c: "iterm2.Connection"):
             # TODO: see if this works as ctrl+c
             await n.async_send_text("\x03")
             await asyncio.sleep(0.1)
-        await n.async_send_text(cmd_text + "\n")
+        await n.async_send_text(cmd_text + ("" if options.pause else "\n"))
 
     if options.focus:
         await n.async_activate()

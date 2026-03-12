@@ -10,9 +10,12 @@ _git-checkout-branch () {
     '(-r --remote)'{-r,--remote=}'[show remote branches]::remote:__git_remotes' \
     '(-d --detach)'{-d,--detach}'[detach the HEAD at named commit]' \
     '(-f --force)'{-f,--force}'[force branch switch/ignore unmerged entries]' \
+    '(--no-track)'--no-track'[do not setup upstream when creating a new branch]' \
+    '(-t --track)'{-t,--track=}'[setup upstream when creating a new branch]:mode:(direct inherit)' \
+    '(-B)-B[reset branch when initializing a new branch]:new branch:__git_branch_names' \
     && ret=0
 
-  return ret
+  return $ret
 }
 
 _git-checkout-branch

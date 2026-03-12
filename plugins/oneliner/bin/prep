@@ -144,7 +144,7 @@ if [[ -f CMakeLists.txt ]]; then
 fi
 
 if [[ -f meson.build ]]; then
-  run meson setup
+  run meson setup build/
 elif [[ -x ./configure ]]; then
   run ./configure
 fi
@@ -167,7 +167,7 @@ if [[ -f dune-project ]]; then
 fi
 
 if [[ -f *.rockspec ]]; then
-  luarocks install --only-deps *.rockspec
+  run luarocks install --only-deps *.rockspec
 fi
 
 if ! $wasrun; then

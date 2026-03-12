@@ -39,7 +39,7 @@ case "$1" in
   stash) stash=true; args+=(stash); pretty+=(--pretty=medium) ;&
   --walk-reflogs|-g) reflog=true; shift; continue; ;;
   --patch|-p) forcediff=true; ;&
-  --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary)
+  --no-patch|--name-only|--raw|--cumulative|--dirstat|--dirstat-by-file|--dirstat-by-file=*|--stat|--numstat|--shortstat|--summary|--compact-summary|--unified=*)
       showdiff=false; pretty+=("$1"); shift; continue; ;;
   --name-status) showdiff=false; namestatus=true; shift; continue; ;;
   --with-name-status) namestatus=true; shift; continue; ;;

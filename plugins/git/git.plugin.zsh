@@ -40,6 +40,7 @@ alias gcm='git commit'
 # alias gco='git checkout'
 alias gcop='git checkoutp'
 alias gcob='git checkout-branch'
+alias gcoB='git checkout-branch -B'
 alias gcobp='git checkout-branch --prefix'
 alias gcor='git checkout-recent'
 alias gsco='git stashed checkout'
@@ -348,6 +349,25 @@ source "$__zsh_forivall_git_plugin_location/bin/git-watch-staged"
 
 # source "$__zsh_forivall_git_plugin_location/completions.zsh"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
+
+function zlegcor() {
+  local branch
+  if [[ $LBUFFER == 'gcor' || $LBUFFER == 'gcor '* ]]; then
+    echo -n '\r\033[1B'
+    branch=$(gcor --dry ${(z)${LBUFFER#gcor}})
+    echo -n '\033['$(( ${#LBUFFER} ))'C'
+    echo -n '\r\033[1A'
+    if (( $? == 0 )) && [[ -n "$branch" ]]; then
+      print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
+      LBUFFER="gco $branch # $LBUFFER";
+    else
+      LBUFFER="";
+      print -Pn ${PROMPT##*\${prompt_newline}};
+      printf "gcor^["
+    fi
+  fi
+}
+add-zle-hook-widget -Uz line-finish zlegcor
 
 if (( ${+commands[git]} )) && (( ${+commands[fzf]} )) && (( ${+commands[fzf-git-branch]} )); then
   function zlefzfgitswitch() {
