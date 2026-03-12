@@ -261,11 +261,25 @@ function _cwt() {
 compdef _cwt cwt
 
 alias c='false'
-function __c_expand() {
+
+function __fzf_magic_expand() {
   emulate -L zsh
   setopt extendedglob
 
   if [[ "$LBUFFER" = "c" ]]; then
+    local dir
+    dir="$(atuin history list --reverse=false --format '{directory}' | huniq | rg --passthrough "^$HOME/" --replace '~/' | fzf)"
+    if (( $? == 0 )) && [[ -n "$dir" ]]; then
+      print -Pn ${PROMPT##*\${prompt_newline}}' ';
+      LBUFFER="cd $dir";
+    else
+      print -Pn ${PROMPT##*\${prompt_newline}};
+      printf "c^["
+    fi
+    return
+  fi
+
+  if [[ "$LBUFFER" = "cd ?" ]]; then
     local dir
     dir="$(fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --type d | fzf)"
     if (( $? == 0 )) && [[ -n "$dir" ]]; then
@@ -275,16 +289,11 @@ function __c_expand() {
       print -Pn ${PROMPT##*\${prompt_newline}};
       printf "c^["
     fi
+    return
   fi
-}
-add-zle-hook-widget -Uz line-finish __c_expand
-
-function __c_expand() {
-  emulate -L zsh
-  setopt extendedglob
 
   if [[ "$LBUFFER" = *' ?' ]]; then
-    local dir
+    local file
     file="$(fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' | fzf)"
     if (( $? == 0 )); then
       print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
@@ -294,4 +303,4 @@ function __c_expand() {
     fi
   fi
 }
-add-zle-hook-widget -Uz line-finish __c_expand
+add-zle-hook-widget -Uz line-finish __fzf_magic_expand
