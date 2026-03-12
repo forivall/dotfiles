@@ -283,11 +283,12 @@ function __fzf_magic_expand() {
     local dir
     dir="$(fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' --type d | fzf)"
     if (( $? == 0 )) && [[ -n "$dir" ]]; then
-      print -Pn ${PROMPT##*\${prompt_newline}}' ';
+      print -Pn ${PROMPT##*\${prompt_newline}};
+      printf "cd  "
       LBUFFER="cd $dir";
     else
       print -Pn ${PROMPT##*\${prompt_newline}};
-      printf "c^["
+      printf "cd ?^["
     fi
     return
   fi
