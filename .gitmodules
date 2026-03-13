@@ -30,3 +30,6 @@
 [submodule "util/alias2symlink"]
 	path = util/alias2symlink
 	url = https://github.com/sergk8/alias2symlink
+[submodule "scripts/colortest.bash"]
+	path = scripts/colortest.bash
+	url = https://gist.github.com/vivkin/567896630dbc588ad470b8196c601ad1
