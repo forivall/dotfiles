@@ -282,6 +282,7 @@ if ! zgen saved; then
   zgen load "$__zshrc_dirname/plugins/ngrok"
   zgen load "$__zshrc_dirname/plugins/npm"
   zgen load "$__zshrc_dirname/plugins/pnpm"
+  zgen load "$__zshrc_dirname/plugins/playdate"
   whence twilio > /dev/null && zgen load "$__zshrc_dirname/plugins/twilio"
 
   zgen load "$__zshrc_dirname/plugins/wttr"

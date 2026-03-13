@@ -9,6 +9,7 @@ line-number = "relative"
 color-modes = true
 insert-final-newline = true
 # indent-style = 2
+auto-format = false
 
 [editor.cursor-shape]
 insert = "bar"

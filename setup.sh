@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -e
 
@@ -47,7 +47,7 @@ if ! type realpath >/dev/null ; then
   fi
 fi
 
-if ${USE_GNU_LN:-false} && type gln; then
+if ${USE_GNU_LN:-true} && type gln; then
   ln() { gln "$@"; }
 fi
 
