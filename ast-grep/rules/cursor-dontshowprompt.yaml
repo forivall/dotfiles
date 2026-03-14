@@ -1,0 +1,5 @@
+id: cursor-dontshowprompt
+language: JavaScript
+rule:
+  pattern: "$C?.dontShowPrompt&&$C.commit===this.productService.commit"
+fix: "!0||$C?.dontShowPrompt&&$C.commit===this.productService.commit"
