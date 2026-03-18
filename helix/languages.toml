@@ -1,7 +1,9 @@
 [language-server.biome]
 command = "biome"
 args = ["lsp-proxy"]
-config = { provideFormatter = true }
+
+[language-server.biome.config.inline_config]
+javascript.formatter.quoteStyle = "single"
 
 [language-server.prettier-lsp]
 command = "prettier-lsp"
@@ -292,6 +294,30 @@ language-servers = [
   # "eslint",
 ]
 
+[language.debugger]
+name = "node-debug2"
+transport = "stdio"
+command = "node-debug"
+
+[[language.debugger.templates]]
+name = "run"
+request = "launch"
+completion = [
+  { name = "binary", completion = "filename", default = "%{file_path_absolute}" }
+]
+args = { program = "{0}" }
+runInTerminal = true
+
+[[language.debugger.templates]]
+name = "jest"
+request = "launch"
+# completion = [
+#   { name = "binary", completion = "filename", default = "%{file_path_absolute}" }
+# ]
+args.program = "node_modules/.bin/jest"
+args.args = ["--runInBand", "%{file_path_absolute}"]
+args.runInTerminal = true
+
 [[language]]
 name = "typescript"
 # formatter = { command = 'prettier', args = ["--parser", "typescript"] }
@@ -307,6 +333,20 @@ language-servers = [
   { name = "graphql-language-service", except-features = [ "format" ] },
   # "eslint",
 ]
+
+[language.debugger]
+name = "node-debug2"
+transport = "stdio"
+command = "node-debug"
+
+[[language.debugger.templates]]
+name = "run"
+request = "launch"
+completion = [
+  { name = "binary", completion = "filename", default = "%{file_path_absolute}" }
+]
+args = { program = "{0}" }
+runInTerminal = true
 
 [[language]]
 name = "toml"
@@ -340,7 +380,7 @@ comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
 language-servers = [ "yaml-language-server", "cci-yaml" ]
 formatter = { command = "yamlfmt", args = ['-'] }
-auto-format = true
+auto-format = false
 
 [[language]]
 name = "markdown"

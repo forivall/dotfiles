@@ -302,6 +302,19 @@ function __fzf_magic_expand() {
     else
       print -Pn ${PROMPT##*\${prompt_newline}}' ';
     fi
+    return
+  fi
+
+  if [[ "$LBUFFER" = *'?' ]]; then
+    local file parsed
+    lastArg=${${(z)LBUFFER}[-1]}
+    file="$(fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.marks' '' ${~lastArg::-1}| fzf)"
+    if (( $? == 0 )); then
+      print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
+      LBUFFER="${LBUFFER::-1} $file";
+    else
+      print -Pn ${PROMPT##*\${prompt_newline}}' ';
+    fi
   fi
 }
 add-zle-hook-widget -Uz line-finish __fzf_magic_expand

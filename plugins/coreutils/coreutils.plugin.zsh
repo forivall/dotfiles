@@ -71,6 +71,8 @@ function grepr() {
 
 alias rgb=batgrep
 alias bam=batman
+(( ${+commands[qman]} )) && alias mqn=qman
+[[ -x ~pubrepos/qman/build/src/qman ]] && alias qman="~pubrepos/qman/build/src/qman --config=${__zsh_coreutils_plugin_location:h:h}/config/qman/qman.conf"
 
 # sed
 autoload -U sedml

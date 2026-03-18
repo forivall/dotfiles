@@ -47,6 +47,6 @@ _ensure_cursor_agent() {
   fi
 }' $CURSOR_INTEGRATION
 sd '^( *).*--resume \$CURSOR_AGENT_CHAT_ID' '${1}_ensure_cursor_agent\n$0' $CURSOR_INTEGRATION
-sd '^add-zsh-hook \w+ _cursor_fix_' '# $0' $CURSOR_INTEGRATION
+sd '^(\s*)(echo ".*Command failed with exit code.*. Press Enter to fix.*)' '$1# $2' $CURSOR_INTEGRATION
 sd '^bindkey -M \w+ '\''\^I'\'' tab-toggle-or-complete$' '# $0' $CURSOR_INTEGRATION
 

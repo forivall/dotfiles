@@ -330,6 +330,7 @@ aliases:
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
   wfrw: '!gh wfr "$@" && sleep 3 && gh run list --workflow=$1 --limit=3 && sleep 3 && gh wr "$1"'
   prism: '!gh-prism "$@"'
+  my-prs: pr list --author '@me'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
