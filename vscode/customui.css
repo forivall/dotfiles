@@ -22,6 +22,9 @@
 .monaco-workbench .part.editor>.content .editor-group-container>.title .breadcrumbs-below-tabs .breadcrumbs-control .monaco-icon-label{
   letter-spacing: -0.024em
 }
+.monaco-workbench .part > .content .markdown-root {
+  font-size: 1.06em !important;
+}
 .custom-list-row .monaco-workbench .monaco-list-row .codicon[class*=codicon-] {
   font-size: 16px;
 }

@@ -1,7 +1,7 @@
 cd ~/.pyenv/versions &&
-  for p in brew-*(-@); do
+  for p in brew-*(N-@); do
     command rm $p
-  done &&
+  done
   for p in $HOMEBREW_PREFIX/opt/python@*; do
     ln -f -s $p brew-${p##*@}
   done

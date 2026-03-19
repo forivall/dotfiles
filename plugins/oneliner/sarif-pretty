@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+jq -r '.runs[].results[].locations[].physicalLocation|(.artifactLocation.uri + ":"+(.region.startLine|tostring)+"\n"+.region.snippet.text)'

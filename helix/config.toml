@@ -11,6 +11,10 @@ insert-final-newline = true
 # indent-style = 2
 auto-format = false
 
+[editor.terminal]
+command = "it2split"
+args = ["--no-focus", "--cwd=%{current_working_directory}"]
+
 [editor.cursor-shape]
 insert = "bar"
 
@@ -86,6 +90,7 @@ display-messages = true
 "v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
 "o" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
 "O" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
+"u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 
 [keys.normal.z]

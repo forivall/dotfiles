@@ -351,7 +351,7 @@ source "$__zsh_forivall_git_plugin_location/bin/git-watch-staged"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
 
 function zlegcor() {
-  local branch
+  local branch len
   if [[ $LBUFFER == 'gcor' || $LBUFFER == 'gcor '* ]]; then
     echo -n '\r\033[1B'
     branch=$(gcor --dry ${(z)${LBUFFER#gcor}})
@@ -361,9 +361,10 @@ function zlegcor() {
       print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
       LBUFFER="gco $branch # $LBUFFER";
     else
+      len=${#LBUFFER}
       LBUFFER="";
       print -Pn ${PROMPT##*\${prompt_newline}};
-      printf "gcor^["
+      printf "gcor^[%${len}s" ''
     fi
   fi
 }
