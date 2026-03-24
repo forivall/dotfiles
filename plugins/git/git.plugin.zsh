@@ -297,6 +297,9 @@ function git() { # also put these in git-aliases for autocomplete
       local alias="$gitcommand-$1"
       if [[ $alias == worktree-cd ]]; then
         "$@"
+      elif [[ $alias == worktree-do ]]; then
+        shift
+        for d in $(git wt dirs); do (export DIRENV_LOG_FORMAT=; cd $d; prompt_pure_run_cmd "$@"); prompt_pure_reset_time; done
       elif [[ $alias == worktree-rm ]] && [[ $2 == '.' ]]; then
         shift
         shift

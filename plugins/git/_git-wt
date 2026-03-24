@@ -86,6 +86,10 @@ _git-wt() {
         (cd)
           __git_worktrees && ret=0
         ;;
+        (do)
+          compset -n 2
+          _normal && ret=0
+        ;;
       esac
   esac
   return ret

@@ -211,7 +211,7 @@ prompt_pure_run_cmd() {
     print -Pn $PROMPT
     echo "$*"
   else
-    print -P ${PROMPT%$'\n'*}
+    print -P ${PROMPT%\${prompt_newline}*}
   fi
 	prompt_pure_set_title 'ignore-escape' "$PWD:t: $*"
   prompt_pure_reset_time

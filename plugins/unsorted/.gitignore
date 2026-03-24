@@ -2,3 +2,4 @@
 /_carapace
 cursor-shell-integration.source.zsh
 activate_mise.source.zsh
+_tree-sitter
