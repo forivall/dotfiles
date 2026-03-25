@@ -17,6 +17,8 @@ forcediff=false
 namestatus=false
 follow=false
 maxcount=100
+reverse=false
+lesskey="${__plugin_dirname}/share/git-logp.lesskey"
 
 dry=false
 navigate=${$(git config delta.navigate):-false}
@@ -56,7 +58,8 @@ case "$1" in
   --all-files) allfiles=true; shift; continue; ;;
   --dry) dry=true; shift; continue; ;;
   --) hasdashdash=true; args+=("$1"); fileargs=(); shift; continue; ;;
-  --reverse|-S*) args+=("$1"); shift; continue; ;;
+  --reverse) lesskey="${__plugin_dirname}/share/git-logp-reverse.lesskey"; ;&
+  -S*) args+=("$1"); shift; continue; ;;
   --grep|--author) args+=("$1" "$2"); shift; shift; continue; ;;
   --max-count) maxcount="$2"; shift; shift; continue; ;;
   --max-count=*) maxcount="${1#--max-count=}"; shift; continue; ;;
@@ -90,7 +93,7 @@ else
 fi
 
 if $hasdashdash; then
-  dashdash="$fileargs "
+  dashdash="${(q+@)fileargs[@]} "
 elif $follow; then
   local followfiles=($(git log --name-only --relative --format= --follow "${args[@]}"| huniq))
   dashdash="$followfiles "
@@ -181,7 +184,7 @@ else
     export LESSHISTFILE
   fi
   LESSOPEN="| zsh -c ${(q)lessopen_command}" \
-   less -f +X -x2 -R --prompt='?f%f .?n?m(%i of %m) ..?lt%lt-%lb?L/%L. ?x- Next\: %x.:?pB%pB\%..%t' --lesskey-src="${__plugin_dirname}/share/git-logp.lesskey" --file-size "${(f)refspecs[@]}"
+   less -f +X -x2 -R --prompt='?f%f .?n?m(%i of %m) ..?lt%lt-%lb?L/%L. ?x- Next\: %x.:?pB%pB\%..%t' --lesskey-src="$lesskey" --file-size "${(f)refspecs[@]}"
 
   wait
   rm "$DELTA_HIST_FILE"
