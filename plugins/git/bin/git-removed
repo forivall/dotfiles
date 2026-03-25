@@ -1,9 +1,12 @@
 #!/usr/bin/env zsh
 
-LINE=$1
+LINE_NUM=$1
 shift
 
-git diff "$@" | while read line; do
+followfiles=($(git log --name-only --relative --format= --follow HEAD ^"$@"| huniq))
+# displayargs=(${(f)$(printf "%s\n" "$@" "${followfiles[@]}" | huniq)})
+# echo git diff "${displayargs[@]}"
+git diff -C1 "$@" "${followfiles[@]}" | while read line; do
   if [[ $line != @@* ]]; then
     if ${PRINTING:-false} && [[ $line == -* ]]; then
       echo ${line:1};
@@ -15,7 +18,7 @@ git diff "$@" | while read line; do
   added=${added% @@*}
   start=${added%,*}
   length=${added#*,}
-  if (( LINE >= start && LINE < start + ( length > 0 ? length : 1 ) )); then
+  if (( LINE_NUM >= start && LINE_NUM < start + ( length > 0 ? length : 1 ) )); then
     PRINTING=true
   fi
 done
