@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# macOS ipconfig(8) — communicates with the IPConfiguration agent.
+name: ipconfig
+description: View and control IP configuration state (test and debug contexts only)
+commands:
+  - name: waitall
+    description: Block until all network services have finished configuring or timed out
+  - name: getifaddr
+    description: Print the IP address for the first network service on the interface
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+  - name: ifcount
+    description: Print the number of interfaces IPConfiguration can configure
+  - name: getoption
+    description: Print a BOOTP or DHCP option by name or numeric code (see bootpd(8))
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+        - [
+            "subnet_mask",
+            "router",
+            "domain_name",
+            "domain_name_server",
+            "host_name",
+            "interface_mtu",
+            "broadcast_address",
+            "dhcp_message_type",
+            "server_identifier",
+            "lease_time",
+            "renewal_time",
+            "rebinding_time",
+            "domain_search",
+            "vendor_encapsulated_options",
+          ]
+  - name: getiflist
+    description: Print space-separated interface names IPConfiguration can configure
+  - name: getsummary
+    description: Print a summary of IPConfiguration state for the interface
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+  - name: getpacket
+    description: Print the DHCP or BOOTP packet accepted from the server for the interface
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+  - name: getv6packet
+    description: Print the latest DHCPv6 packet accepted from the server for the interface
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+  - name: getra
+    description: Print the latest IPv6 Router Advertisement accepted for the interface
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+  - name: getdhcpduid
+    description: Print the DHCP DUID if established
+  - name: getdhcpiaid
+    description: Print the DHCP IA_ID for the interface when IPv6 is configured
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+  - name: set
+    description: "Create a temporary network service on the interface (requires root; not persistent)"
+    completion:
+      positional:
+        - ["$carapace.net.Devices"]
+        - ["NONE", "DHCP", "BOOTP", "MANUAL", "INFORM", "NONE-V6", "AUTOMATIC-V6", "MANUAL-V6", "6TO4"]
+  - name: setverbose
+    description: "Enable (1) or disable (0) verbose IPConfiguration agent logging (requires root)"
+    completion:
+      positional:
+        - ["0", "1"]
