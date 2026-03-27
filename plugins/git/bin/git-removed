@@ -6,10 +6,11 @@ shift
 followfiles=($(git log --name-only --relative --format= --follow HEAD ^"$@"| huniq))
 # displayargs=(${(f)$(printf "%s\n" "$@" "${followfiles[@]}" | huniq)})
 # echo git diff "${displayargs[@]}"
-git diff -C1 "$@" "${followfiles[@]}" | while read line; do
+git diff -U1 "$@" "${followfiles[@]}" | while IFS= read line; do
   if [[ $line != @@* ]]; then
-    if ${PRINTING:-false} && [[ $line == -* ]]; then
-      echo ${line:1};
+    if ${PRINTING:-false} && [[ $line != '+'* ]]; then
+    # if ${PRINTING:-false} && [[ $line == -* ]]; then
+      printf '%s\n' "${line}";
     fi
     continue
   fi

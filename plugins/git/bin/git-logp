@@ -96,7 +96,7 @@ if $hasdashdash; then
   dashdash="${(q+@)fileargs[@]} "
 elif $follow; then
   local followfiles=($(git log --name-only --relative --format= --follow "${args[@]}"| huniq))
-  dashdash="$followfiles "
+  dashdash="${(q+@)followfiles[@]} "
 elif ! $allfiles; then
   dashdash="$(git rev-parse --sq --no-flags --no-revs $fileargs) "
 fi

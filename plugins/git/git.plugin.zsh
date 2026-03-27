@@ -299,7 +299,12 @@ function git() { # also put these in git-aliases for autocomplete
         "$@"
       elif [[ $alias == worktree-do ]]; then
         shift
-        for d in $(git wt dirs); do (export DIRENV_LOG_FORMAT=; cd $d; prompt_pure_run_cmd "$@"); prompt_pure_reset_time; done
+        if [[ $1 == -p ]]; then
+          shift
+          for d in $(git wt dirs); do (export DIRENV_LOG_FORMAT=; cd $d; prompt_pure_run_cmd -p "$@"); prompt_pure_reset_time; done
+        else
+          for d in $(git wt dirs); do (export DIRENV_LOG_FORMAT=; cd $d; prompt_pure_run_cmd "$@"); prompt_pure_reset_time; done
+        fi
       elif [[ $alias == worktree-rm ]] && [[ $2 == '.' ]]; then
         shift
         shift
@@ -362,7 +367,7 @@ function zlegcor() {
     echo -n '\r\033[1A'
     if (( $? == 0 )) && [[ -n "$branch" ]]; then
       print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
-      LBUFFER="gco $branch # $LBUFFER";
+      LBUFFER="gco $branch # $LBUFFER # git checkout $(git rev-parse --symbolic-full-name $branch)";
     else
       len=${#LBUFFER}
       LBUFFER="";

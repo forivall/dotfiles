@@ -1,0 +1,107 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for web-ext. From web-ext --help and web-ext <command> --help.
+name: web-ext
+description: "CLI for building, running, and testing WebExtensions. Option values can also be set via $WEB_EXT_ prefixed env vars."
+
+persistentflags:
+  --version: Show version number
+  -s, --source-dir=: Web extension source directory
+  -a, --artifacts-dir=: Directory where artifacts will be saved
+  -v, --verbose: Show verbose output
+  -i, --ignore-files=: List of glob patterns for files to ignore
+  --no-input: Disable all features that require standard input
+  -c, --config=: Path to a CommonJS config file to set option defaults
+  --config-discovery: Discover config files in home and working directory
+  -h, --help: Show help
+
+completion:
+  flag:
+    "source-dir": ["$directories"]
+    "artifacts-dir": ["$directories"]
+    "ignore-files": ["$files"]
+    config: ["$files"]
+
+commands:
+  - name: build
+    description: Create an extension package from source
+    flags:
+      --as-needed: Watch for file changes and re-build as needed
+      -n, --filename=: Name of the created extension package file
+      -o, --overwrite-dest: Overwrite destination package if it exists
+    completion:
+      flag:
+        filename: ["$files"]
+
+  - name: dump-config
+    description: Run config discovery and dump the resulting config data as JSON
+
+  - name: sign
+    description: Sign the extension so it can be installed in Firefox
+    flags:
+      --amo-base-url=: Submission API URL prefix
+      --api-key=: API key (JWT issuer) from addons.mozilla.org
+      --api-secret=: API secret (JWT secret) from addons.mozilla.org
+      --api-proxy=: Use a proxy to access the signing API
+      --timeout=: Number of milliseconds to wait before giving up
+      --approval-timeout=: Milliseconds to wait for approval before giving up
+      --channel=: Channel for which to sign the addon (listed or unlisted)
+      --amo-metadata=: Path to JSON file with metadata for the API
+      --upload-source-code=: Path to archive of human-readable source code
+    completion:
+      flag:
+        channel: ["listed", "unlisted"]
+        "amo-metadata": ["$files"]
+        "upload-source-code": ["$files"]
+
+  - name: run
+    description: Run the extension
+    flags:
+      -t, --target=: Extension runners to enable (repeat for multiple)
+      -f, --firefox=: Path or alias to Firefox executable
+      -p, --firefox-profile=: Run Firefox using a copy of this profile
+      --chromium-binary=: Path or alias to Chromium executable
+      --chromium-profile=: Path to a custom Chromium profile
+      --profile-create-if-missing: Create the profile directory if missing
+      --keep-profile-changes: Run Firefox directly in custom profile
+      --reload: Reload the extension when source files change
+      --watch-file=: Reload only when this file changes
+      --watch-ignored=: Paths and globs that should not be watched
+      --pre-install: Pre-install the extension before startup
+      --pref=: Launch Firefox with a custom preference
+      -u, --start-url=: Launch Firefox at specified page
+      --devtools: Open the DevTools for the installed add-on
+      --browser-console: Open the DevTools Browser Console
+      --args=: Additional CLI options passed to the browser binary
+      --adb-bin=: Custom path to the adb binary
+      --adb-host=: Connect to adb on the specified host
+      --adb-port=: Connect to adb on the specified port
+      --adb-device=: Connect to the specified adb device name
+      --adb-discovery-timeout=: Milliseconds to wait before giving up
+      --adb-remove-old-artifacts: Remove old artifacts from adb device
+      --firefox-apk=: Run a specific Firefox for Android APK
+      --firefox-apk-component=: Run a specific Android Component
+    completion:
+      flag:
+        target: ["firefox-desktop", "firefox-android", "chromium"]
+        "source-dir": ["$directories"]
+        "firefox-profile": ["$directories"]
+        "chromium-profile": ["$directories"]
+        "watch-file": ["$files"]
+        "start-url": ["$urls"]
+
+  - name: lint
+    description: Validate the extension source
+    flags:
+      -o, --output=: The type of output to generate
+      --metadata: Output only metadata as JSON
+      -w, --warnings-as-errors: Treat warnings as errors
+      --pretty: Prettify JSON output
+      --privileged: Treat extension as a privileged extension
+      --self-hosted: Extension will be self-hosted
+      --boring: Disable colorful shell output
+    completion:
+      flag:
+        output: ["json", "text"]
+
+  - name: docs
+    description: Open the web-ext documentation in a browser

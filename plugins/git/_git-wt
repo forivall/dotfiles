@@ -87,7 +87,11 @@ _git-wt() {
           __git_worktrees && ret=0
         ;;
         (do)
-          compset -n 2
+          if [[ $line[2] == -p ]]; then
+            compset -n 3
+          else
+            compset -n 2
+          fi
           _normal && ret=0
         ;;
       esac

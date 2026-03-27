@@ -200,8 +200,8 @@ class Where extends ArboristWorkspaceCmd {
    */
   output(expls) {
     const flattened = expls.flatMap(
-      ({ version, dependents, location, dev, peer, optional, devOptional }) => {
-        const flags = peer
+      ({ version, dependents, location, dev, peer, optional, devOptional, bundled }) => {
+        let flags = peer
           ? 'peer'
           : devOptional
           ? 'devopt'
@@ -210,6 +210,9 @@ class Where extends ArboristWorkspaceCmd {
           : optional
           ? 'opt'
           : ''
+        if (bundled) {
+          flags = (flags ? flags + ' ' : '') + 'bundled'
+        }
         return dependents
           .map(({ spec, from, latest }) => ({
             spec,

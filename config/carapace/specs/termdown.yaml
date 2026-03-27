@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec for termdown. From https://carapace-sh.github.io/carapace-spec/ and `termdown --help`.
+name: termdown
+description: "Countdown or stopwatch in the terminal. Usage: termdown [OPTIONS] [TIME]"
+
+persistentflags:
+  -a, --alt-format: Use colon-separated time format
+  -b, --blink: Flash terminal at end of countdown
+  -B, --no-bell: Don't ring terminal bell at end of countdown
+  -c, --critical=: "Draw final N seconds in red and announce them individually with --voice or --exec-cmd (defaults to 3)"
+  -e, --end: Display target datetime of unpaused countdown
+  -f, --font=: Choose font from http://www.figlet.org/examples.html
+  -p, --voice-prefix=: Add TEXT to the beginning of --voice and --exec annunciations (except per-second ones)
+  -q, --quit-after=: Quit N seconds after countdown (use with -b or -t) or terminate stopwatch after N seconds
+  -s, --no-seconds: Don't show seconds (except for last minute of countdown and first minute of stopwatch)
+  -t, --text=: Text to display at end of countdown
+  -T, --title=: Text to display on top of countdown/stopwatch
+  -W, --no-window-title: Don't update terminal title with remaining/elapsed time
+  -v, --voice=: "Spoken countdown (requires espeak on Linux or say on macOS; choose VOICE from say -v '?' or espeak --voices)"
+  -o, --outfile=: File to write current remaining/elapsed time to
+  --exec-cmd=: "Runs CMD every second; '{0}' and '{1}' in CMD are replaced with remaining/elapsed seconds and sparse annunciation"
+  --no-figlet: Don't use ASCII art for display
+  --no-figlet-y-offset=: Vertical offset within the terminal (only for --no-figlet)
+  --no-text-magic: Don't try to replace non-ASCII characters (use with -t)
+  --version: Show version and exit
+  -z, --time: Show current time instead of countdown/stopwatch
+  -Z, --time-format=: 'Format for --time/--end (defaults to "%H:%M:%S", ignores --no-seconds)'
+  -D, --date-format=: 'Format for --end (defaults to "%Y-%m-%d")'
+  -h, --help: Show help message and exit
+
+completion:
+  flag:
+    outfile: ["$files"]
+    font: ["$files"]
+  positional:
+    - []
