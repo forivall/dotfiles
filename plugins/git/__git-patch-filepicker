@@ -7,10 +7,13 @@ __simple-term-picker() {
   # $ python3 -m pip install simple-term-menu
 
   local term_menu_options=()
+  if "${TERM_PICKER_MULTI:-false}"; then
+    term_menu_options+=(-m)
+  fi
   if [[ -n "$TERM_PICKER_PREVIEW_COMMAND" ]]; then
     term_menu_options+=(--preview "$TERM_PICKER_PREVIEW_COMMAND")
   fi
-  if (( ${#items} > 255 )); then
+  if "${TERM_PICKER_MULTI:-false}" || (( ${#items} > 255 )); then
     i=$(simple-term-menu --stdout -i $(( i - 1 )) --no-preview-border $term_menu_options "${items[@]}") || true
     [[ -z $i ]] && i=0
   else
@@ -36,11 +39,11 @@ __git-patch-filepicker() {
 
   cdup=$(git rev-parse --show-cdup)
   local first=true
-  local usecdup
+  local usecdup interactiveArg
+  typeset -a interactiveArgs
   while $hasfiles "$@"; do
     usecdup=true
     term_menu_options=()
-    # git diff --name-only | selecta --height 4 | read file
     if [[ $getitems = *_vars ]]; then
       $getitems "$@"
     else
@@ -55,15 +58,30 @@ __git-patch-filepicker() {
       __simple-term-picker
       if (( $i == 0 )) ; then return 1; fi
     fi
-    file=${items[i]}
-    items=()
-    interactiveArg=$file
-    if $usecdup; then
-      interactiveArg=$cdup$file
+    interactiveArgs=()
+    if "${TERM_PICKER_MULTI:-false}"; then
+      for j in ${(s/,/)i}; do
+        file="${items[j]}"
+        interactiveArg=$file
+        if $usecdup; then
+          interactiveArg=$cdup$file
+        fi
+        interactiveArgs+=($interactiveArg)
+      done
+    else
+      file=${items[i]}
+      interactiveArg=$file
+      if $usecdup; then
+        interactiveArg=$cdup$file
+      fi
+      interactiveArgs+=($interactiveArg)
     fi
-    $dointeractive $interactiveArg
+    items=()
+    $dointeractive "${interactiveArgs[@]}"
     first=false
   done
+  unset TERM_PICKER_MULTI
+  unset TERM_PICKER_PREVIEW_COMMAND
 }
 
 __git-patch-filepicker "$@"

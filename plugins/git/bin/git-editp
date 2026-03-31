@@ -20,6 +20,10 @@ else
   GIT_EDITOR=$(git config --get core.guieditor || git config --get core.editor)
 fi
 
+allow_multi() {
+  [[ $GIT_EDITOR = hx || $GIT_EDITOR = helix ]]
+}
+
 run_editor() {
   if [[ $GIT_EDITOR = code ]]; then
     if [[ $TERM_PROGRAM = vscode ]]; then
@@ -29,8 +33,10 @@ run_editor() {
       code --goto "$1$2"
     fi
   elif [[ $GIT_EDITOR = hx || $GIT_EDITOR = helix ]]; then
-    echo $GIT_EDITOR "$1$2"
-    $GIT_EDITOR "$1$2"
+    local arg="$1$2"
+    shift 2
+    echo $GIT_EDITOR "$arg" "$@"
+    HELIX_GIT_HEAD=$HELIX_GIT_HEAD $GIT_EDITOR "$arg" "$@"
   else
     echo $GIT_EDITOR "$1"
     $GIT_EDITOR "$1"
@@ -151,18 +157,20 @@ case "$gitcommand" in
   ;;
   show)
     __git-editp-hasfiles() {
-      git rev-parse "$@" > /dev/null
+      SHOW_REV=$(git rev-parse "$@") && HELIX_GIT_HEAD=$(git rev-parse ${SHOW_REV:-HEAD}^)
     }
     __git-editp-getitems_vars() {
       items=(
         $(git show --format='' --name-only "$@")
       )
+      allow_multi && TERM_PICKER_MULTI=true
       TERM_PICKER_PREVIEW_COMMAND="$__plugin_dirname/__git-showp-preview $cdup{} ${#items} $@"
     }
     __git-editp-dointeractive() {
-      local loc="$(git show -U0 --format='' $revs $1 | get_first_added_line)"
+      local arg=$1; shift
+      local loc="$(git show -U0 --format='' $revs $arg | get_first_added_line)"
       if [[ -n $loc ]]; then loc=":$loc"; fi
-      run_editor "$1" "$loc"
+      run_editor "$arg" "$loc" "$@"
     }
   ;;
 esac
