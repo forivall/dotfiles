@@ -1,0 +1,1 @@
+termdown --no-figlet --title 'ctrl-c to cancel, q to skip' $@
