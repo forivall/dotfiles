@@ -36,7 +36,7 @@ run_editor() {
     local arg="$1$2"
     shift 2
     echo $GIT_EDITOR "$arg" "$@"
-    HELIX_GIT_HEAD=$HELIX_GIT_HEAD $GIT_EDITOR "$arg" "$@"
+    $GIT_EDITOR "$arg" "$@"
   else
     echo $GIT_EDITOR "$1"
     $GIT_EDITOR "$1"
@@ -157,7 +157,7 @@ case "$gitcommand" in
   ;;
   show)
     __git-editp-hasfiles() {
-      SHOW_REV=$(git rev-parse "$@") && HELIX_GIT_HEAD=$(git rev-parse ${SHOW_REV:-HEAD}^)
+      SHOW_REV=$(git rev-parse "$@") && export HELIX_GIT_HEAD=$(git rev-parse ${SHOW_REV:-HEAD}^)
     }
     __git-editp-getitems_vars() {
       items=(

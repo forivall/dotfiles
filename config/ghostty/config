@@ -27,8 +27,8 @@ macos-icon = holographic
 
 # shell-integration = none
 shell-integration-features = no-cursor
-window-padding-x = 2
+window-padding-x = 3
 
 quick-terminal-position = right
 quick-terminal-size = 580px,720px
-keybind = global:cmd+backquote=toggle_quick_terminal
+keybind = global:opt+f1=toggle_quick_terminal

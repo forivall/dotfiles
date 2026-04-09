@@ -8,7 +8,12 @@ if $IS_OSX ; then
   PATH="$PATH:${__zsh_forivall_git_plugin_location}/bin-osx"
 fi
 
-alias approxidate="$__zsh_forivall_git_plugin_location/venv/bin/python3 -c \"import sys; import approxidate; print(int(approxidate.approx(' '.join(sys.argv[1:]))))\""
+__approxidate_venv="$__zsh_forivall_git_plugin_location/.venv/bin/python3"
+
+# use `uv sync` in the `plugins/git` directory to enable these aliases
+alias approxidate="$__approxidate_venv -c \"import sys; from approxidate import approx; print(approx(' '.join(sys.argv[1:]), relative_to=approx('now')))\""
+alias approxidt="$__approxidate_venv -c \"import sys; from datetime import datetime; from approxidate import approx; print(datetime.fromtimestamp(approx(' '.join(sys.argv[1:]), relative_to=approx('now'))))\""
+alias approxidiff="$__approxidate_venv -c \"import sys; from approxidate import approx; now=approx('now'); (lambda a,b='now':print(int(approx(a, relative_to=now)) - int(approx(b, relative_to=now))))(*sys.argv[1:])\""
 
 # GIT_CONTRIB_ROOT="/usr/share/doc/git/contrib"
 GIT_CONTRIB_ROOT="/usr/share/git"
@@ -16,6 +21,7 @@ if $IS_OSX ; then
   GIT_REALPATH="$(readlink -f "$(whence -p git)")"
   GIT_CONTRIB_ROOT="${GIT_REALPATH%/bin/git}/share/git-core/contrib"
 fi
+export GH_EXPERIMENTAL_PROMPTER=true
 
 compdef git-addg=rg
 # for alias in g ga gap gam gcb gcm gco gcp gcs gcsb gd gds gdd gdds ge gf gfo gitify gg gl gla glf glfg glg glga glgs glgas gp gpr gprs gps gst gti gts gtv gtl gwip gunwip ; do
