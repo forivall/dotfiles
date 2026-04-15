@@ -10,6 +10,7 @@ pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
   auth-current: auth status --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
+  whoami: auth status --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
   auth-setup-gcm-local: |
     ! set -x
     remotename=${1:-origin};
@@ -324,7 +325,28 @@ aliases:
       git log --graph --oneline $RANGE &&
       zsh -c "read -q '?> MERGE_COMMIT=\$(gh pr view --json mergeCommit --jq .mergeCommit.oid $1) && git cherry-pick \$MERGE_COMMIT^...\$MERGE_COMMIT^2'$'\\n''Continue? (y/n) '" &&
       git cherry-pick $RANGE
-  my-review-requests: 'pr list --search "sort:updated-desc user-review-requested:@me"'
+  my-review-requests: |
+    pr list --search "sort:updated-desc user-review-requested:@me" --json number,title,url,headRefName,author,createdAt --template '
+    {{- tablerow ("ID" | autocolor "+u") ("TITLE" | autocolor "+u") ("BRANCH" | autocolor "+u") ("AUTHOR" | autocolor "+u") ("CREATED AT" | autocolor "+u") }}
+    {{- range . }}
+      {{- $author := "-" }}
+      {{- $authorHref := (print "https://github.com/" .author.login) }}
+      {{- if .author.name}}
+        {{- $author = .author.name}}
+      {{- else if .author.login | hasPrefix "app/"}}
+        {{- $author = (slice .author.login 4) }}
+        {{- $authorHref = (print "https://github.com/apps/" $author) }}
+      {{- else }}
+        {{- $author = .author.login}}
+      {{- end}}
+      {{- tablerow
+        (printf "#%v" .number | autocolor "green")
+        (hyperlink .url (.title | truncate 70))
+        (.headRefName | autocolor "cyan")
+        (hyperlink $authorHref $author)
+        (.createdAt | timeago | color "magenta")
+      }}
+    {{- end}}'
   my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me" --limit 1 --json number --jq .[].number'
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
