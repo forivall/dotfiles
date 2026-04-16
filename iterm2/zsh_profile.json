@@ -23,7 +23,7 @@
   },
   "Close Sessions On End" : true,
   "Badge Max Width" : 0.5,
-  "Session Close Undo Timeout" : 60,
+  "Session Close Undo Timeout" : 180,
   "Cursor Text Color" : {
     "Red Component" : 0.15134507417678833,
     "Color Space" : "sRGB",
@@ -32,7 +32,7 @@
     "Green Component" : 0.16235706210136414
   },
   "Smart Cursor Color" : false,
-  "Prompt Before Closing 2" : false,
+  "Prompt Before Closing 2" : 2,
   "Ansi 3 Color (Dark)" : {
     "Red Component" : 0.95596319437026978,
     "Color Space" : "sRGB",
@@ -238,7 +238,7 @@
     "Green Component" : 0
   },
   "Use Bright Bold" : true,
-  "Horizontal Spacing" : 0.88,
+  "Horizontal Spacing" : 0.91000000000000003,
   "Ansi 13 Color (Light)" : {
     "Red Component" : 0.61114102602005005,
     "Color Space" : "sRGB",
@@ -328,6 +328,7 @@
     "Green Component" : 0.7137255072593689
   },
   "Vertical Spacing" : 1,
+  "Use Tab Color (Light)" : false,
   "Cursor Type" : 2,
   "Badge Text" : "",
   "Badge Top Margin" : 10,
@@ -437,18 +438,17 @@
   "Custom Command" : "Yes",
   "Jobs to Ignore" : [
     "rlogin",
-    "ssh",
     "slogin",
     "telnet"
   ],
   "Use Non-ASCII Font" : false,
   "Custom Directory" : "Advanced",
   "Ansi 8 Color (Light)" : {
-    "Red Component" : 0.52754360437393188,
-    "Color Space" : "P3",
-    "Blue Component" : 0.52010685205459595,
+    "Red Component" : 0.39984023571014404,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.39420869946479797,
     "Alpha Component" : 1,
-    "Green Component" : 0.53214120864868164
+    "Green Component" : 0.4054718017578125
   },
   "Bold Color (Light)" : {
     "Red Component" : 0.14117647707462311,
@@ -616,8 +616,9 @@
     "Alpha Component" : 1,
     "Green Component" : 0
   },
-  "Normal Font" : "FantasqueSansMNFM-Regular 12",
-  "Has Hotkey" : true,
+  "Use Selected Text Color (Dark)" : true,
+  "Normal Font" : "FantasqueSansMono-Regular 13.5",
+  "Has Hotkey" : false,
   "Foreground Color" : {
     "Red Component" : 0.81409376859664917,
     "Color Space" : "sRGB",
@@ -626,14 +627,14 @@
     "Green Component" : 0.82386010885238647
   },
   "Match Background Color (Light)" : {
-    "Red Component" : 1,
+    "Red Component" : 0.99697142839431763,
     "Color Space" : "P3",
-    "Blue Component" : 0,
+    "Blue Component" : 0.32116127014160156,
     "Alpha Component" : 1,
-    "Green Component" : 1
+    "Green Component" : 0.98600882291793823
   },
   "Command" : "\/opt\/homebrew\/bin\/zsh",
-  "Minimum Contrast (Light)" : 0.6484375,
+  "Minimum Contrast (Light)" : 0.64114091981132071,
   "Blend" : 0.080000000000000002,
   "Send Bell Alert" : false,
   "Character Encoding" : 4,
@@ -739,11 +740,11 @@
     "Green Component" : 0.094117648899555206
   },
   "Ansi 0 Color (Light)" : {
-    "Red Component" : 0.40000000000000002,
-    "Color Space" : "P3",
-    "Blue Component" : 0.39215686274509803,
+    "Red Component" : 0,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0,
     "Alpha Component" : 1,
-    "Green Component" : 0.40392156862745099
+    "Green Component" : 0
   },
   "Badge Font" : "InputSans-Bold",
   "Bold Color" : {
@@ -1102,8 +1103,9 @@
     "Alpha Component" : 1,
     "Green Component" : 0.56862747669219971
   },
-  "Faint Text Alpha (Light)" : 0.49583333333333335,
+  "Faint Text Alpha (Light)" : 0.70474400550314464,
   "Ambiguous Double Width" : false,
+  "ASCII Ligatures" : false,
   "Selected Text Color" : {
     "Red Component" : 0.81409376859664917,
     "Color Space" : "sRGB",
