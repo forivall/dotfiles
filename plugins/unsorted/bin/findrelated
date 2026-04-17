@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+__dirname=${0:A:h}
 configdir=${PWD:A}
 while [[ $configdir != / ]]; do
   if [[ -f .vscode/settings.json ]]; then
@@ -7,14 +8,17 @@ while [[ $configdir != / ]]; do
   fi
   configdir="${configdir:h}"
 done
-if [[ -f $configdir/.vscode/settings.json ]]; then
+jsonc_strip_comments=(rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2')
+if [[ -f $configdir/.vscode/settings.json ]] &&
+  $jsonc_strip_comments "$configdir/.vscode/settings.json" |
+    jq --exit-status '."findrelated.rulesets"' > /dev/null
+then
   configdir="$configdir/.vscode"
 else
-  configdir=~/Library/Application\ Support/User
+  configdir="${__dirname:h:h:h}/vscode"
 fi
 
-RULES=($(< "$configdir/settings.json" rg --passthru '("([^"]|\\\"")*")|//.*' -r '$1' |
-  rg --passthru -U ',(\s*[}\]])' -r '$1' |
+RULES=($($jsonc_strip_comments "$configdir/settings.json" |
   jq -r '."findrelated.rulesets"[].rules[]|@base64'))
 
 for rule in "$RULES[@]"; do

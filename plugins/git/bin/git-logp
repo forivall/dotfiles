@@ -103,7 +103,7 @@ fi
 
 deltaOpts=(--tabs 2)
 if (( ${+commands[dark-mode]} )) && [[ $(dark-mode status) == off ]]; then
-  deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub})
+  deltaOpts+=(--light --syntax-theme ${DELTA_LIGHT_THEME:-GitHub} --features map-styles-light)
 fi
 
 if $namestatus && ! $haspretty; then

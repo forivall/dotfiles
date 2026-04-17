@@ -326,7 +326,10 @@ class Where extends ArboristWorkspaceCmd {
     // if it's just a name, return packages by that name
     const { validForOldPackages: valid } = validName(arg)
     if (valid) {
-      return tree.inventory.query('packageName', arg)
+      const results = tree.inventory.query('packageName', arg)
+      if (results.size) {
+        return results;
+      }
     }
 
     // if it's a location, get that node

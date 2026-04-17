@@ -1,3 +1,8 @@
+[language-server.prlsp]
+# https://github.com/toziegler/prlsp
+command = "prlsp"
+args = []
+
 [language-server.biome]
 command = "biome"
 args = ["lsp-proxy"]

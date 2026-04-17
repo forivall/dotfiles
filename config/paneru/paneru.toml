@@ -1,0 +1,32 @@
+# basic .paneru.toml
+[options]
+focus_follows_mouse = false
+mouse_follows_focus = false
+animation_speed = 200
+preset_column_widths = [0.25, 0.33, 0.5, 0.66, 0.75, 0.9999]
+
+[bindings]
+window_focus_west = "cmd + alt - h"
+window_focus_east = "cmd + alt - l"
+window_focus_south = "cmd + alt - j"
+window_focus_north = "cmd + alt - k"
+window_swap_west = "cmd + shift - h"
+window_swap_east = "cmd + shift - l"
+window_grow = "cmd + alt - f12"
+window_shrink = "cmd + alt - f11"
+# window_resize = "alt - r"
+window_center = "cmd + alt - f10"
+window_stack = "cmd + shift - k"
+window_unstack = "cmd + shift - j"
+quit = "ctrl + alt - q"
+
+[padding]
+left = 75
+
+[swipe]
+sensitivity = 0.1
+# [swipe.gesture]
+# fingers_count = 3
+
+[swipe.scroll]
+modifier = "alt + cmd"

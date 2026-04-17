@@ -116,7 +116,7 @@ aliases:
   ib: issue view --web
   issue-url: issue view --json url --jq .url
   brb: '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "" ) "$@"'
-  generated-patterns: "!rg ' linguist-generated=true' .gitattributes --replace= --no-line-number"
+  generated-patterns: "!rg ' linguist-generated(=true)?' .gitattributes --replace= --no-line-number"
   project-items-with-status: "!gh project item-list --owner $(gh repo view --json owner --jq .owner.login) $1 --format json --jq '.items[] | select(.status == \"'\"$2\"'\") | .content.number'"
   pr-merge-base: '!git merge-base ${1-HEAD} origin/$(gh pr view $2 --json baseRefName -q .baseRefName)'
   pr-merge-commit: pr view $1 --json mergeCommit,potentialMergeCommit -q '(.mergeCommit//.potentialMergeCommit).oid'
