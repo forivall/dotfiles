@@ -1,0 +1,6 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "jq -r 'def fmthome: if startswith($ENV.HOME + \"/\") then \"~\" + .[($ENV.HOME|length):] else . end; \"\\u001b[2m\" + .model.display_name + \" · \" + (.context_window.used_percentage | tostring) + \"% · \" + .session_id + \"\\n\\u001b[2m\" + (.workspace.current_dir | fmthome) + \" · \" + (.transcript_path | sub(\"(/[^/]+){3}$\";\"\") | fmthome)'"
+  }
+}
