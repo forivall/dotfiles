@@ -43,7 +43,7 @@ export const className = /*styl*/`
     height: 100%;
   }
 
-  pre {
+  pre, .term-container {
     font-size: 11px;
     font-weight: 450;
     // font-family: "FantasqueSansM Nerd Font", "SF Mono", "DejaVu Sans Mono", Menlo, "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
@@ -80,6 +80,12 @@ export const className = /*styl*/`
             radial-gradient(ellipse 10% 15% at 90% 70%, #00000090, #00000070 10%, transparent),
             radial-gradient(ellipse 10% 10% at 90% 90%, #00000090, #00000070 10%, transparent);
     text-shadow: #000 0 1px 2px,#000 0 1px 4px,#000 0 1px 8px,#000 0 1px 8px,#000 0 1px 16px,#000 0 1px 16px;
+    color: #eee;
+  }
+
+  .term-fgx240 {
+    /* color: #585858; */
+    color: #a0a0a0;
   }
 
   pre:hover {
@@ -126,7 +132,13 @@ async function fetchWttr() {
   const html = await resp.text();
   const tmpl = document.createElement('template');
   tmpl.innerHTML = html;
-  return (tmpl.content.querySelector('style')?.outerHTML ?? '') + '\n' + (tmpl.content.querySelector('pre')?.outerHTML ?? '')
+  const style = tmpl.content.querySelector('style')?.outerHTML ?? '';
+  const content = tmpl.content.querySelector('pre,.term-container')?.outerHTML ?? '';
+  const result =
+    style.replace(/(html|body), ?(html|body) ?\{[^}]+\}/, '') +
+    '\n' +
+    content.replace(/\bLocation: .*/, '');
+  return result;
 }
 
 /** @type {React.FC<import('uebersicht').DefaultProps>} */
