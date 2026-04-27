@@ -184,8 +184,8 @@ aliases:
       '
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
-  pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql | jq ''[.[]|select(.path=="''"$1"''")]'' | gh pr-review-comments-format'
-  pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql | jq -r ''.[]|.path'' | uniq'
+  pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql --file "$@" | gh pr-review-comments-format'
+  pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql "$@" | jq -r ''.[]|.path'' | uniq'
   pr-review-comments-format: |
     !
     jq -r '.[] | @base64' | while read -r thread; do
@@ -259,13 +259,22 @@ aliases:
       jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) ]'
   pr-unresolved-comments-gql: |
     !
+    nodeconditions=""
     conditions=""
-    while [[ $1 == --not ]]; do
-      conditions+=" and .id != \"$2\""
-      shift 2
+    while true; do
+      case "$1" in
+        --not) conditions+=" and .id != \"$2\""; shift 2; ;;
+        --file) nodeconditions+=" and .path == \"$2\""; shift 2; ;;
+        --reviewer) nodeconditions+=" and .comments[0].author.login == \"$2\""; shift 2; ;;
+        *) break; ;;
+      esac
     done
     gh pr-review-comments-gql-raw "$@" |
-      jq "[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) | select(.isResolved | not) | .comments = (.comments.nodes | map(select(.isMinimized == false $conditions))) ]"
+      jq "[ .data.repository.pullRequest.reviewThreads.edges[] |
+            (. + .node) | del(.node) |
+            .comments = (.comments.nodes | map(select(.isMinimized == false $conditions))) |
+            select((.isResolved | not) $nodeconditions $conditions)
+          ]"
   pr-files: 'pr diff --name-only'
   pr-id-gql: |
     ! [[ $# -gt 0 && $1 != -*  ]] && GH_PR=$1 && shift
