@@ -2,18 +2,20 @@
 [options]
 focus_follows_mouse = false
 mouse_follows_focus = false
-animation_speed = 200
-preset_column_widths = [0.25, 0.33, 0.5, 0.66, 0.75, 0.9999]
+# animation_speed = 32
+animation_speed = 16
+preset_column_widths = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.97]
 
 [bindings]
-window_focus_west = "cmd + alt - h"
-window_focus_east = "cmd + alt - l"
-window_focus_south = "cmd + alt - j"
-window_focus_north = "cmd + alt - k"
-window_swap_west = "cmd + shift - h"
-window_swap_east = "cmd + shift - l"
+window_focus_west = "cmd + alt + ctrl - h"
+window_focus_east = "cmd + alt + ctrl- l"
+window_focus_south = "cmd + alt + ctrl - j"
+window_focus_north = "cmd + alt + ctrl - k"
+window_swap_west = "cmd + alt + shift + ctrl - h"
+window_swap_east = "cmd + alt + shift + ctrl - l"
 window_grow = "cmd + alt - f12"
 window_shrink = "cmd + alt - f11"
+window_manage = "cmd + alt - f9"
 # window_resize = "alt - r"
 window_center = "cmd + alt - f10"
 window_stack = "cmd + shift - k"
