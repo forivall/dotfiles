@@ -258,7 +258,7 @@ function _cwt() {
       if [[ -n "$detachedat" ]]; then
         behind=($(git rev-list --count "${hash}...${detachedat}"))
         if (( behind > 0 )); then
-          branch="(detached $behind commits behind $detachedat) refs/${^containbranches} --contains=$hash"
+          branch="(detached $behind commits behind $detachedat)"
         else
           branch="(detached at $detachedat)"
         fi
