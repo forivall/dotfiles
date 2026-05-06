@@ -223,7 +223,9 @@ function _cwt() {
 
   local -a records=( ${(ps.\n\n.)"$(_call_program directories git worktree list --porcelain)"} )
   local -a directories descriptions
-  local i hash branch
+  local i hash branch detachedat behind
+  local allExcludes="$(git config get log.allExcludes 2> /dev/null)"
+  local containbranches=(${(f)"$(git config --get-all showbranch.default 2> /dev/null)"})
   ismain=true
   for i in $records; do
     directory=${${i%%$'\n'*}#worktree }
@@ -247,8 +249,23 @@ function _cwt() {
 
     # Simulate the non-porcelain output
     if [[ $branch == detached ]]; then
-      # TODO: show a ref that points at $hash here, like vcs_info does?
-      branch="(detached HEAD)"
+      [[ -n "$containbranches" ]] && detachedat="$(
+        git for-each-ref --exclude=refs/remotes/origin/HEAD --count=1 --format=%\(refname:short\) refs/${^containbranches} --contains=$hash
+      )"
+      echo $detachedat
+      [[ -z "$detachedat" ]] &&  detachedat="$(
+        git for-each-ref --exclude=refs/remotes/origin/HEAD ${(z)allExcludes} --count=1 --format=%\(refname:short\) --contains=$hash
+      )"
+      if [[ -n "$detachedat" ]]; then
+        behind=($(git rev-list --count "${hash}...${detachedat}"))
+        if (( behind > 0 )); then
+          branch="(detached $behind commits behind $detachedat) refs/${^containbranches} --contains=$hash"
+        else
+          branch="(detached at $detachedat)"
+        fi
+      else
+        branch="(detached HEAD)"
+      fi
     else
       branch="[$branch]"
     fi
