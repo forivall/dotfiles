@@ -252,7 +252,6 @@ function _cwt() {
       [[ -n "$containbranches" ]] && detachedat="$(
         git for-each-ref --exclude=refs/remotes/origin/HEAD --count=1 --format=%\(refname:short\) refs/${^containbranches} --contains=$hash
       )"
-      echo $detachedat
       [[ -z "$detachedat" ]] &&  detachedat="$(
         git for-each-ref --exclude=refs/remotes/origin/HEAD ${(z)allExcludes} --count=1 --format=%\(refname:short\) --contains=$hash
       )"
