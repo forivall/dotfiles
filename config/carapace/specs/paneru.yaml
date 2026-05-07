@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+# Carapace spec from https://carapace-sh.github.io/carapace-spec/ and `paneru --help` (no `man paneru` on this system).
+# send-cmd tokens match `parse_command` in https://github.com/karinushka/paneru/blob/main/src/config.rs
+name: paneru
+description: "Sliding, tiling window manager for MacOS. Usage: paneru [COMMAND]"
+flags:
+  -h, --help: Print help
+  -V, --version: Print version
+commands:
+  - name: launch
+    description: "Launches the `paneru` daemon directly in the console (default behavior)"
+    flags:
+      -h, --help: Print help
+  - name: install
+    description: "Installs the `paneru` daemon as a background service"
+    flags:
+      -h, --help: Print help
+  - name: uninstall
+    description: "Uninstalls the `paneru` background service"
+    flags:
+      -h, --help: Print help
+  - name: reinstall
+    description: "Reinstalls the `paneru` background service"
+    flags:
+      -h, --help: Print help
+  - name: start
+    description: "Starts the `paneru` background service"
+    flags:
+      -h, --help: Print help
+  - name: stop
+    description: "Stops the `paneru` background service"
+    flags:
+      -h, --help: Print help
+  - name: restart
+    description: "Restarts the `paneru` background service"
+    flags:
+      -h, --help: Print help
+  - name: send-cmd
+    description: "Sends a command via a Unix socket to the running `paneru` daemon"
+    flags:
+      -h, --help: Print help
+    completion:
+      positional:
+        - [window, mouse, quit, printstate]
+        - [focus, swap, center, resize, grow, shrink, fullwidth, manage, equalize, stack, unstack, nextdisplay, nextdisplaysend, snap, virtual, virtualmove, virtualsend]
+        - [north, south, west, east, first, last, grow, shrink]
+  - name: help
+    description: Print this message or the help of the given subcommand(s)
+    flags:
+      -h, --help: Print help
+    completion:
+      positionalany:
+        - launch
+        - install
+        - uninstall
+        - reinstall
+        - start
+        - stop
+        - restart
+        - send-cmd
+        - help

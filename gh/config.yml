@@ -192,6 +192,7 @@ aliases:
       id=$(         jq -nr --arg input $thread '$input | @base64d | fromjson | .id');
       path=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .path');
       startLine=$(  jq -nr --arg input $thread '$input | @base64d | fromjson | .startLine');
+      origLine=$(   jq -nr --arg input $thread '$input | @base64d | fromjson | .originalLine');
       line=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .line');
       subjectType=$(jq -nr --arg input $thread '$input | @base64d | fromjson | .subjectType');
       if [[ -f "$path" ]] ; then
@@ -202,6 +203,8 @@ aliases:
           header="$path (file)";
         elif [[ -n "$line" ]] && [[ "$line" != "null" ]]; then
           header="$path:$line";
+        elif [[ -n "$origLine" ]] && [[ "$origLine" != "null" ]]; then
+          header="$path:$origLine (outdated)";
         fi;
         printf "%s \e[2m%s\e[22m\n" "$header" "$id";
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";

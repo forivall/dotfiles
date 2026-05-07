@@ -39,6 +39,7 @@ alias g=git
 
 # alias ga='git add'
 alias gap='git addp'
+(( ${+functions[forgit::add]} )) && alias gap="forgit::add --patch"
 alias gam='git amend'
 
 # alias gcb='git checkout -b'
@@ -74,12 +75,10 @@ alias gfa='git fetch --all'
 
 alias ggp="git grep-pretty"
 
-alias gl='git l'
-alias gla='git la'
 if (( ${+functions[forgit::log]} )); then # []
-    alias glf="forgit::log"
-    alias glfa="forgit::log --all $(git config get log.allExcludes)"
-    alias glfaa="forgit::log --all"
+    alias gl="forgit::log"
+    alias gla="forgit::log --all $(git config get log.allExcludes)"
+    alias glaa="forgit::log --all"
 fi
 alias glsf='git ls-files'
 alias glg="git l3"

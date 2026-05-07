@@ -4,7 +4,32 @@ focus_follows_mouse = false
 mouse_follows_focus = false
 # animation_speed = 32
 animation_speed = 16
-preset_column_widths = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.97]
+preset_column_widths = [
+  0.2,
+  0.2333,
+  0.2667,
+  0.3,
+  0.3333,
+  0.3667,
+  0.4,
+  0.4333,
+  0.4667,
+  0.5,
+  0.5333,
+  0.5667,
+  0.6,
+  0.6333,
+  0.6667,
+  0.7,
+  0.7333,
+  0.7667,
+  0.8,
+  0.8333,
+  0.8667,
+  0.9,
+  0.9333,
+  0.9667,
+]
 
 [bindings]
 window_focus_west = "cmd + alt + ctrl - h"
@@ -22,13 +47,13 @@ window_stack = "cmd + shift - k"
 window_unstack = "cmd + shift - j"
 quit = "ctrl + alt - q"
 
-[padding]
-left = 75
+# [padding]
+# left = 75
 
 [swipe]
-sensitivity = 0.1
-# [swipe.gesture]
-# fingers_count = 3
+sensitivity = 0.3
+[swipe.gesture]
+fingers_count = 3
 
 [swipe.scroll]
 modifier = "alt + cmd"

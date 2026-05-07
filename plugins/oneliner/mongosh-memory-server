@@ -1,0 +1,6 @@
+#zsh
+node -e "
+  require('mongodb-memory-server').MongoMemoryServer.create().then(async (mongod) => {
+    require('child_process').execFileSync('mongosh', [mongod.getUri(), ...process.argv.slice(1)], { stdio: 'inherit' });
+    await mongod.stop();
+  })"

@@ -349,7 +349,7 @@ fi
 unsetopt nomatch
 
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export CARAPACE_EXCLUDES='git,npm,date,tsc'
+export CARAPACE_EXCLUDES='git,npm,date,tsc,circleci,kill,node'
 zstyle ':completion:*:*:git:*' group-name ''
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m\e[22m%f'

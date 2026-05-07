@@ -1,0 +1,1 @@
+rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(}|])' --multiline --passthrough --replace '$1$2' $@

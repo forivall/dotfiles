@@ -11,6 +11,10 @@ insert-final-newline = true
 # indent-style = 2
 auto-format = false
 
+[editor.soft-wrap]
+enable=false
+wrap-at-text-width = true
+
 [editor.terminal]
 command = "it2split"
 args = ["--no-focus", "--cwd=%{current_working_directory}"]
@@ -42,6 +46,8 @@ right = [
 [editor.lsp]
 display-messages = true
 
+[editor.inline-diagnostics]
+cursor-line = "info"
 
 [keys.normal]
 "#" = ":reflow"
@@ -76,22 +82,30 @@ display-messages = true
 "C-G" = ":sh it2split --no-focus git diffd -w ${HELIX_GIT_HEAD:-HEAD} -- '%{buffer_name}'"
 "x" = ":sh gh pr-file-viewed '%{buffer_name}'"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
-"L" = ":sh it2split --no-focus git logd -w -L'%{selection_line_start},%{selection_line_end}:%{buffer_name}'"
-"C-l" = ":sh it2split --no-focus git diffdh -w $HELIX_GIT_HEAD -- '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 "backspace" = ":sh it2split --no-focus yare build"
+"Q" = ":buffer-close"
 
 [keys.normal.space.g]
 "f" = "changed_file_picker"
+"b" = ":sh gh prb"
 "a" = ":sh git add %{buffer_name}"
+"d" = ":sh it2split --no-focus git diffdh -w ${HELIX_GIT_HEAD:-HEAD} -- '%{buffer_name}'"
 "v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
+"n" = ":open %sh{gh pr-unread-files | head -n1}"
+# "n" = ":open %sh{zet diff <(gh pr-unread-files | head -n1) .github/skipped-review-files}"
+"i" = ":sh echo '${buffer_name}' >> .github/skipped-review-files"
+"l" = ":sh it2split --no-focus git logp --patience -w %{buffer_name}"
+"L" = ":sh it2split --no-focus git logd -w -L'%{selection_line_start},%{selection_line_end}:%{buffer_name}'"
 "o" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
 "O" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
 "u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
+"r" = ":open %sh{findrelated ${buffer_name}}"
+"y" = ":sh gh browse --no-browser '%{buffer_name}:%{selection_line_start}' | pbcopy"
 
 [keys.normal.z]
 "x" = [
@@ -111,6 +125,10 @@ display-messages = true
 [keys.normal.g]
 "R" = ":open %sh{findrelated %{buffer_name}}"
 "V" = ":sh wait-code --no-wait -g %{buffer_name}:%{cursor_line}:%{cursor_column}"
+
+[keys.select]
+"C-left" = "extend_prev_sub_word_start"
+"C-right" = "extend_next_sub_word_end"
 
 [keys.insert]
 "C-space" = "completion"
