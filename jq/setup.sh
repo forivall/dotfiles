@@ -15,16 +15,23 @@ fi
 __dirname="${0:A:h}"
 echo "$HEADER" >> ~/.jq
 
-for m in $__dirname/*.jq; do
-  < $m >> ~/.jq
-done
-# # this is a hacky workaround, just dump the files verbatim instead
-# for m in $__dirname/*.jq; do
-#   NAME="${${m:t}%.jq}"
-#   echo "import \"$NAME\" as I {\"search\": \"$__dirname\"};" >> ~/.jq
-#   echo "include \"$NAME\" {\"search\": \"$__dirname\"};" >> ~/.jq
-# done
-# for m in $__dirname/*.jq; do
-#   NAME="${${m:t}%.jq}"
-#   echo "def $NAME: I::$NAME;" >> ~/.jq
-# done
+if [[ $1 == 'include' ]]; then
+  # this only works with gojq, broken in jq.
+  for m in $__dirname/*.jq; do
+    NAME="${${m:t}%.jq}"
+    echo "include \"$NAME\" {\"search\": \"$__dirname\"};" >> ~/.jq
+  done
+  # # workaround for standard jq
+  # for m in $__dirname/*.jq; do
+  #   NAME="${${m:t}%.jq}"
+  #   echo "import \"$NAME\" as I {\"search\": \"$__dirname\"};" >> ~/.jq
+  # done
+  # for m in $__dirname/*.jq; do
+  #   NAME="${${m:t}%.jq}"
+  #   echo "def $NAME: I::$NAME;" >> ~/.jq
+  # done
+else
+  for m in $__dirname/*.jq; do
+    < $m >> ~/.jq
+  done
+fi
