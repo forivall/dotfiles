@@ -5,6 +5,7 @@ autoload -U clean-env
 autoload -U shcat
 autoload -U reload-function
 compdef _functions reload-function
+compdef gojq=jq
 
 alias ccat="ccat -G String=darkgreen -G Comment=faint -G Keyword=purple -G Punctuation=teal -G Type=darkred -G Literal=darkred -G Plaintext=reset -G Tag=red"
 

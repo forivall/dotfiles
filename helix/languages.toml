@@ -7,7 +7,7 @@ args = []
 command = "biome"
 args = ["lsp-proxy"]
 
-[language-server.biome.config.inline_config]
+[language-server.biome.config.biome.inlineConfig]
 javascript.formatter.quoteStyle = "single"
 
 [language-server.prettier-lsp]
