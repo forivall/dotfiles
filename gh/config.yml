@@ -337,8 +337,10 @@ aliases:
       git log --graph --oneline $RANGE &&
       zsh -c "read -q '?> MERGE_COMMIT=\$(gh pr view --json mergeCommit --jq .mergeCommit.oid $1) && git cherry-pick \$MERGE_COMMIT^...\$MERGE_COMMIT^2'$'\\n''Continue? (y/n) '" &&
       git cherry-pick $RANGE
-  my-review-requests: |
-    pr list --search "sort:updated-desc user-review-requested:@me" --json number,title,url,headRefName,author,createdAt --template '
+  my-review-requests: '!gh pr-list2 --search "sort:updated-desc user-review-requested:@me -author:app/dependabot"'
+  my-review-requests-all: '!gh pr-list2 --search "sort:updated-desc user-review-requested:@me"'
+  pr-list2: |
+    ! gh pr list --json number,title,url,headRefName,author,createdAt --template '
     {{- tablerow ("ID" | autocolor "+u") ("TITLE" | autocolor "+u") ("BRANCH" | autocolor "+u") ("AUTHOR" | autocolor "+u") ("CREATED AT" | autocolor "+u") }}
     {{- range . }}
       {{- $author := "-" }}
@@ -358,8 +360,9 @@ aliases:
         (hyperlink $authorHref $author)
         (.createdAt | timeago | color "magenta")
       }}
-    {{- end}}'
-  my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me" --limit 1 --json number --jq .[].number'
+    {{- end}}' "$@"
+  # {{tablerender}}'
+  my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me -author:app/dependabot" --limit 1 --json number --jq .[].number'
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
