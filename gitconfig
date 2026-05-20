@@ -21,7 +21,7 @@
 [difftool]
 	prompt = false
 [interactive]
-	diffFilter = delta --color-only
+	diffFilter = deltaw --color-only
 [log]
   excludeDecoration = refs/jj/**
   allExcludes = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages
