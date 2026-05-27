@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+printf "\x1b[?2004l" > /dev/tty
+args=()
+if [[ -n "$1" ]]; then
+  args+=(--search-text "$1")
+fi
+scooter --no-stdin ${args[@]} >/dev/tty
+code=$?
+printf "\x1b[?1049h\x1b[?2004h" >/dev/tty
+exit $code
