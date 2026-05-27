@@ -65,6 +65,8 @@ cursor-line = "info"
 "esc" = [":redraw"]
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
+S-m = "match_brackets"
+A-m = "select_textobject_around"
 
 "H" = ["ensure_selections_forward", "collapse_selection", "select_mode", "goto_line_start", "exit_select_mode"]
 "L" = ["ensure_selections_forward", "flip_selections", "collapse_selection", "select_mode", "goto_line_end", "exit_select_mode"]
@@ -92,7 +94,18 @@ S-tab = "move_parent_node_start"
 "E" = "file_explorer_in_current_buffer_directory"
 "C-r" = [
   ":write-all",
-  ":insert-output scooter --no-stdin >/dev/tty",
+  ':insert-output scooterhx %{selection} >/dev/tty',
+  # scooterhx:
+  # #!/usr/bin/env zsh
+  # printf "\x1b[?2004l" > /dev/tty
+  # args=()
+  # if [[ -n "$1" ]]; then
+  #   args+=(--search-text "$1")
+  # fi
+  # scooter --no-stdin ${args[@]} >/dev/tty
+  # code=$?
+  # printf "\x1b[?1049h\x1b[?2004h" >/dev/tty
+  # exit $code
   ":redraw",
   ":reload-all"
 ]
@@ -104,7 +117,7 @@ S-tab = "move_parent_node_start"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 "t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
-"C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}' | pbcopy"
+"C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}:%{cursor_line}' | pbcopy"
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 "backspace" = ":sh it2split --no-focus yare build"
 "Q" = ":buffer-close"
@@ -115,7 +128,11 @@ S-tab = "move_parent_node_start"
 "a" = ":sh git add %{buffer_name}"
 "d" = ":sh it2split --no-focus git diffdh -w ${HELIX_GIT_HEAD:-HEAD} -- '%{buffer_name}'"
 "v" = ":sh it2split --no-focus gh pr-unresolved-comments-file '%{buffer_name}'"
-"n" = ":open %sh{gh pr-unread-files | head -n1}"
+"n" = ":open %sh{gh pr-queued-files | head -n1}"
+"N" = [
+  ":buffer-close-all",
+  ":open %sh{gh pr-unread-files | head -n1}",
+]
 # "n" = ":open %sh{zet diff <(gh pr-unread-files | head -n1) .github/skipped-review-files}"
 "i" = ":sh echo '${buffer_name}' >> .github/skipped-review-files"
 "l" = ":sh it2split --no-focus git logp --patience -w %{buffer_name}"

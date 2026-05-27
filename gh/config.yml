@@ -155,7 +155,9 @@ aliases:
           pullRequest { number files(first: 100) { totalCount nodes { path viewerViewedState } } }
         }
       }' "$@"
-  pr-file-viewed: |
+  pr-file-unqueue: '! a=$(realpath "$1") && r=${a#$PWD/} && grep -vxF -e "$a" -e "$r" -e "./$r" .gh-pr-queue | sponge .gh-pr-queue'
+  pr-file-viewed: '! gh pr-file-viewed-gh "$1"; gh pr-file-unqueue "$1"'
+  pr-file-viewed-gh: |
     ! gh pr-file-viewed-gql "$1" --jq '
         .data.markFileAsViewed.pullRequest |
         ("#" + (.number | tostring) + " " +
@@ -183,6 +185,7 @@ aliases:
         )
       '
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
+  pr-queued-files: '!( cat .gh-pr-queue 2>/dev/null; gh pr-unread-files ) | huniq 2>/dev/null'
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql --file "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql "$@" | jq -r ''.[]|.path'' | uniq'
@@ -229,9 +232,10 @@ aliases:
         utc_date=$(jq -nr --arg input $comment '$input | @base64d | fromjson | .publishedAt');
         url=$(     jq -nr --arg input $comment '$input | @base64d | fromjson | .url');
         id=$(      jq -nr --arg input $comment '$input | @base64d | fromjson | .id');
+        fullDatabaseId=$(      jq -nr --arg input $comment '$input | @base64d | fromjson | .fullDatabaseId');
         local_date=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || date -d "$utc_date" "+%Y-%m-%d %H:%M:%S %Z" 2>/dev/null || echo "$utc_date");
         echo "";
-        printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\): \e[2m%s\e[22m\n" "$author" "$url" "$local_date" "$id";
+        printf "@%s (\e]8;;%s\e\\%s\e]8;;\e\\): \e[2m%s %s\e[22m\n" "$author" "$url" "$local_date" "$id" "$fullDatabaseId";
         echo "$body" | mcat --no-linenumbers --paging=never;
       done;
       echo "";
@@ -248,7 +252,7 @@ aliases:
               edges { cursor node {
                 id isResolved line startLine originalLine originalStartLine path subjectType
                 comments(first: 100) { nodes {
-                  id
+                  id fullDatabaseId
                   author { login ... on User { name } }
                   body createdAt isMinimized publishedAt url
                 }}
@@ -328,6 +332,14 @@ aliases:
         clientMutationId
       }
     }' "$@"
+  pr-reply-to-review-gql: |
+    !gh api graphql -f threadId="$1" -f body="$2" -f query='
+      mutation ($threadId: ID!, $body: String!) {
+        addPullRequestReviewThreadReply(
+          input: { pullRequestReviewThreadId: $threadId, body: $body }
+        ) { comment { id body } }
+      }
+    '
   pr-commit-range: "pr view --json mergeCommit --jq '.mergeCommit.oid + \"^...\" + .mergeCommit.oid + \"^2\"'"
   cherry-pick-pr: |
     !

@@ -132,6 +132,7 @@
 	worktree-dirs = "!git worktree list --porcelain | rg '^worktree ' --replace ''"
 	worktree-main = "!git worktree list --porcelain | head -n1 | sd '^worktree ' ''"
 	worktree-do= "worktree do"
+	worktree-each= "worktree each"
 	worktree-ls = worktree list
 	worktree-mv = worktree move
 	worktree-rm = worktree remove

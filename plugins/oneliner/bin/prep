@@ -29,9 +29,9 @@ BUILD=false
 if (( $# > 0 )) && [[ $1 == build || $1 == b ]]; then
   BUILD=true
 fi
-: ${PREP_SAFE:=false}
-if (( $# > 0 )) && [[ $1 == --safe ]]; then
-  PREP_SAFE=true
+: ${PREP_SAFE:=true}
+if (( $# > 0 )) && [[ $1 == --unsafe ]]; then
+  PREP_SAFE=false
 fi
 
 if [[ -f package.json ]] &&

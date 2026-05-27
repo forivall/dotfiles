@@ -11,7 +11,7 @@ done
 jsonc_strip_comments=(rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2')
 if [[ -f $configdir/.vscode/settings.json ]] &&
   $jsonc_strip_comments "$configdir/.vscode/settings.json" |
-    jq --exit-status '."findrelated.rulesets"' > /dev/null
+    jq --exit-status '."findrelated.rulesets"' > /dev/null || echo failed to parse "$configdir/.vscode/settings.json" >&2
 then
   configdir="$configdir/.vscode"
 else

@@ -156,6 +156,7 @@ elif [[ -f {} ]]; then if [[ \$(file --brief --dereference --mime -- {}) =~ imag
 export FORGIT_FZF_DEFAULT_OPTS="
 --preview-window='right,nohidden'
 "
+export FORGIT_PAGER="bat"
 export FORGIT_SHOW_PAGER="deltaw \
   --file-decoration-style '' \
   --hunk-header-decoration-style '' "
@@ -348,8 +349,9 @@ fi
 [[ $(whence -w 9 2>/dev/null) == '9: alias' ]] && unalias 9
 unsetopt nomatch
 
+export CARAPACE_LENIENT=true
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export CARAPACE_EXCLUDES='git,npm,date,tsc,circleci,kill,node'
+export CARAPACE_EXCLUDES='git,npm,date,tsc,circleci,kill,node,gpg'
 zstyle ':completion:*:*:git:*' group-name ''
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m\e[22m%f'

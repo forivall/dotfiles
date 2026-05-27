@@ -302,7 +302,7 @@ function git() { # also put these in git-aliases for autocomplete
       local alias="$gitcommand-$1"
       if [[ $alias == worktree-cd ]]; then
         "$@"
-      elif [[ $alias == worktree-do ]]; then
+      elif [[ $alias == worktree-do || $alias == worktree-each ]]; then
         shift
         if [[ $1 == -p ]]; then
           shift

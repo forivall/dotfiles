@@ -3,7 +3,11 @@
 LINE_NUM=$1
 shift
 
-followfiles=($(git log --name-only --relative --format= --follow HEAD ^"$@"| huniq))
+if [[ $1 == HEAD ]]; then
+  followfiles=()
+else
+  followfiles=($(git log --name-only --relative --format= --follow HEAD ^"$@"| huniq))
+fi
 # displayargs=(${(f)$(printf "%s\n" "$@" "${followfiles[@]}" | huniq)})
 # echo git diff "${displayargs[@]}"
 git diff -U1 "$@" "${followfiles[@]}" | while IFS= read line; do

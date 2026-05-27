@@ -16,21 +16,42 @@ function npm() {
   if [[ ${(k)functions[npm-$command]} == npm-$command ]] ; then
     shift; npm-$command "$@"; return
   fi
-  local npm_bin="$(whence -p npm)";
-  local -a npm_cmd; npm_cmd=( "$npm_bin" )
-  # npm_cmd+=( "--node-gyp=$("$npm_bin" -g root)/pangyp/bin/node-gyp.js" )
-  if ${IS_WINDOWS:-false} && [[ -t 1 ]]; then npm_cmd+=( --color=always ); fi
-  if [[ "$1" == "-g" ]] ; then npm_cmd+=( -g ); shift; fi
+  local -a npm_args; npm_args=()
+  if ${IS_WINDOWS:-false} && [[ -t 1 ]]; then npm_args+=( --color=always ); fi
+  while (( $# > 0 )); do
+    if [[ $1 == -* ]]; then npm_args+=($1); shift; else break; fi
+  done
   case "$1" in
     # t) ;&
     # tst) ;&
     # test) ;&
     # start) ;&
     # stop) ;&
-    ru[nm]) shift; ${npm_cmd[@]} run --no-spin "$@";;
+    ru[nm]) shift; command npm ${npm_args[@]} run --no-spin "$@";;
     # diffuse) shift; ~/scripts/git-diffuse "$@";;
-    go) shift; cd $(${npm_cmd[@]} explore "$@" pwd);;
-    *) ${npm_cmd[@]} "$@";;
+    go) shift; cd $(command npm ${npm_args[@]} explore "$@" pwd);;
+    # https://github.com/npm/cli/blob/6cb34cac9f4e4c6af7ecebc98fcfecd22a5e061d/lib/utils/cmd-list.js?plain=1#L121-L129
+    i|in|ins|inst|insta|instal|isnt|isnta|isntal|isntall|install)
+      arg=$1; shift
+      while (( $# > 0 )); do
+        if [[ $1 == -* ]]; then npm_args+=($1); shift; else break; fi
+      done
+      if (( $# > 0 )); then
+        echo '$' npq --dry-run "$@"
+        npq --dry-run "$@" || echo Exited with $?
+        echo -n "Continue (y/N)? " >&2
+        read yn
+        if [[ "$yn" =~ [Yy](es)? ]] ; then
+          echo '$' npm ${npm_args[@]} "$arg" "$@"
+          command npm ${npm_args[@]} "$arg" "$@"
+        else
+          return 1
+        fi
+      else
+        command npm $arg ${npm_args[@]} "$@"
+      fi
+      ;;
+    *) command npm ${npm_args[@]} "$@";;
   esac
 }
 compdef _zbnc_zsh_better_npm_completion npm
