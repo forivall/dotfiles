@@ -5,31 +5,22 @@ mouse_follows_focus = false
 # animation_speed = 32
 animation_speed = 16
 preset_column_widths = [
-  0.2,
-  0.2333,
-  0.2667,
-  0.3,
-  0.3333,
-  0.3667,
-  0.4,
-  0.4333,
-  0.4667,
-  0.5,
-  0.5333,
-  0.5667,
-  0.6,
-  0.6333,
-  0.6667,
-  0.7,
-  0.7333,
-  0.7667,
-  0.8,
-  0.8333,
-  0.8667,
-  0.9,
-  0.9333,
-  0.9667,
+  0.21,
+  0.27,
+  0.33,
+  0.39,
+  0.45,
+  0.51,
+  0.57,
+  0.63,
+  0.69,
+  0.75,
+  0.81,
+  0.87,
+  0.93,
+  0.97,
 ]
+sliver_width = 5
 
 [bindings]
 window_focus_west = "cmd + alt + ctrl - h"
@@ -41,19 +32,40 @@ window_swap_east = "cmd + alt + shift + ctrl - l"
 window_grow = "cmd + alt - f12"
 window_shrink = "cmd + alt - f11"
 window_manage = "cmd + alt - f9"
+window_nextdisplay = "cmd + alt - f8"
 # window_resize = "alt - r"
 window_center = "cmd + alt - f10"
 window_stack = "cmd + shift - k"
 window_unstack = "cmd + shift - j"
 quit = "ctrl + alt - q"
 
-# [padding]
+[windows]
+
+[windows.pip]
+title = "Picture.*(in)?.*[Pp]icture"
+floating = true
+
+[windows.hotkey]
+title = "^$"
+bundle_id = "com.googlecode.iterm2"
+floating = true
+
+[windows.passwords]
+# Floating window placed on a grid. The format is "cols:rows:x:y:w:h".
+# This divides the display into a 6x6 grid and places the window at cell (1,1)
+# spanning 4 columns and 4 rows — roughly centered covering 2/3 of the display.
+title = "Passwords.*"
+floating = true
+grid = "6:6:1:1:4:4"# [padding]
+
 # left = 75
 
 [swipe]
 sensitivity = 0.3
 [swipe.gesture]
 fingers_count = 3
+direction = "Natural"
+# direction = "Reversed"
 
 [swipe.scroll]
 modifier = "alt + cmd"
