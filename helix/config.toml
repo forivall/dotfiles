@@ -94,7 +94,7 @@ A-m = "select_textobject_around"
 "E" = "file_explorer_in_current_buffer_directory"
 "C-r" = [
   ":write-all",
-  ':insert-output scooterhx %{selection} >/dev/tty',
+  ':insert-output scooterhx "%{selection}" >/dev/tty',
   # scooterhx:
   # #!/usr/bin/env zsh
   # printf "\x1b[?2004l" > /dev/tty
@@ -113,9 +113,13 @@ A-m = "select_textobject_around"
 "C-o" = ":sh open '%{selection}'"
 "C-g" = ":sh gh bf '%{buffer_name}' 'L%{selection_line_start}-L%{selection_line_end}'"
 "C-G" = ":sh it2split --no-focus git diffd -w ${HELIX_GIT_HEAD:-HEAD} -- '%{buffer_name}'"
+"A-x" = ":sh gh pr-file-unqueue '%{buffer_name}'"
 "x" = ":sh gh pr-file-viewed '%{buffer_name}'"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
-"t" = ":sh jest-toplevel --in-terminal-split '%{buffer_name}'"
+"t" = [
+  ":write-all",
+  ":sh jest-toplevel --in-terminal-split '%{buffer_name}'",
+]
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}:%{cursor_line}' | pbcopy"
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
@@ -159,6 +163,10 @@ A-m = "select_textobject_around"
 "w" = ":toggle-option soft-wrap.enable"
 
 [keys.normal.g]
+"h" = ["collapse_selection", "extend_to_line_start"]
+"l" = ["collapse_selection", "extend_to_line_end"]
+"s" = ["collapse_selection", "extend_to_first_nonwhitespace"]
+
 "R" = ":open --list %sh{findrelated %{buffer_name}}"
 "V" = ":sh wait-code --no-wait -g %{buffer_name}:%{cursor_line}:%{cursor_column}"
 
@@ -171,4 +179,6 @@ S-tab = "extend_parent_node_start"
 [keys.insert]
 S-tab = "move_parent_node_start"
 "C-space" = "completion"
+"C-a" = "goto_line_start"
+"C-e" = "goto_line_end_newline"
 
