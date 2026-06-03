@@ -1662,6 +1662,7 @@
         "w": { "text": "Window",                                        "command": "dance.openMenu", "args": [{ "menu": "window-hx" }]                        },
         "m": { "text": "Run Task",                                      "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "task " }] }] },
         "`": { "text": "Terminal",                                      "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "term " }] }] },
+        "-": { "text": "Show quick diff", "command": "editor.action.dirtydiff.next"},
         "y": { "text": "Join and yank selections to clipboard",         "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "Y": { "text": "Yank main selection to clipboard",              "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
         "p": { "text": "Paste clipboard after selections",              "command": "dance.edit.insert", "args": [{ "handleNewLine": true, "where": "end"   }] },
@@ -1675,11 +1676,13 @@
         "X": { "text": "Focus Extensions",                              "command": "workbench.view.extensions" },
         "u": { "text": "Focus Panel View",                              "command": "runCommands", "args": [{ "commands": [{ "command": "workbench.action.quickOpen", "args": "view " }] }] },
         "i": { "text": "Inline chat",                                   "command": "aipopup.action.modal.generate" },
-        "I": { "text": "Open AI Chat",                                  "command": "composer.startComposerPrompt"},
-        "l": { "text": "Send to New Chat context",                      "command": "aichat.newchataction"},
-        "L": { "text": "Send to Agent",                                 "command": "composer.sendToAgent"},
+        // "I": { "text": "Open AI Chat",                                  "command": "composer.startComposerPrompt"},
+        "I": { "text": "Open AI Chat",                                  "command": "composer.openChatAsEditor"},
+        "l": { "text": "Send to Chat context",                          "command": "composer.sendToAgent"},
+        "L": { "text": "Send symbol to Chat",                                 "command": "editor.action.addSymbolToChat"},
         // "U": { "text": "Add Selection to Copilot Context",              "command": "workbench.action.chat.attachSelection"},
         "A": { "text": "Toggle Agent View",                               "command": "cursor.toggleAgentWindowIDEUnification"},
+        "Q": { "text": "Open Agent Window",                               "command": "cursor.switchToGlassWindow"},
         "Z": { "text": "Toggle Inline Suggestions Show Collapsed",      "command": "editor.action.inlineSuggest.toggleShowCollapsed" },
         "v": { "text": "Open television picker",                        "command": "television.ToggleFileFinder"                                            },
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
@@ -2723,6 +2726,9 @@
   },
   "[less]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[log][Log]": {
+    "editor.foldingStrategy": "indentation"
   },
   "[markdown]": {
     "editor.formatOnSaveMode": "modifications",
@@ -3928,7 +3934,6 @@
   "diffEditor.maxFileSize": 10,
   "geminicodeassist.codeGenerationPaneViewEnabled": true,
   "geminicodeassist.inlineSuggestions.enableAuto": false,
-  "eslint.runtime": "/Users/emily.klassen/.nvm/versions/node/v22.11.0/bin/node",
   "testing.showCoverageInExplorer": false,
   "geminicodeassist.project": "ttc-labs",
   "extensions.experimental.affinity": {

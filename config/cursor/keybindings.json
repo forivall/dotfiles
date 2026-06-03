@@ -19,6 +19,8 @@
                                     "when": "dance.mode != 'input' && !dance.isRecording && editorTextFocus && restoreEditors:key:escape && !findWidgetVisible && !isInEmbeddedEditor && !quickFixWidgetVisible && !renameInputVisible && !suggestWidgetVisible" },
   { "key": "escape",                "command": "gitlens.key.escape",
                                     "when": "dance.mode != 'input' && !dance.isRecording && editorTextFocus && gitlens:key:escape && !findWidgetVisible && !isInEmbeddedEditor && !quickFixWidgetVisible && !renameInputVisible && !suggestWidgetVisible" },
+  { "key": "escape",                "command": "closeQuickDiff",
+                                    "when": "dirtyDiffVisible" },
   { "key": "escape",                "command": "runCommands", "args": { "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.closeAuxiliaryBar"] },
                                     "when": "dance.mode != 'input' && !dance.isRecording && inChatInput && !inlineChatVisible && !findWidgetVisible && !isInEmbeddedEditor && !quickFixWidgetVisible && !renameInputVisible && !suggestWidgetVisible" },
   { "key": "escape",                "command": "runCommands", "args": { "commands": ["workbench.files.action.focusOpenEditorsView", "workbench.action.closeAuxiliaryBar"] },
@@ -82,7 +84,7 @@
                                     "when": "editorFocus && findWidgetVisible && !isComposing" },
   { "key": "shift+escape",          "command": "leaveEditorMessage",
                                     "when": "messageVisible" },
-  { "key": "shift+escape",          "command": "closeDirtyDiff",
+  { "key": "shift+escape",          "command": "closeQuickDiff",
                                     "when": "dirtyDiffVisible" },
   { "key": "shift+escape",          "command": "closeMarkersNavigation",
                                     "when": "editorFocus && markersNavigationVisible" },
@@ -659,6 +661,8 @@
       "}"
     ] } },
   { "key": "l", "command": "dance.select.right.jump",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+h", "command": "dance.select.lineStart", "args": { "skipBlank": true }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
+  { "key": "shift+l", "command": "dance.select.lineEnd",            "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
   { "key": "ctrl+e", "command": "dance.select.lineEnd",   "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "ctrl+a", "command": "dance.select.lineStart", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
@@ -987,6 +991,8 @@
   { "key": "shift+2", "command": "dance.openMenu", "args": { "menu": "sort" }, "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
   { "key": "shift+3", "command": "rewrap.rewrapComment", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'" },
 
+  { "key": "ctrl+y", "command": "copyRelativeFilePath", "when": "editorTextFocus && dance.mode == 'normal' || editorTextFocus && dance.mode == 'select'"
+  },
   // { "key": "ctrl+/", "command": "editor.action.showHover", "when": "editorTextFocus" },
   //
   // Select
@@ -1415,6 +1421,11 @@
   {
     "key": "shift+cmd+a",
     "command": "ast-grep.search.input.focus"
+  },
+  {
+    "key": "cmd+o",
+    "command": "composer.openChatAsEditor",
+    "when": "composerFocused"
   },
 
   // End.
