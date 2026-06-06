@@ -25,8 +25,9 @@ set scrolloff 10
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 # set cursorpreviewfmt "\033[7;2m"
 
+map <enter> open
 # use enter for shell commands
-map <enter> shell
+map $ shell
 
 # show the result of execution of previous commands
 map ` !true

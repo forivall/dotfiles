@@ -84,7 +84,8 @@ A-m = "select_textobject_around"
 # https://github.com/helix-editor/helix/wiki/Recipes#advanced-file-explorer-with-yazi
 "e" = [
   ":sh rm -f /tmp/unique-file-h21a434",
-  ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file-h21a434',
+  ':insert-output lf --selection-path=/tmp/unique-file-h21a434 "%sh{echo %{buffer_name}}"',
+  # ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file-h21a434',
   ':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
   ":open %sh{cat /tmp/unique-file-h21a434}",
   ":redraw",
@@ -118,7 +119,7 @@ A-m = "select_textobject_around"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 "t" = [
   ":write-all",
-  ":sh jest-toplevel --in-terminal-split '%{buffer_name}'",
+  ":sh it2split --no-focus jest '%{buffer_name}'",
 ]
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}:%{cursor_line}' | pbcopy"
