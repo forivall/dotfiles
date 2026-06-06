@@ -39,7 +39,6 @@ alias g=git
 
 # alias ga='git add'
 alias gap='git addp'
-(( ${+functions[forgit::add]} )) && alias gap="forgit::add --patch"
 alias gam='git amend'
 
 # alias gcb='git checkout -b'

@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # code: language=shellscript
 
-PICKER_BACKEND=simple-term-menu
+PICKER_BACKEND=fzf
 
 __simple-term-picker() {
   # $ python3 -m pip install simple-term-menu
@@ -20,6 +20,43 @@ __simple-term-picker() {
     simple-term-menu -i $(( i - 1 )) --no-preview-border $term_menu_options "${items[@]}" && i=0 || i=$?
   fi
 }
+
+if [[ $PICKER_BACKEND == fzf ]]; then
+  __simple-term-picker() {
+    local fzf_options=()
+    if "${TERM_PICKER_MULTI:-false}"; then
+      fzf_options+=(-m)
+    fi
+    local heightpct=80
+    if [[ -n "$TERM_PICKER_PREVIEW_COMMAND" ]]; then
+      local itemcount=${#items}
+      local previewlines=$(( LINES*heightpct/100 - itemcount - 1 ))
+      if (( previewlines < 5 )); then
+        previewlines=5
+      fi
+      if (( previewlines > LINES )); then
+        previewlines=$((LINES - 3))
+        if (( previewlines < 2 )); then
+          previewlines=2
+        fi
+      fi
+      fzf_options+=(--preview "$TERM_PICKER_PREVIEW_COMMAND" --layout=reverse --preview-window=down,$previewlines,nohidden)
+    fi
+    local fzf_output="$(printf "%s\n" ${items[@]} | fzf "${fzf_options[@]}" \
+      --disabled --accept-nth='{n}' --height=${heightpct}% \
+      --prompt '> ' \
+      --bind "load:pos($i)" \
+      --bind 'j:down,k:up,g:first,G:last,d:half-page-down,u:half-page-up,q:abort' \
+      --bind '/:enable-search+unbind(j,k,g,G,d,u,q)+change-prompt(~ )' \
+      --bind 'esc:transform:[[ $FZF_PROMPT == "~ " ]] && echo "disable-search+rebind(j,k,g,G,d,u,q)+change-prompt(> )+clear-query" || echo "abort"'
+    )"
+    if [[ -z $fzf_output ]]; then i=0; else
+      local fzf_items=(${(f)fzf_output})
+      for j in {1..${#fzf_items}}; do (( fzf_items[j]++ )); done
+      i="${(j:,:)fzf_items}"
+    fi
+  }
+fi
 
 __git-patch-filepicker() {
   # if [[ -v configArgs ]]; then
