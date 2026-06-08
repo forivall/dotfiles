@@ -191,7 +191,20 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 PURE_HIGHLIGHT_REPO=1
 PURE_PROMPT_SYMBOL="%B»%b"
 PURE_GIT_UNTRACKED_DIRTY=0
+PURE_GITHUB_DRAFT_SYMBOL=$'\uf4dd'
+PURE_GITHUB_CLOSED_SYMBOL=$'\uf4dc'
+PURE_GITHUB_OPEN_SYMBOL=$'\uf407'
+PURE_GITHUB_MERGED_SYMBOL=$'\uf419'
+# PURE_GITHUB_OPEN_SYMBOL=$'\uf41b'
+# PURE_GITHUB_OPEN_PENDING_SYMBOL=$'\uf4e3'
+# PURE_GITHUB_OPEN_SUCCESS_SYMBOL=$'\uf49e'
+# PURE_GITHUB_OPEN_FAILURE_SYMBOL=$'\uf52f'
+# PURE_GITHUB_OPEN_ACTION_SYMBOL=$'\uf420'
+PURE_GITHUB_OPEN_SUCCESS_SYMBOL=$'\uf42e'
+PURE_GITHUB_OPEN_FAILURE_SYMBOL=$'\uf467'
+PURE_GITHUB_OPEN_ACTION_SYMBOL=$'\uf500'
 zstyle :prompt:pure:git:stash show yes
+zstyle :prompt:pure:github:pr show yes
 # $prompt_pure_git_stash
 
 zstyle ':completion:*' rehash true
@@ -233,6 +246,7 @@ if ! zgen saved; then
   # # zgen ohmyzsh plugins/jump
   # # zgen ohmyzsh encode64
   zgenom bin junegunn/everything.fzf
+  zgenom load junegunn/fzf-git.sh
 
   # zgenom load unixorn/fzf-zsh-plugin
   zgen load atuinsh/atuin
@@ -351,7 +365,7 @@ unsetopt nomatch
 
 export CARAPACE_LENIENT=true
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export CARAPACE_EXCLUDES='git,npm,date,tsc,circleci,kill,node,gpg'
+export CARAPACE_EXCLUDES='git,npm,date,tsc,circleci,kill,node,gpg,brew'
 zstyle ':completion:*:*:git:*' group-name ''
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m\e[22m%f'
