@@ -233,9 +233,8 @@ source = { git = "https://github.com/forivall/tree-sitter-typescript", rev = "c9
 
 [[grammar]]
 name = "angular"
-# source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "d1f24a8890462cb740909ff62a3a079cded288bc" }
-# source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "df5d783d9afb45566afa03db129190253b46771b" }
-source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "afaf0dc8930486a2159d35af5d0aff4e95dfc887" }
+# source = { git = "https://github.com/dlvandenberg/tree-sitter-angular", rev = "38a8014ed5452cd6b7cf1399c00177a1f5374256" }
+source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "5b617c7efd74a35f6c36da0504587310953e77ee" }
 
 [[grammar]]
 name = "git-rebase"

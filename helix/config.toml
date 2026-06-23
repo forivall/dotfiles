@@ -97,6 +97,9 @@ A-m = "select_textobject_around"
 ]
 "C-r" = [
   ":write-all",
+  # cargo binstall swpui
+  # ':insert-output swp "%{selection}" >/dev/tty',
+  # ':insert-output serpl "%{selection}" >/dev/tty',
   ':insert-output scooterhx "%{selection}" >/dev/tty',
   # scooterhx:
   # #!/usr/bin/env zsh
@@ -149,7 +152,7 @@ A-m = "select_textobject_around"
 "O" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
 "u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
-"y" = ":sh gh browse --no-browser '%{buffer_name}:%{selection_line_start}' | pbcopy"
+"y" = ":sh gh browse --commit=%sh{git rev-parse HEAD} --no-browser '%{buffer_name}:%{selection_line_start}' | pbcopy"
 
 [keys.normal.z]
 "x" = [
