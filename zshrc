@@ -251,7 +251,7 @@ if ! zgen saved; then
   # # zgen ohmyzsh encode64
   zgenom bin junegunn/everything.fzf
   zgenom load junegunn/fzf-git.sh
-  zgenom load Aloxaf/fzf-tab
+  # zgenom load Aloxaf/fzf-tab
 
   # zgenom load unixorn/fzf-zsh-plugin
   zgen load atuinsh/atuin
@@ -374,7 +374,8 @@ unsetopt nomatch
 
 export CARAPACE_LENIENT=true
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export CARAPACE_EXCLUDES='git,npm,date,tsc,circleci,kill,node,gpg,brew'
+export CARAPACE_EXCLUDES='cp,ls,mv,eza,git,npm,date,tsc,circleci,kill,node,gpg,brew'
+export CARAPACE_MATCH=1
 zstyle ':completion:*:*:git:*' group-name ''
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'
 zstyle ':completion:*' format $'\e[2;37m\e[4m%d\e[24m\e[22m%f'
