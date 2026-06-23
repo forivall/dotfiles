@@ -34,7 +34,11 @@ function npm() {
     i|in|ins|inst|insta|instal|isnt|isnta|isntal|isntall|install)
       arg=$1; shift
       while (( $# > 0 )); do
-        if [[ $1 == -* ]]; then npm_args+=($1); shift; else break; fi
+        case $1 in
+          -w) npm_args+=($1 $2); shift 2 ;;
+          -*) npm_args+=($1); shift ;;
+          *) break; ;;
+        esac
       done
       if (( $# > 0 )); then
         echo '$' npq --dry-run "$@"

@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+args=()
+filter=()
+
+while :; do
+  if [[ $1 == -* ]]; then args+=($1);
+  elif [[ -z $filter ]]; then filter=$1;
+  else break; fi
+  shift || break;
+done
+
+if [[ $# -gt 0 ]]; then
+  for f in "$@"; do
+    rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2' $f | jq "$args[@]" "$filter"
+  done
+else
+  rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2' | jq "$args[@]" "$filter"
+fi

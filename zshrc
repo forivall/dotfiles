@@ -61,7 +61,7 @@ fi
 # export SHELL=zsh
 export EDITOR=hx
 
-export VISUAL="wait-code"
+export VISUAL="hx"
 export LC_ALL="en_CA.UTF-8"
 export HISTTIMEFORMAT=": %F %T:0;"
 export HISTFILESIZE=
@@ -156,6 +156,10 @@ elif [[ -f {} ]]; then if [[ \$(file --brief --dereference --mime -- {}) =~ imag
 export FORGIT_FZF_DEFAULT_OPTS="
 --preview-window='right,nohidden'
 "
+
+zstyle ':fzf-tab:*' continuous-trigger ''
+bindkey '^X/' fzf-tab-complete
+
 export FORGIT_PAGER="bat"
 export FORGIT_SHOW_PAGER="deltaw \
   --file-decoration-style '' \
@@ -196,7 +200,7 @@ PURE_GITHUB_CLOSED_SYMBOL=$'\uf4dc'
 PURE_GITHUB_OPEN_SYMBOL=$'\uf407'
 PURE_GITHUB_MERGED_SYMBOL=$'\uf419'
 # PURE_GITHUB_OPEN_SYMBOL=$'\uf41b'
-# PURE_GITHUB_OPEN_PENDING_SYMBOL=$'\uf4e3'
+PURE_GITHUB_OPEN_PENDING_SYMBOL=$'\uf4e3'
 # PURE_GITHUB_OPEN_SUCCESS_SYMBOL=$'\uf49e'
 # PURE_GITHUB_OPEN_FAILURE_SYMBOL=$'\uf52f'
 # PURE_GITHUB_OPEN_ACTION_SYMBOL=$'\uf420'
@@ -247,6 +251,7 @@ if ! zgen saved; then
   # # zgen ohmyzsh encode64
   zgenom bin junegunn/everything.fzf
   zgenom load junegunn/fzf-git.sh
+  zgenom load Aloxaf/fzf-tab
 
   # zgenom load unixorn/fzf-zsh-plugin
   zgen load atuinsh/atuin
@@ -339,6 +344,10 @@ if ! zgen saved; then
   zgen-zplug-before-save
   zgen save
   zgen-zplug-after-save
+fi
+if (( ${+functions[disable-fzf-tab]} )); then
+  bindkey -M emacs '^I' expand-or-complete
+  bindkey -M viins '^I' expand-or-complete
 fi
 if $ZHM_ENABLED; then
   zhm-add-update-region-highlight-hook

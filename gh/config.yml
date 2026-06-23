@@ -155,7 +155,7 @@ aliases:
           pullRequest { number files(first: 100) { totalCount nodes { path viewerViewedState } } }
         }
       }' "$@"
-  pr-file-unqueue: '! a=$(realpath "$1") && r=${a#$PWD/} && grep -vxF -e "$a" -e "$r" -e "./$r" .gh-pr-queue | sponge .gh-pr-queue'
+  pr-file-unqueue: '! a=$(realpath "$1") && r=${a#$PWD/} && grep -vx -e "$a\(:\d\+\)*" -e "\(\./\)\?$r\(:\d\+\)*" .gh-pr-queue | sponge .gh-pr-queue'
   pr-file-viewed: '! gh pr-file-viewed-gh "$1"; gh pr-file-unqueue "$1"'
   pr-file-viewed-gh: |
     ! gh pr-file-viewed-gql "$1" --jq '

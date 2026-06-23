@@ -20,12 +20,23 @@ fi
 
 RULES=($($jsonc_strip_comments "$configdir/settings.json" |
   jq -r '."findrelated.rulesets"[].rules[]|@base64'))
+if [[ ${#RULES} -eq 0 ]]; then
+  : # TODO
+fi
 
 for rule in "$RULES[@]"; do
+  if ${DEBUG:-false}; then
+    printf 'RULE: ' >&2
+    jq --compact-output -nr --arg input "$rule" '$input|@base64d|fromjson' >&2
+  fi
   PATTERN="$(jq -nr --arg input $rule '$input|@base64d|fromjson|.pattern')"
   LOCATORS="$(jq -nr --arg input $rule '$input|@base64d|fromjson|.locators|join("\n")')"
   echo "${(F)@}" | rg $PATTERN -r $LOCATORS | while read candidate; do
-    [[ -f $candidate ]] && echo $candidate
+    if [[ -f $candidate ]]; then
+      echo $candidate
+    elif ${DEBUG:-false}; then
+      printf '!%s\n' $candidate >&2
+    fi
   done
 done
 

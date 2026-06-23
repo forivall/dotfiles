@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+[[ $1 == --insert ]] && INSERT=true && shift
+
 LINE_NUM=$1
 shift
 
@@ -13,8 +15,11 @@ fi
 git diff -U1 "$@" "${followfiles[@]}" | while IFS= read line; do
   if [[ $line != @@* ]]; then
     if ${PRINTING:-false} && [[ $line != '+'* ]]; then
-    # if ${PRINTING:-false} && [[ $line == -* ]]; then
-      printf '%s\n' "${line}";
+      if ${INSERT:-false}; then
+        [[ $line == -* ]] && printf '%s\n' "${line:1}"
+      else
+        printf '%s\n' "${line}";
+      fi
     fi
     continue
   fi

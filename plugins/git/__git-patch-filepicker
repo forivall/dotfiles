@@ -43,7 +43,7 @@ if [[ $PICKER_BACKEND == fzf ]]; then
       fzf_options+=(--preview "$TERM_PICKER_PREVIEW_COMMAND" --layout=reverse --preview-window=down,$previewlines,nohidden)
     fi
     local fzf_output="$(printf "%s\n" ${items[@]} | fzf "${fzf_options[@]}" \
-      --disabled --accept-nth='{n}' --height=${heightpct}% \
+      --ansi --disabled --accept-nth='{n}' --height=${heightpct}% \
       --prompt '> ' \
       --bind "load:pos($i)" \
       --bind 'j:down,k:up,g:first,G:last,d:half-page-down,u:half-page-up,q:abort' \
@@ -52,7 +52,7 @@ if [[ $PICKER_BACKEND == fzf ]]; then
     )"
     if [[ -z $fzf_output ]]; then i=0; else
       local fzf_items=(${(f)fzf_output})
-      for j in {1..${#fzf_items}}; do (( fzf_items[j]++ )); done
+      for j in {1..${#fzf_items}}; do (( ++fzf_items[j] )); done
       i="${(j:,:)fzf_items}"
     fi
   }

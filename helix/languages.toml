@@ -3,6 +3,13 @@
 command = "prlsp"
 args = []
 
+[language-server.actions-languageserver]
+command = "actions-languageserver"
+args = ["--stdio"]
+config.sessionToken = "%sh{gh auth token}"
+config.experimentalFeatures.all = true
+# config.repos= "%sh{}"
+
 [language-server.biome]
 command = "biome"
 args = ["lsp-proxy"]
@@ -264,6 +271,17 @@ grammar = "json"
 scope = "source.json"
 language-servers = [ "vscode-json-language-server", "nxls" ]
 indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "github-action"
+scope = "source.yaml.github-action"
+language-servers = [ "actions-language-server", "yaml-language-server" ]
+file-types = [{ glob = ".github/workflows/*.yaml" }, { glob = ".github/workflows/*.yml" }]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+grammar = "yaml"
+formatter = { command = "yamlfmt", args = ['-'] }
+auto-format = false
 
 [[language]]
 name = "json"

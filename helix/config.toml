@@ -76,23 +76,25 @@ A-m = "select_textobject_around"
 
 [keys.normal."C-w"]
 "c" = ":buffer-close"
+"g" = ":cd %sh{dirname %{file_path_absolute}}"
+"G" = ":cd %sh{git root}"
 
 [keys.normal.space.w]
 "c" = ":buffer-close"
 
 [keys.normal.space]
+"e" = "file_explorer_in_current_buffer_directory"
 # https://github.com/helix-editor/helix/wiki/Recipes#advanced-file-explorer-with-yazi
-"e" = [
+"E" = [
   ":sh rm -f /tmp/unique-file-h21a434",
-  ':insert-output lf --selection-path=/tmp/unique-file-h21a434 "%sh{echo %{buffer_name}}"',
-  # ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file-h21a434',
+  # ':insert-output lf --selection-path=/tmp/unique-file-h21a434 "%sh{echo %{buffer_name}}"',
+  ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file-h21a434',
   ':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
   ":open %sh{cat /tmp/unique-file-h21a434}",
   ":redraw",
   ":set mouse false",
   ":set mouse true",
 ]
-"E" = "file_explorer_in_current_buffer_directory"
 "C-r" = [
   ":write-all",
   ':insert-output scooterhx "%{selection}" >/dev/tty',
@@ -122,6 +124,7 @@ A-m = "select_textobject_around"
   ":sh it2split --no-focus jest '%{buffer_name}'",
 ]
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
+"_" = ":insert-output git removed --insert %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "C-y" = ":sh /opt/homebrew/opt/coreutils/libexec/gnubin/echo -n '%{buffer_name}:%{cursor_line}' | pbcopy"
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 "backspace" = ":sh it2split --no-focus yare build"
