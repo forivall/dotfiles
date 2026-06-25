@@ -116,6 +116,7 @@
 	shlg = log --name-status --pretty=raw --abbrev-commit --decorate --graph
 	tracking-status = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
 	ignore-for-now = update-index --assume-unchanged
+	nearest-remote-rev = "!f() { git rev-list --boundary ${1:-HEAD} --not --remotes | { ! sed -n 's/^-//p;T;q1'; } || git rev-parse ${1:-HEAD}; }; f"
 	update-branch-upstream = "!f() { branch=${1:-$(git symbolic-ref --short HEAD)}; shift; git update-ref \"refs/heads/$branch\" \"$branch@{u}\" $@; }; f"
 	push-new-branch = "push -u"
 	reset-upstream = reset @{u}

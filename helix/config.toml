@@ -10,6 +10,7 @@ color-modes = true
 insert-final-newline = true
 # indent-style = 2
 auto-format = false
+bufferline = "multiple"
 
 [editor.soft-wrap]
 enable=false
@@ -29,7 +30,11 @@ git-ignore = true
 git-global = true
 git-exclude = true
 
+# see 'impl Default for StatusLineConfig' for defaults
 [editor.statusline]
+center = [
+  "version-control",
+]
 right = [
   # default
   "diagnostics",
@@ -149,10 +154,10 @@ A-m = "select_textobject_around"
 "l" = ":sh it2split --no-focus git logp --patience -w %{buffer_name}"
 "L" = ":sh it2split --no-focus git logd -w -L'%{selection_line_start},%{selection_line_end}:%{buffer_name}'"
 "o" = ":sh gh pfh '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
-"O" = ":sh gh browse '%{buffer_name}:%{selection_line_start}'"
+"O" = ":sh gh browse --commit=%sh{git nearest-remote-rev} '%{buffer_name}:%{selection_line_start}'"
+"y" = ":sh gh browse --commit=%sh{git nearest-remote-rev} '%{buffer_name}:%{selection_line_start}' --no-browser | pbcopy"
 "u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
-"y" = ":sh gh browse --commit=%sh{git rev-parse HEAD} --no-browser '%{buffer_name}:%{selection_line_start}' | pbcopy"
 
 [keys.normal.z]
 "x" = [

@@ -6,6 +6,7 @@ inherits = "base16_transparent"
 "ui.virtual.ruler" = { bg = "light-gray" }
 "ui.popup" = { bg = "#182530" }
 "ui.menu" = { bg = "#192625" }
+"ui.bufferline.active" = { modifiers = [], underline = { style = "dotted" } }
 "markup.heading" = { fg = "cyan" }
 "markup.normal" = { fg = "black" }
 "markup.normal.completion" = { bg = "black" }

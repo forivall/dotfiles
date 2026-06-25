@@ -375,6 +375,7 @@ aliases:
     {{- end}}' "$@"
   # {{tablerender}}'
   my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me -author:app/dependabot" --limit 1 --json number --jq .[].number'
+  my-latest-review-request-branch: 'pr list --search "sort:updated-desc user-review-requested:@me -author:app/dependabot" --limit 1 --json headRefName --jq .[].headRefName'
   repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
