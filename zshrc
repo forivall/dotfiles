@@ -158,7 +158,6 @@ export FORGIT_FZF_DEFAULT_OPTS="
 "
 
 zstyle ':fzf-tab:*' continuous-trigger ''
-bindkey '^X/' fzf-tab-complete
 
 export FORGIT_PAGER="bat"
 export FORGIT_SHOW_PAGER="deltaw \
@@ -346,6 +345,7 @@ if ! zgen saved; then
   zgen-zplug-after-save
 fi
 if (( ${+functions[disable-fzf-tab]} )); then
+  bindkey '^X/' fzf-tab-complete
   bindkey -M emacs '^I' expand-or-complete
   bindkey -M viins '^I' expand-or-complete
 fi
@@ -357,6 +357,7 @@ if $ZHM_ENABLED; then
     zhm_prompt_accept
     zhm_accept
     zhm_accept_or_insert_newline
+    bracketed-paste
   )
   ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
     zhm_move_right
