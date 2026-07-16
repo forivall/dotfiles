@@ -41,7 +41,10 @@ tap "teamookla/speedtest"
 tap "ten0s/brew-cache"
 tap "trisreed/python2"
 tap "unhappychoice/tap"
+tap "valkyrie00/bbrew", "https://github.com/Valkyrie00/homebrew-bbrew"
 tap "vladkens/tap"
+# Run your GitHub Actions locally
+brew "act"
 # Extremely Fast Compression algorithm
 brew "lz4"
 # General-purpose data compression with high compression ratio
@@ -50,6 +53,12 @@ brew "xz"
 brew "zstd"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Language server for GitHub Actions YAML files
+brew "actions-languageserver"
+# Asciicast to GIF converter
+brew "agg"
+# News and email agent
+brew "alpine"
 # Strip or convert ANSI codes into HTML, (La)Tex, RTF, or BBCode
 brew "ansifilter"
 # Codec library for encoding and decoding AV1 video streams
@@ -66,6 +75,8 @@ brew "autoconf"
 brew "automake"
 # GNU internationalization (i18n) and localization (l10n) library
 brew "gettext"
+# Programmable completion for Bash 3.2
+brew "bash-completion"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
@@ -140,6 +151,8 @@ brew "comrak"
 brew "coreutils"
 # Apache CouchDB database server
 brew "couchdb"
+# Terminal countdown timer
+brew "countdown"
 # Get, unpack, build, and install modules from CPAN
 brew "cpanminus"
 # Header-only library for parsing TOML
@@ -243,6 +256,8 @@ brew "libtool"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Generate pixel-perfect macOS folder icons in the native style
+brew "folderify"
+# Monitor a directory for changes and run a shell command
 brew "fswatch"
 # Command-line fuzzy finder written in Go
 brew "fzf"
@@ -274,6 +289,8 @@ brew "pyqt"
 brew "git-cola"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta", args: ["HEAD"]
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Quickly rewrite git repository history
 brew "git-filter-repo"
 # Interpreted, interactive, object-oriented programming language
@@ -320,6 +337,8 @@ brew "gnu-tar"
 brew "go"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
+# Pure Go implementation of jq
+brew "gojq"
 # Version Control Visualization Tool
 brew "gource"
 # Multimedia framework for research and academic purposes
@@ -372,6 +391,8 @@ brew "pandoc"
 brew "jupyterlab"
 # Super fast CLI tool to decode and encode JWTs built in Rust
 brew "jwt-cli"
+# TUI for decoding and encoding JWT tokens
+brew "jwt-ui"
 # Selection-based modal text editor
 brew "kakoune"
 # User-friendly front-end to ssh-agent(1)
@@ -388,10 +409,14 @@ brew "kubernetes-cli"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Terminal Markdown previewer with a GUI-like experience
+brew "leaf-md"
 # Pager program similar to more
 brew "less"
 # Input filter for the pager less
 brew "lesspipe"
+# Key-value storage library with ordered mapping
+brew "leveldb"
 # Terminal file manager
 brew "lf"
 # Subtitle renderer for the ASS/SSA subtitle format
@@ -564,10 +589,18 @@ brew "rust-analyzer"
 brew "rustup"
 # Web search from the terminal
 brew "s-search"
+# Interactive find and replace in the terminal
+brew "scooter"
 # Intuitive find & replace CLI
 brew "sd"
 # Fuzzy text selector for files and anything else you need to select
 brew "selecta"
+# Semantic version control CLI with entity-level diffs and blame
+brew "sem-cli"
+# Sequoia-PGP command-line tool
+brew "sequoia-sq"
+# Simple OpenPGP signature verification program
+brew "sequoia-sqv"
 # Simple terminal UI for search and replace
 brew "serpl"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -578,6 +611,10 @@ brew "shfmt"
 brew "showkey"
 # Prints a steam locomotive if you type sl instead of ls
 brew "sl"
+# Simple tool to count source lines of code
+brew "sloc"
+# Count lines of code in many languages
+brew "sloccount"
 # Ruby language server
 brew "solargraph"
 # SOund eXchange: universal sound sample translator
@@ -604,10 +641,14 @@ brew "trash", link: true
 brew "tree-sitter-cli"
 # TUI and CLI dual pane markdown viewer
 brew "treemd"
+# Extremely fast Python type checker, written in Rust
+brew "ty"
 # Tool for writing command-line pipes with instant live preview
 brew "up"
 # Collection of Linux utilities
 brew "util-linux"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Ncurses-based file manager with vi-like keybindings
 brew "vifm"
 # Vi 'workalike' with many additional features
@@ -636,6 +677,8 @@ brew "wego"
 brew "wget"
 # LAN discovery tool with a modern TUI written in Go
 brew "whosthere"
+# Validate and execute GitHub Actions workflows locally
+brew "wrkflw"
 # Access X11 clipboards from the command-line
 brew "xclip"
 # Friendly and fast tool for sending HTTP requests
@@ -670,6 +713,10 @@ brew "charmbracelet/tap/mods"
 brew "charmbracelet/tap/vhs"
 # Terraform
 brew "hashicorp/tap/terraform"
+# A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
+brew "smudge/smudge/nightlight", trusted: true
+# Ookla Speedtest
+brew "teamookla/speedtest/speedtest", trusted: true
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Android SDK component
@@ -759,6 +806,8 @@ cask "gather"
 cask "gcc-arm-embedded"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
+# Short-term memory for screenshots, downloads, clipboard, and desktop files
+cask "general-software-fresh"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Free and open-source image editor
@@ -847,6 +896,8 @@ cask "nimble-commander"
 cask "notion"
 # Calendar for professionals and teams
 cask "notion-calendar"
+# Command-line interface for Notion
+cask "notion-cli"
 # Open-source tool to make 2D hand-drawn animations
 cask "pencil2d"
 # Administration and development platform for PostgreSQL
@@ -1052,6 +1103,7 @@ vscode "github.vscode-pull-request-github"
 vscode "gitlab.gitlab-workflow"
 vscode "google.geminicodeassist"
 vscode "googlecloudtools.cloudcode"
+vscode "googlecloudtools.datacloud"
 vscode "gordonsmith.observable-js"
 vscode "gozala.flow-language-mode"
 vscode "graphql.vscode-graphql"
