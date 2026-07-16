@@ -37,6 +37,10 @@ graphql-config.load.legacy = true
 command = "nxls"
 args = ["--stdio"]
 
+[language-server.oxvg]
+command = "oxvg"
+args = ["lint", "serve"]
+
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
@@ -292,7 +296,7 @@ language-servers = [ "prettier-lsp", "vscode-json-language-server" ]
 name = "jsonc"
 language-servers = [
   "prettier-lsp",
-  "vscode-json-language-server",  
+  "vscode-json-language-server",
   { name = "vtsls", except-features = ["format"] },
 ]
 
@@ -371,6 +375,14 @@ completion = [
 ]
 args = { program = "{0}" }
 runInTerminal = true
+
+[[language]]
+name = "svg"
+scope = "source.svg"
+file-types = ["svg"]
+grammar = "xml"
+language-servers = ["oxvg"]
+formatter = { command = "oxvg", args = ["format"] }
 
 [[language]]
 name = "toml"
