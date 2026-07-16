@@ -196,7 +196,7 @@ if [[ -v diffstat ]]; then
         diffOpts+=(--unified=2)
       fi
       source $__dirname/bin/git-delta
-      git-delta --color "${diffOpts[@]}" $@ $file
+      git-delta --color "${diffOpts[@]}" $@ -- $file
     fi
   fi
 elif [[ -d $file ]]; then

@@ -236,10 +236,54 @@ function git() { # also put these in git-aliases for autocomplete
       return
       ;;
     delta) shift;
+      local deltaw="deltaw"
+      while (( $# > 0 )); do
+        case "$1" in
+          --color-only) ;&
+          --config=*) ;&
+          --dark) ;&
+          --default-language) ;&
+          --detect-dark-light) ;&
+          --diff-highlight) ;&
+          --diff-so-fancy) ;&
+          --diff-stat-align-width=*) ;&
+          --file-transformation) ;&
+          --hyperlinks) ;&
+          --inspect-raw-lines) ;&
+          --color-moved) ;&
+          --keep-plus-minus-markers) ;&
+          --light) ;&
+          --line-buffer-size) ;&
+          --line-fill-method) ;&
+          --list-languages) ;&
+          --list-syntax-themes) ;&
+          --max-line-distance) ;&
+          --max-syntax-highlighting-length) ;&
+          --max-line-length) ;&
+          --navigate) ;&
+          --file-modified-label) ;&
+          --no-gitconfig) ;&
+          --pager) ;&
+          --paging) ;&
+          --parse-ansi) ;&
+          --raw) ;&
+          --relative-paths) ;&
+          --right-arrow) ;&
+          --syntax-theme=*) ;&
+          --tabs) ;&
+          --true-color) ;&
+          --max-line-distance) ;&
+          --word-diff) ;&
+          --wrap-max-lines) ;&
+          --wrap-right-percent=*)
+            deltaw+=" $1"; shift ;;
+          *) break ;;
+        esac
+      done
       if (( $# == 0 )) || [[ $1 == -* ]] || [[ $1 == @* ]] || ! command git --list-cmds=main,others,alias | rg "^$1\$" > /dev/null; then
-        git -c core.pager=deltaw diff "${opts[@]}" "$@"
+        git -c core.pager="$deltaw" diff "${opts[@]}" "$@"
       else
-        git -c core.pager=deltaw "${opts[@]}" "$@"
+        git -c core.pager="$deltaw" "${opts[@]}" "$@"
       fi
       return
       ;;

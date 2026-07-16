@@ -1,4 +1,5 @@
 _poetry
 /_pyenv
 /_pdm
+/_jc
 pyenv-init.sh
