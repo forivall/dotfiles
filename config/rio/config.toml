@@ -1,0 +1,32 @@
+# See the full configuration reference: https://rioterm.com/docs/config
+
+theme = "thursday"
+
+[adaptive-theme]
+light = "tuesday"
+dark = "thursday"
+
+[editor]
+program = "/Users/emily.klassen/.cargo/bin/hx"
+args = []
+
+[fonts]
+size = 13.5
+use-drawable-chars = false
+hinting = false
+
+[fonts.regular]
+family = "FantasqueSansM Nerd Font"
+style = "Regular"
+
+[shell]
+program = "/opt/homebrew/bin/zsh"
+
+# [window]
+# opacity = 0.9
+# opacity-cells = true
+# blur = true
+
+[window.background-image]
+path = "/Users/emily.klassen/Pictures/Wallpapers/Japan daylight savings_tiler_blur.jpg"
+opacity = 0.08
