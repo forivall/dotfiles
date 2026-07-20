@@ -5,8 +5,8 @@ rule:
   pattern: |
     function $NAME($CONFIGSVC,$WINDOW,$MENUBARTOGGLED) {
       if (!$HASCUSTOMTITLEBAR($CONFIGSVC)) return !1;
-      if (e.document.body.classList.contains($CLASSNAME)) return !0;
-      const $INFULLSCREEN = $ISFULLSCREEN(e), $NATIVETITLEBARENABLED = $HASNATIVETITLEBAR($CONFIGSVC);
+      if ($WINDOW.document.body.classList.contains($CLASSNAME)) return !0;
+      const $INFULLSCREEN = $ISFULLSCREEN($WINDOW), $NATIVETITLEBARENABLED = $HASNATIVETITLEBAR($CONFIGSVC);
       if (!$ISTITLEBAREMPTY($CONFIGSVC)) return !0;
       if ($NATIVETITLEBARENABLED) return !1;
       $$$REST

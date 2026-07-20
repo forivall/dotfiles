@@ -1,6 +1,7 @@
 # See the full configuration reference: https://rioterm.com/docs/config
 
 theme = "thursday"
+line-height = 1.01
 
 [adaptive-theme]
 light = "tuesday"
@@ -18,6 +19,7 @@ hinting = false
 [fonts.regular]
 family = "FantasqueSansM Nerd Font"
 style = "Regular"
+features = ["-calt"]
 
 [shell]
 program = "/opt/homebrew/bin/zsh"
