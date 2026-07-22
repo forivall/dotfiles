@@ -100,12 +100,25 @@ A-m = "select_textobject_around"
   ":set mouse false",
   ":set mouse true",
 ]
+"o" = [
+  ":sh rm -f /tmp/unique-file-h21a435",
+  ":sh cat > /tmp/unique-file-h21a436 <<'RAWSELECTION'\n%{selection}\nRAWSELECTION\n",
+  "delete_selection",
+  # ":insert-output python3 -c \"import subprocess as sp;import os.path as p;import time;time.sleep(0.05);s=open('/tmp/unique-file-h21a436').read();print(s,end='')\"",
+  ":insert-output python3 -c \"import subprocess as sp;import os.path as p;import time;time.sleep(0.05);s=open('/tmp/unique-file-h21a436').read();a=p.dirname(p.expanduser('%{buffer_name}'));sp.run(['yazi',p.join(a,s),'--chooser-file=/tmp/unique-file-h21a435'])\ntry:b=p.expanduser(open('/tmp/unique-file-h21a435').read())\nexcept FileNotFoundError:b=s\nr=p.relpath(b,a);print(f'./{r}'if r[0]!='.'and s[0]=='.'else r,end='')\"",
+  ':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ":redraw",
+  ":insert-output sleep 0.05",
+  ":redraw",
+  ":set mouse false",
+  ":set mouse true",
+]
 "C-r" = [
   ":write-all",
   # cargo binstall swpui
   # ':insert-output swp "%{selection}" >/dev/tty',
   # ':insert-output serpl "%{selection}" >/dev/tty',
-  ':insert-output scooterhx "%{selection}" >/dev/tty',
+  ":insert-output scooterhx \"$(perl -ne 'chomp($_); print quotemeta($_);' <<'SCOOTERSEARCHTEXT'\n%{selection}\nSCOOTERSEARCHTEXT\n)\" >/dev/tty",
   # scooterhx:
   # #!/usr/bin/env zsh
   # printf "\x1b[?2004l" > /dev/tty
@@ -137,6 +150,8 @@ A-m = "select_textobject_around"
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 "backspace" = ":sh it2split --no-focus yare build"
 "Q" = ":buffer-close"
+"," = ":config-open"
+">" = ":config-open-workspace"
 
 [keys.normal.space.g]
 "f" = "changed_file_picker"

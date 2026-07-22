@@ -310,6 +310,14 @@ name = "html"
 formatter = { command = 'prettier', args = ["--parser", "angular"] }
 
 [[language]]
+name = "mjml"
+scope = "text.mjml"
+grammar = "html"
+file-types = ["mjml"]
+block-comment-tokens = { start = "<!--", end = "-->" }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
 name = "javascript"
 # formatter = { command = 'biome', args = ["format"] }
 # formatter = { command = 'prettier', args = ["--parser", "babel"] }
@@ -382,7 +390,11 @@ scope = "source.svg"
 file-types = ["svg"]
 grammar = "xml"
 language-servers = ["oxvg"]
-formatter = { command = "oxvg", args = ["format"] }
+# formatter = { command = "oxvg", args = ["format", "--pretty=2"] }
+# formatter = { command = "svg-format", args = ["--stdin"] }
+# formatter = { command = "biome", args = ["format", "--stdin-file-path=%{file_path_absolute}"] }
+# # config file contents is "export default { plugins: [] }"
+formatter = { command = "svgo", args = ["--config=/Users/emily.klassen/.config/helix/svgo.config.mjs", "--indent=2", "--pretty", "-"] }
 
 [[language]]
 name = "toml"
