@@ -2,6 +2,8 @@
 
 __dirname=${0:A:h}
 configdir=${PWD:A}
+WITH_ORIGINAL=false
+if [[ $1 == '--with-original' ]]; then WITH_ORIGINAL=true; shift; fi
 while [[ $configdir != / ]]; do
   if [[ -f .vscode/settings.json ]]; then
     break;
@@ -24,6 +26,11 @@ if [[ ${#RULES} -eq 0 ]]; then
   : # TODO
 fi
 
+if [[ $1 == '-' ]]; then FILES=$(cat)
+else FILES="${(F)@}"; fi
+
+$WITH_ORIGINAL && echo "$FILES"
+
 for rule in "$RULES[@]"; do
   if ${DEBUG:-false}; then
     printf 'RULE: ' >&2
@@ -31,7 +38,7 @@ for rule in "$RULES[@]"; do
   fi
   PATTERN="$(jq -nr --arg input $rule '$input|@base64d|fromjson|.pattern')"
   LOCATORS="$(jq -nr --arg input $rule '$input|@base64d|fromjson|.locators|join("\n")')"
-  echo "${(F)@}" | rg $PATTERN -r $LOCATORS | while read candidate; do
+  echo "$FILES" | rg $PATTERN -r $LOCATORS | while read candidate; do
     if [[ -f $candidate ]]; then
       echo $candidate
     elif ${DEBUG:-false}; then
