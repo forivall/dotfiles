@@ -1,5 +1,5 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.2",
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.11.2",
   "schemes" : [
     {
       "if" : {
@@ -31,6 +31,25 @@
       }
     },
     {
+      "buttons" : {
+        "gesture" : {
+          "actions" : {
+            "down" : "appExpose",
+            "left" : "missionControl.spaceLeft",
+            "right" : "missionControl.spaceRight",
+            "up" : "missionControl"
+          },
+          "enabled" : true,
+          "threshold" : 50,
+          "trigger" : {
+            "button" : 3,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          }
+        }
+      },
       "if" : {
         "device" : {
           "category" : "mouse",
@@ -42,14 +61,31 @@
       "pointer" : {
         "acceleration" : 0.6,
         "disableAcceleration" : false,
+        "redirectsToScroll" : false,
         "speed" : 0.09
       },
       "scrolling" : {
         "acceleration" : {
-          "vertical" : 5
+          "vertical" : 1
+        },
+        "distance" : {
+          "vertical" : 3
+        },
+        "modifiers" : {
+          "vertical" : {
+            "option" : {
+              "scale" : 0.5,
+              "type" : "changeSpeed"
+            }
+          }
         },
         "reverse" : {
-          "vertical" : false
+          "vertical" : true
+        },
+        "smoothed" : {
+          "vertical" : {
+            "enabled" : false
+          }
         },
         "speed" : {
           "vertical" : 0
@@ -138,28 +174,6 @@
       "if" : {
         "device" : {
           "category" : "trackpad",
-          "productID" : "0x265",
-          "productName" : "Emily’s Magic Trackpad",
-          "serialNumber" : "C0:95:6D:02:61:6F",
-          "vendorID" : "0x4c"
-        }
-      },
-      "pointer" : {
-        "acceleration" : 2,
-        "disableAcceleration" : false,
-        "speed" : 0.0689655172413792768
-      },
-      "scrolling" : {
-        "reverse" : {
-          "horizontal" : true,
-          "vertical" : false
-        }
-      }
-    },
-    {
-      "if" : {
-        "device" : {
-          "category" : "trackpad",
           "productID" : "0x343",
           "productName" : "Apple Internal Keyboard \/ Trackpad",
           "vendorID" : "0x5ac"
@@ -167,6 +181,22 @@
       },
       "scrolling" : {
         "reverse" : false
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "trackpad",
+          "productID" : "0x265",
+          "productName" : "Emily’s Magic Trackpad",
+          "serialNumber" : "C0:95:6D:02:61:6F",
+          "vendorID" : "0x4c"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : false
+        }
       }
     },
     {
@@ -181,20 +211,10 @@
       },
       "scrolling" : {
         "acceleration" : {
-          "vertical" : 0.3
-        },
-        "distance" : {
-          "vertical" : "auto"
-        },
-        "modifiers" : {
-          "vertical" : {
-            "shift" : {
-              "type" : "alterOrientation"
-            }
-          }
+          "vertical" : 0.1
         },
         "reverse" : {
-          "vertical" : false
+          "vertical" : true
         },
         "speed" : {
           "vertical" : 10

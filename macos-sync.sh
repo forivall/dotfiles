@@ -38,6 +38,7 @@ lapce_config=(   ./config/lapce    ~/$appsupport/dev.lapce.Lapce-Stable         
 zed_config=(     ./config/zed      ~/.config/zed                                  "*.json(.)")
 zed_themes=(     ./config/zed/themes ~/.config/zed/themes                         "*.json")
 hammerspoon=(    ./hammerspoon     ~/.hammerspoon                                 "*.lua")
+linearmouse=(    ./config/linearmouse ~/.config/linearmouse                       "*.json")
 
 if (( $# < 2 )); then
     entries=(
@@ -54,6 +55,7 @@ if (( $# < 2 )); then
       lapce_config
       zed_config
       hammerspoon
+      linearmouse
     )
 else
     entries=(${@:2})
