@@ -17,6 +17,7 @@ p,prefix  filter by current '+' prefix
 f,force   use --force when checking out
 d,detach  use --detach when checking out
 t,track?direct|inherit setup upstream when creating a new branch
+contains? filter branches containing HEAD or commit
 no-track  do not setup upstream when creating a new branch
 B         reset branch when initializing a new branch
 "
@@ -25,10 +26,12 @@ eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || ech
 term_menu_options=()
 all=false
 remotes=false
+noremote=false
 remote_option=
 checkout_options=()
 pattern=
 reset_branch=false
+contains=
 
 index=0
 for arg in $@; do
@@ -38,10 +41,13 @@ for arg in $@; do
     --all) all=true; remotes=true ;;
     --remote=*) remote_option="${arg#--remote=}" ;&
     --remote) remotes=true ;;
+    --no-remote) noremote=false ;;
     --prefix)
       branch_name=$(git rev-parse --symbolic-full-name HEAD)
       branch_name=${branch_name#refs/heads/}
       pattern="${branch_name%+*}*" ;;
+    --contains=*) contains="${arg#--contains=}" ;;
+    --contains) contains=HEAD ;;
     -B) reset_branch=true ;;
     --force|--detach|--no-track|--track|--track=*) checkout_options+=($arg) ;;
     --) break; ;;
@@ -67,10 +73,16 @@ fi
 
 branches=()
 if ! $remotes || $all; then
-  branches=($(git rev-parse --symbolic --branches=$pattern))
+  if [[ -n "$contains" ]]; then
+    branches=($(git for-each-ref --contains HEAD --format=%\(refname:short\) refs/heads))
+  else
+    branches=($(git rev-parse --symbolic --branches=$pattern))
+  fi
 fi
 remote_branches=()
-if $remotes; then
+if [[ -n "$contains" ]] && ! $noremote; then
+  remote_branches=($(git for-each-ref --contains HEAD --format=%\(refname:short\) refs/remotes))
+elif $remotes; then
   remote_branches=($(git rev-parse --symbolic --exclude="*/HEAD" $(print -l -- --exclude="*/"${^branches}) --remotes=$remote_option))
 
   if ! $all && (( ${#remote_branches} == 0 )); then
@@ -88,7 +100,7 @@ term_menu_options+=(
 )
 
 remote_options=()
-if $remotes; then
+if [[ ${#remote_branches} -gt 0 ]]; then
   remote_options_str="$(printf '%1$s|--remotes %1$s\n' ${^remote_branches})"
   remote_options=("${(f)remote_options_str[@]}")
 fi

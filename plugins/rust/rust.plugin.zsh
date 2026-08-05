@@ -6,6 +6,7 @@ alias cm="cargo make"
 alias cr="cargo run"
 alias inlyne="command inlyne --config ${__zsh_rust_plugin_location:h:h}/config/inlyne.toml"
 alias yz="yazi"
+alias xh="xh --format-options=json.indent:2,headers.sort:false"
 function md() {
   ( command inlyne --config "${__zsh_rust_plugin_location:h:h}/config/inlyne.toml" "$@" 2>/dev/null & )
 }

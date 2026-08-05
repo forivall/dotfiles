@@ -15,7 +15,7 @@ export MARKPATH
 : ${MARK_NOCONFIRM:=false}
 : ${MARK_CREATENAMEDDIRS:=true}
 
-(( +${aliases[md]} )) && unalias md
+(( ${+aliases[md]} )) && unalias md
 
 source ${0:A:h}/loadnameddirs.zsh
 

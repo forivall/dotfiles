@@ -375,7 +375,7 @@ unsetopt nomatch
 
 export CARAPACE_LENIENT=true
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export CARAPACE_EXCLUDES='cp,ls,mv,eza,git,npm,date,tsc,circleci,kill,node,gpg,brew'
+export CARAPACE_EXCLUDES='cp,ls,mv,eza,git,npm,date,tsc,circleci,kill,node,gpg,brew,xh'
 export CARAPACE_MATCH=1
 zstyle ':completion:*:*:git:*' group-name ''
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'

@@ -204,7 +204,7 @@ elif [[ -d $file ]]; then
     echo "${fg[cyan]}Add${reset_color} subproject"
   else
     echo "${fg[cyan]}Add${reset_color} ${fg[yellow]}$(git ls-files --other --exclude-standard $file | wc -l)${reset_color} new file(s)"
-    COLUMNS=$COLUMNS exa --grid -x -F --git --color=always $file
+    COLUMNS=$COLUMNS eza --grid -x -F --git --color=always $file
   fi
 else
   echo "???"

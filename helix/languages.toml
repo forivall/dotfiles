@@ -116,9 +116,11 @@ inlayHints.propertyDeclarationTypes.enabled = true
 inlayHints.functionLikeReturnTypes = true
 inlayHints.enumMemberValues.enabled = true
 suggest.completeFunctionCalls = true
-tsserver.path = "node_modules/typescript/lib"
+format.enable = false
+tsserver.experimental.enableProjectDiagnostics = true
+# tsserver.path = "node_modules/typescript/lib"
 # tsserver.enableTracing = true
-updateImportsOnFileMove = { enabled = "always" }
+updateImportsOnFileMove.enabled = "always"
 
 [language-server.vtsls]
 command = "vtsls"
@@ -229,6 +231,12 @@ args = ["run"]
 command = "$HOME/Library/Application Support/CircleCI-language-server/circleci-yaml-language-server"
 args = ["-schema=$HOME/Library/Application Support/CircleCI-language-server/schema.json", "--stdio"]
 
+[language-server.mjml-lsp]
+# git clone hub:pataruco/zed-mjml
+# cd zed-mjml/crates/mjml-lsp
+# cargo install --locked --path .
+command = "mjml-lsp"
+
 [[grammar]]
 name = "typescript"
 # # source = { git = "https://github.com/tree-sitter/tree-sitter-typescript", rev = "75b3874edb2dc714fb1fd77a32013d0f8699989f", subpath = "typescript" }
@@ -316,6 +324,7 @@ grammar = "html"
 file-types = ["mjml"]
 block-comment-tokens = { start = "<!--", end = "-->" }
 indent = { tab-width = 2, unit = "  " }
+language-servers = [ "mjml-lsp" ]
 
 [[language]]
 name = "javascript"
@@ -359,6 +368,7 @@ name = "typescript"
 # formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 # formatter = { command = 'biome', args = ["format"] }
 language-servers = [
+  "prlsp",
   "prettier-lsp",
   # { name = "typescript-language-server", except-features = [ "format" ] },
   { name = "vtsls", except-features = ["format"] },
