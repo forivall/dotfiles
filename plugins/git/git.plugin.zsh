@@ -403,7 +403,7 @@ source "$__zsh_forivall_git_plugin_location/bin/git-watch-staged"
 source "$__zsh_forivall_git_plugin_location/gitify.zsh"
 
 function zlegcor() {
-  local branch len
+  local branch len old
   if [[ $LBUFFER == 'gcor' || $LBUFFER == 'gcor '* ]]; then
     echo -n '\r\033[1B'
     branch=$(gcor --dry ${(z)${LBUFFER#gcor}})
@@ -413,14 +413,36 @@ function zlegcor() {
       print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
       LBUFFER="gco $branch # $LBUFFER # git checkout $(git rev-parse --symbolic-full-name $branch)";
     else
+      old="$LBUFFER"
       len=${#LBUFFER}
       LBUFFER="";
       print -Pn ${PROMPT##*\${prompt_newline}};
-      printf "gcor^[%${len}s" ''
+      printf "$old^[%${len}s" ''
     fi
   fi
 }
 add-zle-hook-widget -Uz line-finish zlegcor
+
+function zlegcob() {
+  local command len old
+  if [[ $LBUFFER == 'gcob' || $LBUFFER == 'gcob '* ]]; then
+    echo -n '\r\033[1B'
+    command="$(gcob --dry ${(z)${LBUFFER#gcob}})"
+    echo -n '\033['$(( ${#LBUFFER} ))'C'
+    echo -n '\r\033[1A'
+    if (( $? == 0 )) && [[ -n "$command" ]]; then
+      print -Pn ${PROMPT##*\${prompt_newline}}"${LBUFFER}";
+      LBUFFER="$command # $LBUFFER";
+    else
+      old="$LBUFFER"
+      len=${#LBUFFER}
+      LBUFFER="";
+      print -Pn ${PROMPT##*\${prompt_newline}};
+      printf "$old^[%${len}s" ''
+    fi
+  fi
+}
+add-zle-hook-widget -Uz line-finish zlegcob
 
 if (( ${+commands[git]} )) && (( ${+commands[fzf]} )) && (( ${+commands[fzf-git-branch]} )); then
   function zlefzfgitswitch() {
