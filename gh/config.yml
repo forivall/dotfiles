@@ -203,25 +203,181 @@ aliases:
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql --file "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql "$@" | jq -r ''.[]|.path'' | uniq'
+  pr-update-comment-shas: |
+    !
+    zsh -s -- "$@" <<'SCRIPTEND'
+    #!/usr/bin/env zsh
+    # Update stale git SHA references in your PR review comments.
+    #
+    # Matches old commits to current PR history using the same technique as
+    # git-update-branch-restack: subject line + git rev-list --fixed-strings --grep.
+    #
+    # Usage:
+    #   update-pr-comment-shas.sh [pr] [--author LOGIN[,LOGIN...]]...
+    #
+    # Example gh alias:
+    #   gh alias set update-comment-shas '!f() { /path/to/update-pr-comment-shas.sh "$@"; }; f'
+
+    set -euo pipefail
+
+    OPTIONS='
+    gh pr-update-comment-shas [pr]
+
+    pr            Pull request number (default: PR for current branch)
+    --
+    author=login  Only update comments by these authors (repeatable, comma-separated)
+    y,yes         Ignore prompts and always replace
+    d,debug       Always print diffs
+    '
+
+    eval "$(print -r -- "$OPTIONS" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
+
+    AUTHORS=()
+    typeset -A opts
+
+    while [[ $# -gt 0 && "$1" != -- ]]; do
+      case $1 in
+        --author=*) AUTHORS+=(${(s:,:)${1#--author=}}); shift ;; # '
+        --*) opts[${1#--}]=true; shift ;;
+      esac
+    done
+    shift
+
+    prompt() {
+      if ${opts[debug]:-false}; then
+        diff --color -u <(print -r -- "$2") <(print -r -- "$3") | BAT_PAGER=cat deltaw --hunk-header-style=omit --file-style=omit || true
+      fi
+      if ${opts[yes]:-false}; then
+        return 0
+      fi
+      print -n "$1 (y/N/p) "; read -k 1 yn; print
+      case $yn in
+        y) return 0 ;;
+        p) diff --color -u <(print -r -- "$2") <(print -r -- "$3") | BAT_PAGER=cat deltaw --hunk-header-style=omit --file-style=omit || true ;;
+        *) return 1 ;;
+      esac
+    }
+
+    [[ ${#AUTHORS[@]} -eq 0 ]] && AUTHORS=("$(gh api user --jq .login)")
+
+    typeset -a pr_args=()
+    PR_DATA=$(gh pr view $@ --json number,baseRefOid,headRefOid --jq @base64)
+    GH_PR=$(jq -nr --arg input $PR_DATA '$input | @base64d | fromjson | .number')
+    BASE=$( jq -nr --arg input $PR_DATA '$input | @base64d | fromjson | .baseRefOid')
+    HEAD=$( jq -nr --arg input $PR_DATA '$input | @base64d | fromjson | .headRefOid')
+
+    replace_shas_in_text() {
+      local out=$1 old_rev old_sha rev_list_output subject new_sha new_rev len
+
+      while IFS= read -r old_rev; do
+        [[ -z "$old_rev" ]] && continue
+        old_sha=$(git rev-parse --verify "${old_rev}^{commit}" 2>/dev/null ||
+          gh api "repos/{owner}/{repo}/commits/${old_rev}" --jq .sha 2>/dev/null) || continue
+
+        rev_list_output=(${(f)"$(git rev-list -n1 --pretty=%s "$old_sha")"}) # "
+        subject=${rev_list_output[2]}
+        new_sha=$(git rev-list -n1 --fixed-strings --grep "$subject" "$HEAD" "^$BASE")
+        [[ -z "$new_sha" || "$new_sha" == "$old_sha" ]] && continue
+
+        len=${#old_rev}
+        if (( len >= 40 )); then
+          new_rev=$new_sha
+        else
+          new_rev=$(git rev-parse --short="$len" "$new_sha")
+        fi
+        out=${out//"$old_rev"/"$new_rev"}
+      done < <(
+        print -rn -- "$out" | rg -o '[0-9a-fA-F]{7,40}' \
+          | while IFS= read -r old_rev; do print -- "${#old_rev}"$'\t'"$old_rev"; done \
+          | sort -t $'\t' -k1,1rn \
+          | cut -f2- \
+          | uniq
+      )
+
+      print -rn -- "$out"
+    }
+
+    print "PR #${GH_PR}: commits ${BASE:0:7}..${HEAD:0:7}"
+    print "Authors: ${AUTHORS[*]}"
+    print
+
+    comments=("${(@f)$(gh api graphql -f query='
+      query($owner:String!, $name:String!, $number:Int!) {
+        repository(owner:$owner, name:$name) {
+          pullRequest(number:$number) {
+            reviewThreads(first:100) {
+              nodes {
+                path line
+                comments(first:50) {
+                  nodes { databaseId author { login } body }
+                }
+              }
+            }
+          }
+        }
+      }' -F owner='{owner}' -F name='{repo}' -F number="$GH_PR" --jq '
+        .data.repository.pullRequest.reviewThreads.nodes[] | . as $thread | .comments.nodes[] | (. + {path: $thread.path, line: $thread.line}) | @base64
+      ')}")
+
+    for comment in $comments; do
+      id=$(   jq -nr --arg input $comment '$input | @base64d | fromjson | .databaseId')
+      login=$(jq -nr --arg input $comment '$input | @base64d | fromjson | .author.login')
+      filepath=$( jq -nr --arg input $comment '$input | @base64d | fromjson | .path')
+      line=$( jq -nr --arg input $comment '$input | @base64d | fromjson | .line')
+      body=$( jq -nr --arg input $comment '$input | @base64d | fromjson | .body')
+
+      (( ${AUTHORS[(I)$login]} )) || continue
+
+      new_body=$(replace_shas_in_text "$body")
+      [[ "$body" == "$new_body" ]] && continue
+
+      if prompt "Update review comment #$id ($login) $filepath:$line? (y/N/p) " "$body" "$new_body"; then
+        gh api -X PATCH "repos/{owner}/{repo}/pulls/comments/${id}" -f body="$new_body" --jq '"Updated" + (.id|tostring) + " " + .node_id + " " + .html_url'
+      fi
+    done
+
+    reviews=("${(@f)$(gh api "repos/{owner}/{repo}/pulls/${GH_PR}/reviews" --paginate --jq '.[] | select(.body != null and .body != "") | @base64')}")
+
+    for review in $reviews; do
+      id=$(     jq -nr --arg input $review '$input | @base64d | fromjson | .id')
+      login=$(  jq -nr --arg input $review '$input | @base64d | fromjson | .user.login')
+      node_id=$(jq -nr --arg input $review '$input | @base64d | fromjson | .node_id')
+      body=$(   jq -nr --arg input $review '$input | @base64d | fromjson | .body')
+
+      (( ${AUTHORS[(I)$login]} )) || continue
+
+      new_body=$(replace_shas_in_text "$body")
+      [[ "$body" == "$new_body" ]] && continue
+
+      if prompt "Update review #$id ($login)?" "$body" "$new_body"; then
+        gh api graphql -f query='
+          mutation($id: ID!, $body: String!) {
+            updatePullRequestReview(input: { pullRequestReviewId: $id, body: $body }) {
+              pullRequestReview { id }
+            }
+          }' -f id="$node_id" -f body="$new_body"
+      fi
+    done
+    SCRIPTEND
   pr-review-comments-format: |
     !
     jq -r '.[] | @base64' | while read -r thread; do
       id=$(         jq -nr --arg input $thread '$input | @base64d | fromjson | .id');
-      path=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .path');
+      filepath=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .path');
       startLine=$(  jq -nr --arg input $thread '$input | @base64d | fromjson | .startLine');
       origLine=$(   jq -nr --arg input $thread '$input | @base64d | fromjson | .originalLine');
       line=$(       jq -nr --arg input $thread '$input | @base64d | fromjson | .line');
       subjectType=$(jq -nr --arg input $thread '$input | @base64d | fromjson | .subjectType');
-      if [[ -f "$path" ]] ; then
+      if [[ -f "$filepath" ]] ; then
         echo "";
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
-        header="$path (outdated)"
+        header="$filepath (outdated)"
         if [[ $subjectType = "FILE" ]]; then
-          header="$path (file)";
+          header="$filepath (file)";
         elif [[ -n "$line" ]] && [[ "$line" != "null" ]]; then
-          header="$path:$line";
+          header="$filepath:$line";
         elif [[ -n "$origLine" ]] && [[ "$origLine" != "null" ]]; then
-          header="$path:$origLine (outdated)";
+          header="$filepath:$origLine (outdated)";
         fi;
         printf "%s \e[2m%s\e[22m\n" "$header" "$id";
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
@@ -235,7 +391,7 @@ aliases:
           fi
           if [[ start -lt 1 ]]; then start=1; fi;
           end=$((line + 5));
-          bat --no-pager --style=numbers --color=always --highlight-line="$highlightLine" --line-range="$start:$end" "$path" 2>/dev/null;
+          bat --no-pager --style=numbers --color=always --highlight-line="$highlightLine" --line-range="$start:$end" "$filepath" 2>/dev/null;
         fi;
       else
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
