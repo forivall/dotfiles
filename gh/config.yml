@@ -170,7 +170,7 @@ aliases:
         }
       }' "$@"
   pr-file-unqueue: '! a=$(realpath "$1") && r=${a#$PWD/} && grep -vx -e "$a\(:\d\+\)*" -e "\(\./\)\?$r\(:\d\+\)*" .gh-pr-queue | sponge .gh-pr-queue'
-  pr-file-viewed: '! gh pr-file-viewed-gh "$1"; gh pr-file-unqueue "$1"'
+  pr-file-viewed: '! gh pr-file-unqueue "$1"; gh pr-file-viewed-gh "$1"'
   pr-file-viewed-gh: |
     ! gh pr-file-viewed-gql "$1" --jq '
         .data.markFileAsViewed.pullRequest |
@@ -199,7 +199,7 @@ aliases:
         )
       '
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
-  pr-queued-files: '!( cat .gh-pr-queue 2>/dev/null; gh pr-unread-files ) | huniq 2>/dev/null'
+  pr-queued-files: '![[ -s .gh-pr-queue ]] && cat .gh-pr-queue || gh pr-unread-files | tee .gh-pr-queue'
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql --file "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql "$@" | jq -r ''.[]|.path'' | uniq'

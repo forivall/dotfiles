@@ -142,7 +142,7 @@ A-m = "select_textobject_around"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 "t" = [
   ":write-all",
-  ":sh it2split --no-focus jest '%{buffer_name}'",
+  ":sh it2split --no-focus jest '%{buffer_name}' $(findrelated '%{buffer_name}')",
 ]
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "_" = ":insert-output git removed --insert %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
@@ -162,7 +162,7 @@ A-m = "select_textobject_around"
 "n" = ":open %sh{gh pr-queued-files | head -n1}"
 "N" = [
   ":buffer-close-all",
-  ":open %sh{gh pr-unread-files | head -n1}",
+  ":open %sh{gh pr-queued-files | head -n1}",
 ]
 # "n" = ":open %sh{zet diff <(gh pr-unread-files | head -n1) .github/skipped-review-files}"
 "i" = ":sh echo '${buffer_name}' >> .github/skipped-review-files"
