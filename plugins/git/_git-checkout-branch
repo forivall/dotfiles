@@ -6,6 +6,7 @@ _git-checkout-branch () {
 
   _arguments -S \
     '(-s --search)'{-s,--search}'[use search mode]' \
+    '(--dry)--dry[only output branch name]' \
     '(-a --all)'{-a,--all}'[show all branches]' \
     '(-r --remote)'{-r,--remote=}'[show remote branches]::remote:__git_remotes' \
     '(-d --detach)'{-d,--detach}'[detach the HEAD at named commit]' \

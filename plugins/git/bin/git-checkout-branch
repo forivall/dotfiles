@@ -10,6 +10,7 @@ OPTS_SPEC="\
 git checkout-branch [<options>] <args>...
 --
 h,help    show the help
+dry       print the command instead of running it
 s,search  search mode
 a,all     all branches
 r,remote? remote
@@ -24,6 +25,7 @@ B         reset branch when initializing a new branch
 eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt --stuck-long -- "$@" || echo exit $?)"
 
 term_menu_options=()
+dry=false
 all=false
 remotes=false
 noremote=false
@@ -37,6 +39,7 @@ index=0
 for arg in $@; do
   index=$((index+1))
   case "$arg" in
+    --dry) dry=true ;;
     --search) term_menu_options+=(--search-key none) ;;
     --all) all=true; remotes=true ;;
     --remote=*) remote_option="${arg#--remote=}" ;&
@@ -61,12 +64,19 @@ if $reset_branch; then
   exit
 fi
 
-if (( ( index == ${#checkout_options} + 1 ) && $# > 0 )); then
+expected_index=$(( ${#checkout_options} + 1 ))
+if $dry; then (( expected_index += 1 )); fi
+if (( ( index == expected_index ) && $# > 0 )); then
   if [[ $1 == +* ]]; then
     branch_name=$(git rev-parse --symbolic-full-name HEAD)
-    git checkout ${checkout_options[@]} -b ${branch_name#refs/heads/}$1
+    command=( git checkout ${checkout_options[@]} -b ${branch_name#refs/heads/}$1 )
   else
-    git checkout ${checkout_options[@]} -b $@
+    command=( git checkout ${checkout_options[@]} -b $@ )
+  fi
+  if $dry ; then
+    echo ${(@q-)command}
+  else
+    ${command[@]}
   fi
   exit
 fi
@@ -125,5 +135,9 @@ else
   command=(git checkout "${checkout_options[@]}" $branch)
 fi
 
+if $dry ; then
+  echo ${(@q-)command}
+  return || exit
+fi
 echo '>' ${command[@]}
 ${command[@]}

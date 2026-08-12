@@ -425,7 +425,7 @@ add-zle-hook-widget -Uz line-finish zlegcor
 
 function zlegcob() {
   local command len old
-  if [[ $LBUFFER == 'gcob' || $LBUFFER == 'gcob '* ]]; then
+  if [[ $LBUFFER == 'gcob' ]]; then
     echo -n '\r\033[1B'
     command="$(gcob --dry ${(z)${LBUFFER#gcob}})"
     echo -n '\033['$(( ${#LBUFFER} ))'C'
