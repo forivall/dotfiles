@@ -12,8 +12,8 @@ rule:
       $$$REST
     }
 fix: 'function
-  $NAME($CONFIGSVC,$WINDOW,$MENUBARTOGGLED){if(!$HASCUSTOMTITLEBAR($CONFIGSVC))return!1;if(e.document.body.classList.contains($CLASSNAME))return!0;const
-  $INFULLSCREEN=$ISFULLSCREEN(e),$NATIVETITLEBARENABLED=$HASNATIVETITLEBAR($CONFIGSVC);if($NATIVETITLEBARENABLED&&$CONFIGSVC.getValue("window.customTitleBarVisibility")==="never")return!1;if(!$ISTITLEBAREMPTY($CONFIGSVC))return!0;if($NATIVETITLEBARENABLED)return!1;$$$REST}'
+  $NAME($CONFIGSVC,$WINDOW,$MENUBARTOGGLED){if(!$HASCUSTOMTITLEBAR($CONFIGSVC))return!1;if($WINDOW.document.body.classList.contains($CLASSNAME))return!0;const
+  $INFULLSCREEN=$ISFULLSCREEN($WINDOW),$NATIVETITLEBARENABLED=$HASNATIVETITLEBAR($CONFIGSVC);if($NATIVETITLEBARENABLED&&$CONFIGSVC.getValue("window.customTitleBarVisibility")==="never")return!1;if(!$ISTITLEBAREMPTY($CONFIGSVC))return!0;if($NATIVETITLEBARENABLED)return!1;$$$REST}'
 # # rule for caller:
 # rule:
 #   pattern: "shouldShowTitleBar($TOGGLED,$MAINWINDOW){return!!$SHOULD_SHOW_CUSTOM_TITLE_BAR(this.configurationService,$MAINWINDOW,$TOGGLED)}"
