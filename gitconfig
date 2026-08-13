@@ -422,6 +422,10 @@
 [interactive-rebase-tool]
 	inputUndo = u Control+z
 	inputRedo = U Control+y
+	inputMoveSelectionDown = J Shift+Down
+	inputMoveSelectionUp = K Shift+Up
+	inputMoveDown = j Down
+	inputMoveUp = k Up
 [gui]
 	editor = vscode
 [column]
