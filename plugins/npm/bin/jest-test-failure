@@ -1,0 +1,151 @@
+#!/usr/bin/env node
+/** biome-ignore-all lint/suspicious/noConfusingLabels: <explanation> */
+'use strict';
+
+/*
+ * jest-test-failure <file> <line> <next|prev>
+ *
+ * Reads .jest-watch-output.json (the JSON output of a jest --json run) in the
+ * current directory and prints the failure that is closest to <line> in <file>,
+ * searching in the given direction.
+ *
+ * The failure locations are recovered from the stack traces inside
+ * failureMessages, i.e. the equivalent of:
+ *   .testResults[]|select(.status=="failed")|.assertionResults[]|.failureMessages
+ * filtered to frames that point at <file>.
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const args = process.argv.slice(2);
+
+if (args.length !== 4) {
+	console.error('Usage: jest-test-failure <file> <line> <next|prev> <show|go>');
+	process.exit(1);
+}
+
+const [fileArg, lineArg, direction, action] = args;
+const cursorLine = Number.parseInt(lineArg, 10);
+const testFileBase = path.basename(fileArg);
+const testFilePath = path.resolve(fileArg);
+
+if (!Number.isInteger(cursorLine)) {
+	console.error(`jest-test-failure: invalid line "${lineArg}"`);
+	process.exit(1);
+}
+if (direction !== 'next' && direction !== 'prev') {
+	console.error(
+		`jest-test-failure: direction must be "next" or "prev", got "${direction}"`,
+	);
+	process.exit(1);
+}
+if (action !== 'show' && action !== 'go') {
+	console.error(
+		`jest-test-failure: direction must be "next" or "prev", got "${action}"`,
+	);
+	process.exit(1);
+}
+
+const DATA_FILE = '.jest-watch-output.json';
+
+let data;
+try {
+	data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+} catch (err) {
+	console.error(`jest-test-failure: cannot read ${DATA_FILE}: ${err.message}`);
+	process.exit(1);
+}
+
+const FRAME_RE = /([^\s()]+\.(?:[jt]sx?|cjs|mjs)):(\d+):\d+/;
+
+const failures = [];
+function gatherFailures(assertion, fileBase = testFileBase) {
+	for (const message of assertion.failureMessages || []) {
+		// First stack frame that points back at the requested file.
+		let frameFile = null;
+		let frameLine = null;
+
+		for (const frame of message.split('\n')) {
+			const m = frame.match(FRAME_RE);
+			if (!m || path.basename(m[1]) !== fileBase) continue;
+			frameFile = m[1];
+			frameLine = Number.parseInt(m[2], 10);
+			break;
+		}
+
+		if (!frameLine) continue; // failure never touches this file
+
+		failures.push({
+			file: frameFile,
+			line: frameLine,
+			title: assertion.title,
+			message,
+		});
+	}
+}
+
+const ourFileIndex = data.testResults.findIndex((testResult) => {
+	const resultFile = testResult.name || '';
+	return (
+		path.resolve(resultFile) === testFilePath ||
+		path.basename(resultFile) === testFileBase
+	);
+});
+processFile: if (ourFileIndex >= 0) {
+	const testResult = data.testResults[ourFileIndex];
+	if (testResult.status !== 'failed') break processFile;
+
+	for (const assertion of testResult.assertionResults || []) {
+		if (assertion.status !== 'failed') continue;
+		gatherFailures(assertion);
+	}
+}
+let best = null;
+if (direction === 'next') {
+	const candidates = failures
+		.filter((f) => f.line > cursorLine)
+		.sort((a, b) => a.line - b.line);
+	best = candidates[0] ?? null;
+} else {
+	const candidates = failures
+		.filter((f) => f.line < cursorLine)
+		.sort((a, b) => b.line - a.line);
+	best = candidates[0] ?? null;
+}
+
+if (!best) {
+	if (direction === 'next') {
+		const testResult = data.testResults[ourFileIndex + 1];
+		const assertion = testResult?.assertionResults.find(
+			(a) => a.status === 'failed',
+		);
+		if (assertion) {
+			gatherFailures(assertion, path.basename(testResult.name));
+			best = failures[0];
+		}
+	} else {
+		const testResult = data.testResults[ourFileIndex - 1];
+		const assertion = testResult?.assertionResults.findLast(
+			(a) => a.status === 'failed',
+		);
+		if (assertion) {
+			gatherFailures(assertion, path.basename(testResult.name));
+			best = failures.at(-1);
+		}
+	}
+}
+if (!best) {
+	console.error(
+		`jest-test-failure: no ${direction} failure from line ${cursorLine} in ${fileArg}` +
+			` (${failures.length} failure(s) found in file)`,
+	);
+	process.exit(1);
+}
+if (action === 'go') {
+	console.log(`${best.file}:${best.line}`);
+} else {
+	console.log(`${best.file}:${best.line} — ${best.title}`);
+	console.log('---');
+	console.log(best.message.replace(/\n+$/, ''));
+}

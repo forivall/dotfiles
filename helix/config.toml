@@ -10,7 +10,45 @@ color-modes = true
 insert-final-newline = true
 # indent-style = 2
 auto-format = false
-bufferline = "multiple"
+
+# upstream ^
+# bufferline = "multiple"
+# upstream end $
+
+# gj1118 fork ^
+bufferline.render-mode = "multiple"
+
+# [editor.cmdline]
+# style = "bottom"
+# use-full-height = false
+
+[editor.notifications]
+enable = true              # Enable notification system
+style = "popup"       # "popup" (noice-style) or "statusline" (traditional)
+max-width = 60             # Maximum width for notification popups
+max-height = 3            # Maximum height for notification popups
+default-timeout = 4500     # Default timeout in milliseconds (0 = no timeout)
+show-icons = true          # Show notification type icons
+show-emojis = true         # Show notification type emojis
+max-history = 100          # Maximum notifications to keep in history
+shadow.enable = false
+
+# Border configuration
+[editor.notifications.border]
+enable = false              # Show borders around notifications
+width = 1                  # Border width
+radius = 1                 # Corner radius (0 for square corners)
+
+[editor.gradient-borders]
+enable = true
+thickness = 2
+direction = "diagonal"
+animation-speed = 0
+
+[editor.inline-blame]
+show = "never"
+format = "{commit} - {author} ({time-ago}): {title}"
+# gj1118 fork end $
 
 [editor.soft-wrap]
 enable=false
@@ -71,7 +109,10 @@ cursor-line = "info"
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
 S-m = "match_brackets"
-A-m = "select_textobject_around"
+# upstream
+# A-m = "select_textobject_around"
+# fork
+A-m = "select_textobject_around_closest_surrounding_pair"
 
 "H" = ["ensure_selections_forward", "collapse_selection", "select_mode", "goto_line_start", "exit_select_mode"]
 "L" = ["ensure_selections_forward", "flip_selections", "collapse_selection", "select_mode", "goto_line_end", "exit_select_mode"]
@@ -155,6 +196,7 @@ A-m = "select_textobject_around"
 
 [keys.normal.space.g]
 "f" = "changed_file_picker"
+"F" = ":sh gh pr-queued-files"
 "b" = ":sh gh prb"
 "a" = ":sh git add %{buffer_name}"
 "d" = ":sh it2split --no-focus git diffdh -w ${HELIX_GIT_HEAD:-HEAD} -- '%{buffer_name}'"
@@ -174,6 +216,17 @@ A-m = "select_textobject_around"
 "u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
 
+[keys.normal."["]
+"F" = [
+  ":sh it2split --no-focus jest-test-failure %{file_path_absolute} %{cursor_line} prev show",
+  ":open %sh{jest-test-failure %{file_path_absolute} %{cursor_line} prev go}",
+]
+[keys.normal."]"]
+"F" = [
+  ":sh it2split --no-focus jest-test-failure %{file_path_absolute} %{cursor_line} next show",
+  ":open %sh{jest-test-failure %{file_path_absolute} %{cursor_line} next go}",
+]
+
 [keys.normal.z]
 "x" = [
   ":toggle-option file-explorer.git-global",
@@ -188,6 +241,12 @@ A-m = "select_textobject_around"
   ":toggle-option file-picker.hidden"
 ]
 "w" = ":toggle-option soft-wrap.enable"
+
+# gj1118 fork
+"[" = "unfold"
+"]" = "fold"
+# gj1118 fork end
+
 
 [keys.normal.g]
 "h" = ["collapse_selection", "extend_to_line_start"]
