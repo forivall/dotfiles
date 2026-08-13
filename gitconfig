@@ -419,6 +419,9 @@
 [rebase]
 	autoSquash = true
 	updateRefs = true
+[interactive-rebase-tool]
+	inputUndo = u Control+z
+	inputRedo = U Control+y
 [gui]
 	editor = vscode
 [column]
