@@ -19,6 +19,10 @@ cp() {
     command $CP_COMMAND --verbose "$@"
   fi
 }
+if [[ $1 == '--help' ]]; then
+    echo "use 'to-local' to copy to local."
+    exit
+fi
 
 mu=~/.config/mackup
 appsupport="Library/Application Support"
