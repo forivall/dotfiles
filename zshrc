@@ -219,9 +219,6 @@ path=(
   ~/.zgen/deliciousinsights/git-stree-master
 )
 
-unset sourceIfExists
-
-
 ENABLE_AUTOCOMPLETE=false
 
 source "$__zshrc_dirname/zgen/zgenom.zsh"
@@ -401,7 +398,8 @@ zstyle ':autocomplete:*' min-input 3
 zstyle ':autocomplete:*' delay 0.1
 zstyle ':autocomplete:tab:*' widget-style menu-select
 
-source "${__zshrc_dirname}/plugins/unsorted/_carapace"
+sourceIfExists "${__zshrc_dirname}/plugins/unsorted/_carapace"
+unset sourceIfExists
 
 ## from ohmyzsh web-search. github is from github desktop.
 [[ $(whence -w github 2>/dev/null) == 'github: alias' ]] && unalias github
