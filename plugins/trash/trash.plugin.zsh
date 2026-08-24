@@ -30,5 +30,13 @@ fi
 alias rmd="command rm"
 alias rmdsu="sudo rm"
 
-alias mv="mv -b"
-alias cp="cp -b"
+if (( ${+commands[gmv]} )); then
+  alias mv="gmv -b"
+else
+  alias mv="mv -b"
+fi
+if (( ${+commands[gcp]} )); then
+  alias cp="gcp -b"
+else
+  alias cp="cp -b"
+fi

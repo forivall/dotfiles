@@ -362,7 +362,7 @@
 # [mergetool "meld_windows"]
 # 		cmd = \"C:\\Program Files (x86)\\Meld\\meld\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	cmd = "opendiff \"$LOCAL\" \"$REMOTE\""
 	path =
 [difftool "vscode"]
 	cmd = "code --wait \"$LOCAL\" \"$REMOTE\" --diff"
