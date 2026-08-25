@@ -31,12 +31,12 @@ alias rmd="command rm"
 alias rmdsu="sudo rm"
 
 if (( ${+commands[gmv]} )); then
-  alias mv="gmv -b"
+  alias mv="command gmv -b"
 else
   alias mv="mv -b"
 fi
 if (( ${+commands[gcp]} )); then
-  alias cp="gcp -b"
+  alias cp="command gcp -b"
 else
   alias cp="cp -b"
 fi
