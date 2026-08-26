@@ -354,6 +354,9 @@ if $ZHM_ENABLED; then
     zhm_prompt_accept
     zhm_accept
     zhm_accept_or_insert_newline
+    send-break
+  )
+  ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(
     bracketed-paste
   )
   ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
