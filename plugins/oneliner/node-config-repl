@@ -34,5 +34,7 @@ if (__configDir !== process.cwd()) {
   console.log('\rNODE_CONFIG_DIR=' + process.env.NODE_CONFIG_DIR);
   $($interactive && echo "process.stdout.write('> ');")
 }
+var util = require('util');
+function inspect(obj, opts) { console.log(util.inspect(obj, { colors: true, ...opts })) }
 ${(F)nodeEval}
 " "${nodeArgs[@]}"

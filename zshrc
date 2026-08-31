@@ -155,6 +155,8 @@ elif [[ -f {} ]]; then if [[ \$(file --brief --dereference --mime -- {}) =~ imag
 
 export FORGIT_FZF_DEFAULT_OPTS="
 --preview-window='right,nohidden'
+--delimiter='\]\s+'
+--bind 'ctrl-e:execute(hx {2} >/dev/tty)'
 "
 
 zstyle ':fzf-tab:*' continuous-trigger ''
@@ -375,7 +377,7 @@ unsetopt nomatch
 
 export CARAPACE_LENIENT=true
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export CARAPACE_EXCLUDES='cp,ls,mv,eza,git,npm,date,tsc,circleci,kill,node,gpg,brew,xh'
+export CARAPACE_EXCLUDES='cp,gcp,ls,mv,gmv,eza,git,npm,date,tsc,circleci,kill,node,gpg,brew,xh'
 export CARAPACE_MATCH=1
 zstyle ':completion:*:*:git:*' group-name ''
 zstyle ':completion:*:warnings' format '%F{yellow}%d%f'

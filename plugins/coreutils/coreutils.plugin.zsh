@@ -27,9 +27,9 @@ export LESS_TERMCAP_ZW=$(tput rsupm)
 # ls
 if whence eza > /dev/null ; then
   alias ls="eza --group-directories-first -F --color=auto"
-  alias li="eza --group-directories-first -F --color=auto --icons"
+  alias li="eza --group-directories-first -F --color=auto --icons=auto"
   alias ll="eza -alF --icons"
-  alias la="eza -a --icons"
+  alias la="eza -a --icons=auto"
   alias l="eza -F"
 else
   alias ls="$(whence ls) --group-directories-first -F --color=auto --hide=\*~ "
@@ -128,6 +128,8 @@ elif [[ -d /Applications/Preview.app || -d /System/Applications/Preview.app ]] ;
     open -a $preview_app "$mantmp.pdf"
   }
 fi
+compdef gcp=cp
+compdef gmv=mv
 compdef gman=man
 man() {
   if (( COLUMNS > 120 )); then

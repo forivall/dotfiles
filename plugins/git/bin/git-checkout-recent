@@ -92,9 +92,9 @@ else
 fi
 
 if (( ! ${#entries} )); then
-  echo "No options available"
+  echo "No options available" >&2
   if (( ${#command} )); then
-    echo '>' $command
+    echo '>' $command >&2
   fi
   exit
 fi

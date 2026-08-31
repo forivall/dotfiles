@@ -59,6 +59,10 @@ python.analysis.autoImoprtCompletion = true
 python.analysis.reportOptionalSubscript = false
 python.analysis.reportOptionalMemberAccess = false
 
+[language-server.testing-ls]
+command = "testing-language-server"
+args = []
+
 [language-server.efm]
 command = "efm-langserver"
 

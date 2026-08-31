@@ -18,4 +18,9 @@ if [[ $BAT_PAGER == moor* ]]; then
   MOORHISTFILE=$XDGBASE/moor/search_history
   printf '^(commit|❖%s%s%s%s%s)\n' "|Δ" "|added:" "|removed:" "|renamed:" "|•" >> "$MOORHISTFILE"
 fi
-BAT_PAGER=$BAT_PAGER exec delta "${deltaOpts[@]}" --pager="$BAT_PAGER" "$@"
+if [[ $1 == --no-pager ]]; then
+  shift
+  exec delta --pager=cat "${deltaOpts[@]}" "$@"
+else
+  BAT_PAGER=$BAT_PAGER exec delta "${deltaOpts[@]}" --pager="$BAT_PAGER" "$@"
+fi

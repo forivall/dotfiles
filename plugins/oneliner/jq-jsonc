@@ -12,7 +12,7 @@ done
 
 if [[ $# -gt 0 ]]; then
   for f in "$@"; do
-    rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2' $f | jq "$args[@]" "$filter"
+    rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2' $f | jq --arg input_filename "$f"  "$args[@]" "$filter"
   done
 else
   rg -P -e '("(?:[^"]|\\")*(?<!\\)")' -e '//.*' -e ',\s*(\}|\])' --multiline --passthrough --replace '$1$2' | jq "$args[@]" "$filter"

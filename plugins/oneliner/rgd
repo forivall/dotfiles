@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+if [[ $1 == --pager ]]; then
+  shift
+  rg --json "$@" | deltaw
+else
+  rg --json "$@" | deltaw --no-pager
+fi

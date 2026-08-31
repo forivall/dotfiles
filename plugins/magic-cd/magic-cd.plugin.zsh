@@ -284,7 +284,7 @@ function __fzf_magic_expand() {
 
   if [[ "$LBUFFER" = "c" ]]; then
     local dir
-    dir="$(atuin history list --reverse=false --format '{directory}' | huniq | rg --passthrough "^$HOME/" --replace '~/' | fzf)"
+    dir="$(atuin history list --reverse=false --format '{directory}' 2>/dev/null | rg -v '^unknown$' | huniq | rg --passthrough "^$HOME/" --replace '~/' 2>/dev/null | fzf)"
     if (( $? == 0 )) && [[ -n "$dir" ]]; then
       print -Pn ${PROMPT##*\${prompt_newline}}' ';
       LBUFFER="cd $dir";
