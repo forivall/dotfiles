@@ -1,5 +1,6 @@
 tap "afnanenayet/tap"
 tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
+tap "atani/tap"
 tap "bendews/tap"
 tap "brevity1swos/tap"
 tap "brimdata/tap"
@@ -22,7 +23,7 @@ tap "ikebastuz/wiper"
 tap "jarred-sumner/git-peek"
 tap "jbreckmckye/formulae"
 tap "jetpackduba/apps"
-tap "jftuga/tap"
+tap "jftuga/tap", trusted: { formulae: ["stats"] }
 tap "jorgelbg/tap"
 tap "lokalise/cli-2"
 tap "loteoo/formulas"
@@ -35,10 +36,10 @@ tap "ngrok/ngrok"
 tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
-tap "skardyy/mcat", "https://github.com/Skardyy/homebrew-mcat"
+tap "skardyy/mcat", "https://github.com/Skardyy/homebrew-mcat", trusted: true
 tap "smudge/smudge"
 tap "teamookla/speedtest"
-tap "ten0s/brew-cache"
+tap "ten0s/brew-cache", trusted: { commands: ["cache"] }
 tap "trisreed/python2"
 tap "unhappychoice/tap"
 tap "valkyrie00/bbrew", "https://github.com/Valkyrie00/homebrew-bbrew"
@@ -131,7 +132,7 @@ brew "chafa"
 brew "chawan"
 # Control Google Chrome from the command-line
 brew "chrome-cli"
-# Enables you to reproduce the CircleCI environment locally
+# Official command-line tool for CircleCI
 brew "circleci"
 # Hacker News in your terminal
 brew "circumflex"
@@ -155,6 +156,8 @@ brew "couchdb"
 brew "countdown"
 # Get, unpack, build, and install modules from CPAN
 brew "cpanminus"
+# PDF Command-line Tools
+brew "cpdf"
 # Header-only library for parsing TOML
 brew "cpptoml"
 # CPU architecture fetching tool
@@ -345,6 +348,8 @@ brew "gource"
 brew "gpac"
 # Image processing tools collection
 brew "graphicsmagick"
+# GitHub Markdown previewer
+brew "grip"
 # Image manipulation
 brew "netpbm"
 # GNU troff text-formatting system
@@ -410,7 +415,7 @@ brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Terminal Markdown previewer with a GUI-like experience
-brew "leaf-md"
+brew "leaf-markdown-viewer"
 # Pager program similar to more
 brew "less"
 # Input filter for the pager less
@@ -447,6 +452,8 @@ brew "man2html"
 brew "mandown"
 # Personal Knowledge Management System for the LSP
 brew "markdown-oxide"
+# Markdown parser and compiler built for speed
+brew "marked"
 # Markdown renderer in the terminal written in rust
 brew "md-tui"
 # Terminal e-mail client and e-mail client library
@@ -495,8 +502,6 @@ brew "neovim"
 brew "nmap"
 # Tiny, lightning fast, feature-packed file manager
 brew "nnn"
-# Modern shell for the GitHub era
-brew "nushell"
 # Manage multiple Node.js versions
 brew "nvm"
 # Renders an animated, color, ANSI-text loop of the Poptart Cat
@@ -615,8 +620,6 @@ brew "sl"
 brew "sloc"
 # Count lines of code in many languages
 brew "sloccount"
-# Ruby language server
-brew "solargraph"
 # SOund eXchange: universal sound sample translator
 brew "sox"
 # Code surgeon for precise text and code transplantation
@@ -663,12 +666,8 @@ brew "vsce"
 brew "w3m"
 # Low level tooling for WebAssembly in Rust
 brew "wasm-tools"
-# Universal WebAssembly Runtime
-brew "wasmer"
 # Watch files and take action when they change
 brew "watchman"
-# Entity-level semantic merge driver for Git using tree-sitter
-brew "weave"
 # Extensible IRC client
 brew "weechat"
 # Weather app for the terminal
@@ -701,6 +700,8 @@ brew "zlib"
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
+# Glow-like Markdown CLI with Mermaid diagrams (iTerm2/Kitty inline images + PDF)
+brew "atani/tap/glowm", trusted: true
 # A command-line tool for processing data in diverse input formats,
 # providing search, analytics, and extensive transormations using the Zed
 # query language.
@@ -713,6 +714,8 @@ brew "charmbracelet/tap/mods"
 brew "charmbracelet/tap/vhs"
 # Terraform
 brew "hashicorp/tap/terraform"
+# a powerfull extended cat command, to cat all the things you couldn't before
+brew "skardyy/mcat/mcat"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
 brew "smudge/smudge/nightlight", trusted: true
 # Ookla Speedtest
@@ -733,6 +736,8 @@ cask "bruno"
 cask "caffeine"
 # Control USB Cameras from an app
 cask "cameracontroller"
+# Terminal emulator
+cask "canario"
 cask "cleardisk"
 # Clipboard extension app
 cask "clipy"
@@ -752,8 +757,6 @@ cask "db-browser-for-sqlite"
 cask "deeper"
 # Tool to investigate the history of source code
 cask "deepgit"
-# Utility to fix a common scroll wheel problem
-cask "discretescroll"
 # Drivers for DisplayLink docks, adapters and monitors
 cask "displaylink"
 # Window peeking utility app
@@ -766,8 +769,6 @@ cask "easy-move+resize"
 cask "elgato-stream-deck"
 # Monitor filesystem activity
 cask "filemonitor"
-# Multi-protocol API development platform
-cask "firecamp"
 # Web browser
 cask "firefox"
 cask "font-abeezee"
@@ -779,13 +780,18 @@ cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-hubballi"
 cask "font-input"
+cask "font-inter"
+cask "font-iosevka-charon"
+cask "font-iosevka-charon-mono"
 cask "font-iosevka-nerd-font"
 cask "font-iosevka-ss17"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-khula"
+cask "font-poppins"
 cask "font-recursive"
 cask "font-recursive-code"
+cask "font-rethink-sans"
 cask "font-roboto"
 cask "font-roboto-mono"
 cask "font-roboto-mono-nerd-font"
@@ -821,13 +827,13 @@ cask "github"
 # Git interface focused on visual interaction
 cask "gitup-app"
 # Web browser
+cask "google-chrome@beta"
+# Web browser
 cask "google-chrome@dev"
 # Tools to protect your files
 cask "gpg-suite-no-mail"
 # Graphically shows disk usage within a file system
 cask "grandperspective"
-# Set which graphics card to use
-cask "gswitch"
 # Desktop automation application
 cask "hammerspoon"
 # Chromium-based web browser
@@ -836,8 +842,6 @@ cask "helium-browser"
 cask "inkscape"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-# Standalone Java Decompiler GUI
-cask "jd-gui"
 # Open-source screen recorder built with web technology
 cask "kap"
 # Keyboard customiser
@@ -858,8 +862,6 @@ cask "launchpad-manager"
 cask "lidanglesensor"
 # Customise mouse behavior
 cask "linearmouse"
-# Host-based application firewall
-cask "little-snitch"
 # Software for Logitech devices
 cask "logi-options+"
 # Provides access to camera controls
@@ -911,6 +913,8 @@ cask "qr-journal"
 # Control your tools with a few keystrokes
 cask "raycast"
 cask "remarkable"
+# Hardware-accelerated GPU terminal emulator
+cask "rio"
 cask "robo-3t"
 # JavaScript playground that auto-evaluates as code is typed
 cask "runjs"
@@ -934,8 +938,6 @@ cask "sublime-merge"
 cask "sublime-text"
 # Replacement for RCDefaultApps, written in Swift
 cask "swiftdefaultappsprefpane"
-# Enables you to control your computer with voice, eye tracking, or noises
-cask "talon"
 # Customizable timing of breaks
 cask "time-out"
 # Configurable document editor that supports Markdown
@@ -1393,6 +1395,7 @@ go "github.com/dhth/act3"
 go "github.com/lichtzeichner/base64url"
 go "github.com/maaslalani/confetty"
 go "github.com/dlvhdr/diffnav"
+go "github.com/shilangyu/driveignore"
 go "github.com/tfkhdyt/geminicommit"
 go "github.com/silouanwright/gh-comment"
 go "github.com/yukikotani231/gh-pr-review"
@@ -1413,6 +1416,7 @@ go "github.com/ChausseBenjamin/termpicker"
 go "github.com/kopecmaciej/vi-mongo"
 go "github.com/google/yamlfmt/cmd/yamlfmt"
 cargo "ate-pager"
+cargo "basic-http-server"
 cargo "bingrep"
 cargo "boilerfiles"
 cargo "cargo-cache"
@@ -1438,11 +1442,14 @@ cargo "hx-lsp"
 cargo "igrep"
 cargo "kondo"
 cargo "kondo-ui"
-cargo "lalrpop-lsp"
+cargo "lalrpop-lsp", source: "https://github.com/LighghtEeloo/lalrpop-lsp.git"
 cargo "lobtui"
 cargo "lsp-servers-cli"
 cargo "markdown-reader"
+cargo "markdown2html-converter"
 cargo "md-tui"
+cargo "mds"
+cargo "mjml-lsp"
 cargo "mq-run"
 cargo "nucleo-ui"
 cargo "octosurfer"
@@ -1460,7 +1467,11 @@ cargo "serie"
 cargo "sigye"
 cargo "steel-interpreter"
 cargo "steel-language-server"
+cargo "svg-format"
+cargo "svgtidy"
 cargo "swpui"
+cargo "testing-language-server"
+cargo "testing-ls-adapter"
 cargo "timg"
 cargo "toml-cli"
 cargo "tongo"
@@ -1501,6 +1512,7 @@ npm "jsparser"
 npm "llnode"
 npm "lodash-cli"
 npm "mcp-angular-local"
+npm "mdts"
 npm "mrgit"
 npm "nice-napi"
 npm "node-debug2"
