@@ -1,1 +1,6 @@
-local TMPFILE=$(mktemp $@); > $TMPFILE; echo $TMPFILE
+typeset -a MKTEMP_ARGS
+while [[ "$1" != -- ]]; do MKTEMP_ARGS+=($1); shift; done
+shift
+local TMPFILE=$(mktemp "${MKTEMP_ARGS[@]}");
+> $TMPFILE;
+if (( $# >= 1 )); then "$@" $TMPFILE; else echo $TMPFILE; fi

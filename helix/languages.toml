@@ -106,6 +106,7 @@ includeInlayVariableTypeHints = true
 
 [language-server.tsgo]
 command = "tsgo"
+# command = "/opt/homebrew/bin/tsc"
 args = ["--lsp", "--stdio"]
 
 [language-server.tsgo.config.typescript]

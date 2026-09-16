@@ -183,7 +183,7 @@ A-m = "select_textobject_around_closest_surrounding_pair"
 "X" = ":sh gh pr-file-unviewed-gql '%{buffer_name}'"
 "t" = [
   ":write-all",
-  ":sh it2split --no-focus jest '%{buffer_name}' $(findrelated '%{buffer_name}')",
+  ":sh it2split --no-focus jest --json --outputFile .jest-watch-output.json '%{buffer_name}' $(findrelated '%{buffer_name}')",
 ]
 "-" = ":sh git removed %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
 "_" = ":insert-output git removed --insert %{cursor_line} ${HELIX_GIT_HEAD:-HEAD} -- %{buffer_name}"
@@ -215,6 +215,7 @@ A-m = "select_textobject_around_closest_surrounding_pair"
 "y" = ":sh gh browse --commit=%sh{git nearest-remote-rev} '%{buffer_name}:%{selection_line_start}' --no-browser | pbcopy"
 "u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
+"V" = ":sh open-in-editor %{current_working_directory} %{buffer_name} %{cursor_line}"
 
 [keys.normal."["]
 "F" = [

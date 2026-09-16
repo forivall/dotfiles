@@ -12,6 +12,7 @@ function md() {
 }
 function cargo-repo() {
   cargo info $@ | sed -n s/repository:\ //p
+  # xh https://crates.io/api/v1/crates/$1 | jq -r .crate.repository
 }
 function cargo-clone() {
   git clone $(cargo-repo $@)

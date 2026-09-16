@@ -119,6 +119,10 @@ aliases:
   prc: pr create --web
   ib: issue view --web
   issue-url: issue view --json url --jq .url
+  next-issue-number: |
+    !(gh issue list --json number --limit 1 --search 'sort:created-desc' &&
+      gh pr list --json number --limit 1 --search 'sort:created-desc'
+     ) | jq --slurp '[.[].[].number] | max | . + 1'
   brb: '!gh browse --branch $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "" ) "$@"'
   generated-patterns: "!rg ' linguist-generated(=true)?' .gitattributes --replace= --no-line-number"
   project-items-with-status: "!gh project item-list --owner $(gh repo view --json owner --jq .owner.login) $1 --format json --jq '.items[] | select(.status == \"'\"$2\"'\") | .content.number'"

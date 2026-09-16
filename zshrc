@@ -404,6 +404,7 @@ zstyle ':autocomplete:*' delay 0.1
 zstyle ':autocomplete:tab:*' widget-style menu-select
 
 sourceIfExists "${__zshrc_dirname}/plugins/unsorted/_carapace"
+sourceIfExists ~/.local/zshrc
 unset sourceIfExists
 
 ## from ohmyzsh web-search. github is from github desktop.

@@ -199,6 +199,7 @@ prompt_pure_sync_refresh() {
 	prompt_pure_set_title 'expand-prompt' '%~'
 	prompt_pure_set_colors
 	async_run_job_sync prompt_pure_async_callback prompt_pure_async_vcs_info
+	async_run_job_sync prompt_pure_async_callback prompt_pure_async_github_pr
 	async_run_job_sync prompt_pure_async_callback prompt_pure_async_git_arrows
 	async_run_job_sync prompt_pure_async_callback prompt_pure_async_git_dirty ${PURE_GIT_UNTRACKED_DIRTY:-1}
 	prompt_pure_preprompt_render

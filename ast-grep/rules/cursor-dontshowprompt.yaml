@@ -2,4 +2,4 @@ id: cursor-dontshowprompt
 language: JavaScript
 rule:
   pattern: "$C?.dontShowPrompt&&$C.commit===this.productService.commit"
-fix: "!0||$C?.dontShowPrompt&&$C.commit===this.productService.commit"
+fix: "(this.storage.set({dontShowPrompt:!0,commit:this.productService.commit}),!0)||$C?.dontShowPrompt&&$C.commit===this.productService.commit"
