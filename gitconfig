@@ -25,6 +25,7 @@
 [log]
   excludeDecoration = refs/jj/**
   allExcludes = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages
+  defaultLimit = 10000
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	minus-style = syntax auto
@@ -75,14 +76,16 @@
 
 	diffcd = -c core.pager=deltaw diff --cached
 	showd = -c core.pager=deltaw show
+	showt = -c diff.external=difft show
 	stashsd = -c core.pager=deltaw stash show -p
 	last = -c pager.show=off show --oneline --name-status --decorate
 	last2 = last --name-status --pretty=twomore
-	l = log --pretty=oneline --abbrev-commit --decorate --graph
-	lc = "!f() { git log --pretty=oneline --abbrev-commit --decorate --graph ${1:-HEAD} $(git branch --format=\"%(objectname:short)\" --all --contains ${1:-HEAD}) ${@:2}; }; f"
+  # see `git config log.defaultLimit` for max-count
+	l = log --pretty=oneline --abbrev-commit --decorate --graph --max-count=10000
+	lc = "!f() { git log --pretty=oneline --abbrev-commit --decorate --graph ${1:-HEAD} $(git branch --format=\"%(objectname:short)\" --all --contains ${1:-HEAD} --max-count=$(git config log.defaultLimit)) ${@:2}; }; f"
 	lr = log --pretty=oneline --abbrev-commit --decorate --reverse
 	lm = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration --tags
-	lp = !git log --pretty=oneline --abbrev-commit --decorate --graph HEAD $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name)*\")
+	lp = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name)*\")"
 	lu = logu --pretty=oneline --abbrev-commit --decorate --graph
 	lup = "!git log --pretty=oneline --abbrev-commit --decorate --graph HEAD @{u} $(git rev-parse --symbolic --glob=\"$(git rev-parse --symbolic-full-name @{u})*\")"
 	lus = log --pretty=oneline --abbrev-commit --decorate --graph --simplify-by-decoration HEAD @{u}
@@ -96,6 +99,8 @@
 	lg = log --name-status --pretty=oneline --abbrev-commit --decorate --graph
 	lga = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
 	lgaa = log --name-status --pretty=oneline --abbrev-commit --decorate --graph --all
+	l2a = log --pretty=onemore --decorate --graph --no-notes  --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
+	l3a = log --pretty=twoline --decorate --graph --date=local  --exclude=refs/stash --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages --all
 	lg2 = log --name-status --pretty=onemore --graph --no-notes
 	lg3 = log --name-status --pretty=twoline --graph --date=local
 	lgp = log -p --pretty=onemore --graph

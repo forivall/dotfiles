@@ -16,6 +16,7 @@ generate_completions rustup completions zsh
 generate_completions srgn --completions zsh
 generate_completions dua completions zsh
 generate_completions mcat --generate zsh
+generate_completions procs --gen-completion zsh
 COMPLETE=zsh generate_completions treemd
 [[ -f _treemd ]] && sd --fixed-strings 'compdef _clap_dynamic_completer_treemd treemd
 ' 'if [ "$funcstack[1]" = "_treemd" ]; then
@@ -32,5 +33,3 @@ patch -p3 -f -i tv-init.patch
 
 broot --set-install-state installed
 broot --print-shell-function zsh > $__dirname/broot.source.zsh
-
-(( ${+commands[procs]} )) && (cd  $__dirname && procs --gen-completion zsh)

@@ -35,10 +35,11 @@ aliases:
     BROWSE=open
     ARGS=()
     if [[ $1 == --no-browser ]]; then BROWSE=echo; ARGS+=($1); shift; fi
-    if [[ $1 =~ ^(node_modules/(@[^/]+/)?[^/]+)/ ]]; then
+    FULL_PATH="$(git rev-parse --show-prefix)$1"
+    if [[ $FULL_PATH =~ ^(node_modules/(@[^/]+/)?[^/]+)/ ]]; then
       ROOT="$(jq -r '(if .repository | type == "string" then { url: .repository } else .repository end) | ((.url // .) | sub("^.*[:/](?<r>[^/]+/[^/]+?)(?:\\.git)?/?$"; "\(.r)")) + "/tree/HEAD" + if .directory then "/" + .directory else "" end' "${BASH_REMATCH[1]}/package.json")"
       # alternatively, use get-pkg-repo (part of npm)
-      $BROWSE "https://github.com/$ROOT/${1:${#BASH_REMATCH[0]}}"
+      $BROWSE "https://github.com/$ROOT/${FULL_PATH:${#BASH_REMATCH[0]}}"
       exit
     fi
     gh browse "${ARGS[@]}" --commit=$(git nearest-remote-rev) $1
@@ -348,7 +349,7 @@ aliases:
       [[ "$body" == "$new_body" ]] && continue
 
       if prompt "Update review comment #$id ($login) $filepath:$line? (y/N/p) " "$body" "$new_body"; then
-        gh api -X PATCH "repos/{owner}/{repo}/pulls/comments/${id}" -f body="$new_body" --jq '"Updated" + (.id|tostring) + " " + .node_id + " " + .html_url'
+        gh api -X PATCH "repos/{owner}/{repo}/pulls/comments/${id}" -f body="$new_body" --jq '"Updated " + (.id|tostring) + " " + .node_id + " " + .html_url'
       fi
     done
 

@@ -1,0 +1,4 @@
+#!/bin/zsh
+node "${@: 1:$#-1}" -e "var stdin = ''; process.stdin.on('readable', function() {var chunk; while(chunk = process.stdin.read()) { stdin += chunk; }}).on('end', function() {
+console.log(require('$(npm -g prefix)/lib/node_modules/beautiful-mermaid').renderMermaidAscii(stdin, { paddingX: 1, paddingY: 2, boxBorderPadding: 0}));
+});"

@@ -136,6 +136,8 @@ A-m = "select_textobject_around_closest_surrounding_pair"
   ":sh rm -f /tmp/unique-file-h21a434",
   # ':insert-output lf --selection-path=/tmp/unique-file-h21a434 "%sh{echo %{buffer_name}}"',
   ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file-h21a434',
+  # this nnn doesnt work.
+  # ':insert-output NNN_OPTS="C" nnnhx "%sh{dirname %{file_path_absolute}}" -p /tmp/unique-file-h21a434',
   ':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
   ":open %sh{cat /tmp/unique-file-h21a434}",
   ":redraw",
@@ -213,6 +215,7 @@ A-m = "select_textobject_around_closest_surrounding_pair"
 "L" = ":sh it2split --no-focus git logd -w -L'%{selection_line_start},%{selection_line_end}:%{buffer_name}'"
 "o" = ":sh gh pr-file-browse-at '%{buffer_name}' 'R%{selection_line_start}-R%{selection_line_end}'"
 "O" = ":sh gh browse-from-editor '%{buffer_name}#L%{selection_line_start}'"
+"Y" = ":sh gh browse-from-editor --no-browser '%{buffer_name}#L%{selection_line_start}'"
 "y" = ":sh gh browse --commit=%sh{git nearest-remote-rev} '%{buffer_name}:%{selection_line_start}' --no-browser | pbcopy"
 "u" = ":sh it2split --pause gh pr-add-review-thread-at %{buffer_name} %{selection_line_start} %{selection_line_end} \"\""
 "U" = ":sh gh pr-add-review-thread-suggestion %{buffer_name} %{selection_line_start} %{selection_line_end} \"$(pbpaste)\""
@@ -242,6 +245,7 @@ A-m = "select_textobject_around_closest_surrounding_pair"
   ":toggle-option file-picker.hidden"
 ]
 "w" = ":toggle-option soft-wrap.enable"
+"V" = ":sh wait-code --no-wait -g %{buffer_name}:%{cursor_line}:%{cursor_column}"
 
 # gj1118 fork
 "[" = "unfold"
