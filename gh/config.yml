@@ -9,8 +9,8 @@ prompt: enabled
 pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
-  auth-current: auth status --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
-  whoami: auth status --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
+  auth-current: auth status --active  --active--json hosts --jq '.hosts[][].login'
+  whoami: auth status --active --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
   auth-setup-gcm-local: |
     ! set -x
     remotename=${1:-origin};
@@ -451,6 +451,31 @@ aliases:
   pr-review-comments-gql: |
     ! gh pr-review-comments-gql-raw "$@" |
       jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) ]'
+  pr-latest-review-gql: |
+    ! [[ $# -gt 0 && $1 != --* ]] && GH_PR=$1 && shift
+      [[ -n "$GH_PR" ]] || GH_PR=$(gh pr view --json number --jq .number) || exit $?
+      [[ $# -gt 0 && $1 != --* ]] && GH_LOGIN=$1 && shift
+      [[ -n "$GH_LOGIN" ]] || GH_LOGIN=$(gh auth status --active --json hosts --jq '.hosts[][].login') || exit $?
+      JQ_EXPR='.'
+      [[ $# -gt 0 && $1 = --jq ]] && JQ_EXPR="$2" && shift 2
+      [[ $# -gt 0 && $1 = --jq=* ]] && JQ_EXPR="${1#--jq=}" && shift
+      gh api graphql -F 'owner={owner}' -F 'repo={repo}' -F "pr=$GH_PR" -F "login=$GH_LOGIN" -f query='
+      query($owner: String!, $repo: String!, $pr: Int!, $login: String!) {
+        repository(owner: $owner, name: $repo) {
+          pullRequest(number: $pr) {
+            reviews(last: 1, author: $login) {
+              nodes {
+                authorAssociation
+                commit { oid message }
+                createdAt
+                publishedAt
+                state
+              }
+            }
+          }
+        }
+      }
+    ' --jq ".data.repository.pullRequest.reviews.nodes[] | $JQ_EXPR" "$@"
   pr-unresolved-comments-gql: |
     !
     nodeconditions=""
