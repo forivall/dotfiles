@@ -1,0 +1,490 @@
+#compdef git-branchless
+#description Branchless workflow for Git
+
+_git-branchless() {
+  local curcontext="$curcontext" state state_descr line ret=1
+  typeset -A opt_args
+
+  _arguments -C \
+    '-C+[change to directory before running]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(- :)'{-h,--help}'[print help]' \
+    '(- :)'{-V,--version}'[print version]' \
+    '(-): :->command' \
+    '(-)*:: :->option-or-argument' && ret=0
+
+  case $state in
+    (command)
+      local -a commands
+      commands=(
+        'amend:amend the current HEAD commit'
+        'bug-report:gather information for a bug report'
+        'difftool:use partial commit selector as a Git difftool'
+        'gc:run internal garbage collection'
+        'hide:hide commits from the smartlog'
+        'init:initialize the branchless workflow'
+        'install-man-pages:install man-pages to a path'
+        'move:move a subtree of commits'
+        'next:move to a later commit in the stack'
+        'prev:move to an earlier commit in the stack'
+        'query:query the commit graph with revsets'
+        'repair:restore internal invariants'
+        'restack:fix up commits abandoned by a rewrite'
+        'record:create a commit by interactively selecting changes'
+        'reword:reword commits'
+        'smartlog:show the smartlog'
+        'split:split commits'
+        'submit:push commits to a remote'
+        'switch:switch to a branch or commit'
+        'sync:move local stacks onto the main branch'
+        'test:run a command on each commit in a set'
+        'undo:browse or return to a previous state'
+        'unhide:unhide previously-hidden commits'
+        'wrap:wrap a Git command in a branchless transaction'
+        'help:print help'
+      )
+      _describe -t commands 'git-branchless command' commands && ret=0
+      ;;
+    (option-or-argument)
+      curcontext="${curcontext%:*}:git-branchless-$line[1]:"
+      case $line[1] in
+        (amend)            _git-branchless-amend ;;
+        (bug-report)       _git-branchless-bug-report ;;
+        (difftool)         _git-branchless-difftool ;;
+        (gc)               _git-branchless-gc ;;
+        (hide)             _git-branchless-hide ;;
+        (init)             _git-branchless-init ;;
+        (install-man-pages) _git-branchless-install-man-pages ;;
+        (move)             _git-branchless-move ;;
+        (next)             _git-branchless-next ;;
+        (prev)             _git-branchless-prev ;;
+        (query)            _git-branchless-query ;;
+        (repair)           _git-branchless-repair ;;
+        (restack)          _git-branchless-restack ;;
+        (record)           _git-branchless-record ;;
+        (reword)           _git-branchless-reword ;;
+        (smartlog)         _git-branchless-smartlog ;;
+        (split)            _git-branchless-split ;;
+        (submit)           _git-branchless-submit ;;
+        (switch)           _git-branchless-switch ;;
+        (sync)             _git-branchless-sync ;;
+        (test)             _git-branchless-test ;;
+        (undo)             _git-branchless-undo ;;
+        (unhide)           _git-branchless-unhide ;;
+        (wrap)             _git-branchless-wrap ;;
+        (help)             _message 'subcommand' ;;
+      esac
+      ;;
+  esac
+
+  return ret
+}
+
+# Shared option groups (appended by subcommands)
+
+_git-branchless-amend() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force rewriting public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '--in-memory[only attempt an in-memory rebase]' \
+    '--on-disk[skip in-memory rebase and try on-disk directly]' \
+    '--no-deduplicate-commits[skip deduplication of identical commits]' \
+    '(-m --merge)'{-m,--merge}'[attempt to resolve merge conflicts]' \
+    '--reparent[keep descendant contents the same (reparent them)]' \
+    '--debug-dump-rebase-constraints[print rebase constraints before executing]' \
+    '--debug-dump-rebase-plan[print rebase plan before executing]' \
+    '--untracked=[how to handle untracked files]:STRATEGY:(add disable prompt skip)' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-bug-report() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-difftool() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-d --dir-diff)'{-d,--dir-diff}'[compare two directories recursively]' \
+    '--read-only[disable editing controls and do not write to disk]' \
+    '(-N --dry-run)'{-N,--dry-run}'[show what would be written without writing it]' \
+    '(-b --base=)'{-b,--base=}'[use this file as base for a three-way diff]:BASE:_files' \
+    '(-o --output=)'{-o,--output=}'[write resolved merge conflicts to this file]:OUTPUT:_files' \
+    ':left file:_files' \
+    ':right file:_files' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-gc() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-hide() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '--no-delete-branches[do not delete branches pointing to hidden commits]' \
+    '(-r --recursive)'{-r,--recursive}'[recursively hide children commits]' \
+    '*::revsets:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-init() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--uninstall[uninstall the branchless workflow]' \
+    '--main-branch=[use this as the main branch name]:BRANCH:__git_branch_names' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-install-man-pages() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    ':install path:_directories' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-move() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-s --source=)'{-s,--source=}'[source commit to move]:SOURCE:__git_commits' \
+    '(-b --base=)'{-b,--base=}'[base commit inside subtree to move]:BASE:__git_commits' \
+    '(-x --exact=)'{-x,--exact=}'[exact set of commits to move]:EXACT:__git_commits' \
+    '(-d --dest=)'{-d,--dest=}'[destination commit]:DEST:__git_commits' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force moving public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '--in-memory[only attempt an in-memory rebase]' \
+    '--on-disk[skip in-memory rebase and try on-disk directly]' \
+    '--no-deduplicate-commits[skip deduplication of identical commits]' \
+    '(-m --merge)'{-m,--merge}'[attempt to resolve merge conflicts]' \
+    '--reparent[keep descendant contents the same]' \
+    '--debug-dump-rebase-constraints[print rebase constraints before executing]' \
+    '--debug-dump-rebase-plan[print rebase plan before executing]' \
+    '(-F --fixup)'{-F,--fixup}'[squash moved commits into the destination commit]' \
+    '(-I --insert)'{-I,--insert}'[insert subtree between destination and its children]' \
+    '--dry-run[test whether an in-memory rebase would succeed]' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-next() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-a --all)'{-a,--all}'[traverse as many commits as possible]' \
+    '(-b --branch)'{-b,--branch}'[move by branches rather than commits]' \
+    '(-o --oldest)'{-o,--oldest}'[choose the oldest when multiple next commits]' \
+    '(-n --newest)'{-n,--newest}'[choose the newest when multiple next commits]' \
+    '(-i --interactive)'{-i,--interactive}'[interactively prompt which to advance to]' \
+    '(-m --merge)'{-m,--merge}'[attempt to merge local changes with destination]' \
+    '(-f --force)'{-f,--force}'[discard conflicting local changes]' \
+    '::number of commits:' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-prev() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-a --all)'{-a,--all}'[traverse as many commits as possible]' \
+    '(-b --branch)'{-b,--branch}'[move by branches rather than commits]' \
+    '(-o --oldest)'{-o,--oldest}'[choose the oldest when multiple commits]' \
+    '(-n --newest)'{-n,--newest}'[choose the newest when multiple commits]' \
+    '(-i --interactive)'{-i,--interactive}'[interactively prompt which to advance to]' \
+    '(-m --merge)'{-m,--merge}'[attempt to merge local changes with destination]' \
+    '(-f --force)'{-f,--force}'[discard conflicting local changes]' \
+    '::number of commits:' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-query() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-b --branches)'{-b,--branches}'[print branches attached to resulting commits]' \
+    '(-r --raw)'{-r,--raw}'[print OIDs, one per line]' \
+    ':revset:' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-repair() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--no-dry-run[apply changes]' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-restack() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force moving public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '--in-memory[only attempt an in-memory rebase]' \
+    '--on-disk[skip in-memory rebase and try on-disk directly]' \
+    '--no-deduplicate-commits[skip deduplication of identical commits]' \
+    '(-m --merge)'{-m,--merge}'[attempt to resolve merge conflicts]' \
+    '--reparent[keep descendant contents the same]' \
+    '--debug-dump-rebase-constraints[print rebase constraints before executing]' \
+    '--debug-dump-rebase-plan[print rebase plan before executing]' \
+    '*::revsets:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-record() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-m --message=)'{-m,--message=}'[commit message]:MESSAGE:' \
+    '--fixup=[commit to fix up]:COMMIT:__git_commits' \
+    '(-i --interactive)'{-i,--interactive}'[interactively select changes to include]' \
+    '(-c --create=)'{-c,--create=}'[create and switch to a new branch]:BRANCH:' \
+    '(-d --detach)'{-d,--detach}'[detach the current branch before committing]' \
+    '(-I --insert)'{-I,--insert}'[insert the new commit between current commit and its children]' \
+    '(-s --stash)'{-s,--stash}'[switch back to the previous commit after committing]' \
+    '--untracked=[how to handle untracked files]:STRATEGY:(add disable prompt skip)' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-reword() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force rewording public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '(-m --message=)'{-m,--message=}'[commit message]:MESSAGE:' \
+    '--fixup=[commit to fix up]:COMMIT:__git_commits' \
+    '(-d --discard)'{-d,--discard}'[throw away original commit messages]' \
+    '*::revsets:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-smartlog() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--event-id=[point in time to show smartlog]:EVENT_ID:' \
+    '--reverse[print smartlog in opposite order (deprecated)]' \
+    '--exact[do not automatically add HEAD and main branch]' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '::revset:' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-split() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-b --before)'{-b,--before}'[insert extracted commit before the split commit]' \
+    '(-d --detach)'{-d,--detach}'[restack descendants onto the split commit]' \
+    '(-D --discard)'{-D,--discard}'[do not recommit extracted changes]' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force moving public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '--in-memory[only attempt an in-memory rebase]' \
+    '--on-disk[skip in-memory rebase and try on-disk directly]' \
+    '--no-deduplicate-commits[skip deduplication of identical commits]' \
+    '(-m --merge)'{-m,--merge}'[attempt to resolve merge conflicts]' \
+    '--reparent[keep descendant contents the same]' \
+    '--debug-dump-rebase-constraints[print rebase constraints before executing]' \
+    '--debug-dump-rebase-plan[print rebase plan before executing]' \
+    ':revset:__git_commits' \
+    '*:files:_files' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-submit() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-F --forge=)'{-F,--forge=}'[Git hosting provider]:FORGE:(branch github phabricator)' \
+    '(-c --create)'{-c,--create}'[create remote objects by pushing]' \
+    '(-d --draft)'{-d,--draft}'[create code reviews in draft mode]' \
+    '(-m --message=)'{-m,--message=}'[message to include with create or update]:MESSAGE:' \
+    '(-j --jobs=)'{-j,--jobs=}'[number of parallel jobs]:NUM_JOBS:' \
+    '(-s --strategy=)'{-s,--strategy=}'[execution strategy]:STRATEGY:(working-copy worktree)' \
+    '(-n --dry-run)'{-n,--dry-run}'[report what would be pushed without pushing]' \
+    '*::revsets:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-switch() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-i --interactive)'{-i,--interactive}'[interactively select a commit to check out]' \
+    '(-c --create=)'{-c,--create=}'[create a branch with this name]:BRANCH_NAME:' \
+    '(-f --force)'{-f,--force}'[forcibly switch, discarding working copy changes]' \
+    '(-m --merge)'{-m,--merge}'[start merge conflict resolution if changes do not apply cleanly]' \
+    '(-d --detach)'{-d,--detach}'[switch to branch and immediately detach from it]' \
+    '::target:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-sync() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-p --pull)'{-p,--pull}'[run git fetch to update remote references before syncing]' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force moving public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '--in-memory[only attempt an in-memory rebase]' \
+    '--on-disk[skip in-memory rebase and try on-disk directly]' \
+    '--no-deduplicate-commits[skip deduplication of identical commits]' \
+    '(-m --merge)'{-m,--merge}'[attempt to resolve merge conflicts]' \
+    '--reparent[keep descendant contents the same]' \
+    '--debug-dump-rebase-constraints[print rebase constraints before executing]' \
+    '--debug-dump-rebase-plan[print rebase plan before executing]' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '*::revsets:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-test() {
+  local curcontext="$curcontext" state state_descr line ret=1
+  typeset -A opt_args
+
+  _arguments -C \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(- :)'{-h,--help}'[print help]' \
+    '(-): :->command' \
+    '(-)*:: :->option-or-argument' && ret=0
+
+  case $state in
+    (command)
+      local -a commands
+      commands=(
+        'clean:clean cached test results'
+        'run:run a command on a set of commits'
+        'show:show results of previous test runs'
+        'fix:rewrite commits by running a command on each'
+        'help:print help'
+      )
+      _describe -t commands 'git-branchless test command' commands && ret=0
+      ;;
+    (option-or-argument)
+      curcontext="${curcontext%:*}:git-branchless-test-$line[1]:"
+      case $line[1] in
+        (clean) _git-branchless-test-clean ;;
+        (run)   _git-branchless-test-run ;;
+        (show)  _git-branchless-test-show ;;
+        (fix)   _git-branchless-test-fix ;;
+        (help)  _message 'subcommand' ;;
+      esac
+      ;;
+  esac
+
+  return ret
+}
+
+_git-branchless-test-clean() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '::revset:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-test-run() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-x --exec=)'{-x,--exec=}'[ad-hoc command to execute on each commit]:EXEC:' \
+    '(-c --command=)'{-c,--command=}'[test command alias]:COMMAND:' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-v --verbose)'{-v,--verbose}'[show test output as well]' \
+    '(-s --strategy=)'{-s,--strategy=}'[execution strategy]:STRATEGY:(working-copy worktree)' \
+    '(-S --search=)'{-S,--search=}'[search for first failing commit]:SEARCH:(linear reverse binary)' \
+    '(-b --bisect)'{-b,--bisect}'[shorthand for --search binary]' \
+    '--no-cache[do not read or write to the cache]' \
+    '(-i --interactive)'{-i,--interactive}'[run test command in the foreground]' \
+    '(-j --jobs=)'{-j,--jobs=}'[number of parallel jobs]:JOBS:' \
+    '::revset:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-test-show() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-x --exec=)'{-x,--exec=}'[ad-hoc command to execute on each commit]:EXEC:' \
+    '(-c --command=)'{-c,--command=}'[test command alias]:COMMAND:' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-v --verbose)'{-v,--verbose}'[show test output as well]' \
+    '::revset:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-test-fix() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-x --exec=)'{-x,--exec=}'[ad-hoc command to execute on each commit]:EXEC:' \
+    '(-c --command=)'{-c,--command=}'[test command alias]:COMMAND:' \
+    '(-n --dry-run)'{-n,--dry-run}'[do not rewrite commits, just print summary]' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-v --verbose)'{-v,--verbose}'[show test output as well]' \
+    '(-s --strategy=)'{-s,--strategy=}'[execution strategy]:STRATEGY:(working-copy worktree)' \
+    '--no-cache[do not read or write to the cache]' \
+    '(-j --jobs=)'{-j,--jobs=}'[number of parallel jobs]:JOBS:' \
+    '(-f --force-rewrite)'{-f,--force-rewrite}'[force moving public commits]' \
+    '--fr[alias for --force-rewrite]' \
+    '--in-memory[only attempt an in-memory rebase]' \
+    '--on-disk[skip in-memory rebase and try on-disk directly]' \
+    '--no-deduplicate-commits[skip deduplication of identical commits]' \
+    '(-m --merge)'{-m,--merge}'[attempt to resolve merge conflicts]' \
+    '--reparent[keep descendant contents the same]' \
+    '--debug-dump-rebase-constraints[print rebase constraints before executing]' \
+    '--debug-dump-rebase-plan[print rebase plan before executing]' \
+    '::revset:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-undo() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '(-i --interactive)'{-i,--interactive}'[interactively browse previous states]' \
+    '(-y --yes)'{-y,--yes}'[skip confirmation and apply changes immediately]' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-unhide() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--hidden[include hidden commits in revset evaluation]' \
+    '(-r --recursive)'{-r,--recursive}'[recursively unhide children commits]' \
+    '*::revsets:__git_commits' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless-wrap() {
+  _arguments -S \
+    '-C+[change to directory]: :_directories' \
+    '--color=[force color output]:COLOR:(auto always never)' \
+    '--git-executable=[git executable to invoke]:GIT_EXECUTABLE:_command_names' \
+    ':command:_command_names' \
+    '(- :)'{-h,--help}'[print help]'
+}
+
+_git-branchless "$@"
