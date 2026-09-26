@@ -48,6 +48,16 @@ animation-speed = 0
 [editor.inline-blame]
 show = "never"
 format = "{commit} - {author} ({time-ago}): {title}"
+
+[editor.breadcrumb]
+enable = true
+path = "none"
+
+[editor.persistence]
+old-files = true
+commands = true
+search = true
+clipboard = true
 # gj1118 fork end $
 
 [editor.soft-wrap]
@@ -95,7 +105,7 @@ cursor-line = "info"
 [keys.normal]
 "#" = ":reflow"
 # macos new terminal tab
-"C-t" = ":sh it2split cd \"%{buffer_name}\""
+"C-t" = ":sh it2split cd \"%{file_path_absolute}\""
 "C-A-o" = ":sh open '%{selection}'"
 "C-y" = ":sh printf '%%s' '%{buffer_name}' | pbcopy"
 # "A-[" = "move_prev_sub_word_end"

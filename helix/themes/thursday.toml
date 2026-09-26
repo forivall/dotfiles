@@ -1,5 +1,6 @@
 inherits = "base16_transparent"
 
+"ui.breadcrumb" = { bg = "gray" }
 # "ui.cursor" = { modifiers = [], underline = { color = "#000000", style = "dotted"} }
 "ui.cursor.primary" = { modifiers = ["reversed"], underline = { color = "#000000", style = "line"}, fg = "#a0a0a0" }
 "ui.cursor.secondary" = { modifiers = ["reversed"], underline = { color = "#000000", style = "dotted"} }
