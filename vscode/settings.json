@@ -3910,7 +3910,7 @@
   "diffEditor.maxFileSize": 10,
   "geminicodeassist.codeGenerationPaneViewEnabled": true,
   "geminicodeassist.inlineSuggestions.enableAuto": false,
-  "eslint.runtime": "/Users/emily.klassen/.nvm/versions/node/v22.11.0/bin/node",
+  "eslint.runtime": "/Users/emily.klassen/.nvm/versions/node/v24.14.1/bin/node",
   "testing.showCoverageInExplorer": false,
   "geminicodeassist.project": "ttc-labs",
   "extensions.experimental.affinity": {
@@ -3957,4 +3957,8 @@
   "workbench.panel.showLabels": false,
   "testing.coverageToolbarEnabled": true,
   "workbench.secondarySideBar.showLabels": false,
+  "terminal.integrated.initialHint": false,
+  "chat.disableAIFeatures": true,
+  "window.density.layout": "compact",
+  "workbench.experimental.modernUI": false,
 }
