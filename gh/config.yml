@@ -180,7 +180,11 @@ aliases:
   pr-file-viewed-gql: |
     !
     [[ $# -gt 1 && $2 != -* ]] && GH_PR=$1 && shift
-    PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
+    GIT_DIR="$(git rev-parse --git-dir)"; CACHE="$GIT_DIR/gh_cache"; [[ -f $CACHE && $CACHE -nt $GIT_DIR/HEAD ]] && source $CACHE
+    if [[ -z $PR_ID || -n $GH_PR && $GH_PR != $CACHE_GH_PR ]]; then
+      PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
+      printf "CACHE_GH_PR=%s\nPR_ID=%s" "$GH_PR" "$PR_ID" > $CACHE
+    fi
     FILEPATH="$1"; shift;
     gh api graphql -F pr=$PR_ID -F path=$FILEPATH -f query='
       mutation($pr: ID!, $path: String!) {
@@ -201,7 +205,11 @@ aliases:
   pr-file-unviewed-gql: |
     !
     [[ $# -gt 1 && $2 != -* ]] && GH_PR=$1 && shift
-    PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
+    GIT_DIR="$(git rev-parse --git-dir)"; CACHE="$GIT_DIR/gh_cache"; [[ -f $CACHE && $CACHE -nt $GIT_DIR/HEAD ]] && source $CACHE
+    if [[ -z $PR_ID || -n $GH_PR && $GH_PR != $CACHE_GH_PR ]]; then
+      PR_ID=$(gh pr view $GH_PR --json id --jq .id) || exit $?
+      printf "CACHE_GH_PR=%s\nPR_ID=%s" "$GH_PR" "$PR_ID" > $CACHE
+    fi
     FILEPATH="$1"; shift;
     gh api graphql -F pr=$PR_ID -F path=$FILEPATH -f query='
       mutation($pr: ID!, $path: String!) {
@@ -218,7 +226,7 @@ aliases:
         )
       '
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
-  pr-queued-files: '![[ -s .gh-pr-queue ]] && cat .gh-pr-queue || gh pr-unread-files | tee .gh-pr-queue'
+  pr-queued-files: '![[ -s .gh-pr-queue ]] && cat .gh-pr-queue || gh pr-unread-files "$@" | tee .gh-pr-queue'
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql --file "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql "$@" | jq -r ''.[]|.path'' | uniq'
