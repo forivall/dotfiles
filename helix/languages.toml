@@ -254,6 +254,10 @@ name = "angular"
 source = { git = "https://github.com/forivall/tree-sitter-angular", rev = "5b617c7efd74a35f6c36da0504587310953e77ee" }
 
 [[grammar]]
+name = "htmlmustache"
+source = { git = "https://github.com/prairielearn/tree-sitter-htmlmustache", rev = "48f588164793242c807dacf45b1a4d4b0d32bac5" }
+
+[[grammar]]
 name = "git-rebase"
 source = { git = "https://forivall@github.com/forivall/tree-sitter-git-rebase", rev = "0b221744732d89bb646116b59d05909fc9c80fc8" }
 
@@ -268,12 +272,26 @@ source = { git = "https://github.com/lincheney/tree-sitter-zsh", rev = "8fb08cf9
 [[language]]
 name = "angular"
 scope = "source.angular"
+# injection-regex = "html"
 file-types = ["component.html"]
 block-comment-tokens = { start = "<!--", end = "-->" }
+# language-servers = [ ]
 language-servers = [ "angular" ]
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = 'npx', args = ["prettier", "--parser", "angular"] }
+
+[[language]]
+name = "htmlmustache"
+scope = "source.htmlmustache"
+# injection-regex = "html"
+file-types = ["hbs.html", "html.hbs"]
+block-comment-tokens = { start = "{{#", end = "}}" }
+language-servers = [ ]
+# https://github.com/PrairieLearn/tree-sitter-htmlmustache/tree/master/lsp/server
+# language-servers = [ "htmlmustache-lsp-server" ]
+auto-format = false
+indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name = "nxjson"
@@ -303,11 +321,12 @@ auto-format = false
 name = "json"
 auto-format = false
 # formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
-language-servers = [ "prettier-lsp", "vscode-json-language-server" ]
+language-servers = [ "prlsp", "prettier-lsp", "vscode-json-language-server" ]
 
 [[language]]
 name = "jsonc"
 language-servers = [
+  "prlsp",
   "prettier-lsp",
   "vscode-json-language-server",
   { name = "vtsls", except-features = ["format"] },
@@ -336,6 +355,8 @@ name = "javascript"
 # formatter = { command = 'biome', args = ["format"] }
 # formatter = { command = 'prettier', args = ["--parser", "babel"] }
 language-servers = [
+  "prlsp",
+  "prettier-lsp",
   # { name = "typescript-language-server", except-features = [ "format" ] },
   { name = "biome" },
   { name = "vtsls", except-features = ["format"] },
@@ -369,6 +390,14 @@ args.args = ["--runInBand", "%{file_path_absolute}"]
 args.runInTerminal = true
 
 [[language]]
+name = "go"
+language-servers = [
+  # { name = "testing-ls", only-features = [ "diagnostics" ] },
+  "gopls",
+  "golangci-lint-lsp",
+]
+
+[[language]]
 name = "typescript"
 # formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 # formatter = { command = 'biome', args = ["format"] }
@@ -381,6 +410,21 @@ language-servers = [
   # { name = "tsgo", except-features = ["format"] },
   # { name = "efm", "only-features" = [ "diagnostics", "format",  ] },
   # { name = "efm-lsp-eslint" },
+  { name = "graphql-language-service", except-features = [ "format" ] },
+  # "eslint",
+]
+
+[[language]]
+name = "tsx"
+# formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+# formatter = { command = 'biome', args = ["format"] }
+language-servers = [
+  "prlsp",
+  "prettier-lsp",
+  # { name = "typescript-language-server", except-features = [ "format" ] },
+  { name = "vtsls", except-features = ["format"] },
+  { name = "biome" },
+  # { name = "tsgo", except-features = ["format"] },
   { name = "graphql-language-service", except-features = [ "format" ] },
   # "eslint",
 ]
