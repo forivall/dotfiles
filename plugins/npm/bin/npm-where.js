@@ -156,9 +156,21 @@ class Where extends ArboristWorkspaceCmd {
     /** @type {{version: string, dependents: any[]}} */
     const nodeExpl = node.explain()
     /**
+     * @typedef {object} Depndt
+     * @property {string} type
+     * @property {string} name
+     * @property {string} spec
+     * @property {boolean} dev
+     * @property {boolean} devOptional
+     * @property {boolean} peer
+     * @property {boolean} optional
+     * @property {import('pacote').AbbreviatedManifest} [latest]
+     * @property {{ name: string, version: string; location?: string; isWorkspace: boolean, linksIn: { link?: boolean }[]}} from
+     */
+    /**
      * @typedef {object} Expl
      * @property {string} version
-     * @property {{type: string; name: string; spec: string; latest?: import('pacote').AbbreviatedManifest; from: { name: string, version: string; location?: string; isWorkspace: boolean, linksIn: { link?: boolean }[]}}[]} dependents
+     * @property {Depndt[]} dependents
      * @property {string} [location]
      * @property {boolean} [extraneous]
      * @property {boolean} [dev]
@@ -171,17 +183,20 @@ class Where extends ArboristWorkspaceCmd {
      */
     /** @type {Expl} */
     const expl = { ...nodeExpl }
-    expl.dependents = expl.dependents.map((d) => ({
-      ...d,
-      from: {
-        ...d.from,
-        dependents: undefined,
-        linksIn: d.from.linksIn?.map((l) => ({
-          ...l,
-          dependents: undefined,
-        })),
-      },
-    }))
+    const shallowDeps = []
+    for (const edge of node.edgesIn) {
+      if (!edge.valid && !edge.from.isProjectRoot) {
+        continue
+      }
+
+      const {
+        from: { dependents, ...from },
+        ...depExpl
+      } = edge.explain([node])
+      const { dev, devOptional, peer, optional } = edge.from
+      shallowDeps.push({ ...depExpl, from, dev, devOptional, peer, optional })
+    }
+    expl.dependents = shallowDeps
     if (extraneous) {
       expl.extraneous = true
     } else {
@@ -201,28 +216,25 @@ class Where extends ArboristWorkspaceCmd {
   output(expls) {
     const flattened = expls.flatMap(
       ({ version, dependents, location, dev, peer, optional, devOptional, bundled }) => {
-        let flags = peer
-          ? 'peer'
-          : devOptional
-          ? 'devopt'
-          : dev
-          ? 'dev'
-          : optional
-          ? 'opt'
-          : ''
-        if (bundled) {
-          flags = (flags ? flags + ' ' : '') + 'bundled'
-        }
+        const flags = { dev, peer, optional, devOptional, bundled }
         return dependents
-          .map(({ spec, from, latest }) => ({
-            spec,
-            location: from.location,
-            latest,
-            update:
-              !latest?.version || version === latest.version
-                ? ''
-                : latest.version,
-          }))
+          .map((dependent) => {
+            const { spec, from, latest, type } = dependent
+            const { dev, peer, optional, devOptional } = dependent
+            return {
+              spec,
+              location: from.location,
+              latest,
+              type,
+              from,
+              flags: { dev, peer, optional, devOptional },
+              // fromType: from.type,
+              update:
+                !latest?.version || version === latest.version
+                  ? ''
+                  : latest.version,
+            }
+          })
           .map((dependent) => ({ version, flags, dependent, location }))
           .sort(
             (a, b) =>
@@ -245,7 +257,34 @@ class Where extends ArboristWorkspaceCmd {
         {},
       ),
     )
-    const hasFlags = groups.some((g) => g[0].flags)
+    const describeFlags = ({ peer, devOptional, dev, optional }) =>
+      peer
+        ? 'peer'
+        : devOptional
+          ? 'devopt'
+          : dev
+            ? 'dev'
+            : optional
+              ? 'opt'
+              : ''
+
+    const groupsWithFlags = groups.map((g) => {
+      const { bundled } = g[0].flags
+      let flags = describeFlags(g[0].flags)
+      if (bundled) {
+        flags = (flags ? flags + ' ' : '') + 'bundled'
+      }
+      if (!flags) {
+        flags = g
+          .map((d) => describeFlags(d.dependent.flags))
+          .reduce((a, b) => (a === b ? a : ''))
+        if (flags) {
+          flags = `via ${flags}`
+        }
+      }
+      return { g, flags }
+    })
+    const hasFlags = groupsWithFlags.some((g) => g.flags)
     const hasUpdate = groups.some((g) => g[0].dependent.update)
     const header = [
       'SPEC',
@@ -255,11 +294,11 @@ class Where extends ArboristWorkspaceCmd {
       'LOCATION',
       'DEPENDENT(S)',
     ]
-    const rows = groups.map((g) => [
+    const rows = groupsWithFlags.map(({ g, flags }) => [
       g[0].dependent.spec,
       g[0].version,
       ...(hasUpdate ? [g[0].dependent.update] : []),
-      ...(hasFlags ? [g[0].flags] : []),
+      ...(hasFlags ? [flags] : []),
       g[0].location,
       g
         .map((it) => it.dependent.location)
