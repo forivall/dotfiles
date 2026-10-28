@@ -1,0 +1,41 @@
+﻿[window]
+opacity = 1.0
+
+[font]
+normal = { family = "FantasqueSansM Nerd Font Mono", style = "Regular" }
+size = 12.24
+
+[colors.primary]
+background = '#27292b'
+foreground = '#D0D2D1'
+
+[colors.cursor]
+text = '#27292C'
+cursor = '#D0D2D1'
+
+[colors.selection]
+text = '#D0D2D1'
+background = '#534C53'
+
+[colors.normal]
+black = '#000000'
+red = '#e19590'
+green = '#c8cc89'
+yellow = '#edd090'
+blue = '#98b0c7'
+magenta = '#bba7c4'
+cyan = '#a3c7c3'
+white = '#fefefe'
+
+[colors.bright]
+black = '#191815'
+red = '#c67c78'
+green = '#b1b574'
+yellow = '#ccb071'
+blue = '#7a91a6'
+magenta = '#9c87a4'
+cyan = '#84a6a3'
+white = '#dddddd'
+
+[scrolling]
+history = 200000
