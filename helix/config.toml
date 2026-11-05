@@ -101,6 +101,7 @@ display-messages = true
 
 [editor.inline-diagnostics]
 cursor-line = "info"
+show-virtual-lines = true
 
 [keys.normal]
 "#" = ":reflow"
@@ -108,6 +109,7 @@ cursor-line = "info"
 "C-t" = ":sh it2split cd \"%{file_path_absolute}\""
 "C-A-o" = ":sh open '%{selection}'"
 "C-y" = ":sh printf '%%s' '%{buffer_name}' | pbcopy"
+"A-y" = ":sh printf '%%s' '%{file_path_absolute}' | pbcopy"
 # "A-[" = "move_prev_sub_word_end"
 # "A-]" = "move_next_sub_word_start"
 "C-left" = "move_prev_sub_word_start"
@@ -232,13 +234,13 @@ A-m = "select_textobject_around_closest_surrounding_pair"
 
 [keys.normal."["]
 "F" = [
-  ":sh it2split --no-focus jest-test-failure %{file_path_absolute} %{cursor_line} prev show",
   ":open %sh{jest-test-failure %{file_path_absolute} %{cursor_line} prev go}",
+  ":sh jest-test-failure %{file_path_absolute} %{cursor_line} prev show",
 ]
 [keys.normal."]"]
 "F" = [
-  ":sh it2split --no-focus jest-test-failure %{file_path_absolute} %{cursor_line} next show",
   ":open %sh{jest-test-failure %{file_path_absolute} %{cursor_line} next go}",
+  ":sh jest-test-failure %{file_path_absolute} %{cursor_line} next show",
 ]
 
 [keys.normal.z]
