@@ -1,0 +1,15 @@
+name = "SVG"
+grammar = "svg_xml"
+
+# Zed has no built-in SVG language, so .svg files would otherwise open as plain
+# text and oxvg would never attach.
+path_suffixes = ["svg"]
+
+block_comment = { start = "<!--", prefix = "", end = "-->", tab_size = 1 }
+tab_size = 2
+
+brackets = [
+  { start = "<", end = ">", close = true, newline = true },
+]
+
+autoclose_before = ">"

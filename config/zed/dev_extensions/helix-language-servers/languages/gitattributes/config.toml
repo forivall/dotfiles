@@ -1,0 +1,21 @@
+name = "Git Attributes"
+grammar = "gitattributes"
+
+# `path_suffixes` does not support globs. Matching is
+# `candidate.ends_with("." + suffix) || candidate == suffix`, tested against the
+# file's last extension segment, its filename, and its absolute path - so the
+# entries below cover both extension-style names (.gitconfig) and bare ones
+# (config.worktree).
+path_suffixes = [
+  "gitattributes",
+  "git/attributes",
+]
+
+line_comments = ["# ", "; "]
+hard_tabs = true
+tab_size = 4
+autoclose_before = "]"
+
+brackets = [
+  { start = "[", end = "]", close = true, newline = false },
+]

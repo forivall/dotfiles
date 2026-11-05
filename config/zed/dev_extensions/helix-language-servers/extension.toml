@@ -1,0 +1,79 @@
+# https://zed.dev/docs/extensions/developing-extensions#directory-structure-of-a-zed-extension
+id = "helix-language-servers"
+name = "Helix-configured Language Servers"
+version = "0.0.1"
+schema_version = 1
+authors = ["Emily M Klassen <hello@forivall.com>"]
+description = "Locally configured Language Servers for Zed: prettier-lsp, gitconfig-lsp, nxls, oxvg, cci-yaml"
+repository = "https://github.com/forivall/dotfiles/tree/osx/config/zed/dev_extensions/helix-language-servers"
+
+# ---------------------------------------------------------------------------
+# Grammars
+#
+# Each language below points at an extension-declared grammar rather than a
+# built-in one, so resolution never depends on which other extensions happen to
+# be installed. Keys are namespaced (`svg_xml`, `nx_json`, `cci_yaml`) so they
+# cannot collide with a built-in grammar or another extension's.
+#
+# `commit` is an alias for `rev`; both are accepted.
+# ---------------------------------------------------------------------------
+
+[grammars.git_config]
+repository = "https://github.com/the-mikedavis/tree-sitter-git-config"
+commit = "0fbc9f99d5a28865f9de8427fb0672d66f9d83a5"
+
+[grammar.gitattributes]
+repository = "https://github.com/mtoohey31/tree-sitter-gitattributes"
+commit = "3dd50808e3096f93dccd5e9dc7dc3dba2eb12dc4"
+
+# [grammars.svg_xml]
+# repository = "https://github.com/tree-sitter-grammars/tree-sitter-xml"
+# commit = "5000ae8f22d11fbe93939b05c1e37cf21117162d"
+# path = "xml"
+
+# [grammars.nx_json]
+# repository = "https://github.com/tree-sitter/tree-sitter-json"
+# commit = "254c42a6476413b776221e03982ac8ae159eeb72"
+
+# [grammars.cci_yaml]
+# repository = "https://github.com/tree-sitter-grammars/tree-sitter-yaml"
+# commit = "a1c4812a73ec5e089de8e441fdea3a921e8d5079"
+
+# ---------------------------------------------------------------------------
+# Language servers
+#
+# The table key is the server id. It is what user settings reference (in
+# `language_servers` and in the `lsp` object) and what `language_server_command`
+# switches on. Names match the Helix `[language-server.<key>]` keys, with no
+# prefix.
+#
+# `languages` must match either a built-in Zed language name or the `name` field
+# of one of the `languages/*/config.toml` files in this extension.
+#
+# `extension.toml` cannot declare commands or arguments - only Rust can, see
+# `language_server_command` in src/lib.rs.
+# ---------------------------------------------------------------------------
+
+[language_servers.prettier-lsp]
+name = "prettier-lsp"
+languages = ["JavaScript", "TypeScript", "TSX", "JSON", "JSONC"]
+
+[language_servers.gitconfig-lsp]
+name = "gitconfig-lsp"
+languages = ["Git Config"]
+
+[language_servers.gitattributes-lsp]
+name = "gitattributes-lsp"
+languages = ["Git Attributes"]
+
+[language_servers.nxls]
+name = "nxls"
+languages = ["Nx JSON"]
+
+[language_servers.oxvg]
+name = "oxvg"
+languages = ["SVG"]
+
+[language_servers.cci-yaml]
+name = "cci-yaml"
+languages = ["CircleCI YAML"]
