@@ -16,4 +16,8 @@ inherits = "base16_transparent"
 "markup.heading.hover" = { bg = "black" }
 "markup.raw.completion" = { bg = "black" }
 "markup.raw.hover" = { bg = "black" }
+"tag" = { fg = "light-red" }
+"property" = { fg = "white" }
+"type.unit" = { fg = "cyan" }
+
 "comment" = { fg = "white", modifiers = ["italic"] }

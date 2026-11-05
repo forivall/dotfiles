@@ -9,7 +9,7 @@ prompt: enabled
 pager: cat
 # Aliases allow you to create nicknames for gh commands
 aliases:
-  auth-current: auth status --active  --active--json hosts --jq '.hosts[][].login'
+  auth-current: auth status --active --json hosts --jq '.hosts[][].login'
   whoami: auth status --active --json hosts --jq '.hosts."github.com".[] | select(.active) | .login'
   auth-setup-gcm-local: |
     ! set -x
@@ -142,7 +142,7 @@ aliases:
   pr-merge-base: '!git merge-base ${1-HEAD} origin/$(gh pr-base-ref-name $2)'
   pr-base-ref-name: 'pr view --json baseRefName -q .baseRefName'
   pr-last-review-merge-base: '!git merge-base "$(gh pr-latest-review-gql --jq .commit.oid)" HEAD'
-  pr-last-review-message-match: '!git rev-list --fixed-strings --grep "$(gh pr-latest-review-gql --jq .commit.message)" -1 HEAD'
+  pr-last-review-message-match: '!git rev-list --fixed-strings --grep "$(gh pr-latest-review-gql --jq .commit.message | head -1)" -1 HEAD'
   pr-merge-commit: pr view --json mergeCommit,potentialMergeCommit -q '(.mergeCommit//.potentialMergeCommit).oid'
   pr-ref-name: pr view $1 --json headRefName -q .headRefName
   pr-ref: pr view $1 --json headRefOid -q .headRefOid
@@ -164,7 +164,9 @@ aliases:
   pr-files-json-rest: '!gh api repos/tenthousandcoffees/api-server/pulls/$(gh pr view --json number -q .number)/files'
   pr-files-json-gql-raw: |
     !
-    PR="${1-${GH_PR-$(gh pr view --json number -q .number)}}"
+    GIT_DIR="$(git rev-parse --git-dir)"; CACHE="$GIT_DIR/gh_cache"; [[ -f $CACHE && $CACHE -nt $GIT_DIR/HEAD ]] && source $CACHE
+    [[ -z $CACHE_GH_PR ]] && unset CACHE_GH_PR
+    PR="${1-${GH_PR-${CACHE_GH_PR-$(gh pr view --json number -q .number)}}}"
     gh api graphql --paginate -F 'owner={owner}' -F 'repo={repo}' -F "pr=$PR" -f query='
     query($endCursor: String, $owner: String!, $repo: String!, $pr: Int!) {
       repository(owner: $owner, name: $repo) {
@@ -192,13 +194,17 @@ aliases:
           pullRequest { number files(first: 100) { totalCount nodes { path viewerViewedState } } }
         }
       }' "$@"
-  pr-file-unqueue: '! a=$(realpath "$1") && r=${a#$PWD/} && grep -vx -e "$a\(:\d\+\)*" -e "\(\./\)\?$r\(:\d\+\)*" .gh-pr-queue | sponge .gh-pr-queue'
+  pr-file-unqueue: |
+    ! a=$(realpath "$1") &&
+      r=${a#$PWD/} &&
+      grep -Evx -e "$(perl -e 'print quotemeta($ARGV[0])' "$a")(:\d+)*" -e "(./)?$(perl -e 'print quotemeta($ARGV[0])' "$r")(:\d+)*" .gh-pr-queue \
+      | sponge .gh-pr-queue
   pr-file-viewed: '! gh pr-file-unqueue "$1"; gh pr-file-viewed-gh "$1"'
   pr-file-viewed-gh: |
     ! gh pr-file-viewed-gql "$1" --jq '
         .data.markFileAsViewed.pullRequest |
         ("#" + (.number | tostring) + " " +
-          (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" +
+          if .files.totalCount > 100 then "≥" else "" end + (.files.nodes | map(select(.viewerViewedState == "VIEWED")) | length | tostring) + "/" +
           (.files.totalCount | tostring)
         )
       '
@@ -462,18 +468,20 @@ aliases:
     ! gh pr-review-comments-gql-raw "$@" |
       jq '[ .data.repository.pullRequest.reviewThreads.edges[] | (. + .node) | del(.node) ]'
   pr-latest-review-gql: |
-    ! [[ $# -gt 0 && $1 != --* ]] && GH_PR=$1 && shift
+    ! [[ $# -gt 0 && $1 != -* ]] && GH_PR=$1 && shift
       [[ -n "$GH_PR" ]] || GH_PR=$(gh pr view --json number --jq .number) || exit $?
-      [[ $# -gt 0 && $1 != --* ]] && GH_LOGIN=$1 && shift
+      [[ $# -gt 0 && $1 != -* ]] && GH_LOGIN=$1 && shift
       [[ -n "$GH_LOGIN" ]] || GH_LOGIN=$(gh auth status --active --json hosts --jq '.hosts[][].login') || exit $?
+      N=1
+      [[ $# -gt 0 && $1 = -n* ]] && N="${1#-n}" && shift
       JQ_EXPR='.'
       [[ $# -gt 0 && $1 = --jq ]] && JQ_EXPR="$2" && shift 2
       [[ $# -gt 0 && $1 = --jq=* ]] && JQ_EXPR="${1#--jq=}" && shift
-      gh api graphql -F 'owner={owner}' -F 'repo={repo}' -F "pr=$GH_PR" -F "login=$GH_LOGIN" -f query='
-      query($owner: String!, $repo: String!, $pr: Int!, $login: String!) {
+      gh api graphql -F 'owner={owner}' -F 'repo={repo}' -F "pr=$GH_PR" -F "login=$GH_LOGIN" -F "count=$N" -f query='
+      query($owner: String!, $repo: String!, $pr: Int!, $login: String!, $count: Int!) {
         repository(owner: $owner, name: $repo) {
           pullRequest(number: $pr) {
-            reviews(last: 1, author: $login) {
+            reviews(last: $count, author: $login) {
               nodes {
                 authorAssociation
                 commit { oid message }
@@ -598,7 +606,7 @@ aliases:
   # {{tablerender}}'
   my-latest-review-request: 'pr list --search "sort:updated-desc user-review-requested:@me -author:app/dependabot" --limit 1 --json number --jq .[].number'
   my-latest-review-request-branch: 'pr list --search "sort:updated-desc user-review-requested:@me -author:app/dependabot" --limit 1 --json headRefName --jq .[].headRefName'
-  repo-set-remote: '!gh repo set-default $(git remote get-url $1)'
+  repo-set-remote: '!git config remote.${1-origin}.gh-resolved base'
   wfr: '!gh workflow run --ref $(git rev-parse --abbrev-ref --symbolic-full-name @{u} | sd "^[^/]*/" "") "$@"'
   wr: "!GH_RUN=\"$(gh run list --workflow=$1 -L1 --json databaseId,url --template '{{range .}}{{printf \"%.f\" .databaseId}}\n{{.url}}{{break}}{{end}}')\"; echo \"$GH_RUN\" | cut -d'\n' -f2; gh run watch $(echo \"$GH_RUN\" | cut -d'\n' -f1)"
   wfrw: '!gh wfr "$@" && sleep 3 && gh run list --workflow=$1 --limit=3 && sleep 3 && gh wr "$1"'

@@ -299,11 +299,11 @@
       // "g c": "vim::WindowMiddle",
       // "g b": "vim::WindowBottom",
       // // Match mode
-      "m m": "vim::Matching",
-      "m i w": ["workspace::SendKeystrokes", "v i w"],
-      "m d": "vim::PushDeleteSurrounds",
-      "m s": "vim::PushAddSurrounds",
-      "m r": "vim::PushChangeSurrounds",
+      // "m m": "vim::Matching",
+      // "m i w": ["workspace::SendKeystrokes", "v i w"],
+      // "m d": "vim::PushDeleteSurrounds",
+      // "m s": "vim::PushAddSurrounds",
+      // "m r": "vim::PushChangeSurrounds",
       // // Misc
       // "ctrl-k": "editor::MoveLineUp",
       // "ctrl-j": "editor::MoveLineDown",
@@ -404,6 +404,12 @@
         "ctrl-w l": "workspace::ActivatePaneRight",
         "ctrl-w k": "workspace::ActivatePaneUp",
         "ctrl-w j": "workspace::ActivatePaneDown"
+      }
+    },
+    {
+      "context": "Workspace",
+      "bindings": {
+        "space shift-g": "debug_panel::ToggleFocus"
       }
     }
 ]

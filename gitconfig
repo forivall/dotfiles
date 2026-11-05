@@ -24,6 +24,7 @@
 	diffFilter = deltaw --color-only
 [log]
   excludeDecoration = refs/jj/**
+  excludeDecoration = refs/branchless/*
   allExcludes = --exclude=refs/remotes/*/archive/** --exclude=refs/tags/archive/** --exclude=refs/branchless/** --exclude=refs/jj/** --exclude=refs/remotes/origin/gh-pages
   defaultLimit = 10000
 [delta]
