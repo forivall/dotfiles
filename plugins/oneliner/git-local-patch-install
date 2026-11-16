@@ -5,7 +5,7 @@ cat << 'END' > $GIT_DIR/hooks/local-patch.sh
 #!/bin/sh
 if [ -e "$PWD/$2.patch" ]; then
   d="`mktemp -d`"
-  mkdir -p "$d/`dirname $2`"
+  mkdir -p "$d/`dirname "$2"`"
   <&0 cat > "$d/$2"
   patch --forward -d "$d" "$1" -p1 -i "$PWD/$2.patch" > "$d/patch.out"
   < "$d/$2" cat

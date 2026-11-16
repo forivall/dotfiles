@@ -1,11 +1,15 @@
 #!/usr/bin/env zsh
 GIT_COMMON_DIR="$(git rev-parse --git-common-dir)"
 mkdir -p $GIT_COMMON_DIR/info
-[[ -f $1.patch ]] && rm $1.patch
-git reset $1
-if git diff --exit-code $1 > $1.patch; then
-  command rm $1.patch
+[[ -f "$1.patch" ]] && rm "$1.patch"
+git reset "$1"
+if git diff --exit-code "$1" > $1.patch; then
+  command rm "$1.patch"
 else
-  echo "/$(git rev-parse --show-prefix)$1 filter=local-patch" >> $GIT_COMMON_DIR/info/attributes
+  if [[ "${(qqq)1}" == "$1" ]]; then
+    echo "/$(git rev-parse --show-prefix)$1 filter=local-patch" >> $GIT_COMMON_DIR/info/attributes
+  else
+    echo "/$(git rev-parse --show-prefix)${(qqq)1} filter=local-patch" >> $GIT_COMMON_DIR/info/attributes
+  fi
   echo "/$(git rev-parse --show-prefix)$1.patch" >> $GIT_COMMON_DIR/info/exclude
 fi
