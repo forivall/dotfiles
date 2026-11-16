@@ -117,6 +117,7 @@
 	branch-name-ref = !git symbolic-ref HEAD 2> /dev/null || cat $GIT_DIR/rebase-merge/head-name
 	branch-name = "!f() { REV=${1:-HEAD}; if [[ "$1" == HEAD ]]; then REF=$(git symbolic-ref HEAD 2> /dev/null || cat $GIT_DIR/rebase-merge/head-name); fi; if [[ -z "$REF" ]]; then REF=$(git rev-parse --symbolic-full-name $REV); fi; [[ -n "$REF" ]] && printf '%s\n' ${REF#refs/heads/}; }; f"
 	branch-name-upstream = "!f() { REF=$(git rev-parse --symbolic-full-name $1@{u}) && printf '%s\n' ${REF#refs/remotes/*/}; }; f"
+	remote-ref-at-head = "for-each-ref --points-at HEAD --format='%(refname:lstrip=1)' refs/remotes"
 	branches = branch --list
 	branches-with-upstreams = "!zsh -c 'if (( $# > 0 )); then opt=(\"--branches=\"${^@}); else opt=(--branches); fi; git rev-parse --symbolic ${opt[@]} | while read branch; do echo $branch; up=$(git rev-parse --symbolic $branch@{u} 2>/dev/null) && echo $up; done' -"
 	llu = "!git log --pretty=oneline --abbrev-commit --decorate --graph $(git branches-with-upstreams)"

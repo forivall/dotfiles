@@ -58,8 +58,7 @@ if (arg === 'server') {
 }
 
 /**
- *
- * @param {NodeJS.ReadableStream} stream
+ * @param {AsyncIterable<Buffer>} stream
  */
 async function streamToPromise(stream) {
   let len = 0;
@@ -86,7 +85,7 @@ function spawnDetached(command, args = []) {
       stdio: 'inherit',
     })
     .on('error', (err) => {
-      if (err.code === 'ENOENT') {
+      if (/** @type NodeJS.ErrnoException */ (err).code === 'ENOENT') {
         child
           .spawn(command, args, {
             detached: true,
@@ -122,7 +121,7 @@ async function server() {
     if (j >= 0) return process.argv[j].slice(a.length + 1);
   }
 
-  const PORT = parseInt(arg('--port'), 10) || 45967;
+  const PORT = parseInt(arg('--port') || '', 10) || 45967;
   const INTERVAL = 3000;
 
   const lmutracker = path.resolve(
@@ -271,7 +270,7 @@ async function server() {
     res.end();
   };
 
-  /** @satisfies {Record<string, (res: http.ServerResponse, req: http.IncomingMessage) => Promise<void>} */
+  /** @satisfies {Record<string, (res: http.ServerResponse, req: http.IncomingMessage) => Promise<void>>} */
   const routes = {
     '/ambient-light.web.js': async (res, req) => {
       if (req.method !== 'GET') throw new HttpError(405);
@@ -341,6 +340,11 @@ async function server() {
   const server = http.createServer(async (req, res) => {
     const now = new Date().toISOString();
     console.log(now, req.method, req.url, req.headers);
+    if (!req.url) {
+      res.statusCode = 500;
+      res.end();
+      return;
+    }
     const url = new URL(req.url, `http://localhost:${PORT}`);
     const wait = url.searchParams.get('wait');
     if (wait) {
@@ -349,7 +353,7 @@ async function server() {
       );
     }
     /** @type {typeof routes[keyof typeof routes] | undefined} */
-    const handler = routes[url.pathname];
+    const handler = routes[/** @type {keyof typeof routes} */ (url.pathname)];
     if (handler) {
       handler(res, req).catch(errorHandler(res));
     } else {
@@ -370,7 +374,9 @@ async function server() {
   try {
     ws = await import('ws');
   } catch (err) {
-    if (err.code !== 'ERR_MODULE_NOT_FOUND') {
+    if (
+      /** @type NodeJS.ErrnoException */ (err).code !== 'ERR_MODULE_NOT_FOUND'
+    ) {
       throw err;
     }
   }
@@ -395,12 +401,18 @@ async function server() {
   const handleTermination = (signal) => {
     shutdown = true;
     c.kill(signal);
-    wss.clients.forEach((socket) => {
-      socket.close(1012, signal);
-    });
-    wss.close();
+    if (wss) {
+      wss.clients.forEach((socket) => {
+        socket.close(1012, signal);
+      });
+      wss.close();
+    }
     server.close();
-    process.exitCode = { SIGINT: 128 + 2, SIGTERM: 128 + 15 }[signal] || 1;
+    process.exitCode =
+      /** @type {Record<string, number | undefined>} */ ({
+        SIGINT: 128 + 2,
+        SIGTERM: 128 + 15,
+      })[signal] || 1;
   };
   process.once('SIGINT', handleTermination);
   process.once('SIGTERM', handleTermination);

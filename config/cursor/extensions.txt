@@ -4,6 +4,8 @@ alfredbirk.go-to-next-change
 angular.ng-template
 anweber.swapf
 anysphere.cursorpyright
+anysphere.remote-containers
+anysphere.remote-ssh
 arturodent.command-alias
 ast-grep.ast-grep-vscode
 be5invis.vscode-custom-css
@@ -26,7 +28,7 @@ esbenp.prettier-vscode
 firsttris.vscode-jest-runner
 github.vscode-pull-request-github
 google.geminicodeassist
-googlecloudtools.cloudcode
+googlecloudtools.datacloud
 graphql.vscode-graphql
 graphql.vscode-graphql-syntax
 gregoire.dance
@@ -52,6 +54,7 @@ nicollasr.vscode-streamdeck
 nrwl.angular-console
 orta.vscode-jest
 pkief.markdown-checkbox
+posthog.posthog-vscode
 pranaygp.vscode-css-peek
 prisma.prisma
 rioj7.html-related-links

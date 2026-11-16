@@ -1,6 +1,7 @@
 {
   "window.autoDetectColorScheme": true,
   "window.customTitleBarVisibility": "never",
+  "window.menuBarVisibility": "hidden",
   "window.density.editorTabHeight": "compact",
   "window.dialogStyle": "custom",
   "window.nativeTabs": true,
@@ -9,6 +10,7 @@
   "window.titleSeparator": " ⠿ ",
   "apc.font.family": "SF Pro Display",
   "workbench.fontAliasing": "auto",
+  "workbench.navigationControl.enabled": false,
   "workbench.panel.showLabels": true, // broken in cursor
   "workbench.secondarySideBar.showLabels": true, // broken in cursor
   // "editor.codeLensFontFamily": "Iosevka Comfy Wide",
@@ -1200,7 +1202,7 @@
     //   "tooltip": "Extensions (⇧⌘X)"
     // },
     {
-      "codicon": "auxiliarybar-left-layout-icon",
+      "codicon": "panel-left",
       "name": "command.workbench.action.toggleSidebarVisibility",
       "tooltip": "Side Panel (⌘F9)"
     },
@@ -1210,7 +1212,7 @@
       "tooltip": "Bottom Panel (⌘F10)"
     },
     {
-      "codicon": "auxiliarybar-right-layout-icon",
+      "codicon": "panel-right",
       "name": "command.workbench.action.toggleAuxiliaryBar",
       "tooltip": "Side Panel (⇧⌘F10)"
     }
@@ -1638,8 +1640,8 @@
         "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
         "F": { "text": "Open file picker at current working directory", "command": "file-browser.open",                                                       },
         // "F": { "text": "Open file picker at current working directory", "command": "file-browser-fixed.open",                                                       },
-        "e": { "text": "Focus file explorer",                           "command": "workbench.explorer.fileView.focus"                                        },
-        "E": { "text": "Open file explorer at current buffer's directory", "command": "file-browser.open"},
+        "e": { "text": "Open file explorer at current buffer's directory", "command": "file-browser.open"},
+        "E": { "text": "Focus file explorer",                           "command": "workbench.explorer.fileView.focus"                                        },
         "c": { "text": "Open PR comment at current line",               "command": "workbench.action.addComment" },
         "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
         "B": { "text": "Focus active editor",                           "command": "workbench.action.focusActiveEditorGroup"                                  },
@@ -1655,8 +1657,7 @@
         "D": { "text": "Open workspace diagnostic picker",              "command": "???"                                                                      },
         "a": { "text": "Perform code action",                           "command": "editor.action.quickFix"                                                   },
         "'": { "text": "Open last picker",                              "command": "???"                                                                      },
-        "C": { "text": "Open changed files list (PR)",                  "command": "prStatus:github.focus",          },
-        "g": { "text": "Open changed files list",                       "command": "workbench.scm.focus",          },
+        "g": { "text": "Open changed files list",                       "command": "dance.openMenu", "args": [{ "menu": "git-hx" }]         },
         "G": { "text": "Debug",                                         "command": "dance.openMenu", "args": [{ "menu": "debug-hx", "locked": true }]         },
         "t": { "text": "Test",                                          "command": "dance.openMenu", "args": [{ "menu": "test-hx" }]},
         "w": { "text": "Window",                                        "command": "dance.openMenu", "args": [{ "menu": "window-hx" }]                        },
@@ -1687,6 +1688,14 @@
         "v": { "text": "Open television picker",                        "command": "television.ToggleFileFinder"                                            },
         "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
       }
+    },
+    "git-hx": {
+      "title": "Git",
+      "items": {
+        "C": { "text": "Open changed files list (PR)",                  "command": "prStatus:github.focus",          },
+        "f": { "text": "Open changed files list",                       "command": "workbench.scm.focus",          },
+        "F": { "text": "Open pr changed files list", "command": "gitDiffSidebar.focus" },
+      },
     },
     "debug-hx": {
       "title": "Debug",
@@ -2575,7 +2584,7 @@
       "uncovered": "rgba(121, 31, 10, 0.2)"
     }
   },
-  "git.blame.editorDecoration.enabled": true,
+  "git.blame.editorDecoration.enabled": false,
   "git.blame.editorDecoration.template": "${subject}, ${authorName} (${authorDate})",
   "gitlens.currentLine.enabled": false,
   "gitlens.blame.ignoreWhitespace": true,
@@ -2665,8 +2674,15 @@
   "gitlens.heatmap.locations": [
     "overview"
   ],
+  "rainbow_csv.enable_auto_csv_lint": false,
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[csv]": {
+    "editor.semanticHighlighting.enabled": false
+  },
+  "[dynamic csv]": {
+    "editor.semanticHighlighting.enabled": false
   },
   "[dart]": {
     "editor.rulers": [
@@ -3981,7 +3997,7 @@
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.chat.terminalShowHoverHint": false,
-  "typescript.experimental.useTsgo": false,
+  "typescript.experimental.useTsgo": true,
   "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
   "cursorpyright.analysis.inlayHints.variableTypes": true,
   "cursorpyright.analysis.typeshedPaths": [
@@ -4112,4 +4128,7 @@
     "delete",
     "create"
   ],
+  "bookmarks.sideBar.hideWelcome": true,
+  "bookmarks.useWorkaroundForFormatters": true,
+  "json.schemaDownload.enable": true,
 }

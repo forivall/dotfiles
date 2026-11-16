@@ -17,12 +17,24 @@ __git-addp-getitems_vars() {
   IFS=$'\n'
   items=(
     $(git diff --name-only $@ | huniq)
+    ---
     $(git ls-files --full-name --other --directory --no-empty-directory --exclude-standard $@)
   )
   IFS="$OIFS"
+  # local changed=$(git config --get-color color.status.changed red)
+  # local unmerged=$(git config --get-color color.status.unmerged red)
+  # local untracked=$(git config --get-color color.status.untracked red)
+  # git -c color.status=always -c status.relativePaths=true -c core.quotePath=false status -s --untracked="${show_untracked:-all}" |
+  #   grep -F -e "$changed" -e "$unmerged" -e "$untracked" |
+  #   sed -E 's/^(..[^[:space:]]*)[[:space:]]+(.*)$/[\1]  \2/' |
+  #   FZF_DEFAULT_OPTS="$opts" fzf
   TERM_PICKER_PREVIEW_COMMAND="$__plugin_dirname/__git-addp-preview $cdup{} ${#items}"
+  # TERM_PICKER_FZF_OPTIONS=(
+  #   --bind=\"alt-e:execute($FORGIT edit_add_file {})+refresh-preview\"
+  # )
 }
 __git-addp-dointeractive() {
+  if [[ $1 == --- ]]; then return; fi
   if git ls-files --error-unmatch $1 2>/dev/null >/dev/null; then
     if unmatched="${(N)$(git ls-files -u --error-unmatch $1 2>/dev/null)}"; then
       if grep -qE '^(>>>>>>>|=======|<<<<<<<)' $1; then

@@ -19,5 +19,6 @@ inherits = "base16_transparent"
 "tag" = { fg = "light-red" }
 "property" = { fg = "white" }
 "type.unit" = { fg = "cyan" }
+"punctuation.special" = { fg = "yellow" }
 
 "comment" = { fg = "white", modifiers = ["italic"] }

@@ -6,7 +6,6 @@
 
   { "key": "escape",                "command": "cancelSelection",
                                     "when": "dance.mode != 'insert' && dance.mode != 'input' && !dance.isRecording && editorHasSelection && textInputFocus" },
-  { "key": "escape", "command": "editor.action.hideHover", "when": "editorHoverFocused && dance.mode != 'insert' && dance.mode != 'select' && dance.mode != 'input'" },
   { "key": "escape",                "command": "editor.action.cancelSelectionAnchor",
                                     "when": "dance.mode != 'input' && !dance.isRecording && editorTextFocus && selectionAnchorSet" },
   { "key": "escape",                "command": "closeFindWidget",
@@ -33,6 +32,7 @@
                                     "when": "composerFocused && !editorTextFocus && auxiliaryBarFocus || !editorTextFocus && focusedView =~ /^workbench.panel.aichat.view/ && auxiliaryBarFocus" },
   { "key": "escape",          "command": "search.action.focusQueryEditorWidget",
                                     "when": "inSearchEditor && editorTextFocus" },
+  { "key": "escape", "command": "editor.action.hideHover", "when": "editorHoverFocused && dance.mode != 'insert' && dance.mode != 'select' && dance.mode != 'input'" },
   { "key": "enter", "command": "search.focus.previousInputBox", "when": "inSearchEditor && !editorTextFocus && inputFocus"},
   { "key": "escape",                "command": "dance.openMenu", "args": { "menu": "vscode-ai" },
     "when": "chatIsEnabled && inChatInput && !inlineChatVisible" },

@@ -33,14 +33,16 @@ function npm() {
     # https://github.com/npm/cli/blob/6cb34cac9f4e4c6af7ecebc98fcfecd22a5e061d/lib/utils/cmd-list.js?plain=1#L121-L129
     i|in|ins|inst|insta|instal|isnt|isnta|isntal|isntall|install)
       arg=$1; shift
+      check=true
       while (( $# > 0 )); do
         case $1 in
           -w) npm_args+=($1 $2); shift 2 ;;
+          -y) check=false ;&
           -*) npm_args+=($1); shift ;;
           *) break; ;;
         esac
       done
-      if (( $# > 0 )); then
+      if (( $# > 0 )) && $check; then
         echo '$' npq --dry-run "$@"
         npq --dry-run "$@" || echo Exited with $?
         echo -n "Continue (y/N)? " >&2

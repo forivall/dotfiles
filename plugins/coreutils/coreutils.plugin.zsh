@@ -28,7 +28,7 @@ export LESS_TERMCAP_ZW=$(tput rsupm)
 if whence eza > /dev/null ; then
   alias ls="eza --group-directories-first -F --color=auto"
   alias li="eza --group-directories-first -F --color=auto --icons=auto"
-  alias ll="eza -alF --icons"
+  alias ll="eza -alF --icons=auto"
   alias la="eza -a --icons=auto"
   alias l="eza -F"
 else

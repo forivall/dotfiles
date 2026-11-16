@@ -24,7 +24,8 @@ features = ["-calt"]
 [shell]
 program = "/opt/homebrew/bin/zsh"
 
-# [window]
+[window]
+# decorations = "Transparent"
 # opacity = 0.9
 # opacity-cells = true
 # blur = true

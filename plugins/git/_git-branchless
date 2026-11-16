@@ -157,7 +157,6 @@ _git-branchless-install-man-pages() {
 
 _git-branchless-move() {
   _arguments -S \
-    '-C+[change to directory]: :_directories' \
     '--color=[force color output]:COLOR:(auto always never)' \
     '(-s --source=)'{-s,--source=}'[source commit to move]:SOURCE:__git_commits' \
     '(-b --base=)'{-b,--base=}'[base commit inside subtree to move]:BASE:__git_commits' \

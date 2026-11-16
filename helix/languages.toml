@@ -16,6 +16,7 @@ args = ["lsp-proxy"]
 
 [language-server.biome.config.biome.inlineConfig]
 javascript.formatter.quoteStyle = "single"
+assist.actions.source.organizeImports.level = "off"
 
 [language-server.clangd]
 args = ["--enable-config"]
@@ -385,6 +386,7 @@ language-servers = [
   # { name = "tsgo", except-features = ["format"] },
   # { name = "graphql-language-service", except-features = [ "format" ] },
   # "eslint",
+  # { name = "testing-ls", only-features = [ "diagnostics" ] },
 ]
 
 [language.debugger]
@@ -412,6 +414,13 @@ args.args = ["--runInBand", "%{file_path_absolute}"]
 args.runInTerminal = true
 
 [[language]]
+name = "rust"
+language-servers = [
+  # { name = "testing-ls", only-features = [ "diagnostics" ] },
+  "rust-analyzer",
+]
+
+[[language]]
 name = "go"
 language-servers = [
   # { name = "testing-ls", only-features = [ "diagnostics" ] },
@@ -434,6 +443,7 @@ language-servers = [
   # { name = "efm-lsp-eslint" },
   { name = "graphql-language-service", except-features = [ "format" ] },
   # "eslint",
+  # { name = "testing-ls", only-features = [ "diagnostics" ] },
 ]
 
 [[language]]

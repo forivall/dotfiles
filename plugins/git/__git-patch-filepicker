@@ -3,6 +3,16 @@
 
 PICKER_BACKEND=fzf
 
+initial=
+for i in {1..${#}}; do
+  if [[ ${argv[$i]} == --initial=* ]]; then
+    initial="${argv[$i]#--initial=}"
+    argv[$i]=()
+    break
+  fi
+done
+i=0
+
 __simple-term-picker() {
   # $ python3 -m pip install simple-term-menu
 
@@ -44,13 +54,23 @@ if [[ $PICKER_BACKEND == fzf ]]; then
     fi
     local fzf_output="$(printf "%s\n" ${items[@]} | fzf "${fzf_options[@]}" \
       --ansi --cycle --disabled --accept-nth='{n}' --height=${heightpct}% \
-      --prompt '> ' \
+      --prompt "${ZSH_ARGZERO:t}"'> ' \
+      --bind "load:put($initial)" \
       --bind "load:pos($i)" \
-      --bind 'j:down,k:up,g:first,G:last,d:half-page-down,u:half-page-up,q:abort' \
-      --bind '/:enable-search+unbind(j,k,g,G,d,u,q)+change-prompt(~ )' \
+      --bind 'j:down,k:up,g:first,G:last,d:half-page-down,u:half-page-up,q:abort,D:execute(trashi -F {+})' \
+      --bind 'A:beginning-of-line+put(!!switch!!addp!!)+print-query' \
+      --bind 's:beginning-of-line+put(!!switch!!addp!!)+print-query' \
+      --bind 'R:beginning-of-line+put(!!switch!!resetp!!)+print-query' \
+      --bind 'u:beginning-of-line+put(!!switch!!resetp!!)+print-query' \
+      --bind 'K:beginning-of-line+put(!!switch!!checkoutp!!)+print-query' \
+      --bind '/:enable-search+unbind(j,k,g,G,d,u,q,A,s,R,u,K)+change-prompt(~ )' \
+      --bind 'ctrl-r:beginning-of-line+put(!!reload!!)+print-query' \
       --bind 'esc:transform:[[ $FZF_PROMPT == "~ " ]] && echo "disable-search+rebind(j,k,g,G,d,u,q)+change-prompt(> )+clear-query" || echo "abort"'
     )"
-    if [[ -z $fzf_output ]]; then i=0; else
+    initial=
+    if [[ "$fzf_output" == '!!'*'!!'* ]]; then
+      action="$fzf_output"
+    elif [[ -z $fzf_output ]]; then i=0; else
       local fzf_items=(${(f)fzf_output})
       for j in {1..${#fzf_items}}; do (( ++fzf_items[j] )); done
       i="${(j:,:)fzf_items}"
@@ -93,6 +113,18 @@ __git-patch-filepicker() {
       i=1
     else
       __simple-term-picker
+      if [[ -n "$action" ]]; then
+        if [[ "$action" == "!!reload!!"* ]]; then
+          initial="${action%!!reload!!}"
+          action=
+          continue
+        elif [[ "$action" == '!!switch!!'* ]]; then
+          what="${action#!!switch!!}"
+          initial="${what#*!!}"
+          next="${what%!!*}"
+          exec git $next --initial="$initial" "$@"
+        fi
+      fi
       if (( $i == 0 )) ; then return 1; fi
     fi
     interactiveArgs=()

@@ -171,7 +171,7 @@ export FORGIT_DIFF_PAGER="deltaw \
   --hunk-header-decoration-style '' "
 export FORGIT_STATUS_COMMAND="git st"
 
-export NNN_OPTS="C"
+export NNN_OPTS="CcEx"
 
 ## zsh-nvm settings
 export NVM_COMPLETION=true

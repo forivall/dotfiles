@@ -37,7 +37,7 @@ fi
 if [[ -f package.json ]] &&
   jsPackageManager=$(jq -e -r '.packageManager // empty' package.json)
 then
-  run corepack prepare
+  run corepack install
   if [[ $jsPackageManager == pnpm@* ]] &&
     jq -e -r '.name == "definitely-typed"' package.json > /dev/null;
   then
