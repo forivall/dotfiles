@@ -232,7 +232,7 @@ aliases:
         )
       '
   pr-unread-files: '!gh pr-files-json-gql $1 | jq -r ''.[]|select(.viewerViewedState!="VIEWED")|.path'''
-  pr-queued-files: '![[ -s .gh-pr-queue ]] && cat .gh-pr-queue || gh pr-unread-files "$@" | tee .gh-pr-queue'
+  pr-queued-files: '![[ -s .gh-pr-queue ]] && cat .gh-pr-queue || gh pr-unread-files "$@" | tee -p .gh-pr-queue'
   pr-unresolved-comments: '!gh pr-unresolved-comments-gql "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-file: '!gh pr-unresolved-comments-gql --file "$@" | gh pr-review-comments-format'
   pr-unresolved-comments-files: '!gh pr-unresolved-comments-gql "$@" | jq -r ''.[]|.path'' | uniq'
