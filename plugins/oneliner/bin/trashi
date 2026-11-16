@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+a=()
+while [[ $# -gt 0 ]]; do;
+  if [[ $1 == -- ]]; then shift; break; fi
+  if [[ $1 == -* ]]; then a+=($1); shift;
+  else break; fi
+done
+_rm_quote() { print -rn -- ${(qq)1} }   # always single-quoted, like GNU rm
+for f in "$@"; do
+  kind=
+  if [[ -L $f ]]; then kind='symbolic link'
+  elif [[ -d $f ]]; then kind='directory';
+    if [[ -z "$f"/*(DN) ]]; then kind="empty $kind"; fi
+  elif [[ -f $f ]]; then
+    if [[ -s $f ]]; then kind='regular file'; else kind='regular empty file'; fi
+  elif [[ -p $f ]]; then kind='fifo'
+  elif [[ -S $f ]]; then kind='socket'
+  elif [[ -b $f ]]; then kind='block special file'
+  elif [[ -c $f ]]; then kind='character special file'
+  elif [[ -e $f ]]; then kind='file'
+  else printf -ru2 -- "cannot trash ${(qq)f}: No such file or directory"; return 1
+  fi
+
+  print -rn -- "trash $kind ${(qq)f}? " >&2
+  if read -q reply; then print -r >&2
+    trash "${a[@]}" "$f"
+  else print -r >&2
+  fi
+done

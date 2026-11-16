@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+# Read the crop box from a PDF and set the media box to match it (pdfcpu).
+# Usage: pdfcpu-crop-to-media in.pdf [out.pdf]
+# If out.pdf is omitted, overwrites in.pdf.
+
+set -e
+if [[ $# -lt 1 ]]; then
+  echo "Usage: $0 in.pdf [out.pdf]" >&2
+  exit 1
+fi
+in=$1
+out=${2:-$in}
+
+# List crop box in points so we get consistent numeric output
+raw=$(pdfcpu boxes list -u po -- crop "$in" 2>/dev/null) || true
+if [[ -z "$raw" ]]; then
+  echo "Could not list crop box for $in" >&2
+  exit 1
+fi
+
+# Parse first line that looks like "CropBox (points) (xmin, ymin, xmax, ymax)" or "  CropBox ..."
+coords=$(echo "$raw" | sed -n 's/.*[Cc]rop[Bb]ox.*(\([0-9.-]*\), \([0-9.-]*\), \([0-9.-]*\), \([0-9.-]*\)).*/\1 \2 \3 \4/p' | head -1)
+if [[ -z "$coords" ]]; then
+  # Try matching MediaBox/CropBox line: (0.00, 0.00, 595.00, 842.00)
+  coords=$(echo "$raw" | sed -n 's/.*(\([0-9.-]*\), \([0-9.-]*\), \([0-9.-]*\), \([0-9.-]*\)).*/\1 \2 \3 \4/p' | head -1)
+fi
+if [[ -z "$coords" ]]; then
+  echo "Could not parse crop box coordinates from pdfcpu output." >&2
+  echo "Output was:" >&2
+  echo "$raw" >&2
+  exit 1
+fi
+
+# Format as [xmin ymin xmax ymax] for pdfcpu
+rect="[${coords}]"
+echo "Setting media box to crop box: $rect" >&2
+exec pdfcpu boxes add -u po -- "media:$rect" "$in" "$out"

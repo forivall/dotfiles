@@ -13,4 +13,3 @@ function generate_completions() {
   fi
 }
 generate_completions driveignore completion zsh
-generate_completions notion completion zsh

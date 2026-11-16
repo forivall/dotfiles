@@ -1,0 +1,140 @@
+#!/usr/bin/env zsh
+
+PROP=".*"
+KEY=".*"
+AST_GREP_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -p)
+      [[ $# -ge 2 ]] || {
+        echo "missing property name for -p" >&2
+        exit 1
+      }
+      PROP="^${2}\$"
+      KEY="^('${2}'|\"${2}\"|${2})\$"
+      shift 2
+      ;;
+    *)
+      AST_GREP_ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+INLINE_RULES="
+id: object-literal-pair-ts
+language: TypeScript
+message: Object literal property $PROP
+severity: info
+rule:
+  kind: pair
+  has:
+    field: key
+    kind: property_identifier
+    pattern: \$PROP
+constraints:
+  PROP:
+    regex: $PROP
+---
+id: object-literal-computed-pair-ts
+language: TypeScript
+message: Object literal computed property \$KEY
+severity: info
+rule:
+  pattern:
+    context: \"{ [\$KEY]: \$VAL }\"
+    selector: pair
+constraints:
+  KEY:
+    regex: $KEY
+---
+id: object-literal-shorthand-ts
+language: TypeScript
+message: Object literal shorthand property
+severity: info
+rule:
+  kind: shorthand_property_identifier
+  regex: __PROP__
+---
+id: property-assignment-ts
+language: TypeScript
+message: Property assignment to \$PROP
+severity: info
+rule:
+  any:
+    - pattern: \$OBJ.\$PROP = \$VAL
+    - pattern: this.\$PROP = \$VAL
+constraints:
+  PROP:
+    regex: $PROP
+---
+id: subscript-assignment-ts
+language: TypeScript
+message: Subscript assignment to \$KEY
+severity: info
+rule:
+  pattern: \$OBJ[\$KEY] = \$VAL
+constraints:
+  KEY:
+    regex: $KEY
+---
+id: object-literal-pair-js
+language: JavaScript
+message: Object literal property $PROP
+severity: info
+rule:
+  kind: pair
+  has:
+    field: key
+    kind: property_identifier
+    pattern: \$PROP
+constraints:
+  PROP:
+    regex: $PROP
+---
+id: object-literal-computed-pair-js
+language: JavaScript
+message: Object literal computed property \$KEY
+severity: info
+rule:
+  pattern:
+    context: \"{ [\$KEY]: \$VAL }\"
+    selector: pair
+constraints:
+  KEY:
+    regex: $KEY
+---
+id: object-literal-shorthand-js
+language: JavaScript
+message: Object literal shorthand property
+severity: info
+rule:
+  kind: shorthand_property_identifier
+  regex: __PROP__
+---
+id: property-assignment-js
+language: JavaScript
+message: Property assignment to \$PROP
+severity: info
+rule:
+  any:
+    - pattern: \$OBJ.\$PROP = \$VAL
+    - pattern: this.\$PROP = \$VAL
+constraints:
+  PROP:
+    regex: $PROP
+---
+id: subscript-assignment-js
+language: JavaScript
+message: Subscript assignment to \$KEY
+severity: info
+rule:
+  pattern: \$OBJ[\$KEY] = \$VAL
+constraints:
+  KEY:
+    regex: $KEY
+"
+
+ast-grep scan --inline-rules "$INLINE_RULES" "${AST_GREP_ARGS[@]}"
+

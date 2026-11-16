@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+printf "\x1b[?2004l" > /dev/tty
+NNN_OPTS="C" nnn "$@" >/dev/tty
+code=$?
+printf "\x1b[?1049h\x1b[?2004h" >/dev/tty
+exit $code
