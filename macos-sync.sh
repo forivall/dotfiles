@@ -69,7 +69,7 @@ echo '#' $1 ${(N)entries[@]}
 
 for entry in $entries; do
   if [[ $entry == 'intelli_shell' ]]; then
-    intelli-shell export gist
+    intelli-shell export gist || echo 'failed: intelli-shell export gist'
     continue
   fi
   repo_dir=${(@)${(P)entry}[1]}
