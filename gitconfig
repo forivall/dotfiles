@@ -62,10 +62,14 @@
 	ahead2 = log --name-status --abbrev-commit --pretty=oneline --graph --decorate HEAD ^origin/HEAD
 	exclude = "!f() { for p in \"$@\" ; do echo \"$GIT_PREFIX$p\" >> $GIT_DIR/info/exclude ; done; }; f"
 	delta = -c core.pager=deltaw diff
+	deltui = "-c core.pager=\"delta --tui\" diff"
 	deltac = -c core.pager=deltaw diff --cached
+	deltuc = "-c core.pager=\"delta --tui\" diff --cached"
 	deltas = -c core.pager=deltaw show
+	deltus = "-c core.pager=\"delta --tui\" show"
 	diffc = diff --cached
 	diffd = -c core.pager=deltaw diff
+	diffu = "-c core.pager=\"delta --tui\" diff"
 	diffd-2way = -c core.pager=deltaw diff-2way
 	diffdh = "!(printf \"❖ diff %s\n\" \"$*\" && git diff \"$@\") | deltaw --commit-regex=\"^❖ \" --commit-style=yellow && :"
 	difft = -c diff.external=difft diff
@@ -76,8 +80,10 @@
 	dc = diff --cached
 
 	diffcd = -c core.pager=deltaw diff --cached
+	diffud = "-c core.pager=\"delta --tui\" diff --cached"
 	showd = -c core.pager=deltaw show
 	showt = -c diff.external=difft show
+	showu = "-c core.pager=\"delta --tui\" show"
 	stashsd = -c core.pager=deltaw stash show -p
 	last = -c pager.show=off show --oneline --name-status --decorate
 	last2 = last --name-status --pretty=twomore

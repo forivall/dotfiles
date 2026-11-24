@@ -318,8 +318,6 @@ brew "git-recent"
 brew "git-revise"
 # Idiomatic, lean, fast & safe pure Rust implementation of Git
 brew "gitoxide"
-# TUI Git client inspired by Magit
-brew "gitu"
 # Blazing fast terminal-ui for git written in rust
 brew "gitui"
 # Update multiple git repositories at once

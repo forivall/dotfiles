@@ -37,6 +37,9 @@ alias gitview="/usr/share/git/gitview/gitview"
 
 alias g=git
 
+alias gitu='delta --tui'
+alias deltui='delta --tui'
+
 # alias ga='git add'
 alias gap='git addp'
 alias gam='git amend'
@@ -229,6 +232,7 @@ function git() { # also put these in git-aliases for autocomplete
   while $cont && (( $# > 0 )); do
   cont=false
   case "$1" in
+    --no-pager) opts+=($1); shift; ; cont=true ;;
     -*) opts+=($1 $2); shift; (( $# > 0 )) && shift; cont=true ;;
     fancy) shift;
       local pager=($(git "${opts[@]}" config core.pager || echo -n "less"))
