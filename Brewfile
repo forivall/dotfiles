@@ -78,6 +78,8 @@ brew "automake"
 brew "gettext"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
+# Language Server for Bash
+brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
@@ -112,14 +114,14 @@ brew "carapace"
 brew "cargo-binstall"
 # Sexy ANSI fonts for the console
 brew "cfonts"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Color management engine supporting ICC profiles
 brew "little-cms2"
-# Image format providing lossless and lossy compression for web images
-brew "webp"
 # New file format for still image compression
 brew "jpeg-xl"
 # Framework for layout and rendering of i18n text
@@ -164,6 +166,8 @@ brew "cpptoml"
 brew "cpufetch"
 # CPU usage limiter
 brew "cpulimit"
+# Command-line csv viewer
+brew "csvlens"
 # Lightweight unit testing framework for C
 brew "cunit"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -230,6 +234,8 @@ brew "eget"
 brew "elvish"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# Incremental parsing library
+brew "tree-sitter"
 # GNU Emacs text editor
 brew "emacs"
 # Run arbitrary commands when files change
@@ -240,6 +246,8 @@ brew "exiftool"
 brew "expect"
 # Modern, maintained replacement for ls
 brew "eza"
+# Efficient Duplicate File Finder
+brew "fclones"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Text mode browser and Gemini, NNTP, FTP, Gopher, Finger, and BitTorrent client
@@ -260,6 +268,8 @@ brew "libtool"
 brew "imagemagick"
 # Generate pixel-perfect macOS folder icons in the native style
 brew "folderify"
+# Scriptable ping program for checking if multiple hosts are up
+brew "fping"
 # Monitor a directory for changes and run a shell command
 brew "fswatch"
 # Command-line fuzzy finder written in Go
@@ -296,10 +306,6 @@ brew "git-delta", args: ["HEAD"]
 brew "python@3.13"
 # Quickly rewrite git repository history
 brew "git-filter-repo"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
-# Incremental merge for git
-brew "git-imerge"
 # Native sequence editor for Git interactive rebase
 brew "git-interactive-rebase-tool"
 # Git extension for versioning large files
@@ -317,7 +323,7 @@ brew "gitu"
 # Blazing fast terminal-ui for git written in rust
 brew "gitui"
 # Update multiple git repositories at once
-brew "gitup", link: false
+brew "gitup"
 # Multi-platform library for OpenGL applications
 brew "glfw"
 # Render markdown on the CLI
@@ -346,6 +352,8 @@ brew "gojq"
 brew "gource"
 # Multimedia framework for research and academic purposes
 brew "gpac"
+# Ping, but with a graph
+brew "gping"
 # Image processing tools collection
 brew "graphicsmagick"
 # GitHub Markdown previewer
@@ -490,12 +498,14 @@ brew "moreutils"
 brew "most"
 # UNIX movie player
 brew "mplayer"
+# Jq-like command-line tool for markdown processing
+brew "mq"
+# 'traceroute' and 'ping' in a single tool
+brew "mtr"
 # Lightweight PDF and XPS viewer
 brew "mupdf"
 # E-mail reader with support for Notmuch, NNTP and much more
 brew "neomutt"
-# Incremental parsing library
-brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
@@ -536,12 +546,14 @@ brew "pipx"
 brew "poetry"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
-# Object-relational database system
-brew "postgresql@14"
+# Terminal UI showing which processes are using TCP and UDP ports
+brew "portop"
 # Object-relational database system
 brew "postgresql@16"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Wrapper to colorize and simplify ping's output
+brew "prettyping"
 # Modern replacement for ps written in Rust
 brew "procs"
 # Show ps output as a tree
@@ -565,7 +577,7 @@ brew "python-setuptools"
 # Python interface to Tcl/Tk
 brew "python-tk@3.13"
 # Command-line YAML and XML processor that wraps jq
-brew "python-yq", link: false
+brew "python-yq"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.12"
 # Modern man page viewer
@@ -587,11 +599,11 @@ brew "ruby"
 # Extremely fast Python linter, written in Rust
 brew "ruff"
 # Safe, concurrent, practical language
-brew "rust"
+brew "rust", link: false
 # Experimental Rust compiler front-end for IDEs
-brew "rust-analyzer"
+brew "rust-analyzer", link: false
 # Rust toolchain installer
-brew "rustup"
+brew "rustup", link: true
 # Web search from the terminal
 brew "s-search"
 # Interactive find and replace in the terminal
@@ -614,6 +626,8 @@ brew "shellcheck"
 brew "shfmt"
 # Simple keystroke visualizer
 brew "showkey"
+# Persistent shell session manager
+brew "shpool", restart_service: :changed
 # Prints a steam locomotive if you type sl instead of ls
 brew "sl"
 # Simple tool to count source lines of code
@@ -626,6 +640,8 @@ brew "sox"
 brew "srgn"
 # Version control system designed to be a better CVS
 brew "subversion"
+# TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
+brew "tabiew"
 # TOML toolkit written in Rust
 brew "taplo"
 # General purpose fuzzy finder TUI
@@ -634,6 +650,8 @@ brew "television"
 brew "telnet"
 # Terminal file explorer
 brew "tere"
+# Render Mermaid diagrams in the terminal
+brew "termaid"
 # Text interface for Git repositories
 brew "tig"
 # Terminal multiplexer
@@ -646,6 +664,8 @@ brew "tree-sitter-cli"
 brew "treemd"
 # Extremely fast Python type checker, written in Rust
 brew "ty"
+# Maintained ctags implementation
+brew "universal-ctags"
 # Tool for writing command-line pipes with instant live preview
 brew "up"
 # Collection of Linux utilities
@@ -660,6 +680,8 @@ brew "vim"
 brew "virtualenv"
 # Python virtualenv extensions
 brew "virtualenvwrapper"
+# Terminal spreadsheet multitool for discovering and arranging data
+brew "visidata"
 # Tool for packaging, publishing and managing VS Code extensions
 brew "vsce"
 # Pager/text based browser
@@ -700,32 +722,61 @@ brew "zlib"
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
+# Tree-sitter based AST difftool to get meaningful semantic diffs
+brew "afnanenayet/tap/diffsitter"
 # Glow-like Markdown CLI with Mermaid diagrams (iTerm2/Kitty inline images + PDF)
 brew "atani/tap/glowm", trusted: true
-# A command-line tool for processing data in diverse input formats,
-# providing search, analytics, and extensive transormations using the Zed
-# query language.
-brew "brimdata/tap/zq", trusted: true
+# CLI for Apple Passwords (also known as iCloud Keychain)
+brew "bendews/tap/apw", trusted: true
+# A terminal regex tester with real-time matching, multi-engine support, and plain-English explanations
+brew "brevity1swos/tap/rgx", trusted: true
 # The modern, text-based browser
 brew "browsh-org/browsh/browsh", trusted: true
 # AI on the command line
 brew "charmbracelet/tap/mods"
 # A tool for recording terminal GIFs
 brew "charmbracelet/tap/vhs"
+# Backup and Restore your Mac System and App Preferences
+brew "clintmod/formulas/macprefs"
+# GPU/Accelerator monitor TUI — like nvtop but for Apple Silicon and more
+brew "evilsocket/gptop/gptop"
+# A beautiful and functional email client for your terminal.
+brew "floatpane/matcha/matcha"
+# GritQL is a query language for searching
+brew "getgrit/tap/grit"
+# Power Usage Monitor for Apple Silicon
+brew "graelo/tap/pumas"
 # Terraform
 brew "hashicorp/tap/terraform"
+# Custom GPG pinentry program for macOS that allows using Touch ID for fetching the password from
+# the macOS keychain.
+brew "jorgelbg/tap/pinentry-touchid"
+# Command-line secrets manager powered by macOS Keychains
+brew "loteoo/formulas/ks"
+# Terminal Unicode Explorer
+brew "lusingander/tap/sauva"
+# Provides 'lsusb' tool for getting detailed info about USB devices
+brew "mikhailai/misc/usbutils"
+# Desktop-inspired terminal diff viewer for agent-authored changesets
+brew "modem-dev/tap/hunk"
+# High-performance, schema-free, document-oriented database
+brew "mongodb/brew/mongodb-community"
+# GNU compiler collection for AVR 8-bit and 32-bit Microcontrollers
+brew "osx-cross/avr/avr-gcc@8"
+# Quantum Mechanical Keyboard (QMK) Firmware
+brew "qmk/qmk/qmk"
 # a powerfull extended cat command, to cat all the things you couldn't before
 brew "skardyy/mcat/mcat"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
 brew "smudge/smudge/nightlight", trusted: true
 # Ookla Speedtest
 brew "teamookla/speedtest/speedtest", trusted: true
+# Sudoless performance monitoring CLI tool for Apple Silicon processors
+brew "vladkens/tap/macmon", trusted: true
+# Classic After Dark screen savers emulator
+cask "afterglow"
 # Enable Windows-like alt-tab
 cask "alt-tab"
-# Android SDK component
-cask "android-platform-tools"
-# Menu bar icon organiser
-cask "bartender"
 # Tool to customise input devices and automate computer systems
 cask "bettertouchtool"
 # Prevents your sleeping computer from connecting to Bluetooth accessories
@@ -738,7 +789,6 @@ cask "caffeine"
 cask "cameracontroller"
 # Terminal emulator
 cask "canario"
-cask "cleardisk"
 # Clipboard extension app
 cask "clipy"
 # Ghostty-based terminal with vertical tabs and notifications for AI coding agents
@@ -778,6 +828,7 @@ cask "font-fantasque-sans-mono"
 cask "font-fantasque-sans-mono-nerd-font"
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
+cask "font-geist-mono-nerd-font"
 cask "font-hubballi"
 cask "font-input"
 cask "font-inter"
@@ -788,6 +839,7 @@ cask "font-iosevka-ss17"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-khula"
+cask "font-play"
 cask "font-poppins"
 cask "font-recursive"
 cask "font-recursive-code"
@@ -802,7 +854,7 @@ cask "font-sf-pro"
 cask "font-yantramanav"
 # Re-enable the font smoothing controls
 cask "fontsmoothingadjuster"
-# GIT client
+# Git client
 cask "fork"
 # Kext-less implementation of FUSE
 cask "fuse-t"
@@ -826,10 +878,6 @@ cask "gitfiend"
 cask "github"
 # Git interface focused on visual interaction
 cask "gitup-app"
-# Web browser
-cask "google-chrome@beta"
-# Web browser
-cask "google-chrome@dev"
 # Tools to protect your files
 cask "gpg-suite-no-mail"
 # Graphically shows disk usage within a file system
@@ -838,6 +886,8 @@ cask "grandperspective"
 cask "hammerspoon"
 # Chromium-based web browser
 cask "helium-browser"
+# Keyboard shortcut conflict detector
+cask "hotkeyclash"
 # Vector graphics editor
 cask "inkscape"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -866,8 +916,6 @@ cask "linearmouse"
 cask "logi-options+"
 # Provides access to camera controls
 cask "logitech-camera-settings"
-# Privacy-first, open-source platform for knowledge sharing and management
-cask "logseq"
 # Screen and video recording software
 cask "loom"
 # Clipboard manager
@@ -900,6 +948,10 @@ cask "notion"
 cask "notion-calendar"
 # Command-line interface for Notion
 cask "notion-cli"
+# Replacement for Docker Desktop
+cask "orbstack"
+# App uninstaller and disk space cleaner
+cask "peel"
 # Open-source tool to make 2D hand-drawn animations
 cask "pencil2d"
 # Administration and development platform for PostgreSQL
@@ -916,6 +968,8 @@ cask "remarkable"
 # Hardware-accelerated GPU terminal emulator
 cask "rio"
 cask "robo-3t"
+# Flash Player emulator
+cask "ruffle"
 # JavaScript playground that auto-evaluates as code is typed
 cask "runjs"
 # Tool to reverse the direction of scrolling
@@ -948,8 +1002,6 @@ cask "ubersicht"
 cask "ukelele"
 # Google Chromium, sans integration with Google
 cask "ungoogled-chromium"
-# Keyboard configurator
-cask "via"
 # Configurator of compatible keyboards in real time
 cask "vial"
 # Open-source code editor
@@ -1063,6 +1115,7 @@ vscode "digitalbrainstem.javascript-ejs-support"
 vscode "dkamyshov.monochrome"
 vscode "dlech.chmod"
 vscode "dnicolson.binary-plist"
+vscode "donjayamanne.typescript-notebook"
 vscode "dotjoshjohnson.xml"
 vscode "dotup.dotup-vscode-override-typescript"
 vscode "drcika.apc-extension"
@@ -1202,6 +1255,7 @@ vscode "michaelcurrin.auto-commit-msg"
 vscode "mikestead.dotenv"
 vscode "mitaki28.vscode-clang"
 vscode "mitchdenny.ecdc"
+vscode "mjmlio.vscode-mjml"
 vscode "mkhl.direnv"
 vscode "mlewand.vscode-markdown-to-clipboard"
 vscode "mohammadbaqer.better-folding"
@@ -1362,8 +1416,6 @@ vscode "unifiedjs.vscode-mdx"
 vscode "uyiosa-enabulele.reopenclosedtab"
 vscode "vadimcn.vscode-lldb"
 vscode "visualjj.visualjj"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
 vscode "vitest.explorer"
 vscode "vladimir.test-file-maker"
 vscode "vlkoti.vscode-sourcemaps-navigator"
@@ -1490,7 +1542,6 @@ npm "@vtsls/language-server"
 npm "all-contributors-cli"
 npm "atlas-app-services-cli"
 npm "atomic-lt"
-npm "bash-language-server"
 npm "chokidar-cli"
 npm "core-js"
 npm "corepack"
@@ -1501,7 +1552,7 @@ npm "download-size"
 npm "editorconfig-tools"
 npm "emma-cli"
 npm "get-pkg-repo"
-npm "github-image-uploader"
+npm "gitconfig-lsp"
 npm "graphql-language-service-cli"
 npm "gulp-cli"
 npm "hereby"
@@ -1538,6 +1589,7 @@ npm "svgo"
 npm "tree-sitter-cli"
 npm "ts-node"
 npm "tslab"
+npm "turndown-cli"
 npm "typescript-language-server"
 npm "typescript"
 npm "update-nodejs-notifier"
